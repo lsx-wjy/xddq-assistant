@@ -1,0 +1,754 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Common";
+import "ActivityBase";
+import "Rank";
+import "Palace";
+enum PuppetPb {
+    S_PUPPET_ENTER_ACTIVITY = 232101;
+    S_PUPPET_ENTER_MAP = 232102;
+    S_PUPPET_ROLL_DICE = 232103;
+    S_PUPPET_USE_ITEM = 232104;
+    S_PUPPET_ASSIST_LIST = 232105;
+    S_PUPPET_RESCUE_TRAP = 232106;
+    S_PUPPET_ASSIST_ATTACK_MONSTER = 232107;
+    S_PUPPET_UNION_LOG = 232108;
+    S_PUPPET_WORKSHIP = 232109;
+    S_PUPPET_GROUP_INFO = 232110;
+    S_PUPPET_EVENT_HANDLE = 232113;
+    S_PUPPET_WEAR_EQUIP = 232114;
+    S_PUPPET_RESOLVE_EQUIP = 232115;
+    S_PUPPET_EQUIP_CHANGE = 232116;
+    S_PUPPET_CHALLENGE_LIST = 232118;
+    S_PUPPET_CHALLENGE = 232119;
+    S_PUPPET_GET_REPORT = 232120;
+    S_PUPPET_GET_MEMBER = 232121;
+    S_PUPPET_GET_REPORT_DETAIL = 232122;
+    S_PUPPET_OPEN_BOX = 232123;
+    S_PUPPET_HEART_BEAT = 232124;
+    S_PUPPET_ASSIST_REWARD = 232125;
+    S_PUPPET_UNLOCK_AUTO = 232126;
+    S_PUPPET_USE_FIGHT_NUM_ITEM = 232127;
+    S_PUPPET_GET_WELFARE_INFO_REQ = 232128;
+    S_PUPPET_RECEIVE_WELFARE_REWARD_REQ = 232129;
+    S_PUPPET_GET_WELFARE_REQ = 232130;
+    S_PUPPET_SEND_WELFARE_REQ = 232131;
+    S_PUPPET_WELFARE_RECORD_REQ = 232132;
+    S_PUPPET_RED_POINT = 232133;
+    S_PUPPET_RECEIVE_BLESSING = 232134;
+    S_PUPPET_BLESSING_LIST = 232135;
+    S_PUPPET_UNION_SUMMARY = 232136;
+    S_PUPPET_NOTIFY_PLAYER_ASSIST_TRAP = 232140;
+    S_PUPPET_NOTIFY_CHALLENGE_INFO = 232141;
+    S_PUPPET_NOTIFY_ASSIST_DATA_CHANGED = 232142;
+    S_PUPPET_NOTIFY_ATTACK_BOSS = 232143;
+    S_PUPPET_SEND_BLESS_NOTIFY = 232144;
+    S_PUPPET_BUILD_UPDATE_NOTIFY = 232145;
+    S_PUPPET_ENTER_ACTIVITY_RESP = 232151;
+    S_PUPPET_ADD_MONSTER_ASSIST_RESP = 232152;
+    S_PUPPET_CHALLENGE_RESP = 232153;
+    S_PUPPET_HANDLE_EVENT_RESP = 232154;
+    S_PUPPET_ROLL_DICE_RESP = 232155;
+    S_PUPPET_UNLOCK_AUTO_RESP = 232156;
+    S_PUPPET_ATTACK_MONSTER_RESP = 232157;
+    S_PUPPET_RECEIVE_WELFARE_RESP = 232158;
+    S_PUPPET_GET_WELFARE_REQ_RESP = 232159;
+    S_PUPPET_SEND_WELFARE_REQ_RESP = 232160;
+    S_PUPPET_USE_FIGHT_NUM_ITEM_RESP = 232161;
+    S_PUPPET_COMMON_SYNC = 232162;
+    S_PUPPET_ATTACK_BOSS = 232163;
+    S_PUPPET_NOTIFY_PLAYER_ASSIST_TRAP_RESP = 232164;
+    S_PUPPET_REISSUE_REWARD_SYNC = 232165;
+    S_PUPPET_RED_POINT_RESP = 232166;
+    S_PUPPET_RECEIVE_BLESSING_RESP = 232167;
+    S_PUPPET_CAN_BUY_MALL = 232168;
+    S_PUPPET_EVENT_HANDLE_RESP = 232169;
+}
+message PuppetEventConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 type = 3;
+    required string desc = 4;
+    required int32 length = 5;
+    required string param = 6;
+    required string drawParam = 7;
+    required string reward = 8;
+    required string score = 9;
+    required string name = 10;
+    required int32 expRate = 11;
+    required int32 isDouble = 12;
+}
+message PuppetMapConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 event = 3;
+    optional string param = 4;
+}
+message PuppetGroupConfigMsg {
+    required int32 activityId = 1;
+    required int32 rankId = 2;
+    required int32 size = 3;
+    required int32 up = 4;
+    required int32 down = 5;
+    required string score = 6;
+}
+message PuppetTimeConfigMsg {
+    required int32 activityId = 1;
+    optional int32 timeId = 2;
+    optional int32 type = 3;
+    optional int32 beginTime = 4;
+    optional int32 durationTime = 5;
+    optional string param = 6;
+}
+message PuppetEquipmentConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional int32 quality = 3;
+    optional int32 type = 4;
+    optional string name = 5;
+    optional int32 icon = 6;
+    optional string buffType = 7;
+    optional int32 buff = 8;
+    optional int32 chara = 9;
+    optional string desc = 10;
+}
+message PuppetCharaConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+}
+message PuppetLevelConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional int32 expMax = 3;
+    optional string windfall = 4;
+    optional int32 exp = 5;
+    optional string lottery = 6;
+    optional int32 forgeLimit = 7;
+    optional string equipmentQualityLevel = 8;
+    optional int32 power = 9;
+    optional string highterQuality = 10;
+}
+message PuppetMonsterConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional string equipment = 3;
+}
+message PuppetBattleConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional string hp = 3;
+    optional string reward = 4;
+    optional int32 monsterChara = 5;
+    optional string name = 6;
+    optional int32 bodyScale = 7;
+}
+message PuppetEquipmentLvConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional int32 output = 3;
+}
+message PuppetSmeltConfigMsg {
+    required int32 activityId = 1;
+    optional int32 id = 2;
+    optional int32 demand = 3;
+}
+message PuppetConfigSyncMsg {
+    repeated PuppetEventConfigMsg eventConfigs = 1;
+    repeated PuppetMapConfigMsg mapConfigs = 2;
+    repeated PuppetTimeConfigMsg timeConfigs = 4;
+    repeated PuppetGroupConfigMsg groupConfigs = 5;
+    repeated PuppetEquipmentConfigMsg equipmentConfigs = 6;
+    repeated PuppetLevelConfigMsg levelConfigs = 7;
+    repeated PuppetMonsterConfigMsg monsterConfigs = 8;
+    repeated PuppetBattleConfigMsg battleConfigs = 9;
+    repeated PuppetCharaConfigMsg charaConfigs = 10;
+    repeated PuppetEquipmentLvConfigMsg lvConfigs = 11;
+    repeated PuppetSmeltConfigMsg smeltConfigs = 12;
+}
+message PuppetUnionBaseData {
+    optional int64 unionId = 1;
+    optional int32 flag = 2;
+    optional string name = 3;
+    optional int64 serverId = 4;
+    optional int64 score = 5;
+    optional string masterName = 6;
+}
+message PuppetSettleInfo {
+    optional int32 round = 1;
+    optional int32 statues = 2;
+    optional int32 groupRank = 3;
+    optional int32 rank = 4;
+    optional int32 battleFieldSore = 5;
+    optional int32 totalScore = 6;
+}
+message PuppetWorshipPlayerMsg {
+    required int64 playerId = 1;
+    required int64 serverId = 2;
+    required string nickName = 3;
+    repeated int32 pet = 4;
+    repeated int32 spirit = 5;
+    optional int32 appearanceId = 6;
+    optional int32 equipCloudId = 7;
+    optional int32 realmsId = 8;
+    optional int32 rank = 10;
+    optional PlayerHeadDataMsg headInfo = 13;
+    repeated int32 petSoulShapeList = 14;
+    optional int32 titleId = 15;
+    repeated int32 petLinkageId = 16;
+    repeated int32 spiritLinkageId = 17;
+}
+message PuppetEquipMsg {
+    optional int64 id = 1;
+    optional int32 equipId = 2;
+    optional int32 equipLevel = 3;
+    optional int32 quality = 4;
+    optional int32 part = 5;
+    optional string power = 6;
+    optional int32 xline = 7;
+    optional int32 yline = 8;
+    optional string basePower = 9;
+}
+message PuppetPlayerDataMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional int32 currentPosition = 2;
+    optional string nickName = 3;
+    optional int32 strength = 4;
+    optional int64 lastRecoveryTime = 6;
+    optional string power = 7;
+    optional int32 totalCostStrength = 8;
+    optional int32 puppetLevel = 9;
+    repeated PuppetEquipMsg equips = 10;
+    optional int32 challengeTimes = 11;
+    optional PuppetMonsterMsg monster = 12;
+    optional int64 trapEndTime = 13;
+    optional int32 doubleRewardCount = 14;
+    optional int32 exp = 15;
+    optional int32 resolveNum = 16;
+    optional int32 resolveTimes = 17;
+    optional int32 battleNum = 18;
+    optional int64 battleRecoverTime = 19;
+    optional int32 doubleRollState = 20;
+}
+message PuppetMonsterMsg{
+    optional int32 monsterId = 1;
+    optional string curHp = 2;
+    optional string power = 3;
+    optional int64 monsterUid = 4;
+    optional string playerPower = 5;
+}
+message PuppetUserMallInfo {
+    optional int32 mallId = 1;
+    optional int64 expiredTime = 2;
+    optional int32 canBuyCount = 3;
+}
+message PuppetUnionBuildInfo {
+    optional int32 id = 1;
+    optional int32 level = 2;
+    optional int32 posX = 3;
+    optional int32 posY = 4;
+}
+message PuppetTrapPlayerMsg {
+    optional int64 playerId = 1;
+    optional int32 appearanceId = 2;
+    optional string nickName = 3;
+    optional int64 endTime = 4;
+}
+message PuppetAssistMonsterMsg {
+    optional int64 monsterUid = 1;
+    optional int32 monsterId = 2;
+    optional string hp = 3;
+    optional string leftHp = 4;
+    optional string nickName = 5;
+    optional int64 assistTime = 6;
+    repeated string helperName = 7;
+    optional int32 state = 8;
+    optional string reward = 9;
+    optional int64 attackTime = 10;
+    optional int64 playerId = 11;
+    optional int32 eventId = 12;
+    optional int32 level = 13;
+}
+message PuppetUnionLogInfo {
+    optional int64 playerId = 1;
+    optional string nickName = 2;
+    optional int64 gainScore = 3;
+    optional int32 robUnionNum = 4;
+    optional int64 unionId = 5;
+    optional PlayerHeadDataMsg headData = 6;
+    optional int32 unionFlag = 7;
+    optional int64 serverId = 8;
+}
+message PuppetUnionBattlePlayerMsg {
+    repeated PuppetEquipMsg equips = 1;
+    optional int64 power = 2;
+    optional string nickName = 3;
+    optional string score = 4;
+}
+message  PuppetWelfareInfo {
+  optional string name = 1;
+  optional int32 itemId = 2;
+  optional int64 id = 3;
+  optional int32 status = 4;
+  optional int64 time = 5;
+}
+message PuppetWelfareRecord {
+  optional string nickName = 1;
+  optional string reward = 2;
+}
+message PuppetRoundBaseInfo {
+    required int32 groupId = 1 ;
+    required int32 rank =2 ;
+    required string score = 3;
+    required int64 point = 4;
+    required int32 danId = 5;
+}
+/*=============================== PVG ====================================*/
+/*========================================================================*/
+message PuppetReportDetailMsg {
+    optional string nickName = 1;
+    optional int32 atkTimes = 2;
+    optional int64 damage = 3;
+}
+message PuppetReportMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional string nickName = 2;
+    optional int64 unionId = 3;
+    optional string unionName = 4;
+    optional int64 damage = 5;
+    optional string targetName = 6;
+    optional int64 serverId = 7;
+    optional int32 flag = 8;
+    optional int32 atkTimes = 9;
+    optional int64 time = 10;
+  }
+message PuppetUnionChallengeSimpleMsg {
+    optional int64 unionId = 1;
+    optional int64 leftHp = 2;
+    optional int64 finalFame = 3;
+    optional bool hasDefeated = 4;
+    optional int64 shieldTriggerTime = 5;
+    optional int32 level = 6;
+}
+message PuppetUnionChallengeMsg {
+    optional PuppetUnionBaseData base = 1;
+    optional int64 reduceBlood = 2;
+    optional int64 lastBeAttackTime = 3;
+    optional int32 rank = 4;
+    optional bool hasDefeated = 5;
+    optional int64 shieldTriggerTime = 7;
+    optional int32 position = 8;
+}
+message PuppetChallengeInfoSync {
+    required int64 playerId = 1;
+    optional string unionName = 2;
+    optional string name = 3;
+    repeated int64 advanced = 4;
+    optional PuppetPlayerDataMsg appearance = 5;
+    optional PuppetUnionChallengeSimpleMsg targetUnion = 6;
+    optional int64 damage = 7;
+    repeated PuppetUnionGroupRankMsg groupRankMsg = 8;
+}
+message PuppetUnionGroupRankMsg {
+  optional int64 unionId = 1;
+  optional int32 rank = 2;
+}
+message PuppetEnterActivityReq {
+    required int32 activityId = 1;
+}
+message PuppetEnterActivityResp {
+    required int32 ret = 1;
+    optional int32 unionRank = 2;
+    optional int32 round = 3;
+    optional int32 group = 4;
+    optional int32 rankId = 5;
+    repeated int32 groups = 6;
+    optional int64 unionId = 7;
+    repeated PuppetUnionBaseData top3Unions = 8;
+    optional PuppetSettleInfo settleInfo = 9;
+    optional bool hasWorship = 10;
+    optional PuppetWorshipPlayerMsg worshipPlayer = 11;
+    optional int32 activityId = 12;
+    optional int32 position = 13;
+}
+message PuppetEnterMapReq {
+    required int32 activityId = 1;
+}
+message PuppetEnterMapResp {
+    required int32 ret = 1;
+    optional PuppetPlayerDataMsg playerData = 2;
+    optional bool isAutoUnLock = 3;
+    optional int32 rank = 4;
+    repeated PuppetUserMallInfo mallInfo = 5;
+    repeated PuppetUnionBuildInfo buildinfo = 7;
+    optional int32 noticeNum = 8;
+    optional int32 unionRank = 9;
+    optional int32 unionScore = 10;
+    optional int32 activityId = 11;
+    optional int32 eventId = 12;
+    optional PuppetMonsterMsg unDealMonster = 13;
+    optional int32 realmType = 14;
+    optional int64 lastEquipFixId = 15;
+    optional int32 fixTimes = 16;
+}
+message PuppetRollDiceReq {
+    required int32 activityId = 1;
+    optional int32 operateType = 2;
+    optional int32 diceNum = 3;
+}
+message PuppetRollDiceResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional PuppetPlayerDataMsg playerData = 3;
+    repeated PuppetUserMallInfo mallInfo = 4;
+    optional PuppetMonsterMsg monster = 5;
+    optional int32 activityId = 6;
+    optional int32 exp = 7;
+    repeated PuppetEquipMsg equips = 8;
+    optional int32 operateType = 9;
+    repeated PuppetUnionBuildInfo buildinfo = 10;
+    optional int32 rank = 11;
+}
+message PuppetStrengthReq {
+    required int32 activityId = 1;
+    required int32 useCount = 2;
+}
+message PuppetStrengthResp {
+    required int32 ret = 1;
+    optional string costInfo = 2 ;
+    optional int32 strength = 3;
+    optional int64 lastRecoveryTime = 4;
+}
+message PuppetAssistListReq {
+    required int32 activityId = 1;
+}
+message PuppetAssistListResp {
+    required int32 ret = 1;
+    repeated PuppetTrapPlayerMsg trapInfo = 2;
+    repeated PuppetAssistMonsterMsg assistInfo = 3;
+    optional int32 assistTimes = 4;
+}
+message PuppetRescueTrapReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message PuppetRescueTrapResp {
+    required int32 ret = 1;
+}
+message PuppetAssistAttackMonsterReq {
+    optional int32 activityId = 1;
+    optional int64 monsterUid = 2;
+    optional int64 playerId = 3;
+}
+message PuppetAssistAttackMonsterResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional PuppetAssistMonsterMsg monsterInfo = 3;
+}
+message PuppetUnionLogListReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+    optional int32 page = 3;
+}
+message PuppetUnionLogListResp {
+    required int32 ret = 1;
+    repeated PuppetUnionLogInfo unionLogList = 2;
+}
+message PuppetWorshipReq {
+    required int32 activityId = 1;
+}
+message PuppetWorshipResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional PuppetWorshipPlayerMsg worshipPlayer = 3;
+}
+message PuppetGroupInfoReq {
+    required int32 activityId = 1;
+    required int32 groupId = 2;
+}
+message PuppetGroupInfoResp {
+    required int32 ret = 1;
+    repeated PuppetUnionBaseData groupInfo = 2;
+}
+message PuppetEventHandleReq {
+    required int32 activityId = 1;
+    required int32 eventId = 2;
+    optional int32 index = 3;
+    optional int32 askHelp = 4;
+    optional int32 action = 5;
+    optional int32 type = 6;
+    optional int64 equipUniqueId = 7;
+    optional int32 isLeave = 8;
+}
+message PuppetEventHandleResp {
+    required int32 ret = 1;
+    optional int32 index = 2;
+    optional PuppetPlayerDataMsg playerData = 3;
+    optional PuppetMonsterMsg monsterData = 4;
+    optional string reward = 5;
+    repeated PuppetEquipMsg equips = 6;
+    optional PuppetAssistMonsterMsg markMonsterData = 7;
+    optional string drawResult = 8;
+    optional int32 rank = 9;
+}
+message PuppetWearEquipReq {
+    required int32 activityId = 1;
+    required int64 equipId = 2;
+    required int32 x = 3;
+    required int32 y = 4;
+    optional int64 takeDownIds1 = 5;
+    optional int64 takeDownIds2 = 6;
+}
+message PuppetWearEquipResp {
+    required int32 ret = 1;
+    repeated PuppetEquipMsg equips = 2;
+    optional string power = 3;
+    optional int32 rank = 4;
+}
+message PuppetResolveReq {
+    required int32 activityId = 1;
+    repeated int64 equipdIds = 2;
+}
+message PuppetResolveResp {
+    required int32 ret = 1;
+    repeated PuppetEquipMsg equips = 2;
+    optional int32 resolveNum = 3;
+}
+message PuppetEquipChangeReq {
+    required int32 activityId = 1;
+    required int32 srcX = 2;
+    required int32 srcY = 3;
+    required int32 dstX = 4;
+    required int32 dstY = 5;
+}
+message PuppetEquipChangeResp {
+    required int32 ret = 1;
+    repeated PuppetEquipMsg equips = 2;
+    optional string power = 3;
+    optional int32 rank = 4;
+}
+message PuppetUnlockAutoReq {
+    required int32 activityId = 1;
+}
+message PuppetUnlockAutoResp {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+}
+/*=============================== PVG ====================================*/
+/*========================================================================*/
+message PuppetChallengeListReq {
+    required int32 activityId = 1;
+}
+message PuppetChallengeListResp {
+    required int32 ret = 1;
+    repeated PuppetUnionChallengeMsg unionMsg = 2;
+    repeated int64 advanced = 3;
+    optional int32 battleNum = 4;
+}
+message PuppetChallengeReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message PuppetChallengeResp {
+    required int32 ret = 1;
+    optional int32 free = 2;
+    optional int64 battleRecoverTime = 3;
+    optional string rewards = 4;
+    optional int64 addScore = 5;
+    optional int64 reduceScore = 6;
+    repeated PuppetUnionBattlePlayerMsg result = 7;
+    optional int32 defeatNum = 8;
+    optional int32 activityId = 9;
+}
+message PuppetChallengeHeartBeatReq {
+    required int32 activityId = 1;
+}
+message PuppetChallengeHeartBeatResp {
+    required int32 ret = 1;
+}
+message PuppetUnionPlayerListReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message PuppetUnionPlayerListResp {
+    required int32 ret = 1;
+    repeated PuppetUnionBattlePlayerMsg playerList = 2;
+    optional int64 reduceScore = 3;
+}
+message PuppetReportReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message PuppetReportResp {
+    required int32 ret = 1;
+    repeated PuppetReportMsg datas = 2;
+}
+message PuppetReportDetailReq {
+    required int32 activityId = 1;
+    optional int64 unionId = 2;
+    optional int32 type = 3;
+}
+message PuppetReportDetailResp {
+    required int32 ret = 1;
+    repeated PuppetReportDetailMsg infos = 2;
+}
+message PuppetOpenBoxReq {
+    required int32 activityId = 1;
+}
+message PuppetOpenBoxResp {
+    required int32 ret = 1;
+    repeated PuppetEquipMsg equips = 2;
+    optional int32 resolveNum = 3;
+    optional int32 resolveTimes = 4;
+}
+message PuppetReceiveMonsterRewardReq {
+    optional int32 activityId = 1;
+    optional int64 monsterUid = 2;
+}
+message PuppetReceiveMonsterRewardResp {
+    required int32 ret = 1;
+    optional int64 monsterUid = 2;
+    repeated PuppetEquipMsg equips = 3;
+    optional PlayerCharacterImageMsg playerData = 4;
+}
+message PuppetUseFightNumItemReq {
+  required int32 activityId = 1;
+  optional int32 itemId = 2;
+  optional int32 num = 3;
+}
+message PuppetUseFightNumItemResp {
+  required int32 ret = 1;
+  optional int32 value = 2;
+  optional int64 lastRecoveryTime = 3;
+  optional int32 battleNum = 4;
+}
+message PuppetSparInfoReq {
+  required int32 activityId = 1;
+}
+message PuppetSparInfoResp {
+  required int32 ret = 1;
+  optional int32 exp = 2;
+  repeated PuppetWelfareInfo info = 3;
+  optional int32 canReceive = 4;
+}
+message PuppetGetSparPowerReq {
+  required int32 activityId = 1;
+}
+message PuppetGetSparPowerResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message PuppetGetWelfareReq {
+  required int32 activityId = 1;
+  required int64 id = 2;
+}
+message PuppetGetWelfareResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message PuppetSendWelfareReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  required int32 num = 3;
+}
+message PuppetSendWelfareResp {
+  required int32 ret = 1;
+  optional PuppetWelfareInfo info = 2;
+}
+message PuppetWelfareRecordReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message PuppetWelfareRecordResp {
+  required int32 ret = 1;
+  repeated PuppetWelfareRecord record = 2;
+}
+message PuppetNotifyPlayerAssistTrap {
+    optional PlayerCharacterImageMsg playerData = 1;
+    optional int64 playerId = 2;
+}
+message PuppetNotifyAssistDataChanged {
+    optional PuppetTrapPlayerMsg trapInfo = 1;
+    optional PuppetAssistMonsterMsg assistInfo = 2;
+}
+message PuppetGuessUnionInfoList {
+    repeated PuppetGuessUnionInfo infoList = 1;
+}
+message PuppetGuessUnionInfo {
+    optional PuppetGuessUnionRankMsg rankInfo = 1;
+    optional int32 selectedCount = 2;
+}
+message PuppetGuessUnionRankMsg {
+    optional UnionBaseData baseData = 1;
+    required int32 score = 2;
+    required int32 iniRank = 3;
+    required int32 rank = 4;
+    optional int64 masterId = 5;
+    optional string masterName = 6;
+}
+message PuppetAttackBossMsg {
+    optional int64 bossId = 1;
+    optional string reward = 2;
+    repeated PuppetEquipMsg equipData = 3;
+}
+enum PuppetRedPointEnum {
+    PUPPET_NULL = 0;
+    PUPPET_STRENGTH = 1;
+    PUPPET_CHALLENGE_TIMES = 2;
+    PUPPET_UNION_REWARD = 3;
+    PUPPET_GUESS = 4;
+    PUPPET_GUESS_REWARD = 5;
+    PUPPET_PLAYER_RANK_REWARD = 6;
+    PUPPET_UNION_RANK_REWARD = 7;
+    PUPPET_SHOP = 8;
+}
+message PuppetRedPointReqMsg {
+    required int32 activityId = 1;
+}
+message PuppetRedPointRespMsg {
+    required int32 ret = 1;
+    optional string data = 2;
+}
+message PuppetReceiveBlessingReq {
+    required int32 activityId = 1;
+    required int64 recordId = 2;
+}
+message PuppetReceiveBlessingResp {
+    required int32 ret = 1;
+    optional int32 strength = 2;
+    optional int64 lastRecoveryTime = 3;
+    optional bool isAlreadyGet = 4;
+}
+message PuppetBlessedNoticeInfo {
+    required int64 id = 1;
+    required PlayerCharacterImageMsg playerData = 2;
+    optional int32 status = 3;
+    optional int64 time = 4;
+    optional int32 strength = 5;
+    optional string giftName = 6;
+}
+message PuppetBlessingListReq {
+    required int32 activityId = 1;
+}
+message PuppetBlessingListResp {
+    required int32 ret = 1;
+    repeated PuppetBlessedNoticeInfo blessingList = 2;
+}
+message PuppetUnionSummaryReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message PuppetUnionSummaryResp {
+    required int32 ret = 1;
+    repeated PuppetRoundBaseInfo info = 2;
+}
+message PuppetBlessNotify {
+    optional int32 noticeNum = 1;
+}
+message PuppetBuildUpdateNotify {
+    repeated PuppetUnionBuildInfo buildInfo = 1;
+    optional string power = 2;
+}

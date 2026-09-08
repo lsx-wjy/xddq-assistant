@@ -1,0 +1,22 @@
+package com.yq.msg.CityMsg;
+enum ThemeShopLoopPb{
+  ThemeShopLoopPb_Null = 0;
+  ThemeShopLoopPb_Get_Pool_Data = 2015401;
+}
+message ActivityMagicShopLoopTurnData{
+    required int32 turn = 1;
+    required int32 type = 2;
+    required int64 beginTime = 3;
+    required int64 endTime = 4;
+}
+message ActivityMagicShopLoopPoolMsg{
+    required int32 activityId = 1;
+    repeated ActivityMagicShopLoopTurnData turnData = 2;
+}
+message ActivityMagicShopLoopGetPoolDataReq {
+  required int32 activityId = 1;
+}
+message ActivityMagicShopLoopGetPoolDataResp {
+  required int32 ret = 1;
+  repeated ActivityMagicShopLoopTurnData turnData = 2;
+}

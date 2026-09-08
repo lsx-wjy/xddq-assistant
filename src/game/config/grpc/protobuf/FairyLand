@@ -1,0 +1,55 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "PackagesBase";
+message FairyLandHeartDevilBattleReq{
+  required int32 id = 1;
+}
+message FairyLandHeartDevilBattleResp {
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+  optional FairyLandHeartDevilInfo heartDevilInfo = 3;
+  optional int32 soarStatus = 4;
+}
+message FairyLandGoToSouthReq{
+}
+message FairyLandGoToSouthResp{
+  required int32 ret = 1;
+  optional FairyLandBattleInfo battleInfo = 2;
+  optional int32 soarStatus = 3;
+}
+message FairyLandEnterSouthReq{
+}
+message FairyLandEnterSouthResp{
+  required int32 ret = 1;
+  optional FairyLandBattleInfo battleInfo = 2;
+}
+message FairyLandSouthDoorInviteReq {
+  required int32 type = 1;
+}
+message FairyLandSouthDoorInviteResp {
+  required int32 ret = 1;
+}
+message FairyLandSouthDoorBattleReq{
+}
+message FairyLandSouthDoorBattleResp {
+  required int32 ret = 1;
+  optional FairyLandBattleInfo battleInfo = 2;
+  optional int32 soarStatus = 3;
+}
+message FairyLandSoarReq{
+}
+message FairyLandSoarResp{
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 soarStatus = 3;
+}
+message FairyLandMonsterReq{
+}
+message FairyLandMonsterResp{
+  required int32 ret = 1;
+  optional int32 id = 2;
+  repeated AttributeDataMsg attributeList = 3;
+  optional string fightValue = 4;
+}

@@ -4,21 +4,39 @@
     "main": "app.js",
     "type": "module",
     "license": "MIT",
+    "engines": {
+        "node": ">=22.5.0"
+    },
     "imports": {
         "#*": "./src/*"
     },
     "dependencies": {
         "async": "^3.2.5",
-        "axios": "^1.7.2",
+        "axios": "^1.20.0",
         "crypto-js": "^4.2.0",
+        "@lucide/vue": "^1.38.0",
         "long": "^5.2.3",
-        "protobufjs": "^7.3.0",
-        "qs": "^6.12.1",
-        "uuid": "^10.0.0",
+        "protobufjs": "^7.6.3",
+        "qs": "^6.16.0",
+        "uuid": "^11.1.1",
+        "vue": "^3.5.13",
         "winston": "^3.13.0",
-        "ws": "^8.17.0"
+        "ws": "^8.21.3"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.2.1",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.5",
+        "vue-tsc": "^2.2.0"
     },
     "scripts": {
-        "start": "node app.js"
+        "build": "npm run verify:protocols && npm run dashboard:build",
+        "start": "node app.js",
+        "dashboard": "vite --config vite.config.ts",
+        "dashboard:build": "vue-tsc --noEmit -p web/tsconfig.json && vite build --config vite.config.ts",
+        "dashboard:preview": "vite preview --config vite.config.ts",
+        "dashboard:serve": "node scripts/dashboard-server.mjs",
+        "protocol:sync": "node scripts/sync-apk-protocols.mjs",
+        "verify:protocols": "node scripts/verify-protocols.mjs"
     }
 }

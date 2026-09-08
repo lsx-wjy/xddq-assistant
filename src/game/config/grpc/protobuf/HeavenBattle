@@ -1,0 +1,750 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "ActivityBase";
+import "Palace";
+message HeavenBattleConfigSyncMsg {
+  repeated ActivityPeakHoldTimeConfig timeConfigs = 1;
+  repeated HeavenBattleMapConfig mapConfigs = 2;
+  repeated HeavenBattleEventConfig eventConfig = 3;
+  repeated HeavenBattleLevelConfigMsg levelConfigs = 4;
+  repeated HeavenBattleMonsterConfigMsg monsterConfigs = 5;
+  repeated HeavenBattleBossConfigMsg bossConfigs = 6;
+}
+message HeavenBattleMapConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 eventId = 3;
+}
+message HeavenBattleEventConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 type = 3;
+  optional string extraEvent = 4;
+  optional string reward = 5;
+  optional string param = 6;
+  optional int32 durability = 7;
+  optional string occupyReward = 8;
+  optional int32 level = 9;
+  optional int32 score = 10;
+}
+message HeavenBattleMonsterConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 round = 3;
+  optional string name = 4;
+  optional string desc = 5;
+  optional string appearanceId = 6;
+  optional string icon = 7;
+  optional string sound = 8;
+  optional string lines = 9;
+  optional string attackType = 10;
+  optional string attackExcursion = 11;
+  optional string attackHitExcursion = 12;
+  optional int32 bodyHeight = 13;
+  optional int32 bodyScale = 14;
+  optional int32 attackBodyScale = 15;
+  optional string attack = 16;
+  optional string hp = 17;
+  optional string def = 18;
+  optional string speed = 19;
+  optional string attributeWeight = 20;
+  optional string resistanceWeight = 21;
+  optional string specialPropertyParam = 22;
+  optional int32 attrProb = 23;
+  optional string petId = 24;
+  optional string petSkillLevel = 25;
+  optional string pithyId = 26;
+  optional string pithySkillLevel = 27;
+  optional string skillId = 28;
+  optional string skillLevel = 29;
+  optional string bloodSkill = 30;
+  optional string specialSkill = 31;
+}
+message HeavenBattleLevelConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 level = 2;
+  optional int64 exp = 3;
+  optional int64 attack = 4;
+  optional int64 defence = 5;
+  optional int64 hp = 6;
+  optional int64 speed = 7;
+  optional int32 type = 8;
+}
+message HeavenBattleBossConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 monsterId = 3;
+  optional string attackBase = 4;
+  optional string hpBase = 5;
+  optional int32 hpNumber = 6;
+  optional int32 hpScore = 7;
+  optional int32 reward = 8;
+  optional string defBase = 9;
+  optional string speedBase = 10;
+  optional string stun = 11;
+  optional string criticalHit = 12;
+  optional string doubleAttack = 13;
+  optional string dodge = 14;
+  optional string attackBack = 15;
+  optional string lifeSteal = 16;
+  optional string reStun = 17;
+  optional string reCriticalHit = 18;
+  optional string reDoubleAttack = 19;
+  optional string reDodge = 20;
+  optional string reAttackBack = 21;
+  optional string reLifeSteal = 22;
+  optional int32 increaseDamage = 23;
+  optional int32 decreaseDamage = 24;
+  optional int32 enhanceHitDamage = 25;
+  optional int32 weakenHitDamage = 26;
+  optional int32 enhanceHeal = 27;
+  optional int32 weakenHeal = 28;
+  optional int32 enhancePet = 29;
+  optional int32 weakenPet = 30;
+  optional int32 enhanceSkill = 31;
+  optional int32 weakenSkill = 32;
+  optional int32 ignoreAllProperty = 33;
+  optional int32 ignoreAllignoreAll = 34;
+  optional int32 sDef = 35;
+  optional int32 sReDef = 36;
+  optional int32 sBreak = 37;
+  optional int32 sReBreak = 38;
+}
+message HeavenBattleCommonReq {
+  required int32 activityId = 1;
+}
+message HeavenBattleEnterActivityResp {
+  optional int32 ret = 1;
+  optional HeavenBattlePlayerBaseMsg playerBaseMsg = 2;
+  optional int32 applyUnionRank = 3;
+  optional HeavenBattleDelegateRewardMsg delegateReward = 5;
+  optional int64 exp = 6;
+  repeated HeavenBattleGatherMsg gatherList = 7;
+  optional int32 gatherPropCount = 8;
+  optional string params = 10;
+  optional int32 bossGridHpRate = 11;
+  optional string unionRechargeReward = 12;
+  optional bool canWorship = 13;
+  optional HeavenBattleWorshipPlayerMsg bestPlayerInfo = 14;
+  optional int32 lastBattleGridId = 16;
+  optional int32 totalCostEnergy = 17;
+  repeated UnionBaseData top4Union = 18;
+  repeated HeavenBattleOtherUnionMsg otherUnions = 19;
+  repeated HeavenBattleGodBodyChangeInfo godBodyChange = 20;
+}
+message HeavenBattleGodBodyChangeInfo {
+  optional int32 index = 1;
+  optional int64 changeTime = 2;
+}
+message HeavenBattleOtherUnionMsg {
+  optional int64 unionId = 1;
+  optional string name = 2;
+}
+message HeavenBattleGatherMsg {
+  optional int32 gridId = 1;
+  optional int64 createTime = 2;
+}
+message HeavenBattlePlayerBaseMsg {
+  optional int64 unionId = 1;
+  optional int32 position = 2;
+  optional int32 energy = 3;
+  optional int64 lastRecoveryTime = 4;
+  optional int32 delegateState = 5;
+  optional bool isCommander = 6;
+  optional string totalBossDamage = 7;
+  optional int32 dailyLittleBossCount = 8;
+  optional int32 dailyBigBossCount = 9;
+  optional string fightValue = 10;
+  repeated int32 selectedBuffs = 11;
+  optional int64 lastSendHelpTime = 12;
+  optional int32 markGrid = 13;
+  optional int32 recoveryAttrRate = 14;
+  repeated int32 unionBuffList = 15;
+  repeated int32 attrGridIds = 16;
+  optional int32 littleBossId = 17;
+}
+message HeavenBattleLockBodyReq{
+  required int32 activityId = 1;
+  optional int32 separationIdx = 2;
+}
+message HeavenBattleLockBodyResp {
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+}
+message HeavenBattleGetLockBodyReq {
+  required int32 activityId = 1;
+  optional int32 bodyIndex = 2;
+  optional int64 targetId = 3;
+}
+message HeavenBattleGetLockBodyResp {
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+  optional int64 exp = 3;
+  optional int32 attrRate = 4;
+  repeated int32 attrGridIds = 5;
+}
+message HeavenBattleQuitBattleFieldReq {
+  optional int32 activityId = 1;
+  optional bool exit = 2;
+  optional int32 treasureGrid = 3;
+}
+message HeavenBattleUseEnergyItemReq {
+  required int32 activityId = 1;
+  required int32 useCount = 2;
+}
+message HeavenBattleUseEnergyItemResp {
+  optional int32 ret = 1;
+  optional string costInfo =2 ;
+  optional int32 energy = 3;
+  optional int64 lastRecoveryTime  = 4;
+}
+message HeavenBattlePlayerPositionDataMsg{
+  optional PlayerHeadAndNameMsg head = 1;
+  optional int32 position = 2;
+}
+message HeavenBattleUnionDetailResp {
+  optional int32 ret = 1;
+  optional int64 unionId = 2;
+  repeated HeavenBattleUnionMemberData memberList = 3;
+  repeated int64 commanders = 4;
+  optional string notice = 5;
+  optional UnionBaseData baseData = 6;
+  repeated HeavenBattleTileOccupyInfoMsg tileOccupyInfo = 7;
+  optional string fightValue = 8;
+}
+message HeavenBattleTileOccupyInfoMsg{
+  optional int32 type = 1;
+  optional int32 occupyNum = 2;
+  optional int32 totalNum = 3;
+}
+message HeavenBattleUnionMemberData {
+  optional PlayerHeadAndFightMsg baseMsg = 1;
+  optional string damage = 2;
+  optional int64 offLineTime = 3;
+  optional bool syncedBodies = 4;
+  optional int32 position = 5;
+  optional int32 delegateState = 6;
+  optional int32 lv = 7;
+}
+message HeavenBattleChangeStrategyGridReq {
+  required int32 activityId = 1;
+  optional bool add = 2;
+  optional int32 gridId = 3;
+  optional string notice = 4;
+}
+message HeavenBattleChangeStrategyGridResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleCampTargerMsg list = 2;
+}
+message HeavenBattleApplyDelegateReq{
+  required int32 activityId = 1;
+  optional bool  isCancel = 2;
+}
+message HeavenBattleApplyDelegateResp {
+  optional int32 ret = 1;
+  optional int32 delegateState = 2;
+}
+message HeavenBattleApplyAgreeReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional bool agree = 3;
+  optional bool isOneKeyDisAgree = 4;
+}
+message HeavenBattleApplyAgreeResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleDelegateApplyListReq {
+  required int32 activityId = 1;
+}
+message HeavenBattleDelegateApplyListResp {
+  optional int32 ret = 1;
+  repeated HeavenBattlePlayerShowMsg currency = 2;
+  repeated HeavenBattlePlayerShowMsg apply = 3;
+}
+message HeavenBattlePlayerShowMsg {
+  optional PlayerHeadDataMsg head = 1;
+  optional string name = 2;
+  optional int32 position = 3;
+  optional int64 contribution = 4;
+  optional string fightValue = 5;
+}
+message HeavenBattleGetGridDetailReq {
+  optional int32 activityId = 1;
+  repeated int32 gridIds = 2;
+  optional bool simple = 3;
+  repeated int32 newGrids = 4;
+}
+message HeavenBattleGetGridDetailResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleGridDetailMsg gridList = 2;
+}
+message HeavenBattleGridDetailMsg {
+  optional int32 id = 1;
+  optional int32 leftHp = 2;
+  repeated HeavenBattleAppearanceIconMsg playerList = 3;
+  optional PlayerAppearanceDataMsg bestPlayer = 4;
+  repeated HeavenBattleGatherMonsterMsg gatherMonsters = 5;
+  optional HeavenBattleGridAttackMsg attackPlayer = 6;
+}
+message HeavenBattleAppearanceIconMsg {
+  optional int64 playerId = 1;
+  optional string name = 2;
+  optional int32 headIcon = 3;
+  optional string wxHeadUrl = 4;
+  optional int32 appearanceId = 5;
+  optional int32 contributeRank = 6;
+}
+message HeavenBattleGridAttackMsg{
+  optional PlayerAppearanceDataMsg appearance = 1;
+  optional PlayerHeadAndNameMsg head = 2;
+  optional int32 contributeRank = 3;
+}
+message HeavenBattleGatherMonsterMsg {
+  optional int32 monsterIndex = 1;
+  optional int32 monsterCount = 2;
+}
+message HeavenBattleExpChangeSyncMsg{
+  optional int64 exp = 1;
+  optional string oldFightValue = 2;
+  optional string curFightValue = 3;
+}
+message HeavenBattleGridBattleReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+  optional int64 targetPlayerId = 3;
+  optional int32 monsterIndex = 4;
+  optional int32 bodyIndex = 5;
+}
+message HeavenBattleGridBattleResp {
+  optional int32 ret = 1;
+  optional BattleRecordMsg battleRecord = 2;
+  optional string reward = 3;
+  optional int32 activityId = 4;
+  optional int32 progress = 5;
+  optional int32 gatherBattleCount = 6;
+  repeated HeavenBattleGatherMonsterMsg gatherMonsters = 7;
+  optional HeavenBattleDelegatePlayerEnergyMsg delegateEnergyMsg = 8;
+  optional string damage = 9;
+  optional int32 bossLastConfigId = 10;
+  optional int32 bossRealDamage = 11;
+}
+message HeavenBattleDelegatePlayerEnergyMsg {
+  optional int32 energy = 1;
+  optional int64 lastRecoveryTime = 2;
+  optional int32 dailyLittleBossCount = 3;
+  optional int32 dailyBigBossCount = 4;
+}
+message HeavenBattleResultSyncMsg {
+  optional int32 energy = 1;
+  optional int64 lastRecoveryTime = 2;
+  optional int32 dailyLittleBossCount = 3;
+  optional int32 dailyBigBossCount = 4;
+  optional int32 gridId = 5;
+  optional int32 totalCostEnergy = 6;
+}
+message HeavenBattleDelegateRewardMsg {
+  optional int32 costEnergy = 1;
+  optional int32 bossBattleCount = 2;
+  optional int32 gatherBattleCount = 3;
+  optional string reward = 4;
+}
+message HeavenBattleGridChangeSync {
+  optional HeavenBattleGridDetailMsg gridUpdateMsg = 1;
+  optional int32 status = 2 ;
+}
+message HeavenBattlePlayerBattleDetailReq {
+   optional int32 activityId = 1;
+   optional int64 targetPlayerId = 2;
+   optional int32 gridId = 3;
+}
+message HeavenBattlePlayerBattleDetailResp{
+   optional int32 ret = 1;
+   optional PlayerHeadAndNameMsg head = 2;
+   repeated HeavenBattlePlayerFightInfoMsg list = 3;
+   optional int32 energy = 4;
+   repeated HeavenBattleTileBattleMonsterMsg detail = 5;
+   optional int32 gatherBattleCount = 6;
+   optional int32 dailyLittleBossCount = 7;
+   optional int32 dailyBigBossCount = 8;
+   repeated HeavenBattleContributeNameMsg topList = 9;
+   repeated HeavenBattlePlayerAppearanceMsg joinBossPlayers = 10;
+}
+message HeavenBattlePlayerAppearanceMsg {
+  optional int64 playerId = 1;
+  optional string nickName = 2;
+  optional int32 appearanceId = 3;
+}
+message HeavenBattlePlayerFightInfoMsg{
+  optional string fightValue = 1;
+  optional int32 bodyIdx = 2;
+  repeated int32 buffList = 3;
+}
+message HeavenBattleTileBattleMonsterMsg{
+  optional int32 monsterId = 1;
+  optional int32 progress = 2;
+  optional string fightValue = 3;
+  optional bool isDefeated = 4;
+  optional int32 stage = 5;
+}
+message HeavenBattleUseBuffReq {
+  optional int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 bodyIndex = 3;
+  optional int32 buffId = 4;
+}
+message HeavenBattleUseBuffResp {
+  optional int32 ret = 1;
+  optional int64 targetPlayerId = 2;
+  optional HeavenBattleBodyBuffMsg updateBodyMsg = 3;
+}
+message HeavenBattleBodyBuffMsg {
+  optional int32 buffId = 1;
+  optional int32 bodyIndex = 2;
+}
+message HeavenBattleStartGatherReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleStartGatherResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleTransferCommanderReq{
+   optional int32 activityId = 1;
+   optional int64 targetPlayerId = 2;
+}
+message HeavenBattleTransferCommanderResp{
+   optional int32 ret = 1;
+    repeated int64 commanderList = 2;
+}
+message HeavenBattleAppointCommanderReq{
+   optional int32 activityId = 1;
+   optional int64 targetPlayerId = 2;
+   optional bool isCancel = 3;
+}
+message HeavenBattleAppointCommanderResp{
+   optional int32 ret = 1;
+   repeated int64 commanderList = 2;
+}
+message HeavenBattleGatherDataSync {
+  optional int32 gridId = 1;
+  optional int64 createTime = 2;
+  optional int64 joinUnions = 3;
+}
+message HeavenBattleGridRewardListResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleGridOccupyRewardMsg rewardGridList = 2;
+  repeated HeavenBattleGridOccupyRewardMsg buffGridList = 3;
+  optional int32 erlangRewardType = 4;
+}
+message HeavenBattleGridOccupyRewardMsg {
+  optional int32 gridId = 1;
+  optional int64 occupyTime = 2;
+}
+message HeavenBattleReceiveGridRewardReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleReceiveGridRewardResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 activityId = 3;
+}
+message HeavenBattleSelectBuffReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+  optional int32 buffId = 3;
+}
+message HeavenBattleSelectBuffResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleSweepReq {
+  optional int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 gridId = 3;
+  optional int32 sweepCount = 4;
+  optional int32 monsterIndex = 5;
+}
+message HeavenBattleSweepResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 energy = 3;
+  optional int64 lastRecoveryTime = 4;
+}
+message HeavenBattleQueryGatherPropResp {
+  optional int32 ret = 1;
+  optional int32 gatherPropCount = 2;
+}
+message HeavenBattleSyncAttrRecoveryMsg {
+  optional int32 recoveryRate = 1;
+  optional string oldFightValue = 2;
+  optional string newFightValue = 3;
+  repeated int32 attrGridList = 4;
+}
+message HeavenBattleCommanderChangeSync {
+  optional bool isCommander = 1;
+}
+message HeavenBattleGridContributeReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleGridContributeResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleContributeNameMsg contributeList = 2;
+}
+message HeavenBattleContributeNameMsg {
+  optional string nickName = 1;
+  optional int32 contributeValue = 2;
+}
+message HeavenBattleBossGuideResp{
+  optional int32 ret = 1;
+  repeated HeavenBattleBossDetailMsg bossList = 2;
+  optional HeavenBattleBossDetailMsg bigBoss = 3;
+}
+message HeavenBattleBossDetailMsg{
+  optional int32 gridId = 1;
+  optional int32 leftHp = 2;
+  optional int64 defeatedTime = 3;
+  optional int32 stage = 4;
+}
+ message HeavenBattleReportResp{
+  optional int32 ret = 1;
+  repeated HeavenBattleReportDataMsg report = 2;
+ }
+ message HeavenBattleReportDataMsg{
+  optional int32 gridId = 1;
+  optional PlayerHeadAndNameMsg head = 2;
+  optional int64 occupyTime = 3;
+ }
+ message HeavenBattleGetBodyBuffResp{
+  optional int32 ret = 1;
+  repeated HeavenBattleBodyBuffMsg bodyBuffList = 2;
+  repeated int32 campBuffList = 3;
+  repeated string fightValueList = 4;
+ }
+message HeavenBattleGetTreasureInfoReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleGetTreasureInfoResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleTreasureBoxRecord openedBoxList = 2;
+  optional int32 receivedBoxId = 3;
+}
+message HeavenBattleTreasureBoxRecord {
+  optional int32 boxId = 1;
+  optional int32 rewardIdx = 2;
+  optional string nickName = 3;
+}
+message HeavenBattleReceiveTreasureInfoReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+  optional int32 boxId = 3;
+}
+message HeavenBattleReceiveTreasureInfoResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 activityId = 3;
+  optional int32 rewardIdx = 4;
+}
+message HeavenBattleTreasureBoxOpenSync {
+  optional int32 gridId = 1;
+  optional int32 boxId = 2;
+  optional int32 rewardIdx = 3;
+  optional string nickName = 4;
+}
+message HeavenBattleEnterMapResp {
+  optional int32 ret = 1;
+  repeated int32 gridList = 2;
+  repeated int32 rewardGirdList = 3;
+  optional int32 erlangStage = 4;
+  optional string fightValue = 5;
+  optional string params = 6;
+}
+message HeavenBattleGetCampTargetListReq{
+  optional int32 activityId = 1;
+  optional int32 campId = 2;
+}
+message HeavenBattleGetCampTargetListResp{
+  optional int32 ret = 1;
+  repeated HeavenBattleCampTargerMsg list = 2;
+  optional int32 signGridId = 3;
+}
+message HeavenBattleCampTargerMsg{
+  optional int32 gridId = 1;
+  optional int32 progress = 2;
+  optional int32 targetNum = 3;
+  optional string notice = 4;
+}
+message HeavenBattleWorshipResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional PalacePlayerShowMsg bestPlayerInfo = 3;
+}
+message HeavenBattleRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+enum HeavenBattleRedPointEnum {
+   heaven_battle_have_battle_chance = 0;
+   heaven_battle_have_token_reward = 1;
+   heaven_battle_have_reward_entrance = 2;
+   heaven_battle_have_rank_speed = 3;
+   heaven_battle_have_rank_damage = 4;
+   heaven_battle_have_person = 5;
+   heaven_battle_have_achievement = 6;
+   heaven_battle_have_shop = 7;
+   heaven_battle_have_apply_delegate = 8;
+   heaven_battle_have_gather = 9;
+   heaven_battle_free_gift = 10;
+   heaven_battle_union_recharge_reward = 11;
+}
+message HeavenBattleWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  repeated int32 petSoulShapeList = 10;
+  optional int32 titleId = 11;
+  optional int32 campId = 12;
+}
+message HeavenBattleTreasureGridSummaryReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleTreasureGridSummaryResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleTreasureSummary summaryList = 2;
+}
+message HeavenBattleTreasureSummary {
+  optional int32 rewardIndex = 1;
+  optional int32 openedCount = 2;
+}
+message HeavenBattleGetSweepInfoReq {
+  optional int32 activityId = 1;
+  optional int32 level = 2;
+  optional int64 targetPlayerId = 3;
+}
+message HeavenBattleGetSweepInfoResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleSweepInfo sweepList = 2;
+}
+message HeavenBattleSweepInfo {
+  optional int32 monsterIndex = 1;
+  optional int32 gridId = 2;
+  optional string fightValue = 3;
+  optional bool isDefeated = 4;
+  optional bool isOccupy = 5;
+}
+message HeavenBattleGetUnionDetailReq {
+  optional int32 activityId = 1;
+  optional string unionId = 2;
+}
+message HeavenBattleGetUnionDetailResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleMemberMsg memberList = 2;
+  optional UnionBaseData baseData = 3;
+}
+message HeavenBattleMemberMsg {
+  optional PlayerHeadAndNameMsg headInfo = 1;
+  optional string fightValue = 2;
+  optional int32 lv = 3;
+  optional int32 position = 4;
+}
+message HeavenBattleAsk4HelpReq {
+  optional int32 activityId = 1;
+  optional int32 gridId = 2;
+}
+message HeavenBattleAsk4HelpResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleRankDetailReq{
+  optional int32 activityId = 1;
+  optional int32 type = 2;
+}
+message HeavenBattleRankDetailResp{
+  optional int32 ret = 1;
+  repeated HeavenBattleRankDetalMsg rankList = 2;
+}
+message HeavenBattleRankDetalMsg{
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional int64 score = 3;
+  optional int32 progress = 4;
+  optional int64 leftHp = 5;
+  optional int64 defeatTime = 6;
+}
+message HeavenBattleGetUnionOccupyDetalReq{
+  optional int32 activityId = 1;
+  optional int64 unionId = 2;
+  optional int32 type = 3;
+}
+message HeavenBattleGetUnionOccupyDetalResp{
+  optional int32 ret = 1;
+  repeated int32 gridsId = 2;
+}
+message HeavenBattleMarkLineReq {
+  optional int32 activityId = 1;
+  repeated int32 addGrids = 2;
+  repeated int32 removeGrids = 3;
+}
+message HeavenBattleMarkLineResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleGetMarkLineResp {
+  optional int32 ret = 1;
+  repeated int32 gridList = 2;
+}
+message HeavenBattleGetSeasonProgressReq {
+  optional int32 activityId = 1;
+  optional int32 stage = 2;
+}
+message HeavenBattleGetSeasonProgressResp {
+  optional int32 ret = 1;
+  optional int32 rank = 2;
+  optional int32 score = 3;
+  optional int64 leftHp = 4;
+}
+message HeavenBattleGetTileScoreReq {
+  optional int32 activityId = 1;
+  optional int64 unionId = 2;
+}
+message HeavenBattleGetTileScoreResp {
+  optional int32 ret = 1;
+  repeated HeavenBattleTileScoreMsg scoreList = 2;
+  optional int32 totalScore = 3;
+}
+message HeavenBattleTileScoreMsg {
+  optional int32 type = 1;
+  optional int32 score = 2;
+  optional int32 level = 3;
+}
+message HeavenBattleChangeUnionNoticeReq {
+  optional int32 activityId = 1;
+  optional string notice = 2;
+  optional int32 girdId = 3;
+}
+message HeavenBattleChangeUnionNoticeResp {
+  optional int32 ret = 1;
+}
+message HeavenBattleGetDelegateBodyListResp {
+  optional int32 ret = 1;
+  optional HeavenBattleBodyInfoMsg currency = 2;
+  repeated HeavenBattleBodyInfoMsg list = 3;
+}
+message HeavenBattleBodyInfoMsg{
+  optional PlayerHeadAndNameMsg head = 1;
+  repeated HeavenBattlePlayerFightInfoMsg list = 2;
+}
+message HeavenBattleSyncLineGridMsg {
+  optional int32 gridId = 1;
+  optional bool add = 2;
+}
+message HeavenBattleSyncLineGridSyn {
+  optional int32 type = 1;
+  repeated HeavenBattleSyncLineGridMsg gridList = 2;
+}

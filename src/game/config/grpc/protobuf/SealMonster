@@ -1,0 +1,437 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+/** 轩辕镇魔 SealMonster 协议定义 */
+enum SealMonsterProtocols {
+    seal_monster_enter = 236601;
+    seal_monster_enter_game = 236602;
+    seal_monster_move_grid = 236603;
+    seal_monster_handler_grid_event = 236604;
+    seal_monster_final_battle= 236605;
+    seal_monster_buy_battle_times = 236606;
+    seal_monster_select_attack_monster = 236607;
+    seal_monster_attack_reward = 236608;
+    seal_monster_battle_skill = 236609;
+    seal_monster_get_region_info = 236610;
+    seal_monster_enter_equip = 236650;
+    seal_monster_forge = 236651;
+    seal_monster_equip_replace = 236652;
+    seal_monster_equip_decompose = 236653;
+    seal_monster_equip_breakthrough = 236654;
+    seal_monster_equip_skill = 236655;
+    seal_monster_enter_bag = 236656;
+    seal_monster_use_item = 236657;
+    seal_monster_red_point = 236659;
+    seal_monster_get_player_info = 236660;
+}
+message SealMonsterConfigMsg {
+    repeated SealMonsterEquipConfigMsg equipConfig = 1;
+    repeated SealMonsterElvConfigMsg elvConfig = 2;
+    repeated SealMonsterEventConfigMsg eventConfig = 3;
+    repeated SealMonsterMapConfigMsg mapConfig = 4;
+    repeated SealMonsterMonstConfigMsg monstConfig = 5;
+    repeated SealMonsterRealmsConfigMsg realmsConfig = 6;
+    repeated SealMonsterSkillConfigMsg skillConfig = 7;
+    repeated SealMonsterSmithConfigMsg smithConfig = 8;
+    repeated SealMonsterStageConfigMsg stageConfig = 9;
+}
+message SealMonsterRealmsConfigMsg {
+    required int32 id = 1;
+    required string name = 2;
+    required string desc = 3;
+    required int32 bigType = 4;
+    required int32 type = 5;
+    required string demonicMax = 6;
+    required string attackBase = 7;
+    required string hpBase = 8;
+    required string equipmentLevel = 9;
+    required string equipmentType = 10;
+}
+message SealMonsterSmithConfigMsg {
+    required int32 id = 1;
+    required int32 stateLimit = 2;
+    required int32 multipleTimes = 3;
+    required string qualityWeight = 4;
+    required int32 bag = 5;
+}
+message SealMonsterEquipConfigMsg {
+    required int32 id = 1;
+    required int32 chara = 2;
+    required int32 icon = 3;
+    required int32 quality = 4;
+    required int32 type = 5;
+    required string name = 6;
+    required string primAttack = 7;
+    required string primHP = 8;
+    required int32 expRate = 9;
+    required int32 weight = 10;
+    required string advanceAttribute = 11;
+    required string attributeNum = 12;
+    required int32 skill = 13;
+    optional int32 effect = 14;
+}
+message SealMonsterElvConfigMsg {
+    required int32 id = 1;
+    required string attack = 2;
+    required string hp = 3;
+    required int32 exp = 4;
+}
+message SealMonsterSkillConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required string name = 3;
+    required string desc = 4;
+    required string param = 5;
+    optional string showParam = 6;
+}
+message SealMonsterEventConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required string param = 3;
+    required string reward = 4;
+    required int32 onlyOnce = 5;
+    required string name = 6;
+    required string desc = 7;
+}
+message SealMonsterMonstConfigMsg {
+    required int32 id = 1;
+    required int32 attack = 2;
+    required int32 hp = 3;
+    required int32 speed = 4;
+    required int32 skill = 5;
+    required string passive = 6;
+    required string attribute = 7;
+    optional int32 chara = 8;
+    optional int32 effect = 9;
+}
+message SealMonsterStageConfigMsg {
+    required int32 id = 1;
+    required string name = 2;
+    required string desc = 3;
+    required int32 mod = 4;
+    optional string event = 5;
+}
+message SealMonsterMapConfigMsg {
+    optional int32 gridId = 1;
+    optional int32 model = 2;
+    optional int32 eventId = 3;
+    optional string location = 4;
+    optional string size = 5;
+}
+message SealMonsterEnterReq {
+    required int32 activityId = 1;
+}
+message SealMonsterEnterRsp {
+    required int32 ret = 1;
+    optional int32 stage = 2;
+}
+message SealMonsterEnterGameReq {
+    optional int32 activityId = 1;
+    optional bool nextStage = 2;
+}
+message SealMonsterEnterGameResp {
+    required int32 ret = 1;
+    optional int32 curGridX = 2;
+    optional int32 curGridY = 3;
+    repeated int32 hasExploreGridIdList = 4;
+    repeated SealMonsterBuffMsg buffList = 5;
+    repeated SealMonsterBagInfoMsg bag = 6;
+    optional int32 leftFinalBattleTimes = 7;
+    optional int64 finalDamage = 8;
+    optional int32 todayBuyTimes = 9;
+    optional int32 stage = 10;
+    optional SealMonsterPlayerDataTemp playerData = 11;
+}
+message SealMonsterMoveGridReq {
+    optional int32 missionId = 1;
+    optional int32 activityId = 2;
+    optional int32 x = 3;
+    optional int32 y = 4;
+}
+message SealMonsterMoveGridResp {
+    required int32 ret = 1;
+}
+message SealMonsterHandlerGridEventReq {
+    optional int32 missionId = 1;
+    optional int32 activityId = 2;
+    optional int32 gridId = 3;
+    optional int32 param = 4;
+}
+message SealMonsterHandlerGridEventResp {
+    required int32 ret = 1;
+    repeated SealMonsterBattleEventResultInfoTemp battleResultList = 2;
+    optional string reward = 3;
+    repeated SealMonsterBuffMsg buffList = 4;
+    repeated SealMonsterBagInfoMsg bag = 5;
+    repeated SealMonsterBattleObjectTemp monsterList = 6;
+    repeated int32 hasExploreGridIdList = 7;
+    optional SealMonsterPlayerDataTemp playerData = 8;
+}
+message SealMonsterFinalBattleReq{
+    optional int32 activityId = 1;
+}
+message SealMonsterFinalBattleResp{
+    required int32 ret = 1;
+    optional int32 leftFinalBattleTimes = 2;
+    optional int64 finalDamage = 3;
+    repeated SealMonsterBattleEventResultInfoTemp battleResultList = 4;
+    repeated SealMonsterBattleObjectTemp monsterList = 5;
+}
+message SealMonsterBuyBattleTimesReq{
+    optional int32 activityId = 1;
+    optional int32 times = 2;
+}
+message SealMonsterBuyBattleTimesResp{
+    required int32 ret = 1;
+    optional int32 leftFinalBattleTimes = 2;
+    optional int32 todayBuyTimes = 3;
+}
+message SealMonsterSelectAttackMonsterReq {
+    required int32 id = 1;
+    optional int32 battleNum = 2;
+    optional int32 activityId = 3;
+}
+message SealMonsterSelectAttackMonsterResp {
+    required int32 ret = 1;
+    repeated SealMonsterBattleEventResultInfoTemp battleResultList = 2;
+}
+message SealMonsterAttackRewardReq {
+    required int32 activityId = 1;
+    required int32 gridId = 2;
+}
+message SealMonsterAttackRewardRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    repeated int32 hasExploreGridIdList = 3;
+    optional SealMonsterPlayerDataTemp playerData = 4;
+}
+message SealMonsterBuffMsg{
+    optional int32 id = 1;
+    optional int32 level = 2;
+}
+message SealMonsterBattleInfoTemp {
+    optional int32 id = 1;
+    optional int64 harmValue = 2;
+    optional int64 curHp = 3;
+    optional int64 suckHp = 4;
+    optional bool isCrit = 5;
+    optional bool isStun = 6;
+    optional bool isDodge = 7;
+    optional int32 anger = 8;
+    optional int64 shield = 9;
+    optional int64 shieldChange = 10;
+    repeated int32 triggerSkillIdList = 11;
+    optional int32 comboTimes = 12;
+    optional int64 healValue = 13;
+}
+message SealMonsterBattleEventResultInfoTemp {
+    optional int32 battleNum = 1;
+    optional int32 attackerType = 2;
+    optional SealMonsterBattleInfoTemp attacker = 3;
+    repeated SealMonsterBattleInfoTemp defenseList = 4;
+    optional int32 skillId = 5;
+    optional int32 winner = 6;
+    optional int32 atkTime = 7;
+    optional bool isBackAtk = 8;
+    repeated int32 triggerSkillIdList = 9;
+    optional int32 actionType = 10;
+}
+message SealMonsterBattleObjectTemp {
+    optional int32 id = 1;
+    optional int32 npcId = 2;
+    optional int64 maxHp = 3;
+    optional int64 attack = 4;
+}
+message SealMonsterBagInfoMsg{
+    optional int32 itemId = 1;
+    optional int32 count = 2;
+}
+message SealMonsterBattleOpenSkillReq {
+    required int32 battleNum = 1;
+    required int32 activityId = 2;
+}
+message SealMonsterBattleOpenSkillResp {
+    required int32 ret = 1;
+    repeated SealMonsterBattleEventResultInfoTemp battleResultList = 2;
+}
+message SealMonsterEquipInfoTemp {
+    optional SealMonsterPlayerDataTemp playerData = 1;
+    repeated SealMonsterEquipDataTemp pendingEquipList = 2;
+    repeated SealMonsterBodyDataTemp bodyList = 3;
+    repeated SealMonsterEquipDataTemp bagEquipList = 4;
+    repeated int32 talentSkillIds = 5;
+}
+message SealMonsterBodyDataTemp {
+    required int32 bodyId = 1;
+    optional string fightValue = 2;
+    repeated SealMonsterEquipSlotTemp equipSlotList = 3;
+    repeated SealMonsterTalentSkillSlotTemp skillSlotList = 4;
+}
+message SealMonsterTalentSkillSlotTemp {
+    optional int32 slotId = 1;
+    optional int32 skillId = 2;
+}
+message SealMonsterPlayerDataTemp {
+    required int32 curBodyId = 1;
+    optional int32 lv = 2;
+    optional int64 exp = 3;
+    optional int64 lastRecoveryTime = 4;
+    optional string attackValue = 5;
+    optional string maxHp = 6;
+    optional int32 todayBuyTimes = 7;
+    optional int32 costItemNums = 8;
+    optional string fightValue = 9;
+}
+message SealMonsterEquipSlotTemp {
+    optional int32 slotId = 1;
+    optional SealMonsterEquipDataTemp data = 2;
+}
+message SealMonsterEquipDataTemp {
+    optional int32 id = 1;
+    optional int32 configId = 2;
+    optional int32 level = 3;
+    optional int32 quality = 4;
+    repeated AttributeDataMsg baseAttrList = 5;
+    repeated AttributeDataMsg battleAttrLIst = 6;
+    optional int32 skillId = 7;
+    optional string fightValue = 8;
+}
+message SealMonsterEnterEquipReqMsg {
+    required int32 activityId = 1;
+}
+message SealMonsterEnterEquipRespMsg {
+    required int32 ret = 1;
+    optional SealMonsterEquipInfoTemp equipInfo = 2;
+}
+message SealMonsterForgeReqMsg {
+    required int32 activityId = 1;
+    optional int32 times = 2;
+}
+message SealMonsterForgeRespMsg {
+    required int32 ret = 1;
+    repeated SealMonsterEquipDataTemp pendingEquipList = 2;
+    optional SealMonsterPlayerDataTemp playerData = 3;
+}
+message SealMonsterEquipReplaceReqMsg {
+    required int32 activityId = 1;
+    required int32 equipId = 2;
+    required int32 bodyId = 3;
+}
+message SealMonsterEquipReplaceRespMsg {
+    required int32 ret = 1;
+    repeated SealMonsterEquipDataTemp pendingEquipList = 2;
+    repeated SealMonsterBodyDataTemp bodyList = 3;
+    repeated SealMonsterEquipDataTemp bagEquipList = 4;
+}
+message SealMonsterEquipDecomposeReqMsg {
+    required int32 activityId = 1;
+    repeated int32 equipIdList = 2;
+}
+message SealMonsterEquipDecomposeRespMsg {
+    required int32 ret = 1;
+    repeated SealMonsterEquipDataTemp pendingEquipList = 2;
+    repeated SealMonsterBodyDataTemp bodyList = 3;
+    repeated string rewards = 4;
+    repeated SealMonsterEquipDataTemp bagEquipList = 5;
+    optional SealMonsterPlayerDataTemp playerData = 6;
+}
+message SealMonsterEquipBreakthroughReqMsg {
+    required int32 activityId = 1;
+}
+message SealMonsterEquipBreakthroughRespMsg {
+    required int32 ret = 1;
+    optional SealMonsterPlayerDataTemp playerData = 2;
+    repeated int32 talentSkillIds = 3;
+}
+message SealMonsterEquipSkillSlotData {
+    required int32 slotId = 2;
+    required int32 skillId = 3;
+}
+message SealMonsterEquipSkillReqMsg {
+    required int32 activityId = 1;
+    repeated SealMonsterEquipSkillSlotData slotList = 2;
+}
+message SealMonsterEquipSkillRespMsg {
+    required int32 ret = 1;
+    repeated SealMonsterTalentSkillSlotTemp slotList = 2;
+    optional SealMonsterPlayerDataTemp playerData = 3;
+}
+message SealMonsterEnterBagReqMsg {
+    required int32 activityId = 1;
+    repeated int32 equipIdList = 2;
+}
+message SealMonsterEnterBagRespMsg {
+    required int32 ret = 1;
+    repeated SealMonsterEquipDataTemp pendingEquipList = 2;
+    repeated SealMonsterEquipDataTemp bagEquipList = 3;
+}
+message SealMonsterGetRegionInfoReq {
+    required int32 activityId = 1;
+}
+message SealMonsterGetRegionInfoResp {
+    required int32 ret = 1;
+    repeated SealMonsterGameMapData mapData = 2;
+}
+message SealMonsterGameMapData{
+    optional int32 id = 1;
+    optional int32 playerNum = 2;
+    repeated SealMonsterPlayerHeadDataMsg player = 3;
+}
+message SealMonsterPlayerHeadDataMsg{
+    optional int64 power = 1;
+    optional PlayerHeadAndNameMsg headInfo = 2;
+}
+message SealMonsterUseItemReq {
+    required int32 activityId = 1;
+    required int32 itemId = 2;
+    required int32 num = 3;
+}
+message SealMonsterUseItemResp {
+    required int32 ret = 1;
+    optional int32 costItemNums = 2;
+    optional int64 lastRecoveryTime = 3;
+}
+enum SealMonsterRedPointType {
+    seal_monster_red_point_iron_half = 0;
+    seal_monster_red_point_realm_upgrade = 1;
+    seal_monster_red_point_talent_empty = 2;
+    seal_monster_red_point_temp_equip = 3;
+    seal_monster_red_point_bag_full = 4;
+    seal_monster_red_point_rank_reward = 5;
+}
+message SealMonsterRedPointReq {
+    required int32 activityId = 1;
+}
+message SealMonsterRedPointResp {
+    required int32 ret = 1;
+    optional int64 redPointVal = 2;
+}
+message SealMonsterGetPlayerInfoReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message SealMonsterGetPlayerInfoResp {
+    required int32 ret = 1;
+    optional SealMonsterBodyDataTemp data = 2;
+    optional int32 lv = 3;
+}
+message SealMonsterGetPlayerInfoOtherServerReq {
+    required int32 activityId = 1;
+    required int64 targetPlayerId = 2;
+    required int64 sendServerId = 3;
+    required int64 sendPlayerId = 4;
+}
+message SealMonsterGetPlayerInfoOtherServerResp {
+    required int32 ret = 1;
+    required SealMonsterGetPlayerInfoResp resp = 2;
+    required int64 sendPlayerId = 3;
+}
+message SealMonsterRankMsgList {
+    repeated SealMonsterRankTempMsg rankTemp = 1;
+}
+message SealMonsterRankTempMsg {
+    repeated SealMonsterEquipSlotTemp equipSlotList = 1;
+    optional string value = 2;
+    optional bytes param = 3;
+    optional PlayerCharacterImageMsg playerCharacterImageMsg = 4;
+}

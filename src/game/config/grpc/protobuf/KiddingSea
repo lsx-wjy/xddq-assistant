@@ -1,0 +1,186 @@
+package com.yq.msg.CityMsg;
+message KiddingSeaConfigMsg {
+    required int32 activityId = 1;
+    repeated KiddingSeaStageConfigMsg stageConfigMsg = 2;
+    repeated KiddingSeaBulletConfigMsg trainingBulletConfigMsg = 3;
+    repeated KiddingSeaCharaConfigMsg trainingCharaConfigMsg = 4;
+    repeated KiddingSeaSkillConfigMsg trainingSkillConfigMsg = 5;
+    repeated KiddingSeaRoleLevelConfigMsg roleLevelConfigMsg = 6;
+    repeated KiddingSeaMonsterLevelConfigMsg monsterLevelConfigMsg = 7;
+}
+message KiddingSeaStageConfigMsg {
+    required int32 id = 1;
+    required int32 unlock = 2;
+    required int32 type = 3;
+    required int32 chapter = 4;
+    required int32 stage = 5;
+    required string params = 6;
+    required int32 exp = 7;
+    required string rewards = 8;
+}
+message KiddingSeaBulletConfigMsg {
+    required int32 id = 1;
+    required int32 vfxId = 2;
+    required int32 isLockForward = 3;
+    required string boxParamModel = 4;
+    required int32 explodeVFXId = 5;
+}
+message KiddingSeaCharaConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required int32 trainingMoveSpeed = 3;
+    required int32 trainingAttackSpeed = 4;
+    repeated int32 trainingSkillId = 5;
+    repeated int32 aggroRange = 6;
+    required int32 runSpeed = 7;
+    required int32 recover = 8;
+    required int32 attackEmp = 9;
+    required int32 hpEmp = 10;
+    required string defEmp = 11;
+    required string stun = 12;
+    required string criticalHit = 13;
+    required string doubleAttack = 14;
+    required string dodge = 15;
+    required string attackBack = 16;
+    required string lifeSteal = 17;
+    required string reStun = 18;
+    required string reCriticalHit = 19;
+    required string reDoubleAttack = 20;
+    required string reDodge = 21;
+    required string reAttackBack = 22;
+    required string reLifeSteal= 23;
+}
+message KiddingSeaSkillConfigMsg {
+    required int32 id = 1;
+    required string skillAnimName = 2;
+    required string colliderBoxParamModel = 3;
+    required int32 lockRange = 4;
+    required int32 movementScale = 5;
+    required int32 isAOE = 6;
+    required int32 aoeHitLimit = 7;
+    required int32 skillCD = 8;
+    required string comboModelList = 9;
+    required string cameraShakeType = 10;
+    required string hitPowerModel = 11;
+    required string hitEffectModel = 12;
+    required string bulletLaunchModelList = 13;
+    required string barrageLaunchModelList = 14;
+    required int32 rageCost = 15;
+    required int32 hitVFXId = 16;
+}
+message KiddingSeaRoleLevelConfigMsg {
+    required int32 id = 1;
+    required int32 talentPoints = 2;
+    required int32 expMax = 3;
+    required int32 attackBase = 4;
+    required int32 hpBase = 5;
+    required int32 defBase = 6;
+    required int32 secAttribute = 7;
+    required int32 secDefAttribute = 8;
+}
+message KiddingSeaMonsterLevelConfigMsg {
+    required int32 id = 1;
+    required int32 attackBase = 2;
+    required int32 hpBase = 3;
+    required int32 defBase = 4;
+    required int32 secAttribute = 5;
+    required int32 secDefAttribute = 6;
+}
+message KiddingSeaDataMsg {
+    required int32 curStageId = 1;
+    required int32 killMonsterNum = 2;
+    required bool defeatBoss = 3;
+    required KiddingSeaRoleMsg roleMsg = 4;
+    repeated int32 partnerList = 5;
+    required int32 taskId = 6;
+    optional int32 onHookStashExp = 7;
+    optional int64 onHookBeginTime = 8;
+    required int32 isInitEnterScene = 9;
+}
+message KiddingSeaRoleMsg {
+    required int32 level = 1;
+    required int32 exp = 2;
+    repeated int32 propertyList = 3;
+}
+message KiddingSeaSavePropertyReq {
+    required int32 activityId = 1;
+    repeated int32 propertyList = 2;
+}
+message KiddingSeaSavePropertyResp {
+    required int32 ret = 1;
+    repeated int32 propertyList = 2;
+}
+message KiddingSeaResetPropertyReq {
+    required int32 activityId = 1;
+}
+message KiddingSeaResetPropertyResp {
+    required int32 ret = 1;
+}
+message KiddingSeaReleasePartnerReq {
+    required int32 activityId = 1;
+    required int32 partnerId = 2;
+}
+message KiddingSeaReleasePartnerResp {
+    required int32 ret = 1;
+    optional int32 partnerId = 2;
+}
+message KiddingSeaKillMonsterReq {
+    required int32 activityId = 1;
+    required int32 entityId = 2;
+    required int32 eventId = 3;
+    required int32 monsterId = 4;
+}
+message KiddingSeaKillMonsterResp {
+    required int32 ret = 1;
+    optional int32 entityId = 2;
+    optional int32 eventId = 3;
+    optional int32 monsterId = 4;
+    optional int32 killMonsterNum = 5;
+    optional int32 exp = 6;
+    optional int32 level = 7;
+    optional int32 nezeExp = 8;
+}
+message KiddingSeaGetOnHookExpReq {
+    required int32 activityId = 1;
+}
+message KiddingSeaGetOnHookExpResp {
+    required int32 ret = 1;
+    optional int32 exp = 2;
+    optional int32 level = 3;
+    optional int32 nezeExp = 4;
+    optional int32 onHookStashExp = 5;
+    optional int64 onHookBeginTime = 6;
+}
+message KiddingSeaToNextStageReq {
+    required int32 activityId = 1;
+}
+message KiddingSeaToNextStageResp {
+    required int32 ret = 1;
+    optional int32 stageId = 2;
+}
+message KiddingSeaKillBossReq {
+    required int32 activityId = 1;
+    required int32 entityId = 2;
+    required int32 eventId = 3;
+    required int32 monsterId = 4;
+}
+message KiddingSeaKillBossResp {
+    required int32 ret = 1;
+    optional int32 entityId = 2;
+    optional int32 eventId = 3;
+    optional int32 monsterId = 4;
+    optional int32 exp = 5;
+    optional int32 level = 6;
+    optional int32 nezeExp = 7;
+    optional string reward = 8;
+    optional int32 onHookStashExp = 9;
+    optional int64 onHookBeginTime = 10;
+}
+message KiddingSeaActiveOnHookReq {
+    required int32 activityId = 1;
+}
+message KiddingSeaActiveOnHookResp {
+    required int32 ret = 1;
+    optional int32 onHookStashExp = 2;
+    optional int64 onHookBeginTime = 3;
+}

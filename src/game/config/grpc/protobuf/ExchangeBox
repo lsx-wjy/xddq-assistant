@@ -1,0 +1,108 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+message ExchangeLogMsg {
+  optional PlayerBaseDataMsg receiveId = 1;
+  optional int32 itemId = 2;
+  repeated ExchangeBoxMsg loglist = 3;
+}
+message ExchangeBoxMsg {
+   optional int64 sendId = 1;
+   optional int64 receiveId = 2;
+   optional int64 sendTime = 3;
+   optional int32 itemId = 4;
+   optional int32 num = 5;
+}
+message ExchangeBoxItemChangeListReq {
+   optional int32 itemId = 1;
+}
+message ExchangeBoxItemChangeListResp {
+  optional int32 ret = 1;
+  repeated ExchangeLogMsg list = 2;
+}
+message ExchangeBoxItemSendReq {
+  required int32 itemId = 1;
+  required int32 num = 2;
+  required int64 targetId = 3;
+  required int64 targetServerId = 4;
+  optional string passwd = 5;
+}
+message ExchangeBoxItemSendResp {
+  optional int32 ret = 1;
+}
+message ExchangeBoxGetUniqueReq {
+  optional int64 playerId = 1;
+  optional int64 serverId = 2;
+}
+message ExchangeBoxGetUniqueResp {
+   optional int32 ret = 1;
+   optional string code = 2;
+   optional string systemOpenValue = 3;
+}
+message ExchangeBoxReceiveReq {
+  optional int64 fromId = 1;
+  optional int64 formServerId = 2;
+  optional int64 toId = 3;
+  optional int64 toServerId = 4;
+  optional int32 itemId = 5;
+  optional int32 num = 6;
+}
+message ExchangeBoxReceiveResp {
+   optional int32 ret = 1;
+}
+message ExchangeBoxLockReq {
+  required int32 stat = 1;
+  optional string passwd = 2;
+  optional string oldPasswd = 3;
+}
+message ExchangeBoxLockResp {
+  required int32 ret = 1;
+  optional int64 forceUnlockTime = 2;
+  optional int64 nextEnterTime = 3;
+}
+message ExchangeBoxDrawTime {
+  optional int32 boxId = 1;
+  optional int32 times = 2;
+}
+message ExchangeBoxDataMsg {
+  optional int32 isLock = 1;
+  optional int64 forceUnlockTime = 2;
+  optional int32 sendTimes = 3;
+  repeated ExchangeBoxDrawTime drawMap = 4;
+  optional int32 isShow = 5;
+}
+message ExchangeBoxComposeReq {
+  required int32 composeId = 1;
+}
+message ExchangeBoxComposeResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+}
+message ExchangeBoxShowCodeReq {
+  optional int32 isShow = 1;
+}
+message ExchangeBoxShowCodeResp {
+  optional int32 ret = 1;
+}
+enum ExchangeBoxBaseEnumRedPoint {
+  RedPointGift = 0;
+  RedPointAchieve = 1;
+  RedPointToken = 2;
+}
+message ExchangeBoxBaseRedPointSync {
+  required string redPoint = 1;
+}
+/** 查看被赠送道具列表 */
+message ExchangeBoxItemLogListReq{}
+message ExchangeBoxItemLogListResp {
+    repeated int32 itemIds = 1;
+}
+message ExchangeBoxCommonReq {
+}
+message ExchangeBoxGetKeyInfoResp {
+  optional int32 ret = 1;
+  optional int32 canReceiveCount = 2;
+}
+message ExchangeBoxReceiveBattlePassResp {
+   optional int32 ret = 1;
+   optional string reward = 2;
+}

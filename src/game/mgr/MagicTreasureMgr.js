@@ -2,12 +2,17 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class MagicTreasureMgr {
     constructor() {
         this.AD_REWARD_DAILY_MAX_NUM = 2; // 每日最大领取次数
         this.AD_REWARD_CD = 1000;         // 每次间隔时间
         this.FREE_NUM = 2;                // 免费抽奖次数
+        // 面板可单独启用广告法宝。首次同步奖池前不要假设数据已存在，
+        // 否则循环会在连接刚建立时访问 undefined 并持续报错。
+        this.jackpotData = [];
+        this.hasJackpotData = false;
         this.isProcessing = false;
 
         LoopMgr.inst.add(this);
@@ -26,11 +31,14 @@ export default class MagicTreasureMgr {
 
     checkReward(t) {
         this.isProcessing = true;
-        this.jackpotData = t.jackpotData;
+        const jackpotConfig = Array.isArray(t?.jackpotConfig) ? t.jackpotConfig : [];
+        this.jackpotData = Array.isArray(t?.jackpotData)
+            ? t.jackpotData.slice(0, jackpotConfig.length)
+            : [];
     
         // 有时候会出现奇怪的情况，需要重新初始化
         // 如果 jackpotData 的长度小于 jackpotConfig 的长度，则填充 jackpotData
-        while (this.jackpotData.length < t.jackpotConfig.length) {
+        while (this.jackpotData.length < jackpotConfig.length) {
             const nextIndex = this.jackpotData.length;
             this.jackpotData.push({
                 poolId: nextIndex + 1,
@@ -42,10 +50,11 @@ export default class MagicTreasureMgr {
     
         // 设置名称
         this.jackpotData.forEach((i, index) => {
-            i.name = t.jackpotConfig[index].title;
+            i.name = jackpotConfig[index].title;
             // t.jackpotConfig[index].drawItemCostParam删除=号后面的内容
-            i.cost = t.jackpotConfig[index].drawItemCostParam.split("=")[0];
+            i.cost = jackpotConfig[index].drawItemCostParam.split("=")[0];
         });
+        this.hasJackpotData = this.jackpotData.length > 0;
         this.isProcessing = false;
     }
 
@@ -69,6 +78,8 @@ export default class MagicTreasureMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('cave.ad-magic-treasure')) return;
+        if (!this.hasJackpotData) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

@@ -1,0 +1,179 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+message PupilRogueBattleMain {
+    required int32 objId = 1;
+    required PupilRogueBattleModelMsg battleModel = 2;
+    required int64 maxHp = 3;
+    optional int32 maxEnergy = 4;
+    optional int64 initShieldVal = 5;
+    optional int64 curHp = 6;
+    optional int32 pos = 7;
+    optional string name = 8;
+    optional int64 playerId = 9;
+    optional int32 wave = 10;
+    optional bool isSummons = 11;
+}
+message PupilRogueBattleModelMsg {
+    optional int32 type = 1;
+    optional int32 mainRoleId = 2;
+    optional int32 realmsId = 3;
+    optional int32 cloudId = 4;
+    repeated PupilRogueBattleCloudMsg cloudSkill = 5;
+    repeated PupilRoguePartnerObj partner = 6;
+    repeated PupilRogueBattleMagicMsg magic = 7;
+    optional int32 atkEffectId = 8;
+    repeated PupilRogueArtifactSkill artifactSkill = 9;
+    optional int32 weaponId = 10;
+    repeated PupilRogueBossSkill bossSkill = 11;
+}
+message PupilRogueBattleMagicMsg {
+    optional int32 skillId = 1;
+    required int32 magicId = 2;
+    optional int32 objId = 3;
+}
+message PupilRogueBattleSkillInfo {
+    optional int32 skillId = 1;
+    optional int32 lv = 2;
+}
+message PupilRogueBattleCloudMsg {
+    optional int32 objId = 1;
+    optional int32 cloudId = 2;
+    optional int32 skillId = 3;
+}
+message PupilRogueBattleActiveMagic {
+    optional int32 objId = 1;
+    optional int32 magicId = 2;
+    optional int32 skillId = 3;
+    optional int32 maxEnergy = 4;
+}
+message PupilRogueBattleSkillMsg {
+    optional int32 objId = 1;
+    optional int32 skillId = 2;
+}
+message PupilRoguePartnerObj {
+    optional int32 objId = 1;
+    optional int32 partnerId = 2;
+    optional int32 skillId = 3;
+    optional int32 maxAnger = 5;
+}
+message PupilRogueArtifactSkill {
+    optional int32 objId = 1;
+    optional int32 skillId = 2;
+}
+message PupilRogueBossSkill {
+    optional int32 objId = 1;
+    optional int32 skillId = 2;
+}
+enum BattleFailReason {
+    BattleFailReason_NoFail = 0;
+    BattleFailReason_RoundLimit = 1;
+    BattleFailReason_TooWeak = 2;
+}
+message PupilRogueBattleRecordMsg {
+    repeated PupilRogueBattleMain battleMain = 1;
+    repeated PupilRogueBattleRoundLog battleRoundLog = 2;
+    required bool isWin = 3;
+    required int32 maxRoundLimit = 4;
+    optional BattleFailReason failReason = 5;
+}
+message PupilRogueBattleRoundLog {
+    required int32 round = 1;
+    repeated PupilRogueBattleAction action = 2;
+    repeated PupilRogueBattleMainState battleMainState = 3;
+    repeated PupilRogueBattleMainReportMsg report = 4;
+}
+message PupilRogueBattleMainReportMsg {
+    optional int32 objId = 1;
+    optional int64 damage = 2;
+    optional int64 partnerDamage = 3;
+}
+enum PupilRogueBattleActionType {
+    BattleActionType_Null = 0;
+    BattleActionType_Main = 1;
+    BattleActionType_Partner = 3;
+    BattleActionType_BossRoundSkill = 4;
+    BattleActionType_BuffChange = 5;
+}
+message PupilRogueBattleAction {
+    required PupilRogueBattleActionType objType = 1;
+    required bytes action = 2;
+}
+message PupilRogueMainAction {
+    required int32 objId = 1;
+    optional bool isAttackBackAction = 2;
+    repeated PupilRogueMainAttackResult mainAttackResult = 3;
+    optional int32 targetId = 5;
+}
+message PupilRogueMainAttackResult {
+    required bool isHit = 1;
+    required bool isCritical = 2;
+    required bool isMagic = 3;
+    required int64 damage = 4;
+    required int64 lifeSteal = 5;
+    optional int32 energyMyChange = 7;
+    optional int32 energyOtherChange = 8;
+    optional bool isArmorBreak = 9;
+    optional bool isParry = 10;
+    optional bool isMagicDoubleAttack = 11;
+    optional int64 shieldMyChange = 12;
+    optional int64 shieldOtherChange = 13;
+    optional PupilRogueBuffTakeEffect buffTakeEffect = 14;
+    optional int32 combo = 15;
+    repeated PupilRogueObjectValueChange shieldChange = 16;
+    optional bool skipShield = 17;
+}
+message PupilRogueSkillEffect {
+    required int32 skillId = 1;
+    required int32 buffId = 2;
+    required int32 objId = 3;
+    optional int32 targetId = 4;
+    optional int64 damage = 5;
+    optional int64 addHp = 6;
+    repeated PupilRogueObjectValueChange energyChange = 7;
+    repeated PupilRogueObjectValueChange shieldChange = 8;
+    repeated PupilRogueObjectValueChange partnerAnger = 9;
+    optional PupilRogueBuffTakeEffect buffTakeEffect = 10;
+    required int32 type = 11;
+    optional int32 stateLevel = 12;
+    optional bool isCritical = 13;
+    optional int64 addTargetHp = 14;
+    repeated PupilRogueObjectValueSet attackSet = 15;
+    repeated PupilRogueObjectValueSet defendSet = 16;
+    optional bool isImmune = 17;
+    optional int32 combo = 18;
+    optional bool isArmorBreak = 19;
+    optional bool isParry = 20;
+    optional bool skipShield = 21;
+    optional bool isAOE = 22;
+    optional int32 id = 23;
+    optional int32 pid = 24;
+    repeated int32 summons = 25;
+}
+message PupilRogueBuffTakeEffect {
+    repeated PupilRogueSkillEffect buffs = 1;
+}
+message PupilRogueObjectValueChange {
+    required int32 objId = 1;
+    optional int64 change = 2;
+}
+message PupilRogueObjectValueSet {
+    required int32 objId = 1;
+    optional int64 value = 2;
+}
+message PupilRogueBattleMainState {
+    required int32 objId = 1;
+    optional int64 hp = 2;
+    optional int32 energy = 3;
+    optional int64 maxHp = 4;
+    optional int64 shieldVal = 5;
+    optional int64 attack = 6;
+    optional int64 defend = 7;
+}
+message PupilRogueBossRoundSkillAction {
+    required int32 objId = 1;
+    optional PupilRogueBuffTakeEffect buffTakeEffect = 2;
+}
+message ExploreBattleSimulateMsg {
+    repeated PupilRogueBattleRecordMsg battleRecord = 1;
+}

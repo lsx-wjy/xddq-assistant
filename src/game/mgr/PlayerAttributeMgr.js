@@ -4,11 +4,12 @@ import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
 import { DBMgr } from "#game/common/DBMgr.js";
 import BagMgr from "#game/mgr/BagMgr.js";
-import account from "../../../account.js";
+import account from "#config/runtimeAccount.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 class Attribute {
     static Chop(times = 1) {
-        logger.debug(`[砍树] 砍树 ${times} 次`);
+        logger.info(`[砍树] 持续执行：砍树 ${times} 次`);
         return GameNetMgr.inst.sendPbMsg(Protocol.S_ATTRIBUTE_DREAM_MSG, { auto: false, times: times }, null);
     }
 
@@ -75,6 +76,7 @@ export default class PlayerAttributeMgr {
 
     // 201 玩家属性信息同步
     SyncAttribute(t) {
+        this.lastAttributeData = t;
         PlayerAttributeMgr.realmsId = t.realmsId;
         PlayerAttributeMgr.fightValue = t.fightValue;
         logger.info(`[属性管理] 等级: ${PlayerAttributeMgr.realmsId} 妖力: ${PlayerAttributeMgr.fightValue}`);
@@ -90,191 +92,228 @@ export default class PlayerAttributeMgr {
             t.useSeparationDataMsg.forEach((data) => {
                 if (data.hasOwnProperty("index")) {
                     this.equipmentData[data.index] = data.equipmentList || [];
-                    this.fightValueData[data.index] = data.fightValueData || [];
+                    this.fightValueData[data.index] = data.fightValue ?? PlayerAttributeMgr.fightValue;
                 }
             });
         }
     }
 
-    // 209 处理装备
+    // 209 处理装备。筛选模型按游戏内 DreamAutoMgr.CheckAutoResolve 还原：
+    // 非仙树来源的装备暂停；低品质直接分解；命中保留条件时暂停或（明确选择时）换装。
     async handlerEquipment(t) {
-        if (t.ret === 0) {
-            if (this.isProcessing) {
-                logger.debug(`[砍树] 忙碌中，跳过处理`);
+        if (!isAutomationTaskEnabled('basic.chop-tree') || t.ret !== 0) return;
+        if (this.isProcessing) {
+            logger.debug('[砍树] 忙碌中，跳过处理');
+            return;
+        }
+
+        this.isProcessing = true;
+        try {
+            const items = Array.isArray(t.undDealEquipmentDataMsg) ? t.undDealEquipmentDataMsg : [];
+            for (const equipment of items) {
+                const unDealEquipment = equipment?.unDealEquipmentData;
+                if (!unDealEquipment?.id) {
+                    logger.warn('[装备] 收到缺少装备标识的未处理装备，已跳过本条数据');
+                    continue;
+                }
+
+                // 官方客户端只会自动处理仙树产出的装备；其余来源由用户确认。
+                if (Number(unDealEquipment.src) !== 1) {
+                    this.pauseChopTree('检测到非仙树来源的未处理装备，已保留等待手动处理');
+                    return;
+                }
+
+                const decision = this.evaluateEquipment({
+                    quality: Number(unDealEquipment.quality),
+                    fightValue: equipment.fightValue,
+                    attributeList: Array.isArray(unDealEquipment.attributeList) ? unDealEquipment.attributeList : [],
+                });
+                const label = this.describeEquipment(unDealEquipment, equipment.fightValue);
+
+                if (decision.action === 'resolve') {
+                    logger.info(`[装备] 分解 ${label}：${decision.reason}`);
+                    await Attribute.DealEquipmentEnum_Resolve(unDealEquipment.id);
+                    continue;
+                }
+
+                logger.warn(`[装备] 保留 ${label}：${decision.reason}`);
+                if (decision.action === 'equip') {
+                    await this.equipMatchedEquipment(unDealEquipment.id, decision.target);
+                    logger.info(`[装备] 已自动换装至${this.getSeparationName(decision.target)}，并请求分解旧装备`);
+                    Attribute.FetchSeparation();
+                    continue;
+                }
+
+                this.pauseChopTree('命中装备保留条件，等待你在游戏内确认是否替换');
                 return;
             }
-
-            this.isProcessing = true;
-            const items = t.undDealEquipmentDataMsg;
-
-            for (let i = 0; i < items.length; i++) {
-                const equipment = items[i];
-                const fightValue = equipment.fightValue; // 该装备的妖力
-                const u = equipment.unDealEquipmentData; // 该装备的未处理数据
-                const id = u.id; // 该装备的id
-                const quality = u.quality; // 该装备的品质
-                const attributeList = this.processAttributes(u.attributeList); // 使用转换后的属性列表
-                const equipmentId = u.equipmentId; // 该装备的装备id
-                const equipmentData = DBMgr.inst.getEquipment(equipmentId);
-                const equipmentName = equipmentData.name;
-                const equipmentType = equipmentData.type - 1;
-
-                let processed = await this.processEquipment(quality, fightValue, attributeList, equipmentType, id, equipmentId);
-
-                if (!processed) {
-                    logger.debug(`[装备] 分解 ${id} ${DBMgr.inst.getEquipmentQuality(quality)} ${equipmentName}`);
-                    Attribute.DealEquipmentEnum_Resolve(id);
-                }
-            }
+        } catch (error) {
+            logger.error(`[装备] 处理掉落装备失败: ${error instanceof Error ? error.message : String(error)}`);
+        } finally {
             this.isProcessing = false;
         }
     }
 
-    async processEquipment(quality, fightValue, attributeList, equipmentType, id, equipmentId) {
-        if (this.separation) {
-            const rule = account.chopTree.separation;
-            const attackType = attributeList.attack.type;
-            const defenseType = attributeList.defense.type;
+    getEquipmentRule() {
+        const configured = account.chopTree?.equipment || {};
+        const groups = Array.isArray(configured.attributeGroups) ? configured.attributeGroups : [];
+        const numberInRange = (value, fallback, minimum, maximum) => {
+            const number = Number(value);
+            return Number.isFinite(number) ? Math.min(maximum, Math.max(minimum, Math.round(number))) : fallback;
+        };
 
-            const { result, index } = this.checkMultipleConditions(attackType, [attackType, defenseType], rule.condition);
+        return {
+            quality: numberInRange(configured.quality, 11, 1, 34),
+            keepHigherPower: configured.keepHigherPower === true,
+            conditionMode: numberInRange(configured.conditionMode, 1, 0, 1),
+            attributeGroups: [0, 1].map(index => {
+                const group = groups[index] || {};
+                return {
+                    enabled: group.enabled === true,
+                    attack: numberInRange(group.attack, 0, 0, 10),
+                    resistance: numberInRange(group.resistance, 0, 0, 16),
+                };
+            }),
+            matchedAction: numberInRange(configured.matchedAction, 1, 1, 2),
+            autoEquipTarget: numberInRange(configured.autoEquipTarget, 0, 0, 2),
+        };
+    }
 
-            if (account.chopTree.showResult) {
-                if ( quality >= rule.quality) {
-                    logger.info(
-                        `[装备] 新装备 ${DBMgr.inst.getEquipmentQuality(quality)} ${DBMgr.inst.getEquipmentName(
-                            equipmentId
-                        )} ${DBMgr.inst.getAttribute(attackType)}:${attributeList.attack.value / 10} ${DBMgr.inst.getAttribute(
-                            defenseType
-                        )}:${attributeList.defense.value / 10}`
-                    );
-                } else {
-                    logger.info("[装备] 新装备品质过差");
-                }
-            }
-            
-            if (result) {
-                let betterAttributes = false;
-                let existingAttributeList = null;
-                let existingExist = true;
-                if (!this.equipmentData[index][equipmentType]) {
-                    betterAttributes = true;
-                    existingExist = false;
-                    logger.warn(`[装备] 分身${index} 无原装备`);
-                    logger.warn(`${JSON.stringify(this.equipmentData[index])}`);
-                } else {
-                    existingAttributeList = this.processAttributes(this.equipmentData[index][equipmentType].attributeList);
-                }
+    getAutoCostRule() {
+        const configured = account.chopTree?.autoCost || {};
+        const multiplier = Number(configured.multiplier);
+        return {
+            enabled: configured.enabled === true,
+            multiplier: Number.isFinite(multiplier) ? Math.min(6, Math.max(1, Math.round(multiplier))) : 1,
+        };
+    }
 
-                if (
-                    !betterAttributes &&
-                    quality >= rule.quality &&
-                    (fightValue >= this.fightValueData[index] * (1 - rule.fightValueOffset) ||
-                        !rule.condition[index].includes(existingAttributeList.attack.type) ||
-                        parseFloat(attributeList.attack.value) >= parseFloat(existingAttributeList.attack.value) * (1 + rule.probOffset))
-                ) {
-                    betterAttributes = true;
-                }
-
-                if (betterAttributes) {
-                    if (existingExist) {
-                        logger.info(
-                            `[装备] 分身${index} 原装备 ${DBMgr.inst.getEquipmentQuality(
-                                this.equipmentData[index][equipmentType].quality
-                            )} ${DBMgr.inst.getEquipmentName(this.equipmentData[index][equipmentType].equipmentId)} ${DBMgr.inst.getAttribute(
-                                existingAttributeList.attack.type
-                            )}:${existingAttributeList.attack.value / 10} ${DBMgr.inst.getAttribute(existingAttributeList.defense.type)}:${
-                                existingAttributeList.defense.value / 10
-                            }`
-                        );
-                    }
-                    logger.warn(
-                        `[装备] 分身${index} 新装备 ${DBMgr.inst.getEquipmentQuality(quality)} ${DBMgr.inst.getEquipmentName(
-                            equipmentId
-                        )} ${DBMgr.inst.getAttribute(attributeList.attack.type)}:${attributeList.attack.value / 10} ${DBMgr.inst.getAttribute(
-                            attributeList.defense.type
-                        )}:${attributeList.defense.value / 10}`
-                    );
-                    Attribute.SwitchSeparation(index);
-                    Attribute.DealEquipmentEnum_EquipAndResolveOld(id);
-                    Attribute.FetchSeparation();
-                    return true;
-                }
-            }
+    evaluateEquipment({ quality, fightValue, attributeList }) {
+        const rule = this.getEquipmentRule();
+        if (quality < rule.quality) {
+            return { action: 'resolve', reason: `品质 ${quality} 低于门槛 ${rule.quality}` };
         }
-        return false;
+
+        const attributesEnabled = rule.attributeGroups.some(group => group.enabled);
+        const powerMatched = rule.keepHigherPower && this.isFightValueHigher(fightValue, this.getCurrentFightValue(rule.autoEquipTarget));
+        const attributesMatched = attributesEnabled && rule.attributeGroups.some(group =>
+            group.enabled && this.matchesAttributeGroup(attributeList, group)
+        );
+        let shouldKeep = true;
+
+        if (rule.keepHigherPower && attributesEnabled) {
+            shouldKeep = rule.conditionMode === 1
+                ? powerMatched && attributesMatched
+                : powerMatched || attributesMatched;
+        } else if (rule.keepHigherPower) {
+            shouldKeep = powerMatched;
+        } else if (attributesEnabled) {
+            shouldKeep = attributesMatched;
+        }
+
+        if (!shouldKeep) {
+            return { action: 'resolve', reason: this.buildEquipmentReason(rule, powerMatched, attributesMatched, false) };
+        }
+        return {
+            action: rule.matchedAction === 2 ? 'equip' : 'pause',
+            target: rule.autoEquipTarget,
+            reason: this.buildEquipmentReason(rule, powerMatched, attributesMatched, true),
+        };
+    }
+
+    matchesAttributeGroup(attributeList, group) {
+        const types = new Set(attributeList.map(attribute => Number(attribute?.type)).filter(Number.isFinite));
+        const hasAttack = group.attack > 0;
+        const hasResistance = group.resistance > 0;
+        if (!hasAttack && !hasResistance) return [...types].some(type => type >= 5 && type <= 16);
+        if (hasAttack && hasResistance) return types.has(group.attack) && types.has(group.resistance);
+        return types.has(hasAttack ? group.attack : group.resistance);
+    }
+
+    buildEquipmentReason(rule, powerMatched, attributesMatched, shouldKeep) {
+        const parts = [];
+        if (rule.keepHigherPower) parts.push(`妖力${powerMatched ? '更高' : '未提升'}`);
+        if (rule.attributeGroups.some(group => group.enabled)) parts.push(`属性${attributesMatched ? '命中' : '未命中'}`);
+        if (!parts.length) return shouldKeep ? '达到品质门槛，未设置额外筛选条件' : '未命中保留条件';
+        return `${parts.join(rule.conditionMode === 1 ? '且' : '或')}${shouldKeep ? '，命中保留条件' : '，未命中保留条件'}`;
+    }
+
+    getCurrentFightValue(target) {
+        const targetValue = this.fightValueData?.[target];
+        if (targetValue !== undefined && !Array.isArray(targetValue) && targetValue !== null) return targetValue;
+        return PlayerAttributeMgr.fightValue;
+    }
+
+    isFightValueHigher(nextValue, currentValue) {
+        const toBigInt = value => {
+            const normalized = value && typeof value === 'object' && typeof value.toString === 'function'
+                ? value.toString()
+                : String(value ?? '0');
+            return BigInt(normalized);
+        };
+        try {
+            return toBigInt(nextValue) > toBigInt(currentValue);
+        } catch {
+            return Number(nextValue) > Number(currentValue);
+        }
+    }
+
+    describeEquipment(equipment, fightValue) {
+        const quality = DBMgr.inst.getEquipmentQuality(equipment.quality) || `品质${equipment.quality}`;
+        const name = DBMgr.inst.getEquipmentName(equipment.equipmentId);
+        const attributes = (equipment.attributeList || [])
+            .map(attribute => `${DBMgr.inst.getAttribute(attribute.type) || `属性${attribute.type}`}:${Number(attribute.value) / 10}`)
+            .join('、');
+        const detail = account.chopTree?.showResult && attributes ? `，属性 ${attributes}` : '';
+        return `${quality} ${name}（妖力 ${String(fightValue ?? 0)}${detail}）`;
+    }
+
+    async equipMatchedEquipment(id, target) {
+        if (this.separation) await Attribute.SwitchSeparation(target);
+        await Attribute.DealEquipmentEnum_EquipAndResolveOld(id);
+    }
+
+    getSeparationName(index) {
+        return ['元体', '阳神', '阴身'][index] || '当前角色';
+    }
+
+    pauseChopTree(reason) {
+        this.chopEnabled = false;
+        logger.warn(`[砍树] 已暂停：${reason}`);
     }
 
     doChopTree() {
         const item = BagMgr.inst.findItemById(100004);
-        if (item.num < account.chopTree.stop.num || this.playerLevel == account.chopTree.stop.level) {
-            logger.warn(`[砍树] 停止任务`);
+        const peachCount = Number(item?.num) || 0;
+        const stopPeachCount = Number(account.chopTree.stop.num) || 0;
+        const stopLevel = Number(account.chopTree.stop.level) || Number.MAX_SAFE_INTEGER;
+        const playerLevel = Number(PlayerAttributeMgr.realmsId) || 0;
+        if (peachCount < stopPeachCount || playerLevel >= stopLevel) {
+            const reason = peachCount < stopPeachCount
+                ? `桃子 ${peachCount} 低于下限 ${stopPeachCount}`
+                : `角色等级 ${playerLevel} 已达到停止等级 ${stopLevel}`;
+            logger.warn(`[砍树] 已停止：${reason}`);
             this.chopEnabled = false;
             return;
-        } else {
-            if (item.num !== this.previousPeachNum) {
-                logger.info(`[砍树] 还剩 ${item.num} 桃子`);
-                this.previousPeachNum = item.num; // 更新上一次数量
-            }
-            Attribute.Chop(this.chopTimes);
-            Attribute.CheckUnfinishedEquipment();
-        }
-    }
-
-    processAttributes(attributeList) {
-        const attributes = {
-            basic: {
-                1: null,
-                2: null,
-                3: null,
-                4: null,
-            },
-            attack: null,
-            defense: null,
-        };
-
-        for (const attr of attributeList) {
-            if (attr.type >= 1 && attr.type <= 4) {
-                attributes.basic[attr.type] = parseFloat(attr.value);
-            } else if (attr.type >= 5 && attr.type <= 10) {
-                attributes.attack = { type: attr.type, value: parseFloat(attr.value) };
-            } else if (attr.type >= 11 && attr.type <= 16) {
-                attributes.defense = { type: attr.type, value: parseFloat(attr.value) };
-            }
         }
 
-        return attributes;
-    }
-
-    checkCondition(input, condition) {
-        for (let i = 0; i < condition.length; i++) {
-            for (let j = 0; j < condition[i].length; j++) {
-                const element = condition[i][j];
-                if (Array.isArray(element) && Array.isArray(input) && input.length === element.length && input.every((val, index) => val === element[index])) {
-                    return { result: true, index: i };
-                } else if (element === input) {
-                    return { result: true, index: i };
-                }
-            }
+        if (peachCount !== this.previousPeachNum) {
+            logger.info(`[砍树] 剩余 ${peachCount} 桃子，仙树 Lv.${this.treeLevel}`);
+            this.previousPeachNum = peachCount;
         }
-        return { result: false, index: -1 };
-    }
-
-    checkMultipleConditions(input1, input2, condition) {
-        let result1 = this.checkCondition(input1, condition);
-        if (result1.result) {
-            return result1;
-        }
-
-        let result2 = this.checkCondition(input2, condition);
-        if (result2.result) {
-            return result2;
-        }
-
-        return { result: false, index: -1 };
+        // The client exposes this as “自动消耗倍率”.  The tree level determines
+        // the highest usable value; the saved preference can only lower it.
+        const autoCost = this.getAutoCostRule();
+        const chopTimes = autoCost.enabled
+            ? Math.min(this.chopTimes, autoCost.multiplier)
+            : 1;
+        Attribute.Chop(chopTimes);
+        Attribute.CheckUnfinishedEquipment();
     }
 
     // 207 仙树初始化以及自动升级
     SyncTree(t) {
+        this.lastTreeData = t;
         this.getAdRewardTimes = t.freeSpeedUpTimes || 0;
         this.dreamLvUpEndTime = parseInt(t.dreamLvUpEndTime, 10) || 0;
         this.lastAdRewardTime = parseInt(t.freeSpeedUpCdEndTime, 10) || 0;
@@ -299,6 +338,7 @@ export default class PlayerAttributeMgr {
     }
 
     processReward() {
+        if (!isAutomationTaskEnabled('basic.tree-speedup')) return;
         const now = Date.now();
         if (this.getAdRewardTimes < this.AD_REWARD_DAILY_MAX_NUM && now - this.lastAdRewardTime >= this.AD_REWARD_CD && this.dreamLvUpEndTime !== 0) {
             logger.info(`[仙树管理] 还剩 ${this.AD_REWARD_DAILY_MAX_NUM - this.getAdRewardTimes} 次广告激励`);
@@ -311,6 +351,7 @@ export default class PlayerAttributeMgr {
 
     // 104 判断是否VIP
     SyncVip(t) {
+        this.lastPrivilegeCardData = t;
         const monthlyCardExpired = this.isExpired(t.monthlyCardEndTime);
         const getMonthlyCardRewardToday = this.isToday(t.getMonthlyCardRewardTime);
         const yearCardExpired = this.isYearCardEndTimeNegativeOne(t.yearCardEndTime);
@@ -319,7 +360,7 @@ export default class PlayerAttributeMgr {
         if (!monthlyCardExpired) {
             logger.info(`[玩家管理] 检测到月卡`);
             PlayerAttributeMgr.isMonthCardVip = true;
-            if (!getMonthlyCardRewardToday) {
+            if (isAutomationTaskEnabled('basic.vip-month') && !getMonthlyCardRewardToday) {
                 logger.info(`[玩家管理] 月卡领取奖励`);
                 GameNetMgr.inst.sendPbMsg(Protocol.S_PRIVILEGE_CARD_RECEIVE_REWARD, { type: 1 }, null);
             }
@@ -328,7 +369,7 @@ export default class PlayerAttributeMgr {
         if (!yearCardExpired) {
             logger.info(`[玩家管理] 检测到年卡`);
             PlayerAttributeMgr.isYearCardVip = true;
-            if (!getYearCardRewardToday) {
+            if (isAutomationTaskEnabled('basic.vip-year') && !getYearCardRewardToday) {
                 logger.info(`[玩家管理] 年卡领取奖励`);
                 GameNetMgr.inst.sendPbMsg(Protocol.S_PRIVILEGE_CARD_RECEIVE_REWARD, { type: 2 }, null);
             }
@@ -350,6 +391,11 @@ export default class PlayerAttributeMgr {
         return !(Number(timestamp) !== 0);
     }
 
+    applyAutomationConfig() {
+        this.chopEnabled = isAutomationTaskEnabled('basic.chop-tree');
+        if (this.lastPrivilegeCardData) this.SyncVip(this.lastPrivilegeCardData);
+    }
+
     async loopUpdate() {
         if (this.isProcessing) return;
         this.isProcessing = true;
@@ -359,7 +405,7 @@ export default class PlayerAttributeMgr {
             this.processReward();
 
             // 自动砍树
-            if (this.chopEnabled && this.separation) {
+            if (this.chopEnabled) {
                 this.doChopTree();
             }
         } catch (error) {

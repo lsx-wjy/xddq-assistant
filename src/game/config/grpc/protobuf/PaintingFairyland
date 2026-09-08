@@ -1,0 +1,315 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Common";
+import "Battle";
+enum PaintingFairylandProtocols{
+    S_PAINT_FAIRYLAND_ENTER = 214601;
+    S_PAINT_FAIRYLAND_GET_BATTLE_RECORD = 214602;
+    S_PAINT_FAIRYLAND_COLLECT_ANIMA = 214603;
+    S_PAINT_FAIRYLAND_ENTER_SHOP = 214604;
+    S_PAINT_FAIRYLAND_LEAVE = 214605;
+    S_PAINT_FAIRYLAND_MOUNTAIN_ENTER_FAIRY = 214610;
+    S_PAINT_FAIRYLAND_MOUNTAIN_OCCUPY_FAIRY = 214611;
+    S_PAINT_FAIRYLAND_POOL_ENTER_FAIRY = 214620;
+    S_PAINT_FAIRYLAND_POOL_FAIRY_POOL_INVITE = 214621;
+    S_PAINT_FAIRYLAND_POOL_INVITE_FRIEND = 214622;
+    S_PAINT_FAIRYLAND_POOL_INVITE_UNION = 214623;
+    S_PAINT_FAIRYLAND_POOL_APPLY_JOIN = 214624;
+    S_PAINT_FAIRYLAND_POOL_APPLY_LIST = 214625;
+    S_PAINT_FAIRYLAND_POOL_APPLY_AGREE = 214626;
+    S_PAINT_FAIRYLAND_POOL_APPLY_REFUSE = 214627;
+    S_PAINT_FAIRYLAND_POOL_OCCUPY = 214628;
+    S_PAINT_FAIRYLAND_POOL_ENTER_INSIDE = 214629;
+    S_PAINT_FAIRYLAND_POOL_JOIN = 214630;
+    S_PAINT_FAIRYLAND_PALACE_ENTER = 214634;
+    S_PAINT_FAIRYLAND_PALACE_JOIN = 214635;
+    S_PAINT_FAIRYLAND_PALACE_OCCUPY = 214636;
+    S_PAINT_FAIRYLAND_REFRESH_SYNC = 214637;
+    S_PAINT_REPORT_LAST_APPLY_SYNC = 214639;
+    S_PAINT_REPORT_GET_PLAYER_INFO = 214638;
+    S_PAINT_FAIRYLAND_ENTER_MAIN = 214640;
+}
+enum FairylandType {
+    FAIRY_MOUNTAIN = 1;
+    FAIRY_POOL = 2;
+    FAIRY_PALACE = 3;
+}
+message FairylandShowData {
+    optional int32 type = 1;
+    optional int32 id = 2;
+    repeated PlayerBaseDataMsg insidePlayers = 3;
+    optional UnionBaseData insideUnion = 4;
+}
+message PlayerCultivationShowBaseData {
+    optional int32 type = 1;
+    optional int32 id = 2;
+    optional PlayerBaseDataMsg playerBaseData = 3;
+    optional int64 cultivationStartTime = 4;
+    optional int64 cultivationEndTime = 5;
+}
+message MountainPlayerCultivationShowData {
+    optional PlayerCultivationShowBaseData playerShowData = 1;
+    optional int32 posIndex = 2;
+}
+message PoolPlayerCultivationShowData {
+    optional PlayerCultivationShowBaseData playerShowData = 1;
+    optional int32 cardIndex = 2;
+    optional bool isOwner = 3;
+}
+message PalacePlayerCultivationShowData {
+    optional PlayerCultivationShowBaseData playerShowData = 1;
+    optional bool isOwner = 2;
+    optional int64 unionId = 3;
+}
+message FriendInviteData {
+    optional int64 playerId = 1;
+    optional bool isInvited = 2;
+}
+message FairyPoolApplyData {
+    optional PlayerBaseDataMsg playerBaseData = 1;
+    optional int64 applyTime = 2;
+    optional int32 id = 3;
+    optional int32 cardIndex = 4;
+}
+message FairyBattleRecordData {
+    optional PlayerBaseDataMsg playerBaseData = 1;
+    optional int32 type = 2;
+    optional int64 battleTime = 3;
+    optional bool isWin = 4;
+    optional int32 id = 5;
+    optional int32 posIndex = 6;
+    optional int32 cardIndex = 7;
+}
+message CultivationData {
+    optional int64 settledAnima = 1;
+    optional int64 notSettledAnim = 2;
+    optional int64 todaySettledTimeCount = 3;
+    optional int64 todayAnima = 4;
+    optional bool isCultivation = 5;
+    optional int32 type = 6;
+    optional int32 posIndex = 7;
+    optional int64 curCultivationStartTime = 8;
+    optional int32 todayCultivationTime = 9;
+    optional int64 showTime = 10;
+    optional int32 id = 11;
+}
+message PaintingFairylandRedData {
+    optional bool Cultivation = 1;
+    optional bool Shop = 2;
+}
+message SyncLastApplyData {
+    optional FairyPoolApplyData lastApplyData = 1;
+}
+message SyncRefresh{
+    optional int32 refreshType = 1;
+    optional CultivationData selfData = 2;
+}
+message PaintingFairyEnterMainReq {
+    required int32 activityId = 1;
+}
+message PaintingFairyEnterMainResp {
+    required int32 ret = 1;
+    optional PaintingFairylandRedData redData = 2;
+    optional string autoRewards = 3;
+}
+message EnterPaintingFairylandReq {
+    required int32 activityId = 1;
+}
+message EnterPaintingFairylandResp {
+    required int32 ret = 1;
+    repeated FairylandShowData fairylandShowDatas = 2;
+    optional FairyPoolApplyData lastApplyData = 3;
+    optional int64 actionColdTime = 4;
+    optional CultivationData selfData = 5;
+}
+message LeavePaintingFairylandReq {
+    required int32 activityId = 1;
+}
+message LeavePaintingFairylandResp {
+    required int32 ret = 1;
+}
+message GetFairyBattleRecordReq {
+    required int32 activityId = 1;
+}
+message GetFairyBattleRecordResp {
+    required int32 ret = 1;
+    repeated FairyBattleRecordData dataList = 2;
+}
+message CollectAnimaReq {
+    required int32 activityId = 1;
+}
+message CollectAnimaResp {
+    required int32 ret = 1;
+    optional int64 settledAnima = 2;
+    optional int64 notSettledAnim = 3;
+}
+message EnterFairyMountainReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+}
+message EnterFairyMountainResp {
+    required int32 ret = 1;
+    repeated MountainPlayerCultivationShowData playerShowDatas = 2;
+}
+message OccupyFairylandReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 posIndex = 3;
+    optional int64 targetPlayerId =4;
+}
+message OccupyFairylandResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg battleRecordMsg = 2;
+    repeated MountainPlayerCultivationShowData playerShowDatas = 3;
+    optional int64 actionColdTime = 4;
+    optional PlayerBaseDataMsg targetPlayerBaseData = 5;
+}
+message EnterFairyPoolReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+}
+message EnterFairyPoolResp {
+    required int32 ret = 1;
+    repeated PoolPlayerCultivationShowData playerShowDatas = 2;
+}
+message EnterFairyPoolInsideReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message EnterFairyPoolInsideResp {
+    required int32 ret = 1;
+    repeated PoolPlayerCultivationShowData playerShowDatas = 2;
+    optional int64 protectStartTime = 3;
+}
+message GetFairyPoolInviteDataReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message GetFairyPoolInviteDataResp {
+    required int32 ret = 1;
+    repeated FriendInviteData dataList = 2;
+    optional int64 nextUnionInviteTime = 3;
+}
+message InviteFriendReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message InviteFriendResp {
+    required int32 ret = 1;
+}
+message InviteUnionReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message InviteUnionResp {
+    required int32 ret = 1;
+}
+message ApplyJoinFairyPoolReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message ApplyJoinFairyPoolResp {
+    required int32 ret = 1;
+}
+message GetFairyPoolApplyListReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message GetFairyPoolApplyListResp {
+    required int32 ret = 1;
+    repeated FairyPoolApplyData dataList = 2;
+}
+message AgreeFairyPoolApplyReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+    required int64 playerId = 4;
+}
+message AgreeFairyPoolApplyResp {
+    required int32 ret = 1;
+    repeated PoolPlayerCultivationShowData playerShowDatas = 2;
+}
+message RefuseAllFairyPoolApplyReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message RefuseAllFairyPoolApplyResp {
+    required int32 ret = 1;
+}
+message OccupyFairyPoolReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+    optional int64 targetPlayerId =4;
+}
+message OccupyFairyPoolResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg battleRecordMsg = 2;
+    optional int64 actionColdTime = 3;
+    repeated PoolPlayerCultivationShowData playerShowDatas = 4;
+    optional PlayerBaseDataMsg targetPlayerBaseData = 5;
+    optional int64 protectStartTime = 6;
+}
+message joinFairyPoolReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 cardIndex = 3;
+}
+message joinFairyPoolResp {
+    required int32 ret = 1;
+    repeated PoolPlayerCultivationShowData playerShowDatas = 2;
+    optional int64 actionColdTime = 3;
+}
+message EnterFairyPalaceReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+}
+message EnterFairyPalaceResp {
+    required int32 ret = 1;
+    repeated PalacePlayerCultivationShowData playerShowDatas = 2;
+    optional int64 protectStartTime = 3;
+}
+message JoinFairyPalaceReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+}
+message JoinFairyPalaceResp {
+    required int32 ret = 1;
+    optional int64 actionColdTime = 2;
+    repeated PalacePlayerCultivationShowData playerShowDatas = 3;
+}
+message OccupyFairyPalaceReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    optional int64 targetPlayerId =3;
+}
+message OccupyFairyPalaceResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg battleRecordMsg = 2;
+    optional int64 actionColdTime = 3;
+    repeated PalacePlayerCultivationShowData playerShowDatas = 4;
+    optional PlayerBaseDataMsg targetPlayerBaseData = 5;
+    optional int64 protectStartTime = 6;
+}
+message EnterFairyLandShopReq {
+    required int32 activityId = 1;
+}
+message EnterFairyLandShopResp {
+    required int32 ret = 1;
+    optional int64 unionAccAnima = 2;
+}
+message GetPlayerCultivationDataReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message GetPlayerCultivationDataResp {
+    required int32 ret = 1;
+    optional int32 type = 2;
+    optional int32 id = 3;
+    optional int32 cardIndex = 4;
+}

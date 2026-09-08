@@ -1,0 +1,41 @@
+package com.yq.msg.CityMsg;
+enum ArtifactPb {
+    Artifact_LvUp = 233401;
+    Artifact_Resonance = 233402;
+    Artifact_Sync = 233403;
+}
+message ArtifactData {
+    required int32 id = 1;
+    required int32 lv = 2;
+    repeated int32 slotList = 3;
+}
+message ArtifactLvUpReq {
+    required int32 artifactId = 1;
+}
+message ArtifactLvUpResp {
+    required int32 ret = 1;
+    optional int32 lv = 2;
+}
+message ArtifactResonanceReq {
+    required int32 artifactId = 1;
+    required int32 magicTreasureId = 2;
+    required int32 slotIndex = 3;
+}
+message ArtifactResonanceResp {
+    required int32 ret = 1;
+}
+message ArtifactSync {
+    repeated ArtifactData artifactList = 1;
+    repeated ArtifactCombineMsg artifactCombineMsgList = 2;
+}
+message ArtifactCombineLvUpReq{
+    required int32 combineId = 1;
+}
+message ArtifactCombineLvUpResp {
+    required int32 ret = 1;
+    optional ArtifactCombineMsg combineMsg = 2;
+}
+message ArtifactCombineMsg{
+    required int32 combineId = 1;
+    required int32 lv = 2;
+}

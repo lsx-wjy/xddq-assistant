@@ -1,0 +1,31 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+message GetRecallConditionRewardReq {
+    optional int32 activityId = 1;
+    optional int32 conditionId = 2;
+    optional int32 getType = 3;
+}
+message GetRecallConditionRewardResp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}
+message GetRecallReceiveRewardReq {
+    optional int32 systemId = 1;
+}
+message GetRecallReceiveRewardResp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}
+message RecallBindActivePlayerReq{
+   optional string recallCode = 1;
+}
+message RecallBindActivePlayerResp{
+    optional int32 ret  = 1;
+    optional string reward  =4;
+}
+message RecallPrivilegeFreeReq{
+    required int32 privilegeType =1;
+}
+message RecallPrivilegeFreeResp{
+    optional int32 ret  = 1;
+}

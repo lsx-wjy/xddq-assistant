@@ -1,0 +1,22 @@
+package com.yq.msg.CityMsg;
+message SyncKuaiShouDailyMsg{
+  required KuaiShouDailyDataMsg kuaiShouDailyDataMsg = 1;
+}
+message KuaiShouDailyLoginReq {
+}
+message KuaiShouDailyLoginResp {
+  required int32 ret = 1;
+  optional KuaiShouDailyDataMsg kuaiShouDailyDataMsg = 2;
+}
+message KuaiShouDailyRewardReq {
+}
+message KuaiShouDailyRewardResp{
+  required int32 ret = 1;
+  optional KuaiShouDailyDataMsg kuaiShouDailyDataMsg = 2;
+  optional string reward = 3;
+}
+message KuaiShouDailyDataMsg {
+  required int32 rewardId = 1;
+  required int64 loginTime = 2;
+  required int64 rewardTime = 3;
+}

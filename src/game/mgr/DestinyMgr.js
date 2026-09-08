@@ -3,6 +3,7 @@ import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
 import PlayerAttributeMgr from "#game/mgr/PlayerAttributeMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class DestinyMgr {
     constructor() {
@@ -27,6 +28,7 @@ export default class DestinyMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('basic.destiny-travel')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

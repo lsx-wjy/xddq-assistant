@@ -1,0 +1,82 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Battle";
+import "FateTreasure";
+enum CaveTrialPb {
+    CAVE_TRIAL_PLAYER_DATA = 232801;
+    CAVE_TRIAL_GET_TICKET = 232802;
+    CAVE_TRIAL_BLESS = 232803;
+    CAVE_TRIAL_BATTLE = 232804;
+    CAVE_TRIAL_BATTLE_REWARD = 232805;
+    CAVE_TRIAL_GET_BOSS_ATTR = 232806;
+    CAVE_TRIAL_DAY_REWARD = 232807;
+    CAVE_TRIAL_WEEK_REWARD_TAKE = 232808;
+    CAVE_TRIAL_WEEK_REWARD_SELECT = 232809;
+    CAVE_TRIAL_PLAYER_DATA_SYNC = 232810;
+}
+message CaveTrialGetTicketReq {
+}
+message CaveTrialGetTicketResp {
+  required int32 ret = 1;
+  optional int32 freeTicket = 2;
+}
+message CaveTrialBlessReq {
+  required string blessItems = 1;
+  optional int32 rate = 2;
+}
+message CaveTrialBlessResp {
+  required int32 ret = 1;
+  optional int32 rate = 2;
+  optional string blessItems = 3;
+}
+message CaveTrialBattleReq {
+  required int32 level = 1;
+  required int32 wave = 2;
+  optional int32 rate = 3;
+  repeated string blessItems = 4;
+}
+message CaveTrialBattleResp {
+  required int32 ret = 1;
+  optional int32 wave = 2;
+  optional BattleRecordMsg records = 3;
+  repeated string rewards = 4;
+  optional bool isWin = 5;
+  optional bool isEnd = 6;
+}
+message CaveTrialBattleRewardReq{
+  required int32 type = 1;
+}
+message CaveTrialBattleRewardResp {
+  required int32 ret = 1;
+  optional int32 curLevel = 2;
+  optional string reward = 3;
+  repeated FateTreasureInscriptionDataMsg inscriptions = 4;
+}
+message CaveTrialGetBossAttrReq{
+  optional int32 bossId = 1;
+  optional int32 level = 2;
+}
+message CaveTrialGetBossAttrResp{
+  optional int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+  optional string monsterFightVal = 3;
+  optional int32 rank = 4;
+  optional int32 rankValue = 5;
+}
+message CaveTrialDayRewardReq{}
+message CaveTrialDayRewardResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 dayRewardCount = 3;
+}
+message CaveTrialWeekRewardReq {}
+message CaveTrialWeekRewardResp {
+  optional int32 ret = 1;
+  repeated FateTreasureInscriptionDataMsg inscriptions = 2;
+}
+message CaveTrialWeekSelectReq{
+  optional int32 pos = 1;
+}
+message CaveTrialWeekSelectResp {
+  optional int32 ret = 1;
+}

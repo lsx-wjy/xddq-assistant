@@ -1,0 +1,110 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum UniversePuzzlePb {
+    UniversePuzzle_Open = 235101;
+    UniversePuzzle_Unlock_Grid = 235102;
+    UniversePuzzle_Save = 235103;
+    UniversePuzzle_Combine = 235104;
+    UniversePuzzle_Open_Preset = 235105;
+    UniversePuzzle_Switch_Preset = 235106;
+    UniversePuzzle_Upgrade_Sync = 235107;
+    UniversePuzzle_Change_Shape = 235108;
+}
+message PuzzleGridMsg {
+    optional sint32 x = 1;
+    optional sint32 y = 2;
+}
+message PuzzlePieceMsg {
+    optional int32 id = 1;
+    optional int32 configId = 2;
+    optional int32 shapeId = 3;
+    repeated int32 equipPresetIds = 4;
+    optional bool new = 5;
+}
+message PuzzleBoardPieceMsg {
+    optional PuzzlePieceMsg piece = 1;
+    repeated PuzzleGridMsg grids = 2;
+    optional int32 rotationAngle = 3;
+    optional PuzzleGridMsg center = 4;
+}
+message PuzzlePresetMsg {
+    optional int32 presetId = 1;
+    optional int32 unlockCount = 2;
+    repeated PuzzleGridMsg unlockGrids = 3;
+    repeated PuzzleBoardPieceMsg boardPieces = 4;
+}
+message PuzzleCombineMsg {
+    repeated int32 pieceIds = 1;
+}
+message UniversePuzzleOpenReq {
+}
+message UniversePuzzleOpenResp {
+    required int32 ret = 1;
+    optional int32 level = 2;
+    optional int64 exp = 3;
+    optional PuzzlePresetMsg puzzlePreset = 4;
+    repeated PuzzlePieceMsg bagPieces = 5;
+    optional int64 unlockNeedExp = 6;
+    optional int32 dayChangeCount = 7;
+}
+message UniversePuzzleUnlockGridReq {
+    optional PuzzleGridMsg unlockGrid = 1;
+}
+message UniversePuzzleUnlockGridResp {
+    required int32 ret = 1;
+}
+message UniversePuzzleSaveReq {
+    repeated PuzzleBoardPieceMsg boardPieces = 1;
+}
+message UniversePuzzleSaveResp {
+    required int32 ret = 1;
+}
+message UniversePuzzleCombineReq {
+    repeated PuzzleCombineMsg combines = 1;
+    optional int32 combineType = 2;
+}
+message UniversePuzzleCombineResp {
+    required int32 ret = 1;
+    repeated PuzzlePieceMsg combinedPieces = 2;
+    optional int64 awardExp = 3;
+    optional int64 unlockCount = 4;
+}
+message UniversePuzzleOpenPresetReq {
+}
+message UniversePuzzleOpenPresetResp {
+    required int32 ret = 1;
+    repeated PuzzlePresetMsg puzzlePresets = 2;
+    optional int32 bodyPresetId = 3;
+}
+message UniversePuzzleSwitchPresetReq {
+    optional int32 presetId = 1;
+}
+message UniversePuzzleSwitchPresetResp {
+    required int32 ret = 1;
+}
+message UniversePuzzleUpgradeSync {
+    optional int32 level = 1;
+    optional int32 exp = 2;
+    optional int32 preLevel = 3;
+}
+message UniversePuzzleChangeShapeReq {
+    optional int32 puzzlePieceId = 1;
+}
+message UniversePuzzleChangeShapeResp {
+    required int32 ret = 1;
+    optional PuzzlePieceMsg puzzlePiece = 2;
+}
+message UniversePuzzlePlayerDataSync {
+    optional int32 level = 1;
+    optional int64 exp = 2;
+    optional int32 unlockCount = 3;
+}
+message UniversePuzzleRedPointSync {
+    optional string redPointValue = 1;
+}
+message UniversePuzzleBagOpenReq {
+}
+message UniversePuzzleBagOpenResp {
+    required int32 ret = 1;
+    repeated PuzzlePieceMsg bagPieces = 5;
+}

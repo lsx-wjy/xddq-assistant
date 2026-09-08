@@ -1,0 +1,198 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "PackagesBase";
+enum FairyPartyPb {
+    FairyParty_Create = 233501;
+    FairyParty_Get_List = 233502;
+    FairyParty_Enter = 233503;
+    FairyParty_Sit_Down = 233504;
+    FairyParty_Exit = 233505;
+    FairyParty_Modify_Auto_Setting = 233506;
+    FairyParty_Get_Apply_List = 233507;
+    FairyParty_Agree_Apply = 233508;
+    FairyParty_Refuse_All = 233509;
+    FairyParty_Search_Apply = 233510;
+    FairyParty_Sync_Open = 233511;
+    FairyParty_Sync_Vip_Seat_Info = 233512;
+    FairyParty_Sync_Seat_Reward = 233513;
+    FairyParty_Sync_New_Apply = 233514;
+    FairyParty_Sync_Login = 233515;
+    FairyParty_Get_Invite_List = 233516;
+    FairyParty_Agree_Invite = 233517;
+    FairyParty_Refuse_Invite_All = 233518;
+    FairyParty_Search_Invite = 233519;
+    FairyParty_Send_Invite = 233520;
+    FairyParty_Draw_Record = 233521;
+    FairyParty_Sync_New_Invite = 233522;
+    FairyParty_CTG_Sync_New_Open = 233530;
+    FairyParty_CTG_Sync_Seat_Reward = 233531;
+    FairyParty_CTG_Send_Mail_Reward = 233532;
+}
+message FairyPartySeatInfo {
+    required int32 index = 1;
+    optional PlayerBaseDataMsg playerInfo = 2;
+    optional bool isBigReward = 3;
+    optional FairyPartyDestinyInfo destiny = 4;
+}
+message FairyPartyAutoSetting {
+    optional bool sameUnionAuto = 1;
+    optional bool friendAuto = 2;
+    optional int32 minRealmsAuto = 3;
+    optional bool minRealmsAutoFlag = 4;
+}
+message FairyPartyApplyInfo {
+    optional PlayerBaseDataMsg playerInfo = 1;
+    optional int64 applyTime = 2;
+    optional bool isRefuse = 3;
+}
+message FairyPartyInviteInfo {
+    optional PlayerBaseDataMsg playerInfo = 1;
+    optional int64 inviteTime = 2;
+    optional string invitePartyId = 3;
+    optional int64 partyEndTime = 4;
+    optional bool isRefuse = 5;
+}
+message FairyPartyDrawInfo {
+    optional PlayerBaseDataMsg playerInfo = 1;
+    optional int64 drawTime = 2;
+    optional int32 rewardIndex = 3;
+}
+message FairyPartyVipSeatInfoSync {
+    optional string partyId = 1;
+    repeated FairyPartySeatInfo seatInfo = 2;
+}
+message FairyPartySeatRewardSync {
+    optional string partyId = 1;
+    optional int32 rewardIndex = 2;
+    optional int32 bigRewardNum = 3;
+    optional int32 joinPartyNum = 4;
+    optional bool isVipSeat = 5;
+    optional bool isHostReward = 6;
+}
+message FairyPartyCreateReq {
+}
+message FairyPartyCreateResp {
+    required int32 ret = 1;
+    optional FairyPartyInfo partyInfo = 2;
+    optional int32 partyOpenTimes = 3;
+    repeated FairyPartyOpenTimesInfo openTimeInfos = 4;
+    optional FairyPartySeatRewardSync rewardInfo = 5;
+}
+message FairyPartyGetListReq {
+    required int32 page = 1;
+}
+message FairyPartyGetListResp {
+    required int32 ret = 1;
+    repeated FairyPartyInfo partyList = 2;
+    optional int32 partyOpenNum = 3;
+    optional int32 joinPartyNum = 4;
+    optional int32 partyOpenTimes = 5;
+    repeated FairyPartyOpenTimesInfo openTimeInfos = 6;
+}
+message FairyPartyEnterReq {
+    required string partyId = 1;
+}
+message FairyPartyEnterResp {
+    required int32 ret = 1;
+    optional FairyPartyInfo partyInfo = 2;
+    repeated FairyPartySeatInfo vipSeatList = 3;
+    repeated FairyPartySeatInfo normalSeatList = 4;
+    optional FairyPartyAutoSetting autoSetting = 5;
+    optional int64 mainPageBubbleEndTime = 6;
+}
+message FairyPartySitDownReq {
+    required string partyId = 1;
+    required int32 seatIndex = 2;
+    optional int64 hostPlayerId = 3;
+}
+message FairyPartySitDownResp {
+    required int32 ret = 1;
+    optional FairyPartySeatInfo seatInfo = 2;
+}
+message FairyPartyExitReq {
+    required string partyId = 1;
+}
+message FairyPartyExitResp {
+    required int32 ret = 1;
+}
+message FairyPartyModifyAutoSettingReq {
+    required string partyId = 1;
+    required FairyPartyAutoSetting autoSetting = 2;
+}
+message FairyPartyModifyAutoSettingResp {
+    required int32 ret = 1;
+}
+message FairyPartyGetApplyListReq {
+    required string partyId = 1;
+    required bool showTheSameUnion = 2;
+    required int32 showRealms = 3;
+}
+message FairyPartyGetApplyListResp {
+    required int32 ret = 1;
+    repeated FairyPartyApplyInfo applyList = 2;
+}
+message FairyPartyAgreeApplyReq {
+    required string partyId = 1;
+    required int64 playerId = 2;
+}
+message FairyPartyAgreeApplyResp {
+    required int32 ret = 1;
+}
+message FairyPartyRefuseAllReq {
+    required string partyId = 1;
+}
+message FairyPartyRefuseAllResp {
+    required int32 ret = 1;
+}
+message FairyPartySearchApplyReq {
+    required string searchKey = 1;
+    optional string partyId = 2;
+}
+message FairyPartySearchApplyResp {
+    required int32 ret = 1;
+    optional FairyPartyApplyInfo applyInfo = 2;
+}
+message FairyPartyGetInviteListReq {
+    required bool showTheSameUnion = 1;
+    required int32 showRealms = 2;
+}
+message FairyPartyGetInviteListResp {
+    required int32 ret = 1;
+    repeated FairyPartyInviteInfo inviteList = 2;
+}
+message FairyPartyAgreeInviteReq {
+    required string partyId = 1;
+    required int64 playerId = 2;
+}
+message FairyPartyAgreeInviteResp {
+    required int32 ret = 1;
+}
+message FairyPartyRefuseInviteAllReq {
+}
+message FairyPartyRefuseInviteAllResp {
+    required int32 ret = 1;
+}
+message FairyPartySearchInviteReq {
+    required string searchKey = 1;
+    optional bool isUnion = 2;
+    optional string partyId = 3;
+}
+message FairyPartySearchInviteResp {
+    required int32 ret = 1;
+    repeated FairyPartyInviteInfo inviteInfo = 2;
+}
+message FairyPartySendInviteReq {
+    required string partyId = 1;
+    optional int64 playerId = 2;
+}
+message FairyPartySendInviteResp {
+    required int32 ret = 1;
+}
+message FairyPartyDrawRecordReq {
+    required string partyId = 1;
+}
+message FairyPartyDrawRecordResp {
+    required int32 ret = 1;
+    repeated FairyPartyDrawInfo drawInfos = 2;
+    optional FairyPartyDrawInfo myDrawInfo = 3;
+}

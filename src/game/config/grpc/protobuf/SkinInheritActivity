@@ -1,0 +1,41 @@
+package com.yq.msg.CityMsg;
+message SkinInheritEnterReq {
+}
+message SkinInheritEnterRsp {
+    optional int32 ret = 1;
+    optional SkinInheritDataMsg data = 2;
+}
+message SkinInheritReceiveLoginRewardReq {
+    required int32 poolType = 1;
+    required int32 rewardIndex = 2;
+}
+message SkinInheritReceiveLoginRewardRsp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+    optional SkinInheritDataMsg data = 3;
+}
+message SkinInheritDrawReq {
+    required int32 poolType = 1;
+}
+message SkinInheritDrawRsp {
+    optional int32 ret = 1;
+    optional int32 charaId = 2;
+    optional string rewards = 3;
+    optional SkinInheritDataMsg data = 4;
+}
+message SkinInheritDataMsg {
+    optional int32 loginDays = 1;
+    repeated int32 bigPoolCharaId = 2;
+    repeated int32 smallPoolCharaId = 3;
+    repeated SkinInheritRecordMsg drawnBigCharaId = 4;
+    repeated SkinInheritRecordMsg drawnSmallCharaId = 5;
+    repeated int32 receivedBigLoginReward = 6;
+    repeated int32 receivedSmallLoginReward = 7;
+}
+message SkinInheritRecordMsg {
+    optional int32 skinId = 1;
+    optional int64 time = 2;
+}
+message SkinInheritDataSync {
+    optional SkinInheritDataMsg data = 1;
+}

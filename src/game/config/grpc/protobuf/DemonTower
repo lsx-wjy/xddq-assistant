@@ -1,0 +1,80 @@
+package com.yq.msg.CityMsg;
+enum DemonTowerProtocols{
+    demon_tower_base_info = 211601;
+    demon_tower_draw = 211602;
+    demon_tower_choose_RareReward = 211603;
+}
+message DemonTowerConfig{
+    repeated DemonTowerDrawConfig drawConfig = 1;
+    repeated DemonTowerCoreRewardConfig coreRewardConfig = 2;
+}
+message DemonTowerDrawConfig{
+    required int32 activityId = 1;
+    required string round = 2;
+    required int32 floor = 3;
+    required string reward = 4;
+    required int32 cost = 5;
+}
+message DemonTowerCoreRewardConfig{
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string reward = 3;
+  required int32 times = 4;
+  required int32 unlock = 5;
+  required int32 great = 6;
+}
+message DemonTowerBaseInfoReqMsg{
+    required int32 activityId = 1;
+}
+message DemonTowerBaseInfoRespMsg{
+    required int32 ret = 1;
+    optional DemonTowerUserDataSync userData = 2;
+}
+message DemonTowerUserDataSync{
+    optional int32 floor = 1;
+    optional string rewardStr = 2;
+    optional int32 rareIndex = 3;
+    repeated DemonTowerRareData rareData = 4;
+    optional int32 point = 5;
+    optional int32 todayPoint = 6;
+    optional int32 round = 7;
+  optional int32 chooseIndex = 8;
+  repeated RareRewardSelectData selectRareRewardItem = 9;
+}
+message RareRewardSelectData {
+  required int32 rareIndex = 1;
+  required int32 selectIndex = 2;
+}
+message DemonTowerRareData{
+    optional int32 rareIndex = 1;
+    optional int32 num = 2;
+}
+message DemonTowerDrawReqMsg{
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message DemonTowerDrawRespMsg{
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 drawIndex = 3;
+    repeated DemonTowerOneKeyDrawData infos = 4;
+}
+message DemonTowerOneKeyDrawData{
+    required int32 floor = 1;
+    repeated int32 drawIndexArr = 2;
+}
+message DemonTowerChooseRareRewardReqMsg{
+    required int32 activityId = 1;
+    required int32 rareIndex = 2;
+}
+message DemonTowerChooseRareRewardRespMsg{
+    required int32 ret = 1;
+}
+message DemonTowerSelectRewardReqMsg {
+  required int32 activityId = 1;
+  required int32 rareIndex = 2;
+  optional int32 chooseIndex = 3;
+}
+message DemonTowerSelectRewardRespMsg {
+  required int32 ret = 1;
+}

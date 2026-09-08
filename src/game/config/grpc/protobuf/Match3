@@ -1,0 +1,168 @@
+package com.yq.msg.CityMsg;
+message SecretRealmSealedDemonActivityPlayerDataMsg {
+  required int64 totalDamage = 1;
+  optional SecretRealmSealedDemonEnergyInfoMsg energyInfoMsg = 2;
+  optional SecretRealmSealedDemonHistoryProgressMsg historyProgressMsg = 3;
+  optional SecretRealmSealedDemonLevelInfoMsg levelInfoMsg = 4;
+}
+message SecretRealmSealedDemonEnergyInfoMsg {
+  required int32 energy = 1;
+  required int64 lastRecTime = 2;
+}
+message SecretRealmSealedDemonHistoryProgressMsg {
+  required int32 levelId = 1;
+  required int32 monsterDamage = 2;
+}
+message SecretRealmSealedDemonLevelInfoMsg {
+  required int32 levelId = 1;
+  required int32 incrementLevelId = 2;
+  required int32 monsterDamage = 3;
+  required int32 residueStep = 4;
+  required bool guide = 5;
+  repeated SecretRealmSealedDemonBlockMsg blockList = 6;
+  repeated SecretRealmSealedDemonItemCountMsg itemCountList = 7;
+}
+message SecretRealmSealedDemonBlockMsg {
+  required int32 x = 1;
+  required int32 y = 2;
+  required int32 c = 3;
+  optional int32 damage = 4;
+}
+message SecretRealmSealedDemonItemCountMsg {
+  required int32 itemId = 1;
+  required int32 itemNum = 2;
+}
+message SecretRealmSealedDemonBlockConfigMsg {
+  required int32 id = 1;
+  required int32 iconId = 2;
+  required string name = 3;
+  required int32 weight = 4;
+}
+message SecretRealmSealedDemonContinuousConfigMsg {
+  required int32 id = 1;
+  required int32 continuousNum = 2;
+  required int32 damageAdd = 3;
+}
+message SecretRealmSealedDemonLevelConfigMsg {
+  required int32 levelId = 1;
+  required int32 id = 2;
+  required int32 bodyScale = 3;
+  repeated int32 excursion = 4;
+  required int32 monsterHp = 5;
+  repeated int32 npcStation = 6;
+  required int32 type = 7;
+  required int32 typeNum = 8;
+  required int32 stepLimit = 9;
+  repeated int32 size = 10;
+  required bool refresh = 11;
+}
+message SecretRealmSealedDemonBombMsg {
+  required int32 x = 1;
+  required int32 y = 2;
+  required int32 t = 3;
+}
+message SecretRealmSealedDemonEliminateStageMsg {
+  repeated SecretRealmSealedDemonBombMsg bombList = 1;
+  repeated SecretRealmSealedDemonBlockMsg blockList = 2;
+}
+message SecretRealmSealedDemonEliminateRoundMsg {
+  required int32 type = 1;
+  repeated SecretRealmSealedDemonEliminateStageMsg stageList = 2;
+  repeated SecretRealmSealedDemonBlockMsg bombBlockList = 3;
+  repeated SecretRealmSealedDemonBlockMsg currentBlockList = 4;
+}
+message SecretRealmSealedDemonEliminateTipsMsg {
+  optional SecretRealmSealedDemonBlockMsg fromBlock = 1;
+  optional SecretRealmSealedDemonBlockMsg toBlock = 2;
+  repeated SecretRealmSealedDemonBlockMsg blockList = 3;
+}
+message SecretRealmSealedDemonConfigSync {
+  repeated SecretRealmSealedDemonBlockConfigMsg blockConfigList = 1;
+  repeated SecretRealmSealedDemonContinuousConfigMsg continuousConfigList = 2;
+  repeated SecretRealmSealedDemonLevelConfigMsg levelConfigList = 3;
+}
+message SecretRealmSealedDemonDataSync {
+  required SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 1;
+}
+message SecretRealmSealedDemonEnterGameReq {
+  required int32 activityId = 1;
+}
+message SecretRealmSealedDemonEnterGameResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 2;
+}
+message SecretRealmSealedDemonEliminateTipsReq {
+  required int32 activityId = 1;
+}
+message SecretRealmSealedDemonEliminateTipsResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonEliminateTipsMsg eliminateTipsMsg = 2;
+  optional SecretRealmSealedDemonEnergyInfoMsg energyInfoMsg = 3;
+  optional SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 4;
+}
+message SecretRealmSealedDemonEliminateBlockReq {
+  required int32 activityId = 1;
+  required int32 fromX = 2;
+  required int32 fromY = 3;
+  required int32 toX = 4;
+  required int32 toY = 5;
+}
+message SecretRealmSealedDemonEliminateBlockResp {
+  required int32 ret = 1;
+  repeated SecretRealmSealedDemonEliminateRoundMsg roundMsgList = 2;
+  optional SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 3;
+}
+message SecretRealmSealedDemonUseEnergyItemReq {
+  required int32 activityId = 1;
+  required int32 itemCount = 2;
+}
+message SecretRealmSealedDemonUseEnergyItemResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonEnergyInfoMsg energyInfoMsg = 2;
+  optional SecretRealmSealedDemonItemCountMsg itemCountMsg = 3;
+}
+message SecretRealmSealedDemonUseBombItemReq {
+  required int32 activityId = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+}
+message SecretRealmSealedDemonUseBombItemResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonEnergyInfoMsg energyInfoMsg = 2;
+  optional SecretRealmSealedDemonBlockMsg blockMsg = 3;
+  optional SecretRealmSealedDemonItemCountMsg itemCountMsg = 4;
+}
+message SecretRealmSealedDemonUseEliminateItemReq {
+  required int32 activityId = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+}
+message SecretRealmSealedDemonUseEliminateItemResp {
+  required int32 ret = 1;
+  repeated SecretRealmSealedDemonEliminateRoundMsg roundMsgList = 2;
+  optional SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 3;
+}
+message SecretRealmSealedDemonUseStepItemReq {
+  required int32 activityId = 1;
+  required int32 itemCount = 2;
+}
+message SecretRealmSealedDemonUseStepItemResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonEnergyInfoMsg energyInfoMsg = 2;
+  optional int32 residueStep = 3;
+  optional SecretRealmSealedDemonItemCountMsg itemCountMsg = 4;
+}
+message SecretRealmSealedDemonGetRankReq {
+  required int32 activityId = 1;
+}
+message SecretRealmSealedDemonGetRankResp {
+  required int32 ret = 1;
+  optional int32 rank = 2;
+}
+message SecretRealmSealedDemonRestartReq {
+  required int32 activityId = 1;
+}
+message SecretRealmSealedDemonRestartResp {
+  required int32 ret = 1;
+  optional SecretRealmSealedDemonActivityPlayerDataMsg playerDataMsg = 2;
+}

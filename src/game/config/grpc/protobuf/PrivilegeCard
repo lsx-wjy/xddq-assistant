@@ -1,9 +1,9 @@
-package com.yq.msg.CityMsg;        
+package com.yq.msg.CityMsg;
     message PrivilegeCardDataMsg {
-        optional int64 monthlyCardEndTime = 1;            
-        optional int64 getMonthlyCardRewardTime = 2;      
-        optional int64 yearCardEndTime = 3;               
-        optional int64 getYearCardRewardTime = 4;         
+        optional int64 monthlyCardEndTime = 1;
+        optional int64 getMonthlyCardRewardTime = 2;
+        optional int64 yearCardEndTime = 3;
+        optional int64 getYearCardRewardTime = 4;
     }
     message PrivilegeCardReceiveRewardReq {
         required int32 type = 1;

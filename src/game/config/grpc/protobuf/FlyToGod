@@ -1,0 +1,153 @@
+package com.yq.msg.CityMsg;
+import "Battle";
+import "WatchPlayer";
+enum FlyToGodPb {
+  flyToGodLoginSync = 232201;
+  flyToGodBattle = 232202;
+  flyToGodPlayerList = 232203;
+  flyToGodEnterPlayerInfo = 232204;
+  flyToGodHelp = 232205;
+  flyToGodFly = 232206;
+  flyToGodWorShip = 232207;
+  flyToGodPickRedBag = 232208;
+  flyToGodRedBagSync = 232209;
+  flyToGodInit = 232210;
+  flyToGodPlayerStepChangeNotice = 232211;
+  flyToGodCongratulationsGet = 232212;
+  flyToGodMonsterInfo = 232213;
+}
+message FlyToGodLoginSyncData {
+  optional FlyToGodPlayerSystemInfo flyToGodPlayerSystemInfo = 1;
+  repeated FlyToGodPlayerInfo playerList = 2;
+}
+message FlyToGodPlayerSystemInfo {
+  required int32 step = 1;
+  optional FlyToGodStepOneInfo flyToGodStepOneInfo = 2;
+}
+message FlyToGodPlayerStepChangeNoticeData {
+  required FlyToGodPlayerInfo playerInfo = 1;
+}
+message FlyToGodStepOneInfo{
+  required int32 index = 1;
+  optional int32 battleTimes = 2;
+}
+message FlyToGodStepTwoInfo{
+  optional int64 startTime = 1;
+  optional int32 helpNum = 2;
+  optional int64 helpTime = 3;
+}
+message FlyToGodStepThreeInfo{
+  required int64 time = 1;
+  repeated FlyToGodCongratulationsInfo congratulationsList = 2;
+  optional bool isWorship = 3;
+  repeated FlyToGodRedBag redBagList = 4;
+}
+message FlyToGodRedBag{
+  required int64 id = 1;
+  required int32 type = 2;
+  required int64 playerId = 3;
+}
+message FlyToGodInitReq{
+}
+message FlyToGodInitResp {
+  required int32 ret = 1;
+  optional int32 step = 2;
+  optional FlyToGodStepOneInfo flyToGodStepOneInfo = 3;
+}
+message FlyToGodBattleReq{
+}
+message FlyToGodBattleResp {
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+  optional int32 step = 3;
+  optional FlyToGodStepOneInfo flyToGodStepOneInfo = 4;
+}
+message FlyToGodPlayerInfo {
+  optional PlayerCharacterImageMsg playerInfo = 1;
+  required int32 step = 2;
+  optional bool redPoint = 3;
+  optional int64 time = 4;
+  optional FlyToGodStepTwoInfo flyToGodStepTwoInfo = 5;
+  optional int64 fullTime = 6;
+}
+message FlyToGodPlayerListReq{
+}
+message FlyToGodPlayerListResp {
+  required int32 ret = 1;
+  repeated FlyToGodPlayerInfo playerList = 2;
+}
+message FlyToGodEnterPlayerInfoReq{
+  required int64 playerId = 1;
+}
+message FlyToGodEnterPlayerInfoResp {
+  required int32 ret = 1;
+  optional int32 step = 2;
+  optional FlyToGodStepTwoInfo flyToGodStepTwoInfo = 3;
+  optional FlyToGodStepThreeInfo flyToGodStepThreeInfo = 4;
+  optional PlayerAppearanceDataMsg playerInfo = 5;
+  repeated PlayerAppearanceDataMsg members = 6;
+  repeated FlyToGodPickRedBagInfo redBagList = 7;
+}
+message FlyToGodHelpReq {
+  required int64 playerId = 1;
+}
+message FlyToGodHelpResp {
+  required int32 ret = 1;
+  optional int64 helpTime = 2;
+  optional int32 totalHelpNum = 3;
+  optional string reward = 4;
+}
+message FlyToGodFlyReq {
+}
+message FlyToGodFlyResp {
+  required int32 ret = 1;
+  optional int32 step = 2;
+  optional FlyToGodStepThreeInfo flyToGodStepThreeInfo = 3;
+}
+message FlyToGodWorShipReq {
+  required int32 luckWordIndex = 1;
+  required int64 playerId = 2;
+}
+message FlyToGodWorShipResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message FlyToGodCongratulationsInfo {
+    optional int32 appearanceId = 1;
+    optional int32 equipCloudId = 2;
+    optional int32 luckWordIndex = 3;
+    optional int64 sendTime = 4;
+}
+message FlyToGodCongratulationsGetReq {
+    required int64 playerId = 1;
+    optional int64 lastCongratulationsTime = 2;
+}
+message FlyToGodCongratulationsGetResp {
+    required int32 ret = 1;
+    repeated FlyToGodCongratulationsInfo congratulationsList = 2;
+}
+message FlyToGodPickRedBagReq {
+  required int64 redBagId = 1;
+  required int64 playerId = 2;
+}
+message FlyToGodPickRedBagResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated FlyToGodPickRedBagInfo redBagInfo = 3;
+}
+message FlyToGodRedBagSync{
+  repeated FlyToGodRedBag redBagList = 1;
+}
+message FlyToGodMonsterReq{
+    required int32 id = 1;
+}
+message FlyToGodMonsterResp{
+  required int32 ret = 1;
+  optional int32 id = 2;
+  repeated AttributeDataMsg attributeList = 3;
+  optional string fightValue = 4;
+}
+message FlyToGodPickRedBagInfo{
+  required int32 type = 1;
+  optional int32 num = 2;
+}

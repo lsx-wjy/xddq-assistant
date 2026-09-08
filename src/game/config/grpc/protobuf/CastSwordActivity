@@ -1,0 +1,122 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum CastSwordPb{
+  CastSwordPb_Null = 0;
+  CastSwordPb_Enter = 2011901;
+  CastSwordPb_Move = 2011902;
+  CastSwordPb_Settlement = 2011903;
+  CastSwordPb_UseTool = 2011904;
+  CastSwordPb_GetReward = 2011905;
+  CastSwordPb_RefreshStrength = 2011906;
+  CastSwordPb_GameEnd = 2011907;
+  CastSwordPb_RankSync = 2011908;
+}
+message CastSwordRefreshStrengthMsg{
+  required int32  strength = 1;
+  required int64  refreshTime = 2;
+}
+message CastSwordPropsMsg{
+  required int32 type = 1;
+  required int32 itemId = 2;
+}
+message CastSwordPaintMsg{
+  required int32 value = 1;
+}
+message CastSwordRespBaseDataEntity {
+  optional int32 score = 1;
+  optional int32 highScore = 2;
+  optional int32 strength = 3;
+  repeated CastSwordPaintMsg paint = 4 ;
+  repeated CastSwordItemUseMsg itemList = 5;
+}
+message CastSwordItemUseMsg{
+  required int32 itemId = 1;
+  required int32 num = 2;
+}
+message CastSwordEnterReq{
+  required int32 activityId = 1;
+}
+message CastSwordEnterResp{
+  required int32 ret = 1;
+  optional CastSwordRespBaseDataEntity entity = 2;
+  required int64 refreshTime = 3;
+  optional int32 nextRankScore = 4;
+  optional int32 rank = 5;
+  optional CastSwordSettleMsg settleMsg = 6;
+}
+message CastSwordSettleMsg {
+  optional int64 playerId = 1;
+  optional int32 rank = 2;
+  optional int32 nextRankScore = 3;
+  optional int32 score = 4;
+}
+message CastSwordMoveSwordReq{
+  required int32 activityId = 1;
+  required int32 direction = 2;
+}
+message CastSwordMoveSwordResp{
+  required int32 ret = 1;
+  optional CastSwordRespBaseDataEntity entity = 2;
+  optional string reward = 3;
+  optional bool isGameEnd = 4;
+}
+message CastSwordSettlementSwordReq{
+  required int32 activityId =1;
+}
+message CastSwordSettlementSwordResp{
+  required int32 ret = 1;
+  optional int32 score = 2;
+  optional CastSwordRespBaseDataEntity entity = 3;
+  optional int32 rank = 4;
+  optional int32 nextRankScore = 5;
+}
+message CastSwordToolUseReq{
+  required int32 activityId = 1;
+  required int32 propId = 2;
+  optional string param = 3;
+  optional int32 num = 4;
+}
+message CastSwordToolUseResp{
+  required int32 ret = 1;
+  optional CastSwordRespBaseDataEntity entity = 2;
+}
+message CastSwordRankListMsg{
+  repeated CastSwordRankData rankList = 1;
+}
+message CastSwordRankData {
+  repeated PlayerBaseDataMsg playerBaseData = 1;
+  optional int32 score = 2;
+  optional int32 rank = 3;
+}
+message CastSwordGetRewardReq {
+  required int32 activityId = 1;
+}
+message CastSwordGetRewardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+message CastSwordGameEndReq {
+  required int32 activityId = 1;
+}
+message CastSwordGameEndResp {
+  required int32 ret = 1;
+  optional CastSwordRespBaseDataEntity entity = 2;
+}
+message CastSwordConfigSyncMsg {
+  repeated CastSwordSwordConfigMsg swordConfigs = 1;
+}
+message CastSwordSwordConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 level = 3;
+  required int32 points = 4;
+  required int32 weight = 5;
+  required int32 unlock = 6;
+  required int32 iconID = 7;
+  required string destroyed = 8;
+  required int32 impactFactor = 9;
+}
+message CastSwordRankListSyncMsg {
+  optional int32 rank = 1;
+  optional int32 nextRankScore = 2;
+}

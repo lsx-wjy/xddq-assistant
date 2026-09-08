@@ -11,6 +11,9 @@ class ProtobufMgr {
         this.resvCmdList = [];
         this.messages = {};
         this.msgInfoDict = {};
+        this.activityRegistry = [];
+        this.missingByteDecoders = [];
+        this.missingMessageTypes = [];
         this.initialized = false;
         this.basePath = resolvePath('../config/grpc/json');
         this.protoPath = resolvePath('../config/grpc/protobuf');
@@ -27,73 +30,80 @@ class ProtobufMgr {
         if (this.initialized) {
             return; // Exit if already initialized
         }
-        this.initialized = true; // Set the flag to true
-
         // 读取Json文件
-        const [cityMsgInfoRes, cmdListRes, resvCmdListRes] = await Promise.all([
+        const [cityMsgInfoRes, cmdListRes, resvCmdListRes, activityRegistryRes] = await Promise.all([
             fs.readFile(path.join(this.basePath, 'CityMsgInfo'), 'utf-8'),
             fs.readFile(path.join(this.basePath, 'cmdList.json'), 'utf-8'),
             fs.readFile(path.join(this.basePath, 'resvCmdList.json'), 'utf-8'),
+            fs.readFile(path.join(this.basePath, 'activityRegistry.json'), 'utf-8'),
         ]);
         const msgInfo = JSON.parse(cityMsgInfoRes);
         this.msgInfoDict = msgInfo;
         this.cmdList = JSON.parse(cmdListRes);
         this.resvCmdList = JSON.parse(resvCmdListRes);
-
-        // 初始化 msgInfoDict
-        for (const key in msgInfo) {
-            const cmds = msgInfo[key];
-            cmds.forEach(cmd => {
-                const protocolKey = cmd.key;
-                this.msgInfoDict[key][protocolKey] = this.cmdList[protocolKey];
-            });
-        }
+        this.activityRegistry = JSON.parse(activityRegistryRes);
 
         // 依次读取多个 proto 文件并加载到 messages 中
         const protoFiles = await fs.readdir(this.protoPath);
 
         await Promise.all(protoFiles.map(protoName => this.loadParseAllCmdMsg(protoName)));
+        this.initialized = true;
     }
 
     async loadParseAllCmdMsg(protoName) {
         const root = await protobuf.load(path.join(this.protoPath, protoName));
-        const msgInfo = this.msgInfoDict[protoName];
+        const msgInfo = this.msgInfoDict[protoName] || [];
 
-        for (const key in msgInfo) {
-            if (msgInfo.hasOwnProperty(key)) {
-                const msg = msgInfo[key];
-                if (!msg) {
-                    continue;
+        for (const msg of msgInfo) {
+            if (!msg) continue;
+            for (const method of [msg.cmMethod, msg.smMethod]) {
+                const qualified = this.qualifyMethod(method);
+                if (!qualified) continue;
+                try {
+                    this.messages[qualified] = root.lookupType(qualified);
+                } catch (_error) {
+                    // 协议表可能先于尚未随包发布的 proto 定义，用于识别但不可发送。
+                    this.missingMessageTypes.push(`${protoName}:${method}`);
                 }
-
-                const cmMethod = msg.cmMethod ? `com.yq.msg.CityMsg.${msg.cmMethod}` : undefined;
-                const smMethod = msg.smMethod ? `com.yq.msg.CityMsg.${msg.smMethod}` : undefined;
-                if (cmMethod) {
-                    this.messages[cmMethod] = root.lookupType(cmMethod);
-                }
-                if (smMethod) {
-                    this.messages[smMethod] = root.lookupType(smMethod);
-                    this.resvCmdList[msg.smMsgId] = {
-                        smMethod: msg.smMethod,
-                        fSmMethod: msg.fSmMethod
-                    };
-                }
-                if (msg.byteDecode) {
-                    const byteDecode = `com.yq.msg.${msg.byteDecode}`;
-                    this.messages[byteDecode] = root.lookupType(byteDecode);
+            }
+            if (msg.byteDecode) {
+                const qualified = this.qualifyMethod(msg.byteDecode);
+                try {
+                    this.messages[qualified] = root.lookupType(qualified);
+                } catch (_error) {
+                    // 官方资源偶尔保留已从 proto 注释掉的旧 byteDecode 条目。
+                    this.missingByteDecoders.push(`${protoName}:${msg.byteDecode}`);
                 }
             }
         }
     }
 
-    getMsg(t, e) {
-        const n = e ? this.cmdList[t] : this.resvCmdList[t];
-        if (n) {
-            const method = e ? n.cmMethod : n.smMethod;
-            const msgClass = this.messages[`com.yq.msg.${method}`];
-            return msgClass;
+    qualifyMethod(method) {
+        if (!method) return null;
+        if (method.startsWith('com.yq.msg.')) return method;
+        return `com.yq.msg.${method.includes('.') ? method : `CityMsg.${method}`}`;
+    }
+
+    getMsgCandidates(msgId, isRequest = false, preferredMethod = null) {
+        const command = isRequest ? this.cmdList[msgId] : this.resvCmdList[msgId];
+        if (!command) return [];
+
+        const methods = isRequest
+            ? [command.cmMethod]
+            : (command.candidates?.map(candidate => candidate.smMethod) || [command.smMethod]);
+        if (preferredMethod) {
+            methods.sort((left, right) =>
+                Number(right === preferredMethod) - Number(left === preferredMethod)
+            );
         }
-        return null;
+
+        return [...new Set(methods)]
+            .map(method => ({ method, type: this.messages[this.qualifyMethod(method)] }))
+            .filter(candidate => candidate.type);
+    }
+
+    getMsg(msgId, isRequest = false, preferredMethod = null) {
+        return this.getMsgCandidates(msgId, isRequest, preferredMethod)[0]?.type || null;
     }
 }
 

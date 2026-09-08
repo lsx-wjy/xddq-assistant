@@ -1,0 +1,57 @@
+package com.yq.msg.CityMsg;
+enum CloudSoulPb{
+  CLOUD_SOUL_SYNC = 230600;
+  CLOUD_SOUL_UNLOCK = 230601;
+  CLOUD_SOUL_UPGRADE = 230602;
+  CLOUD_SOUL_BATTLE = 230603;
+  CLOUD_SOUL_COMBINE_ACTIVATION = 230604;
+  CLOUD_SOUL_COMBINE_UPGRADE = 230605;
+}
+message CloudSoulMsg {
+  required int32 soulId = 1;
+  required int32 soulLevel = 2;
+}
+message CloudSoulCombineMsg {
+  required int32 combineId = 1;
+  required int32 combineLevel = 2;
+}
+message CloudSoulSyncResp {
+  repeated CloudSoulMsg cloudSoulMsg = 1;
+  repeated CloudSoulCombineMsg cloudSoulCombineMsg = 2;
+  repeated int32 battleSoulId = 3;
+}
+message CloudSoulUnlockReq {
+  required int32 soulId = 1;
+}
+message CloudSoulUnlockResp {
+  required int32 ret = 1;
+  optional CloudSoulMsg cloudSoulMsg = 2;
+}
+message CloudSoulUpgradeReq {
+  required int32 soulId = 1;
+}
+message CloudSoulUpgradeResp {
+  required int32 ret = 1;
+  optional CloudSoulMsg cloudSoulMsg = 2;
+}
+message CloudSoulBattleReq {
+  required int32 soulId = 1;
+}
+message CloudSoulBattleResp {
+  required int32 ret = 1;
+  repeated int32 battleSoulId = 3;
+}
+message CloudSoulCombineActivationReq {
+  required int32 combineId = 1;
+}
+message CloudSoulCombineActivationResp {
+  required int32 ret = 1;
+  optional CloudSoulCombineMsg cloudSoulCombineMsg = 2;
+}
+message CloudSoulCombineUpgradeReq {
+  required int32 combineId = 1;
+}
+message CloudSoulCombineUpgradeResp {
+  required int32 ret = 1;
+  optional CloudSoulCombineMsg cloudSoulCombineMsg = 2;
+}

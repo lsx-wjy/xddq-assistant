@@ -1,7 +1,14 @@
 package com.yq.msg.CityMsg;
 message ForbiddenTrailsGetRewardReq {
+    required int32 index = 1;
 }
 message ForbiddenTrailsGetRewardResp {
     required int32 ret = 1;
-    optional string reward = 2;    
+    optional string reward = 2;
+}
+message ForbiddenTrailsEnterReq {
+}
+message ForbiddenTrailsEnterResp {
+    required int32 ret = 1;
+    repeated int32 passList = 2;
 }

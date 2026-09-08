@@ -1,15 +1,16 @@
 package com.yq.msg.CityMsg;
 message ReqLoginMsg {
     required string token = 1;
-    optional string language = 2;              
+    optional string language = 2;
+    optional int32 liveShowType = 3;
 }
 message RspLoginMsg{
     required int32 ret = 1;
     optional TimeDataMsg timeData = 2;
 }
  message TimeDataMsg {
-    required int64 timestamp = 1; 
-    required int32 timeZone = 2; 
+    required int64 timestamp = 1;
+    required int32 timeZone = 2;
 }
 message LoginOverMsg {
 }
@@ -21,9 +22,11 @@ message RspPingMsg {
 message OtherLoginMsg {
 }
 message RspConfigMsg {
-    repeated ConfigParam configList = 1;        
+    repeated ConfigParam configList = 1;
 }
 message ConfigParam {
-    required string key = 1;                    
-    required string value = 2;                  
+    required string key = 1;
+    required string value = 2;
+}
+message RspEscrowStatus {
 }

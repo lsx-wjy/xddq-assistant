@@ -1,0 +1,93 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "PackagesBase";
+message DivineInsightBuildUpgradeReq {
+  required int32 buildId = 1;
+}
+message DivineInsightBuildUpgradeRsp {
+  required int32 ret = 1;
+  optional DivineBuildMsg divineBuildMsg = 2;
+}
+message DivineInsightReceiveMindReq{
+}
+message DivineInsightReceiveMindRsp {
+  required int32 ret = 1;
+  optional DivineInsightMindMsg divineInsightMindMsg = 2;
+  optional int32 receiveNum = 3;
+  optional int32 inspireAddNum = 4;
+}
+message DivineInsightBuildSpeedReq {
+  required int32 buildId = 1;
+  required int32 num = 2;
+}
+message DivineInsightBuildSpeedRsp {
+  required int32 ret = 1;
+  optional DivineBuildMsg divineBuildMsg = 2;
+}
+message DivineInsightMindMsg {
+  required int32 mindAmount = 1;
+  required int64 lastReceiveMindTime = 2;
+  required int64 lastCalTime = 3;
+}
+message DivineBuildMsg {
+  required int32 buildId = 1;
+  required int32 buildLevel = 2;
+  required int64 upgradeEndTime = 3;
+  required bool isUnionHelp = 4;
+}
+message DivineInsightInspireUpgradeReq {
+  required int32 inspireId = 1;
+}
+message DivineInsightInspireUpgradeRsp {
+  required int32 ret = 1;
+  optional DivineInspireMsg divineInspireMsg = 2;
+}
+message DivineInsightSync {
+    required DivineInsightMindMsg divineInsightMindMsg = 1;
+    repeated DivineBuildMsg divineBuildMsgList = 2;
+    repeated DivineInspireMsg divineInspireMsgList = 3;
+    optional int32 buildId = 4;
+    optional int32 inspireId = 5;
+}
+message DivineInspireMsg {
+  required int32 id = 1;
+  required int32 level = 2;
+  required int64 upgradeEndTime = 3;
+  required bool isUnionHelp = 4;
+}
+message DivineInsightUnionHelpReq {
+  required int32 id = 1;
+  required int32 type = 2;
+}
+message DivineInsightUnionHelpRsp {
+  required int32 ret = 1;
+}
+message DivineInsightBuildSync {
+  required DivineBuildMsg buildMsg = 1;
+}
+message DivineInsightInspireSync {
+  required DivineInspireMsg inspireMsg = 1;
+}
+message DivineInsightEnterReq {
+}
+message DivineInsightEnterRsp {
+  required int32 ret = 1;
+  optional DivineInsightSync divineInsightSync = 2;
+  optional int32 buildId = 3;
+  optional int32 inspireId = 4;
+}
+message DivineInsightInspireSpeedReq {
+  required int32 inspireId = 1;
+  required int32 num = 2;
+}
+message DivineInsightInspireSpeedRsp {
+  required int32 ret = 1;
+  optional DivineInspireMsg divineInspireMsg = 2;
+}
+message DivineInsightConfirmUpgradeReq {
+  optional int32 buildId = 1;
+  optional int32 inspireId = 2;
+}
+message DivineInsightConfirmUpgradeRsp {
+   required int32 ret = 1;
+}

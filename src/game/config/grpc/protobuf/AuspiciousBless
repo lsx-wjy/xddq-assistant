@@ -1,0 +1,34 @@
+package com.yq.msg.CityMsg;
+enum AuspiciousBlessProtocols{
+  auspicious_bless_get_reward = 210501;
+  auspicious_bless_lock_rare_reward = 210502;
+}
+message AuspiciousBlessGetRewardReq{
+  required int32 activityId = 1;
+  required int32 type = 2;
+  optional bool isUseKillTime = 3;
+}
+message AuspiciousBlessGetRewardResp{
+  required int32 ret = 1;
+  repeated AuspiciousBlessRewardResult rewardResult= 2;
+}
+message AuspiciousBlessRewardResult {
+  required int32 id = 1;
+  optional string reward = 2;
+}
+message AuspiciousBlessLockRareRewardReq{
+  required int32 activityId = 1;
+  required int32 rareRewardId = 2;
+}
+message AuspiciousBlessLockRareRewardResp{
+  required int32 ret = 1;
+}
+message  AuspiciousBlessActivityConfig {
+    repeated  AuspiciousBlessDrawConfig luckyDrawConfig = 1;
+}
+message AuspiciousBlessDrawConfig {
+    optional int32 id = 1;
+    optional string reward = 2;
+    optional int32 weight = 3;
+    optional int32 big = 4;
+}

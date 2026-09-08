@@ -1,0 +1,636 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Common";
+import "Rank";
+enum PharmacyProtocols{
+    S_PHARMACY_NULL = 0;
+    S_PHARMACY_ENTER_STAGE = 219001;
+    S_PHARMACY_ENTER = 219010;
+    S_PHARMACY_LEAVE = 219011;
+    S_PHARMACY_GET_FOOD_TABLE = 219012;
+    S_PHARMACY_GET_SERVE_FOOD_TABLE = 219013;
+    S_PHARMACY_SELF_RANK_UPDATE = 219014;
+    S_PHARMACY_SERVE_TABLE_SYNC = 219015;
+    S_PHARMACY_MAKE_FOOD = 219016;
+    S_PHARMACY_MERGE_FOOD = 219017;
+    S_PHARMACY_SERVE_FOOD = 219018;
+    S_PHARMACY_HISTORY_MATCH = 219019;
+    S_PHARMACY_MATCH_RANK = 219020;
+    S_PHARMACY_MATCH_REWARD = 219021;
+    S_PHARMACY_WORSHIP = 219022;
+    S_PHARMACY_LEAVE_MATCH = 219023;
+    S_PHARMACY2_GET_DISH_TABLE = 219030;
+    S_PHARMACY2_GET_TABLE_USER = 219031;
+    S_PHARMACY2_PICK_DISH = 219032;
+    S_PHARMACY2_SERVE_DISH = 219033;
+    S_PHARMACY2_JOIN_TABLE = 219034;
+    S_PHARMACY2_GET_TABLE_INFO = 219035;
+    S_PHARMACY2_MERGE_DISH = 219036;
+    S_PHARMACY2_SYNC_DISH_TABLE = 219037;
+    S_PHARMACY2_GET_JOIN_RECORD = 219038;
+    S_PHARMACY2_SEARCH_ONE = 219039;
+    S_PHARMACY2_SEARCH_REQ = 219040;
+    S_PHARMACY2_USER_TABLE_INFO_REQ = 219041;
+    S_PHARMACY2_GET_CAN_JOIN_USER = 219042;
+    S_PHARMACY2_FORBID_SPOON = 219043;
+    S_PHARMACY2_HORSE_NOTICE_SYNC = 219044;
+    S_PHARMACY2_USER_TABLE_INFO_SYNC = 219045;
+    S_PHARMACY3_GET_TABLE_USER = 219050;
+    S_PHARMACY3_OPEN_BANQUET = 219051;
+    S_PHARMACY3_JOIN_BANQUET = 219052;
+    S_PHARMACY3_DATA_SYNC = 219053;
+    S_PHARMACY3_BANQUET_REWARD_REQ = 219054;
+    S_PHARMACY3_GET_USER_BANQUET = 219055;
+    S_PHARMACY3_GET_BANQUET_MEMBER = 219056;
+    S_PHARMACY3_BANQUET_USER_DATA_SYNC = 219057;
+    S_PHARMACY3_OPEN_BANQUET_NOTICE_SYNC = 219058;
+    S_PHARMACY3_SYNC_TABLE_USER = 219059;
+    S_PHARMACY_GET_EAT_REWARD_REQ = 219060;
+    S_PHARMACY_GET_EAT_REWARD_DATA = 219061;
+    S_PHARMACY3_SYNC_END_TABLE = 219062;
+    S_PHARMACY3_COOKER_RED_POINT = 219006;
+    S_PHARMACY_ENTER_MATCH = 219024;
+    S_PHARMACY_RED_POINT_DATA = 219002;
+}
+message PharmacyConfigSync {
+    required int32 activityId = 1;
+    repeated PharmacyAlchemyMatchFoodConfig foodsConfig = 2;
+    repeated PharmacyActivityDishTemp dishsConfig = 3;
+    repeated PharmacyMatchTime timesConfig = 4;
+}
+message PharmacyAlchemyMatchFoodConfig{
+    required int32 cookingId = 1;
+    required int32 cookingOrder = 2;
+    required int32 unlockCondition = 3;
+    required int32 addScore = 4;
+}
+message PharmacyActivityDishTemp{
+    required int32 id = 1;
+    required int32 quality = 2;
+    required string menu = 3;
+    required int32 seat = 4;
+    optional int64 score = 5;
+    optional int32 weight = 6;
+}
+message PharmacyActivitySpoonTemp{
+    required int32 id = 1;
+    required int32 integral = 2;
+    required int32 sponsorIntegral = 3;
+}
+message PharmacyMatchTime {
+    required int32 timeId = 1;
+    required int32 beginDays = 2;
+    required int32 beginTime = 3;
+    required int32 durTime = 4;
+}
+message PharmacyPlayerData {
+    optional PharmacySelfTableSyncMsg selfTable = 1;
+    optional Pharmacy2SelfDishSyncMsg selfDish = 2;
+    optional Pharmacy3SelfDataSyncMsg selfData = 3;
+}
+message PharmacyFinishFoodTempMsg {
+    required int32  id = 1;
+    required int32  foodId = 2;
+    required int32  fraction = 3;
+    required int32  status = 4;
+    required int32  no = 5;
+    required int32  rank = 6;
+    required int32  time = 7;
+}
+message PharmacyFoodTempMsg {
+    required int32  pos =1;
+    required int32  level =2;
+    required int32  fraction =3;
+}
+message PharmacySelfTableSyncMsg {
+    required int32  activityId =1;
+    required int64  integral =2;
+    required int32  foodId =3;
+    required int32  hp =4;
+    required int64  hpTime =5;
+    required bool  isWorship =6;
+    repeated PharmacyFoodTempMsg  foodList = 7;
+    repeated PharmacyFinishFoodTempMsg  finishFoodList =8;
+}
+message PharmacyPublicFoodTempMsg {
+    required int32  pos =1;
+    required int32  foodId =2;
+    required int32  fraction =3;
+    required int64  userId = 4;
+    required PlayerBaseDataMsg userInfo = 5;
+}
+message PharmacyPublicTableTempMsg {
+    optional int32  activityId =1;
+    optional int32  no = 2;
+    optional int32  startTime =3;
+    repeated PharmacyPublicFoodTempMsg  foodList =4;
+}
+message PharmacyHistoryMatchTempMsg {
+    required int32  no = 1;
+    required int64  userId = 2;
+    required int32  foodId = 3;
+    required PlayerBaseDataMsg userInfo = 4;
+    optional int32 myRank = 5;
+}
+message PharmacyMatchRankTempMsg {
+    required int32  rank = 1;
+    required int64  userId = 2;
+    required int64  topScore = 3;
+    required PlayerBaseDataMsg userInfo = 4;
+    repeated PharmacyFinishFoodTempMsg foodList = 5;
+    optional int64 lastUpdateTime = 6;
+}
+message PharmacyMatchRewardRankTempMsg {
+    required int64 userId = 1;
+    required int32 rank = 2;
+    required PlayerBaseDataMsg userInfo = 3;
+    repeated PharmacyFinishFoodTempMsg foodList = 4;
+}
+message PharmacyTableReqMsg {
+    required int32 activityId = 1;
+}
+message PharmacyTableRespMsg {
+    required int32 ret = 1;
+    optional PharmacySelfTableSyncMsg selfTable = 2;
+}
+message PharmacyServeTableReqMsg {
+    required int32 activityId = 1;
+}
+message PharmacyServeTableRespMsg {
+    required int32 ret = 1;
+    repeated PharmacyPublicTableTempMsg tableList = 2;
+}
+message PharmacyPublicTableSyncMsg {
+    repeated PharmacyPublicTableTempMsg tableList = 1;
+}
+message PharmacyMakeFoodReqMsg {
+    required int32 activityId = 1;
+    required int32 times = 2;
+}
+message PharmacyMakeFoodRespMsg {
+    required int32 ret =1;
+    repeated PharmacyFoodTempMsg  foodList =2;
+    optional PharmacySelfTableSyncMsg selfTable = 3;
+    optional int32  hp =4;
+    optional int64  hpTime =5;
+}
+message PharmacyMergeFoodReqMsg {
+    required int32 activityId = 1;
+}
+message PharmacyMergeFoodRespMsg {
+    required int32 ret =1;
+    optional int64 score =2;
+    optional PharmacyFinishFoodTempMsg finishFood = 3;
+    optional PharmacySelfTableSyncMsg selfTable = 4;
+}
+message PharmacyServeFoodReqMsg {
+    required int32 activityId = 1;
+    required int32 no = 2;
+    required int32 id = 3;
+}
+message PharmacyServeFoodRespMsg {
+    required int32 ret =1;
+    optional PharmacySelfTableSyncMsg selfTable = 2;
+    repeated PharmacyPublicTableTempMsg tableList = 3;
+}
+message PharmacyHistoryMatchReqMsg {
+    required int32 activityId = 1;
+}
+message PharmacyHistoryMatchRespMsg {
+    required int32 ret =1;
+    repeated PharmacyHistoryMatchTempMsg historyList = 2;
+}
+message PharmacyMatchRankReqMsg {
+    required int32 activityId = 1;
+    required int32 no = 2;
+}
+message PharmacyMatchRankRespMsg {
+    required int32 ret =1;
+    repeated PharmacyMatchRankTempMsg rankList = 2;
+}
+message PharmacyMatchRewardReqMsg {
+    required int32 activityId = 1;
+    required int32 no = 2;
+}
+message PharmacyMatchRewardRespMsg {
+    required int32 ret =1;
+    optional int32 no = 2;
+    optional int32 rank = 3;
+    optional int32 dishNum = 4;
+    optional int32 topScore = 5;
+    optional string reward = 6;
+    repeated PharmacyMatchRewardRankTempMsg cookerList = 7;
+}
+message PharmacyWorshipReqMsg {
+    required int32 activityId = 1;
+    optional int32 type = 2;
+}
+message PharmacyWorshipRespMsg {
+    required int32 ret = 1;
+    optional string reward = 2;
+}
+message PharmacyUpdateMyRankReqMsg {
+    required int32 activityId =1;
+    optional int32 type =2;
+}
+message PharmacyUpdateMyRankRespMsg {
+    required int32 ret =1;
+    optional int32 myRank =2;
+    optional RankTempMsg rankInfo = 3;
+}
+message PharmacyRankList {
+    repeated PharmacyRankMsg rankInfo = 1;
+}
+message PharmacyRankMsg {
+    required int64 rankId = 1;
+    required PlayerCharacterImageMsg playerBaseData = 2;
+    required string value = 3;
+    required int32 rank = 4;
+}
+message PharmacyEnterStageReq {
+    required int32 activityId =1;
+    required int32 type = 2;
+}
+message PharmacyEnterStageResp {
+    required int32 ret =1;
+    repeated int64 serverId = 2;
+    repeated int64 noAbleServer = 3;
+}
+message PharmacyLeaveMatchReq {
+    required int32 activityId =1;
+}
+message PharmacyLeaveMatchResp {
+    required int32 ret =1;
+}
+message PharmacyEnterReq{
+    required int32 activityId =1;
+    optional int64 openBanquetUserId = 2;
+}
+message PharmacyEnterResp{
+    required int32 ret = 1;
+}
+message PharmacyLeaveReq{
+    required int32 activityId =1;
+    optional int64 openBanquetUserId = 2;
+    optional int32 type = 3;
+}
+message PharmacyLeaveResp{
+    required int32 ret = 1;
+}
+message Pharmacy2SelfDishReqMsg {
+    required int32 activityId = 1;
+}
+message Pharmacy2SelfDishRespMsg {
+    required int32  ret = 1;
+    optional Pharmacy2SelfDishSyncMsg selfDish = 2;
+}
+message Pharmacy2CookerReqMsg {
+    required int32 activityId = 1;
+    optional int64 targetServerId =2;
+}
+message Pharmacy2CookerRespMsg {
+    required int32 ret =1;
+    repeated Pharmacy2CookerTempMsg  cookerList =2;
+    optional int32 activityId = 3;
+}
+message Pharmacy2MakeDishReqMsg {
+    required int32 activityId = 1;
+    required int32 times = 2;
+}
+message Pharmacy2MakeDishRespMsg {
+    required int32 ret =1;
+    optional Pharmacy2SelfDishSyncMsg selfDish = 2;
+    repeated Pharmacy2DishTempMsg dish = 3;
+}
+message Pharmacy2MergeDishReqMsg {
+    required int32 activityId = 1;
+}
+message Pharmacy2MergeDishRespMsg {
+    required int32 ret =1;
+    optional Pharmacy2DishTempMsg  dish =2;
+}
+message Pharmacy2OpenTableReqMsg {
+    required int32 activityId = 1;
+    repeated int32 dishId = 2;
+}
+message Pharmacy2OpenTableRespMsg {
+    required int32 ret =1;
+    optional int32 activityId =2;
+    repeated CrossPharmacy2FoodTableIdMsg foodList = 3;
+}
+message CrossPharmacy2FoodTableIdMsg {
+    required int32 userDishId = 1;
+    required int32 tableId =2;
+}
+message Pharmacy2JoinTableReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    required int32 tableId = 3;
+    required int32 spoonId = 4;
+    optional int32 otherActivityId = 5;
+    optional bool oneKey = 6;
+}
+message Pharmacy2JoinTableRespMsg {
+    required int32 ret =1;
+    optional string reward =2;
+    repeated int32 forbidSpoonId = 3;
+    optional int32 useNum = 4;
+}
+message Pharmacy2CanJoinUserReqMsg {
+    required int32 activityId = 1;
+    required int64 homeUserId = 2;
+    optional int32 otherActivityId = 3;
+    optional bool isNextFriend = 4;
+}
+message Pharmacy2CanJoinUserRespMsg {
+    required int32 ret = 1;
+    optional Pharmacy2CookerTempMsg userInfo = 2;
+}
+message Pharmacy2UserIdTableReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    optional int32 page = 3;
+    optional int32 num = 4;
+}
+message Pharmacy2UserIdTableRespMsg {
+    required int32 ret = 1;
+    optional int64 integral = 2;
+    optional int32 rank = 3;
+    optional int32 dishNum = 4;
+    repeated Pharmacy2TableTempMsg tableList = 5;
+    repeated int32 forbidSpoonId = 6;
+    repeated Pharmacy2TableTempMsg historyTableList = 7;
+}
+message Pharmacy2UserIdTableSyncMsg {
+    optional int64 integral = 1;
+    optional int32 rank = 2;
+    optional int32 dishNum = 3;
+    repeated Pharmacy2TableTempMsg tableList = 4;
+    repeated int32 forbidSpoonId = 5;
+    optional int64 playerId = 6;
+}
+message Pharmacy2UserTableInfoReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    required int32 tableId = 3;
+}
+message Pharmacy2UserTableInfoRespMsg {
+    required int32 ret = 1;
+    optional Pharmacy2TableTempMsg table = 2;
+}
+message Pharmacy2RecordReqMsg{
+    required int32 activityId = 1;
+}
+message BanquetRelationshipTemp {
+    required int64 userId = 1;
+    repeated Pharmacy2TasteDataMsg to = 2;
+    repeated Pharmacy2TasteDataMsg from = 3;
+    optional bool banquetId = 4;
+    optional PlayerBaseDataMsg playerBaseData = 5;
+}
+message Pharmacy2RecordRespMsg {
+    required int32 ret = 1;
+    repeated BanquetRelationshipTemp recordList = 2;
+}
+message Pharmacy2SearchTempMsg{
+    optional int64 userId = 1;
+    optional int32 eatNum = 2;
+    optional PlayerBaseDataMsg userInfo = 3;
+    repeated Pharmacy2TasteDataMsg to = 4;
+    repeated Pharmacy2TasteDataMsg from = 5;
+}
+message Pharmacy2TasteDataMsg{
+    optional int32 itemId = 1;
+    optional int32 times = 2;
+}
+message Pharmacy2SearchReqMsg{
+    required int32 activityId = 1;
+}
+message Pharmacy2SearchRespMsg {
+    required int32 ret = 1;
+    repeated Pharmacy2SearchTempMsg marryList = 2;
+    repeated Pharmacy2SearchTempMsg unionList = 3;
+}
+message Pharmacy2SearchOneReqMsg{
+    required int32 activityId = 1;
+    required string searchId = 2;
+    optional int64 serverId  =3;
+}
+message Pharmacy2SearchOneRespMsg {
+    required int32 ret = 1;
+    optional Pharmacy2SearchTempMsg searchData = 2;
+}
+message Pharmacy2ForbidSpoonReqMsg{
+    required int32 activityId = 1;
+    repeated int32 spoonId = 2;
+}
+message Pharmacy2ForbidSpoonRespMsg {
+    required int32 ret = 1;
+}
+message Pharmacy2horseRaceLampTempMsg{
+    required int64 userId = 1;
+    required int32 dishId = 2;
+    required PlayerBaseDataMsg userInfo = 3;
+}
+message Pharmacy2horseRaceLampSyncMsg {
+    repeated Pharmacy2horseRaceLampTempMsg noticeList = 1;
+}
+message Pharmacy2SelfDishSyncMsg {
+    optional int32  join = 1;
+    optional int32  dishId = 2;
+    optional int32  pickTimes = 3;
+    optional int64  integral = 4;
+    optional int32  hp = 5;
+    optional int32  hpTime = 6;
+    optional bool  isWorship = 7;
+    optional string reward = 8;
+    repeated Pharmacy2DishTempMsg  dishList = 9;
+}
+message Pharmacy2DishTempMsg {
+    required int32  id = 1;
+    required int32  dishId = 2;
+    required int32  status = 3;
+    required int64  integral = 4;
+    required int32  tableId = 5;
+}
+message Pharmacy2TableTempMsg {
+    required int32  tableId =1;
+    required int32  id =2;
+    required int32  dishId =3;
+    required int32  openTime =4;
+    required int32  overTime =5;
+    repeated Pharmacy2TableJoinerTempMsg joinerList = 6;
+}
+message Pharmacy2TableJoinerTempMsg {
+    required int64  serverId =1;
+    required int64  userId =2;
+    required bool  isRobot =3;
+    required int64  integral =4;
+    required int64  spoonId =5;
+    optional PlayerBaseDataMsg userInfo = 6;
+}
+message Pharmacy2CookerTempMsg {
+    required int64  serverId =1;
+    required int64  userId = 2;
+    required bool  canEat = 3;
+    required PlayerBaseDataMsg userInfo = 4;
+    optional int32 rank = 5;
+    optional int32 activityId = 6;
+}
+message Pharmacy3SelfDataSyncMsg {
+    required int32 activityId = 1;
+    required int32  join = 2;
+    required int64  integral = 3;
+    required bool  isWorship = 4;
+}
+message Pharmacy3OpenBanquetReqMsg {
+    required int32 activityId = 1;
+    required int32 itemId = 2;
+}
+message Pharmacy3OpenBanquetRespMsg {
+    required int32 ret = 1;
+    optional int32 banquetId = 2;
+}
+message Pharmacy3JoinBanquetReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    required int32 banquetId = 3;
+}
+message Pharmacy3JoinBanquetRespMsg {
+    required int32 ret = 1;
+    optional string reward = 2;
+    repeated Pharmacy3BanquetJoinSize joinSize = 3;
+}
+message Pharmacy3BanquetJoinSize {
+    required int32 banquetId = 1;
+    required int64 joinSize = 2;
+}
+message Pharmacy3BanquetJoinerReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    required int32 banquetId = 3;
+    required int32 page = 4;
+    required int32 num = 5;
+}
+message Pharmacy3BanquetJoinerTempMsg {
+    required int64 userId = 1;
+    required int32 pos = 2;
+    required PlayerBaseDataMsg userInfo = 3;
+}
+message Pharmacy3BanquetJoinerRespMsg {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional int64 homeUserId = 3;
+    optional int32 banquetId = 4;
+    optional int32 userCount = 5;
+    repeated Pharmacy3BanquetJoinerTempMsg joinerList = 6;
+}
+message Pharmacy3GetUserBanquetReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+    optional bool isSync = 3;
+}
+message Pharmacy3BanquetTempMsg {
+    required int32 banquetId = 1;
+    required int32 openItemId = 2;
+    required int32 openTime = 3;
+    required int32 userCount = 4;
+    required int64 integral = 5;
+    required bool selfJoin = 6;
+}
+message Pharmacy3ConditionMsg{
+    optional int32 conditionId = 1;
+    optional bool isGetReward = 2;
+}
+message Pharmacy3GetEatRewardReqMsg {
+    required int32 activityId = 1;
+    required int32 targetPlayerId = 2;
+    optional int32 conditionId = 3;
+}
+message Pharmacy3GetEatRewardRespMsg {
+    required int32 ret = 1;
+    optional string reward = 2;
+}
+message Pharmacy3GetEatConditionReqMsg {
+    required int32 activityId = 1;
+    required int64 targetPlayerId = 2;
+}
+message Pharmacy3GetEatConditionRespMsg {
+    required int32 ret = 1;
+    optional int32 eatNum = 2;
+    repeated Pharmacy3ConditionMsg condition = 3;
+}
+message Pharmacy3GetUserBanquetRespMsg {
+    required int32 ret = 1;
+    repeated Pharmacy3BanquetTempMsg banquetList = 2;
+    optional int32 heartTime = 3;
+}
+message Pharmacy3CookerReqMsg {
+    required int32 activityId = 1;
+    required int64 userId = 2;
+}
+message Pharmacy3CookerTempMsg {
+    required int32  rank = 1;
+    required int64  userId = 2;
+    required int32 openItemId = 3;
+    required int32  banquetId = 4;
+    required int32  openTime = 5;
+    required bool  canEat = 6;
+    required int32  userNum = 7;
+    required int32  banquetCount = 8;
+    optional PlayerBaseDataMsg userInfo = 9;
+}
+message Pharmacy3CookerRedReqMsg {
+    required int32 activityId = 1;
+}
+message Pharmacy3CookerRedRespMsg {
+    optional int32 ret = 1;
+    repeated Pharmacy3CookerRedTempMsg cookerList = 2;
+}
+message Pharmacy3CookerRedTempMsg{
+    optional int64  userId = 1;
+    optional int32 openItemId = 2;
+    optional int32  openTime = 3;
+    optional bool  canEat = 4;
+    optional int32 banquetCount = 5;
+}
+message Pharmacy3CookerRespMsg {
+    required int32 ret =1;
+    repeated Pharmacy3CookerTempMsg  cookerList =2;
+}
+message Pharmacy3CookerSyncMsg {
+    repeated Pharmacy3CookerTempMsg  cookerList =1;
+}
+message Pharmacy3BanquetRewardReqMsg {
+    required int32 activityId = 1;
+    required int32 banquetId = 2;
+}
+message Pharmacy3BanquetRewardRespMsg {
+    required int32 ret =1;
+    optional int32 banquetId = 2;
+    optional int32 userCount = 3;
+    optional int64 integral = 4;
+    optional int32 itemId = 5;
+}
+message Pharmacy3EndTableMsg{
+    optional int32 activityId = 1;
+    optional int32 banquetId = 2;
+    optional int32 openItemId =3;
+}
+message PharmacyEnterMatchReq {
+    required int32 activityId =1;
+    optional int32 type = 2 ;
+    optional int64 openPlayerId = 3;
+}
+message PharmacyEnterMatchResp {
+    required int32 ret =1;
+    optional int32 heartTime =2;
+}
+message PharmacyRedDotReqMsg {
+    required int32 activityId = 1;
+}
+message PharmacyRedDotRespMsg {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional string data = 3;
+}

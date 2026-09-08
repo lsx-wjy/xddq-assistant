@@ -24,8 +24,8 @@ package com.yq.msg.CityMsg;
     }
     message LuckyDrawActivityDataMsg {
         repeated LimitRewardTimes limitRewardTimes = 1;
-        optional int32 addUpDrawTimes = 2; 
-        optional int32 protectDrawTimes = 3; 
+        optional int32 addUpDrawTimes = 2;
+        optional int32 protectDrawTimes = 3;
     }
     message LimitRewardTimes {
         required int32 id = 1;

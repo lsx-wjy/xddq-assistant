@@ -1,0 +1,66 @@
+package com.yq.msg.CityMsg;
+enum LuckyWheelPb{
+  luckyWheelEnter = 230301;
+  luckyWheelDraw = 230302;
+  luckyWheelSyncNotice = 230303;
+  luckyWheelChooseTheme = 230306;
+}
+message LuckyWheelActivityConfig {
+  repeated LuckyWheelConfig luckWheelConfig = 1;
+  repeated LuckyWheelParamConfig paramConfig = 2;
+}
+message LuckyWheelConfig {
+  optional int32 id = 1;
+  optional int32 num = 2;
+  optional int32 rate = 3;
+  optional int32 weight = 4;
+  optional int32 rank = 5;
+  optional int32 isNotice = 6;
+  optional int32 icon = 7;
+  optional string reward = 8;
+  optional int32 theme = 9;
+}
+message LuckyWheelParamConfig {
+  optional int32 theme = 1;
+  optional int32 badLuckProtect = 2;
+  optional string wheelLimit = 3;
+  optional string wheelCost = 4;
+  optional int32 showIcon = 5;
+}
+message LuckyWheelEnterReq {
+  required int32 activityId = 1;
+}
+message LuckyWheelEnterResp {
+  required int32 ret = 1;
+  optional int32 totalDrawTimes = 2;
+  repeated LuckyWheelNoticeMsg noticeMsg = 3;
+  optional int32 protectDrawTimes = 4;
+  optional int32 theme = 5;
+}
+message LuckyWheelNoticeMsg{
+  optional string nickName = 1;
+  optional int32 cost = 2;
+  optional int32 beiLv = 3;
+  optional int32 wheelId = 4;
+}
+message LuckyWheelDrawReq {
+  required int32 activityId = 1;
+}
+message LuckyWheelDrawResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 totalDrawTimes = 3;
+  optional int32 protectDrawTimes = 4;
+  optional int32 id = 5;
+}
+message LuckyWheelSyncData {
+  optional LuckyWheelNoticeMsg noticeMsg = 1;
+}
+message LuckyWheelChooseThemeReq {
+  required int32 activityId = 1;
+  required int32 theme = 2;
+}
+message LuckyWheelChooseThemeResp {
+  required int32 ret = 1;
+  optional int32 theme = 2;
+}

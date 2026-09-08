@@ -2,3 +2,10 @@ package com.yq.msg.CityMsg;
 message SystemShieldSync {
     repeated int32 shieldList = 1;
 }
+message SubsystemShieldSync{
+    repeated SubsystemInfo subsystemInfo = 1;
+}
+message SubsystemInfo {
+    required int32 systemId = 1;
+    required int32 subsystemId = 2;
+}

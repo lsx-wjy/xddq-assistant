@@ -1,0 +1,286 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum FateTreasurePb {
+    FateTreasureEnter = 231801;
+    FateTreasureChooseType = 231802;
+    FateTreasureAddCastMaterial = 231803;
+    FateTreasureMake = 231804;
+    FateTreasureUpgrade = 231805;
+    FateTreasurePosUpgrade =  231806;
+    FateTreasureInscriptionOn  = 231807;
+    FateTreasureInscriptionRefresh = 231808;
+    FateTreasureInscriptionRefreshConfirm = 231809;
+    FateTreasureInscriptionDecompose = 231810;
+    FateTreasureBagExpand = 231811;
+    FateTreasureInscriptionExtend  = 231812;
+    FateTreasureInscriptionLock = 231813;
+    FateTreasureBagSync = 231814;
+    FateTreasureCombineUp = 231815;
+    FateTreasureSkinSwitch  = 231816;
+    FateTreasureResetDataSync = 231817;
+    FateTreasureInscriptionCollectReward = 231818;
+    FateTreasureSkinStar = 231819;
+    FateTreasureInscriptionTemplateUse = 231821;
+    FateTreasureInscriptionGetPower = 231822;
+    FateTreasureInscriptionTemplateSet = 231823;
+    FateTreasureInscriptionTemplateDel = 231824;
+    FateTreasureInscriptionTemplateRename = 231825;
+    FateTreasureInscriptionNewRedCancel = 231826;
+}
+message FateTreasurePartDataMsg {
+    required int32 partId = 1;
+    required int32 level = 2;
+    optional FateTreasureInscriptionDataMsg inscription = 3;
+}
+message FateTreasureInscriptionDataMsg {
+    required int32 inscriptionId = 1;
+    required int32 configId = 2;
+    repeated FateTreasureInscriptionAttrMsg attributeList = 3;
+    required int32 stat = 4;
+    optional string powerValue = 5;
+    optional int32 mainAttr = 6;
+    required int32 isCheck = 7;
+    optional int32 showStar = 8;
+}
+message FateTreasureInscriptionPowerMsg {
+    optional int32 inscriptionId = 1;
+    optional string powerValue = 2;
+}
+message FateTreasureInscriptionAttrMsg {
+    required int32 id = 1;
+    required AttributeDataMsg attr = 2;
+    optional AttributeDataMsg tempAttr = 3;
+    required bool refresh = 4;
+    optional int32 quality = 5;
+    optional int32 tempQuality = 6;
+}
+message FateTreasureInscriptionCollectMsg {
+    required int32 inscriptionId = 1;
+    required int32 count = 2;
+    optional bool reward = 3;
+}
+message FateTreasureInscriptionCombineMsg {
+    required int32 combineId = 1;
+    required int32 lv = 2;
+}
+message FateTreasureSkinDataMsg {
+    required int32 skinId = 1;
+    required int32 star = 2;
+}
+message FateTreasureMsg{
+    optional int32 type = 1;
+    optional int32 rank = 2;
+    optional int32 level = 3;
+    optional int32 skin = 4;
+    repeated FateTreasurePartDataMsg partList = 5;
+    repeated AttributeDataMsg attrList = 6;
+    optional int32 effectSuit = 7;
+}
+message FateTreasureInscriptionTemplateMsg {
+    optional int32 templateId = 1;
+    repeated int32 inscriptionIds = 2;
+    optional string name = 3;
+}
+message FateTreasureWearMsg {
+    optional int64 godBodyId = 1;
+    repeated int32 inscriptionIds = 2;
+    optional int32 templateId = 3;
+}
+message FateTreasureEnterInfoMsg {
+    optional int32 type = 2;
+    optional int32 rank = 3;
+    optional int32 level = 4;
+    optional int32 skin = 5;
+    optional int32 bagExpandCount = 6;
+    repeated FateTreasurePartDataMsg partList = 7;
+    repeated FateTreasureInscriptionDataMsg inscriptionList = 8;
+    repeated FateTreasureInscriptionCollectMsg collectMsg = 9;
+    repeated FateTreasureInscriptionCombineMsg combineMsg = 10;
+    repeated FateTreasureSkinDataMsg skinList = 11;
+    repeated AttributeDataMsg attrList = 12;
+    optional int32 changeTypeCount = 13;
+    optional int32 chooseSuit = 14;
+    repeated FateTreasureInscriptionTemplateMsg templateList = 15;
+    repeated FateTreasureWearMsg wearList = 16;
+    optional bool newRed = 17;
+}
+message FateTreasureEnterReq {
+}
+message FateTreasureEnterResp {
+    required int32 ret = 1;
+    optional FateTreasureEnterInfoMsg info = 2;
+}
+message FateTreasureChooseTypeReq {
+    required int32 type = 1;
+}
+message FateTreasureChooseTypeResp {
+    required int32 ret = 1;
+    optional int32 type = 2;
+    optional int32 skin = 3;
+    optional int32 changeTypeCount = 4;
+}
+message FateTreasureAddCastMaterialReq {
+    required int32 materialId = 1;
+}
+message FateTreasureAddCastMaterialResp {
+    optional int32 ret = 1;
+    repeated int32 materialList = 2;
+}
+message FateTreasureMakeReq {
+}
+message FateTreasureMakeResp {
+    required int32 ret = 1;
+    optional FateTreasureEnterInfoMsg info = 2;
+}
+message FateTreasureUpgradeReq {}
+message FateTreasureUpgradeResp {
+    required int32 ret = 1;
+    optional int32 rank = 2;
+    optional int32 lv = 3;
+    repeated AttributeDataMsg attrList = 4;
+}
+message FateTreasurePartUpgradeReq {
+    required int32 partId = 1;
+}
+message FateTreasurePartUpgradeResp {
+    required int32 ret = 1;
+    repeated FateTreasurePartDataMsg dataList = 2;
+}
+message FateTreasureInscriptionOnReq {
+    required int32 inscriptionId = 1;
+    optional int32 chooseSuit = 2;
+}
+message FateTreasureInscriptionOnResp {
+    required int32 ret = 1;
+    optional int32 posId = 2;
+    optional int32 inscriptionId = 3;
+    optional int32 chooseSuit = 4;
+}
+message FateTreasureInscriptionRefreshReq {
+    required int32 inscriptionId = 1;
+    repeated int32 attrIndex = 2;
+}
+message FateTreasureInscriptionRefreshResp {
+    required int32 ret = 1;
+    optional FateTreasureInscriptionDataMsg inscription = 2;
+}
+message FateTreasureInscriptionRefreshConfirmReq {
+    required int32 inscriptionId = 1;
+}
+message FateTreasureInscriptionRefreshConfirmResp {
+    required int32 ret = 1;
+    optional FateTreasureInscriptionDataMsg inscription = 2;
+}
+message FateTreasureInscriptionDecomposeReq {
+    repeated int32 inscriptionId = 1;
+}
+message FateTreasureInscriptionDecomposeResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+}
+message FateTreasureBagExpandReq {
+}
+message FateTreasureBagExpandResp {
+    required int32 ret = 1;
+    optional int32 bagExpandCount = 2;
+}
+message FateTreasureInscriptionExtendReq {
+    required int32 inscriptionId = 1;
+    required int32 toInscriptionId = 2;
+    repeated int32 chooseIndex = 3;
+}
+message FateTreasureInscriptionExtendResp {
+    required int32 ret = 1;
+    optional FateTreasureInscriptionDataMsg inscription = 2;
+    optional FateTreasureInscriptionDataMsg oldInscription = 3;
+}
+message InscriptionLockReq {
+    required int32 inscriptionId = 1;
+    required int32 stat = 2;
+    optional int32 type = 3;
+}
+message InscriptionLockResp {
+    required int32 ret = 1;
+    optional FateTreasureInscriptionDataMsg inscription = 2;
+}
+message FateTreasureBagSyncMsg {
+    repeated FateTreasureInscriptionDataMsg addInscriptionList = 1;
+    repeated int32 removeInscriptionList = 2;
+    repeated FateTreasureInscriptionCollectMsg collectMsg = 3;
+}
+message FateTreasureCombineUpReq {
+    required int32 combineId = 1;
+}
+message FateTreasureCombineUpResp {
+    required int32 ret = 1;
+    optional FateTreasureInscriptionCombineMsg combineMsg = 2;
+}
+message FateTreasureSkinSwitchReq {
+    required int32 skinId = 1;
+}
+message FateTreasureSkinSwitchResp {
+    required int32 ret = 1;
+    optional int32 skin = 2;
+}
+message FateTreasureDailyResetSyncMsg {
+    required int32 changeTypeCount = 1;
+}
+message FateTreasureInscriptionCollectRewardReq {
+    repeated int32 inscriptionId = 1;
+}
+message FateTreasureInscriptionCollectRewardResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    repeated FateTreasureInscriptionCollectMsg collectMsg = 3;
+}
+message FateTreasureSkinStarReq {
+    required int32 skinId = 1;
+}
+message FateTreasureSkinStarResp {
+    required int32 ret = 1;
+    optional FateTreasureSkinDataMsg skin = 2;
+}
+message FateTreasureInscriptionTemplateSetReq {
+    required int32 templateId = 1;
+}
+message FateTreasureInscriptionTemplateSetResp {
+    required int32 ret = 1;
+    optional int32 templateId = 2;
+    repeated int32 inscriptionIdList = 3;
+}
+message FateTreasureInscriptionTemplateUseReq {
+    required int32 templateId = 1;
+    required int32 godBodyId = 2;
+}
+message FateTreasureInscriptionTemplateUseResp {
+    required int32 ret = 1;
+    optional int32 godBodyId = 2;
+    optional int32 chooseSuit = 3;
+    repeated FateTreasurePartDataMsg partList = 4;
+}
+message FateTreasureInscriptionGetPowerReq {
+    repeated int32 inscriptionId = 1;
+}
+message FateTreasureInscriptionGetPowerResp {
+    required int32 ret = 1;
+    repeated FateTreasureInscriptionPowerMsg powerList = 2;
+}
+message FateTreasureInscriptionTemplateDelReq {
+    required int32 templateId = 1;
+}
+message FateTreasureInscriptionTemplateDelResp {
+    required int32 ret = 1;
+}
+message FateTreasureInscriptionTemplateRenameReq {
+    required int32 templateId = 1;
+    required string name = 2;
+}
+message FateTreasureInscriptionTemplateRenameResp {
+    required int32 ret = 1;
+    optional int32 templateId = 2;
+    optional string name = 3;
+}
+message FateTreasureInscriptionCancelNewReq {}
+message FateTreasureInscriptionCancelNewResp {
+    required int32 ret = 1;
+}

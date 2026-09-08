@@ -1,0 +1,778 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Rank";
+import "Bag";
+enum ElementalBondsPb {
+  ELEMENTAL_BONDS_MATCH = 218201;
+  ELEMENTAL_BONDS_CANCEL_MATCH = 218202;
+  ELEMENTAL_BONDS_PING = 218203;
+  ELEMENTAL_BONDS_MATCH_RESULT = 218204;
+  ELEMENTAL_BONDS_GET_ROOM_DATA = 218205;
+  ELEMENTAL_BONDS_SURRENDER = 218206;
+  ELEMENTAL_BONDS_NOTICE = 218207;
+  ELEMENTAL_BONDS_OPERATE = 218208;
+  ELEMENTAL_BONDS_SYNC_USER_DATA = 218209;
+  ELEMENTAL_BONDS_SYNC_CONFIG = 218210;
+  ELEMENTAL_BONDS_GET_USER_DATA = 218211;
+  ELEMENTAL_BONDS_CLIENT_SHOW_FINISH = 218212;
+  ELEMENTAL_BONDS_GET_PLAYING_GAME = 218213;
+  ELEMENTAL_BONDS_QUIT_GUIDE = 218214;
+  ELEMENTAL_BONDS_GET_BATTLE_RECORD = 218215;
+  ELEMENTAL_BONDS_OPEN_BOX = 218216;
+  ELEMENTAL_BONDS_GET_GAME_OVER = 218217;
+  ELEMENTAL_BONDS_SYNC_HONOR_MOMENT = 218218;
+  ELEMENTAL_BONDS_GET_BADGE = 218219;
+  ELEMENTAL_BONDS_SEE_GAME_OVER = 218221;
+  ELEMENTAL_BONDS_SEE_OTHER_USER_DATA = 218222;
+  ELEMENTAL_BONDS_FRIEND_CREATE_ROOM = 218223;
+  ELEMENTAL_BONDS_FRIEND_LEAVE_ROOM = 218224;
+  ELEMENTAL_BONDS_FRIEND_SEARCH_ROOM = 218225;
+  ELEMENTAL_BONDS_FRIEND_JOIN_ROOM = 218226;
+  ELEMENTAL_BONDS_FRIEND_SYNC_ROOM = 218227;
+  ELEMENTAL_BONDS_FRIEND_START_GAME = 218228;
+  ELEMENTAL_BONDS_FRIEND_STEP_OUT = 218229;
+  ELEMENTAL_BONDS_FRIEND_ENTER_MY_ROOM = 218230;
+  ELEMENTAL_BONDS_SEASON_0_SHOW = 218231;
+  ELEMENTAL_BONDS_SEASON_CHANGE = 218232;
+  ELEMENTAL_BONDS_SYNC_UNLOCK_CARD = 218233;
+  ELEMENTAL_BONDS_GET_HISTORY_CHAMPION = 218234;
+  ELEMENTAL_BONDS_SEASON_MEMORY = 218235;
+  ELEMENTAL_BONDS_FRIEND_QUICK_CHAT = 218240;
+  ELEMENTAL_BONDS_FRIEND_CHANGE_CARD = 218241;
+  ELEMENTAL_BONDS_FRIEND_READY = 218242;
+  ELEMENTAL_BONDS_FRIEND_CHANGE_SCENE = 218243;
+  ELEMENTAL_BONDS_SYNC_UNLOCK_SKILL = 218244;
+  ELEMENTAL_BONDS_BUY_SKILL = 218245;
+  ELEMENTAL_BONDS_SYNC_DECORATION = 218246;
+  ELEMENTAL_BONDS_CHANGE_DECORATION = 218247;
+  ELEMENTAL_BONDS_REFRESH_TASK = 218248;
+  ELEMENTAL_BONDS_GET_TASK_Data = 218249;
+  ELEMENTAL_BONDS_GET_TASK_REWARD = 218250;
+  ELEMENTAL_BONDS_GET_PRIVILEGE_CARD_REWARD = 218251;
+  ELEMENTAL_BONDS_BUY_PRIVILEGE_CARD_SYNC = 218252;
+  ELEMENTAL_BONDS_GET_ACHIEVEMENT_REWARD = 218253;
+  ELEMENTAL_BONDS_SYNC_RED_POINT_INFO = 218255;
+  ELEMENTAL_BONDS_CHECK = 218256;
+  ELEMENTAL_BONDS_REPLACE_EMOJI = 218257;
+  ELEMENTAL_BONDS_SYNC_GROUP = 218258;
+  ELEMENTAL_BONDS_SYNC_MATCH_STATE = 218259;
+  ELEMENTAL_BONDS_FRIEND_KICK = 218260;
+  ELEMENTAL_BONDS_LIMITTASK_SYNC = 218282;
+  ELEMENTAL_BONDS_MALL_SYNC = 218283;
+  ELEMENTAL_BONDS_GET_MATCH_STATUS = 218284;
+  ELEMENTAL_BONDS_OPEN_RANDOM_CARD_AUTO_BOX = 218285;
+  ELEMENTAL_BONDS_WATCH_AD_GIFT = 218286;
+  ELEMENTAL_BONDS_GET_MATCHING_STATUS = 218287;
+  ELEMENTAL_BONDS_GET_BATTLE_PASS_FU_HUN = 218288;
+  ELEMENTAL_BONDS_VERIFY = 218289;
+  ELEMENTAL_BONDS_CANCEL_MATCH_FROM_CROSS = 218261;
+  ELEMENTAL_BONDS_STATUS_FROM_CROSS = 218262;
+  ELEMENTAL_BONDS_NOTICE_FROM_CROSS = 218263;
+  ELEMENTAL_BONDS_SEE_OTHER_USER_DATA_FROM_CROSS = 218264;
+  ELEMENTAL_BONDS_GET_RANK_RECORD_FROM_CROSS = 218265;
+  ELEMENTAL_BONDS_SEND_EXPRESSION_FROM_CROSS = 218267;
+  ELEMENTAL_BONDS_SYNC_DAY_SCENE = 218268;
+  ELEMENTAL_BONDS_MATCH_RESULT_FROM_CROSS = 218269;
+  ELEMENTAL_BONDS_GET_SCORE_LADDER_INFO = 218270;
+  ELEMENTAL_BONDS_GET_STAGE_REWARD_FROM_CROSS = 218271;
+  ELEMENTAL_BONDS_GET_SCORE_LADDER_REWARD = 218272;
+  ELEMENTAL_BONDS_SYNC_SERVER_ROUND_FROM_CROSS = 218273;
+  ELEMENTAL_BONDS_REISSUE_REWARD_FROM_CROSS = 218274;
+  ELEMENTAL_BONDS_CHANGE_BADGE = 218275;
+  ELEMENTAL_BONDS_SYNC_GAME_STATUS_FROM_CROSS = 218276;
+  ELEMENTAL_BONDS_HANDLE_MATCH_NPC_FROM_CROSS = 218277;
+  ELEMENTAL_BONDS_SEE_OTHER_USER_DATA_TO_GAME = 218280;
+  ELEMENTAL_BONDS_SEE_OTHER_USER_DATA_BACK = 218281;
+}
+message ElementalBondsSkillPrice {
+  required int32 price = 1;
+  required int32 num = 2;
+}
+message ElementalBondsBoxDataMsg {
+  required int32 index = 1;
+  required int32 boxId = 2;
+  required int64 canOpenTime = 3;
+}
+message ElementalBondsUserDataMsg {
+  repeated int32 unlockCard = 1;
+  required int64 score = 2;
+  repeated int32 battlePass = 3;
+  required int32 dataSeason = 4;
+  required int32 buffCollectTimes = 5;
+  required bool guide = 6;
+  optional ElementalBondsGameOverMsg overMsg = 7;
+  repeated ElementalBondsMallMsg mall = 8;
+  optional bool guide2 = 9;
+  optional bool unlockSceneMode = 10;
+  repeated int32 todaySceneMode = 11;
+  optional int32 canSurrenderTimes = 12;
+  repeated int32 unlockSkill = 13;
+  repeated int32 selectedSkill = 14;
+  optional bool linkGuide = 15;
+  optional int32 useBoardSkin = 16;
+  optional int32 useAnimation = 17;
+  optional int32 useEffect = 18;
+  repeated int32 equipEmoji = 20;
+  optional bool inGroup = 21;
+  optional string systemOpenValue = 22;
+  optional int32 limitTaskId = 23;
+  repeated ElementalBondsPrivilegeCardMsg privilegeCardMsg = 24;
+  optional int64 limitTaskEndTime = 25;
+  optional ElementalBondsBadgeMsg cur = 26;
+  optional int64 prohibitMathTime = 27;
+  optional ElementalBondsVerifyInfo verifyInfo = 28;
+}
+message ElementalBondsPrivilegeCardMsg {
+  required int32 cardId = 1;
+  required int64 endTime = 2;
+  required int64 getRewardTime = 3;
+}
+message ElementalBondsOpponentMsg {
+  optional int64 score = 1;
+  optional int64 userId = 2;
+  optional PlayerBaseDataMsg playerInfo = 3;
+  optional int32 channelId = 4;
+  optional int64 serverId = 5;
+  optional ElementalBondsBadgeMsg badge = 6;
+  optional bool novice = 7;
+}
+message ElementalBondsRoomDataMsg {
+  required int32 modeId = 1;
+  optional int32 sceneId = 2;
+  optional ElementalBondsBoardMsg board = 3;
+  optional ElementalBondsOpponentMsg opponent = 4;
+  optional ElementalBondsUserGameDataMsg selfData = 5;
+  optional ElementalBondsUserGameDataMsg opponentData = 6;
+  optional int32 round = 7;
+  optional int64 expireTime = 8;
+  optional int32 turnSide = 9;
+  optional int64 showNo = 10;
+  optional int64 roomId = 11;
+  optional bool isGuide = 12;
+  optional int32 firstOperatePlayer = 13;
+}
+message ElementalBondsUserGameDataMsg {
+  required int32 side = 1;
+  required int64 score = 2;
+  required int32 step = 3;
+  required ElementalBondsUserCardMsg card = 4;
+  repeated ElementalBondsUserSkillMsg skill = 5;
+  optional int32 useBoardSkin = 6;
+  optional int32 useAnimation = 7;
+  optional int32 useEffect = 8;
+}
+message ElementalBondsUserCardMsg {
+  required int32 cardId = 1;
+  required int32 cardMp = 2;
+  required int32 cardMaxMp = 3;
+}
+message ElementalBondsUserSkillMsg {
+  required int32 skillId = 1;
+  required int32 leftTimes = 2;
+}
+message ElementalBondsGameOverMsg {
+  required ElementalBondsRoomDataMsg roomData = 1;
+  required bool win = 2;
+  required int32 endType = 3;
+  optional int64 scoreChange = 4;
+  optional int32 costCardId = 6;
+  optional int32 multiBuff = 7;
+  optional bool useSafeCard = 8;
+  optional int64 costTime = 9;
+  repeated ElementalBondsHonorMomentMsg honorMoment = 10;
+  optional int32 winTimes = 11;
+  optional int32 battleResult = 12;
+  optional int32 modeId = 13;
+  optional int32 fuhun = 14;
+  optional int32 limitTimeItem = 15;
+  optional string reward = 16;
+  optional int64 scoreDiff = 17;
+  optional int32 opponentCardDiff = 18;
+  optional bool guide = 19;
+  optional int32 returnCardId = 20;
+}
+message ElementalBondsBlockMsg {
+  required int32 x = 1;
+  required int32 y = 2;
+  optional int32 type = 3;
+  optional int32 color = 4;
+  optional int32 direction = 5;
+  repeated ElementalBondsBlockEffectMsg effect = 6;
+  optional int32 score = 7;
+  optional int32 sp = 8;
+}
+message ElementalBondsBlockEffectMsg {
+  required int32 effectType = 1;
+  optional int32 effectArg = 2;
+}
+message ElementalBondsOperateResultMsg {
+  required int32 side = 1;
+  required int32 skillId = 2;
+  repeated ElementalBondsShowMsg show = 3;
+  optional ElementalBondsRoomDataMsg gameData = 4;
+}
+message ElementalBondsUseSkillMsg {
+  required int32 id = 1;
+  optional int32 x = 2;
+  optional int32 y = 3;
+  optional int32 toX = 4;
+  optional int32 toY = 5;
+  optional bool isSameCardCoordinate = 6;
+}
+message ElementalBondsBoomMsg {
+  required int32 x = 1;
+  required int32 y = 2;
+  required int32 type = 3;
+  repeated ElementalBondsBlockMsg blockList = 4;
+}
+message ElementalBondsShowMsg {
+  repeated ElementalBondsEffectMsg effects = 1;
+  repeated ElementalBondsRoundResultMsg roundResult = 2;
+}
+message ElementalBondsEffectMsg {
+  required int32 effectType = 1;
+  repeated ElementalBondsBlockMsg blockList = 2;
+  optional int32 param = 3;
+}
+message ElementalBondsRoundResultMsg {
+  required int32 type = 1;
+  repeated ElementalBondsStageResultMsg stageResult = 2;
+  repeated ElementalBondsBlockMsg createBomb = 3;
+  required ElementalBondsBoardMsg board = 4;
+}
+message ElementalBondsStageResultMsg {
+  repeated ElementalBondsBlockMsg blockList = 1;
+  repeated ElementalBondsBoomMsg boomList = 2;
+  repeated ElementalBondsBlockMsg blockList2 = 3;
+}
+message ElementalBondsBoardMsg {
+  repeated ElementalBondsBlockMsg gridList = 1;
+  repeated ElementalBondsBlockMsg blockList = 2;
+}
+message ElementalBondsBattleRecordMsg {
+  required int64 no = 1;
+  required int64 time = 2;
+  required ElementalBondsOpponentMsg opponent = 3;
+  required int32 opponentCard = 4;
+  required int64 opponentScore = 5;
+  required int32 selfCard = 6;
+  required int64 selfScore = 7;
+  required bool win = 8;
+  required int64 scoreChange = 9;
+  optional int32 type = 10;
+  repeated int32 selfSkillId = 11;
+  repeated int32 opponentSkillId = 12;
+  optional int32 endType = 13;
+}
+message ElementalBondsBadgeMsg {
+  optional int32 badgeId = 1;
+  optional int64 score = 2;
+  optional int32 seasonId = 3;
+  optional bool  needRedPoint = 4;
+}
+message ElementalBondsHonorMomentMsg {
+  required int32 honorMomentType = 1;
+  optional int64 time = 2;
+  optional int64 value = 3;
+  optional int32 rewardIndex = 4;
+  optional bool  needRedPoint = 5;
+  optional int64 oldValue = 6;
+}
+message ElementalBondsMallMsg {
+  required int32 mallId = 1;
+  required int64 endTime = 2;
+  required int32 canBuyTimes = 3;
+}
+message ElementalBondsSeasonConfig {
+  required int32 seasonId = 1;
+  required string theme = 2;
+  optional string desc = 3;
+}
+message ElementalBondsFriendRoomInfoMsg {
+  required string roomId = 1;
+  optional ElementalBondsOpponentMsg friend = 2;
+  optional int32 sceneId = 3;
+  optional bool stepOut = 4;
+  optional int64 masterUserId = 5;
+  optional int32 cardId1 = 6;
+  optional int32 cardId2 = 7;
+  optional bool ready = 8;
+  repeated int32 skillId1 = 9;
+  repeated int32 skillId2 = 10;
+  repeated int32 cardPool = 11;
+  repeated int32 skillPool = 12;
+}
+message ElementalBondsSeasonMemoryMsg {
+  required int32 oldSeasonId = 1;
+  required int64 seasonBattleTimes = 2;
+  repeated ElementalBondsHonorMomentMsg honorMoment = 3;
+  repeated int32 topUnlockCardId = 4;
+  required int32 topUseCardId = 5;
+  required int64 topUseCardTimes = 6;
+  required int64 seasonScore = 7;
+  required int32 seasonRank = 8;
+  required int32 oneActionMaxScore = 9;
+  optional int32 expressionId = 10;
+  required int64 topScore = 11;
+  optional int32 expressionUseTimes = 12;
+}
+message ElementalBondsSeasonChangeMsg {
+  required int64 oldScore = 1;
+  required int64 newScore = 2;
+}
+message ElementalBondsChampionMsg {
+  required int32 seasonId = 1;
+  required RankTempMsg rank = 2;
+}
+message ElementalBondsMatchReqMsg {
+  required int32 cardId = 1;
+  optional int32 modeId = 2;
+  optional int32 sceneId = 3;
+  repeated int32 skillId = 4;
+}
+message ElementalBondsMatchRespMsg {
+  required int32 ret = 1;
+  optional int64 expectMatchTime = 2;
+  repeated ElementalBondsOpponentMsg opponent = 3;
+  optional ElementalBondsBadgeMsg badge = 4;
+}
+message ElementalBondsGetMatchStatusRepMsg{
+}
+message ElementalBondsGetMatchStatusRespMsg{
+  required int32 ret = 1;
+  optional int64 expectMatchTime = 2;
+  repeated ElementalBondsOpponentMsg opponent = 3;
+  optional ElementalBondsBadgeMsg badge = 4;
+}
+message ElementalBondsCancelMatchReqMsg {
+}
+message ElementalBondsCancelMatchRespMsg {
+  required int32 ret = 1;
+  required bool matchSuccess = 2;
+}
+message ElementalBondsPingReqMsg {
+}
+message ElementalBondsPingRespMsg {
+  optional int32 ret = 1;
+}
+message ElementalBondsMatchResultRespMsg {
+  required int32 ret = 1;
+  optional int32 mode = 2;
+  optional int32 sceneId = 3;
+  optional ElementalBondsOpponentMsg opponent = 4;
+}
+message ElementalBondsGetRoomDataReqMsg {
+}
+message ElementalBondsGetRoomDataRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsRoomDataMsg roomData = 2;
+}
+message ElementalBondsSurrenderReqMsg {
+}
+message ElementalBondsSurrenderRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsBatchSyncNoticeRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsSyncNoticeRespMsg msgList = 2;
+  optional int32 modeId = 3;
+}
+message ElementalBondsSyncNoticeRespMsg {
+  required int32 type = 1;
+  optional int64 dropLineWaitTime = 2;
+  optional int64 expireTime = 3;
+  optional int32 expressionId = 4;
+  optional ElementalBondsGameOverMsg over = 5;
+  optional ElementalBondsOperateResultMsg operate = 6;
+}
+message ElementalBondsOperateReqMsg {
+  required int32 type = 1;
+  optional int32 fromX = 2;
+  optional int32 fromY = 3;
+  optional int32 toX = 4;
+  optional int32 toY = 5;
+  optional ElementalBondsUseSkillMsg useSkill = 6;
+  optional int32 expressionId = 7;
+  optional int64 showNo = 8;
+}
+message ElementalBondsOperateRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsRoomDataMsg roomData = 2;
+}
+message ElementalBondsSyncUserRespMsg {
+  required ElementalBondsUserDataMsg userData = 1;
+}
+message ElementalBondsGetUserReqMsg {
+  optional bool getGameOver = 1;
+}
+message ElementalBondsGetUserRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsUserDataMsg userData = 2;
+  optional int32 userType = 3;
+  optional bool matchShield = 4;
+}
+message ElementalBondsShowFinishReqMsg {
+  required int64 showNo = 1;
+}
+message ElementalBondsGetPlayingGameReqMsg {
+}
+message ElementalBondsGetPlayingGameRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsRoomDataMsg roomData = 2;
+}
+message ElementalBondsQuitGuideReqMsg {
+  optional int32 type = 1;
+}
+message ElementalBondsQuitGuideRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsUserDataMsg userData = 2;
+}
+message ElementalBondsGetBattleRecordReqMsg {
+}
+message ElementalBondsGetBattleRecordRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsBattleRecordMsg list = 2;
+}
+message ElementalBondsGetGameOverReqMsg {
+}
+message ElementalBondsGetGameOverRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsGameOverMsg data = 2;
+}
+message ElementalBondsSyncHonorMomentRespMsg {
+  repeated ElementalBondsHonorMomentMsg honorMoment = 1;
+}
+message ElementalBondsGetBadgeReqMsg {
+  required int32 type = 1;
+}
+message ElementalBondsGetBadgeRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsBadgeMsg cur = 2;
+  optional ElementalBondsBadgeMsg top = 3;
+  repeated ElementalBondsBadgeMsg seasonBadge = 4;
+  repeated ElementalBondsBadgeMsg playBadge = 5;
+  repeated ElementalBondsHonorMomentMsg honorMoment = 6;
+}
+message ElementalBondsSeeGameOverReqMsg {
+}
+message ElementalBondsSeeGameOverRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsSeeOtherUserDataReqMsg {
+  required int64 userId = 1;
+  required int64 serverId = 2;
+}
+message ElementalBondsSeeOtherUserDataRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsBadgeMsg cur = 2;
+  optional PlayerBaseDataMsg playerData = 3;
+  optional int64 score = 4;
+}
+message ElementalBondsBuySkillReqMsg {
+  required int32 skillId = 1;
+  required ElementalBondsSkillPrice price = 2;
+}
+message ElementalBondsBuySkillRespMsg {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message ElementalBondsFriendCreateRoomReqMsg {
+  required int32 sceneId = 1;
+  required int32 cardId = 2;
+}
+message ElementalBondsFriendCreateRoomRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsFriendRoomInfoMsg roomInfo = 2;
+}
+message ElementalBondsFriendLeaveRoomReqMsg {
+  required string roomId = 1;
+}
+message ElementalBondsFriendLeaveRoomRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendSearchRoomReqMsg {
+  required int64 roomId = 1;
+}
+message ElementalBondsFriendSearchRoomRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsFriendRoomInfoMsg result = 2;
+  optional PlayerHeadAndNameMsg showMsg = 3;
+}
+message ElementalBondsFriendJoinRoomReqMsg {
+  required int64 roomId = 1;
+}
+message ElementalBondsFriendJoinRoomRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsFriendRoomInfoMsg roomInfo = 2;
+}
+message ElementalBondsFriendSyncRoomRespMsg {
+  required int32 type = 1;
+  optional ElementalBondsOpponentMsg friend = 2;
+  optional int32 arg = 3;
+  repeated int32 cardPool = 4;
+  repeated int32 skillPool = 5;
+  repeated int32 arg2 = 6;
+}
+message ElementalBondsFriendStartGameReqMsg {
+  required string roomId = 1;
+}
+message ElementalBondsFriendStartGameRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendStepOutReqMsg {
+  required string roomId = 1;
+}
+message ElementalBondsFriendStepOutRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendEnterMyRoomReqMsg {
+}
+message ElementalBondsFriendEnterMyRoomRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsFriendRoomInfoMsg roomInfo = 2;
+}
+message ElementalBondsSeason0ShowReqMsg {
+}
+message ElementalBondsSeason0ShowRespMsg {
+  required int32 ret = 1;
+  required bool needShow = 2;
+}
+message ElementalBondsSeasonChangeReqMsg {
+}
+message ElementalBondsSeasonChangeRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsSeasonChangeMsg seasonChange = 2;
+}
+message ElementalBondsSyncUnlockCardRespMsg {
+  required int32 ret = 1;
+  required int32 cardId = 2;
+}
+message ElementalBondsGetHistoryChampionReqMsg {
+}
+message ElementalBondsGetHistoryChampionRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsChampionMsg champion = 2;
+}
+message ElementalBondsSeasonMemoryReqMsg {
+}
+message ElementalBondsSeasonMemoryRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsSeasonMemoryMsg memory = 2;
+}
+message ElementalBondsSyncUnlockSkillRespMsg {
+  required int32 skillId = 1;
+}
+message ElementalBondsFriendQuickChatReqMsg {
+  required string roomId = 1;
+  required int32 chatIndex = 2;
+  optional int32 expressionId = 3;
+}
+message ElementalBondsFriendQuickChatRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendChangeCardReqMsg{
+  required string roomId = 1;
+  required int32 cardId = 2;
+  repeated int32 skillId = 3;
+}
+message ElementalBondsFriendChangeCardRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendReadyReqMsg {
+  required string roomId = 1;
+  required bool ready = 2;
+}
+message ElementalBondsFriendReadyRespMsg{
+  required int32 ret = 1;
+}
+message ElementalBondsFriendChangeSceneReqMsg {
+  required string roomId = 1;
+  required int32 sceneId = 2;
+}
+message ElementalBondsFriendChangeSceneRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsFriendKickMemberReqMsg {
+}
+message ElementalBondsFriendKickMemberRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsChangeDecorationReqMsg {
+  required int32 type = 1;
+  required int32 decorationId = 2;
+}
+message ElementalBondsChangeDecorationRespMsg {
+  required int32 ret = 1;
+  optional int32 useBoardSkin = 2;
+  optional int32 useAnimation = 3;
+  optional int32 useEffect = 4;
+}
+message ElementalBondsRefreshTaskReqMsg {
+  required int32 refreshType = 1;
+  optional bool isUseADTime = 4;
+}
+message ElementalBondsRefreshTaskRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsTaskDataMsg taskData = 2;
+  optional int32 dailyRefreshTime = 3;
+  optional int32 weeklyRefreshTime = 4;
+}
+message ElementalBondsGetTaskDataReqMsg {
+  required int32 type = 1;
+}
+message ElementalBondsGetTaskDataRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsTaskDataMsg taskData = 2;
+  optional int32 refreshTime = 3;
+  optional int32 weeklyRefreshTime = 4;
+}
+message ElementalBondsTaskDataMsg {
+  optional int32 uniqueId = 1;
+  optional int32 taskId = 2;
+  optional int32 taskValue = 3;
+  optional bool isReward = 4;
+  optional string reward = 5;
+}
+message ElementalBondsGetTaskRewardReqMsg {
+  repeated int32 uniqueId = 1;
+}
+message ElementalBondsGetTaskRewardRespMsg {
+  required int32 ret = 1;
+  repeated ElementalBondsTaskDataMsg taskData = 2;
+  optional string reward = 3;
+}
+message ElementalBondsGetPrivilegeCardRewardReqMsg {
+  required int32 cardId = 1;
+}
+message ElementalBondsGetPrivilegeCardRewardRespMsg {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int64  rewardedTime = 3;
+}
+message ElementalBondsSyncPrivilegeCardMsg{
+  repeated ElementalBondsPrivilegeCardMsg privilegeCardMsg = 1;
+}
+message ElementalBondsGetAchievementRewardReqMsg {
+  required int32 configId = 1;
+}
+message ElementalBondsGetAchievementRewardRespMsg {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional ElementalBondsHonorMomentMsg honorMoment = 3;
+}
+message ElementalBondsSyncRedPointInfoMsg {
+  repeated ElementalBondsRedPointData redPointInfo = 1;
+  repeated ElementalBondsRedPointData crossRedPointInfo = 2;
+}
+enum ElementalBondsRedPointEnum {
+  ElementalBondsRedPoint_null = 0;
+  ElementalBondsRedPoint_LimitedTime = 1;
+  ElementalBondsRedPoint_DailyTask = 2;
+  ElementalBondsRedPoint_BattlePass = 3;
+  ElementalBondsRedPoint_Shop = 4;
+  ElementalBondsRedPoint_RankReward = 5;
+  ElementalBondsRedPoint_Badge = 6;
+  ElementalBondsRedPoint_ScoreLadder = 7;
+  ElementalBondsRedPoint_Achievement = 8;
+  ElementalBondsRedPoint_PrivilegeCard = 9;
+  ElementalBondsRedPoint_RookieTask = 10;
+}
+message ElementalBondsRedPointData {
+  required ElementalBondsRedPointEnum redPointType = 1;
+  required bool isShow = 2;
+}
+message ElementalBondsCheckReqMsg {
+  required int32 configId = 1;
+  optional bool isSeason = 2;
+}
+message ElementalBondsCheckRespMsg {
+  required int32 ret = 1;
+}
+message ElementalBondsReplaceEmojiReqMsg{
+  repeated int32 equipEmoji = 1;
+}
+message ElementalBondsReplaceEmojiRespMsg{
+  required int32 ret = 1;
+  repeated int32 equipEmoji = 2;
+}
+message ElementalBondsSyncGroupMsg {
+  optional bool inGroup = 1;
+}
+message ElementalBondsSyncMatchStateRespMsg {
+  required bool matchShield = 1;
+}
+message ElementalBondsGetScoreLadderInfoReqMsg {
+}
+message ElementalBondsGetScoreLadderInfoRespMsg{
+  required int32 ret = 1;
+  optional int32 rank = 2;
+  optional int64 score = 3;
+  optional int32 maxScoreId = 4;
+  optional int64 lastEnterScore = 5;
+  optional int32 canGetScoreId = 6;
+}
+message ElementalBondsGetScoreLadderRewardReqMsg {
+}
+message ElementalBondsGetScoreLadderRewardRespMsg {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 maxScoreId = 3;
+  optional int32 maxCanGetScoreId = 4;
+}
+message ElementalBondsChangeBadgeReqMsg {
+  required int32 badgeId = 1;
+  optional bool  isSeason = 2;
+}
+message ElementalBondsChangeBadgeRespMsg {
+  required int32 ret = 1;
+  optional ElementalBondsBadgeMsg cur = 2;
+}
+message ElementalBondsLimitTaskSyncRespMsg{
+  required int32 limitTaskId = 1;
+  required int64 endTime = 2;
+}
+message ElementalBondsMallSyncRespMsg{
+  repeated ElementalBondsMallMsg mallMsg = 1;
+}
+message ElementalBondsOpenRandomCardAutoBoxReqMsg{
+  repeated BagDataMsg boxList = 1;
+}
+message ElementalBondsOpenRandomCardAutoBoxRespMsg{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message ElementalBondsWatchAdRewardReqMsg{
+  required int32 mallId = 1;
+  optional bool  useItem = 2;
+}
+message ElementalBondsWatchAdRewardRespMsg{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message ElementalBondsGetMatchingStatusReqMsg {
+}
+message ElementalBondsGetMatchingStatusRespMsg {
+  required int32 ret = 1;
+  required bool matching = 2;
+}
+message ElementalBondsGetBattlePassFuHunReqMsg {
+}
+message ElementalBondsGetBattlePassFuHunRespMsg {
+  required int32 ret = 1;
+  required int32 battlePassFuHunValue = 2;
+  required int64 battlePassFuHunUpdateTime = 3;
+}
+message ElementalBondsVerifyReqMsg{
+    optional int32 id = 1;
+}
+message ElementalBondsVerifyRespMsg{
+    optional int32 ret = 1;
+    optional string reward = 2;
+    optional int64 prohibitMathTime = 3;
+    optional ElementalBondsVerifyInfo verifyInfo = 4;
+}
+message ElementalBondsVerifyInfo{
+    repeated int32 verifyList = 1;
+    optional int32 verifyId = 2;
+}

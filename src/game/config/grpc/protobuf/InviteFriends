@@ -1,13 +1,13 @@
-package com.yq.msg.CityMsg;        
+package com.yq.msg.CityMsg;
 message ReqBindInviteCode {
-    required string inviteCode = 1;                 
+    required string inviteCode = 1;
 }
 message RspBindInviteCode {
     required int32 ret = 1;
-    optional string reward = 2;                     
+    optional string reward = 2;
 }
 message ReqGetBindInviteCode { }
 message RspGetBindInviteCode {
     required int32 ret = 1;
-    optional string bindInviteCode = 2;             
+    optional string bindInviteCode = 2;
 }

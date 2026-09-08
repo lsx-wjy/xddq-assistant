@@ -1,0 +1,8 @@
+package com.yq.msg.CityMsg;
+message NewRechargeSyncMsg {
+    repeated NewRechargeLockSelectMsg selectMsg = 1;
+}
+message NewRechargeLockSelectMsg {
+    optional int32 selectOrder = 1;
+    optional int32 itemId = 2;
+}

@@ -1,83 +1,127 @@
-package com.yq.msg.CityMsg;  
+package com.yq.msg.CityMsg;
 import "Common";
 import "WatchPlayer";
 import "Battle";
 import "Rank";
 import "Pet";
 message PetKernelPlayerDataMsg {
-  repeated PetKernelDataMsg petKernelData = 1;        
-  repeated PetKernelCombineMsg petKernelCombine = 2;  
-  required int32 freeDrawTimes = 3;                   
-  required int32 drawCount = 4;                       
-  required int32 ensureCount = 5;                     
-  optional bool  pieceShopOpen = 6;                   
+  repeated PetKernelDataMsg petKernelData = 1;
+  repeated PetKernelCombineMsg petKernelCombine = 2;
+  required int32 freeDrawTimes = 3;
+  required int32 drawCount = 4;
+  required int32 ensureCount = 5;
+  optional bool  pieceShopOpen = 6;
+  optional int32 curPresetIndex = 7;
+  repeated PetKernelPresetSeparationMsg presetSeparationMsg = 8;
 }
 message PetKernelDataMsg {
-  required int32 kernelId = 1;  
-  required int32 attachPet = 2; 
-  required int32 star = 3;      
+  required int32 kernelId = 1;
+  required int32 attachPet = 2;
+  required int32 star = 3;
+  optional int32 resonanceLv = 4;
+  optional int32 wakeLv = 5;
+  repeated WakePutKernelInfo wakePutKernelInfo = 6;
+  optional int32 wakePutKernelId = 7;
 }
 message PetKernelCombineMsg {
-  required int32 combineId = 1;  
-  required int32 level = 2;      
+  required int32 combineId = 1;
+  required int32 level = 2;
 }
 message PetKernelSlotMsg {
-  required int32 slotId = 1;     
-  required bool stat = 2;        
+  required int32 slotId = 1;
+  required bool stat = 2;
 }
 message PetKernelDrawResult {
-  optional string rewards = 1;  
-  optional string items = 2;    
+  optional string rewards = 1;
+  optional string items = 2;
 }
 message PetKernelSyncMsg {
-  required int32 petId = 1;                  
-  optional int32 kernelLv = 2;               
-  repeated int32 equipKernelId = 3;          
+  required int32 petId = 1;
+  optional int32 kernelLv = 2;
+  repeated int32 equipKernelId = 3;
 }
 message PetKerneCarryReq {
-  required int32 kernelId = 1;  
-  required int32 petId = 2;     
+  required int32 kernelId = 1;
+  required int32 petId = 2;
 }
 message PetKerneCarryResp {
   required int32 ret = 1;
-  repeated PetKernelSyncMsg syncPetMsg = 2;     
-  repeated PetKernelDataMsg syncKernelMsg = 3;  
+  repeated PetKernelSyncMsg syncPetMsg = 2;
+  repeated PetKernelDataMsg syncKernelMsg = 3;
 }
 message PetKerneUpLevelReq {
-  required int32 petId = 1;     
+  required int32 petId = 1;
+  optional int32 targetLevel = 2;
 }
 message PetKerneUpLevelResp {
   required int32 ret = 1;
 }
 message PetKerneUpStarReq {
-  required int32 kernelId = 1;  
+  required int32 kernelId = 1;
 }
 message PetKerneUpStarResp {
   required int32 ret = 1;
 }
 message PetKerneActiveReq {
-  required int32 kernelId = 1;  
+  required int32 kernelId = 1;
 }
 message PetKerneActiveResp {
   required int32 ret = 1;
   optional PetKernelDataMsg petKernelData = 2;
 }
 message PetKernelDrawReq {
-  required bool isTen = 1;      
+  required bool isTen = 1;
 }
 message PetKernelDrawResp {
   required int32 ret = 1;
   repeated PetKernelDrawResult drawResult = 2;
-  repeated PetKernelDataMsg syncKernelMsg = 3;  
+  repeated PetKernelDataMsg syncKernelMsg = 3;
   optional int32 freeDrawTimes = 4;
   optional int32 drawCount = 5;
   optional int32 ensureCount = 6;
-  optional bool  pieceShopOpen = 7; 
+  optional bool  pieceShopOpen = 7;
 }
 message PetKerneCombineUpLevelReq {
-  required int32 combineId = 1;  
+  required int32 combineId = 1;
 }
 message PetKerneCombineUpLevelResp {
   required int32 ret = 1;
   optional PetKernelCombineMsg combine = 2;
+}
+message ResonanceActiveReq {
+  optional int32 kernelId = 1;
+}
+message ResonanceActiveResp {
+  required int32 ret = 1;
+  optional PetKernelDataMsg petKernelData = 2;
+}
+message WakePutKernelInfo {
+  required int32 pos = 1;
+  required int32 kernelId = 2;
+}
+enum PetKernelPresetProtocols {
+  petKernelSwitchPreset = 211709;
+}
+message PetKernelSwitchPresetReq {
+  required int32 presetIndex = 1;
+}
+message PetKernelSwitchPresetResp {
+  required int32 ret = 1;
+}
+message PetKernelPresetPetMsg {
+  required int32 petId = 1;
+  repeated int32 kernelIds = 2;
+}
+message PetKernelPresetWakeMsg {
+  required int32 kernelId = 1;
+  repeated WakePutKernelInfo putKernelInfo = 2;
+}
+message PetKernelPresetMsg {
+  required int32 presetIndex = 1;
+  repeated PetKernelPresetPetMsg petList = 2;
+  repeated PetKernelPresetWakeMsg wakeList = 3;
+}
+message PetKernelPresetSeparationMsg {
+  required int32 separationIdx = 1;
+  repeated PetKernelPresetMsg presetList = 2;
 }

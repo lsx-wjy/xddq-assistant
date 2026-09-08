@@ -1,0 +1,49 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "Rank";
+import "Pet";
+import "PetKernel";
+enum PetKernelWakeProtocols{
+  petKernelWakeActive = 234201;
+  petKernelWakeUpStar = 234202;
+  petKernelWakePutKernel = 234203;
+  petKernelWakeReset = 234204;
+  petKernelWakeResonance = 234205;
+}
+message PetKernelWakeActiveReq{
+  required int32 kernelId = 1;
+}
+message PetKernelWakeActiveResp{
+  required int32 ret = 1;
+  optional PetKernelDataMsg petKernelData = 2;
+}
+message PetKernelWakeUpStarReq {
+  required int32 kernelId = 1;
+}
+message PetKernelWakeUpStarResp {
+  required int32 ret = 1;
+  optional PetKernelDataMsg petKernelData = 2;
+}
+message PetKernelWakePutKernelReq {
+  required int32 kernelId = 1;
+  required int32 pos = 2;
+  required int32 putKernelId = 3;
+}
+message PetKernelWakePutKernelResp {
+  required int32 ret = 1;
+  repeated PetKernelDataMsg petKernelData = 2;
+}
+message PetKernelWakeResetReq {
+  required int32 kernelId = 1;
+}
+message PetKernelWakeResetResp {
+  required int32 ret = 1;
+  repeated PetKernelDataMsg petKernelData = 2;
+}
+message PetKernelWakeResonanceReq {
+}
+message PetKernelWakeResonanceResp {
+  required int32 ret = 1;
+}

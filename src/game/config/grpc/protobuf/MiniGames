@@ -1,28 +1,66 @@
-package com.yq.msg.CityMsg;  
+package com.yq.msg.CityMsg;
 import "Battle";
 enum MiniGamesPb {
-    MiniGamesPb_ReceiveMiniGamesReward = 200021;  
-    MiniGamesPb_StageMapChallenge = 200022; 
+  MiniGamesPb_ReceiveMiniGamesReward = 200021;
+  MiniGamesPb_StageMapChallenge = 200022;
+  MiniGamesPb_GetWestJourneyReward = 200026;
+  MiniGamesPb_Enter_WestJourney = 200024;
+  MiniGamesPb_Sync_WestJourney_Player_Data = 200025;
+  MiniGamesPb_Get_BreakPath_Reward = 200027;
+  MiniGamePb_Get_RewardBit = 200028;
 }
 enum MiniGamesType {
-    SaveThePig = 1; 
-    RelicExplore = 2; 
-    Shoot = 3; 
+  SaveThePig = 1;
+  RelicExplore = 2;
+  Shoot = 3;
+  WestJourney = 4;
+  BreakPath = 5;
+}
+message MiniGamesWestJourneyData {
+  optional int32 maxStage = 1;
+}
+message GetMiniGameRewardBitReq{
+  required int32 type = 1;
+}
+message GetMiniGameRewardBitResp{
+  required int32 ret = 1;
+  optional string rewardBit = 2;
 }
 message ReceiveMiniGamesRewardReq {
-    required MiniGamesType type = 1; 
-    required int32 stage = 2; 
+  required MiniGamesType type = 1;
+  required int32 stage = 2;
 }
 message ReceiveMiniGamesRewardResp {
-    required int32 ret = 1;
-    optional string reward = 2; 
+  required int32 ret = 1;
+  optional string reward = 2;
 }
 message StageMapChallengeReq {
-    required int32 stage = 1;
-    required int32 index = 2;
+  required int32 stage = 1;
+  required int32 index = 2;
 }
 message StageMapChallengeRsp {
-    required int32 ret = 1;
-    optional bool challengeSuccess = 2; 
-    optional BattleRecordMsg allBattleRecord = 3; 
+  required int32 ret = 1;
+  optional bool challengeSuccess = 2;
+  optional BattleRecordMsg allBattleRecord = 3;
+}
+message GetWestJourneyRewardReq {
+  required int32 stage = 1;
+}
+message GetWestJourneyRewardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message EnterWestJourneyReq{
+}
+message EnterWestJourneyResp{
+  required int32 ret = 1;
+  optional int32 westJourneyMaxStage = 2;
+}
+message MiniGameGetBreakPathRewardReq{
+  required int32 stage = 1;
+}
+message MiniGameGetBreakPathRewardResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional string miniGameRewardBit = 3;
 }

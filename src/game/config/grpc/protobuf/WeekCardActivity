@@ -1,12 +1,12 @@
-package com.yq.msg.CityMsg;        
+package com.yq.msg.CityMsg;
 message WeekCardActivityDataSync{
     optional int64 nextResetTime = 1;
     optional XyFundPlayerDataMsg xyFundPlayerDataMsg = 2;
 }
 message XyFundPlayerDataMsg {
-    optional int32 progressValue = 1; 
+    optional int32 progressValue = 1;
     optional int32 progressTarget = 2;
-    optional string reward = 3; 
+    optional string reward = 3;
 }
 message XyFundGetRewardReq{
     required int32 activityId = 1;

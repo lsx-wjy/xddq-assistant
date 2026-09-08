@@ -1,0 +1,22 @@
+package com.yq.msg.CityMsg;
+enum BlessFrogPb {
+  S_BLESS_FROG_ENTER_ACTIVITY = 230801;
+  S_BLESS_FROG_SYNC_DREAM_TIMES = 230802;
+  S_BLESS_FROG_EXIT_ACTIVITY = 230803;
+}
+message BlessFrogEnterReq {
+  required int32 activityId = 1;
+}
+message BlessFrogEnterResp {
+  required int32 ret = 1;
+  optional int32 dreamTimes = 2;
+}
+message BlessFrogExitReq {
+  required int32 activityId = 1;
+}
+message BlessFrogExitResp {
+  required int32 ret = 1;
+}
+message BlessFrogDreamTimesSyncMsg{
+  optional int32 dreamTimes = 1;
+}

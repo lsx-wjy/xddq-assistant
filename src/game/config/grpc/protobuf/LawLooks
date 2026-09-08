@@ -1,0 +1,223 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum LawLooksPb{
+    S_LAW_LOOKS_ENTER = 218701;
+    S_LAW_LOOKS_LEVEL_UP = 218702;
+    S_LAW_LOOKS_RESET = 218703;
+    S_LAW_LOOKS_EQUIP = 218705;
+    S_LAW_LOOKS_STAR_UP = 218706;
+    S_LAW_LOOKS_WASH_SKILL = 218707;
+    S_LAW_LOOKS_COMPOUND = 218708;
+    S_LAW_LOOKS_DRAW = 218709;
+    S_LAW_LOOKS_PIECE_COMPOUND = 218710;
+    S_LAW_LOOKS_LOGIN_SYNC = 218711;
+    S_LAW_LOOKS_SAVE_REFRESH = 218712;
+    S_LAW_LOOKS_ACTIVE_COMBINE = 218713;
+    S_LAW_LOOKS_SYNC_DATA = 218714;
+    S_LAW_LOOKS_Exit = 218715;
+    S_LAW_LOOKS_RESET_PREVIEW = 218716;
+    S_LAW_LOOKS_Batch_COMPOUND = 218717;
+    S_Law_Looks_Change_Lock_State = 218718;
+}
+message LawLooksLoginSyncMsg {
+    optional LawLooksDataMsg lawLooksData = 1;
+    optional int32 freeDrawTimesToday = 2;
+    optional int32 adDrawTimesToday = 3;
+}
+message LawLooksSyncMsg {
+    optional LawLooksEnterMsg enterMsg = 1;
+}
+message LawLooksEnterMsg {
+    repeated LawLooksDataMsg lawLooksDataList = 1;
+    optional int32 freeDrawTimesToday = 2;
+    optional int32 adDrawTimesToday = 3;
+    repeated LawLooksCombineSkillMsg combineSkillList = 4;
+    repeated LawLooksCollectInfo collectInfoList = 5;
+    optional int32 drawTimes = 6;
+    optional int32 ensureTimes = 7;
+    optional int32 resetLawLooksTimesToday = 8;
+    optional int32 refreshSkillTimes = 9;
+    repeated LawLooksCombatInfo combatInfoList = 10;
+    optional int32 extendTimes = 11;
+}
+message LawLooksCombatInfo{
+  optional int32 bodyIndex = 1;
+  optional int32 id = 2;
+}
+message LawLooksCollectInfo{
+    optional int32 lawLooksConfigId = 1;
+    optional int32 count = 2;
+}
+message LawLooksDataMsg {
+    required int32 id = 1;
+    required int32 configId = 2;
+    required int32 star = 3;
+    repeated LawLookPassiveSkillInfo passiveSkillInfoList = 4;
+    optional bool lock = 5;
+}
+message LawLooksRefreshSkillMsg {
+    optional int32 quality = 1;
+    optional AttributeDataMsg attributeData = 2;
+}
+message LawLookPassiveSkillInfo{
+    optional LawLooksRefreshSkillMsg refreshSkillMsg = 1;
+    optional LawLooksRefreshSkillMsg alternateSkillMsg =2;
+}
+message LawLooksCombineSkillMsg {
+    required int32 combineId = 1;
+    required int32 lv = 2;
+}
+message LawLooksBatchCompoundMsg {
+    repeated int32 lawLooksIdList = 1;
+}
+message LawLooksEnterReq {
+}
+message LawLooksEnterResp {
+    required int32 ret = 1;
+    optional LawLooksEnterMsg enterMsg = 2;
+}
+message LawLooksLevelUpReq {
+    required int32 lawLooksId = 1;
+}
+message LawLooksLevelUpResp {
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+}
+message LawLooksResetReq {
+    required int32 lawLooksId = 1;
+}
+message LawLooksResetResp {
+    required int32 ret = 1;
+    repeated LawLooksDataMsg lawLooksDataList = 2;
+    optional LawLooksDataMsg lawLooksData = 3;
+    optional string reward = 4;
+}
+message LawLooksEquipReq {
+    required int32 lawLooksId = 1;
+    optional int32 type = 2;
+}
+message LawLooksEquipResp {
+    required int32 ret = 1;
+    optional int32 lawLooksId = 2;
+}
+message LawLooksStarUpReq {
+    required int32 lawLooksId = 1;
+    repeated int32 costLawLooksIdList = 2;
+}
+message LawLooksStarUpResp {
+    required int32 ret = 1;
+    optional int32 lawLooksId = 2;
+    optional LawLooksDataMsg equipLawLooksData = 3;
+}
+message LawLooksWashSkillReq {
+    required int32 lawLooksId = 1;
+    required int32 skillIndex = 2;
+}
+message LawLooksWashSkillResp {
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+    optional int32 refreshSkillTimes = 3;
+}
+message LawLooksCompoundReq {
+    required int32 compoundType = 1;
+    repeated int32 lawLooksIdList = 2;
+    optional int32 tarLawLooksConfigId = 3;
+}
+message LawLooksCompoundResp {
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+    optional LawLooksDataMsg equipLawLooksData = 3;
+    optional bool transferPiece = 4;
+}
+message LawLooksDrawReq {
+    required int32 drawTimes = 1;
+    optional int32 drawType = 2;
+}
+message LawLooksDrawResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    repeated LawLooksDataMsg lawLooksDataList = 3;
+}
+message LawLooksPieceCompoundReq {
+    required int32 lawLookConfigId = 1;
+    required int32 num = 2;
+}
+message LawLooksPieceCompoundResp {
+    required int32 ret = 1;
+    optional int32 lawLookConfigId = 2;
+    optional int32 num = 3;
+}
+message LawLooksSaveRefreshReq{
+    required int32 lawLooksId = 1;
+    required int32 skillIndex = 2;
+}
+message LawLooksSaveRefreshResp{
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+    optional string reward = 3;
+}
+message LawLooksActiveCombineReq{
+    required int32 combineId = 1;
+}
+message LawLooksActiveCombineResp{
+    required int32 ret = 1;
+}
+message LawLooksExitReq{
+}
+message LawLooksExitResp{
+    required int32 ret = 1;
+}
+message LawLooksResetPreviewReq{
+    required int32 lawLooksId = 1;
+}
+message LawLooksResetPreviewResp{
+    required int32 ret = 1;
+    repeated LawLooksDataMsg lawLooksDataList = 2;
+}
+message LawLooksBatchCompoundReq {
+    repeated LawLooksBatchCompoundMsg compoundList = 1;
+}
+message LawLooksBatchCompoundResp {
+    required int32 ret = 1;
+    repeated LawLooksDataMsg lawLooksDataList = 2;
+}
+message LawLooksChangeLockReq{
+    required int32 lawLooksId = 1;
+    required bool lock = 2;
+}
+message LawLooksChangeLockResp{
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+}
+message LawLooksExtendsReq{
+    required int32 srcLawLooksId = 1;
+    required int32 tarLawLooksId = 2;
+  }
+  message LawLooksExtendsResp{
+    required int32 ret = 1;
+    optional LawLooksDataMsg srcLawLooksData = 2;
+    optional LawLooksDataMsg tarLawLooksData = 3;
+  }
+message LawLooksOneKeyMergeReq{
+}
+message LawLooksOneKeyMergeResp{
+  required int32 ret = 1;
+  repeated LawLooksDataMsg lawLooksDataList = 2;
+}
+message LawLooksBreakDownReq{
+    required int32 lawLooksId = 1;
+  }
+  message LawLooksBreakDownResp{
+    required int32 ret = 1;
+    optional string reward = 2;
+  }
+message LawLooksOneKeyCompoundReq {
+    optional int32 tarLawLooksConfigId = 1;
+    repeated int32 lawLooksIdList = 2;
+}
+message LawLooksOneKeyCompoundResp {
+    required int32 ret = 1;
+    optional LawLooksDataMsg lawLooksData = 2;
+    optional LawLooksDataMsg equipLawLooksData = 3;
+    optional bool transferPiece = 4;
+}

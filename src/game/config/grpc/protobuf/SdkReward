@@ -1,16 +1,22 @@
 package com.yq.msg.CityMsg;
 import "Common";
 enum ReceiveSdkRewardPb{
-    ReceiveSdkRewardPb_RECEIVE_SDK_REWARD_SYN = 207201;  
-    ReceiveSdkRewardPb_RECEIVE_SDK_REWARD = 207202;   
-    QQCARD_GET_REWARD = 207203;   
-    ALIPAY_SET_START_PARAM = 207204; 
-    RECEIVE_SDK_DAILY_REWARD = 207205;  
-    GET_WECHAT_RANK_WHITE_LIST = 212601; 
+    ReceiveSdkRewardPb_RECEIVE_SDK_REWARD_SYN = 207201;
+    ReceiveSdkRewardPb_RECEIVE_SDK_REWARD = 207202;
+    QQCARD_GET_REWARD = 207203;
+    ALIPAY_SET_START_PARAM = 207204;
+    RECEIVE_SDK_DAILY_REWARD = 207205;
+    GET_WECHAT_RANK_WHITE_LIST = 212601;
+    MEITUAN_SET_START_PARAM = 207206;
+    APLIPAY_GAMECIRCLE = 207207;
+    JD_SET_START_PARAM = 207208;
+    SDK_REWARD_RECEIVE_SDK_DAILY_REWARD = 207209;
 }
 message ReceiveSdkRewardSyn {
-    required string bit = 1;            
-    optional ReceiveSdkDailyRewardData dailyRewardData = 2; 
+    required string bit = 1;
+    optional ReceiveSdkDailyRewardData dailyRewardData = 2;
+    repeated SdkDailyRewardInfo dailyList = 3;
+    optional int32 isCanDyToApp = 4;
 }
 message ReceiveSdkRewardReq {
     optional SdkRewardTypeEnum type = 1;
@@ -18,16 +24,21 @@ message ReceiveSdkRewardReq {
 message ReceiveSdkRewardRsp {
     required int32 ret = 1;
     repeated AwardInfo awardInfoList = 2;
-    required string bit = 3;            
+    required string bit = 3;
 }
 enum SdkRewardTypeEnum{
-    SdkRewardTypeEnum_1 = 1;    
-    SdkRewardTypeEnum_2 = 2;    
-    SdkRewardTypeEnum_3 = 3;    
-    SdkRewardTypeEnum_4 = 4;    
-    SdkRewardTypeEnum_5 = 5;    
-    SdkRewardTypeEnum_6 = 6;    
-    SdkRewardTypeEnum_7 = 7;    
+    SdkRewardTypeEnum_1 = 1;
+    SdkRewardTypeEnum_2 = 2;
+    SdkRewardTypeEnum_3 = 3;
+    SdkRewardTypeEnum_4 = 4;
+    SdkRewardTypeEnum_5 = 5;
+    SdkRewardTypeEnum_6 = 6;
+    SdkRewardTypeEnum_7 = 7;
+    SdkRewardTypeEnum_8 = 8;
+    SdkRewardTypeEnum_9 = 9;
+    SdkRewardTypeEnum_10 = 10;
+    SdkRewardTypeEnum_11 = 11;
+    SdkRewardTypeEnum_12 = 12;
 }
 message QQCardGetRewardReq {
     required string openId =1;
@@ -41,6 +52,12 @@ message AlipayStartParamReq {
 message AlipayStartParamRsp {
     required int32 ret = 1;
 }
+message MeiTuanStartParamReq {
+    required string innerSource = 1;
+}
+message MeiTuanStartParamRsp {
+    required int32 ret = 1;
+}
 message GetWechatRankWhiteListReq {
 }
 message GetWechatRankWhiteListRsp {
@@ -49,18 +66,50 @@ message GetWechatRankWhiteListRsp {
 }
 message ReceiveSdkDailyRewardData {
     optional SdkDailyRewardTypeEnum type = 1;
-    optional int64 firstRewardTime = 2;     
-    optional string bit = 3;                
+    optional int64 firstRewardTime = 2;
+    optional string bit = 3;
 }
 enum SdkDailyRewardTypeEnum{
-    SdkDailyRewardTypeEnum_1 = 1;    
-    SdkDailyRewardTypeEnum_2 = 2;    
+    SdkDailyRewardTypeEnum_1 = 1;
+    SdkDailyRewardTypeEnum_2 = 2;
+    SdkDailyRewardTypeEnum_3 = 3;
+    SdkDailyRewardTypeEnum_4 = 4;
+    SdkDailyRewardTypeEnum_5 = 5;
+    SdkDailyRewardTypeEnum_6 = 6;
 }
 message ReceiveSdkDailyRewardReq {
     optional SdkDailyRewardTypeEnum type = 1;
-    optional int32 index = 2; 
+    optional int32 index = 2;
 }
 message ReceiveSdkDailyRewardRsp {
     required int32 ret = 1;
     optional ReceiveSdkDailyRewardData data = 2;
+}
+message AlipayGameCircleReq {
+    required int32 type = 1;
+    required int32 times = 2;
+}
+message AlipayGameCircleResp {
+    required int32 ret = 1;
+}
+message JdStartParamReq {
+  optional string assignmentToken = 1;
+  optional string encryptAssignmentId = 2;
+  optional string actionType = 3;
+}
+message JdStartParamRsp {
+  optional int32 ret = 1;
+}
+message SdkDailyRewardInfo {
+    optional SdkDailyRewardTypeEnum type = 1;
+    optional int64 lastGainAt = 2;
+    optional int32 totalGainCount = 3;
+}
+message ReceiveSdkDailyRewardReqNew {
+    optional SdkDailyRewardTypeEnum type = 1;
+}
+message ReceiveSdkDailyRewardRspNew {
+    optional int32 ret = 1;
+    repeated AwardInfo awardInfoList = 2;
+    optional SdkDailyRewardInfo dailyInfo = 3;
 }

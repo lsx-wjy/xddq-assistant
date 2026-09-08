@@ -1,0 +1,8 @@
+package com.yq.msg.CityMsg;
+message SevenDaysSignInRepairReq {
+    optional int32 activityId = 1;
+}
+message SevenDaysSignInRepairRsp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}

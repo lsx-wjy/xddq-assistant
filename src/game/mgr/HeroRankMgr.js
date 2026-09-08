@@ -2,12 +2,15 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
-import account from "../../../account.js";
+import account from "#config/runtimeAccount.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
+import { localDateKey } from '#game/common/localDateKey.js';
 
 export default class HeroRankMgr {
     constructor() {
         this.isProcessing = false;
         this.enabled = account.switch.herorank || false;
+        this.lastRunDay = '';
         this.buyNumDaily = 0;
         this.buyNumMax = 10;
         LoopMgr.inst.add(this);
@@ -26,18 +29,14 @@ export default class HeroRankMgr {
 
     SyncData(t) {
         logger.debug("[群英镑管理] 初始化");
+        this.enabled = isAutomationTaskEnabled('challenge.hero-rank') && account.activities?.allowCombat === true;
+        if (!this.enabled && !(isAutomationTaskEnabled('shop.hero-rank-peach') && account.activities?.allowPurchase === true)) return;
         this.energy = t.energy || 0;
         this.buyNumDaily = t.buyNumDaily || 0;
-        if (this.enabled) {
-            if (this.buyNumDaily < this.buyNumMax) {
-                const num = this.buyNumMax - this.buyNumDaily;
-                logger.info(`[群英镑管理] 购买体力 ${num}次`);
-                GameNetMgr.inst.sendPbMsg(Protocol.S_HERORANK_BUY_ENERGY, { num: num }, null);
-                this.buyNumDaily = this.buyNumMax;
-            }
+        if (isAutomationTaskEnabled('shop.hero-rank-peach') && account.activities?.allowPurchase === true) {
+            logger.info('[群英榜管理] 购买商店桃子');
+            GameNetMgr.inst.sendPbMsg(Protocol.S_MALL_BUY_GOODS, {mallId: 250000001, count: 1, activityId: 0}, null);
         }
-        // 群英镑商店买桃
-        GameNetMgr.inst.sendPbMsg(Protocol.S_MALL_BUY_GOODS, {mallId: 250000001, count: 1, activityId: 0}, null);    
     }
 
     findFirstHeroRankPlayer(body) {
@@ -48,6 +47,7 @@ export default class HeroRankMgr {
     }
 
     getFightList(t) {
+        if (!this.enabled) return;
         this.isProcessing = true;
         logger.debug(`[群英镑管理] 收到群英镑列表${JSON.stringify(t, null, 2)}`);
         if (t.ret === 0) {
@@ -72,6 +72,7 @@ export default class HeroRankMgr {
     }
 
     async doFight(t) {
+        if (!this.enabled) return;
         this.isProcessing = true;
         logger.debug(`[群英镑] 收到群英镑战斗结果${JSON.stringify(t, null, 2)}`);
         if (t.ret === 0) {
@@ -79,6 +80,7 @@ export default class HeroRankMgr {
             if (t.allBattleRecord.isWin) {
                 logger.info(`[群英镑] 当前排名: ${t.rank} 战斗胜利, 再次请求列表...`);
                 await new Promise((resolve) => setTimeout(resolve, 2000));
+                GameNetMgr.inst.sendPbMsg(Protocol.S_HERORANK_GET_FIGHT_LIST, { type: 0 }, null);
             }
         }
         this.isProcessing = false;
@@ -95,12 +97,12 @@ export default class HeroRankMgr {
             const isZeroFive = now.getHours() === 0 && now.getMinutes() === 5;
 
             if (!this.enabled || this.energy < 1 || this.rank === 1 || !isMonday) {
-                logger.info("[群英镑管理] 停止循环。今天不是周一, 或者体力不足, 或者已经打到第一名, 或者未开启速通群英榜");
-                this.clear();
                 return;
             }
 
-            if (this.enabled && this.energy > 0 && isZeroFive) {
+            const today = localDateKey(now);
+            if (this.enabled && this.energy > 0 && isZeroFive && this.lastRunDay !== today) {
+                this.lastRunDay = today;
                 logger.info("[群英镑管理] 开始快速打群英镑");
                 GameNetMgr.inst.sendPbMsg(Protocol.S_HERORANK_GET_FIGHT_LIST, { type: 0 }, null);
             }

@@ -2,6 +2,7 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class PupilMgr {
     constructor() {
@@ -41,6 +42,7 @@ export default class PupilMgr {
     }
 
     async checkGraduatation(t) {
+        if (!isAutomationTaskEnabled('cave.pupil-management')) return;
         if (t.ret === 0) {
             // 判断是否可以招人
             const invitationCount = this.countElementsWithoutPupilData(t.siteList);
@@ -66,6 +68,15 @@ export default class PupilMgr {
         }
     }
 
+    async handlePupilData(t) {
+        this.checkReward(t);
+        await this.checkGraduatation(t);
+        if (isAutomationTaskEnabled('cave.pupil-training') && t.ret === 0) {
+            logger.info('[宗门管理] 执行弟子一键训练');
+            GameNetMgr.inst.sendPbMsg(Protocol.S_PUPIL_TRAIN, { isOneKey: 1 }, null);
+        }
+    }
+
     processReward() {
         const now = Date.now();
         if (this.getAdRewardTimes < this.AD_REWARD_DAILY_MAX_NUM && now - this.lastAdRewardTime >= this.AD_REWARD_CD) {
@@ -77,6 +88,7 @@ export default class PupilMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('cave.ad-pupil')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

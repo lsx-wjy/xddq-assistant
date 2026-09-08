@@ -1,0 +1,134 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Palace";
+enum DoubleSeventhPb{
+  double_seventh_player_list = 216101;
+  double_seventh_send_flower = 216102;
+  double_seventh_gift_list = 216103;
+  double_seventh_gift_receive = 216104;
+  double_seventh_gift_search_player = 216105;
+  double_seventh_send_gift_reward = 216106;
+  double_seventh_send_gift_sync_msg = 216107;
+}
+message DoubleSeventhPlayerData{
+  optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+  optional int32 send = 2;
+  optional int32 receive = 3;
+  optional int64 score = 4;
+  repeated DoubleSeventhLimitData limitData = 5;
+}
+message DoubleSeventhPlayerListReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message DoubleSeventhPlayerListResp {
+  required int32 ret = 1;
+  repeated DoubleSeventhPlayerData playerData = 2;
+}
+message DoubleSeventhSendFlowerReq {
+  required int32 activityId = 1;
+  required int64 otherPlayerId = 2;
+  required int32 flower = 3;
+  optional int32 num = 4;
+  optional int32 word = 5;
+  optional int64 playerId = 6;
+  optional bool isSystem = 7;
+  optional int32 score = 8;
+  optional int32 type = 9;
+}
+message DoubleSeventhSendFlowerResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional PlayerHeadAndNameMsg headInfo = 3;
+  optional int32 flowerNum = 4;
+  optional int32 addScore = 5;
+  optional int32 flower = 6;
+  optional DoubleSeventhLimitData limitData = 7;
+  optional DoubleSeventhSendGiftDataMsg sendGiftData= 8;
+}
+message DoubleSeventhGiftListReq {
+  required int32 activityId = 1;
+}
+message DoubleSeventhGiftListResp {
+  required int32 ret = 1;
+  repeated DoubleSeventhGiftData giftData = 2;
+  repeated DoubleSeventhLimitData limitData = 3;
+}
+message DoubleSeventhGiftData {
+  optional int32 flower = 1;
+  optional int32 num = 2;
+  optional int32 gift = 3;
+  optional int32 giftNum = 4;
+  optional PlayerBaseDataMsg headInfo = 5;
+}
+message DoubleSeventhLimitData {
+  optional int32 flower = 1;
+  optional int32 giftNum = 2;
+  optional int32 score = 3;
+}
+message DoubleSeventhGiftReceiveReq {
+  required int32 activityId = 1;
+}
+message DoubleSeventhGiftReceiveResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 addScore = 3;
+  repeated DoubleSeventhSendGiftDataMsg sendGiftData= 4;
+}
+message DoubleSeventhSearchPlayerReq {
+  required int32 activityId = 1;
+  required string searchKey = 2;
+  optional int64 serverId = 3;
+}
+message DoubleSeventhSearchPlayerResp {
+  required int32 ret = 1;
+  optional DoubleSeventhSearchPlayerMsg playerMsg = 2;
+}
+message DoubleSeventhSearchPlayerMsg {
+  optional DoubleSeventhPlayerData playerData = 1;
+}
+message DoubleSeventhList {
+  repeated DoubleSeventhRankMsg rankList = 1;
+}
+message DoubleSeventhRankMsg {
+  optional int64 playerId = 1;
+  optional PlayerCharacterImageMsg playerBaseData = 2;
+  optional int32 value = 3;
+  optional PlayerCharacterImageMsg headInfo = 4;
+}
+message DoubleSeventhEnterReq{
+  required int32 activityId = 1;
+}
+message DoubleSeventhEnterResp{
+  required int32 ret = 1;
+  repeated int64 serverList = 2;
+  optional int32 giftNum = 3;
+}
+message DoubleSeventhPlayerScoreRankReq{
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+  optional int64 selfPlayerId = 3;
+}
+message DoubleSeventhPlayerScoreRankResp {
+  optional int32 ret = 1;
+  optional RankMsg rankMsg = 2;
+  optional int64 selfPlayerId = 3;
+}
+message DoubleSeventhSendGiftDataMsg{
+  optional string id = 1;
+  required PalacePlayerShowMsg playerData = 2;
+  required PalacePlayerShowMsg otherPlayerData = 3;
+  optional int64 expiredTime = 4;
+  repeated int32 title = 5;
+  optional string words = 6;
+  optional string param = 7;
+  optional SendGiftType type = 8;
+}
+message DoubleSeventhGetSendScoreReq{
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+}
+message DoubleSeventhGetSendScoreResp {
+  optional int32 ret = 1;
+  optional int64 score = 2;
+}

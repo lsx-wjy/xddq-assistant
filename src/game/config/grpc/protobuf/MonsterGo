@@ -1,0 +1,247 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum MonsterGoPb {
+  MonsterGo_Enter = 232701;
+  MonsterGo_Match = 232702;
+  MonsterGo_SelectMonster = 232703;
+  MonsterGo_MatchSuccessSync = 232704;
+  MonsterGo_FullFrameSync = 232705;
+  MonsterGo_ShowCard = 232706;
+  MonsterGo_ShowCardSync = 232707;
+  MonsterGo_SelectSync = 232708;
+  MonsterGo_SelectFullSync = 232709;
+  MonsterGO_DrawCardSync = 232710;
+  MonsterGo_SettleSync = 232711;
+  MonsterGo_FinalSettleSync = 232712;
+  MonsterGo_FullFrame = 232713;
+  MonsterGO_PlayerBaseReq = 232720;
+  MonsterGo_StartRoom = 232717;
+  MonsterGo_CreateRoom = 232714;
+  MonsterGo_JoinRoom = 232715;
+  MonsterGo_JoinRoomSync = 232716;
+  MonsterGo_RoomDissolveSync = 232721;
+  MonsterGo_LeaveRoom = 232722;
+  MonsterGo_PlayerLeaveSync = 232723;
+  MonsterGo_KickPlayer = 232718;
+  MonsterGo_KickPlayerSync = 232719;
+  MonsterGo_BeginBattleSync = 232728;
+  MonsterGo_Emotion = 232724;
+  MonsterGo_EmotionSync = 232725;
+  MonsterGo_GetReport = 232726;
+  MonsterGo_RedPointSync = 232729;
+}
+enum MonsterGoEnumRedPoint {
+  RedPoint_Gift = 0;
+  RedPoint_Achieve = 1;
+  RedPoint_Token = 2;
+}
+message MonsterGoEnterReq {
+}
+message MonsterGoEnterRsp {
+  required int32 ret = 1;
+  optional int32 state = 2;
+  optional int32 exp = 3;
+  optional int32 levelRank = 4;
+  optional string systemOpenValue = 5;
+  optional string redPoint = 6;
+  optional int32 groupId = 7;
+  optional int32 roud = 8;
+}
+message MonsterGoRedPointSync {
+  required string redPoint = 1;
+}
+message MonsterGoMatchReq {
+  required int32 mul = 1;
+}
+message MonsterGoMatchRsp {
+  required int32 ret = 1;
+  optional int64 joinTime = 2;
+  optional int32 multi = 3;
+}
+message MonsterGoSelectMonsterReq {
+  required int32 monsterId = 1;
+}
+message MonsterGoSelectMonsterRsp {
+  required int32 ret = 1;
+  optional int32 battleMonsterId = 2;
+}
+message MonsterGoFullFrameSync {
+  required int32 totalTime = 1;
+  required bool begin = 2;
+  required int64 createTime = 3;
+  required int64 beginTime = 4;
+  required int64 roomOwner = 5;
+  required int32 round = 6;
+  required int64 roundBeginTime  = 7;
+  repeated MonsterGoPlayerFullData players = 8;
+  required int32 roomId = 9;
+  required int64 autoResetTime = 10;
+}
+message MonsterGoPlayerFullData {
+  required int64 playerId = 1;
+  required int32 monsterId = 2;
+  required float distance = 3;
+  required int64 lastOperateTime = 4;
+  repeated MonsterGoCardData totalCards = 5;
+  repeated MonsterGoBuffData buffs = 6;
+  repeated int32 finishTimes = 7;
+  repeated int32 battleMonsterIds = 8;
+  repeated int32 ranks = 9;
+  required int32 exp = 10;
+}
+message MonsterGoCardData {
+  optional int32 id = 1;
+  optional int32 num = 2;
+  optional int32 skillId = 3;
+}
+message MonsterGoBuffData {
+  required int32 skillId = 1;
+  required int32 beginTime = 2;
+  optional float value = 3;
+}
+message MonsterGoMatchSuccessSync {
+  repeated MonsterGoMatchPlayerData players = 1;
+  required int32 roomId = 2;
+  required int64 successTime = 3;
+}
+message MonsterGoMatchPlayerData {
+  required int64 playerId = 1;
+  optional int32 level = 2;
+}
+message MonsterGoShowCardReq {
+  repeated int32 cards = 1;
+}
+message MonsterGoShowCardRsp {
+  required int32 ret = 1;
+  optional int64 lastOperateTime = 2;
+}
+message MonsterGoShowCardSync {
+  required int32 totalTime = 1;
+  required int64 showPlayerId = 2;
+  repeated MonsterGoCardData cards = 3;
+  repeated MonsterGoPlayerFewData players = 4;
+}
+message MonsterGoPlayerFewData {
+  required int64 playerId = 1;
+  required float distance = 3;
+  repeated MonsterGoBuffData buffs = 4;
+  repeated MonsterGoBuffData shieldBuffs = 5;
+}
+message MonsterGoSelectSync {
+  required int64 playerId = 1;
+}
+message MonsterGoSelectFullSync {
+  repeated int64 playerIds = 1;
+  repeated int32 battleMonsterIds = 2;
+  required int64 selectAllTime = 3;
+}
+message MonsterGoDrawCardSync {
+  required int64 playerId = 1;
+  repeated MonsterGoCardData cards = 2;
+}
+message MonsterGoSettleSync {
+  repeated MonsterGoSettleData settleDatas = 1;
+  required int64 allFinishTime = 2;
+}
+message MonsterGoSettleData {
+  required int64 playerId = 1;
+  required int32 rank = 2;
+  required int32 score = 3;
+  required int32 finishTime = 4;
+}
+message MonsterGoFinalSettleSync {
+  repeated MonsterGoFinalSettleData finalSettleDatas = 1;
+}
+message MonsterGoFinalSettleData {
+  required int64 playerId = 1;
+  required int32 rank = 2;
+  optional int32 levelRank = 3;
+  optional int32 exp = 4;
+  optional string reward = 5;
+}
+message MonsterGoFullFrameReq {
+}
+message MonsterGoFullFrameRsp {
+  required int32 ret = 1;
+  optional MonsterGoFullFrameSync data = 2;
+}
+message MonsterGoCreateRoomReq {
+}
+message MonsterGoCreateRoomRsp {
+  required int32 ret = 1;
+  optional int32 roomId = 2;
+}
+message MonsterGoJoinRoomReq {
+  required int32 roomId = 1;
+}
+message MonsterGoJoinRoomRsp {
+  required int32 ret = 1;
+  repeated MonsterGoMatchPlayerData players = 2;
+}
+message MonsterGoJoinRoomSync {
+  required MonsterGoMatchPlayerData players = 1;
+}
+message MonsterGoStartRoomReq {
+}
+message MonsterGoStartRoomRsp {
+  required int32 ret = 1;
+}
+message MonsterGoKickPlayerReq {
+  required int64 targetPlayerId = 1;
+}
+message MonsterGoKickPlayerRsp {
+  required int32 ret = 1;
+}
+message MonsterGoKickPlayerSync {
+  required int64 targetPlayerId = 1;
+}
+message MonsterGoPlayerBaseReq {
+  repeated int64 players = 1;
+  required int32 roomId = 2;
+}
+message MonsterGoPlayerBaseRsp {
+  required int32 ret = 1;
+  repeated PlayerBaseDataMsg players = 2;
+}
+message MonsterGoDissolveRoomSync {
+}
+message MonsterGoLeaveRoomReq {
+}
+message MonsterGoLeaveRoomRsp {
+  required int32 ret = 1;
+}
+message MonsterGoPlayerLeaveSync {
+  required int64 playerId = 1;
+}
+message MonsterGoEmotionReq {
+  required int32 emotionId = 1;
+}
+message MonsterGoEmotionRsp {
+  required int32 ret = 1;
+}
+message MonsterGoEmotionSync {
+  required int64 playerId = 1;
+  required int32 emotionId = 2;
+}
+message MonsterGoGetReportReq {
+}
+message MonsterGoGetReportRsp {
+  required int32 ret = 1;
+  repeated MonsterGoReportData reports = 2;
+}
+message MonsterGoReportData {
+  repeated MonsterGoReportPlayerData players = 1;
+  required int64 time = 2;
+}
+message MonsterGoReportPlayerData {
+  required PlayerHeadAndNameMsg playerInfo = 1;
+  repeated int32 finishList = 2;
+  repeated int32 monsterList = 3;
+  required int32 score = 4;
+  required int32 exp = 5;
+  required int32 rank = 6;
+}
+message MonsterGoBeginBattleSync {
+  required int32 round = 1;
+  required int64 roundBeginTime = 2;
+}

@@ -1,0 +1,7 @@
+package com.yq.msg.CityMsg;
+enum MultipleRechargesPb {
+    MultipleRecharges_Sync = 235201;
+}
+message MultipleRechargesPlayerDataMsg {
+    repeated int32 buyMallId = 1;
+}

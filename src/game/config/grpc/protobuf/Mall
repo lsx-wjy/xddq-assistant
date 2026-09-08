@@ -1,42 +1,81 @@
 package com.yq.msg.CityMsg;
     message MallBuyCountTempMsg {
-        required int32 mallId =1;          
-        required int32 count =2;           
+        required int32 mallId =1;
+        required int32 count =2;
     }
     message MallTempMsg {
-        optional int32 id = 1; 
-        optional string name = 2; 
-        optional int32 shopType = 3; 
-        optional string reward = 4; 
-        optional int32 category = 5; 
-        optional string price = 6; 
-        optional string oldPrice = 7; 
-        optional int32 priceAdd = 8; 
-        optional bool isDouble = 9; 
-        optional int32 buyLimitType = 10; 
-        optional int32 buyLimit = 11; 
-        optional int32 sort = 12; 
-        optional string param = 13; 
-        optional int32 vipLimit = 14; 
-        optional string rechargeId = 15; 
+        optional int32 id = 1;
+        optional string name = 2;
+        optional int32 shopType = 3;
+        optional string reward = 4;
+        optional int32 category = 5;
+        optional string price = 6;
+        optional string oldPrice = 7;
+        optional int32 priceAdd = 8;
+        optional bool isDouble = 9;
+        optional int32 buyLimitType = 10;
+        optional int32 buyLimit = 11;
+        optional int32 sort = 12;
+        optional string param = 13;
+        optional int32 vipLimit = 14;
+        optional string rechargeId = 15;
+        optional string fundParam = 16;
     }
     message MallBuyCountListMsg {
         repeated MallBuyCountTempMsg mallBuyCountList = 1;
     }
     message BuyGoodsReq {
-        required int32 mallId = 1;          
-        required int32 count = 2;           
-        optional int32 activityId = 3;      
+        required int32 mallId = 1;
+        required int32 count = 2;
+        optional int32 activityId = 3;
+        optional string extra = 4;
+        optional bool isUseADTime = 5;
     }
     message BuyGoodsResp {
-        required int32  ret = 1;            
-        optional int32  mallId =2;          
-        optional string reward =3;          
+        required int32  ret = 1;
+        optional int32  mallId =2;
+        optional string reward =3;
+        optional string extra = 4;
     }
     message MallRandomGoodsReqMsg{
-        required int32 shopType = 1;       
+        required int32 shopType = 1;
     }
     message MallRandomGoodsRespMsg{
         required int32 ret = 1;
-        repeated MallTempMsg mallGoods = 2;     
+        repeated MallTempMsg mallGoods = 2;
+    }
+    message BackendMallConfigMsg {
+        optional MallTempMsg baseInfo = 1;
+        optional int32 model = 2;
+        optional string unlockParam = 3;
+    }
+    message GetBackendMallConfigReq {
+        optional int32 shopType = 1;
+        optional int32 model = 2;
+    }
+    message GetBackendMallConfigResp {
+        optional int32 ret = 1;
+        repeated BackendMallConfigMsg configList = 2;
+    }
+    message MallSelectItemMsg {
+        required int32 index = 1;
+        required int32 selectIndex = 2;
+    }
+    message SelectMallRewardMsg {
+        required int32 mallId = 1;
+        repeated MallSelectItemMsg selectItem = 2;
+    }
+    message SelectMallRewardReq {
+        required int32 activityId = 1;
+        repeated SelectMallRewardMsg rewardMsg = 2;
+    }
+    message SelectMallRewardRsp {
+        required int32 ret = 1;
+    }
+    message SelectMallDataList {
+        optional int32 activityId = 1;
+        repeated SelectMallRewardMsg mallSelectList = 2;
+    }
+    message SelectMallRewardSync {
+        repeated SelectMallDataList selectMallDataList = 1;
     }

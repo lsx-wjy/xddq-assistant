@@ -1,0 +1,72 @@
+package com.yq.msg.CityMsg;
+import "ActivityBase";
+enum MarbleProtocols {
+    marble_draw = 234301;
+    marble_hit_reward_select = 234302;
+    marble_hit_reward_receive = 234304;
+ }
+ message MarbleConfigSync {
+   repeated MarbleActionConfigMsg actionConfigs = 1;
+   repeated MarbleStarLoopConfigMsg starLoopConfigs = 2;
+ }
+ message MarbleActionConfigMsg {
+   optional int32 activityId = 1;
+   optional int32 id = 2;
+   optional int32 entry = 3;
+   optional int32 hitLeft = 4;
+   optional int32 hitRight = 5;
+   optional int32 returnPosition = 6;
+   optional string actionDate = 7;
+ }
+ message MarbleStarLoopConfigMsg {
+   optional int32 activityId = 1;
+   optional int32 id = 2;
+   optional int32 type = 3;
+   optional int32 round = 4;
+   optional int32 hitNumber = 5;
+   optional string reward = 6;
+   optional int32 grandPrice = 7;
+ }
+ /** 玩家数据 **/
+ message MarblePlayerDataMsg{
+   optional int32 totalHitLeftCount = 1;
+   optional int32 totalHitRightCount = 2;
+   repeated MarbleSelectMsg selectedInfo = 3;
+   repeated MarbleHitReceiveRecord receiveRecords = 4;
+ }
+ message MarbleHitReceiveRecord {
+   optional int32 rewardId = 1;
+   optional int32 count = 2;
+ }
+ message MarbleDrawReq {
+   optional int32 activityId = 1;
+   optional int32 times = 2;
+ }
+ message MarbleDrawResp {
+   optional int32 ret = 1;
+   optional string reward = 2;
+   optional MarblePlayerDataMsg playerData = 3;
+   repeated int32 resultList = 4;
+ }
+ message MarbleSelectHitRewardReq {
+   optional int32 activityId = 1;
+   repeated SelectConditionRewardMsg rewardMsg = 2;
+ }
+ message MarbleSelectHitRewardResp {
+   optional int32 ret = 1;
+   repeated MarbleSelectMsg selectedInfo = 2;
+ }
+ message MarbleReceiveMarbleRewardReq {
+   optional int32 activityId = 1;
+   optional bool left = 2;
+   repeated int32 rewardIdList = 3;
+ }
+ message MarbleReceiveMarbleRewardResp {
+   optional int32 ret = 1;
+   optional string reward = 2;
+   repeated MarbleHitReceiveRecord records = 3;
+ }
+ message MarbleSelectMsg {
+   optional int32 rewardId = 1;
+   optional int32 rewardIndex = 2;
+ }

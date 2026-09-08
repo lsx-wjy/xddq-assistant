@@ -1,0 +1,267 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum DestinyFightPb{
+  destinyFightEnter = 230701;
+  destinyFightGetTask = 230702;
+  destinyFightGetTaskAward = 230703;
+  destinyFightDestinyList = 230704;
+  destinyFightRefreshBattleList = 230705;
+  destinyFightBattle = 230706;
+  destinyFightSearch = 230707;
+  destinyFightSearchRecord = 230708;
+  destinyFightBattleLog = 230709;
+  destinyFightPoolLvUp = 230710;
+  destinyFightPoolPosUp = 230711;
+  destinyFightCancelTask = 230712;
+  destinyFightLeaveBattle = 230714;
+  destinyFightEnterBattle = 230715;
+  destinyFightPlayerTaskList = 230716;
+  destinyFightLike = 230717;
+  destinyFightRedPointInfo = 230718;
+  destinyFightFlowerAttr = 230719;
+  destinyFightCheckBattle = 230720;
+  destinyFightOperatePreSet = 230721;
+}
+enum DestinyFightRedPointEnum {
+  destinyFightRankLikeRedPoint = 0;
+  destinyFightBattleLogRedPoint = 1;
+  destinyEnterBattleRedPoint = 2;
+}
+message DestinyFightCommonReq{
+}
+message DestinyFightEnterReq {
+}
+message DestinyFightEnterResp {
+  required int32 ret = 1;
+  repeated DestinyFightBattleInfo taskInfo = 2;
+  optional bool hasLike = 3;
+  repeated int32 taskNum = 4;
+  optional int32 robNum = 5;
+  repeated DestinyFightPreSetInfo preSetInfo = 6;
+}
+message DestinyFightGetTaskReq {
+  repeated int32 destinyId = 1;
+  optional int32 doubleItem = 2;
+  required int32 taskId = 3;
+  required int32 pos = 4;
+  optional int32 doubleItemNum = 5;
+  optional int32 preSetNo = 6;
+}
+message DestinyFightGetTaskResp {
+  required int32 ret = 1;
+  repeated DestinyFightBattleInfo taskInfo = 2;
+  optional int32 taskNum = 3;
+}
+message DestinyFightCancelTaskReq {
+  required int64 id = 1;
+}
+message DestinyFightCancelTaskResp {
+  required int32 ret = 1;
+}
+message DestinyFightGetTaskAwardReq {
+  required int64 id = 1;
+  optional bool getAllRewards = 2;
+}
+message DestinyFightGetTaskAwardResp {
+  required int32 ret = 1;
+  repeated DestinyFightGetTaskAwardInfo awards = 2;
+}
+message DestinyFightGetTaskAwardInfo {
+  optional string rewards = 1;
+  repeated DestinyFightRobInfo robInfo = 2;
+  optional int32 allRewardsNum = 3;
+  optional int32 teamNum = 4;
+}
+message DestinyFightRobInfo {
+  required string name = 1;
+  required int32 num = 2;
+}
+message DestinyFightDestinyListReq {
+}
+message DestinyFightDestinyListResp {
+  required int32 ret = 1;
+  repeated DestinyFightDestinyInfo destinyInfo = 2;
+}
+message DestinyFightDestinyInfo {
+  required int32 destinyId = 1;
+  required int32 energy = 2;
+  optional int32 taskId = 3;
+  required int32 phy = 4;
+  required string power = 5;
+  optional int64 id = 6;
+}
+message DestinyFightEnterBattleReq {
+}
+message DestinyFightEnterBattleResp {
+  required int32 ret = 1;
+  repeated DestinyFightBattleInfo battleInfo = 2;
+  optional int32 refreshNum = 3;
+  optional int32 robNum = 4;
+  repeated int64 serverId = 5;
+}
+message DestinyFightLeaveBattleReq {
+}
+message DestinyFightLeaveBattleResp {
+  required int32 ret = 1;
+}
+message DestinyFightRefreshBattleListReq {
+  optional bool isRefresh = 1;
+}
+message DestinyFightRefreshBattleListResp {
+  required int32 ret = 1;
+  repeated DestinyFightBattleInfo battleInfo = 2;
+  optional int32 refreshNum = 3;
+}
+message  DestinyFightBattleInfo {
+  repeated DestinyFightDestinyBattleInfo destinyBattleInfo = 1;
+  required int64 endTime = 2;
+  required int32 taskId = 3;
+  optional PlayerBaseDataMsg playerInfo = 4;
+  optional int32 pos = 5;
+  optional int32 doubleItem = 6;
+  required int64 id = 7;
+  optional bool canBattle = 8;
+  optional int32 robNum = 9;
+  optional int32 doubleItemNum = 10;
+}
+message DestinyFightDestinyBattleInfo {
+  required int32 destinyId = 1;
+  required string power = 2;
+  optional int32 favor = 3;
+  optional int32 skinId = 4;
+  optional int32 linkageId = 5;
+  optional int32 cardGroupLv = 6;
+  optional int32 equipCardId = 7;
+}
+message DestinyFightBattleReq {
+  required int64 id = 1;
+  optional int64 reportId = 2;
+  repeated int32 destinyId = 3;
+  required int32 type = 4;
+  optional int64 playerId = 5;
+}
+message DestinyFightBattleResp {
+  required int32 ret = 1;
+  optional bool win = 2;
+  repeated DestinyFightDestinyBattleInfo battleInfo = 3;
+  repeated DestinyFightDestinyBattleInfo otherBattleInfo = 4;
+  optional string rewards = 5;
+  optional PlayerBaseDataMsg otherPlayerInfo = 6;
+  optional int32 robNum = 7;
+  optional int32 itemNum = 8;
+  optional int32 reduceNum = 9;
+}
+message DestinyFightSearchReq{
+  required string searchKey = 1;
+  optional int64 serverId = 2;
+}
+message DestinyFightSearchResp {
+  required int32 ret = 1;
+  optional DestinyFightPlayerData playerInfo = 2;
+}
+message DestinyFightPlayerData{
+  optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+  repeated DestinyFightBattleInfo taskInfo = 2;
+  optional string power = 3;
+  optional int64 createTime = 4;
+  optional bool hasTask = 5;
+}
+message DestinyFightSearchRecordReq{
+}
+message DestinyFightSearchRecordResp{
+  required int32 ret = 1;
+  repeated DestinyFightPlayerData playerInfo = 2;
+}
+message DestinyFightBattleLogReq{
+}
+message DestinyFightBattleLogResp{
+  required int32 ret = 1;
+  repeated DestinyFightBattleLogInfo logInfo = 2;
+}
+message DestinyFightBattleLogInfo{
+  required DestinyFightPlayerData playerInfo = 1;
+  required int32 battleNum = 2;
+  required bool win = 3;
+  optional string lose = 4;
+  required int64 createTime = 5;
+  required int64 logId = 6;
+  optional int32 myTeamNum = 7;
+}
+message DestinyFightPoolLvUpReq{
+  optional int32 oneKey = 1;
+}
+message DestinyFightPoolLvUpResp{
+  required int32 ret = 1;
+  optional int32 lv = 2;
+  optional int32 curItemAccount = 3;
+}
+message DestinyFightPoolPosUpReq{
+  required int32 destinyId = 1;
+  required int32 pos = 2;
+}
+message DestinyFightPoolPosUpResp{
+  required int32 ret = 1;
+  optional int32 destinyId = 2;
+  optional int32 pos = 3;
+}
+message DestinyFightRankData {
+  required int64 playerId = 1;
+  optional PlayerCharacterImageMsg playerCharacterImageMsg = 2;
+  required string value = 3;
+  required int32 rank = 4;
+  repeated DestinyFightDestinyBattleInfo destinyInfo = 5;
+}
+message DestinyFightRankList {
+  repeated DestinyFightRankData rankInfo = 1;
+}
+message DestinyFightPlayerTaskListReq{
+  required int64 playerId = 1;
+}
+message DestinyFightPlayerTaskListResp{
+  required int32 ret = 1;
+  repeated DestinyFightBattleInfo taskInfo = 2;
+  optional PlayerBaseDataMsg playerBaseDataMsg = 3;
+}
+message DestinyFightLikeReq{
+}
+message DestinyFightLikeResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional PlayerCharacterImageMsg playerCharacterImageMsg = 3;
+}
+message DestinyFightRedPointInfoReq{
+}
+message DestinyFightRedPointInfoResp{
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message DestinyFightFlowerAttrReq{
+}
+message DestinyFightFlowerAttrResp{
+  optional int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+}
+message DestinyFightEnterRedExtVal{
+  repeated int32 pos = 1;
+  repeated int32 destInyId = 2;
+  optional bool canRedPoint = 3;
+}
+message DestinyFightCheckBattleReq{
+  required int64 id = 1;
+}
+message DestinyFightCheckBattleResp{
+  optional int32 ret = 1;
+  optional int32 type = 2;
+}
+message DestinyFightPreSetInfo {
+  required int32 no = 1;
+  repeated DestinyFightDestinyBattleInfo destinyBattleInfo = 2;
+}
+message DestinyFightOperatePreSetReq{
+  repeated int32 destinyId = 1;
+  required int32 preSetNo = 2;
+}
+message DestinyFightOperatePreSetResp{
+  required int32 ret = 1;
+  optional DestinyFightPreSetInfo preSetInfo = 2;
+}

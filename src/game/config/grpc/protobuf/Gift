@@ -1,0 +1,120 @@
+package com.yq.msg.CityMsg;
+option java_package = "com.yanqu.xiuxian.pb.player";
+import "WatchPlayer";
+enum GiftPb {
+    S_GIFT_SEND_REQ          = 290101;
+    S_GIFT_SEND_RESP         = 290102;
+    S_GIFT_RECEIVE           = 290103;
+    S_GIFT_SEND_RESP_CROSS   = 290104;
+    S_GIFT_DATA_SYNC         = 290105;
+    S_GIFT_LOG_LIST          = 290106;
+    S_GIFT_LOG_ITEMS         = 290107;
+    S_GIFT_LOCK              = 290108;
+    S_GIFT_SHOW_CODE         = 290109;
+    S_GIFT_GET_CODE          = 290110;
+}
+message GiftSendReq {
+    optional int32 itemId = 1;
+    optional int32 num = 2;
+    optional int64 targetId = 3;
+    optional int32 targetServerId = 4;
+    optional string passwd = 5;
+}
+message GiftSendResp {
+    optional int32 ret = 1;
+}
+message GiftReceiveReq {
+    optional int32 callerSystemId = 1;
+    optional int64 fromId = 2;
+    optional int32 fromServerId = 3;
+    optional int64 toId = 4;
+    optional int32 toServerId = 5;
+    optional int32 itemId = 6;
+    optional int32 num = 7;
+    optional string fromName = 8;
+    optional bool fromIsInternal = 9;
+    optional bool fromIsWhite = 10;
+    optional bool isCommon = 11;
+}
+message GiftReceiveResp {
+    optional int32 ret = 1;
+    optional int64 fromId = 2;
+    optional int32 itemId = 3;
+    optional int32 num = 4;
+    optional int64 toId = 5;
+    optional int32 toServerId = 6;
+    optional bool isCommon = 7;
+}
+message GiftDataSync {
+    optional int32 isLock = 1;
+    optional int64 forceUnlockTime = 2;
+    repeated GiftSystemData giftSystemData = 3;
+    optional int32 isShow = 4;
+    repeated GiftBagItem bagItem = 5;
+    repeated GiftDrawTime drawMap = 6;
+}
+message GiftSystemData {
+    optional int32 systemId = 1;
+    optional int32 sendTimes = 2;
+}
+message GiftDrawTime {
+    optional int32 boxId = 1;
+    optional int32 times = 2;
+}
+message GiftBagItem {
+    optional int32 propId = 1;
+    optional string canExchangeNum = 2;
+    optional string bindNum = 3;
+}
+message GiftLogListReq {
+    optional int32 itemId = 1;
+}
+message GiftLogListResp {
+    optional int32 ret = 1;
+    repeated GiftLogMsg list = 2;
+}
+message GiftLogMsg {
+    optional PlayerBaseDataMsg receiveInfo = 1;
+    optional int32 itemId = 2;
+    repeated GiftLogDetail logList = 3;
+}
+message GiftLogDetail {
+    optional int64 sendId = 1;
+    optional int64 receiveId = 2;
+    optional int32 itemId = 3;
+    optional int32 num = 4;
+    optional int64 sendTime = 5;
+}
+message GiftLogItemsReq {
+    optional int32 systemId = 1;
+}
+message GiftLogItemsResp {
+    optional int32 ret = 1;
+    repeated int32 itemIds = 2;
+}
+message GiftLockReq {
+    optional int32 stat = 1;
+    optional string passwd = 2;
+    optional string oldPasswd = 3;
+}
+message GiftLockResp {
+    optional int32 ret = 1;
+    optional int64 forceUnlockTime = 2;
+    optional int64 nextEnterTime = 3;
+}
+message GiftShowCodeReq {
+    optional int32 isShow = 1;
+}
+message GiftShowCodeResp {
+    optional int32 ret = 1;
+}
+message GiftGetCodeReq {
+  optional int64 playerId = 1;
+  optional int64 serverId = 2;
+  optional int32 systemId = 3;
+}
+message GiftGetCodeResp {
+    optional int32 ret = 1;
+    optional string code = 2;
+    optional string systemOpenValue = 3;
+}

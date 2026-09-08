@@ -2,8 +2,9 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
-import account from "../../../account.js";
+import account from "#config/runtimeAccount.js";
 import UserMgr from "#game/mgr/UserMgr.js";
+import { localDateKey } from '#game/common/localDateKey.js';
 
 class Homeland {
     static ExploreReq() {
@@ -62,6 +63,7 @@ export default class HomelandMgr {
             manage: 0,
             check: 0,
         };
+        this.lastRedeployDate = '';
         this.player = {
             total: 0,            // 临时数据 总人数
             count: 0,            // 临时数据 已探寻人数
@@ -79,7 +81,9 @@ export default class HomelandMgr {
         this.canRefresh = false; // 刷新标志
         this.counter = {
             failure: 0,          // 记录探寻失败次数
-            maxFailure: 6,       // 连续 6 x 5 分钟未发现合适的福地, 且不在高产时间区间, 停止刷新福地
+            maxFailure: account.automation?.tasks?.['homeland.resource-collection']?.values?.unlimitedRefresh === true
+                ? Number.MAX_SAFE_INTEGER
+                : 6,             // 连续 6 x 5 分钟未发现合适的福地, 且不在高产时间区间, 停止刷新福地
         };
         
         this.isProcessing = false;
@@ -167,16 +171,21 @@ export default class HomelandMgr {
     }
 
     doManage(t) {
+        const now = new Date();
+        const dayKey = localDateKey(now);
+        const scheduledRedeploy = account.switch.homelandRedeployAt22 === true
+            && now.getHours() === 22
+            && now.getMinutes() < 2
+            && this.lastRedeployDate !== dayKey;
+        if (account.switch.homelandCollection !== true && !scheduledRedeploy) return;
         const playerId = UserMgr.playerId.toString();
         const ongoing = [];
     
-        const now = new Date();
-    
-        t.reward.forEach((i) => {
+        for (const i of t.reward || []) {
             const finishTime = new Date(parseInt(i.finishTime));
             const isOverTwoHours = (finishTime - now) > 2 * 60 * 60 * 1000;
-            if ((this.worker.energy > 50) && isOverTwoHours) { // 体力超过50且 & 任务完成超过2小时, 撤回并重新派遣
-                logger.info(`[福地管理] ${i.playerId.toString()}位置${i.pos}的任务已完成或超过2小时, 撤回并重新派遣!`);
+            if (scheduledRedeploy && this.worker.energy > 50 && isOverTwoHours) {
+                logger.info(`[福地管理] ${i.playerId.toString()}位置${i.pos}剩余时间超过2小时，撤回并重新派遣`);
                 Homeland.Reset(i.playerId, i.pos);
                 Homeland.Steal(i.playerId, i.pos, 1);
             } else if (i.enemy && i.enemy.playerId.toString() == playerId) {
@@ -194,7 +203,12 @@ export default class HomelandMgr {
                     ongoing.push(i.playerId.toString());
                 }
             }
-        });
+        }
+
+        if (scheduledRedeploy) {
+            this.lastRedeployDate = dayKey;
+            logger.info('[福地管理] 已完成 22:00 福地撤回并重派检查');
+        }
     
         this.player.ongoing = ongoing;
     }
@@ -229,10 +243,10 @@ export default class HomelandMgr {
         if (enter.id == UserMgr.playerId.toString()) {
             logger.debug(`[福地管理] 探查自己的福地!`);
             const result = this.checkItems([enter], "自己", true);
-            if (result.length > 0) {
+            if (result.length > 0 && account.switch.homelandCollection === true) {
                 this.items.myself = result;
                 this.doCheckAndSteal(true);
-            } else {
+            } else if (result.length === 0 && account.switch.homelandAdRefresh === true) {
                 const freeRefreshCount = t.homeland.freeRefreshCount;
                 if (freeRefreshCount < 2) {
                     logger.info(`[福地管理] [自己] 可以刷新 ${2 - freeRefreshCount} 次`);
@@ -243,6 +257,7 @@ export default class HomelandMgr {
                 }
             }
         } else {
+            if (account.switch.homelandCollection !== true) return;
             if (this.player.near.includes(enter.id.toString())) {
                 // Check if nearby player is valid
                 const result = this.checkItems([enter], "周围", true);
@@ -276,6 +291,8 @@ export default class HomelandMgr {
 
     doExplore(t) {
         this.resetHomeland();
+
+        if (account.switch.homelandCollection !== true) return;
 
         const { near, enemy } = this.convertExploreData(t);
 

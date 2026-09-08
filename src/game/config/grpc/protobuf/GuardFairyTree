@@ -1,0 +1,232 @@
+package com.yq.msg.CityMsg;
+enum GuardFairyTreeProtocols {
+    guard_fairy_tree_enter_activity = 217301;
+    guard_fairy_tree_enter_game = 217302;
+    guard_fairy_tree_goods_place = 217303;
+    guard_fairy_tree_goods_compose = 217304;
+    guard_fairy_tree_plate_expand = 217305;
+    guard_fairy_tree_plate_buy = 217306;
+    guard_fairy_tree_update_ad_good = 217307;
+    guard_fairy_tree_goods_save = 217308;
+    guard_fairy_tree_fight_result = 217309;
+    guard_fairy_tree_select_buff = 217310;
+    guard_fairy_tree_random_buff = 217311;
+    guard_fairy_tree_start_battle = 217312;
+    guard_fairy_tree_set_weapon = 217313;
+}
+message GuardFairyTreeConfigMsg {
+    repeated GuardFairyTreeBagStageConfigMsg bagStageConfig = 1;
+    repeated GuardFairyTreeBagWeaponConfigMsg bagWeaponConfig = 2;
+    repeated GuardFairyTreeBagBlankConfigMsg bagBlankConfig = 3;
+    repeated GuardFairyTreeBagMonsterConfigMsg bagMonsterConfig = 4;
+    repeated GuardFairyTreeBagBuffConfigMsg bagBuffConfig = 5;
+    repeated GuardFairyTreeBagLevelConfigMsg bagLevelConfig = 6;
+}
+message GuardFairyTreeBagStageConfigMsg {
+    optional int32 id = 1;
+    optional int32 stage = 2;
+    optional int32 isBoss = 3;
+    optional int32 coin = 4;
+    optional string monsterList = 5;
+    optional int32 unlock = 6;
+}
+message GuardFairyTreeBagWeaponConfigMsg {
+    optional int32 id = 1;
+    optional int32 unlock = 2;
+    optional string chara = 3;
+    optional string weight = 4;
+    optional string grid = 5;
+    optional int32 targetType = 6;
+    optional string targetNum = 7;
+    optional string attack = 8;
+    optional string coldTime = 9;
+    optional string specialParam = 10;
+    optional string name = 11;
+    optional string desc = 12;
+    optional string skillDesc = 13;
+    optional string specialParamDesc = 14;
+    optional string vfx = 15;
+}
+message GuardFairyTreeBagBlankConfigMsg {
+    optional int32 id = 1;
+    optional int32 weight = 2;
+    optional int32 isAd = 3;
+    optional string grid = 4;
+}
+message GuardFairyTreeBagMonsterConfigMsg {
+    optional int32 id = 1;
+    optional int32 isBoss = 2;
+    optional int32 hpEmp = 3;
+    optional int32 speed = 4;
+    optional int32 damageReduction = 5;
+    optional int32 specialSkill = 6;
+    optional int32 exp = 7;
+}
+message GuardFairyTreeBagBuffConfigMsg {
+    optional int32 id = 1;
+    optional int32 icon = 2;
+    optional int32 quality = 3;
+    optional int32 weight = 4;
+    optional int32 upgrade = 5;
+    optional int32 weapon = 6;
+    optional string param = 7;
+    optional string desc = 8;
+    optional string paramDesc = 9;
+    optional int32 type = 10;
+}
+message GuardFairyTreeBagLevelConfigMsg {
+    optional int32 id = 1;
+    optional int32 buff = 2;
+    optional int32 stage = 3;
+}
+message GuardFairyTreePowerData {
+    optional int32 curPower = 1;
+    optional int64 lastRecoverTime = 2;
+}
+message GuardFairyTreeGridData {
+    optional int32 x = 1;
+    optional int32 y = 2;
+}
+message GuardFairyTreeFightData {
+    optional int32 exp = 1;
+    repeated int32 buffIdList = 2;
+    optional int32 buffAdRandomTimes = 3;
+    optional int32 treeHp = 4;
+    optional int32 goodsAdTimes = 5;
+}
+message GuardFairyTreeGoodsItemInfo {
+    required int32 baseId = 1;
+    required int32 itemId = 2;
+    optional int32 lv = 3;
+    optional bool isAd = 4;
+    repeated GuardFairyTreeGridData gridList = 5;
+}
+message GuardFairyTreeEnterReq {
+    required int32 activityId = 1;
+}
+message GuardFairyTreeEnterResp {
+    required int32 ret = 1;
+    optional GuardFairyTreePowerData powerData = 2;
+    optional int32 passLevelId = 3;
+    optional int32 weaponSelected = 4;
+    optional int32 curLevelId = 5;
+}
+message GuardFairyTreeEnterGameReq {
+    required int32 activityId = 1;
+    required int32 levelId = 2;
+}
+message GuardFairyTreeEnterGameResp {
+    required int32 ret = 1;
+    optional int32 round = 2;
+    repeated GuardFairyTreeGoodsItemInfo plateGoods = 3;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 4;
+    optional GuardFairyTreeGoodsItemInfo saveGood = 5;
+    optional int32 silverCoins = 6;
+    repeated GuardFairyTreeGridData plateGridList = 7;
+    optional GuardFairyTreeFightData fightData = 8;
+    optional int32 refreshNum = 9;
+}
+message GuardFairyTreeGoodsPlaceReq {
+    required int32 activityId = 1;
+    optional int32 areaType = 2;
+    optional GuardFairyTreeGoodsItemInfo newGoodInfo = 3;
+}
+message GuardFairyTreeGoodsPlaceResp {
+    required int32 ret = 1;
+    repeated GuardFairyTreeGoodsItemInfo plateGoods = 2;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 3;
+}
+message GuardFairyTreeGoodsComposeReq {
+    required int32 activityId = 1;
+    required int32 baseId1 = 2;
+    required int32 baseId2 = 3;
+}
+message GuardFairyTreeGoodsComposeResp {
+    required int32 ret = 1;
+    repeated GuardFairyTreeGoodsItemInfo plateGoods = 2;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 3;
+    optional GuardFairyTreeGoodsItemInfo saveGood = 4;
+}
+message GuardFairyTreePlateExpandReq {
+    required int32 activityId = 1;
+    repeated GuardFairyTreeGridData newPlateGridList = 2;
+    repeated GuardFairyTreeGoodsItemInfo newPlateGoods = 3;
+    repeated GuardFairyTreeGoodsItemInfo goodsList = 4;
+}
+message GuardFairyTreePlateExpandResp {
+    required int32 ret = 1;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 2;
+    repeated GuardFairyTreeGridData newPlateGridList = 3;
+}
+message GuardFairyTreeRefreshShopsReq {
+    required int32 activityId = 1;
+}
+message GuardFairyTreeRefreshShopsResp {
+    required int32 ret = 1;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 2;
+    optional int32 silverCoins = 3;
+    optional int32 refreshNum = 4;
+}
+message GuardFairyTreeUpdateAdGoodsReq {
+    required int32 activityId = 1;
+    required int32 baseId = 2;
+    optional bool isUseADTime = 3;
+}
+message GuardFairyTreeUpdateAdGoodsResp {
+    required int32 ret = 1;
+    optional int32 goodsAdTimes = 2;
+}
+message GuardFairyTreeGoodsSaveReq {
+    required int32 activityId = 1;
+    required int32 baseId = 2;
+}
+message GuardFairyTreeGoodsSaveResp {
+    required int32 ret = 1;
+    repeated GuardFairyTreeGoodsItemInfo plateGoods = 3;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 4;
+    optional GuardFairyTreeGoodsItemInfo saveGood = 5;
+}
+message GuardFairyTreeFightResultReq {
+    required int32 activityId = 1;
+    required int32 levelId = 2;
+    required bool isWin = 4;
+    optional GuardFairyTreeFightData fightData = 5;
+}
+message GuardFairyTreeFightWinResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+    optional int32 silverCoins = 3;
+    repeated GuardFairyTreeGoodsItemInfo shopGoods = 4;
+}
+message GuardFairyTreeSelectBuffReq {
+    required int32 activityId = 1;
+    required int32 buffId = 2;
+}
+message GuardFairyTreeSelectBuffResp {
+    required int32 ret = 1;
+    repeated int32 buffIdList = 2;
+}
+message GuardFairyTreeRandomBuffListReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+    optional bool isUseADTime = 3;
+}
+message GuardFairyTreeRandomBuffListResp {
+    required int32 ret = 1;
+    repeated int32 buffPool = 2;
+    optional int32 buffAdRandomTimes = 3;
+}
+message GuardFairyTreeStartBattleReq {
+    required int32 activityId = 1;
+}
+message GuardFairyTreeStartBattleResp {
+    required int32 ret = 1;
+}
+message GuardFairyTreeSetWeaponReq {
+    required int32 activityId = 1;
+    repeated int32 weaponId = 2;
+    optional int32 levelId = 3;
+}
+message GuardFairyTreeSetWeaponResp {
+    required int32 ret = 1;
+}

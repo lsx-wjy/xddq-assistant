@@ -1,0 +1,663 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Common";
+import "Union";
+import "Battle";
+enum HolyLandProtocols{
+  holy_land_base_info_load = 209501;
+  holy_land_group = 209502;
+  holy_land_union_get_member_list = 209503;
+  holy_land_battle_report = 209504 ;
+  holy_land_union_group_point_info = 209507;
+  holy_land_player_union_rank_reward = 209508;
+  holy_land_get_player_union_rank_reward = 209509;
+  holy_land_red_dot_data = 209510;
+  holy_land_worship = 209511;
+  holy_land_set_separation = 209512;
+  holy_land_guess_info = 209513;
+  holy_land_set_guess = 209514;
+  holy_land_all_champion_unions = 209515;
+  holy_land_champion_info = 209516;
+  holy_land_union_rank_list = 209517;
+  holy_land_get_separation = 209518;
+  holy_land_all_join_server = 209519;
+  holy_land_now_champion_info = 209536;
+  holy_land_game_heart_beat = 209520;
+  holy_land_game_info_load = 209521;
+  holy_land_game_map_city_info = 209522;
+  holy_land_game_target_city_info = 209523;
+  holy_land_game_target_city_line_info = 209524;
+  holy_land_game_move = 209525;
+  holy_land_game_miniMap_info = 209526;
+  holy_land_game_strategy_info = 209527;
+  holy_land_game_commander_set = 209528;
+  holy_land_game_set_union_target = 209529;
+  holy_land_game_for_help = 209530;
+  holy_land_game_accelerate_move = 209531;
+  holy_land_game_back_home = 209532;
+  holy_land_game_battle = 209533;
+  holy_land_game_union_detail = 209534;
+  holy_land_game_war_situation = 209535;
+  holy_land_game_auto_attack = 209537;
+  holy_land_game_get_guess_coin = 209538;
+  holy_land_game_city_change_sync = 209550;
+  holy_land_game_player_win_sync = 209551;
+  holy_land_game_line_info_sync = 209552;
+  holy_land_game_myGameInfo_sync = 209553;
+  holy_land_game_occupyCity_sync = 209554;
+  holy_land_game_left_out_sync = 209555;
+  holy_land_game_commander_change_sync = 209556;
+  holy_land_game_city_battle_sync = 209557;
+  holy_land_game_been_kill_sync = 209558;
+  holy_land_game_route_info_sync = 209559;
+  holy_land_game_auto_battle_stop_sync = 209560;
+  holy_land_game_red_dot_sync = 209561;
+  holy_land_union_data_agent = 209571;
+  holy_land_move_speed_up_back = 209572;
+  holy_land_base_info_load_back = 209573;
+  holy_land_red_point_back = 209574;
+}
+message HolyLandUnionRankListReqMsg {
+  required int32 gameType = 1;
+  required int32 startRank = 2;
+  required int32 endRank = 3;
+  optional int32 groupId = 4;
+}
+message HolyLandUnionRankListRespMsg {
+  required int32 ret = 1;
+  repeated HolyLandUnionRankData unionRankDataArray = 2;
+}
+message HolyLandUnionRankData {
+  optional int32 unionRank = 1;
+  optional int32 unionFlag = 2;
+  optional string unionName = 3;
+  optional string masterName = 4;
+  optional int64 serverId = 5;
+  optional int32 unionScore = 6;
+  optional int64 unionId = 7;
+}
+message HolyLandBaseInfoReqMsg {
+}
+message HolyLandBaseInfoRespMsg {
+  required int32 ret = 1;
+  optional int32 selfRank = 2;
+  optional int32 group = 3;
+  optional int32 gameType = 4;
+  optional int64 unionId = 5;
+  optional int32 position = 6;
+  optional HolyLandRoundSettleData roundSettleInfo = 7;
+  repeated HolyLandGameTypeGroupData gameTypeGroupDataArray = 8;
+  repeated UnionBaseData top3Union = 10;
+  optional bool canWorship = 11;
+  optional int32 bigGroup = 12;
+  optional int32 active = 13;
+  optional int32 nextWeekGameType = 14;
+  optional int32 groupType = 15;
+  repeated UnionNameServerIdData unionServerIdList = 16;
+}
+message HolyLandGameTypeGroupData {
+  optional int32 gameType = 1;
+  repeated int32 groupIdArray = 2;
+}
+message HolyLandRoundSettleData {
+  optional int32 groupId = 1;
+  optional string firstUnionName = 2;
+  optional int32 firstOccupiedBuildingCount = 3;
+  optional int32 firstUnionAddScore = 4;
+  optional int32 firstUnionScore = 5;
+  optional int32 firstUnionFlag = 6;
+  optional HolyLandRoundSettleDisplayData killLeader = 7;
+  optional HolyLandRoundSettleDisplayData occupyLeader = 8;
+  optional int32 selfUnionRank = 11;
+  optional int32 selfSeasonRank = 12;
+  optional int32 selfUnionAddScore = 13;
+  repeated HolyLandRoundSettleUnionRankData unionRankDataList = 14;
+}
+message HolyLandRoundSettleDisplayData{
+  optional string nickName = 1;
+  optional int32 appearanceId = 2;
+  optional int32 killCount = 3;
+  optional int32 occupyCount = 4;
+  optional int32 title = 5;
+}
+message HolyLandRoundSettleUnionRankData {
+  optional int32 unionRank = 1;
+  optional string unionName = 2;
+  optional int64 unionServerId = 3;
+  optional int32 unionScore = 4;
+  optional int64 unionId = 5;
+}
+message HolyLandWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  optional int32 appearanceId = 4;
+  optional UnionPositionEnum pos = 5;
+}
+message HolyLandGroupReqMsg {
+  required int32 groupId = 1;
+  required int32 gameType = 2;
+}
+message HolyLandGroupRespMsg {
+  required int32 ret = 1;
+  repeated HolyLandGroupBaseMsg groupInfo = 2;
+}
+message HolyLandGroupBaseMsg {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional int32 flag = 3;
+  optional string masterName = 4;
+  optional int32 rank = 5;
+  optional int64 cityScore = 6;
+  optional int64 serverId = 7 ;
+}
+message HolyLandGetJoinMemberListReq{
+  optional int64 unionId = 1;
+}
+message HolyLandGetJoinMemberListResp{
+  required int32 ret = 1;
+  repeated HolyLandJoinMemberMsg joinMemberList = 2;
+  optional int64 unionExp = 3;
+}
+message HolyLandJoinMemberMsg {
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional string nickname = 2;
+  optional string fightValue = 3;
+  optional int32  position = 4;
+}
+message HolyLandBattleReportReqMsg {
+  required int64 unionId = 1;
+  optional int32 reportType = 2;
+}
+message HolyLandBattleReportRespMsg {
+  required int32 ret = 1;
+  repeated HolyLandReportDetail reportList = 2;
+}
+message HolyLandReportDetail {
+  optional int32 buildingId= 1;
+  optional HolyLandReportPlayerData attacker = 2;
+  optional HolyLandReportPlayerData defender = 3;
+  optional int32 monsterId = 4;
+  optional bool isAttackerWin = 5;
+  optional int32 winnerBeforePower = 6;
+  optional bool isOccupied = 7;
+  optional int32 loserBeforeDurability = 8;
+  optional int32 loseEnergy = 9;
+}
+message HolyLandReportPlayerData{
+  optional int32 headIcon = 1;
+  optional string wxHeadUrl = 2;
+  optional string nickname = 3;
+  optional string unionName = 4;
+  optional int64 unionId = 5;
+  optional int64 playerId = 6;
+  optional int64 serverId = 7;
+}
+message HolyLandUnionGroupDamageReqMsg{
+  required int64 unionId = 1;
+}
+message HolyLandUnionGroupDamageRespMsg{
+  required int32 ret = 1;
+  optional string unionName = 2;
+  repeated HolyLandGroupScoreInfo info = 3;
+  required int64 groupId = 4 ;
+}
+message HolyLandGroupScoreInfo{
+  required int32 rank = 1 ;
+  required int32 point = 2;
+  required int32 gameType = 3;
+  optional int64 time = 4;
+}
+message HolyLandPlayerUnionRankRewardReqMsg{
+}
+message HolyLandPlayerUnionRankRewardRespMsg{
+  required int32 ret = 1;
+  optional int32 unionRank = 2;
+  optional int32 unionScore = 3;
+  optional bool hasReward = 4;
+  optional bool isEnterMap = 5;
+}
+message HolyLandGetPlayerUnionRankRewardReqMsg{
+}
+message HolyLandGetPlayerUnionRankRewardRespMsg{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message HolyLandRedDotReqMsg {
+}
+message HolyLandRedDotRespMsg {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+enum HolyLandRedPointEnum {
+  HolyLandRedNone = 0;
+  HolyLandRedGuess = 1;
+  HolyLandRedGuessReward = 2;
+  HolyLandRedPlayerRankReward = 3;
+  HolyLandRedWorship = 4;
+  HolyLandRedReport = 5;
+  HolyLandRedSituation = 6;
+}
+message HolyLandWorshipReq{
+}
+message HolyLandWorshipResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional HolyLandWorshipPlayerMsg worshipPlayer = 3;
+}
+message HolyLandSetSeparationReq{
+}
+message HolyLandSetSeparationResp{
+  required int32 ret = 1;
+  optional PlayerDetailDataMsg playerDetail = 2;
+}
+message HolyLandGetSeparationDetailReq {
+}
+message HolyLandGetSeparationDetailRsp {
+  optional int32 ret = 1;
+  optional PlayerDetailDataMsg playerDetail = 2;
+}
+message HolyLandGetGuessInfoReq{
+}
+message HolyLandGetGuessInfoResp{
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  repeated HolyLandPlayerGuessInfoMsg playerGuessInfoArr = 3;
+  optional bool hasReward = 4;
+}
+message HolyLandPlayerGuessInfoMsg{
+  optional int64 unionId = 1;
+  optional string name = 2;
+  optional int32 flag = 3;
+  optional string fightValue = 4;
+  optional int32 betGuessCoin = 5;
+  optional int64 hotNum = 6;
+  optional int32 odds = 7;
+  optional int32 battleResult = 8;
+}
+message HolyLandSetGuessReq{
+  required int64 unionId = 1;
+  required int32 guessCoinCost = 2;
+}
+message HolyLandSetGuessResp{
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  optional HolyLandPlayerGuessInfoMsg playerGuessInfoArr = 3;
+}
+message HolyLandAllChampionUnionsReq{
+  required int32 index = 1;
+}
+message HolyLandAllChampionUnionsResp{
+  required int32 ret = 1;
+  repeated HolyLandChampionUnionInfo unionInfoArray = 2;
+}
+message HolyLandChampionUnionInfo{
+  required int64 unionId = 1;
+  optional int32 unionFlag = 2;
+  optional string unionName = 3;
+  optional int64 wonTime = 4;
+  optional int64 wonServerId = 5;
+}
+message HolyLandChampionMemberInfoReq{
+  required int32 index = 1;
+  required int64 unionId = 2;
+  required int64 wonTime = 3;
+}
+message HolyLandChampionMemberInfoResp{
+  required int32 ret = 1;
+  repeated HolyLandChampionMemberInfo memberInfoArray = 2;
+}
+message HolyLandGetNowChampionReq{
+}
+message HolyLandGetNowChampionResp{
+  required int32 ret = 1;
+  repeated HolyLandChampionMemberInfo memberInfoArray = 2;
+  optional HolyLandChampionUnionInfo unionInfo = 3;
+}
+message HolyLandChampionMemberInfo{
+  required string nickName = 1;
+  optional int32 appearanceId = 2;
+  optional int32 position = 3;
+  optional int32 contribution = 4;
+}
+message HolyLandAllJoinServerReq{
+}
+message HolyLandAllJoinServerResp{
+  required int32 ret = 1;
+  repeated int64 serverIdArray = 2;
+}
+message HolyLandHeartBeatReqMsg {
+}
+message HolyLandHeartBeatRespMsg {
+  required int32 ret = 1;
+  optional int32 rank = 2;
+}
+message HolyLandGameInfoReqMsg{
+}
+message HolyLandGameInfoRespMsg{
+  required int32 ret = 1;
+  optional int32 baseCamp = 2;
+  optional string fightValue = 3;
+  optional HolyLandBeenKillSyncMsg rebirthData = 4;
+  optional HolyLandGameRouteInfo myRouteInfo = 5;
+  optional int32 itemRebirthCount = 6;
+  optional bool leftOut = 7;
+  optional int32 location = 8;
+  optional int32 speedUpCount = 9;
+  optional bool haveCommand = 11;
+  optional int32 curPower = 12;
+  optional int64 attackCd = 13;
+  optional int32 unionPointRank = 14;
+  optional int32 freeRebirthCount = 15;
+  repeated UnionRankHistoryMsg lastChampionUnions = 16;
+  optional int32 autoAtkCityId = 17;
+  optional int32 realmsType = 18;
+}
+message UnionRankHistoryMsg {
+  optional int64 unionId = 1;
+  optional int32 lastRank = 2;
+}
+message HolyLandGameRouteInfo {
+  optional int64 playerId = 1;
+  optional int32 fromCityId = 2;
+  optional int32 toCityId = 3;
+  optional int64 time = 4;
+  optional int64 arrival = 5;
+  optional int64 unionId = 6;
+  optional HolyLandRouterAppearanceMsg appearance = 7;
+  optional int32 currentRank = 8;
+  optional string name = 9;
+}
+/**
+前X名 显示形象和坐骑, 其他玩家使用头像
+ */
+message HolyLandRouterAppearanceMsg {
+  optional int32 headIcon = 1;
+  optional string wxHeadUrl = 2;
+  optional int32  appearanceId = 3;
+  optional int32 equipCloudId = 4;
+}
+message HolyLandGameCityInfoReqMsg{
+  repeated int32 cityVec = 1;
+  required int32 gameType = 2;
+  required int32 groupId = 3;
+}
+message HolyLandGameCityInfoRespMsg{
+  required int32 ret = 1;
+  repeated HolyLandGameCityInfo cityInfo = 2;
+  repeated HolyLandGameRouteInfo routeInfo = 3;
+  optional int32 gameType = 4;
+  optional int32 groupId = 5;
+}
+message HolyLandGameCityInfo {
+  required int32 cityId = 1;
+  optional bool haveFight = 2;
+  optional int32 hp = 3;
+  optional int32 curHp = 4;
+  required bool updateType = 5;
+  optional bool destroyed = 6;
+  optional HolyLandUnionSimpleInfo baseData = 7;
+  repeated PlayerHeadDataMsg headInfo = 8;
+}
+message HolyLandUnionSimpleInfo {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional int64 serverId = 3;
+  optional int32 flag = 4;
+}
+message HolyLandGameTargetCityInfoReqMsg{
+  required int32 cityId = 1;
+}
+message HolyLandGameTargetCityInfoRespMsg{
+  required int32 ret = 1;
+  optional int64 costTime = 2;
+  optional int32 attackNum = 3;
+  optional int32 defendNum = 4;
+}
+message HolyLandGameTargetCityLineInfoReqMsg{
+  required int32 cityId = 1;
+  optional int32 type = 2;
+}
+message HolyLandGameTargetCityLineInfoRespMsg{
+  required int32 ret = 1;
+  repeated HolyLandGameLinePlayerInfo attackInfo = 2;
+  repeated HolyLandGameLinePlayerInfo defendInfo = 3;
+  repeated HolyLandBattleMsg battleInfo = 4;
+}
+message HolyLandGameLinePlayerInfo{
+  optional string name = 1;
+  optional int32 power = 2;
+  optional int64 union = 3;
+  optional PlayerHeadDataMsg headInfo = 4;
+  optional int64 playerId = 5;
+  optional bool npc = 6;
+  optional string unionName = 7;
+  optional string fightValue = 8;
+  optional int32 realmsType = 9;
+}
+message HolyLandGameMoveReqMsg {
+  required int32 targetId = 1;
+}
+message HolyLandGameMoveRespMsg {
+  required int32 ret = 1;
+}
+message HolyLandGameMiniMapInfoReqMsg{
+  optional int32 gameType = 1;
+  optional int32 group = 2;
+}
+message HolyLandGameMiniMapInfoRespMsg{
+  required int32 ret = 1;
+  repeated HolyLandGameMiniCityInfo cityInfo = 2;
+}
+message HolyLandGameMiniCityInfo{
+  optional int32 cityId = 1;
+  optional UnionBaseData baseData = 2;
+  optional bool haveFight = 3;
+}
+message HolyLandGameStrategyInfoReqMsg{
+}
+message HolyLandGameStrategyInfoRespMsg{
+  required int32 ret = 1;
+  repeated HolyLandOccupyCities occupyCities = 2;
+  repeated HolyLandPlayerSimpleInfo commanders = 3;
+  repeated HolyLandStrategyCityInfo strategyCityInfoArray = 4;
+}
+message HolyLandPlayerSimpleInfo {
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional string nickname = 2;
+}
+message HolyLandOccupyCities {
+  optional int32 type = 1;
+  optional int32 count = 2;
+}
+message HolyLandStrategyCityInfo {
+  optional int32 cityId = 1;
+  optional int64 serverId = 2;
+  optional string unionName = 3;
+}
+message HolyLandGameCommanderSetReqMsg{
+  repeated int64 commanders = 1;
+}
+message HolyLandGameCommanderSetRespMsg{
+  required int32 ret = 1;
+  repeated int64 commanders = 2;
+}
+message HolyLandGameSetUnionTargetReqMsg{
+  repeated int32 cityId = 1;
+}
+message HolyLandGameSetUnionTargetRespMsg{
+  required int32 ret = 1;
+}
+message HolyLandGameForHelpReqMsg{
+  required int32 cityId = 1;
+}
+message HolyLandGameForHelpRespMsg{
+  required int32 ret = 1;
+}
+message HolyLandGameAcclerateMoveMsg{
+  required int32 speedUpCount = 1;
+}
+message HolyLandGameAcclerateMoveRespMsg{
+  required int32 ret = 1;
+  optional string costInfo = 2;
+  optional int32 speedUpCount = 3;
+}
+message HolyLandGameBackHomeReq {
+  required bool useItem = 1;
+}
+message HolyLandGameBackHomeResp {
+  required int32 ret = 1;
+  optional int32 freeRebirthCount = 2;
+  optional int32 itemRebirthCount = 3;
+}
+message HolyLandGameAtkReqMsg {
+  required int32 targetId = 1;
+  optional int64 enemyId = 2;
+  required bool isNpc = 3;
+}
+message HolyLandGameAtkRespMsg {
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+  optional PlayerHeadAndNameMsg enemyInfo = 3;
+}
+message HolyLandGameUnionDetailReqMsg {
+}
+message HolyLandGameUnionDetailRespMsg {
+  required int32 ret = 1;
+  optional int32 unionScore = 2;
+  optional int32 unionRank = 3;
+  optional UnionBaseData unionBaseData = 4;
+  repeated HolyLandGameUnionMemberMsg memberList = 5;
+}
+message HolyLandGameUnionMemberMsg {
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional string nickname = 2;
+  optional string fightValue = 3;
+  optional int32  position = 4;
+  optional int32 killCount = 5;
+  optional int32 causeDamage = 6;
+  optional int32 rebirthCount = 7;
+}
+message HolyLandGameWarSituationReqMsg {
+  optional int32 type = 1;
+}
+message HolyLandGameWarSituationRespMsg{
+  required int32 ret = 1;
+  repeated HolyLandGameMoveInfo moveInfo = 2;
+  repeated HolyLandGameBuildInfo buidlInfo = 3;
+}
+message HolyLandGameMoveInfo {
+  optional int64 playerId = 1;
+  optional string name = 2;
+  optional int64 unionId = 3;
+  optional int64 serverId = 4;
+  optional string unionName = 5;
+  optional int32 toCityId = 6;
+  optional int64 arrival = 7;
+  optional int32 headIcon = 8;
+  optional string wxHeadUrl = 9;
+}
+message HolyLandGameBuildInfo{
+  optional int32 cityId = 1;
+  optional int32 curHp = 2;
+  optional int32 atkNum = 3;
+  optional int32 defNum = 4;
+  optional int32 unionNum = 5;
+  optional int64 unionId = 6;
+  optional int64 serverId = 7;
+  optional string unionName = 8;
+}
+message HolyLandGameGameAutoAttackReqMsg{
+  required int32 targetId = 1;
+}
+message HolyLandGameGameAutoAttackRespMsg{
+  required int32 ret = 1;
+  optional int32 targetId = 2;
+}
+message  HolyLandGameGetGuessCoinReq{
+}
+message  HolyLandGameGetGuessCoinRsp{
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+}
+message HolyLandGameCityChangeSyncMsg{
+  repeated HolyLandGameCityInfo cityInfo = 1;
+}
+message HolyLandGamePlayerWinSyncMsg{
+  repeated HolyLandGamePlayerWinInfo info = 1;
+}
+message HolyLandGamePlayerWinInfo{
+  optional string name = 1;
+  optional string unionName = 2;
+  optional int32 winCount = 3;
+  optional PlayerHeadDataMsg headInfo = 4;
+  optional int32 appearanceId = 5;
+  optional int64 serverId = 6;
+}
+message HolyLandGameLineInfoSyncMsg{
+  repeated HolyLandGameLineInfo lineInfo = 1;
+  repeated HolyLandBattleMsg battleInfo = 2;
+  repeated HolyLandPlayerPowerChangeInfo powerChange = 3;
+}
+message HolyLandBattleMsg{
+  optional int32 cityId = 1;
+  optional HolyLandGameLinePlayerInfo attacker = 2;
+  optional HolyLandGameLinePlayerInfo beAttacker = 3;
+  optional int64 battleTime = 4;
+}
+message HolyLandGameLineInfo{
+  optional int32 inCityId = 1;
+  optional int32 outCityId = 2;
+  optional int32 inLineType = 3;
+  optional int32 outLineType = 4;
+  optional int64 playerId = 5;
+  optional HolyLandGameLinePlayerInfo playerInfo = 6;
+}
+message HolyLandPlayerPowerChangeInfo {
+  optional int32 cityId = 1;
+  optional int64 playerId = 2;
+  optional int32 power = 3;
+}
+message HolyLandGameMyGameInfoSyncMsg{
+  optional int32 location = 1;
+  optional int32 curPower = 2;
+  optional int64 attackCd = 3;
+  optional string fightValue = 4;
+}
+message HolyLandLeftOutSyncInfo {
+  required int64 unionId = 1;
+}
+message HolyLandCommanderChangeSyncMsg {
+  required bool haveCommand = 1;
+}
+message HolyLandGameCityBattleSyncMsg{
+  repeated HolyLandCityBattleState cityStates = 1;
+}
+message HolyLandCityBattleState {
+  optional int32 cityId = 1;
+  optional bool isBattle = 2;
+}
+message HolyLandBeenKillSyncMsg {
+  optional bool killByNPC = 1;
+  optional string targetName = 2;
+  optional string unionName = 3;
+  optional int32 killNum = 4;
+  optional int64 rebirthTime = 5;
+  optional int32 cityId = 6;
+}
+message HolyLandGameRouteInfoSyncMsg{
+  repeated HolyLandGameRouteInfo routeInfo = 1;
+}
+message HolyLandGameAutoBattleStopSyncMsg {
+  required int32 ret = 1;
+}
+message HolyLandGameReddotSyncMsg{
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message HolyLandGameOccupyCitySyncMsg{
+  required int32 ret = 1;
+  optional int32 cityId = 2;
+  optional string killName =3;
+  optional int64 unionId = 4;
+}

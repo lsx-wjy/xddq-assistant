@@ -1,7 +1,7 @@
 const account = {
     serverId: "<serverId>",
-    username: "<username>",
-    password: "<password>",
+    username: '',
+    password: '',
     rules: [
         { ItemId: 100004, minItemLv: 3, isCheck: true, description: "仙桃" },
         { ItemId: 100025, minItemLv: 5, isCheck: false, description: "净瓶水" },
@@ -19,21 +19,31 @@ const account = {
         challenge: 50,      // [挑战] 冒险/真火/镇妖塔 次数 0为不挑战
         showResult: false,  // [挑战] 冒险/真火/镇妖塔 显示战斗结果
     },
+    activities: {
+        enabled: true,            // 接收 APK 中全部活动协议，不按当前区服开放状态过滤
+        logDiscovery: true,       // 首次收到某个活动分组消息时输出日志
+        persistSnapshots: false,  // 是否把最新活动消息保存到 logs/activity-snapshots.json
+        autoClaim: false,         // 预留：自动领奖，默认关闭
+        autoFreeShop: false,      // 预留：自动领取免费商店物品，默认关闭
+        allowCombat: false,       // 活动战斗请求必须显式授权
+        allowPurchase: false,     // 购买、充值、交易请求必须显式授权
+    },
     chopTree: {
         stop: { // 砍树停止条件
             num: 10000,   // 桃子数量<该数
             level: 375,   // 玩家等级等于该数 设置为渡劫等级
         },
         showResult: false, // 显示砍树结果 防焦虑
-        separation: {
-            quality: 11,          // 最低品质
-            fightValueOffset: 0,  // 妖力偏移值 能接受妖力低于该百分比 新装备妖力 >= 当前装备妖力 * ( 1 - fightValueOffset )
-            probOffset: 0.2,      // 概率偏移值 概率大于该百分比直接穿上 比如当前是 16% 的概率 设置为0.1 那么大于16% x ( 1 + 0.2 ) = 19.2%
-            condition:[
-                [5],              // 元体 击晕
-                [6, 7],           // 阳神 连爆
-                [8]               // 阴身 闪避
-            ]
+        equipment: {
+            quality: 11,          // 低于该品质直接分解
+            keepHigherPower: true,// 妖力更高时保留
+            conditionMode: 1,     // 1=妖力和属性都满足，0=满足任一条件
+            attributeGroups: [
+                { enabled: false, attack: 0, resistance: 0 },
+                { enabled: false, attack: 0, resistance: 0 },
+            ],
+            matchedAction: 1,     // 1=按游戏逻辑暂停等待处理，2=自动换装并继续
+            autoEquipTarget: 0,   // 自动换装目标：0元体、1阳神、2阴身
         },
     },
 

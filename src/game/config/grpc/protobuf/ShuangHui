@@ -1,0 +1,20 @@
+package com.yq.msg.CityMsg;
+enum ShuangHuiPb {
+  ShuangHui_OpenBox = 237001;
+  ShuangHui_BaseInfo = 237002;
+}
+message ShuangHuiBaseInfoReq {
+}
+message ShuangHuiBaseInfoResp {
+  optional int32 ret = 1;
+  optional int32 todayDropCount = 2;
+}
+message ShuangHuiOpenBoxReq {
+    required int32 boxId = 1;
+    required int32 count = 2;
+}
+message ShuangHuiOpenBoxResp {
+    optional int32 ret = 1;
+    optional string reward = 2;
+    optional string spillReward = 3;
+}

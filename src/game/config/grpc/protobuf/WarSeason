@@ -1,0 +1,1286 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "Rank";
+import "Palace";
+import "GroupInfo";
+message WarSeasonEnterActivityReq {
+  required int64 groupId = 1;
+}
+message WarSeasonEnterActivityResp {
+  required int32 ret = 1;
+  optional int64 unionId = 2;
+  optional bool isCommander = 3;
+  optional int32 position = 4;
+  optional WarSeasonWorshipPlayerMsg worshipPlayer = 5;
+  repeated UnionBaseData top3Union = 6;
+  optional bool canWorship = 7;
+  repeated SystemGroupUnionInfo unionInfoList = 8;
+  optional int64 seasonExp = 9;
+  optional int64 unionExp = 10;
+  optional string endManorReward = 11;
+  optional int32 resurrectionTimes = 12;
+  optional bool isDeclareWar = 13;
+  optional string params = 14;
+  optional WarSeasonCityReward occupiedManorReward = 15;
+  optional WarSeasonCityReward firstOccupyReward = 16;
+  optional int32 model = 17;
+  optional WarSeasonStrategyData strategyData = 18;
+  repeated WarSeasonModelHistory historyModel = 19;
+  optional int32 selectRankRewardId = 20;
+  optional int64 newFunction = 21;
+  optional int32 historyGroupCount = 22;
+}
+message WarSeasonCityReward {
+  repeated int32 cityList = 1;
+  optional string reward = 2;
+}
+message WarSeasonModelHistory {
+  optional int32 model = 1;
+  optional int32 count = 2;
+}
+message WarSeasonGodBodyChangeInfo{
+    optional int32 index = 1;
+    optional int64 changeTime = 2;
+}
+message WarSeasonUpdateLockDataReq{
+  required int64 groupId = 1;
+  required int32 separationIdx = 2;
+}
+message WarSeasonUpdateLockDataResp {
+    required int32 ret = 1;
+    optional GodBodyDetailDataMsg data = 2;
+}
+message WarSeasonGetGodBodyDataReq{
+    optional int64 groupId = 1;
+    optional int32 bodyIndex = 2;
+    optional int64 targetId = 3;
+    optional int64 targetServerId = 4;
+}
+message WarSeasonGetGodBodyDataResp {
+    required int32 ret = 1;
+    optional GodBodyDetailDataMsg data = 2;
+    optional int64 seasonExp = 3;
+}
+/**
+1: 个人排行奖励待领取时
+2: 妖盟排行奖励待领取时
+3: 王城排行奖励待领取时
+4: 可竞猜红点
+5: 战令奖励可领
+6: 可签到
+7: 有申请托管(指挥官 盟主 副盟主才有红点)
+8: 新的军情
+9: 新的个人,妖盟战报
+10: 副本挑战 有免费扫荡次数
+11: 有托管玩家死亡后可以复活(指挥官 盟主 副盟主才有红点)
+12: 资源田有资源可以收取
+13: 赛季进程有可以领取的奖励-妖盟任务
+14: 竞猜奖励可领取
+15. 分封
+16. 活跃度奖励
+17. 圣兽召唤
+18. 圣兽培养
+19.指挥官奖励
+ */
+message WarSeasonRedPointReq {
+  required int64 groupId = 1;
+}
+message WarSeasonRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message WarSeasonEnterMapReq{
+  optional int64 groupId = 1;
+}
+message WarSeasonEnterMapResp{
+  required int32 ret = 1;
+  optional int32 curCityId = 2;
+  optional int64 seasonExp = 3;
+  repeated WarSeasonGodBodyStatusDatsMsg bodyStatus = 4;
+  repeated WarSeasonCityDetailMsg markInfo = 5;
+  repeated WarSeasonMapUnionDataMsg unionData = 6;
+  repeated WarSeasonMapMoveDataMsg moveDatas = 7;
+  repeated int32 collectionCityArr = 8;
+  repeated WarSeasonMapDeclareFightDataMsg fightData = 9;
+  repeated WarSeasonMapDeclareWarCarDataMsg carData = 10;
+  repeated WarSeasonManorDataMsg manorData = 11;
+  optional int64 lastMoveCapitalTime = 12;
+  optional string params = 13;
+  repeated int32 passStage = 14;
+  optional int32 challengeTimes = 15;
+  optional int32 itemChallengeTimes = 16;
+  optional int32 battleTimes = 17;
+  repeated int32 cityLevel = 18;
+  optional string curFightValue = 19;
+  repeated WarSeasonOrderDeclareFightDataMsg orderFightData = 20;
+  repeated WarSeasonEffectStrategyInfo otherUnionStrategyList = 21;
+  optional int32 preCityId = 22;
+  optional WarSeasonPetMsg petInfo = 23;
+}
+message WarSeasonMapUnionDataMsg{
+  optional int64 unionId = 1;
+  repeated int32 ownerCity = 2;
+  optional string unionName = 3;
+  optional int32 mainCityId = 4;
+  optional int32 bornCityId = 5;
+}
+message WarSeasonMapMoveDataMsg{
+  repeated int32 movePath = 1;
+  optional int64 beginMoveTime = 2;
+  optional int64 endMoveTime = 3;
+  optional int32 type = 4;
+  optional int32 status = 5;
+  optional PlayerHeadDataMsg headInfo = 6;
+  optional int32 bodyIndex = 7;
+  optional string nickName = 8;
+  optional int64 unionId = 9;
+}
+message WarSeasonGodBodyStatusDatsMsg{
+  optional int32 bodyIndex = 1;
+  optional int32 status = 2;
+}
+message WarSeasonManorDataMsg{
+  optional int32 cityId = 1;
+  optional int64 fightTime = 2;
+}
+message WarSeasonMapCityViewInfoReq{
+  required int64 groupId = 1;
+  repeated int32 viewCityArr = 2;
+  required int32 type = 3;
+}
+message WarSeasonMapCityViewInfoResp{
+  required int32 ret = 1;
+  repeated WarSeasonMapCityDataMsg infos = 2;
+}
+message WarSeasonMapCityDataMsg{
+  optional int32 cityId = 1;
+  optional int32 roleNum = 2;
+  repeated WarSeasonMapBattleDataMsg battleRoles = 3;
+  optional int64 fightStartTime = 4;
+  optional int32 monsterNum = 5;
+  optional int64 leftHp = 6;
+  optional int64 shieldMax = 7;
+  optional int64 shieldValue = 8;
+  optional int64 shieldEndTime = 9;
+  repeated WarSeasonStrategyStatus cityStrategyList = 10;
+  repeated WarSeasonPetFightMsg petData = 11;
+}
+message WarSeasonMapBattleDataMsg{
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional int32 bodyIndex = 2;
+  optional string nickName = 3;
+  optional int32 rank = 4;
+  optional int64 unionId = 5;
+  optional int32 npcId = 6;
+  optional int32 fromCityId = 7;
+  optional int32 buffStatus = 8;
+  optional int32 hpRate = 9;
+  optional int64 npcUid = 10;
+  optional int32 energy = 11;
+}
+message WarSeasonMapHeartBeatReq{
+  required int64 groupId = 1;
+  optional bool isBreak = 2;
+}
+message WarSeasonMapHeartBeatResp{
+  required int32 ret = 1;
+}
+message WarSeasonMapReviveReq{
+  required int64 groupId = 1;
+  required int64 playerId = 2;
+  required int32 bodyIndex = 3;
+  required int32 type = 4;
+}
+message WarSeasonMapReviveResp{
+  required int32 ret = 1;
+  optional int32 cityId = 2;
+}
+message WarSeasonMapManorListReq{
+  required int64 groupId = 1;
+}
+message WarSeasonMapManorListResp{
+  required int32 ret = 1;
+  repeated WarSeasonMapManorDataMsg datas = 2;
+}
+message WarSeasonMapManorDataMsg{
+  optional int32 id = 1;
+  optional int64 lastGotTime = 2;
+}
+message WarSeasonMapGetManorBonusReq{
+  required int64 groupId = 1;
+}
+message WarSeasonMapGetManorBonusResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated WarSeasonMapManorDataMsg datas = 3;
+}
+message WarSeasonMapGiveUpManorReq{
+  required int64 groupId = 1;
+  required int32 id = 2;
+}
+message WarSeasonMapGiveUpManorResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message WarSeasonMapCollectionCityListReq{
+  required int64 groupId = 1;
+}
+message WarSeasonMapCollectionCityListResp{
+  required int32 ret = 1;
+  repeated WarSeasonMapCollectionCityDataMsg datas = 2;
+}
+message WarSeasonMapCollectionCityDataMsg{
+  optional int32 cityId = 1;
+  optional int64 unionId = 2;
+  optional string unionName = 3;
+}
+message WarSeasonMapCollectionCityReq{
+  required int64 groupId = 1;
+  required int32 cityId = 2;
+  required int32 type = 3;
+}
+message WarSeasonMapCollectionCityResp{
+  required int32 ret = 1;
+}
+message WarSeasonMapCityDetailInfoReq{
+  required int64 groupId = 1;
+  required int32 cityId = 2;
+  optional bool manor = 3;
+}
+message WarSeasonMapCityDetailInfoResp{
+  required int32 ret = 1;
+  repeated PlayerHeadDataMsg atkList = 2;
+  repeated PlayerHeadDataMsg defList = 3;
+  optional int32 npcNum = 4;
+  optional int64 unionId = 5;
+  optional bool isDeclareWar = 6;
+  optional int64 costTime = 7;
+  optional int32 atkPlayerNum = 8;
+  optional int32 defPlayerNum = 9;
+}
+message WarSeasonMapCityMarkSyncMsg {
+  optional WarSeasonCityDetailMsg info = 1;
+}
+message WarSeasonMapCityMoveReq{
+  required int64 groupId = 1;
+  required int32 cityId = 2;
+  optional int64 playerId = 3;
+}
+message WarSeasonMapCityMoveResp{
+  required int32 ret = 1;
+}
+message WarSeasonMapDeclareWarReq{
+  required int64 groupId = 1;
+  required int32 cityId = 2;
+}
+message WarSeasonMapDeclareWarResp{
+  required int32 ret = 1;
+}
+message WarSeasonMapDeclareFightDataMsg{
+  optional int32 cityId = 1;
+  required int64 fightStartTime = 2;
+  optional int64 targetUnionId = 3;
+  repeated WarSeasonMapDeclareUnionDataMsg unionData = 4;
+}
+message WarSeasonMapDeclareUnionDataMsg{
+  optional int64 unionId = 1;
+  optional int32 beginId = 2;
+  optional int64 time = 3;
+  optional string name = 4;
+}
+message WarSeasonMapDeclareWarCarDataMsg{
+  optional int64 iid = 1;
+  repeated int32 movePath = 2;
+  optional int64 beginTime = 3;
+  optional int64 finishTime = 4;
+  optional string fightValue = 5;
+  optional int64 unionId = 6;
+  optional int32 status = 7;
+  optional int32 petSkillId = 8;
+  optional int32 petLv = 9;
+}
+message WarSeasonMapDeclareWarSyncMsg {
+  optional WarSeasonMapDeclareFightDataMsg fightData = 1;
+  repeated WarSeasonMapDeclareWarCarDataMsg carData = 2;
+}
+message WarSeasonMapSimpleGodBodyDataReq{
+  required int64 groupId = 1;
+  required int64 playerId = 2;
+}
+message WarSeasonMapSimpleGodBodyDataResp{
+  required int32 ret = 1;
+  optional WarSeasonCommonGodBodyShowMsg data = 2;
+}
+message WarSeasonMapToFightReq{
+  required int64 groupId = 1;
+  optional int64 playerId = 2;
+  optional int32 bodyIndex = 3;
+  optional int32 cityId = 4;
+  optional int32 dispatchType = 5;
+  optional int32 order = 6;
+}
+message WarSeasonMapToFightResp{
+  required int32 ret = 1;
+}
+message WarSeasonTargetCityLineInfoReqMsg{
+  required int64 groupId = 1;
+  required int32 cityId = 2;
+  optional int32 type = 3;
+  optional bool manor = 4;
+}
+message WarSeasonTargetCityLineInfoRespMsg{
+  required int32 ret = 1;
+  repeated WarSeasonGameLinePlayerInfo infos = 2;
+}
+message WarSeasonGameLinePlayerInfo{
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional int32 npcId = 2;
+  optional string nickName = 3;
+  repeated WarSeasonGameLineBodyInfo bodyInfos = 4;
+  optional int32 defenceType = 5;
+}
+message WarSeasonGameLineBodyInfo{
+  optional int32 bodyIndex = 1;
+  optional int32 status = 2;
+  optional int32 energy = 3;
+  optional string fightValue = 4;
+}
+message WarSeasonMapUpdateMovePlayerSyncMsg {
+  optional WarSeasonMapMoveDataMsg data = 1;
+}
+message WarSeasonMapEnterFightStageSyncMsg {
+  optional WarSeasonMapCityDataMsg data =1;
+}
+message WarSeasonMapCityPlayerFightSyncMsg {
+  optional int32 cityId = 1;
+  optional WarSeasonBattleHpDataMsg data1 = 2;
+  optional WarSeasonBattleHpDataMsg data2 = 3;
+  optional int32 fightNum = 4;
+  optional bool isOccupy = 5;
+  optional int64 fightTime = 6;
+  optional int32 roleNum = 7;
+  optional bool secKill = 8;
+  repeated int32 buffList1 = 9;
+  repeated int32 buffList2 = 10;
+}
+message WarSeasonBattleHpDataMsg{
+  optional WarSeasonMapBattleDataMsg data = 1;
+  optional int32 curHpRate = 2;
+  optional int32 finalRate = 3;
+}
+message WarSeasonMapCityBeAtkSyncMsg {
+  optional int32 cityId = 1;
+  optional int64 hp = 2;
+  repeated WarSeasonAttackCityHpMsg attackDamageInfo = 3;
+  optional int64 occupyUnionId = 4;
+  optional int64 shield = 5;
+}
+message WarSeasonAttackCityHpMsg {
+  optional int64 unionId = 1;
+  optional int32 count = 2;
+  optional int64 totalDamage = 3;
+}
+message WarSeasonMapPlayerEnterCitySyncMsg {
+  optional int32 cityId = 1;
+  optional int32 roleNum = 2;
+  repeated WarSeasonMapBattleDataMsg data = 3;
+  optional bool isMoveBorn = 4;
+  optional int64 unionId = 5;
+  repeated int64 moveCityPlayerIds = 6;
+  repeated WarSeasonPetFightMsg petData = 7;
+}
+message WarSeasonAutoMoveCityInfoReqMsg{
+  required int64 groupId = 1;
+}
+message WarSeasonAutoMoveCityInfoRespMsg{
+  required int32 ret = 1;
+  repeated WarSeasonAutoMoveCityInfo infos = 2;
+  optional WarSeasonAutoMoveCityInfo selfInfo = 3;
+}
+message WarSeasonAutoMoveCityInfo{
+  optional int64 playerId = 1;
+  optional int32 appearanceId = 2;
+  optional string nickName = 3;
+  optional int64 fightValue = 4;
+  optional int32 cityId = 5;
+  optional int32 status = 6;
+}
+message WarSeasonMapBodyDieSyncMsg {
+  optional int32 bodyIndex = 1;
+  optional int32 reviveCount = 2;
+  optional int32 freeReviveCount = 3;
+  optional int64 reviveItemNum = 4;
+  optional int64 deathTime = 5;
+  optional string nickName = 6;
+  optional int32 npcId = 7;
+  optional int32 cityId = 8;
+  optional int32 petSkillId = 9;
+}
+message WarSeasonMapBodyDieCommonderSyncMsg {
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional string nickName = 2;
+  optional int32 bodyIndex = 3;
+}
+message WarSeasonMapBodyEnterCarSyncMsg {
+  optional int32 startCityId = 1;
+  optional int32 targetCityId = 2;
+  optional int64 playerId = 3;
+  optional int32 bodyIndex = 4;
+  optional string fightValue = 5;
+  optional bool isEnterCar = 6;
+  required int64 iid = 7;
+}
+message WarSeasonUnionRankList {
+  repeated WarSeasonUnionRankMsg rankTemp = 1;
+}
+message WarSeasonUnionRankMsg {
+  optional UnionBaseData baseData = 1;
+  required int64 value = 2;
+  optional int32 rank = 3;
+}
+message WarSeasonPlayerRankMsg {
+  required int64 playerId = 1;
+  required PlayerCharacterImageMsg playerBaseData = 2;
+  required string value = 3;
+  required int32 rank = 4;
+}
+message WarSeasonPlayerRankList {
+  repeated WarSeasonPlayerRankMsg rankInfo = 1;
+}
+message WarSeasonGetPlayerInfoReq{
+  optional int64 groupId = 1;
+  required int64 playerId = 2;
+}
+message WarSeasonGetPlayerInfoResp{
+  required int32 ret = 1;
+  optional WarSeasonCommonPlayerShowMsg playerShowMsg = 2;
+}
+message WarSeasonGiftInfoReq{
+    required int64 groupId = 1;
+  }
+message WarSeasonGiftInfoResp{
+  required int32 ret = 1;
+  repeated WarSeasonGiftInfo giftInfo = 2;
+}
+message WarSeasonSendGiftReq{
+    required int64 groupId = 1;
+    required int32 boxId = 2;
+    required int32 sendNum = 3;
+  }
+message WarSeasonSendGiftResp{
+  required int32 ret = 1;
+  optional WarSeasonGiftInfo giftInfo = 2;
+}
+message WarSeasonGiftInfo{
+  optional string name = 1;
+  optional int32 boxId = 2;
+  optional int32 id = 3;
+  optional int64 sendTime = 4;
+  optional int64 giftId = 5;
+}
+message WarSeasonGetGiftReq{
+  optional int64 groupId = 1;
+  repeated int32 idList = 2;
+}
+message WarSeasonGetGiftResp{
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+message WarSeasonGiftSyncMsg{
+  repeated  WarSeasonGiftInfo giftInfo = 1;
+}
+message WarSeasonUnionInfoReq{
+    required int64 groupId = 1;
+  }
+message WarSeasonUnionInfoResp{
+  required int32 ret = 1;
+  optional WarSeasonUnionRoomMsg roomInfo = 2;
+}
+message WarSeasonUnionRoomMsg{
+    optional string notice = 1;
+    optional int32 ticket = 2;
+    optional int64 recoverTime = 3;
+    optional int32 seasonGiftNum = 4;
+    repeated int32 reciveRank = 5;
+    optional int64 exp = 6;
+    repeated UnionMemberDetailInfo memberInfo = 7;
+    optional bool isSign = 8;
+    optional int64 lastApplyTime = 9;
+    optional int32 dailyTicketNum = 10;
+    optional string name = 12;
+    optional int64 unionId = 13;
+    optional int32 mainCityId = 14;
+    optional int32 ownerCity = 15;
+    optional int32 flag = 16;
+  }
+message UnionMemberDetailInfo{
+  optional PlayerBaseDataMsg playerData = 1;
+  optional int64 lastLoginTime = 2;
+  optional int64 exp = 3;
+  optional bool  isCommander = 4;
+  optional int32 pos = 5;
+  optional int64 exploit = 6;
+}
+message WarSeasonGetPrivilegeRewardReq{
+    required int64 groupId = 1;
+    required int32 level = 2;
+  }
+message WarSeasonGetPrivilegeRewardResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message WarSeasonSignReq {
+    required int64 groupId = 1;
+  }
+message WarSeasonSignResp {
+  optional int32 ret = 1;
+  optional int64 unionExp = 2;
+}
+message WarSeasonDonateReq {
+    required int64 groupId = 1;
+    required int32 num = 2;
+  }
+message WarSeasonDonateResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 seasonGiftNum = 3;
+  optional int64 exploit = 4;
+}
+message WarSeasonExchangeTicketReq {
+  required int32 num = 1;
+}
+message WarSeasonExchangeTicketResp {
+  optional int32 ret = 1;
+  optional int32 ticket = 2;
+  optional int64 recoverTime = 3;
+}
+message WarSeasonChallengeReq {
+    required int64 groupId = 1;
+    required int32 level = 2;
+    optional bool  isItemCost = 3;
+    optional bool  isQuick = 4;
+    optional int32 bodyIndex = 5;
+}
+message WarSeasonChallengeResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional BattleRecordMsg allBattleRecord = 3;
+  optional bool isWin = 4;
+  repeated int32 passStage = 5;
+  optional int32 challengeTimes = 6;
+  optional int32 itemChallengeTimes = 7;
+  optional int32 battleTimes = 8;
+}
+message WarSeasonBattleReportInfoReq {
+  optional int64 groupId = 1;
+  optional int32 type = 2;
+}
+message WarSeasonBattleReportInfoResp {
+  optional int32 ret = 1;
+  repeated WarSeasonBattleReportMsg battleReportMsg = 2;
+  repeated WarSeasonUnionReportMsg unionReportMsg = 3;
+}
+message WarSeasonBattleReportMsg{
+  optional int32 cityId = 1;
+  optional int64 score = 2;
+  optional int64 gold = 3;
+  repeated WarSeasonReportDetailMsg infos = 4;
+  optional int32 type = 5;
+}
+message WarSeasonReportDetailMsg{
+  optional WarSeasonReportHeadMsg myBattleReportMsg = 1;
+  optional WarSeasonReportHeadMsg enemyBattleReportMsg = 2;
+  optional int64 battleId = 3;
+  optional int64 time = 4;
+  optional bool secKill = 5;
+  optional int32 petSkillId = 6;
+}
+message WarSeasonReportHeadMsg{
+  optional PlayerHeadAndNameMsg playerHeadAndNameMsg = 1;
+  optional string unionName = 2;
+  optional int32 energy = 3;
+  optional int32 npcId = 4;
+  optional int32 costEnergy = 5;
+  optional int32 bodyIndex = 6;
+  repeated int32 buffList = 7;
+}
+message WarSeasonUnionReportMsg{
+  optional int32 cityId = 1;
+  optional bool isWin = 2;
+  optional WarSeasonUnionReportDataMsg selfData = 3;
+  optional WarSeasonUnionReportDataMsg enemyData = 4;
+  optional int64 time = 5;
+}
+message WarSeasonUnionReportDataMsg{
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional string masterName = 3;
+  optional int32 flag = 4;
+}
+message WarSeasonBattleReportPlayReq {
+  optional int64 groupId = 1;
+  optional int64 battleId = 2;
+}
+message WarSeasonBattleReportPlayResp {
+  optional int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+}
+message WarSeasonWorshipReq{
+  required int64 groupId = 1;
+}
+message WarSeasonWorshipRsp{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message WarSeasonWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional PlayerHeadDataMsg headInfo = 9;
+  repeated int32 petSoulShapeList = 10;
+  optional int32 titleId = 11;
+  repeated int32 petLinkageId = 12;
+  repeated int32 spiritLinkageId = 13;
+}
+message WarSeasonModifyNoticeReq {
+  optional int64 groupId = 1;
+  optional string content = 2;
+}
+message WarSeasonModifyNoticeResp {
+  optional int32 ret = 1;
+}
+message WarSeasonPositionInfoReq{
+  required int32 activityId = 1;
+  optional int32 unionId = 2;
+  optional int32 rank = 3;
+}
+message WarSeasonPositionInfoResp{
+  optional int32 ret = 1;
+  repeated PositionMsg  positionMsg = 2;
+}
+message PositionMsg{
+  optional int32 rank = 1;
+  optional UnionBaseData unionBaseData = 2;
+}
+message WarSeasonSetPositionReq{
+  required int32 activityId = 1;
+  optional int32 unionId = 2;
+  optional int32 rank = 3;
+}
+message WarSeasonSetPositionResp{
+  required int32 ret = 1;
+}
+message WarSeasonUnionTaskInfoReq{
+    required int64 groupId = 1;
+    optional int32 type = 2;
+  }
+message WarSeasonUnionTaskInfoResp{
+  optional int32 ret = 1;
+  repeated SeasonUnionTaskMsg unionTaskInfo = 2;
+}
+message WarSeasonSyncUnionTask{
+    repeated SeasonUnionTaskMsg unionTaskInfo = 1;
+  }
+message SeasonUnionTaskMsg{
+  optional int32 conditionId = 1;
+  optional int64 value = 2;
+  optional bool  isGetReward = 3;
+}
+message WarSeasonGetUnionTaskRewardReq{
+    required int64 groupId = 1;
+    optional int32 conditionId = 2;
+  }
+message WarSeasonGetUnionTaskRewardResp{
+  optional int32 ret = 1;
+  optional string rewards = 2;
+}
+message WarSeasonStrategyInfoReq{
+  optional int64 groupId = 1;
+}
+message WarSeasonStrategyInfoResp{
+  required int32 ret = 1;
+  repeated int64 commanders = 2;
+  repeated WarSeasonCityDetailMsg cityMsg = 3;
+  optional int32  delegateState = 4;
+  repeated int64 playerId = 5;
+  optional int64 lastRejectApplyTime = 6;
+}
+message WarSeasonCityDetailMsg{
+  optional int32 cityId = 1;
+  optional string content = 2;
+  repeated WarSeasonPlayerSimpleInfo players = 3;
+  optional int64 playerId = 4;
+  optional int64 editTime = 5;
+}
+message WarSeasonPlayerSimpleInfo {
+  optional PlayerHeadDataMsg headInfo = 1;
+  optional string nickname = 2;
+  optional int64 fightValue = 3;
+}
+message WarSeasonMiniMapInfoReqMsg{
+    required int64 groupId = 1;
+  }
+message WarSeasonMiniMapInfoRespMsg{
+  required int32 ret = 1;
+  repeated WarSeasonMiniCityInfo cityInfo = 2;
+}
+message WarSeasonMiniCityInfo{
+  optional int32 cityId = 1;
+  optional UnionBaseData baseData = 2;
+  optional bool haveFight = 3;
+}
+message WarSeasonApplyAutoAttackReq{
+    required int64 groupId = 1;
+    optional bool  isCancel = 2;
+}
+message WarSeasonApplyAutoAttackResp{
+  required int32 ret = 1;
+  optional int32 delegateState = 2;
+}
+message WarSeasonApplyListReq{
+  required int64 groupId = 1;
+}
+message WarSeasonApplyListResp{
+  required int32 ret = 1;
+  repeated WarSeasonApplyInfo applyList = 2;
+}
+message WarSeasonApplyInfo{
+  optional int64 playerId = 1;
+  optional int64 sendTime = 2;
+}
+message WarSeasonApplySetReq{
+    required int64 groupId = 1;
+    optional int32 status = 2;
+    optional int64 targetPlayerId = 3;
+  }
+message WarSeasonApplySetResp{
+  required int32 ret = 1;
+  repeated WarSeasonApplyInfo applyList = 2;
+}
+message WarSeasonCommanderSetReq{
+    required int64 groupId = 1;
+    repeated int64 commanders = 2;
+  }
+message WarSeasonCommanderSetResp{
+  required int32 ret = 1;
+  repeated int64 commanders = 2;
+}
+message WarSeasonSetUnionTargetReq{
+    required int64 groupId = 1;
+    repeated int32 cityId = 2;
+  }
+message WarSeasonSetUnionTargetResp{
+  required int32 ret = 1;
+  repeated WarSeasonCityDetailMsg cityMsg = 2;
+}
+message WarSeasonCommanderChangeSyncMsg {
+  required bool haveCommand = 1;
+  optional int64 commanderTime = 2;
+}
+message WarSeasonUnionInfoSyncMsg{
+}
+message WarSeasonSetTargetContentReq{
+    required int64 groupId = 1;
+    required int32 cityId = 2;
+    optional string content = 3;
+  }
+message WarSeasonSetTargetContentResp {
+  required int32 ret = 1;
+  optional int32 cityId = 2;
+  optional string content = 3;
+}
+message WarSeasonCommonPlayerShowMsg {
+  optional PlayerHeadAndNameMsg headData = 1;
+  optional WarSeasonCommonGodBodyShowMsg godBodyData = 2;
+  optional int64 seasonExp = 3;
+  optional int32 groundNum = 4;
+  optional int64 groundOutput = 5;
+  optional int64 unionId = 6;
+  optional int32 petLv = 7;
+}
+message WarSeasonCommonGodBodyShowMsg {
+  repeated WarSeasonCommonPlayerGodBodyMsg godBodyList = 1;
+  optional int32 reviveCount = 2;
+  optional int32 freeReviveCount = 3;
+  optional int64 reviveItemNum = 4;
+  optional int64 seasonExp = 5;
+}
+message WarSeasonCommonPlayerGodBodyMsg {
+  optional int32 bodyIndex = 1;
+  optional int32 appearanceId = 2;
+  optional string fightValue = 3;
+  repeated AttributeDataMsg preAttribute = 4;
+  optional int32 cloudId = 5;
+  optional int32 energy = 6;
+  optional string currentFightValue = 7;
+  optional int32 cityId = 8;
+  optional int64 deathTime = 9;
+  optional int32 status = 10;
+  optional int64 lastFailTime = 11;
+  optional bool isOpenAutoRevive = 12;
+}
+message WarSeasonMoveCapitalReq {
+  optional int64 groupId = 1;
+  optional int32 targetCityId = 2;
+}
+message WarSeasonMoveCapitalResp {
+  optional int32 ret = 1;
+}
+message WarSeasonBodyReviveSyncMsg{
+  optional int64 playerId = 1;
+  optional int32 bodyIndex = 2;
+  optional int32 reviveCount = 3;
+  optional int32 freeReviveCount = 4;
+  optional int64 reviveItemNum = 5;
+  optional int32 cityId = 6;
+}
+message WarSeasonCommanderDetailReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonCommanderDetailResp {
+  optional int32 ret = 1;
+  repeated PlayerHeadAndNameMsg headDatas = 2;
+  optional WarSeasonCommonGodBodyShowMsg playerInfo = 3;
+  optional int32 unionLevel = 4;
+}
+message WarSeasonGetGrantedTitleListReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonGetGrantedTitleListResp {
+  required int32 ret = 1;
+  repeated WarSeasonTitleShowPlayerInfo playerMsgList = 2;
+  optional bool isWorship = 3;
+}
+message WarSeasonTitleShowPlayerInfo {
+  optional PlayerAppearanceDataMsg appearance = 1;
+  optional int32 warSeasonTitle = 2;
+  optional string unionName = 3;
+}
+message WarSeasonGrantTitleReq {
+  required int64 playerId = 1;
+  required int32 title = 2;
+  required int32 actionType = 3;
+  optional int64 groupId = 4;
+}
+message WarSeasonGrantTitleResp {
+  required int32 ret = 1;
+  repeated WarSeasonTitleShowPlayerInfo playerMsg = 2;
+}
+message WarSeasonWorshipTitleReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonWorshipTitleResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional PalacePlayerShowMsg worshipPlayer = 3;
+}
+message WarSeasonBetUnionInfo {
+  optional WarSeasonUnionRankMsg rankInfo = 1;
+  optional int32 selectedCount = 2;
+}
+message WarSeasonAllGuessData {
+  repeated WarSeasonBetUnionInfo unionInfo = 1;
+}
+enum WarSeasonBodyState {
+  bodyState_defend = 0;
+  bodyState_battle = 1;
+  bodyState_dead = 2;
+  bodyState_gather = 3;
+  bodyState_backHome = 4;
+  bodyState_helpDefend = 5;
+  bodyState_moving = 6;
+  bodyState_ghostCity = 7;
+}
+message WarSeasonUnionMemberListReq {
+  optional int64 groupId = 1;
+  optional int64 unionId = 2;
+  required int32 type = 3;
+}
+message WarSeasonUnionMemberListResp {
+  optional int32 ret = 1;
+  repeated WarSeasonUnionMemberShowMsg memberList = 2;
+  repeated UnionMemberDetailInfo memberDetailList = 3;
+}
+message WarSeasonUnionMemberShowMsg {
+  optional int64 playerId = 1;
+  optional int32 serverId = 2;
+  optional int32 headIcon = 3;
+  optional string wxHeadUrl = 4;
+  optional int32 equipHeadIconFrame = 5;
+  optional string nickName = 6;
+  optional int64 fightValue = 7;
+  optional int64 battleScore = 8;
+  optional int32 bodyCount = 9;
+}
+message WarSeasonExpChangeSyncMsg{
+  optional int64 exp = 1;
+  optional string oldFightValue = 2;
+  optional string curFightValue = 3;
+}
+message WarSeasonCarDataChangeSyncMsg{
+  repeated WarSeasonMapDeclareWarCarDataMsg data = 1;
+  repeated int64 delCarIIdArr = 2;
+}
+message WarSeasonMoveCityFinishSyncMsg{
+  optional int64 playerId = 1;
+  optional int32 cityId = 2;
+}
+message WarSeasonMonsterAttrReq {
+  optional int64 groupId = 1;
+  required int32 monsterId = 2;
+}
+message WarSeasonMonsterAttrResp {
+  optional int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+}
+message WarSeasonCarDetailReq {
+  optional int64 groupId = 1;
+  optional int64 iId = 2;
+}
+message WarSeasonCarDetailResp {
+  optional int32 ret = 1;
+  optional int64 iId = 2;
+  repeated WarSeasonGameLinePlayerInfo infos = 3;
+}
+message WarSeasonBodyStatusChangedSyncMsg{
+  optional int32 bodyIndex = 1;
+  optional int32 status = 2;
+}
+message WarSeasonResurrectionTimesChangeSyncMsg{
+    optional int32 resurrectionTimes = 1;
+  }
+message WarSeasonRedPointSyncMsg{
+    repeated WarSeasonRedPointSyncSingleMsg data = 1;
+  }
+  message WarSeasonRedPointSyncSingleMsg{
+    optional int32 type = 1;
+    optional int32 value = 2;
+  }
+message WarSeasonMonsterListReq{
+    optional int64 groupId = 1;
+  }
+  message WarSeasonMonsterListResp{
+    optional int32 ret = 1;
+    repeated WarSeasonMonsterData warSeasonMonsterData = 2;
+  }
+  message WarSeasonMonsterData{
+    required int32 monsterId = 1;
+    required string fightValue = 2;
+  }
+message WarSeasonCityBelongListReq{
+  optional int64 groupId = 1;
+  optional int64 unionId = 2;
+}
+message WarSeasonCityBelongListResp{
+  optional int32 ret = 1;
+  repeated WarSeasonCityBelongData warSeasonCityBelongData = 2;
+}
+message WarSeasonCityBelongData{
+  repeated int32 cityId = 1;
+  optional string unionName = 2;
+  optional int64 unionId = 3;
+}
+message WarSeasonCityTicketNumReq{
+  optional int64 groupId = 1;
+}
+message WarSeasonCityTicketNumResp{
+  optional int32 ret = 1;
+  optional int32 itemNum = 2;
+}
+message WarSeasonTransferCommandRightReq {
+  optional int64 groupId = 1;
+  optional int64 targetId = 2;
+}
+message WarSeasonTransferCommandRightResp {
+  optional int32 ret = 1;
+  repeated int64 commanders = 2;
+  optional int64 commanderTime = 3;
+}
+message WarSeasonGetGiftSelectMsgReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonGetGiftSelectMsgResp {
+  optional int32 ret = 1;
+  repeated WarSeasonGiftSelectMsg giftSelectMsg = 2;
+  optional string systemOpenValue = 3;
+  optional int64 battleScore = 4;
+  optional int32 specialExchangeItemId = 5;
+}
+message WarSeasonSelectGiftRewardReq {
+  optional int64 groupId = 1;
+  optional int32 mallId = 2;
+  optional int32 gridIndex = 3;
+  optional int32 selectIndex = 4;
+}
+message WarSeasonSelectGiftRewardResp {
+  optional int32 ret = 1;
+  repeated WarSeasonGiftSelectMsg giftSelectMsg = 2;
+}
+message WarSeasonGiftSelectMsg{
+  optional int32 mallId = 1;
+  repeated WarSeasonGiftSelectGridMsg gridMsgs = 2;
+}
+message WarSeasonGiftSelectGridMsg{
+  optional int32 index = 1;
+  optional int32 selectIndex = 2;
+}
+message WarSeasonUnionScoreDetailReq {
+  optional int64 groupId = 1;
+  optional int64 unionId = 2;
+}
+message WarSeasonUnionScoreDetailResp {
+  optional int32 ret = 1;
+  optional int32 totalScore = 2;
+  repeated WarSeasonUnionScoreCityMsg scoreCities = 3;
+}
+message WarSeasonUnionScoreCityMsg {
+  optional int32 cityId = 1;
+  optional int32 score = 2;
+}
+message WarSeasonGetSendBoxRecordsReq {
+  optional int64 groupId = 1;
+  optional int32 type = 2;
+}
+message WarSeasonGetSendBoxRecordsResp {
+  optional int32 ret = 1;
+  repeated WarSeasonMemberSendBoxMsg records = 2;
+}
+message WarSeasonMemberSendBoxMsg {
+  optional string name = 1;
+  repeated WarSeasonMemberSendBoxItem items = 2;
+  optional int64 addPetExp = 3;
+  optional int32 activeValue = 4;
+}
+message WarSeasonMemberSendBoxItem {
+  optional int32 boxId = 1;
+  optional int32 count = 2;
+}
+message WarSeasonGetNoSignMembersReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonGetNoSignMembersResp {
+  optional int32 ret = 1;
+  repeated WarSeasonNoSignMsg noSignList = 2;
+}
+message WarSeasonNoSignMsg {
+  optional string nickName = 1;
+  optional int64 lastOnlineTime = 2;
+}
+message WarSeasonStrategyData {
+  required int32 strategyPoint = 1;
+  optional int64 lastRecoverTime = 2;
+  repeated WarSeasonStrategyStatus strategyStatusList = 3;
+}
+message WarSeasonStrategyStatusSync {
+  optional int64 unionId = 1;
+  optional WarSeasonStrategyStatus strategyStatus = 2;
+  optional string params = 3;
+}
+message WarSeasonEffectStrategyInfo {
+  optional int64 unionId = 1;
+  repeated WarSeasonStrategyStatus strategyStatusList = 2;
+}
+message WarSeasonStrategyStatus {
+  required int32 strategyId = 1;
+  required int64 cityId = 2;
+  optional int64 useTime = 3;
+  optional int64 expiredTime = 4;
+  optional string playerName = 5;
+}
+message WarSeasonActivateStrategyReq {
+  optional int64 groupId = 1;
+  optional int32 strategyId = 2;
+  optional int32 targetCityId = 3;
+}
+message WarSeasonActivateStrategyResp {
+  required int32 ret = 1;
+  optional WarSeasonStrategyData strategyData = 2;
+}
+message WarSeasonSeparationPosReq {
+  required int64 groupId = 1;
+  required int32 bodyIndex = 2;
+}
+message WarSeasonSeparationPosResp {
+    required int32 ret = 1;
+    optional int64 declareWarCarId = 2;
+    optional int64 cityId = 3;
+}
+message WarSeasonOrderDeclareWar {
+  required int32 cityId = 1;
+  required int64 orderTime = 2;
+}
+message WarSeasonOrderDeclareWarReq {
+  optional int64 groupId = 1;
+  optional WarSeasonOrderDeclareWar order = 2;
+}
+message WarSeasonOrderDeclareWarResp {
+  required int32 ret = 1;
+}
+message WarSeasonOrderDeclareFightDataMsg {
+  optional string name = 1;
+  optional int32 cityId = 2;
+  optional int64 time = 3;
+}
+message WarSeasonMapOrderDeclareWarSyncMsg {
+  optional WarSeasonOrderDeclareFightDataMsg orderFightData = 1;
+}
+message WarSeasonEnterGhostCityReq {
+  optional int64 groupId = 1;
+  repeated int32 bodyIndex = 2;
+}
+message WarSeasonEnterGhostCityResp {
+  optional int32 ret = 1;
+}
+message WarSeasonEnterGhostSync {
+  optional int64 playerId = 1;
+  repeated WarSeasonEnterGhostInfo enterGhostCityInfo = 2;
+}
+message WarSeasonEnterGhostInfo {
+  optional int32 bodyIndex = 1;
+  optional int32 fromCityId = 2;
+}
+message WarSeasonGhostCityBattleSync {
+  optional int64 bodyIndex = 1;
+  optional bool win = 2;
+  optional int32 leftEnergy = 3;
+  optional int32 addScore = 4;
+  optional int32 fightNum = 5;
+  optional int32 winnerLeftHpRate = 6;
+}
+message WarSeasonManorReplaceSync {
+  optional int32 oldManorId = 1;
+  optional string reward = 2;
+  optional int32 newManorId = 3;
+}
+message WarSeasonFeedPetReq {
+  optional int64 groupId = 1;
+  optional int32 count = 2;
+}
+message WarSeasonFeedPetResp {
+  optional int32 ret = 1;
+  optional int64 petExp = 2;
+}
+message WarSeasonCommReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonActiveTaskProgressResp {
+  optional int32 ret = 1;
+  optional int32 receivedIndex = 2;
+  optional int64 activeValue = 3;
+}
+message WarSeasonReceiveActiveProgressResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 receivedIndex = 3;
+}
+message WarSeasonActiveProgressSync {
+  optional int64 activeValue = 2;
+}
+message WarSeasonPreFightCitySync {
+  optional int32 cityId = 1;
+}
+message WarSeasonSavePreFightCityReq {
+  optional int64 groupId = 1;
+  repeated int64 selectPlayers = 2;
+  optional int32 cityId = 3;
+}
+message WarSeasonSavePreFightCityResp {
+  optional int32 ret = 1;
+}
+message WarSeasonPetDetailResp {
+  optional int32 ret = 1;
+  optional WarSeasonPetMsg petInfo = 2;
+}
+message WarSeasonPetMsg {
+  optional int64 exp = 1;
+  optional int32 summonCityId = 2;
+  repeated WarSeasonPetSummonTime summonTimeList = 3;
+}
+message WarSeasonPetSummonTime {
+  optional int32 petType = 1;
+  optional int64 time = 2;
+}
+message WarSeasonSummonPetReq {
+  optional int64 groupId = 1;
+  optional int32 petSkillId = 2;
+  optional int32 cityId = 3;
+}
+message WarSeasonSummonPetResp {
+  optional int32 ret = 1;
+  optional int64 carId = 2;
+  optional WarSeasonPetSummonTime summonTime = 3;
+}
+message WarSeasonPetBuffSync {
+  optional int32 cityId = 1;
+  repeated WarSeasonMapBattleDataMsg target = 2;
+}
+message WarSeasonPetFightSync {
+  optional int32 cityId = 1;
+  optional WarSeasonPetFightMsg petData = 2;
+  repeated WarSeasonMapBattleDataMsg targets = 3;
+  optional bool type = 4;
+  repeated WarSeasonAttackCityHpMsg attackDamageInfo = 5;
+}
+message WarSeasonPetFightMsg {
+  optional int64 unionId = 1;
+  optional int32 petSkillId = 2;
+  optional int32 petLv = 3;
+  optional int64 petLeftHp = 4;
+  optional int32 fromCityId = 5;
+}
+message WarSeasonPetLvUpSync {
+  optional int64 exp = 1;
+}
+message WarSeasonSelectRewardModelReq {
+  optional int64 groupId = 1;
+  optional bool isRank = 2;
+  optional int32 modelId = 3;
+  optional int32 specialExchangeItemId = 4;
+}
+message WarSeasonSelectRewardModelResp {
+  optional int32 ret = 1;
+  optional int32 specialExchangeItemId = 2;
+}
+enum WarSeasonNewFunction {
+  war_season_new_function_commander_reward = 0;
+}
+message WarSeasonCommanderTimeReq {
+  optional int64 groupId = 1;
+}
+message WarSeasonCommanderTimeResp {
+  optional int32 ret = 1;
+  optional int64 commanderTime = 2;
+  optional int64 battleScore = 3;
+  optional bool isCommander = 4;
+  optional bool received = 5;
+}
+message WarSeasonAutoReviveOptionsMsg {
+  optional int32 bodyIndex = 1;
+  optional int32 freeCount = 2;
+  optional int32 propCount = 3;
+  optional bool open = 4;
+}
+message WarSeasonSetAutoReviveOptionsReq {
+  optional int64 groupId = 1;
+  optional int64 targetPlayerId = 2;
+  repeated WarSeasonAutoReviveOptionsMsg options = 3;
+}
+message WarSeasonSetAutoReviveOptionsResp {
+  optional int32 ret = 1;
+}
+message WarSeasonGetAutoReviveOptionsReq {
+  optional int64 groupId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message WarSeasonGetAutoReviveOptionsResp {
+  optional int32 ret = 1;
+  optional int64 targetPlayerId = 2;
+  repeated WarSeasonAutoReviveOptionsMsg options = 3;
+}

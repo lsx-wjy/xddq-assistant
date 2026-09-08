@@ -1,0 +1,55 @@
+package com.yq.msg.CityMsg;
+message getGuessDataReq {/*  */
+    required int32 sysTemId = 1;
+    optional string extra = 2;
+  }
+  message getGuessDataResp {
+    optional int32 ret = 1;
+    optional bytes guessList = 2;
+    repeated int64 myGuessInfo = 3;
+    optional int32 rewardParam = 4;
+    optional bool isReceive = 5;
+    repeated SystemGuessTotalResulMsg totalSettleResult = 6;
+  }
+  message SystemGuessTotalResulMsg {
+    optional int32 param = 1;
+    optional int32 count = 2;
+    optional int32 guessType = 3;
+  }
+  message GuessInfo{
+    optional int64 guessUnion = 1;
+  }
+  message GuessReq {
+    required int32 sysTemId = 1;
+    repeated GuessInfo myGuessInfo = 2;
+    optional string extra = 3;
+  }
+  message GuessResp {
+    optional int32 ret = 1;
+    optional string cost = 2;
+    repeated GuessInfo myGuessInfo = 3;
+  }
+  message GuessRewardReq {
+    required int32 sysTemId = 1;
+    optional string extra = 2;
+  }
+  message GuessRewardResp {
+    optional int32 ret = 1;
+    optional string reward = 2;
+  }
+  message GuessResultDetailReq {
+    required int32 sysTemId = 1;
+    required int32 param = 2;
+    repeated string extraParams = 3;
+    optional string extra = 4;
+  }
+  message GuessResultDetailResp {
+    required int32 ret = 1;
+    optional int32 param = 2;
+    repeated SystemGuessPlayerInfo playerList = 3;
+  }
+  message SystemGuessPlayerInfo {
+    optional int64 playerId = 1;
+    optional string nickName = 2;
+    optional int64 serverId = 3;
+  }

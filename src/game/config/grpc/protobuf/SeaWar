@@ -1,0 +1,904 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Common";
+import "Battle";
+import "Palace";
+/** 罗天幻海协议号 */
+enum SeaWarPb {
+    S_SEA_WAR_ENTER = 234901;
+    S_SEA_WAR_ENTER_GAME = 234902;
+    S_SEA_WAR_SOUL_BALL_LIST = 234903;
+    S_SEA_WAR_GAME_MAP = 234904;
+    S_SEA_WAR_UNION_MEMBER_LIST = 234905;
+    S_SEA_WAR_EXPLORE = 234906;
+    S_SEA_WAR_HANDLE_EVENT = 234907;
+    S_SEA_WAR_GAME_LOG = 234908;
+    S_SEA_WAR_ASSIST_LIST = 234909;
+    S_SEA_WAR_ASSIST = 234910;
+    S_SEA_WAR_PLAYER_INFO_SYNC = 234911;
+    S_SEA_WAR_ASSIST_REWARD = 234912;
+    S_SEA_WAR_ASSIST_SYNC = 234913;
+    S_SEA_WAR_UNION_WELFARE = 234914;
+    S_SEA_WAR_UNION_WELFARE_REWARD = 234915;
+    S_SEA_WAR_UNION_RECEIVE_LIQUID = 234916;
+    S_SEA_WAR_UNION_SEND_LIQUID = 234917;
+    S_SEA_WAR_UNION_LIQUID_RECORD = 234918;
+    S_SEA_WAR_HEART_BEAT = 234919;
+    S_SEA_WAR_NEXT_REGION = 234920;
+    S_SEA_WAR_LOCK_AVATAR = 234921;
+    S_SEA_WAR_USE_ITEM = 234922;
+    S_SEA_WAR_GET_UNION_MEMBER_LIST = 234923;
+    S_SEA_WAR_RED_POINT_DATA = 234924;
+    S_SEA_WAR_CURRENT_STAGE = 234925;
+    S_SEA_WAR_WORSHIP = 234926;
+    S_SEA_WAR_SUMMARY = 234927;
+    S_SEA_WAR_DROP_REGION_SYNC = 234928;
+    S_SEA_WAR_HORSE_LAMP_SYNC = 234929;
+    S_SEA_WAR_CHALLENGE_LIST = 234931;
+    S_SEA_WAR_CHALLENGE_INFO_SYNC = 234932;
+    S_SEA_WAR_DECLARATION_INFO_SYNC = 234933;
+    S_SEA_WAR_DECLARATION_RECORD = 234934;
+    S_SEA_WAR_UNION_DECLARATION_RECORD = 234935;
+    S_SEA_WAR_ENTER_CHALLENGE = 234936;
+    S_SEA_WAR_CHALLENGE_INFO = 234937;
+    S_SEA_WAR_CHALLENGE_BATTLE = 234938;
+    S_SEA_WAR_CHALLENGE_REPORT = 234939;
+    S_SEA_WAR_CHALLENGE_DAMAGE_DETAIL = 234940;
+    S_SEA_WAR_CHALLENGE_GROUP_DATA = 234941;
+    S_SEA_WAR_CHALLENGE_GROUP_DETAIL_DATA = 234942;
+    S_SEA_WAR_PLAYER_DATA = 234943;
+    S_SEA_WAR_DECLARATION = 234944;
+    S_SEA_WAR_UNION_MEMBER = 234945;
+}
+enum SeaWarRedPoint {
+    S_SEA_WAR_RED_POINT_NONE = 0;
+    S_SEA_WAR_RED_POINT_POWER = 1;
+    S_SEA_WAR_RED_POINT_RANK_REWARD = 2;
+    S_SEA_WAR_RED_POINT_UNION_WELFARE = 3;
+    S_SEA_WAR_RED_POINT_BET = 4;
+    S_SEA_WAR_RED_POINT_HELP_REWARD = 5;
+    S_SEA_WAR_RED_POINT_NEXT_LAYER = 6;
+    S_SEA_WAR_RED_POINT_BATTLE_CHALLENGE = 7;
+    S_SEA_WAR_RED_POINT_BATTLE_DECLARATION = 8;
+    S_SEA_WAR_RED_POINT_UNION_RECHARGE = 9;
+    S_SEA_WAR_RED_POINT_WORSHIP = 10;
+    S_SEA_WAR_RED_POINT_CAN_HELP = 11;
+}
+message SeaWarConfigSync {
+    repeated SeaWarAttrConfigMsg seaWarAttrConfigMsgs = 1;
+    repeated SeaWarBuffConfigMsg seaWarBuffConfigMsgs = 2;
+    repeated SeaWarEventConfigMsg seaWarEventConfigMsgs = 3;
+    repeated SeaWarGroupConfigMsg seaWarGroupConfigMsgs = 4;
+    repeated SeaWarMonsterConfigMsg seaWarMonsterConfigMsgs = 5;
+    repeated SeaWarRegionConfigMsg seaWarRegionConfigMsgs = 6;
+    repeated SeaWarTimeConfigMsg seaWarTimeConfigMsgs = 7;
+}
+message SeaWarAttrConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 exp = 3;
+    required int32 type = 4;
+    required int32 attrProb = 5;
+    required string attack = 6;
+    required string defence = 7;
+    required string hp = 8;
+    required string speed = 9;
+}
+message SeaWarBuffConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required string name = 3;
+    required int32 type = 4;
+    required int32 effect = 5;
+    required int32 itemId = 6;
+    required int32 level = 7;
+    required int32 weight = 8;
+    required string forgeRate = 9;
+    required string forgeUp = 10;
+    required string forgeDown = 11;
+}
+message SeaWarEventConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 eventType = 3;
+    required string param = 4;
+    required string reward = 5;
+    required int32 score = 6;
+    required int32 exp = 7;
+    required int32 protect = 8;
+    required int32 points = 9;
+    required string name = 10;
+    required string desc = 11;
+}
+message SeaWarGroupConfigMsg {
+    required int32 activityId = 1;
+    required int32 rankId = 2;
+    required int32 size = 3;
+    required int32 up = 4;
+    required int32 down = 5;
+    required string score = 6;
+}
+message SeaWarMonsterConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 monsterId = 3;
+    required string attack = 4;
+    required string defence = 5;
+    required string hp = 6;
+    required string speed = 7;
+    required string stun = 8;
+    required string criticalHit = 9;
+    required string doubleAttack = 10;
+    required string dodge = 11;
+    required string attackBack = 12;
+    required string lifeSteal = 13;
+    required string reStun = 14;
+    required string reCriticalHit = 15;
+    required string reDoubleAttack = 16;
+    required string reDodge = 17;
+    required string reAttackBack = 18;
+    required string reLifeSteal = 19;
+    required string increaseDamage = 20;
+    required string decreaseDamage = 21;
+    required string enhanceHitDamage = 22;
+    required string weakenHitDamage = 23;
+    required string enhanceHeal = 24;
+    required string weakenHeal = 25;
+    required string enhancePet = 26;
+    required string weakenPet = 27;
+    required string enhanceSkill = 28;
+    required string weakenSkill = 29;
+    required string ignoreAllProperty = 30;
+    required string ignoreAllignoreAll = 31;
+    required string sDef = 32;
+    required string sReDef = 33;
+    required string sBreak = 34;
+    required string sReBreak = 35;
+    required string name = 36;
+    required string petId = 37;
+    required string petSkillLevel = 38;
+    required string pithyId = 39;
+    required string pithySkillLevel = 40;
+    required string skillId = 41;
+    required string skillLevel = 42;
+    required string bloodSkill = 43;
+}
+message SeaWarRegionConfigMsg {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required string name = 3;
+    required int32 energy = 4;
+    required string consumeCondition = 6;
+    required int32 scoreBase = 7;
+    required string eventWeight = 8;
+    required int32 pointsBase = 9;
+    required string helpReward = 10;
+}
+message SeaWarTimeConfigMsg {
+    required int32 activityId = 1;
+    required int32 timeId = 2;
+    required int32 type = 3;
+    required int32 beginTime = 4;
+    required int32 durationTime = 5;
+    required string param = 6;
+}
+message SeaWarCommonReq {
+    required int32 activityId = 1;
+}
+message SeaWarEnterResp {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional int32 selfRank = 3;
+    optional int32 group = 4;
+    optional int64 unionId = 5;
+    optional int32 position = 6;
+    optional int32 round = 7;
+    optional int32 rankId = 8;
+    repeated int32 groups = 9;
+    optional string unionName = 10;
+    repeated SeaWarUnionBaseData top3Unions = 11;
+    optional SeaWarRoundSettleData roundSettleInfo = 12;
+    optional PlayerCharacterImageMsg worshipPlayer = 13;
+    optional bool canWorship = 14;
+    optional int32 regionId = 15;
+    optional string unionRechargeReward = 16;
+}
+message SeaWarRoundSettleData {
+    optional int32 round = 1;
+    optional int32 statues = 2;
+    optional int32 groupRank = 3;
+    optional int32 rank = 4;
+    optional int32 rankScore = 5;
+    optional int32 totalScore = 6;
+    optional string unionName = 7;
+}
+message SeaWarUserMallInfo {
+    optional int32 mallId = 1;
+    optional int64 expiredTime = 2;
+    optional int32 canBuyCount = 3;
+}
+message SeaWarEnterGameResp {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional SeaWarPlayerDataMsg playerData = 3;
+    optional SeaWarEventDataMsg curEventData = 4;
+    repeated SeaWarUserMallInfo mallInfos = 5;
+    optional SeaWarDropRegionSync dropData = 6;
+}
+message SeaWarEventDataMsg{
+    optional int32 eventType = 1;
+    optional bytes eventInfo = 2;
+    optional int32 eventId = 3;
+}
+message SeaWarEventCompleteDataMsg{
+    optional int32 eventId = 1;
+    optional int32 num = 2;
+}
+message SeaWarSoulBallListResp {
+    required int32 ret = 1;
+    repeated SeaWarSoulBallData soulBallData = 2;
+}
+message SeaWarSoulBallData{
+    optional int32 id = 1;
+    optional int32 num = 2;
+}
+message SeaWarGameMapResp {
+    required int32 ret = 1;
+    repeated SeaWarGameMapData mapData = 2;
+}
+message SeaWarGameMapData{
+    optional int32 id = 1;
+    optional int32 unionPlayerNum = 2;
+    repeated PlayerHeadAndNameMsg headInfo = 3;
+}
+message SeaWarUnionMemberListReq{
+    required int32 activityId = 1;
+    required int32 id = 2;
+}
+message SeaWarUnionMemberListResp {
+    required int32 ret = 1;
+    repeated SeaWarUnionMemberData unionMemberData = 2;
+    optional int32 maxNum = 3;
+    optional string unionName = 4;
+}
+message SeaWarUnionMemberData{
+    optional int64 playerId = 1;
+    optional string memberName = 2;
+    optional int32 score = 3;
+}
+enum SeaWarEventType{
+    SEA_WAR_EVENT_TYPE_NONE = 0;
+    SEA_WAR_EVENT_TYPE_CHALLENGE_MONSTER = 1;
+    SEA_WAR_EVENT_TYPE_CHALLENGE_PLAYER = 2;
+    SEA_WAR_EVENT_TYPE_OPEN_NORMAL_BOX = 3;
+    SEA_WAR_EVENT_TYPE_OPEN_HELP_BOX = 4;
+    SEA_WAR_EVENT_TYPE_FORGE_GEM = 5;
+    SEA_WAR_EVENT_TYPE_TRIGGER_GIFT = 6;
+    SEA_WAR_EVENT_TYPE_PROBE_WATER_SPRING = 7;
+}
+message SeaWarExploreResp {
+    required int32 ret = 1;
+    optional SeaWarPlayerDataMsg playerData = 2;
+    optional SeaWarEventDataMsg eventData = 3;
+    optional int32 score = 4;
+    optional int32 unionScore = 5;
+}
+message SeaWarHandleEventReq {
+    required int32 activityId = 1;
+    optional int32 eventId = 2;
+    optional int32 action = 3;
+    optional int64 id = 4;
+}
+message SeaWarHandleEventResp {
+    required int32 ret = 1;
+    optional SeaWarPlayerDataMsg playerData = 2;
+    optional SeaWarEventDataMsg eventData = 3;
+    optional string reward = 4;
+    optional int32 activityId = 5;
+    repeated SeaWarBuffBallMsg buffBalls = 6;
+    optional string param = 7;
+    optional SeaWarGameBuffDataMsg waterBuff = 8;
+    repeated int32 buffId = 9;
+    optional SeaWarAssistMsg assistant = 10;
+    optional BattleRecordMsg battleRecordMsg = 11;
+    optional int32 score = 12;
+    optional int32 unionScore = 13;
+    optional int32 beatScore = 14;
+}
+message SeaWarBuffBallMsg {
+    required int64 uid = 1;
+    required int32 configId = 2;
+}
+message SeaWarEvent_ChallengePlayer{
+    repeated SeaWarEvent_ChallengePlayerData playerData = 1;
+}
+message SeaWarEvent_ChallengePlayerData{
+    optional int64 playerId = 1;
+    optional string nickName = 2;
+    optional string fightValue = 3;
+    optional int32 appearanceId = 4;
+    optional string hp = 5;
+    optional string maxHp = 6;
+    optional string unionName = 7;
+    optional int64 assistId = 8;
+    optional bool isHadAtk = 9;
+    optional int64 unionId = 10;
+}
+message SeaWarEvent_ChallengeMonster{
+    optional int32 monsterId = 1;
+    optional string monsterPower = 2;
+    optional string hp = 3;
+    optional int64 assistId = 4;
+    optional string maxHp = 5;
+}
+message SeaWarEvent_OpenNormalBox{
+}
+message SeaWarEvent_ForgeGem{
+    repeated SeaWarBuffBallMsg ballList = 1;
+}
+message SeaWarEvent_OpenHelpBox{
+    repeated string helpName = 1;
+    optional int64 assistId = 2;
+}
+message SeaWarEvent_TriggerGift{
+    repeated SeaWarEvent_TriggerGiftData giftData = 1;
+}
+message SeaWarEvent_TriggerGiftData{
+    optional int32 mallId = 1;
+    optional int64 expiredTime = 2;
+    optional int32 canBuyCount = 3;
+}
+message SeaWarEvent_ProbeWaterSpring{
+}
+message SeaWarUnionHelpPlayerEntity{
+    optional string nickName = 1;
+    optional int32 appearanceId = 2;
+    optional string unionName = 3;
+    optional PlayerHeadDataMsg headInfo = 4;
+}
+message SeaWarGameLogReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message SeaWarGameLogResp {
+    required int32 ret = 1;
+    repeated SeaWarGameLogData logData = 2;
+}
+message SeaWarGameLogData {
+    optional int32 type = 1;
+    optional int32 attackType = 2;
+    optional SeaWarUnionHelpPlayerEntity player = 3;
+    optional SeaWarUnionHelpPlayerEntity beHelpPlayer = 4;
+    optional SeaWarUnionHelpPlayerEntity killPlayer = 5;
+    optional int32 monsterId = 6;
+    optional string item = 7;
+    optional SeaWarGameDefenseLog defenseLog = 8;
+    optional int32 eventId = 9;
+    optional int64 time = 10;
+}
+message SeaWarGameDefenseLog {
+    optional string damage = 1;
+    optional bool dieFlag = 2;
+}
+message SeaWarChallengeListResp {
+    required int32 ret = 1;
+    repeated SeaWarUnionChallengeMsg unionMsg = 2;
+    repeated SeaWarChallengeInfoSync infos = 3;
+    optional SeaWarPersonalRankInfo rankInfo = 5;
+    optional int64 lastNormalUnionId = 6;
+    optional int64 lastAdvancedUnionId = 7;
+    repeated int64 canBattleUnionIds = 8;
+    optional int32 freeNormalTimes = 9;
+}
+message SeaWarDeclarationTargetInfo {
+    optional int64 targetUnionId = 1;
+    optional int32 count = 2;
+}
+message SeaWarUnionChallengeMsg {
+    optional SeaWarUnionBaseData base = 1;
+    optional int32 rank = 2;
+    repeated SeaWarDeclarationTargetInfo targetInfos = 3;
+    optional int32 positionRank = 4;
+}
+message SeaWarUnionBaseData {
+    optional int64 unionId = 1;
+    optional int32 flag = 2;
+    optional string name = 3;
+    optional int64 serverId = 4;
+    optional string masterName = 5;
+}
+message SeaWarChallengeInfoSync {
+    required int64 playerId = 1;
+    optional string unionName = 2;
+    optional string name = 3;
+    optional SeaWarChallengePlayerDataMsg appearance = 4;
+    optional int64 targetUnionId = 5;
+    optional string damage = 6;
+    repeated SeaWarUnionGroupRankMsg groupRankMsg = 7;
+    optional SeaWarPersonalRankInfo rankInfo = 8;
+    optional SeaWarBeChallengedInfo beChallengedInfo = 9;
+}
+message SeaWarPlayerDataMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional string nickName = 2;
+    optional int32 strength = 3;
+    optional int64 lastRecoveryTime = 4;
+    optional string power = 5;
+    optional int32 totalCostStrength = 6;
+    optional int32 point = 7;
+    optional string hp = 8;
+    optional string maxHp = 9;
+    repeated SeaWarGameBuffDataMsg buffVec = 10;
+    optional int32 regionId = 11;
+    repeated SeaWarEventCompleteDataMsg eventCompleteVec = 12;
+    optional int32 exp = 13;
+    optional int32 rank = 14;
+}
+message SeaWarGameBuffDataMsg{
+  optional int32 id = 1;
+  optional int32 num = 2;
+}
+message SeaWarChallengePlayerDataMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional int32 appearanceId = 2;
+    optional string nickName = 3;
+    optional int32 equipCloudId = 4;
+}
+message SeaWarUnionChallengeSimpleMsg {
+    optional int64 unionId = 1;
+    optional int64 leftHp = 2;
+    optional int64 finalFame = 3;
+    optional bool hasDefeated = 4;
+    optional int64 shieldTriggerTime = 5;
+    optional int32 level = 6;
+}
+message SeaWarUnionGroupRankMsg {
+    optional int64 unionId = 1;
+    optional int32 rank = 2;
+}
+message SeaWarGuessUnionInfoList {
+    repeated SeaWarGuessUnionInfo infoList = 1;
+}
+message SeaWarGuessUnionInfo {
+    optional SeaWarGuessUnionRankMsg rankInfo = 1;
+    optional int32 selectedCount = 2;
+}
+message SeaWarGuessUnionRankMsg {
+    optional UnionBaseData baseData = 1;
+    required int32 score = 2;
+    required int32 iniRank = 3;
+    required int32 rank = 4;
+    optional int64 masterId = 5;
+    optional string masterName = 6;
+}
+message SeaWarDeclarationInfoSync {
+    required int64 playerId = 1;
+    optional string unionName = 2;
+    optional string name = 3;
+    optional int32 appearanceId = 7;
+    optional string beUnionName = 8;
+    optional int32 type = 9;
+    optional int32 theSameTimes = 10;
+    optional int64 beUnionServer = 11;
+    optional int64 unionId = 12;
+    optional int64 beUnionId = 13;
+}
+message SeaWarDeclarationRecordResp {
+    required int32 ret = 1;
+    repeated SeaWarDeclarationRecordMsg declarationRecord = 2;
+}
+message SeaWarDeclarationRecordMsg {
+    required int64 playerId = 1;
+    optional string unionName = 2;
+    optional string name = 3;
+    optional int32 appearanceId = 7;
+    optional string beUnionName = 8;
+    optional int64 serverId = 9;
+    optional int64 time = 10;
+    optional int32 beUnionFlag = 11;
+    optional int32 challengeTimes = 12;
+    optional int64 beUnionId = 13;
+    optional int32 roomId = 14;
+    optional int32 type = 15;
+}
+message SeaWarUnionDeclarationRecordResp {
+    required int32 ret = 1;
+    repeated SeaWarUnionDeclarationRecordMsg unionDeclarationRecord = 2;
+}
+message SeaWarUnionDeclarationRecordMsg {
+    optional int64 unionId = 1;
+    optional string unionName = 2;
+    optional int64 beUnionId = 3;
+    optional string beUnionName = 4;
+    optional int32 declarationNum = 5;
+    optional int64 deductScore = 6;
+    optional int32 unionFlag = 7;
+}
+message SeaWarEnterChallengeReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message SeaWarEnterChallengeResp {
+    required int32 ret = 1;
+    optional SeaWarPersonalRankInfo personalRankInfo = 2;
+    repeated SeaWarDeclarationInfo declarationInfos = 3;
+}
+message SeaWarRoomInfoReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+    required int32 roomId = 3;
+}
+message SeaWarRoomInfoResp {
+    required int32 ret = 1;
+    repeated SeaWarBeChallengedInfo beChallengedInfos = 2;
+}
+message SeaWarPersonalRankInfo {
+    optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+    optional int32 rank = 2;
+    optional int64 score = 3;
+}
+message SeaWarBeChallengedInfo {
+    optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+    optional int32 rank = 2;
+    optional int32 roomId = 3;
+    optional int32 defeatedNum = 4;
+}
+message SeaWarDeclarationInfo {
+    optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+    optional int32 challengeTimes = 2 ;
+    optional int32 roomId = 3;
+    optional int32 type = 4;
+    optional int64 time = 5;
+}
+message SeaWarChallengeReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+    required int32 roomId = 3;
+    required int64 playerId = 4;
+}
+message SeaWarChallengeResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg battleRecordMsg = 2;
+    optional string rewards = 3;
+    optional string damage = 4;
+    optional int32 activityId = 5;
+    optional int32 unionScore = 6;
+}
+message SeaWarBattleReportReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message SeaWarBattleReportResp {
+    required int32 ret = 1;
+    repeated SeaWarAttackReportData attackReportDatas = 2;
+    repeated SeaWarDefenseReportData defenseReportDatas = 3;
+    repeated SeaWarPersonalReportData personalReportDatas = 4;
+}
+message SeaWarAttackReportData {
+    optional int32 rank = 1;
+    optional int32 unionFlag = 2;
+    optional string unionName = 3;
+    optional int32 attackTimes = 4;
+    optional int64 score = 5;
+    optional int64 unionId = 6;
+}
+message SeaWarDefenseReportData {
+    optional int32 rank = 1;
+    optional int32 unionFlag = 2;
+    optional string unionName = 3;
+    optional int32 beAttackTimes = 4;
+    optional int64 reduceScore = 5;
+    optional int64 unionId = 6;
+}
+message SeaWarPersonalReportData {
+    optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+    optional string unionName = 2;
+    optional int64 reduceScore = 3;
+}
+message SeaWarDamageDetailReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+    required int32 type = 3;
+}
+message SeaWarDamageDetailResp {
+    required int32 ret = 1;
+    repeated SeaWarDamageDetailData damageDetailDatas = 2;
+}
+message SeaWarDamageDetailData {
+    optional string nickName = 1;
+    optional int32 normalTimes = 2;
+    optional int32 advancedTimes = 3;
+    optional int64 score = 4;
+}
+message SeaWarGroupDatasReq {
+    required int32 activityId = 1;
+    required int32 groupId = 2;
+}
+message SeaWarGroupDatasResp {
+    required int32 ret = 1;
+    repeated SeaWarGroupInfo groupList = 2;
+}
+message SeaWarGroupInfo {
+    optional int64 unionId = 1;
+    optional string unionName = 2;
+    optional int32 flag = 3;
+    optional string masterName = 4;
+    optional int32 rank = 5;
+    optional int64 score = 6;
+    optional int64 serverId = 7 ;
+}
+message SeaWarGroupDetailDatasReq {
+    required int32 activityId = 1;
+    required int32 groupId = 2;
+    required int64 unionId = 3;
+}
+message SeaWarGroupDetailDatasResp {
+    required int32 ret = 1;
+    optional int64 beAttackScore = 2;
+    repeated SeaWarGroupDetailData dataList = 3;
+    optional int64 lastFinalValue = 4;
+}
+message SeaWarGroupDetailData {
+    optional string nickName = 1;
+    optional int64 getScore = 2;
+}
+message SeaWarPlayerDataReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message SeaWarPlayerDataResp {
+  required int32 ret = 1;
+  optional PlayerDetailDataMsg playerDetail = 2;
+  optional bool hasQualifying = 3;
+}
+message SeaWarDeclarationReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+    required int32 type = 3;
+    required bool isFree = 4;
+}
+message SeaWarDeclarationResp {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional int32 type = 3;
+    optional int32 freeNormalTimes = 4;
+    optional bool isFree = 5;
+}
+message SeaWarAssistListReq {
+    required int32 activityId = 1;
+}
+message SeaWarAssistListResp {
+    required int32 ret = 1;
+    repeated SeaWarAssistData data  = 2;
+    optional int32 assistTimes = 3;
+    optional int32 helpBoxCount = 4;
+}
+message SeaWarAssistData {
+    optional SeaWarHelpBoxMsg helpBoxInfos = 1;
+    optional SeaWarAssistMsg assistInfos = 2;
+    optional int32 type = 3;
+}
+message SeaWarAssistMsg {
+    optional int64 assistId = 1;
+    optional int32 monsterConfigId = 2;
+    optional string hp = 3;
+    optional string leftHp = 4;
+    optional string nickName = 5;
+    optional int64 assistTime = 6;
+    repeated PlayerHeadDataMsg helpUsers = 7;
+    optional int64 playerId = 8;
+    optional int32 eventId = 9;
+    optional int64 targetPlayerId = 10;
+    optional SeaWarUnionHelpPlayerEntity targetPlayer = 11;
+    optional string maxHp = 12;
+    optional bool isKilled = 13;
+    optional bool isReceive = 14;
+    optional int32 regionId = 15;
+}
+message SeaWarHelpBoxMsg {
+    optional int64 assistId = 1;
+    optional int64 assistTime = 2;
+    repeated PlayerHeadAndNameMsg helpUsers = 3;
+    optional int64 playerId = 4;
+    optional int32 eventId = 5;
+    optional bool isReceive = 6;
+    optional int32 regionId = 7;
+    optional string playerName = 8;
+}
+message SeaWarAssistReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+    required int64 targetPlayerId = 3;
+    required int64 id = 4;
+}
+message SeaWarAssistRsp {
+    required int32 ret = 1;
+    repeated SeaWarAssistData data  = 2;
+    optional int32 assistTimes = 3;
+    optional string reward = 4;
+    optional int32 activityId = 5;
+    optional int32 helpBoxCount = 6;
+    optional BattleRecordMsg battleRecordMsg = 7;
+}
+message SeaWarPlayerInfoSync {
+    optional SeaWarPlayerDataMsg playerData = 1;
+    optional SeaWarEventDataMsg curEventData = 2;
+}
+message SeaWarAssistRewardReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+    required int64 id = 3;
+}
+message SeaWarAssistRewardRsp {
+    required int32 ret = 1;
+    repeated SeaWarAssistData data  = 2;
+    optional string reward = 3;
+    optional int32 activityId = 4;
+    repeated SeaWarBuffBallMsg buffBalls = 5;
+}
+message SeaWarAssistSync {
+    optional SeaWarAssistData data  = 1;
+}
+message SeaWarUnionWelfareResp {
+    required int32 ret = 1;
+    optional int32 lv = 2;
+    optional int32 exp = 3;
+    repeated SeaWarUnionWelfareNoticeInfo noticeInfo = 4;
+    optional int32 canReceive = 5;
+    optional int32 waterCount = 6;
+}
+message SeaWarUnionWelfareNoticeInfo{
+  optional string name = 1;
+  optional int32 liquidId = 2;
+  optional int64 id = 3;
+  optional int32 status=4;
+  optional int64 time = 5;
+}
+message SeaWarUnionWelfareRewardResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 lv = 3;
+    optional int32 exp = 4;
+    optional int32 canReceive = 5;
+    optional int32 activityId = 6;
+}
+message SeaWarUnionLiquidRewardReq {
+    required int32 activityId = 1;
+    required int64 id = 2;
+}
+message SeaWarUnionLiquidRewardResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 exp = 3;
+    optional int32 canReceive = 4;
+    optional int32 lv = 5;
+    optional int32 waterCount = 6;
+    optional int64 id = 7;
+    optional int32 activityId = 8;
+}
+message SeaWarUnionLiquidSendReq {
+    required int32 activityId = 1;
+    required int32 itemId = 2;
+    required int32 num = 3;
+}
+message SeaWarUnionLiquidSendResp {
+    required int32 ret = 1;
+    optional SeaWarUnionWelfareNoticeInfo noticeInfo = 2;
+}
+message SeaWarUnionLiquidRecordReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message SeaWarUnionLiquidRecordResp {
+    required int32 ret = 1;
+    repeated SeaWarUnionLiquidRecord record = 2;
+}
+message SeaWarUnionLiquidRecord {
+    optional string nickName = 1;
+    optional string reward = 2;
+}
+message SeaWarHeartBeatReq {
+    required int32 activityId = 1;
+    required bool challengeState = 2;
+}
+message SeaWarHeartBeatResp {
+    required int32 ret = 1;
+}
+message SeaWarNextRegionReq {
+    required int32 activityId = 1;
+    required int32 nextRegionId = 2;
+    required bool useItem = 3;
+}
+message SeaWarNextRegionResp {
+    required int32 ret = 1;
+    optional SeaWarPlayerDataMsg playerData = 2;
+}
+message SeaWarLockAvatarResp {
+    required int32 ret = 1;
+}
+message SeaWarUseItemReq {
+    required int32 activityId = 1;
+    optional int32 num = 2;
+}
+message SeaWarUseItemResp {
+    required int32 ret = 1;
+    optional SeaWarPlayerDataMsg playerData = 2;
+}
+message SeaWarGetUnionMemberListResp{
+  optional int32 ret = 1;
+  repeated string name = 2;
+  optional int64 unionExp = 3;
+}
+message SeaWarRedPointDataResp {
+    optional int32 ret = 1;
+    optional string redPointData = 2;
+}
+message SeaWarGetCurStateInfoResp {
+    optional int32 ret = 1;
+    optional SeaWarCurrentStage state = 2;
+    optional int64 stateEndTime = 3;
+}
+enum SeaWarCurrentStage {
+    SeaWarCurrentStage_show = 1;
+    SeaWarCurrentStage_fight = 2;
+    SeaWarCurrentStage_settle = 3;
+    SeaWarCurrentStage_reward = 4;
+}
+message SeaWarPlayerRankMsg {
+  required int64 playerId = 1;
+  required PlayerCharacterImageMsg playerBaseData = 2;
+  required string value = 3;
+  required int32 rank = 4;
+}
+message SeaWarPlayerRankList {
+  repeated SeaWarPlayerRankMsg rankInfo = 1;
+}
+message SeaWarUnionRankMsg {
+  optional UnionBaseData baseData = 1;
+  required int32 score = 2;
+  required string fightValue = 3;
+  required int32 rank = 4;
+  required int64 masterId = 5;
+  required string masterName = 6;
+}
+message SeaWarUnionRankList {
+  repeated SeaWarUnionRankMsg rankInfo = 1;
+}
+message SeaWarUnionMemberReq {
+    required int32 activityId = 1;
+    optional int64 unionId = 2;
+}
+message SeaWarUnionMemberResp {
+    optional int32 ret = 1;
+    repeated PlayerBaseDataMsg dataList = 2;
+}
+message SeaWarWorshipResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional PalacePlayerShowMsg worshipPlayer = 3;
+    optional int32 activityId = 4;
+}
+message SeaWarUnionSummaryReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message SeaWarUnionSummaryResp {
+    required int32 ret = 1;
+    repeated SeaWarRoundBaseInfo info = 2;
+}
+message SeaWarRoundBaseInfo {
+    required int32 groupId = 1 ;
+    required int32 rank =2 ;
+    required string score = 3;
+    required int64 point = 4;
+    required int32 danId = 5;
+}
+message SeaWarDropRegionSync {
+    optional SeaWarGameLogData data = 1;
+    optional int32 regionId = 2;
+}
+message SeaWarHorseLampSync {
+    optional int32 attackWinNum = 1;
+    optional int32 defenseWinNum = 2;
+    optional SeaWarGameLogData data = 3;
+}

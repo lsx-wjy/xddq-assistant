@@ -1,0 +1,23 @@
+package com.yq.msg.CityMsg;
+message DiscountGiftGetProgressReq{
+    required int32 activityId = 1;
+  }
+  message DiscountGiftGetProgressResp{
+    required int32 ret = 1;
+    optional int32 curDiscountVal = 2;
+    optional int64 curConditionVal = 3;
+  }
+  message DiscountGiftGetConditionRewardReq{
+    required int32 activityId = 1;
+  }
+  message DiscountGiftGetConditionRewardResp{
+    required int32 ret = 1;
+    optional string returnReward = 2;
+  }
+  message DiscountGiftGetProgressRewardReq{
+    required int32 activityId = 1;
+  }
+  message DiscountGiftGetProgressRewardResp{
+    required int32 ret = 1;
+    optional string reward = 2;
+  }

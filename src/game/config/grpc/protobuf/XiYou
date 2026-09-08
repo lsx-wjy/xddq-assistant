@@ -1,0 +1,598 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "Rank";
+enum XiYouAttributeEnum {
+  AttributeEnum_None = 0;
+  AttributeEnum_HP = 1;
+  AttributeEnum_HPMAX = 2;
+  AttributeEnum_POWER = 3;
+  AttributeEnum_POWERMAX = 4;
+  AttributeEnum_Attack = 5;
+  AttributeEnum_Defense = 6;
+  AttributeEnum_HP_Percentage = 7;
+  AttributeEnum_Attack_Percentage = 8;
+  AttributeEnum_Defense_Percentage = 9;
+  AttributeEnum_Hit_Percentage = 10;
+  AttributeEnum_Critical_Percentage = 11;
+  AttributeEnum_Thorn_Percentage = 12;
+  AttributeEnum_AccessoryInjury_Probability = 13;
+  AttributeEnum_CriticalDamage = 14;
+  AttributeEnum_ThornDamage = 15;
+  AttributeEnum_AdditionalDamage = 16;
+  AttributeEnum_BasicSkillDamageIncrease = 17;
+  AttributeEnum_CoreSkillDamageIncrease = 18;
+  AttributeEnum_PhysicalDamage = 19;
+  AttributeEnum_ElementalDamage = 20;
+  AttributeEnum_FinalDamageIncrease = 21;
+  AttributeEnum_EnergyRecovery = 22;
+  AttributeEnum_HitBackResistance = 23;
+  AttributeEnum_CoolDownReduction = 24;
+  AttributeEnum_Haste = 25;
+  AttributeEnum_MovementSpeed = 26;
+  AttributeEnum_BlockRate = 27;
+  AttributeEnum_Evasion = 28;
+  AttributeEnum_BlockValue = 29;
+  AttributeEnum_PhysicalResistance = 30;
+  AttributeEnum_ElementalResistance = 31;
+  AttributeEnum_CriticalDamageResistance = 32;
+  AttributeEnum_AccessoryInjuryResistance = 33;
+  AttributeEnum_ThornResistance = 34;
+  AttributeEnum_FinalDamageReduction = 35;
+  AttributeEnum_HitRecovery = 36;
+  AttributeEnum_RecoveryPerSecond = 37;
+  AttributeEnum_SlowResistance = 38;
+  AttributeEnum_RepelResistance = 39;
+  AttributeEnum_MoveCd = 40;
+  AttributeEnum_MoveCd_Time = 41;
+  AttributeEnum_ExtraDamage = 42;
+  AttributeEnum_ExtraDamageReduction = 43;
+  AttributeEnum_DamageNow = 44;
+  AttributeEnum_DamageContinue = 45;
+  AttributeEnum_RecoveryHp = 46;
+  AttributeEnum_RecoveryHpReduce = 47;
+  AttributeEnum_ProjectileProbability = 48;
+  AttributeEnum_Physique = 49;
+  AttributeEnum_BuffList = 50;
+  AttributeEnum_SummonExtends = 51;
+  AttributeEnum_Protect = 52;
+  AttributeEnum_EasyHurt = 53;
+  AtrributeEnum_SkillAddHurt = 54;
+};
+enum XiYouSkillAttributeEnum {
+    SkillAttributeEnum_None = 0;
+}
+enum XiYouPb{
+  S_XIYOU_ATTACK = 231101;
+  S_XIYOU_RAND_EQUIPMENT = 231102;
+  S_XIYOU_WEAR_EQUIPMENT = 231103;
+  S_XIYOU_RESOLVE_EQUIPMENT = 231104;
+  S_XIYOU_WEAR_SKILL = 231105;
+  S_XIYOU_WEAR_PASSIVE_SKILL = 231106;
+  S_XIYOU_SKILL_WEAR_RUNIC = 231107;
+  S_XIYOU_RUNIC_UNLOCK = 231108;
+  S_XIYOU_RUNIC_UPLEV = 231109;
+  S_XIYOU_RUNIC_UPQUALITY = 231110;
+  S_XIYOU_RUNIC_UPSTAGE = 231111;
+  S_XIYOU_PLAYER_SET_APPAREANCE_ID = 231112;
+  S_XIYOU_PLAYER_UPDATE_PROGRESS = 231113;
+  S_XIYOU_PLAYER_BRESS_UPLEV = 231114;
+  S_XIYOU_PLAYER_BRESS_SPEEDUP = 231115;
+  S_XIYOU_PLAYER_DATA_INFO = 231116;
+  S_XIYOU_PLAYER_DATA_SYNC = 231117;
+  S_XIYOU_RUNIC_SUMMON = 231118;
+  S_XIYOU_MAGIC_WEAPON_WEAR = 231119;
+  S_XIYOU_MAGIC_WEAPON_ENHANCE = 231120;
+  S_XIYOU_MAGIC_WEAPON_RESOLVE = 231121;
+  S_XIYOU_MAGIC_WEAPON_VIEW = 231122;
+  S_XIYOU_MAGIC_WEAPON_DATA = 231123;
+  S_XIYOU_GET_UNDEAL_EQUIPMENT = 231124;
+  S_XIYOU_REALM_UP = 231125;
+  S_XIYOU_BOSS_CHALLENGE = 231126;
+  S_XIYOU_SECRET_START = 231127;
+  S_XIYOU_SECRET_SELECT = 231128;
+  S_XIYOU_SECRET_KILL = 231129;
+  S_XIYOU_SIGN = 231130;
+  S_XIYOU_RED_POINT_DETAIL = 231131;
+  S_XIYOU_TAKE_REWARD = 231132;
+  S_XIYOU_SKILL_RUNIC_ALL_UPGRADE = 231133;
+  S_XIYOU_USE_PREVIEW_SKILL_RUNIC = 231134;
+  S_XIYOU_USE_PREVIEW_MAGIC = 231135;
+  S_XIYOU_SECRET_AUTO_SETING = 231136;
+  S_XIYOU_UPDATE_SEED = 231137;
+  S_XIYOU_SECRET_SWEEP = 231138;
+  S_XIYOU_SELECT_RUNE = 231139;
+}
+message XiYouAttributeMsg {
+  required XiYouAttributeEnum type = 1;
+  required string value = 2;
+}
+message XiYouSkillAttributeMsg {
+  required XiYouSkillAttributeEnum type = 1;
+  required string value = 2;
+}
+message XiYouMagicWeaponDataMsg {
+  optional int64 id = 1;
+  optional int32 type = 2;
+  optional int32 weaponId = 3;
+  optional int32 weaponLevel = 4;
+  optional int32 enhanceLevel = 5;
+  optional int32 quality = 6;
+  repeated XiYouAttributeMsg attributeList = 7;
+  optional int32 isCheck = 8;
+  optional int32 isLock = 9;
+}
+message XiYouEquipmentDataMsg {
+  required int64 id = 1;
+  required int32 equipmentId = 2;
+  required int32 level = 3;
+  required int32 quality = 4;
+  repeated XiYouAttributeMsg attributeList = 5;
+}
+message XiYouRunicDataMsg {
+  required int32 runicId = 1;
+  required int32 runicLevel = 2;
+  required int32 runicStage = 3;
+}
+message XiYouSkillDataMsg {
+  required int32 skillId = 1;
+  required int32 currentRunicId = 2;
+  repeated XiYouRunicDataMsg runicDatas = 3;
+}
+message XiYouDropRewardMsg {
+  optional string reward = 1;
+  optional XiYouUnDealEquipmentDataMsg equipmentInfo = 2;
+}
+message XiYouUnDealEquipmentDataMsg {
+  required XiYouEquipmentDataMsg equipment = 1;
+  required string power = 2;
+}
+message XiYouUnDealMagicWeaponDataMsg {
+  required XiYouMagicWeaponDataMsg magicWeapon = 1;
+  required string power = 2;
+}
+message XiYouBressMsg {
+  optional int32 bressLev = 1;
+  optional int64 bressLevEndTime = 2;
+  optional int32 speedTimes = 3;
+  optional int64 speedTimeCdEndTime = 4;
+}
+message XiYouItemMsg {
+  optional int32 itemId = 1;
+  optional int64 itemCount = 2;
+}
+message XiYouCombatServerData {
+  optional XiYouPlayerDataMsg playerData = 1;
+  /** 随机种子 */
+  optional int32 seed = 2;
+  /** 代码版本*/
+  optional string codeVersion = 3;
+  /** 战斗类型  1普通关卡boss 2奶牛 3秘境*/
+  optional int32 fightType = 4;
+  /** 关卡id*/
+  optional int32 levelId = 5;
+  /** 额外校验数据（由客户端构建转发至战斗服）*/
+  optional string extraData = 6;
+  /** 秘境额外战斗数据*/
+  optional XiYouSecretCombatServerData secret = 7;
+  /** 战斗校验数据*/
+  repeated int32 levels = 8;
+  /** 玩家id*/
+  optional string playerId = 9;
+  /** 请求时间*/
+  optional string reqTime = 10;
+}
+message XiYouSecretCombatServerData {
+  repeated int32 secretSelect = 1;
+  optional int32 bossTempId = 2;
+}
+message XiYouCombatResult {
+  optional int32 result = 1;
+}
+message XiYouPlayerDataMsg {
+  optional int32 realmId = 1;
+  optional string exp = 2;
+  optional string power = 3;
+  optional int32 progress = 4;
+  optional XiYouBressMsg bressMsg = 5;
+  repeated int32 useSkills = 6;
+  optional int32 heroAppearanceId = 7;
+  repeated XiYouSkillDataMsg skills = 8;
+  repeated int32 passiveSkillIds = 9;
+  repeated XiYouEquipmentDataMsg equpiments = 10;
+  repeated XiYouAttributeMsg attributeList = 11;
+  optional int32 todayFreeTime = 12;
+  repeated XiYouUnDealEquipmentDataMsg unDealEquipments = 13;
+  repeated XiYouItemMsg items = 14;
+  optional int32 runicSommonTimes = 15;
+  optional int32 mainConditonId = 16;
+  repeated XiYouMagicWeaponDataMsg magicWeapon = 17;
+  optional XiYouBossChallengeDataMsg challenge = 18;
+  optional int32 currentSecretId = 19;
+  optional int32 secretDailyReward = 20;
+  optional int32 initReward = 21;
+  optional int32 previewSkillId = 22;
+  optional XiYouSecretAutoSettingMsg autoSet = 23;
+  optional int32 previewMagicId = 24;
+  optional int32 dailySweepTimes = 25;
+  optional int32 totalDrawTimes = 26;
+  repeated int32 godRuneId = 27;
+}
+message XiYouPlayerDataInfoReq {
+   optional int32 activityId = 1;
+}
+message XiYouPlayerDataInfoResp {
+  optional int32 ret = 1;
+  optional XiYouPlayerDataMsg info = 2;
+}
+message XiYouAttackReq {
+   optional int32 activityId = 1;
+   optional int32 times = 2;
+}
+message XiYouAttackResp {
+  optional int32 ret = 1;
+}
+message XiYouRandEquipmentReq {
+   optional int32 activityId = 1;
+   optional int32 num = 2;
+}
+message XiYouRandEquipmentResp {
+  optional int32 ret = 1;
+  repeated XiYouDropRewardMsg dropReward = 2;
+  optional int32 realmId = 3;
+  optional string exp = 4;
+ }
+message XiYouWearEquipmentReq {
+   optional int32 activityId = 1;
+  required int64 id = 2;
+  optional bool isResolve = 3;
+}
+message XiYouWearEquipmentResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  repeated XiYouUnDealEquipmentDataMsg unDealEquipments = 3;
+}
+message XiYouResolveEquipmentReq {
+   optional int32 activityId = 1;
+   repeated int64 ids = 2;
+}
+message XiYouResolveEquipmentResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  repeated XiYouUnDealEquipmentDataMsg unDealEquipments = 3;
+}
+message XiYouWearSkillReq {
+   optional int32 activityId = 1;
+   required int32 skillId = 2;
+}
+message XiYouWearSkillResp {
+  optional int32 ret = 1;
+  repeated int32 useSkillIds = 2;
+}
+message XiYouWearPassiveSkillReq {
+   optional int32 activityId = 1;
+   repeated int32 passiveSkillIds = 2;
+}
+message XiYouWearPassiveSkillResp {
+  optional int32 ret = 1;
+  repeated int32 passiveSkillIds = 2;
+}
+message XiYouSkillWearRunicReq {
+   optional int32 activityId = 1;
+   optional int32 skillId = 2;
+   optional int32 runicId = 3;
+}
+message XiYouWearSkillRunicResp {
+  optional int32 ret = 1;
+  optional XiYouSkillDataMsg skill = 2;
+}
+message XiYouRunicUnlockReq {
+   optional int32 activityId = 1;
+  optional int32 runicId = 2;
+  optional int32 skillId = 3;
+}
+message XiYouRunicUnlockResp {
+  optional int32 ret = 1;
+  optional XiYouSkillDataMsg skill = 2;
+  repeated XiYouItemMsg items = 3;
+}
+message XiYouRunicUpLevReq {
+   optional int32 activityId = 1;
+   optional int32 runicId = 2;
+   optional int32 skillId = 3;
+}
+message XiYouRunicUpLevResp {
+  optional int32 ret = 1;
+  optional XiYouSkillDataMsg skill = 2;
+  repeated XiYouItemMsg items = 3;
+}
+message XiYouRunicUpQualityReq {
+   optional int32 activityId = 1;
+   optional int32 runicId = 2;
+   optional int32 skillId = 3;
+}
+message XiYouRunicUpQualityResp {
+  optional int32 ret = 1;
+  optional XiYouSkillDataMsg skill = 2;
+  repeated XiYouItemMsg items = 3;
+}
+message XiYouRunicUpStageReq {
+   optional int32 activityId = 1;
+  optional int32 runicId = 2;
+  optional int32 skillId = 3;
+}
+message XiYouRunicUpStageResp {
+  optional int32 ret = 1;
+  optional XiYouSkillDataMsg skill = 2;
+  repeated XiYouItemMsg items = 3;
+}
+message XiYouPlayerSetAppreanceReq {
+   optional int32 activityId = 1;
+  required int32 heroAppearanceId = 2;
+}
+message XiYouPlayerSetAppreanceResp {
+  optional int32 ret = 1;
+}
+message XiYouUpdateProgressReq {
+  optional int32 activityId = 1;
+  required int32 progress = 2;
+  optional string codeVersion = 3;
+  repeated int32 levels = 4;
+}
+message XiYouUpdateProgressResp{
+  optional int32 ret = 1;
+  optional int32 progress = 2;
+  optional string reward = 3;
+}
+message XiYouBressUpLevReq {
+   optional int32 activityId = 1;
+}
+message XiYouBressUpLevResp{
+  optional int32 ret = 1;
+  optional XiYouBressMsg bress = 2;
+}
+message XiYouBressSpeedUpReq {
+  optional int32 activityId = 1;
+  required int32 speedUpType = 2;
+  optional int32 useTimes = 3;
+  optional bool isUseADTime = 4;
+}
+message XiYouBressSpeedUpResp {
+  optional int32 ret = 1;
+  optional XiYouBressMsg bress = 2;
+}
+message XiYouRunicSummonReq {
+   optional int32 activityId = 1;
+   optional int32 times = 2;
+}
+message XiYouRunicSummonResp{
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 todayFreeTime = 3;
+  repeated XiYouItemMsg items = 4;
+  optional int32 runicSommonTimes = 5;
+  optional int32 totalDrawTimes = 6;
+}
+message XiYouMagicWeaponWearReq {
+   optional int32 activityId = 1;
+   required int64 id = 2;
+}
+message XiYouMagicWeaponWearResp {
+  optional int32 ret = 1;
+  repeated XiYouMagicWeaponDataMsg magicWeapon = 2;
+  repeated XiYouUnDealMagicWeaponDataMsg unDealMagicWeaponList = 3;
+}
+message XiYouMagicWeaponEnhanceReq {
+  optional int32 activityId = 1;
+  optional int32 type = 2;
+}
+message XiYouMagicWeaponEnhanceResp {
+   optional int32 ret = 1;
+   repeated XiYouMagicWeaponDataMsg magicWeapons = 2;
+   repeated XiYouUnDealMagicWeaponDataMsg unDealMagicWeaponList = 3;
+}
+message XiYouMagicWeaponResolveReq {
+   optional int32 activityId = 1;
+  repeated int64 ids = 2;
+}
+message XiYouMagicalWeaponResolveResp {
+   optional int32 ret = 1;
+   repeated XiYouUnDealMagicWeaponDataMsg unDealMagicWeaponList = 2;
+   optional string reward = 3;
+}
+message XiYouMagicWeaponViewReq {
+   optional int32 activityId = 1;
+   required uint64 id = 2;
+   required uint32 type = 3;
+}
+message XiYouMagicWeaponViewResp {
+  optional int32 ret = 1;
+  optional XiYouMagicWeaponDataMsg magicWeapon = 2;
+}
+message XiYouPreviewMagicMsg {
+  optional int32 previewId = 1;
+  repeated int64 ids = 2;
+}
+message XiYouPlayerMagicDataReq {
+   optional int32 activityId = 1;
+}
+message XiYouPlayerMagicDataResp {
+  optional int32 ret = 1;
+  repeated XiYouUnDealMagicWeaponDataMsg unDealMagicWeaponList = 2;
+  repeated int32 weaponIds = 3;
+  repeated XiYouPreviewMagicMsg preview = 4;
+}
+message XiYouGetUnDealEquipmentReq{
+   optional int32 activityId = 1;
+}
+message XiYouGetUnDealEquipmentResp {
+  optional int32 ret = 1;
+  repeated XiYouUnDealEquipmentDataMsg unDealList = 2;
+}
+message XiYouRealmUpLevReq {
+   optional int32 activityId = 1;
+}
+message XiYouRealmUpLevResp {
+  optional int32 ret = 1;
+  optional int32 realmId = 2;
+}
+message XiYouBossChallengeDataMsg{
+  optional int32 id = 1;
+  optional int32 quickBattleTime = 2;
+  optional int32 adQuickBattleTime = 3;
+}
+message XiYouBossChallengeReq{
+  optional int32 activityId = 1;
+  optional int32 battleType = 2;
+  optional bool isUseKillTime = 3;
+  optional string codeVersion = 4;
+  repeated int32 levels = 5;
+}
+message XiYouBossChallengeResp{
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional XiYouBossChallengeDataMsg challenge = 3;
+}
+message XiYouSecretStartReq {
+  optional int32 activityId = 1;
+  optional int32 secretId = 2;
+  optional int32 rate = 3;
+}
+message XiYouSecretStartResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 secretId  = 3;
+  repeated int32 doorIds = 4;
+  repeated int32 selectedDoorsIds = 5;
+}
+message XiYouSecretSelectReq {
+  optional int32 activityId = 1;
+  optional int32 secretId = 2;
+  optional int32 rate = 3;
+  optional int32 doorId = 4;
+}
+message XiYouSecretSelectResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 secretId  = 3;
+  repeated int32 doorIds = 4;
+  repeated int32 selectedDoorsIds = 5;
+}
+message XiYouSecretKillReq {
+  optional int32 activityId = 1;
+  optional int32 secretId = 2;
+  optional int32 rate = 3;
+  repeated int32 useLuckItemIds = 4;
+  optional string codeVersion = 5;
+  optional string fightData = 6;
+  repeated int32 levels = 7;
+}
+message XiYouSecretKillResp{
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 currentSecretId = 3;
+  repeated XiYouUnDealMagicWeaponDataMsg dropMagicList = 5;
+}
+message XiYouSecretSweepReq {
+    optional int32 activityId = 1;
+    optional int32 secretId = 2;
+    optional int32 rate = 3;
+    repeated int32 useLuckItemIds = 4;
+  }
+  message XiYouSecretSweepResp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+    repeated XiYouUnDealMagicWeaponDataMsg dropMagicList = 3;
+    optional int32 dailySweepTimes = 4;
+  }
+message XiYouGetSignRewardReq {
+  optional int32 activityId = 1;
+  optional int32 conditionId = 2;
+}
+message XiYouGetSignRewardResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+}
+message XiYouRedPointReq{
+  optional int32 activityId = 1;
+}
+message XiYouRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message XiYouTakeRewardReq {
+   optional int32 activityId = 1;
+   optional int32 type = 2;
+}
+message XiYouTakeRewardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+enum XiYouRedPointEnum {
+   xiyou_hornor= 0;
+   xiyou_bless = 1;
+   xiyou_sign = 2;
+   xiyou_achievement = 3;
+   xiyou_token = 4;
+   xiyou_free_gift = 5;
+}
+message XiYouSkillRunicAllUpgradeReq {
+  optional int32 activityId = 1;
+}
+message XiYouSkillRunicAllUpgradeResp {
+  optional int32 ret = 1;
+  repeated XiYouSkillDataMsg skill = 2;
+  repeated XiYouItemMsg items = 3;
+}
+message XiYouSecretAutoSettingMsg {
+  optional int32 cardSelect = 1;
+  optional int32 starSelect = 2;
+  repeated int32 qualityResove = 3;
+  optional int32 rate = 4;
+  optional bool isAutoResolve = 5;
+}
+message XiYouUsePreviewSkillRunicReq {
+  optional int32 activityId = 1;
+  optional int32 previewId = 2;
+}
+message XiYouUsePreviewSkillRunicResp {
+  optional int32 ret = 1;
+  optional int32 previewId = 2;
+  repeated int32 useSkills = 3;
+  repeated XiYouSkillDataMsg skills = 4;
+  repeated int32 passiveSkillIds = 5;
+}
+message XiYouUsePreviewMagicReq {
+  optional int32 activityId = 1;
+  optional int32 previewId = 2;
+}
+message XiYouUsePreviewMagicResp {
+  optional int32 ret = 1;
+  optional int32 previewId = 2;
+  repeated XiYouMagicWeaponDataMsg magicWeapon = 3;
+  repeated XiYouUnDealMagicWeaponDataMsg unDealMagicWeaponList = 4;
+}
+message XiYouSecretAutoSettingReq {
+  optional int32 activityId = 1;
+  optional XiYouSecretAutoSettingMsg autoSet = 2;
+}
+message XiYouSecretAutoSettingResp {
+  optional int32 ret = 1;
+}
+message XiYouUpdateSeedReq {
+  optional int32 activityId = 1;
+}
+message XiYouUpdateSeedResp {
+  optional int32 ret = 1;
+  optional int32 seed = 2;
+}
+message XiYouSelectRuneReq {
+  optional int32 activityId = 1;
+  optional int32 runicId = 2;
+}
+message XiYouSelectRuneResp {
+  optional int32 ret = 1;
+  repeated XiYouItemMsg items = 2;
+  repeated int32 godRuneId = 3;
+}

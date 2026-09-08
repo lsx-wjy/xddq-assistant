@@ -1,6 +1,6 @@
 # For nodejs
 # Logs
-logs
+/logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -91,6 +91,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+dist-dashboard
 
 # Gatsby files
 .cache/
@@ -132,5 +133,11 @@ dist
 
 nodejs
 account.js
+.env
+data/dashboard-users.json*
+data/dashboard.sqlite
+data/dashboard.sqlite-*
+deploy/caddy-data/
+deploy/caddy-config/
 
 test*

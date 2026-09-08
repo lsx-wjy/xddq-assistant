@@ -2,6 +2,7 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class GatherEnergyMgr {
     constructor() {
@@ -48,6 +49,7 @@ export default class GatherEnergyMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('cave.ad-gather-energy')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

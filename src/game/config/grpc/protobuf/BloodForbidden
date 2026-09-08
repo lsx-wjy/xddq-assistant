@@ -1,0 +1,102 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Battle";
+enum BloodForbiddenPb {
+    DEFAULT = 0;
+    ChallengeBoss = 2013901;
+    TransferToNextStage = 2013902;
+    ViewBossDetail = 2013903;
+    ClearMonsterPos = 2013904;
+}
+message BloodForbiddenConfigMsg {
+    required int32 activityId = 1;
+    repeated BloodForbiddenStageConfigMsg stageConfigMsg = 2;
+    repeated BloodForbiddenTrainingBulletConfigMsg trainingBulletConfigMsg = 3;
+    repeated BloodForbiddenTrainingCharaConfigMsg trainingCharaConfigMsg = 4;
+    repeated BloodForbiddenTrainingSkillConfigMsg trainingSkillConfigMsg = 5;
+}
+message BloodForbiddenStageConfigMsg {
+    required int32 id = 1;
+    required int32 background = 2;
+    required int32 chapter = 3;
+    required int32 unlock = 4;
+    required int32 monster = 5;
+    required int32 monsterLevel = 6;
+    required string rewards = 7;
+    required int32 falme = 8;
+    repeated int32 randomMonsterId = 9;
+    required string randomNum = 10;
+    repeated int32 randomParam = 11;
+    required int32 monsterLimit = 12;
+}
+message BloodForbiddenTrainingBulletConfigMsg {
+    required int32 id = 1;
+    required int32 isLockTarget = 2;
+    required int32 isPenetrable = 3;
+    required string boxParamModel = 4;
+    required int32 speed = 5;
+    required int32 maintainMS = 6;
+    required int32 hitCameraShakeType = 7;
+    required int32 hasKnockBack = 8;
+}
+message BloodForbiddenTrainingCharaConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required int32 trainingMoveSpeed = 3;
+    required int32 trainingAttackSpeed = 4;
+    repeated int32 trainingSkillId = 5;
+    repeated int32 aggroRange = 6;
+    required int32 runSpeed = 7;
+    required int32 recover = 8;
+}
+message BloodForbiddenTrainingSkillConfigMsg {
+    required int32 id = 1;
+    required string skillAnimName = 2;
+    required int32 skillCd = 3;
+    required string colliderBoxParamModel = 4;
+    required int32 skillVFXScale = 5;
+    repeated int32 comboModelArray = 6;
+    required int32 cameraShakeType = 7;
+    required int32 knockBackType = 8;
+    required int32 skillMovementType = 9;
+    required string bulletLaunchModelList = 10;
+    required string randomBulletLaunchModelList = 11;
+}
+message BloodForbiddenDataMsg {
+    required int32 curStageId = 1;
+    repeated int32 defeatMonsterPos = 2;
+    required bool defeatBoss = 3;
+    required string bossFightVal = 4;
+}
+message viewBloodForbiddenBossReq {
+    required int32 activityId = 1;
+}
+message viewBloodForbiddenBossResp {
+    required int32 ret = 1;
+    repeated AttributeDataMsg attributeList = 2;
+}
+message challengeBossReq {
+    required int32 activityId = 1;
+}
+message challengeBossResp {
+    required int32 ret = 1;
+    optional bool isWin = 2;
+    optional BattleRecordMsg allBattleRecord = 3;
+    optional string reward = 4;
+}
+message transferToNextStageReq {
+    required int32 activityId = 1;
+}
+message transferToNextStageResp {
+    required int32 ret = 1;
+    optional int32 stageId = 2;
+    optional string bossFightVal = 3;
+}
+message clearMonsterPosReq {
+    required int32 activityId = 1;
+    required int32 pos = 2;
+}
+message clearMonsterPosResp {
+    required int32 ret = 1;
+    repeated int32 defeatMonsterPos = 2;
+}

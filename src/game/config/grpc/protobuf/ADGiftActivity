@@ -1,4 +1,4 @@
-package com.yq.msg.CityMsg;  
+package com.yq.msg.CityMsg;
 message ADGiftTriggerReq {
   required int32 activityId = 1;
 }

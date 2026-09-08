@@ -1,0 +1,9 @@
+package com.yq.msg.CityMsg;
+enum soulLiQuidProtocols{
+  S_SOUL_LIQUID_ACTIVE = 209802;
+}
+message SoulLiquidActiveReq{
+}
+message SoulLiquidActiveResp{
+	required int32 ret = 1;
+}

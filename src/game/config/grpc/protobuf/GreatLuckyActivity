@@ -1,0 +1,36 @@
+package com.yq.msg.CityMsg;
+enum HaoGreatLuckyActivityPb {
+    Draw = 213701;
+}
+message HaoActivityDrawConfig {
+    repeated HaoLuckyDrawConfig luckyDrawConfig = 1;
+}
+message HaoLuckyDrawConfig {
+    optional int32 id = 1;
+    optional string reward = 2;
+    optional int32 weight = 3;
+    optional int32 limit = 4;
+    optional int32 protectTimes = 5;
+}
+message HaoLuckyDrawReq {
+    required int32 activityId = 1;
+    required int32 times = 2;
+}
+message HaoLuckyDrawResp {
+    required int32 ret = 1;
+    repeated HaoLuckyDrawResult result = 2;
+}
+message HaoLuckyDrawResult {
+    required int32 id = 1;
+    optional string reward = 2;
+}
+message HaoLuckyDrawActivityDataMsg {
+    repeated HaoLimitRewardTimes limitRewardTimes = 1;
+    optional int32 addUpDrawTimes = 2;
+    optional int64 entranceCloseTime = 3;
+    optional int32 protectDrawTimes = 4;
+}
+message HaoLimitRewardTimes {
+    required int32 id = 1;
+    optional int32 times = 2;
+}

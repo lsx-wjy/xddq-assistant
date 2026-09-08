@@ -1,0 +1,55 @@
+package com.yq.msg.CityMsg;
+import "Battle";
+import "Common";
+import "PackagesBase";
+enum CareerPb{
+    Career_Switch_Career = 218001;
+    Career_Train = 218003;
+    Career_Battle_Boss = 218004;
+    Career_Get_Boss_Attr = 218005;
+    Career_Get_Player_Attr_Map = 218006;
+    Career_Get_Pre_Task_Reward = 218007;
+}
+message CareerSwitchCareerReq{
+  required int32 careerType = 1;
+}
+message CareerSwitchCareerResp{
+  optional int32 ret = 1;
+}
+message CareerTrainReq{
+}
+message CareerTrainResp{
+  optional int32 ret = 1;
+  optional CareerPlayerDataMsg playerData = 2;
+}
+message CareerBattleBossReq{
+  required int32 bossId = 1;
+  required int32 type = 2;
+}
+message CareerBattleBossResp{
+  optional int32 ret = 1;
+  optional BattleRecordMsg battleRecord = 2;
+  optional string reward = 3;
+  optional string inspireReward = 4;
+}
+message CareerGetBossAttrReq{
+  optional int32 bossId = 1;
+}
+message CareerGetBossAttrResp{
+  optional int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+  optional string monsterFightVal = 3;
+}
+message CareerGetAttrMapReq{
+}
+message CareerGetAttrMapResp{
+  optional int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+}
+message CareerGetPreTaskRewardReq{
+  optional int32 taskId = 1;
+}
+message CareerGetPreTaskRewardResp{
+  optional int32 ret = 1;
+  optional string reward = 2;
+}

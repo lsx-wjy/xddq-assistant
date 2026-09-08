@@ -2,13 +2,13 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
-import account from "../../../account.js";
+import account from "#config/runtimeAccount.js";
 
 export default class SecretTowerMgr {
     constructor() {
         this.isProcessing = false;
-        this.challenge = account.switch.challenge || 0;
-        this.showResult = account.switch.showResult || false;
+        this.challenge = account.switch.secretTowerChallenge || 0;
+        this.showResult = account.switch.secretTowerShowResult || false;
         LoopMgr.inst.add(this);
     }
 

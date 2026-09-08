@@ -1,0 +1,63 @@
+package com.yq.msg.CityMsg;
+message UnionVoteInfoPb {
+    optional int32 voteType = 1;
+    optional int64 initiatorId = 2;
+    optional int64 targetId = 3;
+    optional int64 endTime = 4;
+    optional int32 agreeCount = 5;
+    optional int32 totalVoterCount = 6;
+    optional int32 myVote = 7;
+    optional bool canChangeVote = 8;
+    optional int32 disagreeCount = 9;
+    optional int32 participatedCount = 10;
+    optional int32 voteRate = 11;
+    optional int32 agreeRate = 12;
+    optional bool hasVotePermission = 13;
+}
+message ReqStartDissolveVote {}
+message RspStartDissolveVote {
+    optional int32 ret = 1;
+}
+message ReqStopVote {}
+message RspStopVote {
+    optional int32 ret = 1;
+}
+message ReqStartKickCoreVote {
+    optional int64 targetId = 1;
+}
+message RspStartKickCoreVote {
+    optional int32 ret = 1;
+}
+message ReqStartImpeachVote {}
+message RspStartImpeachVote {
+    optional int32 ret = 1;
+}
+message ReqCastVote {
+    optional int32 choice = 1;
+}
+message RspCastVote {
+    optional int32 ret = 1;
+}
+message ReqChangeVote {
+    optional int32 newChoice = 1;
+}
+message RspChangeVote {
+    optional int32 ret = 1;
+}
+message ReqGetVoteInfo {}
+message RspGetVoteInfo {
+    optional int32 ret = 1;
+    optional UnionVoteInfoPb voteInfo = 2;
+    optional int32 todayKickQuota = 3;
+}
+message PushVoteUpdate {
+    optional UnionVoteInfoPb voteInfo = 1;
+}
+message PushVoteResult {
+    optional int32 voteType = 1;
+    optional int32 result = 2;
+    optional int64 targetId = 3;
+}
+message PushKickQuotaUpdate {
+    optional int32 remainingQuota = 1;
+}

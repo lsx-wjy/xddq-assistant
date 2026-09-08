@@ -1,4 +1,4 @@
-package com.yq.msg.CityMsg;        
+package com.yq.msg.CityMsg;
 message ActivityShieldSync {
     repeated ActivityShieldData shieldList = 1;
 }

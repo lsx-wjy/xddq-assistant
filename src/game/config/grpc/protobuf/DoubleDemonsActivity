@@ -1,0 +1,76 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum DoubleDemonsProtocols{
+    double_demons_enter = 211101;
+    double_demons_data_sync = 211102;
+    double_demons_get_reward = 211103;
+    double_demons_fly_up = 211104;
+    double_demons_share_invite = 211105;
+    double_demons_find_friend = 211107;
+    double_demons_rank_sync = 211115;
+}
+message DoubleDemonsSingleData {
+    optional int32 charmValue = 1;
+}
+message DoubleDemonsDoubleData {
+    optional int32 height = 1;
+    optional PlayerBaseDataMsg partnerData = 3;
+    optional int32 partnerHeight = 4;
+    optional int32 costItemNum = 5;
+}
+message DoubleDemonsDataSync {
+    optional DoubleDemonsSingleData singleData = 1;
+    optional DoubleDemonsDoubleData doubleData = 2;
+}
+message DoubleDemonsRankSync {
+    optional int32 rank = 1;
+}
+message DoubleDemonsEnterReq {
+    required int32  activityId = 1;
+}
+message DoubleDemonsEnterResp {
+    required int32 ret = 1;
+    optional DoubleDemonsSingleData singleData = 2;
+    optional DoubleDemonsDoubleData doubleData = 3;
+    optional int32 rank = 5;
+}
+message DoubleDemonsGetRewardReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message DoubleDemonsGetRewardResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+}
+message DoubleDemonsFlyUpReq {
+    required int32 activityId = 1;
+    required int32 costNum = 2;
+}
+message DoubleDemonsFlyUpResp {
+    required int32 ret = 1;
+}
+message DoubleDemonsShareInviteReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message DoubleDemonsShareInviteResp {
+    required int32 ret = 1;
+}
+message DoubleDemonsFindFriendReq {
+    required int32 activityId = 1;
+    required string name = 2;
+    optional int64 serverId = 3;
+}
+message DoubleDemonsFindFriendResp {
+    required int32 ret = 1;
+    optional PlayerBaseDataMsg playerData = 2;
+    optional string systemOpenValue = 3;
+}
+message DoubleDemonsRankListMsg{
+    repeated DoubleDemonsRankData rankList = 1;
+}
+message DoubleDemonsRankData {
+    repeated PlayerBaseDataMsg playerBaseData = 1;
+    optional int32 height = 2;
+    optional int32 rank = 3;
+}

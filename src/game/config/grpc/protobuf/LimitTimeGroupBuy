@@ -1,0 +1,28 @@
+package com.yq.msg.CityMsg;
+message TeamBuySyncProgressDataReq{
+    optional int32 activityId = 1;
+  }
+  message TeamBuySyncProgressDataRsp{
+    optional int32 ret = 1;
+    optional TeamBuyActivityData teamBuyActivityData = 2;
+  }
+  message TeamBuyGetConditionRewardReq{
+    optional int32 activityId = 1;
+    repeated int32 conditionId = 2;
+  }
+  message TeamBuyGetConditionRewardRsp{
+    optional int32 ret = 1;
+    optional string reward = 2;
+  }
+  message TeamBuyActivityData{
+    repeated TeamBuyhasBuyMallInfo hasBuyMallInfos = 1;
+    repeated TeamBuyMallCountInfo mallCountInfos = 2;
+  }
+  message TeamBuyhasBuyMallInfo{
+    optional int32 mallId = 1;
+    repeated int32 hasGetRewardConditionIds = 2;
+  }
+  message TeamBuyMallCountInfo{
+    optional int32 mallId = 1;
+    optional int32 val = 2;
+  }

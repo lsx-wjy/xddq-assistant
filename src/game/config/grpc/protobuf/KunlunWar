@@ -1,0 +1,958 @@
+package com.yq.msg.CityMsg;
+import "Union";
+import "Common";
+import "ActivityBase";
+message KunlunWarConfigSync {
+  repeated ActivityPeakHoldTimeConfig peakHoldTimeConfigs = 1;
+  repeated KunlunWarGroupConfig groupConfig = 2;
+  repeated KunlunWarPlaceConfig placeConfig = 3;
+  repeated KunlunWarEventConfig eventConfig = 4;
+  repeated KunlunWarAttrConfig attrConfig = 5;
+  repeated KunlunWarTreasureConfig treasureConfig = 6;
+  repeated KunlunWarCityConfig cityConfig = 7;
+  repeated NorthPoleStrategyConfig northPoleStrategyConfig = 8;
+}
+message KunlunWarGroupConfig {
+  required int32 activityId = 1;
+  required int32 rankId = 2;
+  required int32 size = 3;
+  required int32 up = 4;
+  required int32 down = 5;
+  required string score = 6;
+}
+message KunlunWarEventConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required int32 weight = 4;
+  required string rewards = 5;
+  required int32 score = 6;
+  required int32 exp = 7;
+  required string param = 8;
+  required int32 monsterId = 9;
+  required int32 quality = 10;
+}
+message KunlunWarPlaceConfig {
+  required int32 activityId = 1;
+  required int32 type = 2;
+  required string long = 3;
+  required int32 score = 4;
+  required int32 reward = 5;
+  required int32 hp = 6;
+}
+message KunlunWarAttrConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 exp = 3;
+  required int32 attack = 4;
+  required int32 defense = 5;
+  required int32 hp = 6;
+  required int32 speed = 7;
+  required int32 increaseDamage = 8;
+  required int32 decreaseDamage = 9;
+  required int32 type = 10;
+}
+message KunlunWarTreasureConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required int32 param = 4;
+  required int32 weight = 5;
+  required int32 quality = 6;
+}
+message KunlunWarCityConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string data = 3;
+}
+message NorthPoleStrategyConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required string name = 4;
+  required string desc = 5;
+  required string param = 6;
+  required int32 cd = 7;
+  required int32 duration = 8;
+  required int32 cost = 9;
+  required int32 limit = 10;
+}
+message KunlunWarFloorGroupCount {
+  optional int32 floorId = 1;
+  optional int32 groupCount = 2;
+  repeated int32 groupIdList = 3;
+}
+message KunlunWarPlayerInfo {
+  optional int32 pos = 1;
+  optional string curPower = 2;
+  optional PlayerHeadAndNameMsg headInfo = 3;
+  optional int32 appearanceId = 4;
+  optional int64 unionId = 5;
+  optional int32 vigor = 6;
+  optional KunlunWarBackHomeMsg backHomeMsg = 7;
+}
+message KunlunWarBackHomeMsg{
+  optional int64 time = 1;
+  optional int32 freeRebirthCount = 2;
+  optional int32 itemRebirthCount = 3;
+  optional string defeatName = 4;
+  optional int32  killCount = 5;
+}
+message KunlunWarPlayerDisplayInfo {
+  optional int64 playerId = 1;
+  optional int32 appearanceId = 2;
+  optional string nickName = 3;
+  optional int64 unionId = 4;
+  optional int32 headIcon = 5;
+  optional string wxHeadUrl = 6;
+  optional string power = 7;
+}
+message KunlunWarGameRouteInfo {
+  optional int64 playerId = 1;
+  optional int32 fromPoint = 2;
+  optional int32 toPoint = 3;
+  optional int64 time = 4;
+  optional int64 arrival = 5;
+  optional KunlunWarPlayerInfo playerInfo = 6;
+  optional int32 currentRank = 7;
+}
+message KunlunWarGameCityInfo {
+  required int32 cityId = 1;
+  optional bool haveFight = 2;
+  optional int64 unionId = 3;
+  optional int32 hp = 5;
+  optional int32 curHp = 6;
+  required bool updateType = 7;
+  optional bool destroyed = 8;
+  repeated KunlunWarPlayerDisplayInfo displayInfo = 9;
+  optional NorthPoleWarUnionSkillMsg unionSkillInfo = 10;
+  optional int32 flag = 11;
+}
+message NorthPoleWarUnionSkillMsg {
+  repeated NorthPoleWarUnionSkillInfo unionSkillInfo = 1;
+}
+message KunlunWarUnionSimpleInfo {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional int64 serverId = 3;
+  repeated int32 occupyCity = 4;
+  optional int32 flag = 5;
+}
+message KunlunWarBlockInfo {
+  optional int32 pos = 1;
+  repeated KunlunWarUnionBlockData unionBlockData = 2;
+  repeated KunlunWarPlayerDisplayInfo displayInfo = 3;
+}
+message KunlunWarUnionBlockData{
+  optional int64 unionId = 1;
+  optional int32 occupyProgress = 2;
+}
+message KunlunWarEventInfo {
+  optional int32 eventId = 1;
+  repeated KunlunWarMallInfo mallInfo = 2;
+  repeated KunlunWarTreasureInfoMsg treasureInfo = 3;
+  optional KunlunWarMonsterMsg monster = 4;
+}
+message KunlunWarMonsterMsg {
+  optional int64 id = 1;
+  optional int32 configId = 2;
+  optional string maxBloods = 3;
+  optional string remainBloods = 4;
+  optional bool defeat = 5;
+}
+message KunlunWarRoundSettleData {
+  optional int32 round = 1;
+  optional int32  statues = 2;
+  optional int32 groupRank = 3;
+  optional int32 rank = 4;
+  optional int32 rankScore = 5;
+  optional int32 totalScore = 6;
+  optional int32 cityCount = 7;
+  optional int32 playerKillCount = 8;
+  optional string unionName = 9;
+  optional string first_unionName = 10;
+  optional int64 first_serverId = 11;
+  optional int64 first_unionFlag = 12;
+  optional int32 floor = 13;
+  optional int32 group = 14;
+}
+message KunlunWarWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional int32 rank = 10;
+  optional PlayerHeadDataMsg headInfo = 13;
+  repeated int32 petSoulShapeList = 14;
+  optional int32 titleId = 15;
+  repeated int32 petLinkageId = 16;
+  repeated int32 spiritLinkageId = 17;
+}
+message KunlunWarGameLineInfo{
+  optional int32 inCityId = 1;
+  optional int32 outCityId = 2;
+  optional int32 inLineType = 3;
+  optional int32 outLineType = 4;
+  optional int64 playerId = 5;
+  optional KunlunWarPlayerDisplayInfo playerInfo = 6;
+}
+message KunlunWarPlayerPowerChangeInfo {
+  optional int32 cityId = 1;
+  optional int64 playerId = 2;
+  optional string power = 3;
+  optional int32 vigor = 4;
+  optional int64 time = 5;
+}
+message KunlunWarGameLinePlayerInfo{
+  optional string name = 1;
+  optional string power = 2;
+  optional int64 union = 3;
+  optional PlayerHeadDataMsg headInfo = 4;
+  optional int64 playerId = 5;
+  optional bool npc = 6;
+  optional string unionName = 7;
+  optional string maxPower = 8;
+}
+message KunlunWarRoundBaseInfo {
+  required int32 groupId = 1 ;
+  required int32 rank = 2 ;
+  required string score = 3;
+  required int64 point = 4;
+  required int32 danId = 5;
+}
+message KunlunWarUnionBaseMsg {
+  optional int64 unionId = 1;
+  optional int32 flag = 2;
+  optional string name = 3;
+  optional int64 serverId = 4;
+  optional int64 score = 5;
+  optional string masterName = 6;
+}
+message KunlunWarMallInfo {
+  optional int32 mallId = 1;
+  optional int64 expiredTime = 2;
+  optional int32 canBuyCount = 3;
+}
+message  KunlunWarWelfareInfo {
+  optional string name = 1;
+  optional int32 itemId = 2;
+  optional int64 id = 3;
+  optional int32 status = 4;
+  optional int64 time = 5;
+}
+message KunlunWarWelfareRecord {
+  optional string nickName = 1;
+  optional string reward = 2;
+}
+message KunlunWarTreasureInfoMsg{
+  optional int32 id = 1;
+  optional int32 num = 2;
+}
+message KunlunWarCityBattleState {
+  optional int32 cityId = 1;
+  optional bool isBattle = 2;
+}
+message KunlunWarCityBattleMsg{
+  optional int32 cityId = 1;
+  optional KunlunWarBattlePlayer winner = 2;
+  repeated KunlunWarBattlePlayer loser = 3;
+  optional int64 battleTime = 4;
+  optional bool attackSpeedUp = 5;
+}
+message KunlunWarBattlePlayer {
+  optional int32 realmsType = 1;
+  optional KunlunWarGameLinePlayerInfo playerInfo = 2;
+  optional int32  killCount = 3;
+}
+message KunlunWarCellBattleMsg{
+  optional int32 cellId = 1;
+  optional KunlunWarBattlePlayer winner = 2;
+  repeated KunlunWarBattlePlayer loser = 3;
+}
+message KunlunWarAttackCityInfo {
+  optional int32 cityId = 1;
+  optional int32 curHp = 2;
+  repeated KunlunWarPlayerDisplayInfo playerIds = 3;
+}
+message KunlunWarEnterActivityReq {
+  required int32 activityId = 1;
+}
+message KunlunWarEnterActivityResp {
+  required int32 ret = 1;
+  optional int32 activityId = 2;
+  optional int32 selfRank = 3;
+  optional int32 group = 4;
+  optional int32 floor = 5;
+  optional int64 unionId = 6;
+  optional int32 position = 7;
+  optional KunlunWarRoundSettleData roundSettleInfo = 8;
+  repeated KunlunWarFloorGroupCount floorGroupList = 9;
+  optional KunlunWarWorshipPlayerMsg worshipPlayer = 10;
+  repeated UnionBaseData top3Union = 11;
+  optional bool canWorship = 12;
+  repeated int32 groups = 13;
+  optional int32 round = 14;
+  optional int32 rankId = 15;
+  optional int32 realmsType = 16;
+  optional string unionRechargeReward = 17;
+}
+message KunlunWarEnterGameReq {
+  required int32 activityId = 1;
+}
+message KunlunWarEnterGameResp {
+  required int32 ret = 1;
+  optional int32 home = 2;
+  optional bool leftout = 4;
+  optional int32 speedUpCount = 5;
+  optional int32 energy = 6;
+  optional int64 energyRecoverTime = 7;
+  repeated KunlunWarUnionSimpleInfo unionInfo = 8;
+  repeated KunlunWarMallInfo mallInfo = 9;
+  repeated KunlunWarTreasureInfoMsg treasureInfo = 10;
+  optional int64 exp = 11;
+  optional string power = 12;
+  optional KunlunWarPlayerInfo myPlayerInfo = 13;
+  optional KunlunWarGroupBaseMsg myUnionBaseMsg = 14;
+  optional int32 rank = 15;
+  optional int32 rankScore = 16;
+  optional int32 giftNum = 17;
+  optional int32 totalCostEnergy = 18;
+  optional NorthPoleWarFriendUnionNotify alertFriendUnion = 19;
+  optional int64 friendUnionId = 20;
+  repeated NorthPoleWarUnionSkillInfo skillInfo = 21;
+  repeated KunlunWarTopRoundPersonRank topRoundPersonRank = 22;
+}
+message KunlunWarTopRoundPersonRank {
+  required int64 playerId = 1;
+  required int32 currentRank = 2;
+}
+message KunlunWarGameBlockInfoReq {
+  required int32 activityId = 1;
+  repeated int32 blockVec = 2;
+  required int32 floorId = 3;
+  required int32 groupId = 4;
+}
+message KunlunWarGameBlockInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarGameCityInfo cityInfo = 2;
+  repeated KunlunWarGameRouteInfo routeInfo = 3;
+  optional int32 floorId = 4;
+  optional int32 groupId = 5;
+  repeated KunlunWarBlockInfo blockInfo = 6;
+}
+message KunlunWarMoveReq {
+  required int32 activityId = 1;
+  optional int32 targetPoint = 2;
+  optional bool attackCity = 3;
+}
+message KunlunWarMoveResp {
+  required int32 ret = 1;
+  optional KunlunWarGameRouteInfo routeInfo = 2;
+  optional int32 energy = 3;
+}
+message KunlunWarExploreReq {
+  required int32 activityId = 1;
+  optional int32 targetPoint = 2;
+}
+message KunlunWarExploreResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 energy = 3;
+  optional KunlunWarEventInfo event = 4;
+  optional int32 occupyProgress = 5;
+  optional int64 exp = 6;
+  optional string power = 7;
+  optional int64 energyRecoverTime = 8;
+  optional int32 rank = 9;
+  optional int32 rankScore = 10;
+  optional int32 totalCostEnergy = 11;
+  optional string maxPower = 12;
+}
+message KunlunWarSweepReq {
+  required int32 activityId = 1;
+  optional int32 num = 2;
+}
+message KunlunWarSweepResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 energy = 3;
+  optional KunlunWarEventInfo event = 4;
+  optional string power = 5;
+  optional int64 exp = 6;
+  optional int64 energyRecoverTime = 7;
+  optional int32 rank = 8;
+  optional int32 rankScore = 9;
+  optional int32 totalCostEnergy = 10;
+  optional string maxPower = 11;
+}
+message KunlunWarWorshipReq{
+  required int32 activityId = 1;
+}
+message KunlunWarWorshipResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional KunlunWarWorshipPlayerMsg worshipPlayer = 3;
+}
+message KunlunWarUnionRoundSummaryReq {
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+}
+message KunlunWarUnionRoundSummaryResp {
+  required int32 ret = 1;
+  repeated KunlunWarRoundBaseInfo info = 2;
+}
+message KunlunWarGroupInfoReq {
+  required int32 activityId = 1;
+  required int32 groupId = 2;
+  optional int32 floorId = 3;
+}
+message KunlunWarGroupInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarGroupBaseMsg groupInfo = 2;
+}
+message KunlunWarGroupBaseMsg {
+  optional int64 unionId = 1;
+  optional string unionName = 2;
+  optional int32 flag = 3;
+  optional string masterName = 4;
+  optional int32 rank = 5;
+  optional int64 cityScore = 6;
+  optional int64 serverId = 7 ;
+  optional string friendUnionName = 8;
+}
+message KunlunWarSparInfoReq {
+  required int32 activityId = 1;
+}
+message KunlunWarSparInfoResp {
+  required int32 ret = 1;
+  optional int32 exp = 2;
+  repeated KunlunWarWelfareInfo info = 3;
+  optional int32 canReceive = 4;
+}
+message KunlunWarGetSparPowerReq {
+  required int32 activityId = 1;
+}
+message KunlunWarGetSparPowerResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message KunlunWarGetWelfareReq {
+  required int32 activityId = 1;
+  required int64 id = 2;
+}
+message KunlunWarGetWelfareResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message KunlunWarSendWelfareReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  required int32 num = 3;
+}
+message KunlunWarSendWelfareResp {
+  required int32 ret = 1;
+  optional KunlunWarWelfareInfo info = 2;
+}
+message KunlunWarWelfareRecordReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message KunlunWarWelfareRecordResp {
+  required int32 ret = 1;
+  repeated KunlunWarWelfareRecord record = 2;
+}
+message KunlunWarBackHomeReq {
+  optional int32 activityId = 1;
+  optional bool useItem = 2;
+}
+message KunlunWarBackHomeResp {
+  required int32 ret = 1;
+  optional KunlunWarBackHomeMsg backHomeMsg = 2;
+}
+message KunlunWarSimpleBlockInfoReq {
+  required int32 activityId = 1;
+  repeated int32 blockVec = 2;
+  required int32 floorId = 3;
+  required int32 groupId = 4;
+}
+message KunlunWarSimpleBlockInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarBlockInfo blockInfo = 2;
+  repeated KunlunWarGameCityInfo cityInfo = 3;
+}
+message KunlunWarHeartBeatReqMsg {
+  required int32 activityId = 1;
+}
+message KunlunWarHeartBeatRespMsg {
+  optional int32 ret = 1;
+}
+message KunlunWarAcclerateMoveMsg{
+  required int32 activityId = 1;
+  optional int32 speedUpCount = 2;
+}
+message KunlunWarAcclerateMoveRespMsg{
+  required int32 ret = 1;
+  optional string costInfo = 2;
+  optional int32 speedUpCount = 3;
+}
+message KunlunWarMiniMapInfoReqMsg{
+  required int32 activityId = 1;
+  optional int32 floor = 2;
+  optional int32 group = 3;
+}
+message KunlunWarMiniMapInfoRespMsg{
+  required int32 ret = 1;
+  repeated KunlunWarMiniCityInfo cityInfo = 2;
+  repeated KunlunWarMiniCellInfo cellInfo = 3;
+  repeated UnionBaseData baseData = 4;
+}
+message KunlunWarMiniCityInfo{
+  optional int32 cityId = 1;
+  optional bool haveFight = 2;
+  optional int64 unionId = 3;
+}
+message KunlunWarMiniCellInfo{
+  optional int32 index = 1;
+  optional bool haveFight = 2;
+  optional int64 unionId = 3;
+}
+message KunlunWarBlessingListReq {
+  required int32 activityId = 1;
+}
+message KunlunWarBlessingListResp {
+  required int32 ret = 1;
+  repeated KunlunWarBlessedNoticeInfo blessingList = 2;
+}
+message KunlunWarBlessedNoticeInfo{
+  required int64 id = 1;
+  required PlayerCharacterImageMsg playerData = 2;
+  optional int32 status = 3;
+  optional int64 time = 4;
+  optional string reward = 5;
+  optional string giftName = 6;
+}
+message KunlunWarReceiveBlessingReq {
+  required int32 activityId = 1;
+  required int64 recordId = 2;
+}
+message KunlunWarReceiveBlessingResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message KunlunWarBlockSync {
+  repeated KunlunWarBlockInfo blockInfo = 1;
+}
+message KunlunWarCitySync {
+  repeated KunlunWarGameCityInfo cityInfo = 1;
+}
+message KunlunWarMyGameInfoSyncMsg{
+  required int32 activityId = 1;
+  optional int32 location = 2;
+  optional string curPower = 3;
+  optional string maxPower = 4;
+  optional int64 attackCd = 5;
+  optional int32 vigor = 6;
+}
+message KunlunWarBeenKillSyncMsg {
+  required int32 activityId = 1;
+  optional int32 cityId = 2;
+  optional int64 targetId = 3;
+  optional string targetName = 4;
+  optional bool killByNPc = 5;
+  optional int64 reviveTime = 6;
+  optional int32  killCount = 7;
+}
+message KunlunWarLeftOutSyncInfo {
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+  repeated int32 blockIndex = 3;
+  repeated KunlunWarGameCityInfo cityInfo = 4;
+  repeated KunlunWarGameLineInfo lineInfo = 5;
+}
+message KunlunWarGameCityBattleSyncMsg{
+  repeated KunlunWarCityBattleState cityStates = 1;
+}
+message KunlunGameRouteInfoSyncMsg{
+  repeated KunlunWarGameRouteInfo routeInfo = 2;
+}
+message KunlunWarAttackCitySyncMsg{
+  repeated KunlunWarAttackCityInfo attackCityInfo = 1;
+}
+message KunlunWarGameLineInfoSyncMsg{
+  repeated KunlunWarGameLineInfo lineInfo = 1;
+  repeated KunlunWarCityBattleMsg cityBattleInfo = 2;
+  repeated KunlunWarCellBattleMsg cellBattleInfo = 3;
+  repeated KunlunWarPlayerPowerChangeInfo powerChange = 4;
+}
+message KunlunWarGameHorseLampInfo{
+  optional int64 serverId = 1;
+  optional string unionName = 2;
+  optional int32 cityId = 3;
+}
+message KunlunWarGamePlayerWinInfo{
+  optional string name = 1;
+  optional string unionName = 2;
+  optional int32 winCount = 3;
+  optional PlayerHeadDataMsg headInfo = 4;
+}
+message KunlunWarGameHorseLampSyncMsg{
+  repeated KunlunWarGameHorseLampInfo info = 1;
+}
+message KunlunWarBetUnionInfoList {
+  repeated KunlunWarBetUnionInfo infoList = 1;
+}
+message KunlunWarBetUnionInfo {
+  optional KunlunWarUnionRankMsg rankInfo = 1;
+  optional int32 selectedCount = 2;
+}
+message KunlunWarUnionRankMsg {
+  optional UnionBaseData baseData = 1;
+  required int32 score = 2;
+  required string fightValue = 3;
+  required int32 rank = 4;
+  required int64 masterId = 5;
+  required string masterName = 6;
+}
+message KunlunWarCityTrialReq{
+  required int32 activityId = 1;
+}
+message KunlunWarCityTrialResp{
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 id = 3;
+  optional int32 energy = 4;
+  optional int64 energyRecoverTime = 5;
+  optional int32 rank = 6;
+  optional int32 rankScore = 7;
+  optional int32 totalCostEnergy = 8;
+  optional int64 exp = 9;
+}
+message KunlunWarCrystalInfoReq {
+  required int32 activityId = 1;
+}
+message KunlunWarCrystalInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarCityCrystalInfo crystalInfo = 2;
+}
+message KunlunWarCityCrystalInfo {
+  optional int32 cityId = 1;
+  optional int64 num = 2;
+}
+message KunlunWarCrystalReceiveReqMsg {
+  required int32 activityId = 1;
+}
+message KunlunWarCrystalReceiveResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message KunlunWarReportReq {
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+}
+message KunlunWarReportResp {
+  required int32 ret = 1;
+  optional int64 unionId = 2;
+  repeated KunlunWarCityBattleReport cityReports = 3;
+  optional string unionName = 4;
+}
+message KunlunWarCityBattleReport {
+  optional int64 reportUid = 1;
+  optional bool win = 2;
+  optional int64 time = 3;
+  optional int32 cityId = 4;
+  optional int64 enemyUnionSid = 5;
+  optional string enemyUnionName = 6;
+  optional int32 detailCount = 8;
+}
+message KunlunWarReportDetailReq {
+  required int32 activityId = 1;
+  required int64 index = 2;
+  optional int32 from = 3;
+  optional int32 size = 4;
+  optional int32 floor = 5;
+  optional int32 group = 6;
+}
+message KunlunWarReportDetailResp {
+  required int32 ret = 1;
+  repeated KunlunWarCityReportDetail reportDetails = 2;
+  optional int32 from = 3;
+}
+message KunlunWarCityReportDetail {
+  optional PlayerHeadDataMsg attackHeadInfo = 1;
+  optional string attackName = 2;
+  optional PlayerHeadDataMsg beAttackHeadInfo = 3;
+  optional string beAttackName = 4;
+  optional bool attackWin = 5;
+  optional int64 attackPower = 6;
+  optional int64 beAttackPower = 7;
+  optional int64 cityId = 8;
+  optional int32 changeEnergy = 9;
+  optional int64 attackEnergy = 10;
+  optional int64 beAttackEnergy = 11;
+  optional int32 winNum = 12;
+  optional int32 id = 13;
+  optional int64 time = 14;
+  optional int32 defId = 15;
+  optional int32 winScore = 16;
+  repeated int32 atkSkillId = 17;
+  repeated int32 beAtkSkillId = 18;
+}
+message KunlunWarPlayerReportReq {
+  required int32 activityId = 1;
+  optional int32 round = 2;
+}
+message KunlunWarPlayerReportResp {
+  required int32 ret = 1;
+  repeated KunlunWarCityReportDetail reportList = 2;
+}
+message KunlunWarPlayerBattleReportMsg {
+  optional PlayerHeadDataMsg enemy = 1;
+  optional string enemyName = 2;
+  optional bool win = 3;
+  optional int64 time = 4;
+  optional string selfPower = 5;
+  optional string enemyPower = 6;
+  optional string enemyLostPower = 7;
+  optional string addScore = 8;
+  optional int32 cityId = 9;
+}
+message KunlunSendBlessingNotify {
+  optional int32 noticeNum = 1;
+}
+message KunlunWarPlayerWinSyncMsg{
+  repeated KunlunWarGamePlayerWinInfo info = 1;
+}
+message KunlunWarUseItemReq {
+  required int32 activityId = 1;
+  optional int32 itemId = 2;
+  optional int32 num = 3;
+}
+message KunlunWarUseItemResp {
+  required int32 ret = 1;
+  optional int32 energy = 2;
+  optional int64 energyRecoverTime = 3;
+}
+message KunlunWarRedPointReq {
+  required int32 activityId = 1;
+}
+message KunlunWarRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+  optional int32 activityId = 3;
+}
+message KunlunWarGroupRankSync {
+  optional int64 unionId = 1;
+  optional int64 score = 2;
+  optional int64 rank = 3;
+  optional int32 cityId = 4;
+}
+message KunlunWarSendRebirthCoinSync {
+  optional int32 noticeNum = 1;
+}
+message KunlunWarReceiveRebirthCoinReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+}
+message KunlunWarReceiveRebirthCoinResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional PlayerCharacterImageMsg playerData = 3;
+  optional int32 mallId = 4;
+  optional int32 noticeNum = 5;
+}
+message KunlunWarStrategyInfoReq {
+  required int32 activityId = 1;
+}
+message KunlunWarStrategyInfoResp{
+  required int32 ret = 1;
+  repeated KunlunWarMemberInfo commanders = 2;
+  repeated KunlunWarBuildMarkInfo markInfo = 3;
+}
+message KunlunWarBuildMarkInfo{
+  required int32 index = 1;
+  required string content = 2;
+  optional int32 markType = 3;
+}
+message KunlunWarCommanderSetReq{
+  required int32 activityId = 1;
+  repeated int64 commanders = 2;
+}
+message KunlunWarCommanderSetResp{
+  required int32 ret = 1;
+  repeated KunlunWarMemberInfo commanders = 2;
+}
+message KunlunWarCommanderChangeSyncMsg {
+  required int32 activityId = 1;
+  required bool haveCommand = 2;
+}
+message KunlunWarMemberListReq{
+  required int32 activityId = 1;
+}
+message KunlunWarMemberListResp {
+  optional int32 ret = 1;
+  repeated KunlunWarMemberInfo memberList = 2;
+}
+message KunlunWarMemberInfo{
+  optional PlayerBaseDataMsg playerData = 1;
+  optional int64 lastLoginTime = 2;
+  optional bool isCommander = 3;
+  optional int32 pos = 4;
+  optional int64 score = 5;
+}
+message KunlunWarMarkBuildReq{
+  required int32 activityId = 1;
+  required int32 index = 2;
+  optional string content = 3;
+  required bool isMark = 4;
+  optional int32 markType = 5;
+}
+message KunlunWarMarkBuildResp {
+  required int32 ret = 1;
+}
+message KunlunWarMarkBuildSyncMsg {
+  optional KunlunWarBuildMarkInfo info = 1;
+  optional bool isMark = 2;
+}
+message KunlunWarUnionInfoReq {
+  required int32 activityId = 1;
+}
+message KunlunWarUnionInfoResp {
+  required int32 ret = 1;
+  optional KunlunWarUnionInfo unionInfo = 2;
+  repeated KunlunWarMemberDetail memberList = 3;
+}
+message KunlunWarUnionInfo {
+  required int64 unionId = 1;
+  required string unionName = 2;
+  optional int64 exp = 3;
+  required int64 score = 4;
+  required int32 rank = 5;
+  required int32 memberNum = 6;
+  optional int32 flag = 7;
+}
+message KunlunWarMemberDetail{
+  optional PlayerBaseDataMsg playerData = 1;
+  optional int32 totalKill = 2;
+  optional int32 totalRebirth = 3;
+  optional int32 pos = 4;
+}
+message KunlunWarLeaveReq {
+  required int32 activityId = 1;
+}
+message KunlunWarLeaveResp {
+  required int32 ret = 1;
+}
+message KunlunWarGroupUnionInfoReq {
+  required int32 activityId = 1;
+  required int32 floorId = 2;
+  required int32 groupId = 3;
+}
+message KunlunWarGroupUnionInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarUnionSimpleInfo unionInfo = 2;
+}
+message NorthPoleWarUnionListReq {
+  required int32 activityId = 1;
+}
+message NorthPoleWarUnionListResp {
+  required int32 ret = 1;
+  repeated NorthPoleWarUnionInfo unionInfo = 2;
+  optional int64 friendUnionCd = 3;
+}
+message NorthPoleWarUnionInfo {
+  required KunlunWarUnionBaseMsg unionBase = 1;
+  required int32 status = 2;
+}
+message NorthPoleWarUnionFriendApplyListReq {
+  required int32 activityId = 1;
+}
+message NorthPoleWarUnionFriendApplyListResp {
+  required int32 ret = 1;
+  repeated KunlunWarUnionBaseMsg unionBase = 2;
+}
+message NorthPoleWarUnionFriendOperateReq {
+  required int32 activityId = 1;
+  optional int64 unionId = 2;
+  required int32 operate = 3;
+}
+message NorthPoleWarUnionFriendOperateResp {
+  required int32 ret = 1;
+}
+message NorthPoleWarUnionSkillInfoReq {
+  required int32 activityId = 1;
+}
+message NorthPoleWarUnionSkillInfoResp {
+  required int32 ret = 1;
+  repeated KunlunWarMemberInfo commanders = 2;
+  required int32 skillVal = 3;
+  repeated NorthPoleWarUnionSkillInfo skillInfo = 4;
+}
+message NorthPoleWarUnionSkillInfo{
+  optional int32 skillId = 1;
+  optional int64 skillEndTime = 2;
+  optional int32 skillEffectCity = 3;
+  optional int32 useNum = 4;
+  optional int64 unionId = 5;
+}
+message NorthPoleWarOpenUnionSkillReq {
+  required int32 activityId = 1;
+  required int32 skillId = 2;
+  optional int32 cityId = 3;
+}
+message NorthPoleWarOpenUnionSkillResp {
+  required int32 ret = 1;
+  optional int32 skillVal = 2;
+  optional int32 skillId = 3;
+  optional int64 skillEndTime = 4;
+  optional int32 skillEffectCity = 5;
+}
+message NorthPoleWarFriendUnionNotify {
+  repeated KunlunWarUnionBaseMsg friendUnion = 1;
+  required int32 alertType = 2;
+  optional int64 friendUnionCd = 3;
+}
+message NorthPoleWarNotify {
+  optional NorthPoleWarFriendUnionNotify alertFriendUnion = 1;
+  optional NorthPoleWarUnionSkillInfo openSkillInfo = 2;
+}
+message NorthPoleWarOpenUnionSkillCityReq {
+  required int32 activityId = 1;
+  required int32 skillId = 2;
+}
+message NorthPoleWarOpenUnionSkillCityResp {
+  required int32 ret = 1;
+  repeated KunlunWarGameHorseLampInfo cityInfo = 2;
+}
+message NorthPoleWarGetSendGiftListReq {
+  required int32 activityId = 1;
+}
+message NorthPoleWarGetSendGiftListResp {
+  required int32 ret = 1;
+  repeated NorthPoleSendGiftInfo sendGiftList = 2;
+}
+message NorthPoleSendGiftInfo{
+  optional string rewards = 1;
+  optional PlayerCharacterImageMsg playerData = 2;
+  optional int32 mallId = 3;
+  optional string fightValue = 4;
+  optional int32 lv = 5;
+}
+message NorthPoleWarAllUnionSkillListReq {
+  required int32 activityId = 1;
+}
+message NorthPoleWarAllUnionSkillListResp {
+  required int32 ret = 1;
+  repeated NorthPoleWarUnionSkillInfoList unionSkillInfoList = 2;
+}
+message NorthPoleWarUnionSkillInfoList {
+  required KunlunWarUnionBaseMsg unionInfo = 1;
+  repeated NorthPoleWarUnionSkillInfo skillInfo = 2;
+}

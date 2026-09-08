@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DASHBOARD_HOST: 0.0.0.0
+      DASHBOARD_PORT: 4173
+      DASHBOARD_ALLOWED_ORIGINS: https://${DASHBOARD_DOMAIN}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    init: true
+    networks:
+      - internal
+
+  caddy:
+    image: caddy:2.8-alpine
+    depends_on:
+      - app
+    environment:
+      DASHBOARD_DOMAIN: ${DASHBOARD_DOMAIN}
+      CADDY_EMAIL: ${CADDY_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./deploy/caddy-data:/data
+      - ./deploy/caddy-config:/config
+    restart: unless-stopped
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

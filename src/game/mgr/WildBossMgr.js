@@ -4,6 +4,7 @@ import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
 import PlayerAttributeMgr from "#game/mgr/PlayerAttributeMgr.js";
 import PalaceMgr from "#game/mgr/PalaceMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class WildBossMgr {
     constructor() {
@@ -49,6 +50,7 @@ export default class WildBossMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('challenge.wild-boss')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

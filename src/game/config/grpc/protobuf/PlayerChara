@@ -1,31 +1,40 @@
-package com.yq.msg.CityMsg;        
+package com.yq.msg.CityMsg;
 message PlayerCharaDataMsg {
-    optional int32 equipHeadIcon = 1; 
-    optional int32 equipAppearanceId = 2; 
-    repeated PlayerHaveCharaMsg haveSpecialChara = 3; 
+    optional int32 equipHeadIcon = 1;
+    optional int32 equipAppearanceId = 2;
+    repeated PlayerHaveCharaMsg haveSpecialChara = 3;
     optional int32 titleId = 4;
-    optional int32 equipHeadIconFrame = 5; 
-    optional int32 equipChatBubble = 6; 
-    optional int32 equipAtkEffect = 7; 
-    optional int32 medalId = 8; 
-    repeated AppearanceCollect appearanceCollect = 9; 
+    optional int32 equipHeadIconFrame = 5;
+    optional int32 equipChatBubble = 6;
+    optional int32 equipAtkEffect = 7;
+    optional int32 medalId = 8;
+    repeated AppearanceCollect appearanceCollect = 9;
+    optional int32 equipSceneId = 10;
+    optional int32 equipFrogId = 11;
+    optional int32 equipArtifactId = 12;
+    optional int32 realTitleId = 13;
+    optional int32 equipCardSkin = 14;
 }
 enum CharaType {
-    CharaType_Appearance = 1; 
-    CharaType_HeadIcon = 2; 
-    CharaType_HeadIconFrame = 3; 
-    CharaType_ChatBubble = 4; 
-    CharaType_AtkEffect = 5; 
-    CharaType_Medal = 6; 
+    CharaType_Appearance = 1;
+    CharaType_HeadIcon = 2;
+    CharaType_HeadIconFrame = 3;
+    CharaType_ChatBubble = 4;
+    CharaType_AtkEffect = 5;
+    CharaType_Medal = 6;
+    CharaType_Scene = 10;
+    CharaType_Frog = 11;
+    CharaType_Artifact = 12;
+    CharaType_Card_Skin = 14;
 }
 message GetPlayerCharaListResp {
     required int32 ret = 1;
-    optional PlayerCharaDataMsg data = 2; 
+    optional PlayerCharaDataMsg data = 2;
 }
 message PlayerHaveCharaMsg {
     required int32 charaId = 1;
-    required int64 expireTime = 2; 
-    optional int32 lv = 3; 
+    required int64 expireTime = 2;
+    optional int32 lv = 3;
 }
 message ChangePlayerCharaReq {
     required CharaType type = 1;
@@ -33,11 +42,15 @@ message ChangePlayerCharaReq {
 }
 message ChangePlayerCharaResp {
     required int32 ret = 1;
-    optional int32 equipHeadIcon = 2; 
-    optional int32 equipAppearanceId = 3; 
-    optional int32 equipHeadIconFrame = 4; 
-    optional int32 equipChatBubble = 5; 
-    optional int32 equipAtkEffect = 6; 
+    optional int32 equipHeadIcon = 2;
+    optional int32 equipAppearanceId = 3;
+    optional int32 equipHeadIconFrame = 4;
+    optional int32 equipChatBubble = 5;
+    optional int32 equipAtkEffect = 6;
+    optional int32 equipSceneEffect = 7;
+    optional int32 equipFrog = 8;
+    optional int32 equipArtifactId = 9;
+    optional int32 equipCardId = 10;
 }
 message UseTitleReq{
     required int32 titleId = 1;
@@ -74,12 +87,19 @@ message CollectPlayerCharaReq {
 }
 message CollectPlayerCharaResp {
     required int32 ret = 1;
-    optional AppearanceCollect appearanceCollect = 2; 
+    optional AppearanceCollect appearanceCollect = 2;
 }
 message UpgradePlayerCharaReq {
     required int32 charaId = 1;
 }
 message UpgradePlayerCharaResp {
     required int32 ret = 1;
-    optional PlayerHaveCharaMsg layerHaveCharaMsg = 2; 
+    optional PlayerHaveCharaMsg layerHaveCharaMsg = 2;
+}
+message TransmogrifyReq {
+    required  int32 transmogrifyTitleId  = 1;
+    required bool use = 2;
+}
+message TransmogrifyResp {
+    required  int32 ret  = 1;
 }

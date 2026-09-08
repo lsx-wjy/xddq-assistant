@@ -1,0 +1,777 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Rank";
+import "Palace";
+/* ==================== 协议枚举 ======================== */
+/* ===================================================== */
+enum CodeEnum {
+    Enter_Activity = 218600;
+    Enter = 218601;
+    Explore = 218602;
+    Move = 218603;
+    Deal_Event = 218604;
+    Use_Item = 218605;
+    Trap_Seek = 218606;
+    Assist = 218607;
+    Assist_Log = 218608;
+    Union_Event_Log = 218609;
+    Sync_Power = 218610;
+    Group_Info = 218611;
+    Worship = 218612;
+    Union_Score_List = 218613;
+    Union_Round_Summary = 218614;
+    Reward_Floor = 218615;
+    Auto_Switch = 218616;
+    Get_Monster_Reward = 218617;
+    Get_Union_Detail = 218618;
+    Bonus_Info = 218620;
+    Get_Bonus_Result = 218621;
+    Get_Bonus_Item = 218622;
+    Send_Bonus_Item = 218623;
+    Bonus_Record = 218624;
+    Challenge_List = 218630;
+    Challenge = 218631;
+    Challenge_HeartBeat = 218632;
+    Union_PlayerList = 218633;
+    Get_Challenge_Report = 218634;
+    Get_Challenge_Report_Detail = 218635;
+    Get_Union_Gift_List = 218636;
+    Receive_Union_Gift = 218637;
+    RedPoint = 218638;
+    AssistTrap_Sync = 218677;
+    RedPoint_Resp = 218678;
+    Receive_Union_Gift_Resp = 218679;
+    Deal_Event_Resp = 218680;
+    Use_Item_Resp = 218681;
+    Worship_Resp = 218682;
+    Explore_Resp = 218683;
+    Assist_Resp = 218684;
+    Reward_Floor_Resp = 218685;
+    Get_Monster_Reward_Resp = 218686;
+    Enter_Activity_Resp = 218687;
+    Send_Bonus_Item_Resp = 218688;
+    Get_Bonus_Result_Resp = 218689;
+    Get_Bonus_Item_Resp = 218690;
+    Auto_Switch_Resp = 218691;
+    Challenge_Resp = 218692;
+    Gift_Sync = 218693;
+    Mall_Can_Buy_Count_Sync = 218694;
+    Scene_Sync = 218695;
+    Challenge_Info_Sync = 218696;
+    Union_Info_Sync = 218697;
+    Reissue_Reward_Sync = 218698;
+    Common_Sync = 218699;
+}
+/* ==================== 基础配置 ======================== */
+/* ===================================================== */
+message WeYoundEventConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional string occupation = 3;
+    optional string param = 4;
+    optional string monsterParam = 5;
+    optional string extraParam = 6;
+    optional string reward = 7;
+    optional int64 points = 8;
+    optional int64 exp = 9;
+    optional string elixir = 10;
+    optional string name = 11;
+    optional string desc = 12;
+}
+message WeYoundElixirConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional string param = 3;
+}
+message WeYoundBuffConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional string param = 3;
+}
+message WeYoundBaseConfig {
+    optional int32 level = 1;
+    optional int64 hp = 2;
+    optional int64 exp = 3;
+}
+message WeYoundTimeConfig {
+    optional int32 timeId = 1;
+    optional int32 type = 2;
+    optional int32 beginTime = 3;
+    optional int32 durationTime = 4;
+    optional string param = 5;
+}
+message WeYoundMapConfig {
+    optional int32 floor = 1;
+    optional int32 mapId = 2;
+    optional int32 cost = 3;
+    optional string reward = 4;
+    optional int32 star = 5;
+    optional int32 points = 6;
+    optional string bossProb = 7;
+    optional string bossParam = 8;
+    optional string event = 9;
+    optional string randomEvent = 10;
+    optional string bossOccupation = 11;
+    optional int32 level = 12;
+    optional int32 bossExp = 13;
+    optional string elixir = 14;
+    optional string extraAttack = 15;
+}
+message WeYoundGroupConfig {
+    optional int32 rankId = 1;
+    optional int32 size = 2;
+    optional int32 up = 3;
+    optional int32 down = 4;
+    optional string score = 5;
+}
+message WeYoundConfigSync {
+    required int32 activityId = 1;
+    repeated WeYoundEventConfig eventConfig = 2;
+    repeated WeYoundBuffConfig buffConfig = 3;
+    repeated WeYoundBaseConfig baseConfig = 4;
+    repeated WeYoundTimeConfig timeConfig = 5;
+    repeated WeYoundMapConfig mapConfig = 6;
+    repeated WeYoundGroupConfig groupConfig = 7;
+    repeated WeYoundElixirConfig elixirConfig = 8;
+}
+/* ==================== 实体包装 ======================== */
+/* ===================================================== */
+message WeYoundPlayerMsg {
+    optional string power = 1;
+    optional int64 point = 2;
+    optional int32 hp = 3;
+    repeated WeYoundBuffMsg buff = 4;
+    optional WeYoundPosMsg pos = 5;
+    optional int64 hpRecoveryTime = 6;
+    optional int32 battleNum = 7;
+    repeated WeYoundCellMsg unDealCell = 8;
+    optional int64 trapEndTime = 9;
+    optional int32 assistNum = 10;
+    repeated int32 rewardFloors = 11;
+    optional bool autoSwitch = 12;
+    optional int32 myRank = 13;
+    optional bool trapSeek = 14;
+    repeated WeYoundElixirMsg elixir = 15;
+    optional int32 costHpCount = 16;
+    repeated WeYoundNpcGiftInfo npcGiftInfo = 17;
+}
+message WeYoundNpcGiftInfo {
+    optional int32 mallId = 1;
+    optional int64 expiredTime = 2;
+    optional int32 canBuyCount = 3;
+}
+message WeYoundBuffMsg {
+    optional int32 buffId = 1;
+    optional int32 count = 2;
+}
+message WeYoundElixirMsg {
+    optional int32 elixirId = 1;
+    optional int32 count = 2;
+}
+message WeYoundUnionMemberMsg {
+    optional PlayerAppearanceDataMsg appearance = 1;
+    optional WeYoundPosMsg pos = 2;
+    optional int32 floor = 3;
+    optional int64 trapEndTime = 4;
+    optional bool trapSeek = 5;
+    optional int32 titleId = 10;
+}
+message WeYoundPosMsg {
+    required int32 x = 1;
+    required int32 y = 2;
+}
+message WeYoundEventMsg {
+    optional int64 id = 1;
+    optional int32 configId = 2;
+    optional int64 objId = 3;
+    optional int32 eventType = 5;
+}
+message WeYoundCellMsg {
+    optional WeYoundPosMsg pos = 1;
+    /* [1:迷雾, 2:事件（探索后将迷雾设置成事件格）, 3:空白, 4:障碍, 5:下一层（出口boss击杀置成出口）] */
+    optional int32 type = 2;
+    optional WeYoundEventMsg event = 3;
+    optional bool reachable = 4;
+    optional WeYoundPosMsg root = 5;
+    optional int64 tag = 6;
+}
+message WeYoundMonsterMsg {
+    optional int64 id = 1;
+    optional int32 configId = 2;
+    optional string maxBloods = 3;
+    optional string remainBloods = 4;
+    optional int64 explorePlayerId = 5;
+    optional bool defeat = 6;
+    optional int64 time = 7;
+    optional int32 eventConfigId = 8;
+    optional string exploreName = 9;
+    repeated WeYoundAttackInfo attackInfo = 10;
+    optional bool exploreReward = 11;
+}
+message WeYoundAttackInfo {
+    optional int64 playerId = 1;
+    optional string name = 2;
+    optional int32 attackNum = 3;
+}
+message WeYoundSceneMsg {
+    optional int32 mapId = 1;
+    optional int32 floor = 2;
+    optional WeYoundPlayerMsg player = 3;
+    repeated WeYoundUnionMemberMsg member = 4;
+    repeated WeYoundCellMsg view = 5;
+    repeated WeYoundMonsterMsg monster = 6;
+    repeated WeYoundPosMsg receivePos = 7;
+}
+message WeYoundUnionBaseMsg {
+    optional int64 unionId = 1;
+    optional int32 flag = 2;
+    optional string name = 3;
+    optional int64 serverId = 4;
+    optional int64 star = 5;
+    optional string masterName = 6;
+}
+message WeYoundRoundSettleData {
+    optional int32 round = 1;
+    optional int32 statues = 2;
+    optional int32 groupRank = 3;
+    optional int32 rank = 4;
+    optional int32 rankScore = 5;
+    optional int32 totalScore = 6;
+    optional string unionName = 7;
+    optional int32 flag = 8;
+}
+message WeYoundPlayerScoreInfo {
+    required int64 playerId = 1 ;
+    required string memberName = 2 ;
+    required string damage = 3;
+}
+message WeYoundRoundBaseInfo {
+    required int32 groupId = 1 ;
+    required int32 rank =2 ;
+    required string score = 3;
+    required int64 point = 4;
+    required int32 danId = 5;
+}
+message WeYoundBonusInfo {
+    optional string name = 1;
+    optional int32 itemId = 2;
+    optional int64 id = 3;
+    optional int32 status=4;
+    optional int64 time = 5;
+}
+message WeYoundBonusRecord {
+    optional string nickName =1;
+    optional string reward =2;
+}
+message WeYoundGuessPlayerInfo {
+    optional int64 playerId = 1;
+    optional int64 serverId = 2;
+    optional string name = 3;
+}
+message WeYoundGuessUnionInfo {
+    optional UnionRankTempMsg rankInfo = 1;
+    optional int32 selectedCount = 2;
+}
+message WeYoundUnionChallengeMsg {
+    optional WeYoundUnionBaseMsg base = 1;
+    optional int64 reduceBlood = 2;
+    optional int64 lastBeAttackTime = 3;
+    optional int32 rank = 4;
+    optional int32 position = 5;
+    optional int32 level = 6;
+}
+message WeYoundUnionChallengeSimpleMsg {
+    optional int64 unionId = 1;
+    optional int64 reduceBlood = 2;
+    optional int64 star = 3;
+    optional int32 level = 4;
+}
+message WeYoundUnionGroupRankMsg {
+    optional int64 unionId = 1;
+    optional int32 rank = 2;
+}
+message WeYoundUnionBattlePlayerMsg {
+    optional int32 appearanceId = 1;
+    optional int32 cloudId = 2;
+    optional int64 exp = 3;
+    optional string nickName = 4;
+}
+message WeYoundReportMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional string nickName = 2;
+    optional int64 unionId = 3;
+    optional string unionName = 4;
+    optional int64 damage = 5;
+    optional string targetName = 6;
+    optional int64 serverId = 7;
+    optional int32 flag = 8;
+    optional int32 atkTimes = 9;
+    optional int64 time = 10;
+}
+message WeYoundReportDetailMsg {
+    optional string nickName = 1;
+    optional int32 atkTimes = 2;
+    optional int64 damage = 3;
+}
+/**
+前X名 显示形象和坐骑, 其他玩家使用头像
+ */
+message  WeYoundAppearanceMsg {
+    optional int32 headIcon = 1;
+    optional string wxHeadUrl = 2;
+    optional int32  appearanceId = 3;
+    optional int32 equipCloudId = 4;
+}
+message WeYoundUnionEventLog {
+    optional PlayerHeadDataMsg head = 1;
+    optional string playerName = 2;
+    optional int64 time = 3;
+    optional int32 eventConfigId = 4;
+    optional string rewards = 5;
+    optional int32 floor = 6;
+}
+message WeYoundUnionDetailInfoMsg {
+    optional WeYoundUnionBaseMsg unionBase = 1;
+    repeated WeYoundUnionDefenseMemMsg defenseMem = 2;
+    optional int64 reduceBlood = 3;
+    optional int32 level = 4;
+    optional int32 star = 5;
+}
+message WeYoundUnionDefenseMemMsg {
+    optional PlayerHeadDataMsg headData = 1;
+    optional string nickName = 2;
+    optional int64 power = 3;
+    optional int64 point = 4;
+    optional int64 totalDamage = 5;
+    optional int64 todayAddExp = 6;
+    optional int64 totalAddExp = 7;
+}
+message WeYoundRankGroupInfo {
+    optional int32 rankId = 1;
+    repeated int32 groups = 2;
+}
+message WeYoundGiftNoticeInfo {
+    required PlayerCharacterImageMsg playerData = 1;
+    required int64 recordId = 2;
+    optional int32 status = 3;
+    optional int64 time = 4;
+    optional int32 mallId = 5;
+    optional string rewards = 6;
+}
+/* ==================== 请求协议 ======================== */
+/* ===================================================== */
+message WeYoundEnterActivityReq {
+    required int32 activityId = 1;
+}
+message WeYoundEnterActivityResp {
+    optional int32 ret = 1;
+    optional int32 selfRank = 2;
+    optional int32 round = 3;
+    optional int32 group = 4;
+    optional int32 rankId = 5;
+    optional int64 unionId = 6;
+    repeated int32 groups = 7;
+    optional string unionName = 8;
+    optional PalacePlayerShowMsg worshipPlayer = 9;
+    repeated WeYoundUnionBaseMsg top3Unions = 10;
+    optional bool hasWorship = 11;
+    optional int32 position = 12;
+    optional WeYoundRoundSettleData roundSettleInfo = 13;
+    optional int32 hpCostCount = 14;
+}
+message WeYoundEnterReq {
+    required int32 activityId = 1;
+    optional bool enterNext = 2;
+}
+message WeYoundEnterResp {
+    required int32 ret = 1;
+    optional WeYoundSceneMsg scene = 2;
+    optional int32 noticeNum = 3;
+    optional int32 memberSize = 4;
+    repeated WeYoundRewardDrawMsg draw = 5;
+    optional WeYoundUnionInfoSync unionInfo = 6;
+}
+message WeYoundExploreReq {
+    required int32 activityId = 1;
+    required WeYoundPosMsg pos = 2;
+}
+message WeYoundExploreResp {
+    required int32 ret = 1;
+    optional WeYoundPlayerMsg player = 2;
+    optional string rewards = 3;
+    optional WeYoundEventMsg event = 4;
+    repeated int32 buffs = 5;
+    repeated int32 elixirs = 6;
+    repeated int32 points = 7;
+    repeated WeYoundCellMsg view = 8;
+    optional WeYoundMonsterMsg monster = 9;
+}
+message WeYoundMoveReq {
+    required int32 activityId = 1;
+    required WeYoundPosMsg pos = 2;
+}
+message WeYoundMoveResp {
+    required int32 ret = 1;
+}
+message WeYoundDealEventReq {
+    required int32 activityId = 1;
+    required WeYoundPosMsg pos = 2;
+    repeated WeYoundPosMsg selectView = 3;
+    optional int32 param1 = 4;
+    optional int32 param2 = 5;
+}
+message WeYoundDealEventResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+    repeated WeYoundMonsterMsg monster = 3;
+    repeated WeYoundEventMsg event = 4;
+    optional WeYoundPlayerMsg player = 5;
+    repeated int32 buffs = 6;
+    repeated int32 elixirs = 7;
+    repeated int32 points = 8;
+    repeated WeYoundCellMsg view = 9;
+}
+message WeYoundUseItemReq {
+    required int32 activityId = 1;
+    optional int32 itemId = 2;
+    optional int32 num = 3;
+}
+message WeYoundUseItemResp {
+    required int32 ret = 1;
+    optional int32 value = 2;
+    /* 如果是体力有恢复时间 */
+    optional int64 lastRecoveryTime = 3;
+}
+message WeYoundTrapSeekReq {
+    required int32 activityId = 1;
+}
+message WeYoundTrapSeekResp {
+    required int32 ret = 1;
+}
+message WeYoundAssistReq {
+    required int32 activityId = 1;
+    repeated int64 playerId = 2;
+    optional int64 monsterId = 3;
+}
+message WeYoundAssistResp {
+    required int32 ret = 1;
+    optional int32 assistNum = 2;
+    optional WeYoundUnionMemberMsg trapInfo = 3;
+    optional WeYoundMonsterMsg monsterInfo = 4;
+    optional string rewards = 5;
+}
+message WeYoundAssistLogReq {
+    required int32 activityId = 1;
+}
+message WeYoundAssistLogResp {
+    required int32 ret = 1;
+    repeated WeYoundUnionMemberMsg trapInfo = 2;
+    repeated WeYoundMonsterMsg monsterInfo = 3;
+    optional int32 assistNum = 4;
+}
+message WeYoundUnionEventLogReq {
+    required int32 activityId = 1;
+}
+message WeYoundUnionEventLogResp {
+    required int32 ret = 1;
+    repeated WeYoundUnionEventLog eventLog = 2;
+}
+message WeYoundSyncPowerReq {
+    required int32 activityId = 1;
+}
+message WeYoundSyncPowerResp {
+    required int32 ret = 1;
+    optional string power = 2;
+}
+message WeYoundGroupInfoReq {
+    required int32 activityId = 1;
+    required int32 groupId = 2;
+}
+message WeYoundGroupInfoResp {
+    required int32 ret = 1;
+    repeated WeYoundUnionBaseMsg groupInfo = 2;
+}
+message WeYoundWorshipReq {
+    required int32 activityId = 1;
+}
+message WeYoundWorshipResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional PalacePlayerShowMsg worshipPlayer = 3;
+}
+message WeYoundUnionScoreReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message WeYoundUnionScoreResp {
+    required int32 ret = 1;
+    repeated WeYoundPlayerScoreInfo scoreInfo = 2;
+}
+message WeYoundUnionRoundSummaryReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message WeYoundUnionRoundSummaryResp {
+    required int32 ret = 1;
+    repeated WeYoundRoundBaseInfo info = 2;
+}
+message WeYoundRewardFloorReq {
+    required int32 activityId = 1;
+    optional WeYoundPosMsg pos = 2;
+    optional int32 floor = 3;
+}
+message WeYoundRewardFloorResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+    repeated int32 rewardFloors = 3;
+    optional string elixirs = 4;
+    optional bool greatDraw = 5;
+    optional WeYoundPlayerMsg playerData = 6;
+}
+message WeYoundAutoSwitchReq {
+    required int32 activityId = 1;
+}
+message WeYoundAutoSwitchResp {
+    required int32 ret = 1;
+    optional string cost = 2;
+}
+message WeYoundGetMonsterRewardReq {
+    required int32 activityId = 1;
+    optional int64 monsterId = 2;
+}
+message WeYoundGetMonsterRewardResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+    optional WeYoundPlayerMsg player = 3;
+    repeated int32 buffs = 4;
+    repeated int32 elixirs = 5;
+    repeated int32 points = 6;
+}
+message WeYoundGetUnionDetailReq {
+    required int32 activityId = 1;
+}
+message WeYoundGetUnionDetailResp {
+    required int32 ret = 1;
+    optional WeYoundUnionDetailInfoMsg detailInfo = 2;
+}
+message WeYoundBonusReq {
+    required int32 activityId = 1;
+}
+message WeYoundBonusResp {
+    required int32 ret = 1;
+    optional int32 exp = 2;
+    repeated WeYoundBonusInfo info = 3;
+    optional int32 canReceive = 4;
+}
+message WeYoundGetBonusResultReq {
+    required int32 activityId = 1;
+}
+message WeYoundGetBonusResultResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 exp = 3;
+    optional int32 canReceive = 4;
+}
+message WeYoundGetBonusItemReq {
+    required int32 activityId = 1;
+    required int64 id = 2;
+}
+message WeYoundGetBonusItemResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 exp = 3;
+    optional int32 canReceive = 4;
+}
+message WeYoundSendBonusItemReq {
+    required int32 activityId = 1;
+    required int32 itemId = 2;
+    required int32 num = 3;
+}
+message WeYoundSendBonusItemResp {
+    required int32 ret = 1;
+    optional WeYoundBonusInfo info = 2;
+}
+message WeYoundBonusRecordReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message WeYoundBonusRecordResp {
+    required int32 ret = 1;
+    repeated WeYoundBonusRecord record = 2;
+}
+message WeYoundGuessPlayersReq {
+    required int32 activityId = 1;
+    optional int32 param = 2;
+}
+message WeYoundGuessPlayersResp {
+    required int32 ret = 1;
+    optional int32 param = 2;
+    repeated WeYoundGuessPlayerInfo playerList = 3;
+}
+message WeYoundGuessDataReq {
+    required int32 activityId = 1;
+}
+message WeYoundGuessDataResp {
+    required int32 ret = 1;
+    repeated WeYoundGuessUnionInfo infoList = 2;
+    repeated int64 unionIdArr = 3;
+    repeated int32 rewardRankAchieve = 4;
+    optional bool isReceive = 5;
+    optional int32 rewardParam = 6;
+}
+message WeYoundGuessSelectReq {
+    required int32 activityId = 1;
+    repeated int64 unionIdArr = 2;
+}
+message WeYoundGuessSelectResp {
+    required int32 ret = 1;
+}
+message WeYoundGuessRewardReq {
+    required int32 activityId = 1;
+}
+message WeYoundGuessRewardResp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+}
+message WeYoundChallengeListReq {
+    required int32 activityId = 1;
+    optional int32 groupId = 2;
+    optional bool needPlayerData = 3;
+}
+message WeYoundChallengeListResp {
+    required int32 ret = 1;
+    repeated WeYoundUnionChallengeMsg unionMsg = 2;
+    repeated int64 advanced = 3;
+    repeated WeYoundRankGroupInfo rankGroupInfo = 4;
+    optional int32 battleNum = 5;
+    optional WeYoundPlayerMsg playerData = 6;
+}
+message WeYoundChallengeReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message WeYoundChallengeResp {
+    required int32 ret = 1;
+    optional int32 free = 2;
+    optional string rewards = 3;
+}
+message WeYoundChallengeHeartBeatReq {
+    required int32 activityId = 1;
+}
+message WeYoundChallengeHeartBeatResp {
+    required int32 ret = 1;
+}
+message WeYoundUnionPlayerListReq {
+    required int32 activityId = 1;
+    required int64 unionId = 2;
+}
+message WeYoundUnionPlayerListResp {
+    required int32 ret = 1;
+    repeated WeYoundUnionBattlePlayerMsg playerList = 2;
+}
+message WeYoundReportReq {
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message WeYoundReportResp {
+    required int32 ret = 1;
+    repeated WeYoundReportMsg datas = 2;
+}
+message WeYoundReportDetailReq {
+    required int32 activityId = 1;
+    optional int64 unionId = 2;
+    optional int32 type = 3;
+}
+message WeYoundReportDetailResp {
+    required int32 ret = 1;
+    repeated WeYoundReportDetailMsg infos = 2;
+}
+message WeYoundUnionGiftListReq {
+    required int32 activityId = 1;
+}
+message WeYoundUnionGiftListResp {
+    required int32 ret = 1;
+    repeated WeYoundGiftNoticeInfo blessingList = 2;
+}
+message WeYoundReceiveUnionGiftReq {
+    required int32 activityId = 1;
+    required int64 recordId = 2;
+}
+message WeYoundReceiveUnionGiftResp {
+    required int32 ret = 1;
+    optional int32 strength = 2;
+    optional int64 lastRecoveryTime = 3;
+    optional bool isAlreadyGet = 4;
+    optional string rewards = 5;
+}
+/**
+1   首次开启红点
+2   礼包红点
+3   战令红点
+4   排行榜奖励红点
+5   体力可使用红点
+6   挑战次数可使用红点
+7   探索自动处理红点
+8   日志红点
+9   协助红点
+10  通层奖励红点
+11  膜拜红点
+12  妖盟福利红点
+13  妖盟宝箱红点
+14  成就奖励红点
+15  妖盟协力有可领取奖励
+16  未处理事件
+ */
+message WeYoundRedPointReq {
+    required int32 activityId = 1;
+}
+message WeYoundRedPointResp {
+    required int32 ret = 1;
+    optional string data = 2;
+    optional int32 activityId = 3;
+}
+/* ==================== 同步协议 ======================== */
+/* ===================================================== */
+message WeYoundSceneSync {
+    repeated WeYoundCellMsg view = 1;
+    repeated WeYoundUnionMemberMsg member = 2;
+    repeated WeYoundMonsterMsg monster = 3;
+    repeated WeYoundRewardDrawMsg draw = 4;
+}
+message WeYoundRewardDrawMsg {
+    optional WeYoundPosMsg pos = 1;
+    optional int64 playerId = 2;
+    optional string playerName = 3;
+    optional string rewards = 4;
+    optional bool greatDraw = 5;
+}
+message WeYoundChallengeInfoSync {
+    required int64 playerId = 1;
+    optional string unionName = 2;
+    optional string name = 3;
+    repeated int64 advanced = 4;
+    optional WeYoundAppearanceMsg appearance = 5;
+    /* 被攻击的妖盟信息 */
+    optional WeYoundUnionChallengeSimpleMsg targetUnion = 6;
+    repeated WeYoundUnionGroupRankMsg groupRankMsg = 7;
+    optional int64 damage = 8;
+}
+message WeYoundUnionInfoSync {
+    optional int64 levelExp = 1;
+    optional int32 unionRank = 2;
+    optional int32 star = 3;
+    optional int64 playerId = 4;
+}
+message WeYoundSendGiftSync {
+    optional int32 noticeNum = 1;
+    optional WeYoundMyGiftMsg myGift = 2;
+}
+message WeYoundMyGiftMsg {
+    optional PlayerCharacterImageMsg playerData = 1;
+    optional int32 mallId = 2;
+    optional int64 recordId = 3;
+}
+message WeYoundAssistTrapSync {
+    optional PlayerCharacterImageMsg playerData = 1;
+    optional int64  playerId = 2;
+}

@@ -1,4 +1,4 @@
-package com.yq.msg.CityMsg;    
+package com.yq.msg.CityMsg;
     message WelfareGiftActivityPlayerDataMsg {
         required int32 activityId = 1;
         repeated TriggerGiftDataMsg triggerGiftDataMsg = 2;
@@ -8,7 +8,33 @@ package com.yq.msg.CityMsg;
         required int64 endTime = 2;
         repeated int32 hasBeenBought = 3;
         repeated int32 triggerMallId = 4;
+        optional bool isHabit = 5;
     }
     message WelfareGiftActivityPlayerDataSync {
         optional WelfareGiftActivityPlayerDataMsg syncMsg = 1;
+    }
+    message WelfareGiftTriggerReq {
+        required int32 conditionId = 1;
+        required int32 activityId = 2;
+    }
+    message WelfareGiftTriggerResp {
+        optional int32 ret = 1;
+    }
+    message WelfareGiftBackData {
+        optional int32 conditionId = 1;
+        repeated  WelfareGiftBackMallData backMallData = 2;
+        optional int32 canAddTimes = 3;
+    }
+    message WelfareGiftBackMallData {
+        optional int32 mallId = 1;
+        optional int32 canBuyTimes = 2;
+    }
+    message WelfareGiftBackDataSync {
+        repeated WelfareGiftBackData backData = 1;
+    }
+    message WelfareGiftBackAddTimesReq {
+        required int32 conditionId = 1;
+    }
+    message WelfareGiftBackAddTimesResp {
+        required int32 ret = 1;
     }

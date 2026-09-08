@@ -2,6 +2,7 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class MagicMgr {
     constructor() {
@@ -49,6 +50,7 @@ export default class MagicMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('cave.ad-magic')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

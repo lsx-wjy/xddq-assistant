@@ -1,0 +1,337 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "Union";
+enum TownDemonProtocols{
+  town_demon_base_info_load = 213201;
+  town_demon_all_join_server = 213202;
+  town_demon_red_dot_data = 213203;
+  town_demon_get_achieve_info = 213204;
+  town_demon_achieve_reward = 213205;
+  town_demon_get_rank_reward = 213206;
+  town_demon_get_reward_info = 213207;
+  town_demon_battle = 213208;
+  town_demon_get_attack_union_list = 213209;
+  town_demon_union_player_list = 213210;
+  town_demon_set_union_target = 213211;
+  town_demon_pillage = 213212;
+  town_demon_report = 213213;
+  town_demon_log_play_back = 213214;
+  town_demon_guess_info = 213216;
+  town_demon_set_guess = 213217;
+  town_demon_get_guess_reward = 213218;
+  town_demon_get_boss_attr = 213219;
+  town_demon_guess_player_list = 213220;
+  town_demon_get_top3player = 213221;
+  town_demon_union_data_agent = 213271;
+  town_demon_red_point_back = 213274;
+  town_demon_play_back = 213275;
+  town_demon_battle_result_from_other = 213276;
+  TownDemon_CrossToGame_FIGHT = 213277;
+}
+enum TownDemonRedPointEnum {
+  TownDemonRedNone = 0;
+  TownDemonRedGuess = 1;
+  TownDemonRedGuessReward = 2;
+  TownDemonRedPlayerRankReward = 3;
+  TownDemonRedUnionRankReward = 4;
+}
+message TownDemonUnionRankMsg {
+  optional UnionBaseData baseData = 1;
+  required int64 score = 2;
+  required string fightValue = 3;
+  required int32 rank = 4;
+  required int64 masterId = 5;
+  required string masterName = 6;
+}
+message TownDemonUnionRankList {
+  repeated TownDemonUnionRankMsg rankInfo = 1;
+}
+message TownDemonPlayerRankMsg {
+  required int64 playerId = 1;
+  required PlayerCharacterImageMsg playerBaseData = 2;
+  required string value = 3;
+  required int32 rank = 4;
+}
+message TownDemonPlayerRankList {
+  repeated TownDemonPlayerRankMsg rankInfo = 1;
+}
+message TownDemonBaseInfoReqMsg {
+}
+message TownDemonBaseInfoRespMsg {
+  required int32 ret = 1;
+  optional int64 unionId = 2;
+  optional int32 position = 3;
+  optional TownDemonRoundSettleData roundSettleInfo = 4;
+  repeated PlayerCharacterImageMsg top3Player = 5;
+  optional int32 active = 6;
+  optional TownDemonPlayerData playerData = 7;
+  repeated int64 serverIdArray = 8;
+  optional int32 groupType = 9;
+}
+message TownDemonPlayerData{
+    optional int32 challengeTimes = 1;
+    optional int32 pillageTimes = 2;
+    optional string totalDamage = 3;
+    repeated int32 received = 4;
+}
+message TownDemonRoundSettleData {
+  optional string firstUnionName = 1;
+  optional int64 firstUnionPoint = 2;
+  optional int64 firstUnionAddScore = 3;
+  optional int64 firstUnionScore = 4;
+  optional int32 firstUnionFlag = 5;
+  optional TownDemonRoundSettleDisplayData killLeader = 6;
+  optional int32 selfUnionRank = 7;
+  optional int32 selfSeasonRank = 8;
+  optional int64 selfUnionAddScore = 9;
+}
+message TownDemonRoundSettleDisplayData{
+  optional string nickName = 1;
+  optional int32 appearanceId = 2;
+  optional int64 point = 3;
+  optional int32 title = 4;
+  optional string unionName = 5;
+  repeated int32 petId = 6;
+  repeated int32 petSoulShapeList = 7;
+  repeated int32 petLinkageId = 8;
+  optional int32 realmsId = 9;
+}
+message TownDemonRoundSettleUnionRankData {
+  optional int32 unionRank = 1;
+  optional string unionName = 2;
+  optional int64 unionServerId = 3;
+  optional int32 unionScore = 4;
+  optional int64 unionId = 5;
+}
+message TownDemonAllJoinServerReq{
+}
+message TownDemonAllJoinServerResp{
+  required int32 ret = 1;
+  repeated int64 serverIdArray = 2;
+}
+message TownDemonRedDotReqMsg {
+}
+message TownDemonRedDotRespMsg {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message TowerDemonGetAchieveInfoReqMsg {
+}
+message TowerDemonGetAchieveInfoRespMsg {
+  required int32 ret = 1;
+  repeated int32 received = 2;
+}
+message TownDemonAchieveRewardReqMsg {
+  repeated int32 taskId = 1;
+}
+message TownDemonAchieveRewardRespMsg {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  repeated int32 received = 3;
+}
+message TownDemonGetRankRewardReqMsg {
+  required int32 type = 1;
+}
+message TownDemonGetRankRewardRespMsg {
+  required int32 ret = 1;
+  optional int32 type = 2;
+  optional string rewards = 3;
+}
+message TownDemonGetRewardInfoReqMsg {
+  required int32 rankType = 1;
+}
+message TownDemonGetRewardInfoRespMsg {
+  required int32 ret = 1;
+  optional int32 myRank = 2;
+  optional string myValue = 3;
+  optional string param = 4;
+  optional bool reward = 5;
+}
+message TownDemonBattleReqMsg {
+}
+message TownDemonBattleRespMsg {
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+  optional PlayerHeadAndNameMsg enemyInfo = 3;
+  optional int64 score = 4;
+  optional string damage =5;
+  optional int64 changeScore = 6;
+}
+message TownDemonGetAttackUnionListReqMsg {
+}
+message TownDemonGetAttackUnionListRespMsg {
+  required int32 ret = 1;
+  repeated TowerDemonAttackUnionData unionDataArray = 2;
+  optional int64 enemyUnionId = 3;
+}
+message TowerDemonAttackUnionData{
+    optional int64 unionId = 1;
+    optional string unionName = 2;
+    optional int32 unionFlag = 3;
+    optional int64 unionScore = 4;
+    optional int32 unionRank = 5;
+    optional string fightValue = 6;
+    optional int64 serverId = 7;
+    optional int32 amount = 8;
+    optional int64 exp = 9;
+}
+message TownDemonGetPlayerListReq{
+  optional int64 unionId = 1;
+}
+message TownDemonGetPlayerListResp{
+  optional int32 ret =1;
+  repeated TownDemonPlayerUnionData unionPlayerDataArray = 2;
+  optional int32 myRank = 3;
+  optional int64 myScore = 4;
+  optional int32 unionRank = 5;
+  optional int64 unionScore = 6;
+  repeated int64 scoreRange = 7;
+}
+message TownDemonPlayerUnionData{
+  optional PlayerBaseDataMsg playerInfo = 1;
+  optional int64 score = 2;
+  optional int64 plunderScore =3;
+  optional int64 initScore = 4;
+}
+message TownDemonSetUnionTargetReqMsg{
+  optional int64 unionId = 1;
+}
+message TownDemonSetUnionTargetRespMsg{
+  required int32 ret = 1;
+}
+message TownDemonPillageReqMsg {
+  required int64 playerId = 1;
+}
+message TownDemonPillageRespMsg{
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+  optional PlayerHeadAndNameMsg enemyInfo = 3;
+  optional TowerDemonBattleResultData myPoint = 4;
+  optional TowerDemonBattleResultData enemyPoint = 5;
+}
+message TowerDemonBattleResultData{
+  optional int64 curScore = 1;
+  optional int64 changeScore = 2;
+}
+message TownDemonReportReq {
+}
+message TownDemonReportRsp {
+  required int32 ret = 1;
+  repeated TownDemonReportData logData = 2;
+}
+message TownDemonReportData {
+  optional PlayerBaseDataMsg playerData = 1;
+  optional bool isWin = 2;
+  optional int64 score = 3;
+  optional int64 battleId = 4;
+  optional int64 warTime = 5;
+  optional bool isAttacker = 6;
+  optional string myUnionName = 7;
+}
+message TownDemonLogPlaybackReq {
+  required int64 battleId = 1;
+}
+message TownDemonLogPlaybackRsp {
+  required int32 ret = 1;
+  optional BattleRecordMsg battleRecordMsg = 2;
+  optional bool isLeft = 3;
+}
+message TownDemonGetSimpleLogReq {}
+message TownDemonGetSimpleLogResp {
+   optional int32 ret = 1;
+   repeated TownDemonBattleRecord records = 2;
+}
+message TownDemonBattleRecord {
+  optional int64 playerId = 1;
+  optional string playerName = 2;
+  optional int32 monsterId =3;
+  optional int64 targetPlayerId = 4;
+  optional int32 num = 5;
+  optional string damage = 6;
+  optional int64 time = 7;
+}
+message TownDemonGetGuessInfoReq{
+}
+message TownDemonGetGuessInfoResp{
+  required int32 ret = 1;
+  repeated TownDemonBetUnionInfo infoList = 2;
+  repeated int64 unionIdArr = 3;
+  repeated int32 rewardRankAchi = 4;
+  optional bool isReceive = 5;
+  optional int32 rewardParam = 6;
+  repeated TownDemonGuessTotalResulMsg totalSettleResult = 7;
+}
+message TownDemonBetUnionInfo {
+  optional TownDemonRankMsg rankInfo = 1;
+  optional int32 selectedCount = 2;
+}
+message TownDemonGuessTotalResulMsg {
+    optional int32 param = 1;
+    optional int32 count = 2;
+    optional int32 guessType = 3;
+}
+message TownDemonRankMsg {
+  optional UnionBaseData baseData = 1;
+  required int64 score = 2;
+  required string fightValue = 3;
+  required int32 rank = 4;
+  required int64 masterId = 5;
+  required string masterName = 6;
+}
+message TownDemonSetGuessReq{
+  repeated int64 unionIdArr = 1;
+}
+message TownDemonSetGuessResp{
+  required int32 ret = 1;
+}
+message TownDemonGetGuessRewardReqMsg {
+}
+message TownDemonGetGuessRewardRespMsg {
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+message TownDemonGetBossDetailDataReq {
+     required int32 bossId = 1;
+}
+message TownDemonGetBossDetailDataResp {
+    optional int32 ret = 1;
+    optional PlayerDetailDataMsg playerDetailDataMsg = 2;
+    optional string fightValue = 3;
+}
+message TownDemonWarGuessPlayersReqMsg {
+  required int32 param = 1;
+}
+message TownDemonWarGuessPlayersRespMsg {
+  required int32 ret = 1;
+  optional int32 param = 2;
+  repeated TownDemonGuessPlayerInfo playerList = 3;
+}
+message TownDemonGuessPlayerInfo {
+  optional int64 playerId = 1;
+  optional int32 serverId = 2;
+  optional string name = 3;
+}
+message TownDemonGetTop3PlayerReq{
+}
+message TownDemonGetTop3PlayerResp{
+ optional int32 ret =1;
+ repeated PlayerCharacterImageMsg top3Player = 2;
+}
+message TownDemonGetUnionInfoReq{
+}
+message TownDemonGetUnionInfoResp{
+  optional int32 ret = 1;
+  optional UnionBaseData baseData = 2;
+  repeated TownDemonGetUnionInfoData players = 3;
+  optional int64 unionScore = 4;
+  optional int64 unionRank = 5;
+}
+message TownDemonGetUnionInfoData{
+  optional PlayerHeadAndFightMsg headData = 1;
+  optional int32 position = 2;
+  optional int32 challengeTimes = 3;
+  optional int32 robTimes = 4;
+  optional int64 score = 5;
+}

@@ -1,0 +1,188 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Union";
+import "WatchPlayer";
+enum ElixirBattlePb {
+    S_ELIXIR_BATTLE_CONFIG = 235801;
+    S_ELIXIR_BATTLE_ENTER = 235802;
+    S_ELIXIR_BATTLE_UNION_RANK = 235803;
+    S_ELIXIR_BATTLE_TASKLIST = 235804;
+    S_ELIXIR_BATTLE_ADD_MAXTASKNUM = 235805;
+    S_ELIXIR_BATTLE_TASK_ACCEPT = 235806;
+    S_ELIXIR_BATTLE_TASK_DELETE = 235807;
+    S_ELIXIR_BATTLE_TASK_GIVE_UP = 235808;
+    S_ELIXIR_BATTLE_TASK_REFRESH = 235809;
+    S_ELIXIR_BATTLE_TASK_COMPLETE = 235810;
+    S_ELIXIR_BATTLE_RANKLIST = 235811;
+    S_ELIXIR_BATTLE_LOGLIST = 235812;
+    S_ELIXIR_BATTLE_RANKHISTORYLIST = 235813;
+    S_ELIXIR_BATTLE_SYNC = 235814;
+    S_ELIXIR_BATTLE_EXPLOIT_SYNC = 235815;
+    S_ELIXIR_BATTLE_GETBOX = 235816;
+    S_ELIXIR_BATTLE_RED_POINT = 235817;
+    S_ELIXIR_BATTLE_DATA_SYNC = 235818;
+}
+message ElixirBattleUnionRankInfo {
+    required int32 rank = 1;
+    required UnionBaseData unionBaseData = 2;
+    required int32 score = 3;
+    optional int32 upgradeType = 4;
+}
+message ElixirBattleCommonBaseReq{
+    optional int64 unionId = 1;
+    optional bool isEnter = 2;
+}
+message ElixirBattleDataSync {
+    optional int32 state = 1;
+}
+message ElixirBattleConfigSync {
+    required int32 ret = 1;
+}
+message ElixirBattleResultInfo{
+    required int32 upgradeType = 1;
+    required int32 battleLv = 2;
+    required int32 rank = 3;
+}
+message ElixirBattleEnterRsp {
+    required int32 ret = 1;
+    optional int32 battleLv = 2;
+    optional int32 state = 3;
+    optional ElixirBattleTaskInfo curTask = 4;
+    optional int32 continuousFirstNUm = 5;
+    optional int32 cumulativeFirstNum = 6;
+    optional string reward = 7;
+    optional int32 rewardCount = 8;
+    optional ElixirBattleResultInfo result = 9;
+    optional int64 groupTime = 10;
+    optional int32 round = 11;
+    optional int32 applyCount = 12;
+    optional bool taskExpired = 13;
+}
+message ElixirBattleUnionRankRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleUnionRankInfo unionList = 2;
+}
+message ElixirBattleTaskInfo {
+    required int32 taskId = 1;
+    required int32 configId = 2;
+    required int32 curProgress = 3;
+    optional PlayerBaseDataMsg playerBaseData = 4;
+    required int64 deleteTime = 5;
+    required int64 startTime = 6;
+    required int32 slotId = 7;
+    required int64 createTime = 8;
+    required string params = 9;
+}
+message ElixirBattlePlayerInfo{
+    required int32 refreshTimes = 1;
+    required int32 acceptTaskNum = 2;
+    required int32 maxTaskNum = 3;
+    required int64 lastGiveUpTime = 4;
+}
+message ElixirBattleTaskCommonReq{
+    optional int64 unionId = 1;
+    required int32 taskId = 2;
+}
+message ElixirBattleTaskListRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleTaskInfo taskList = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+    optional ElixirBattleTaskInfo curTask = 4;
+    repeated int32 canCombineDanYaoIdList = 5;
+    repeated int32 canPlantGrassIdList = 6;
+}
+message ElixirBattleAddMaxTaskNumReq {
+    required int32 maxTaskNum = 1;
+    required int32 battleLv = 2;
+    optional int64 unionId = 3;
+}
+message ElixirBattleAddMaxTaskNumRsp {
+    required int32 ret = 1;
+    optional ElixirBattlePlayerInfo playerInfo = 2;
+}
+message ElixirBattleTaskAcceptRsp {
+    required int32 ret = 1;
+    optional ElixirBattleTaskInfo taskInfo = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+}
+message ElixirBattleTaskDeleteRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleTaskInfo taskList = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+}
+message ElixirBattleTaskGiveUpRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleTaskInfo taskList = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+}
+message ElixirBattleTaskRefreshReq{
+    optional int64 unionId = 1;
+    required int32 taskId = 2;
+    required int32 refreshType = 3;
+}
+message ElixirBattleTaskRefreshRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleTaskInfo taskList = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+}
+message ElixirBattleTaskCompleteRsp {
+    required int32 ret = 1;
+    optional string rewards = 2;
+    optional ElixirBattlePlayerInfo playerInfo = 3;
+}
+message ElixirBattleRankInfo {
+    required int32 rank = 1;
+    required UnionMemberData member = 2;
+    required int32 taskNum = 3;
+    required int32 score = 4;
+}
+message ElixirBattleRankListRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleRankInfo rankList = 2;
+}
+message ElixirBattleLogInfo {
+    required PlayerBaseDataMsg playerBaseData = 1;
+    required int32 type = 2;
+    required int64 time = 3;
+    required int32 taskConfigId = 4;
+    required string params = 5;
+}
+message ElixirBattleLogListRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleLogInfo logList = 2;
+}
+message ElixirBattleRecord {
+    required int32 battleLv = 1;
+    required int32 rank = 2;
+    required int64 score = 3;
+    required int64 time = 4;
+}
+message ElixirBattleRankHistoryListRsp {
+    required int32 ret = 1;
+    repeated ElixirBattleRecord recordList = 2;
+}
+message ElixirBattleSync{
+    required int64 cumulativeCostCoin = 1;
+}
+message ElixirExploitRankInfo {
+    required PlayerBaseDataMsg playerData = 1;
+    required int32 score = 2;
+}
+message ElixirBattleExploitSync {
+    repeated ElixirExploitRankInfo elixirExploitRankList = 1;
+    optional int32 canGetBoxNum = 2;
+}
+message ElixirBattleGetBoxRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 rewardCount = 3;
+}
+enum ElixirBattleEnumRedPoint {
+    RedPoint_AcceptTask = 0;
+    RedPoint_TaskFinish = 1;
+    RedPoint_Box = 2;
+}
+message ElixirBattleRedPointRsp {
+    required int32 ret = 1;
+    optional string redPoint = 2;
+}

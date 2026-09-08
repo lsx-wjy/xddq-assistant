@@ -1,24 +1,63 @@
 package com.yq.msg.CityMsg;
+import "ActivityBase";
     message TaskDataTempMsg{
-        required int32   taskId =1;         
-        required string  value =2;          
-        required int32   state =3;        
+        required int32   taskId =1;
+        required string  value =2;
+        required int32   state =3;
+        repeated ActivityMultiReward multiReward = 4;
+        repeated TaskSelectItemMsg selectItem = 5;
+        optional int64 completeTime = 6;
     }
     message TaskDataListMsg{
         repeated TaskDataTempMsg dataList =1;
     }
     message TaskGetRewardReqMsg{
-        repeated int32 taskId =1;       
+        repeated int32 taskId =1;
     }
     message TaskGetRewardRespMsg{
-        required int32  ret = 1;             
-        optional string rewards = 2;        
+        required int32  ret = 1;
+        optional string rewards = 2;
     }
     message WatchAdReq{
-        required int32 activityId = 1; 
+        required int32 activityId = 1;
         required int32 conditionId = 2;
         optional bool isUseADTime = 3;
     }
     message WatchAdResp{
         required int32 ret = 1;
     }
+    message TaskGetFundsRewardReq{
+        optional int32 sysTemId = 1;
+        optional int32 taskType = 2;
+        optional int32 conditionId = 3;
+    }
+    message TaskGetFundsRewardResp{
+        required int32  ret = 1;
+        optional string rewards = 2;
+    }
+message TaskSelectRewardReq {
+    required int32 selectType = 1;
+    required int32 systemId = 2;
+    required SelectTaskRewardMsg rewardMsg = 3;
+}
+message TaskSelectRewardResp {
+    required int32 ret = 1;
+    optional TaskDataTempMsg taskData = 2;
+}
+message SelectTaskRewardMsg {
+    required int32 taskId = 1;
+    repeated TaskSelectItemMsg selectItem = 2;
+}
+message TaskSelectItemMsg {
+    required int32 index = 1;
+    required int32 selectIndex = 2;
+    required int32 selectType = 3;
+}
+message TaskBatchSelectRewardReq {
+    required int32 selectType = 1;
+    required int32 systemId = 2;
+    repeated SelectTaskRewardMsg selectTaskRewardMsg = 3;
+}
+message TaskBatchSelectRewardResp {
+    required int32 ret = 1;
+}

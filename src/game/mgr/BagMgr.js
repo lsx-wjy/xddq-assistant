@@ -3,6 +3,7 @@ import Protocol from '#game/net/Protocol.js';
 import logger from "#utils/logger.js";
 import LoopMgr from '#game/common/LoopMgr.js';
 import PlayerAttributeMgr from "./PlayerAttributeMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class BagMgr {
     constructor() {
@@ -51,7 +52,7 @@ export default class BagMgr {
 
             const vipLevel = (PlayerAttributeMgr.isMonthCardVip ? 1 : 0) + (PlayerAttributeMgr.isYearCardVip ? 1 : 0);
             const count = 2 + vipLevel * 3;
-            if (fightTicket.num > count) {
+            if (isAutomationTaskEnabled('challenge.duel') && fightTicket.num > count) {
                 logger.info(`[背包管理] 还剩 ${fightTicket.num} 张斗法券`);
                 GameNetMgr.inst.sendPbMsg(Protocol.S_RANK_BATTLE_GET_BATTLE_LIST, {}, null);
                 await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -60,7 +61,7 @@ export default class BagMgr {
 
             // 万年灵芝 > 0 的时候自动激活
             const books = this.findItemById(100008);
-            if (books.num > 0) {
+            if (isAutomationTaskEnabled('basic.use-talent-reishi') && books.num > 0) {
                 logger.info(`[背包管理] 还剩 ${books.num} 万年灵芝`);
                 GameNetMgr.inst.sendPbMsg(Protocol.S_TALENT_READ_BOOK, { readTimes: books.num }, null);
             }

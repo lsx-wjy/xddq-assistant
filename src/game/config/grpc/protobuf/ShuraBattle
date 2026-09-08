@@ -1,0 +1,603 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+enum ShuraBattleProtocols{
+  ShuraBattle_EnterActivity = 215901;
+  ShuraBattle_Worship = 215902;
+  ShuraBattle_EnterBattleField = 215903;
+  ShuraBattle_GetPlayerBattleAttr = 215904;
+  ShuraBattle_LockBattleAttr = 215905;
+  ShuraBattle_createTeam = 215906;
+  ShuraBattle_teamDetail = 215907;
+  ShuraBattle_teamList = 215908;
+  ShuraBattle_quitTeam = 215909;
+  ShuraBattle_agreeJoin = 215911;
+  ShuraBattle_sendInviteMsg  = 215913;
+  ShuraBattle_agreeInviteJoin = 215914;
+  ShuraBattle_getApplyList = 215915;
+  ShuraBattle_getInviteList = 215916;
+  ShuraBattle_searchTeam = 215917;
+  ShuraBattle_getTeamPosition = 215918;
+  ShuraBattle_changeTeamPosition = 215919;
+  ShuraBattle_changeTeamController = 215920;
+  ShuraBattle_getSuppressEquipmentData = 215921;
+  ShuraBattle_teamStateSync = 215922;
+  ShuraBattle_kickoutTeam = 215923;
+  ShuraBattle_inviteCd = 215924;
+  ShuraBattle_move = 215925;
+  ShuraBattle_teamPositionSync = 215927;
+  ShuraBattle_fight  = 215928;
+  ShuraBattle_battleFieldTeamSync = 215930 ;
+  ShuraBattle_teamBattleEndTimeSync = 215931;
+  ShuraBattle_floorChangeSync  = 215932;
+  ShuraBattle_gameEndMsgSync = 215933;
+  ShurBattle_getRoomRankMsg = 215934;
+  ShuraBattle_getBreakGameScoreList = 215935;
+  ShuraBattle_groupTeamList = 215936;
+  ShuraBattle_getGuessDataReq = 215937;
+  ShuraBattle_setGuessSelectReq = 215938;
+  ShuraBattle_getGuessRewardReq = 215939;
+  ShuraBattle_getRoomFloorsInfo = 215940;
+  ShuraBattle_receiveJoinReward = 215941;
+  ShuraBattle_getGuessPlayerReq = 215942;
+  ShuraBattle_getZoneTop3Team = 215943;
+  ShuraBattle_battleReport = 215944;
+  ShuraBattle_redPoint = 215945;
+  ShuraBattle_recordBackPlay = 215946;
+  ShuraBattle_getTeamPositon = 215947;
+  ShurBattle_heartBeat = 215951;
+}
+message ShuraBattleConfigMsg {
+  repeated ShuraBattleMatchConfigMsg matchConfig = 1;
+  repeated ShuraBattleTimeConfigMsg timeConfig = 2;
+  repeated ShuraBattleFieldConfigMsg battleFieldConfig = 3;
+  repeated ShuraBattleSettlementConfigMsg settleConfig = 4;
+}
+message ShuraBattleMatchConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string name = 3;
+  required int32 minLevel = 4;
+  required int32 maxLevel = 5;
+  required int32 standardLevel = 6;
+  optional int32 minNum = 7;
+ optional string protectNum = 8;
+  optional string breakoutNum = 9;
+}
+message ShuraBattleTimeConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required int32 beginTime = 4;
+  required int32 durationTime = 5;
+  required string param = 6;
+}
+message ShuraBattleFieldConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string param = 3;
+  optional string notice = 4;
+}
+message ShuraBattleSettlementConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 minScore = 3;
+  required string reward = 4;
+}
+enum JoinSate {
+  normal = 1;
+  failed = 2;
+  notJoin = 3;
+}
+enum JoinRewardState {
+  notReach = 1;
+  canGet = 2;
+  Receive = 3;
+}
+enum TeamSyncType {
+  Kicked = 1;
+  Dissolve = 2;
+  Change = 3;
+  Control = 4;
+  PositionChange = 5;
+}
+enum InnerTeamSyncType {
+  Join = 1;
+  Leave = 2;
+}
+message ShuraBttleTeamBaseInfo {
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  repeated PlayerCharacterImageMsg playerImageData = 3;
+  optional string fightValue = 4;
+  optional int32 zoneId = 5;
+  optional int64 captainId = 6;
+}
+message ShuraBattlePositionTemp {
+  required int32 x = 1;
+  required int32 y = 2;
+  required int32 dirX = 3;
+  required int32 dirY = 4;
+  required int64 time = 5;
+  optional bool birth = 6;
+}
+message ShuraBattleSimpleTeamTemp {
+  required int64 teamId = 1;
+  required ShuraBattlePositionTemp position = 2;
+}
+message ShuraBattleSyncMsg {
+  repeated ShuraBattleSimpleTeamTemp teams = 1;
+}
+message ShuraBattleDoBattleNotify{
+  required BattleRecordMsg allBattleRecord = 1;
+  optional ShuraBttleInnerTeamInfo attackTeam = 2;
+  optional ShuraBttleInnerTeamInfo defendTeam = 3;
+  optional bool auto = 4;
+}
+message ShuraBattleTeamSync {
+  optional int32 type = 1;
+  optional int64 teamId = 2;
+  optional int64 controlPlayerId = 3;
+  optional string teamName = 4;
+  repeated ShuraBattlePositionIndexMsg datas = 5;
+}
+message ShuraBattleInnerTeamSync {
+  optional int32 type = 1;
+  optional int32 floor = 2;
+  optional ShuraBttleInnerTeamInfo newTeam = 3;
+  optional int64 removeTeamId = 4;
+}
+message ShuraBattleCommonReq{
+  required int32 activityId = 1;
+}
+message EnterShuraBattleMainResp {
+  optional int32 ret = 1;
+  optional int32 zoneId = 2;
+  optional bool suppressed = 3;
+  optional int32 promotionTimeId = 4;
+  repeated ShuraBattleMatchMsg allGroupInfo = 5;
+  optional ShuraBttleRewardTeamInfo teamData = 6;
+  optional bool canWorship = 7;
+  repeated int64 applyTeamIdList = 8;
+  optional int32 applyRank = 9;
+  repeated int64 teamServerIds = 10;
+  optional int64 myTeamId = 11;
+  optional int32 sessionNum = 12;
+  optional int32 breakOutRank = 13;
+  optional int32 gameFormatId = 14;
+  optional int32 breakOutScore = 16;
+  repeated string params = 20;
+}
+message ShuraBattleMatchMsg {
+  required int32 id = 1;
+  required int32 minLv = 2;
+  required int32 maxLv = 3;
+  optional int32 format = 4;
+}
+message getRewardTeamDataReq {
+  required int32 activityId = 1;
+  required int32 zoneId = 2;
+}
+message getRewardTeamDataResp {
+  required int32 ret = 1;
+  optional ShuraBttleRewardTeamInfo teamData = 2;
+}
+message ShuraBttleRewardTeamInfo {
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  repeated PlayerCharacterImageMsg memberPlayerData = 3;
+  optional int64 captainId = 4;
+}
+message ShuraBattleWorshipResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+  optional ShuraBattleWorshipShowMsg playerShowData = 3;
+}
+message ShuraBattleWorshipShowMsg{
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional int64 time = 9;
+  optional int32 rank = 10;
+  optional int32 headIcon = 11;
+  optional string wxHeadUrl = 12;
+  optional PlayerHeadDataMsg headInfo = 13;
+  repeated int32 petSoulShapeList = 14;
+  optional int32 titleId = 15;
+  repeated int32 petLinkageId = 16;
+  repeated int32 spiritLinkageId = 17;
+}
+message EnterShuraBattlefieldResp {
+  required int32 ret = 1;
+  optional ShuraBttleInnerTeamInfo myTeam = 2;
+  repeated ShuraBttleInnerTeamInfo otherTeams = 3;
+  optional int32 highestFloorTeamsNum = 4;
+  optional int32 joinRewardState = 5;
+  optional int32 totalRank = 6;
+  optional int32 lastSettleFloor = 7;
+  repeated string params = 10;
+}
+message ShuraBttleInnerTeamInfo {
+  optional ShuraBttleTeamBaseInfo teamBaseInfo = 1;
+  optional int64 lastBattleTime = 2;
+  optional ShuraBattlePositionTemp posInfo = 3;
+  optional int64 controlPlayerId = 4;
+  optional int32 floor = 5;
+  optional int32 defeatedNum = 6;
+  optional int32 reviveNum = 7;
+  optional int32 rank = 8;
+  optional int64 floorChangeProtectTime = 9;
+}
+message ShuraBattleFightReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message ShuraBattleFightResp {
+  required int32 ret = 1;
+}
+message ShuraBattleTeamDetailReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message ShuraBattleTeamDetailResp {
+  required int32 ret = 1;
+  optional ShuraBttleTeamBaseInfo teamInfo = 2;
+}
+message ShuraBattleTeamDetailInfo {
+  optional ShuraBttleTeamBaseInfo teamBaseInfo = 1;
+  optional int32 floor = 2;
+}
+message GetJoinRewardReq {
+  required int32 activityId = 1;
+  optional int32 timeId = 2;
+}
+message GetJoinRewardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+message ShuraBattleMoveReq {
+  required int32 activityId = 1;
+  required ShuraBattlePositionTemp position = 2;
+}
+message ShuraBattleMoveResp {
+  optional int32 ret = 1;
+  optional ShuraBattlePositionTemp position = 2;
+}
+message GetShuraBattleGroupTeamDatasReq {
+  required int32 activityId = 1;
+  optional int32 groupId = 2;
+}
+message GetShuraBattleGroupTeamDatasResp {
+  required int32 ret = 1;
+  optional int32 groupNums = 2;
+  repeated ShuraBattleGroupTeamInfo teamList = 3;
+  optional int32 groupId = 4;
+}
+message ShuraBattleGroupTeamInfo {
+  optional int32 rank = 1;
+  optional PlayerHeadAndNameMsg headInfo = 2;
+  optional string teamName = 3;
+  optional int32 floor = 4;
+  optional int64 time = 5;
+  optional int64 teamId = 6;
+}
+message GetShuraBattleBreakOutScoreReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message GetShuraBattleBreakOutScoreResp {
+  required int32 ret = 1;
+  repeated ShuraBattleBreakOutScoreData datas = 2;
+}
+message ShuraBattleBreakOutScoreData {
+  optional int32 stageId = 1;
+  optional int32 score = 2;
+}
+message GetShuraBattleReportReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+  optional int32 zoneId = 3;
+}
+message GetShuraBattleReportResp {
+  required int32 ret = 1;
+  repeated ShuraBattleReportData dataList = 2;
+  repeated PlayerHeadAndNameMsg myTeamHeadInfos = 3;
+}
+message ShuraBattleReportData {
+  optional ShuraBattleReportTeamInfo team1 = 1;
+  optional ShuraBattleReportTeamInfo team2 = 2;
+  optional int32 floor = 3;
+  optional int64 winnerId = 4;
+  optional int64 timeId = 5;
+  optional int64 battleId = 6;
+}
+message ShuraBattleReportTeamInfo  {
+  repeated PlayerHeadAndNameMsg headInfos = 1;
+  optional int64 teamId = 2;
+  optional string teamName = 3;
+  optional string fightValue = 4;
+  optional int64 captainId = 5;
+}
+message GetShuraBattlePositionReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message GetShuraBattlePositionResp {
+  required int32 ret = 1;
+  optional ShuraBattlePositionData data = 2;
+}
+message ShuraBattlePositionData {
+  repeated ShuraBattleSinglePositionData datas = 2;
+  optional int64 controlPlayerId = 3;
+  optional int64 captainId = 4;
+  optional string teamName = 5;
+  optional int32 zoneId = 6;
+  optional int64 teamId = 7;
+}
+message ShuraBattleSinglePositionData {
+  optional int32 index = 1;
+  optional PlayerCharacterImageMsg playerImageData = 2;
+}
+message SetShuraBattlePositionIndexReq {
+  required int32 activityId = 1;
+  repeated ShuraBattlePositionIndexMsg datas = 3;
+}
+message SetShuraBattlePositionIndexResp {
+  optional int32 ret = 1;
+}
+message ShuraBattlePositionIndexMsg {
+  optional int64 playerId = 1;
+  optional int32 index = 2;
+}
+message SetShuraBattleControlReq {
+  required int32 activityId = 1;
+  required int64 playerId = 3;
+}
+message SetShuraBattleControlResp {
+  required int32 ret = 1;
+}
+message ShuraBattleCreateTeamReq {
+  required int32 activityId = 1;
+  required string teamName = 2;
+}
+message ShuraBattleCreateTeamRsp {
+  required int32 ret = 1;
+  optional ShuraBattlePositionData data = 2;
+}
+message ShuraBattleKickOutTeamReq {
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+}
+message ShuraBattleKickOutTeamRsp {
+  required int32 ret = 1;
+  optional ShuraBattlePositionData data = 2;
+}
+message ShuraBattleGetTeamListReq {
+  required int32 activityId = 1;
+  required int32 page = 2;
+}
+message ShuraBattleGetTeamListResp {
+  required int32 ret = 1;
+  repeated ShuraBattleOrganizeTeamInfo teamList = 2;
+}
+message ShuraBattleOrganizeTeamInfo {
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  optional int64 serverId = 3;
+  optional string fightValue = 4;
+  optional int32 zoneId = 5;
+  optional string captainName = 6;
+  optional int32 playerCount = 7;
+}
+message ShuraBattleSearchTeamReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message ShuraBattleSearchTeamResp {
+  required int32 ret = 1;
+  optional ShuraBattleOrganizeTeamInfo teamInfo = 2;
+}
+message ShuraBattleGetApplyListResp {
+  required int32 ret = 1;
+  repeated ShuraBattlePlayerApplyData applyList = 2;
+}
+message ShuraBattlePlayerApplyData {
+  optional PlayerHeadAndFightMsg playerData = 1;
+  optional int64 applyTime = 2;
+}
+message ShuraBattleApplyJoinTeamAgreeReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional bool agree = 3;
+}
+message ShuraBattleApplyJoinTeamAgreeRsp {
+  required int32 ret = 1;
+  optional bool agree = 2;
+  optional ShuraBattlePositionData positionaData = 3;
+}
+message ShuraBattleQuitTeamRsp {
+  required int32 ret = 1;
+  optional int64 quitTime = 2;
+}
+message ShuraBattleInviteDataResp {
+  required int32 ret = 1;
+  optional int64 unionNextInviteTime = 2;
+  optional int64 activityNextInviteTime = 3;
+}
+message ShuraBattleSendInviteReq {
+  required int32 activityId = 1;
+  optional int32 type = 2;
+  optional int64 playerId = 3;
+}
+message ShuraBattleSendInviteResp {
+  required int32 ret = 1;
+}
+message ShuraBattleGetInviteListResp {
+  required int32 ret = 1;
+  repeated ShuraBattleOrganizeTeamInfo teamList = 2;
+}
+message ShuraBattleAgreeInviteReq  {
+  required int32 activityId = 1;
+  optional int64 teamId = 2;
+  required bool agree = 3;
+}
+message ShuraBattleAgreeInviteResp  {
+  required int32 ret = 1;
+  optional ShuraBattlePositionData data = 2;
+}
+message ShuraBattleRankTeamEntity {
+  optional ShuraBttleTeamBaseInfo teamData = 1;
+  optional int32 rank = 2;
+  optional int64 score = 3;
+}
+message ShuraBattleRankTeamList{
+  repeated ShuraBattleRankTeamEntity dataList = 1;
+}
+message ShuraBattleGetScoreDetailReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message ShuraBattleGetScoreDetailResp {
+  required int32 ret = 1;
+  repeated ShuraBattleScoreDetailData dataList = 2;
+}
+message ShuraBattleScoreDetailData {
+  optional int32 round = 1;
+  optional int32 floor = 2;
+  optional int32 score =3;
+}
+message ShuraBattleGetGuessDataReq {
+  required int32 activityId = 1;
+}
+message ShuraBattleGetGuessDataResp {
+  required int32 ret = 1;
+  repeated ShuraBattleGuessTeamData optionalList = 2;
+  repeated int64 selectedList = 3;
+  repeated int64 resultList = 4;
+  optional bool isGetReward = 5;
+  optional int32 rewardParam = 6;
+  repeated int32 rewardRankAchi = 7;
+}
+message ShuraBattleGuessTeamData {
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  optional int32 selectedCount = 3;
+  optional int32 headIcon = 4;
+  optional string wxHeadUrl = 5;
+  optional int32 equipHeadIconFrame = 6;
+}
+message ShuraBattleSetGuessSelectReq {
+  required int32 activityId = 1;
+  repeated int64 teamId = 2;
+}
+message ShuraBattleSetGuessSelectResp {
+  required int32 ret = 1;
+}
+message ShuraBattleGetGuessRewardReq {
+  required int32 activityId = 1;
+}
+message ShuraBattleGetGuessRewardRsp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+}
+message ShuraBattleGetBattleMainReq {
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+}
+message ShuraPlayerBattleMainInfoResp {
+  required int32 ret = 1;
+  optional PlayerDetailDataMsg playerDetail = 2;
+  optional bool hasQualifying = 3;
+}
+message ShuraBattleSuppressedRespMsg {
+    required int32 ret = 1;
+    optional PlayerSuppressAttribute suppressAttr = 2;
+}
+message ShuraBattleTeamBattleEndTimeSync {
+  optional int32 floor = 1;
+  repeated ShuraTeamBattleEndTimeMsg battleTimeList = 2;
+}
+message ShuraTeamBattleEndTimeMsg {
+  optional int64 teamId = 1;
+  optional int64 lastBattleTime = 2;
+}
+message ShuraBattleFloorChangeSyncMsg {
+  optional int64 floor = 1;
+}
+message ShuraBattleCurFieldRankInfoResp {
+  required int32 ret = 1;
+  optional int32 floor = 2;
+  optional int32 totalRank = 3;
+  optional int32 floorRank = 4;
+  optional int32 highestFloorTeamsNum = 5;
+  optional int32 defeatedNum = 6;
+  optional int32 reviveNum = 7;
+  optional int32 joinRewardState = 8;
+  optional int32 lastSettleFloor = 9;
+}
+message ShuraBattleSettleSyncMsg {
+  optional int32 stageId = 1;
+  optional int32 totalRank = 2;
+  optional int32 score = 3;
+  repeated ShuraBattleRankDetailTeamInfo rankList = 4;
+}
+message ShuraBattleRankDetailTeamInfo {
+  optional int64 teamId = 1;
+  optional int32 rank = 2;
+  optional string teamName = 3;
+  optional int32 floor = 4;
+  optional int64 score = 5;
+  optional int64 time = 6;
+  optional int64 serverId = 7;
+  optional string fightValue = 8;
+  repeated PlayerCharacterImageMsg playerImageData = 9;
+}
+message GetShuraBattleAllFloorNumsInfoResp {
+  required int32 ret = 1;
+  repeated ShuraBattleFloorNumsInfo datas = 2;
+}
+message ShuraBattleFloorNumsInfo {
+  optional int32 floor = 1;
+  optional int32 teamNums = 2;
+  optional bool isSettle = 3;
+}
+message ShuraBattleGuessPlayersReqMsg {
+  required int32 activityId = 1;
+  optional int32 param = 2;
+}
+message ShuraBattleGuessPlayersRespMsg {
+  required int32 ret = 1;
+  optional int32 param = 2;
+  repeated ShuraBattleGuessPlayerInfo playerList = 3;
+}
+message ShuraBattleGuessPlayerInfo {
+  optional int64 playerId = 1;
+  optional int32 serverId = 2;
+  optional string name = 3;
+}
+message ShuraBattleRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message ShuraBattleRecordBackPlayReq {
+  required int32 activityId = 1;
+  required int64 battleId = 2;
+}
+message ShuraBattleRecordBackPlayResp {
+  required int32 ret = 1;
+  optional BattleRecordMsg allBattleRecord = 2;
+}
+message ShuraBattleGetTeamPositionReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message ShuraBattleGetTeamPositionResp {
+  required int32 ret = 1;
+  repeated ShuraBattlePositionIndexMsg datas = 2;
+}

@@ -1,0 +1,14 @@
+package com.yq.msg.CityMsg;
+enum GodPetBornPb{
+  S_GOD_PET_BORN_ENTER = 218301;
+}
+message GodPetBornEnterReq{
+  required int32 activityId = 1;
+}
+message GodPetBornEnterResp{
+  required int32 ret = 1;
+  repeated int32 openedActivityTypeList = 2;
+  optional int64 score = 3;
+  optional int32 rank = 4;
+  optional bool canReceiveRankReward = 5;
+}

@@ -1,0 +1,63 @@
+package com.yq.msg.CityMsg;
+import "ActivityBase";
+message SystemSeasonRankConfigReq {
+    required int32 systemId = 1;
+    optional int32 type = 2;
+    optional int32 round = 3;
+    optional int32 model = 4;
+}
+message SystemSeasonRankConfigResp {
+    optional int32 ret = 1;
+    repeated SystemSeasonRankConfig configList = 2;
+}
+message SystemSeasonRankConfig {
+    optional int32 systemId = 1;
+    optional int32 id = 2;
+    optional int32 type = 3;
+    optional string rewards = 4;
+    optional string masterRewards = 5;
+    optional string params = 6;
+  }
+message SystemSeasonRankBattleRewardReq {
+    required int32 systemId = 1;
+}
+message SystemSeasonRankBattleRewardResp {
+    required int32 ret = 1;
+    repeated ActivityConditionConfig configList = 2;
+}
+message BackendGameTaskConfig {
+    optional int32 systemId = 1;
+    optional int32 id = 2;
+    optional string name = 3;
+    optional string desc = 4;
+    optional string icon = 5;
+    optional int32 type = 6;
+    optional int32 littleType = 7;
+    optional int32 sort = 8;
+    optional int32 preTaskId = 9;
+    optional int32 nextTaskId = 10;
+    optional string jumpId = 11;
+    optional int32 completeType = 12;
+    optional string completeParams = 13;
+    optional string rewards = 14;
+    optional string refresh = 15;
+    optional string actionParams = 16;
+    optional int32 bigType = 17;
+}
+message BackendGameTaskConfigReq {
+    required int32 systemId = 1;
+}
+message BackendGameTaskConfigResp {
+    required int32 ret = 1;
+    repeated BackendGameTaskConfig configList = 2;
+}
+message BlockedCombineSync {
+    repeated BlockedCombineData combineList = 1;
+}
+message BlockedCombineData {
+    required int32 combineId = 1;
+    required int32 num = 2;
+}
+message BackendConfigRefreshMsg {
+    optional int32 type = 1;
+}

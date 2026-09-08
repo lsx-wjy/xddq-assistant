@@ -1,0 +1,90 @@
+package com.yq.msg.CityMsg;
+enum GoldSnakePb {
+  S_GOLD_SNAKE_ENTER = 231201;
+  S_GOLD_SNAKE_END_BATTLE = 231202;
+  S_GOLD_SNAKE_BUFF_SYNC = 231203;
+}
+message GoldSnakeEnterReq {
+  required int32 activityId = 1;
+}
+message GoldSnakeEnterRsp {
+  required int32 ret = 1;
+  optional int32 passedLevel = 2;
+  repeated int32 buffList = 3;
+}
+message GoldSnakeEndBattleReq {
+  required int32 activityId = 1;
+  required int32 level = 2;
+  required int32 isWin = 3;
+  repeated GoldSnakeBuffData buffDataList = 4;
+}
+message GoldSnakeBuffData {
+    required int32 id = 1;
+    required int32 type = 2;
+    required int32 num = 3;
+}
+message GoldSnakeEndBattleRsp {
+  required int32 ret = 1;
+  optional int32 passedLevel = 2;
+}
+message GoldSnakeActivityConfigMsg {
+  repeated GoldSnakeBuffConfigMsg goldSnakeBuffConfigMsgList = 1;
+  repeated GoldSnakeConfigMsg goldSnakeConfigMsgList = 2;
+  repeated GoldSnakeGourdConfigMsg goldSnakeGourdConfigMsgList = 3;
+  repeated GoldSnakeStageConfigMsg goldSnakeStageConfigMsgList = 4;
+}
+message GoldSnakeBuffConfigMsg {
+  optional int32 id = 1;
+  optional int32 icon = 2;
+  optional int32 type = 3;
+  optional int32 quality = 4;
+  optional int32 weight = 5;
+  optional int32 limit = 6;
+  optional int32 star = 7;
+  optional int32 front = 8;
+  optional int32 gourd = 9;
+  optional string param = 10;
+  optional string paramDesc = 11;
+  optional string desc = 12;
+  optional int32 littleType = 13;
+  optional string variable = 14;
+  optional string name = 15;
+}
+message GoldSnakeConfigMsg {
+  optional int32 snakeBody = 1;
+  optional int32 snake = 2;
+  optional int32 nature = 3;
+  optional int32 length = 4;
+  optional string skill = 5;
+  optional int32 box = 6;
+}
+message GoldSnakeGourdConfigMsg {
+  optional int32 id = 1;
+  optional string desc = 2;
+  optional string param = 3;
+  optional int32 nature = 4;
+  optional int32 attack = 5;
+  optional int32 interval = 6;
+  optional int32 coldTime = 7;
+  optional int32 range = 8;
+  optional int32 critical = 9;
+  optional string name = 10;
+}
+message GoldSnakeStageConfigMsg {
+  optional int32 id = 1;
+  optional string snakeId = 2;
+  optional string bonus = 3;
+  optional string bonusReward = 4;
+  optional int32 unlock = 5;
+  optional int32 day = 6;
+  optional string mad = 7;
+  optional string name = 8;
+}
+message GoldSnakeBuffReq {
+  required int32 activityId = 1;
+  repeated int32 buffList = 2;
+}
+message GoldSnakeBuffRsp {
+  required int32 ret = 1;
+  repeated int32 buffList = 2;
+}

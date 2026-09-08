@@ -1,0 +1,248 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "ActivityBase";
+/** 仙趣弹跳 **/
+message BounceActivityConfig {
+  repeated BounceModelConfig bounceModelConfig = 1;
+  repeated BounceMonsterConfig bounceMonsterConfig = 2;
+  repeated BounceMonsterLvConfig bounceMonsterLvConfig = 3;
+  repeated BounceSkillConfig bounceSkillConfig = 4;
+  repeated BounceStageConfig bounceStageConfig = 5;
+  repeated BounceLevelConfig bounceLevelConfig = 6;
+}
+message BounceModelConfig {
+  required int32 id = 1;
+  required string event = 2;
+}
+message BounceMonsterConfig {
+  required int32 id = 1;
+  optional int32 type = 2;
+  required int32 chara = 3;
+  required string name = 4;
+  required string desc = 5;
+  required int32 scale = 6;
+  required int32 isBoss = 7;
+  required int32 attackType = 8;
+  required int32 attack = 9;
+  required int32 hpEmp = 10;
+  required int32 shield = 11;
+  required int32 specialSkill = 12;
+}
+message BounceMonsterLvConfig {
+  required int32 id = 1;
+  required string hpBase = 2;
+  required int32 exp = 3;
+}
+message BounceSkillConfig {
+  required int32 id = 1;
+  required string name = 2;
+  required string desc = 3;
+  required int32 type = 4;
+  required int32 quality = 5;
+  required int32 specialization = 6;
+  required string param = 7;
+  required string paramType = 8;
+  required int32 limit = 9;
+  required int32 specExp = 10;
+  required int32 weight = 11;
+  required string preSkill = 12;
+  required string preSpec = 13;
+  required string weightAdd = 14;
+  required string descTag = 15;
+}
+message BounceStageConfig {
+  required int32 id = 1;
+  required int32 isBoss = 2;
+  required string modelList = 3;
+  required int32 level = 4;
+}
+message BounceLevelConfig {
+  required int32 id = 1;
+  required string attack = 2;
+  required string hp = 3;
+  required int32 exp = 4;
+}
+message BounceEnterActivityReq{
+  required int32 activityId = 1;
+}
+message BounceEnterActivityResp{
+  required int32 ret = 1;
+  optional int32 stageId = 2;
+  optional int32 dailyFreeBattleNum = 3;
+  optional int32 totalRefreshCount = 4;
+}
+message BounceEnterGameReq {
+  required int32 activityId = 1;
+  optional BounceBoardInfo bounceBoardInfo = 2;
+}
+message BounceEnterGameResp {
+  required int32 ret = 1;
+  optional BouncePlayerInfo playerInfo = 2;
+  optional BounceBoardInfo bounceBoardInfo = 3;
+  repeated BounceItemUseInfo itemUseInfo = 4;
+  optional int32 curScore = 5;
+  optional BounceBattleSettleInfo settleInfo = 6;
+}
+message BounceItemUseInfo {
+  required int32 itemId = 1;
+  required int32 useNum = 2;
+}
+message BouncePlayerInfo {
+  required int32 hp = 1;
+  required int32 lv = 2;
+  required int32 exp = 3;
+  repeated BounceSkillTypeInfo bounceSkillTypeInfo = 4;
+  optional BounceWaitSelectSkillInfo waitSelectSkillInfo = 5;
+  optional int32 reviveTimes = 6;
+  optional int32 shield = 7;
+  optional int32 beatItemNum = 8;
+  optional int32 energy = 9;
+  optional bool isSkill = 10;
+  optional int32 skillNum = 11;
+}
+message BounceWaitSelectSkillInfo{
+  repeated int32 waitSelectSkill = 1;
+  optional int32 refreshCount = 2;
+  optional bool isBox = 3;
+}
+message BounceSkillTypeInfo {
+  required int32 skillType = 1;
+  repeated BounceSkillInfo skillInfo = 2;
+}
+message BounceSkillInfo {
+  required int32 skillId = 1;
+  required int32 skillLv = 2;
+}
+message BounceBattleReq {
+  required int32 activityId = 1;
+}
+message BounceBattleResp {
+  required int32 ret = 1;
+  optional int32 randomSeed = 2;
+}
+message BounceBattleResultReq {
+  required int32 activityId = 1;
+  optional BounceBoardInfo bounceBoardInfo = 2;
+  required string angle = 3;
+  repeated BounceSkillDamageInfo skillDamageInfo = 4;
+  optional int32 hp = 5;
+  optional int32 shield = 6;
+  optional string version = 7;
+  repeated int32 levels = 8;
+}
+message BounceBattleResultResp {
+  required int32 ret = 1;
+  optional BouncePlayerInfo playerInfo = 2;
+  optional BounceBoardInfo bounceBoardInfo = 3;
+  repeated BounceRoundEndMonsterSkillInfo roundEndMonsterSkill = 4;
+  optional int32 curScore = 5;
+  optional BounceBattleSettleInfo settleInfo = 6;
+}
+message BounceRoundEndMonsterSkillInfo{
+  optional int32 monsterId = 1;
+  optional string skillId = 2;
+  repeated BounceRoundEndMonsterSkillValue target = 3;
+}
+message BounceRoundEndMonsterSkillValue{
+  optional int32 type = 1;
+  optional int32 monsterId = 2;
+  optional string value = 3;
+}
+message BounceBattleEndReq{
+  required int32 activityId = 1;
+  required bool isRevive = 2;
+}
+message BounceBattleEndResp{
+  required int32 ret = 1;
+  optional BounceBattleSettleInfo settleInfo = 2;
+  optional BouncePlayerInfo playerInfo = 3;
+  optional BounceBoardInfo bounceBoardInfo = 4;
+}
+message BounceBattleSettleInfo{
+  optional int64 score = 1;
+  optional int64 diffScore = 2;
+  optional int32 rank = 3;
+}
+message BounceSelectSkillReq {
+  required int32 activityId = 1;
+  required int32 index = 2;
+}
+message BounceSelectSkillResp {
+  required int32 ret = 1;
+  optional BouncePlayerInfo playerInfo = 2;
+}
+message BounceRefreshSkillReq {
+  required int32 activityId = 1;
+}
+message BounceRefreshSkillResp {
+  required int32 ret = 1;
+  optional BounceWaitSelectSkillInfo waitSelectSkillInfo = 2;
+}
+message BounceUseItemReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  optional int32 posX = 3;
+  optional int32 posY = 4;
+}
+message BounceUseItemResp {
+  required int32 ret = 1;
+  optional BouncePlayerInfo playerInfo = 2;
+  optional BounceBoardInfo bounceBoardInfo = 3;
+  repeated BounceRoundEndMonsterSkillValue target = 4;
+  optional BounceItemUseInfo itemUseInfo = 5;
+  optional int32 curScore = 6;
+}
+message BounceBoardInfo{
+  optional int32 stageId = 1;
+  optional int32 roundId = 2;
+  repeated BounceBoardEnemyInfo enemies = 3;
+  optional int32 monsterIdCounter = 4;
+  optional int32 modelId = 5;
+}
+message BounceBoardEnemyInfo{
+  required int32 id = 1;
+  required int32 configId = 2;
+  optional int32 hp = 3;
+  optional int32 shield = 4;
+  optional int32 posX = 5;
+  optional int32 posY = 6;
+  repeated BounceBuffInfo buffInfo = 7;
+  repeated BounceSkillCdInfo skillCdInfo = 8;
+}
+message BounceBuffInfo{
+  required int32 buffId = 1;
+  optional int32 buffLv = 2;
+  optional int32 endRound = 3;
+}
+message BounceSkillCdInfo{
+  required int32 skillId = 1;
+  optional int32 lastRound = 2;
+}
+message BounceSkillDamageInfo{
+  required int32 skillId = 1;
+  optional string damage = 2;
+}
+message BounceSyncData{
+  optional int32 totalRefreshCount = 1;
+  optional int32 dailyFreeBattleNum = 2;
+  optional int32 beatItemNum = 3;
+  optional int32 energy = 4;
+  optional bool isSkill = 5;
+  optional int32 hp = 6;
+  optional int32 skillNum = 7;
+}
+message BounceSkillDamageInfoReq{
+  required int32 activityId = 1;
+}
+message BounceSkillDamageInfoResp{
+  required int32 ret = 1;
+  repeated BounceSkillDamageInfo skillDamageInfo = 2;
+}
+message BounceUseSkillReq{
+  required int32 activityId = 1;
+}
+message BounceUseSkillResp{
+  required int32 ret = 1;
+  optional bool isSkill = 2;
+  optional int32 energy = 3;
+}

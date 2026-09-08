@@ -1,0 +1,340 @@
+package com.yq.msg.CityMsg;
+import "Union";
+import "WatchPlayer";
+import "Battle";
+import "Common";
+/* ==================== 基础配置 ======================== */
+/* ===================================================== */
+message GroupPurchaseBaseConfig {
+  optional int32 id = 1;
+  optional string param = 2;
+  optional string discount = 3;
+}
+message GroupPurchaseConfigSync {
+  required int32 activityId = 1;
+  repeated GroupPurchaseBaseConfig baseConfig = 2;
+  repeated CommonTopicConfig topicConfig = 3;
+}
+/* ==================== 实体包装 ======================== */
+/* ===================================================== */
+message GroupPurchaseMemberMsg {
+  optional PlayerHeadDataMsg headData = 1;
+  optional bool leader = 2;
+  optional bool hasBuy = 3;
+  optional int64 joinTime = 4;
+  repeated GroupPurchaseRewardInfo rewardInfo = 5;
+  optional string name = 6;
+}
+message GroupPurchaseRewardInfo {
+  optional int32 pos = 1;
+  optional int64 receiveTime = 2;
+}
+message GroupPurchaseOrderMsg {
+  optional string orderId = 1;
+  repeated GroupPurchaseMemberMsg member = 2;
+  optional int64 time = 3;
+  optional int32 mallId = 4;
+  optional int32 boughtCount = 5;
+  optional string teamId = 6;
+  optional bool autoJoin = 7;
+  optional bool hasApplyJoin = 8;
+}
+message GroupPurchaseSimpleMsg {
+  optional string orderId = 1;
+  optional int32 joinMember = 2;
+  optional int32 maxJoinMember = 3;
+}
+message GroupPurchaseInviteRecord {
+  optional PlayerHeadAndNameMsg headData = 1;
+  optional string orderId = 2;
+  optional int64 time = 3;
+  optional int32 mallId = 4;
+  optional int32 maxJoinMember = 5;
+  optional int32 joinMember = 6;
+  optional int64 inviteTime = 7;
+}
+message GroupPurchaseOrderLog {
+  optional string orderId = 1;
+  optional int64 time = 2;
+  optional int32 mallId = 3;
+  optional int32 maxJoinMember = 4;
+  optional int32 joinMember = 5;
+  optional int64 buyTime = 6;
+  optional int32 receive = 7;
+  optional int32 stat = 8;
+}
+message GroupPurchaseApplyInfo{
+    optional PlayerHeadDataMsg headData = 1;
+    optional string  fightVal = 2;
+    optional int64 applyTime = 3;
+    optional string nickName = 4;
+}
+message GroupPurchaseKickVoteInfo{
+    optional int64 kickPlayerId = 1;
+    optional int64 voteEndTime = 2;
+}
+message GroupPurchaseApplyLeaderInfo{
+    optional int64 applyPlayerId = 1;
+    optional int64 applyEndTime = 2;
+}
+message GroupPurchaseCdTimeInfo{
+  optional int64 playerId = 1;
+  optional int64 time = 2;
+}
+message GroupPurchaseMemberInfo{
+    optional PlayerHeadDataMsg headData = 1;
+    optional string nickName = 2;
+    optional bool isLeader = 3;
+    optional int64 joinTime = 4;
+    optional bool hasBuy = 5;
+}
+message GroupPurchaseTeamInfo{
+  repeated GroupPurchaseMemberInfo memberInfoList = 1;
+  repeated GroupPurchaseKickVoteInfo kickVoteInfoList = 2;
+  optional bool isApplyLeader = 3;
+  optional int64 mallId = 4;
+  optional string teamId = 5;
+  optional bool autoJoin = 6;
+  repeated GroupPurchaseCdTimeInfo kickVoteCdList = 7;
+  optional int64 applyLeaderCd = 8;
+}
+message GroupPurchasePendingEventsMsg{
+    optional int64 mallId = 1;
+    optional int64 endTime = 2;
+    optional GroupPurchaseMemberInfo memberInfo = 3;
+    optional int32 type = 4;
+    optional string orderId = 5;
+}
+message GroupPurchaseEventsRecordMsg{
+    optional int64 mallId = 1;
+    optional int64 time = 2;
+    optional PlayerHeadAndNameMsg memberInfo = 3;
+    optional int32 type = 4;
+    optional string orderId = 5;
+}
+/* ==================== 请求协议 ======================== */
+/* ===================================================== */
+message GroupPurchaseActivityReq {
+  required int32 activityId = 1;
+}
+message GroupPurchaseActivityResp {
+  required int32 ret = 1;
+  repeated GroupPurchaseOrderMsg order = 2;
+  optional int32 activityId = 3;
+  optional int32 pendingEventsNum = 4;
+  repeated int32 noReadLogTypeList = 5;
+  repeated string applyTeamRedList = 6;
+  repeated string applyList = 7;
+  optional bool isJoinNewTeam = 8;
+}
+message GroupPurchaseSendOrderReq {
+  required int32 activityId = 1;
+  optional int32 mallId = 2;
+  optional bool needAudit = 3;
+}
+message GroupPurchaseSendOrderResp {
+  required int32 ret = 1;
+  optional GroupPurchaseOrderMsg order = 2;
+}
+message GroupPurchaseJoinReq {
+  required int32 activityId = 1;
+  optional string orderId = 2;
+  optional int32 mallId = 3;
+  optional bool needAudit = 4;
+}
+message GroupPurchaseJoinResp {
+  required int32 ret = 1;
+  optional GroupPurchaseOrderMsg order = 2;
+  repeated string applyList = 3;
+}
+message GroupPurchaseOrderListReq {
+  required int32 activityId = 1;
+  optional int32 mallId = 2;
+}
+message GroupPurchaseOrderListResp {
+  required int32 ret = 1;
+  repeated GroupPurchaseOrderMsg order = 2;
+}
+message GroupPurchaseExitReq {
+  required int32 activityId = 1;
+  optional string orderId = 2;
+  optional int64 playerId = 3;
+}
+message GroupPurchaseExitResp {
+  required int32 ret = 1;
+  optional GroupPurchaseOrderMsg order = 2;
+}
+message GroupPurchaseGetOrderRewardReq {
+  required int32 activityId = 1;
+  optional string orderId = 2;
+  optional int32 pos = 3;
+}
+message GroupPurchaseGetOrderRewardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional GroupPurchaseOrderMsg order = 3;
+}
+message GroupPurchaseInviteReq {
+  required int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+  optional string orderId = 3;
+  optional int32 type = 4;
+  optional int32 messageType = 5;
+}
+message GroupPurchaseInviteResp {
+  required int32 ret = 1;
+  optional string orderId = 2;
+  optional int32 mallId = 3;
+  optional int32 messageType = 4;
+  optional int32 activityId = 5;
+}
+message GroupPurchaseGetInviteRecordReq {
+  required int32 activityId = 1;
+}
+message GroupPurchaseGetInviteRecordResp {
+  required int32 ret = 1;
+  repeated GroupPurchaseInviteRecord records = 2;
+}
+message GroupPurchaseGetOrderLogReq {
+  required int32 activityId = 1;
+}
+message GroupPurchaseGetOrderLogResp {
+  required int32 ret = 1;
+  repeated GroupPurchaseOrderLog orderLogs = 2;
+}
+message GroupPurchaseGetOrderStatReq {
+    required int32 activityId = 1;
+    optional string orderId = 2;
+}
+message GroupPurchaseGetOrderStatResp {
+    required int32 ret = 1;
+    optional int32 isValid = 2;
+}
+message GroupPurchaseClearInviteRecordReq {
+    required int32 activityId = 1;
+}
+message GroupPurchaseClearInviteRecordResp {
+    required int32 ret = 1;
+}
+message GroupPurchaseApplyListReq {
+    required int32 activityId = 1;
+    required string orderId = 2;
+}
+message GroupPurchaseApplyListResp {
+    required int32 ret = 1;
+    repeated GroupPurchaseApplyInfo applyInfo = 2;
+    optional bool joinApplySwitchOpen = 3;
+}
+message GroupPurchaseGetTeamInfoReq {
+    required int32 activityId = 1;
+    required string orderId = 2;
+}
+message GroupPurchaseGetTeamInfoResp {
+    required int32 ret = 1;
+    optional GroupPurchaseTeamInfo teamInfo = 2;
+}
+message GroupPurchaseDealWithTeamEventReq {
+    required int32 activityId = 1;
+    required string orderId = 2;
+    required int32 type = 3;
+    required bool agree = 4;
+    optional string param = 5;
+}
+message GroupPurchaseDealWithTeamEventResp {
+    required int32 ret = 1;
+    optional GroupPurchaseTeamInfo teamInfo = 2;
+}
+message GroupPurchaseDealWithApplyReq{
+    required int32 activityId = 1;
+    required string orderId = 2;
+    optional int64 dealWithPlayerId = 3;
+    required int32 dealWithType = 4;
+}
+message GroupPurchaseDealWithApplyResp{
+    required int32 ret = 1;
+}
+message GroupPurchaseUpdateApplySwitchReq{
+    required int32 activityId = 1;
+    required bool switchOpen = 2;
+    required string orderId = 3;
+}
+message GroupPurchaseUpdateApplySwitchResp{
+    required int32 ret = 1;
+}
+message GroupPurchaseExitActivityReq{
+    required int32 activityId = 1;
+}
+message GroupPurchaseExitActivityResp{
+    required int32 ret = 1;
+}
+message GroupPurchaseGetPendingEventsReq{
+    required int32 activityId = 1;
+}
+message GroupPurchaseGetPendingEventsResp{
+    required int32 ret = 1;
+    repeated GroupPurchasePendingEventsMsg msgList = 2;
+}
+message GroupPurchaseGetTeamEventsRecordReq{
+    required int32 activityId = 1;
+    required int32 type = 2;
+}
+message GroupPurchaseGetTeamEventsRecordResp{
+    required int32 ret = 1;
+    repeated GroupPurchaseEventsRecordMsg msgList = 2;
+}
+message GroupPurchaseSearchTeamReq{
+    required int32 activityId = 1;
+    required string teamId = 2;
+}
+message GroupPurchaseSearchTeamResp{
+    required int32 ret = 1;
+    optional GroupPurchaseOrderMsg orderMsg = 2;
+}
+message GroupPurchaseCancelApplyReq{
+  required int32 activityId = 1;
+  required string orderId = 2;
+}
+message GroupPurchaseCancelApplyResp{
+  required int32 ret = 1;
+  repeated string applyList = 2;
+}
+message GroupPurchaseTopicReq {
+  required int32 activityId = 1;
+  required int32 topicId = 2;
+}
+message GroupPurchaseTopicRsp {
+  required int32 ret = 1;
+  optional int32 topicId = 2;
+}
+message GroupPurchaseActivityPlayerDataSync {
+  optional int32 topicId = 1;
+  optional bool lockTopic = 2;
+}
+/* ==================== 同步协议 ======================== */
+/* ===================================================== */
+message GroupPurchaseApplyListSync {
+    repeated string applyList = 1;
+}
+message GroupPurchaseSync {
+  repeated GroupPurchaseOrderMsg orderMsg = 1;
+}
+message GroupPurchaseOrderStatSync {
+  repeated GroupPurchaseSimpleMsg orderStat = 1;
+  repeated GroupPurchaseOrderMsg orderMsg = 2;
+  repeated string applyList = 3;
+}
+message GroupPurchasePendingEventsNumSync {
+    optional int32 pendingEventsNum = 1;
+}
+message GroupPurchaseAnyLogNoReadSync{
+  repeated int32 noReadLogTypes = 1;
+}
+message GroupPurchaseApplyTeamRedListSync{
+  optional string applyRedOrderId = 1;
+}
+message GroupPurchaseClickOwnOrderReq{
+  optional int32 activityId = 1;
+}
+message GroupPurchaseClickOwnOrderResp{
+  optional int32 ret = 1;
+}

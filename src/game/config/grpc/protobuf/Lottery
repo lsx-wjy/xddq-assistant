@@ -1,0 +1,118 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum LotteryTicketPb {
+  LotteryTicket_Enter = 233601;
+  LotteryTicket_ChooseCode = 233602;
+  LotteryTicket_GetReward = 233603;
+  LotteryTicket_OpenReward = 233604;
+  LotteryTicket_RewardList = 233605;
+  LotteryTicket_JoinPlayerList = 233607;
+  LotteryTicket_GetHistory = 233608;
+  LotteryTicket_Exit = 233609;
+  LotteryTicket_HeartBeat = 233610;
+  LotteryTicket_UseTicket = 233611;
+}
+enum LotteryTicketType {
+  LotteryTicketType_Base = 1;
+  LotteryTicketType_Pay = 2;
+}
+message LotteryTicketActivityConfig {
+  repeated LotteryTicketRewardConfig rewardConfig = 1;
+  repeated LotteryTicketStageTimeConfig stageTimeConfig = 2;
+}
+message LotteryTicketRewardConfig {
+  optional int32 lotteryType = 1;
+  optional int32 lotteryLevel = 2;
+  optional string reward = 3;
+}
+message LotteryTicketStageTimeConfig {
+  optional int32 stage = 1;
+  optional int32 beginDays = 2;
+  optional int32 beginTime = 3;
+  optional int32 durationTime = 4;
+}
+message LotteryTicketTypeData {
+  optional int32 type = 1;
+  optional string code = 2;
+  optional bool buy = 3;
+  optional string rewardCode = 4;
+  optional bool reward = 5;
+  repeated string joinPlayer = 6;
+  optional bool useTicket = 7;
+}
+message LotteryTicketHistoryData {
+  optional int32 session = 1;
+  optional string code = 2;
+  optional int32 type = 3;
+}
+message LotteryTicketPlayerData {
+  optional int32 level = 1;
+  optional int64 playerId = 2;
+  optional string playerName = 3;
+  optional int64 serverId = 4;
+}
+message LotteryTicketEnterReq {
+  required int32 activityId = 1;
+}
+message LotteryTicketEnterResp {
+  required int32 ret = 1;
+  optional int32 activityId = 2;
+  optional int32 session = 3;
+  repeated LotteryTicketTypeData typeData = 4;
+}
+message LotteryTicketChooseCodeReq {
+  optional int32 activityId = 1;
+  optional int32 type = 2;
+  optional string code = 3;
+}
+message LotteryTicketChooseCodeResp {
+  required int32 ret = 1;
+  optional int32 type = 2;
+  optional string code = 3;
+}
+message LotteryTicketGetRewardReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message LotteryTicketGetRewardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message LotteryTicketOpenRewardSync {
+  optional int32 type = 1;
+  optional string code = 2;
+}
+message LotteryTicketRewardListReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message LotteryTicketRewardListResp {
+  required int32 ret = 1;
+  optional int32 type = 2;
+  repeated LotteryTicketPlayerData rewardPlayerData = 3;
+}
+message LotteryTicketJoinPlayerListSync {
+  optional int32 type = 1;
+  optional string joinPlayer = 2;
+}
+message LotteryTicketGetHistoryReq {
+  required int32 activityId = 1;
+}
+message LotteryTicketGetHistoryResp {
+  required int32 ret = 1;
+  repeated LotteryTicketHistoryData historyData = 2;
+}
+message LotteryTicketExitReq {
+  required int32 activityId = 1;
+}
+message LotteryTicketHeartBeatReq {
+  required int32 activityId = 1;
+}
+message LotteryTicketUseTicketReq {
+  required int32 activityId = 1;
+  optional int32 type = 2;
+}
+message LotteryTicketUseTicketResp {
+  required int32 ret = 1;
+  optional int32 type = 2;
+}

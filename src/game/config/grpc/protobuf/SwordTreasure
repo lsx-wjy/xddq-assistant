@@ -1,0 +1,63 @@
+package com.yq.msg.CityMsg;
+message SwordTreasureConfigsSync{
+    repeated SwordTreasureDrawConfig drawConfig = 1;
+}
+message SwordTreasureDrawConfig{
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string reward = 3;
+  required int32 weight = 4;
+  required int32 lv = 5;
+  required int32 isNotice = 6;
+}
+message SwordTreasureDrawReq{
+  required int32 activityId = 1;
+  required int32 times = 2;
+}
+message SwordTreasureDrawResp{
+  required int32 ret = 1;
+  repeated SwordTreasureDrawResult drawResult= 2;
+}
+message SwordTreasureDrawResult {
+  required int32 id = 1;
+  optional string reward = 2;
+}
+message SwordTreasureViewReq{
+  required int32 activityId = 1;
+}
+message SwordTreasureViewResp{
+  required int32 ret = 1;
+  optional SwordTreasureActivityData activityData = 2;
+  optional SwordTreasureNoticeMsg drawNoticeMsg = 3;
+}
+message SwordTreasureActivityData{
+  optional int32 luckyValue = 1;
+  repeated SwordTreasureRewardData rewardInfo = 2;
+  optional int32 rareIndex = 3;
+  optional int32 point = 4;
+  optional int32 todayPoint = 5;
+  repeated SwordTreasureRewardSelectData selectRareRewardItem = 6;
+}
+message SwordTreasureRewardSelectData {
+  required int32 rareIndex = 1;
+  required int32 selectIndex = 2;
+}
+message SwordTreasureRewardData{
+  optional int32 rareIndex = 1;
+  optional int32 times = 2;
+}
+message SwordTreasureChooseRareRewardReq{
+  required int32 activityId = 1;
+  required int32 rareIndex = 2;
+}
+message SwordTreasureChooseRareRewardResp{
+  required int32 ret = 1;
+}
+message SwordTreasureNoticeMsg{
+  repeated SwordTreasureNoticeSyncInfo noticeInfo = 1;
+}
+message SwordTreasureNoticeSyncInfo{
+  optional string nickName = 1;
+  optional int64 times = 2;
+  optional string reward = 3;
+}

@@ -1,0 +1,418 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum ZombieAttributeEnum {
+  zombie_attribute_none = 0;
+  zombie_attribute_hp = 1;
+  zombie_attribute_attack = 2;
+  zombie_attribute_energy_max = 3;
+  zombie_attribute_energy_recovery_speed = 4;
+  zombie_attribute_skill_cd = 5;
+  zombie_attribute_hp_max = 6;
+  zombie_attribute_energy = 7;
+  zombie_attribute_hp_rate = 11;
+  zombie_attribute_attack_rate = 12;
+  zombie_attribute_speed = 101;
+  zombie_attribute_fix_door_recovery = 102;
+  zombie_attribute_fix_door_speed = 103;
+  zombie_attribute_door_hp_max = 104;
+  zombie_attribute_door_hp_addition = 105;
+  zombie_attribute_crit = 201 ;
+  zombie_attribute_crit_damage = 202;
+  zombie_attribute_final_add_damage = 203;
+  zombie_attribute_final_reduce_damage = 204;
+  zombie_attribute_added_boss_damage = 205;
+  zombie_attribute_added_elite_damage = 206;
+  zombie_attribute_added_monster_damage = 207;
+  zombie_attribute_resist_crit = 208;
+  zombie_attribute_resist_crit_damage = 209;
+  zombie_attribute_normal_attack = 301;
+  zombie_attribute_physical_attack = 302;
+  zombie_attribute_ice_attack = 303;
+  zombie_attribute_electricity_attack = 304;
+  zombie_attribute_fire_attack = 305;
+  zombie_attribute_wind_attack = 306;
+  zombie_attribute_resist_normal_attack = 401;
+  zombie_attribute_resist_physical_attack = 402;
+  zombie_attribute_resist_ice_attack = 403;
+  zombie_attribute_resist_electricity_attack = 404;
+  zombie_attribute_resist_fire_attack = 405;
+  zombie_attribute_resist_wind_attack = 406;
+  zombie_attribute_floor_damage = 500;
+  zombie_attribute_fire_bottle_boom = 501;
+  zombie_attribute_fire_bottle_floor = 502;
+  zombie_attribute_trajectory_block = 503;
+  zombie_attribute_summon_time = 504;
+  zombie_attribute_repel = 505;
+  zombie_attribute_summon_attack_rate = 506;
+  zombie_attribute_summon_hp_rate = 507;
+  zombie_attribute_added_normal_attack = 601;
+  zombie_attribute_added_physical_attack = 602;
+  zombie_attribute_added_ice_attack = 603;
+  zombie_attribute_added_electricity_attack = 604;
+  zombie_attribute_added_fire_attack = 605;
+  zombie_attribute_added_wind_attack = 606;
+  zombie_attribute_init_buff_seq = 700;
+}
+enum ZombieProtocol {
+  zombie_base_info = 236100;
+  zombie_battle_begin = 236101;
+  zombie_battle_settle = 236102;
+  zombie_use_equipment = 236103;
+  zombie_open_container = 236104;
+  zombie_open_artifact_buff_box = 236105;
+  zombie_pack_bag = 236106;
+  zombie_treasure_upgrade = 236107;
+  zombie_attr_info = 236108;
+  zombie_wave_drop = 236109;
+  zombie_select_artifact_buff = 236110;
+  zombie_equipment_upgrade = 236111;
+  zombie_equipment_decompose = 236112;
+  zombie_artifact_upgrade = 236113;
+  zombie_unlock_room = 236114;
+  zombie_stage_reward_record = 236115;
+  zombie_stage_reward_receive = 236116;
+  zombie_stage_sweep = 236117;
+  zombie_equipment_data = 236118;
+  zombie_kill_monster = 236119;
+  zombie_level_up_sync = 236120;
+  zombie_select_chara = 236121;
+  zombie_artifact_buff_refresh = 236122;
+  zombie_revive = 236123;
+  zombie_add_item_for_debug = 236130;
+  zombie_red_point = 236131;
+}
+message ZombieEnterReq{
+}
+message ZombieEnterResp{
+  optional int32 ret = 1;
+  optional ZombieBaseInfo playerData = 2;
+  optional ZombieNotFinishStageReward notFinishStageReward = 3;
+}
+message ZombieBaseInfo {
+  optional int32 stageId = 1;
+  optional int64 exp = 2;
+  optional int64 power = 3;
+  optional int32 talentId = 4;
+  repeated ZombieEquipmentMsg equipmentList = 5;
+  repeated ZombieTreasureMsg treasureList = 6;
+  repeated ZombieArtifactMsg artifactList = 7;
+  repeated ZombieEquipmentSlot equipmentSlot = 8;
+  optional int32 energy = 9;
+  optional ZombieStageRecord stageRecord = 10;
+  optional int32 charaId = 11;
+  optional int32 lastBigType = 12;
+  optional string unlockSystem = 13;
+  optional string params = 14;
+}
+message ZombieNotFinishStageReward {
+  optional int64 addExp = 1;
+  optional string reward = 2;
+}
+message ZombieBattleBeginReq {
+  optional int32 stageId = 1;
+}
+message ZombiePlayerDataMsg {
+  optional int32 heroAppearanceId = 1;
+  repeated ZombieAttributeInfo attributeList = 2;
+  repeated int32 attrAdditionList = 3;
+  repeated int32 artifactSkillList = 4;
+}
+message ZombieBattleBeginResp {
+  optional int32 ret = 1;
+  optional int64 seed = 2;
+  optional string battleId = 3;
+  repeated ZombieBattleSearchPointMsg searchPointList = 4;
+  optional int32 energy = 5;
+  repeated int32 hostageId = 6;
+  optional ZombiePlayerDataMsg playerData = 7;
+  optional int32 curRefreshTimes = 8;
+  optional int64 forbiddenEndTime = 9;
+}
+message ZombieTalentMsg {
+  optional int32 talentId = 1;
+  optional int32 num = 2;
+}
+message ZombieBattleSearchPointMsg{
+  optional int32 id = 1;
+  repeated ZombieBagItemMsg reward = 2;
+  optional int32 searchTimes = 3;
+}
+message ZombieBattleSettleReq {
+  optional string battleId = 1;
+  optional int32 type = 2;
+  repeated ZombieBagItemMsg bagItems = 3;
+  repeated ZombieBagPoint2d position = 4;
+  optional string operationInput = 5;
+  optional string playerPos = 6;
+  repeated int32 levels = 7;
+  optional string codeVersion = 8;
+  optional string extraData = 9;
+}
+message ZombieCombatServerData{
+  optional ZombiePlayerDataMsg playerData = 1;
+  optional int32 seed = 2;
+   /** 代码版本*/
+   optional string codeVersion = 3;
+   /** 关卡id */
+   optional int32 stageId = 4;
+   /** 玩家位置x|y; */
+   optional string playerPos = 5;
+   /** 额外数据(操作输入) */
+   optional string extraData = 6;
+    /** 战斗校验数据*/
+  repeated int32 levels = 7;
+  /** 玩家id*/
+   optional string playerId = 8;
+   /** 请求时间*/
+   optional string reqTime = 9;
+   /** 操作数据*/
+   optional string operationInput = 10;
+}
+message ZombieCombatResult {
+  optional int32 result = 1;
+}
+message ZombieBattleSettleResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  repeated ZombieEquipmentMsg equipmentReward = 3;
+  optional int32 rescueNum = 4;
+  optional int32 expNum = 5;
+  optional int64 power = 6;
+  optional string rewardLimitValue = 7;
+}
+message ZombieUseEquipmentReq {
+  optional int32 equipmentUid = 1;
+  optional bool isResolve = 2;
+}
+message ZombieUseEquipmentResp {
+  optional int32 ret = 1;
+  optional int64 power = 2;
+  optional ZombieEquipmentSlot slotInfo = 3;
+  optional string reward = 4;
+  optional int32 removeUids = 5;
+  optional bool overflow = 6;
+}
+message ZombieOpenContainerReq {
+  required string battleId = 1;
+  optional int32 searchPointId = 2;
+}
+message ZombieOpenContainerResp {
+  optional int32 ret = 1;
+  optional ZombieBattleSearchPointMsg searchPoint = 2;
+  optional int32 coinNum = 3;
+  optional ZombieBagItemMsg item = 4;
+}
+message ZombieBagPoint2d {
+  optional int32 x = 1;
+  optional int32 y = 2;
+}
+message ZombieBagItemMsg {
+  optional int32 itemUid = 1;
+  optional int32 itemId = 2;
+}
+message ZombieTreasureUpgradeReq {
+  optional int32 treasureId = 1;
+}
+message ZombieTreasureUpgradeResp {
+  optional int32 ret = 1;
+  optional int64 power = 2;
+  optional ZombieTreasureMsg treasure = 3;
+}
+message ZombieEquipmentMsg {
+  optional int32 uid = 1;
+  optional int32 itemId = 2;
+  optional int32 isNew = 3;
+  optional int64 power = 4;
+  repeated ZombieAttributeInfo advanceAttr = 5;
+  optional int32 level = 6;
+}
+message ZombieEquipmentSlot {
+  optional int32 type = 1;
+  optional int32 equipmentUid = 2;
+  optional int32 lv = 3;
+}
+message ZombieArtifactMsg {
+  optional int32 itemId = 1;
+  optional int32 lv = 2;
+}
+message ZombieAttrResp {
+  optional int32 ret = 1;
+  repeated ZombieAttributeInfo attrInfo = 2;
+}
+message ZombieTreasureMsg {
+  optional int32 id = 1;
+  optional int32 star = 2;
+}
+message ZombieKillMonsterReq {
+  required string battleId = 1;
+  optional bool isBoss = 2;
+  optional int32 wave = 3;
+}
+message ZombieKillMonsterResp {
+  optional int32 ret = 1;
+  repeated ZombieBagItemMsg bossDrop = 2;
+}
+message ZombieAttributeInfo {
+  optional ZombieAttributeEnum attrType = 1;
+  optional string attrValue = 2;
+}
+message ZombieEquipmentUpgradeReq {
+  optional int32 slot = 1;
+}
+message ZombieEquipmentUpgradeResp {
+  optional int32 ret = 1;
+  optional int64 power = 2;
+  repeated ZombieEquipmentSlot upgradeSlot = 3;
+}
+message ZombieEquipmentDecomposeReq {
+  repeated int32 uidList = 1;
+}
+message ZombieEquipmentDecomposeResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  repeated int32 removeUids = 3;
+  optional bool overflow = 4;
+}
+message ZombieUnlockRoomReq {
+  optional string battleId = 1;
+  optional int32 floorIndex = 2;
+  optional int32 roomIndex = 3;
+  optional int32 keyItemUid = 4;
+}
+message ZombieUnlockRoomResp {
+  optional int32 ret = 1;
+  optional int32 keyItemUid = 2;
+}
+message ZombieOpenArtifactBuffBoxReq {
+  optional string battleId = 1;
+  optional int32 itemUid = 2;
+}
+message ZombieOpenArtifactBuffBoxResp {
+  optional int32 ret = 1;
+  optional int32 type = 2;
+  repeated int32 idList = 3;
+  optional int32 itemUid = 4;
+}
+message ZombieSelectArtifactBuffReq {
+  required string battleId = 1;
+  optional int32 itemUid = 2;
+  optional int32 id = 3;
+}
+message ZombieSelectArtifactBuffResp {
+  optional int32 ret = 1;
+  optional int32 addAttributeAddition = 2;
+  optional int32 addArtifactId = 3;
+}
+message ZombieStageRecord {
+  optional int32 stageId = 1;
+  optional int32 rescueNum = 2;
+  repeated int32 receiveIndex = 3;
+}
+message ZombieStageRewardRecordReq {
+}
+message ZombieStageRewardRecordResp {
+  optional int32 ret = 1;
+  repeated ZombieStageRecord records = 2;
+}
+message ZombieStageRewardReceiveReq {
+  optional int32 stageId = 1;
+}
+message ZombieStageRewardReceiveResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional ZombieStageRecord record = 3;
+}
+message ZombieArtifactUpGradeReq {
+  optional int32 artifactId = 1;
+}
+message ZombieArtifactUpGradeResp {
+  optional int32 ret = 1;
+  optional int64 power = 2;
+  optional ZombieArtifactMsg artifact = 3;
+}
+message ZombieStageSweepReq {
+  optional int32 stageId = 1;
+}
+message ZombieStageSweepResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 energy = 3;
+  repeated ZombieEquipmentMsg equipmentReward = 4;
+  optional int64 expNum = 5;
+  optional int64 power = 6;
+  optional string rewardLimitValue = 7;
+}
+message ZombieEquipmentDataReq {
+  optional int32 uid = 1;
+}
+message ZombieEquipmentDataResp {
+  optional int32 ret = 1;
+  optional ZombieEquipmentMsg equipment = 2;
+}
+message ZombieEquipmentWaveDropReq {
+  optional string battleId = 1;
+  optional int32 waveId = 2;
+  optional int32 monsterType = 3;
+}
+message ZombieEquipmentWaveDropResp {
+  optional int32 ret = 1;
+  repeated ZombieBagItemMsg dropItem = 2;
+}
+message ZombieLevelUpSync {
+  optional int64 newExp = 1;
+  optional int64 power = 2;
+  repeated ZombieArtifactMsg unlockArtifact = 3;
+}
+message ZombieSelectCharaReq {
+  optional int32 charaId = 1;
+}
+message ZombieSelectCharaResp {
+  optional int32 ret = 1;
+}
+message ZombieAddItemForDebugSync {
+  optional string battleId = 1;
+  optional int32 addCoin = 2;
+  optional ZombieBagItemMsg addItem = 3;
+}
+message ZombieArtifactBuffSelectReq{
+  optional string battleId = 1;
+  optional int32 itemUid = 2;
+}
+message ZombieArtifactBuffSelectResp{
+  optional int32 ret = 1;
+  optional int32 type = 2;
+  repeated int32 idList = 3;
+  optional int32 curRefreshTimes = 4;
+}
+message ZombieReviveReq {
+  optional string battleId = 1;
+  optional string params = 2;
+}
+message ZombieReviveResp {
+  optional int32 ret = 1;
+}
+enum ZombieRedPointEnum {
+    ZombieRedPoint_null = 0;
+    ZombieRedPoint_power = 1;
+    ZombieRedPoint_token = 2;
+    ZombieRedPoint_card = 3;
+    ZombieRedPoint_equip = 4;
+    ZombieRedPoint_equip_upgrade = 5;
+    ZombieRedPoint_talent = 6;
+    ZombieRedPoint_artifact = 7;
+    ZombieRedPoint_treasure = 8;
+}
+message ZombieRedPointReq {
+}
+message ZombieRedPointResp {
+  optional int32 ret = 1;
+  optional string data = 2;
+}
+enum ZombieRewardLimitEnum {
+    ZombieRewardLimit_null = 0;
+    ZombieRewardLimit_epx = 1;
+    ZombieRewardLimit_fragment = 2;
+    ZombieRewardLimit_treasure = 3;
+    ZombieRewardLimit_money = 4;
+    ZombieRewardLimit_equipment = 5;
+}

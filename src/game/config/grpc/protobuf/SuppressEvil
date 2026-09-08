@@ -1,0 +1,218 @@
+package com.yq.msg.CityMsg;
+enum SuppressEvilPb {
+    SuppressEvil_Enter = 236401;
+    SuppressEvil_EnterGame = 236402;
+    SuppressEvil_Operate = 236403;
+    SuppressEvil_Upgrade = 236404;
+    SuppressEvil_Sweep = 236405;
+    SuppressEvil_EndGame = 236406;
+    SuppressEvil_GetTip = 236407;
+  }
+/************** 活动配置 **************/
+message SuppressEvilActivityConfigMsg {
+    repeated SuppressEvilStageConfig stageConfig = 1;
+    repeated SuppressEvilMonsterConfig monsterConfig = 2;
+    repeated SuppressEvilLevelConfig levelConfig = 3;
+    repeated SuppressEvilSkillConfig skillConfig = 4;
+  }
+  message SuppressEvilStageConfig {
+    optional int32 id = 1;
+    optional int32 chapter = 2;
+    optional int32 type = 3;
+    optional string name = 4;
+    optional string monster = 5;
+    optional string monsterSite = 6;
+    optional int32 round = 7;
+    optional int32 itemReward = 8;
+    optional string bossId = 9;
+    optional int32 recommendLevel = 10;
+    optional string returnEnergy = 11;
+    optional string loseReward = 12;
+  }
+  message SuppressEvilMonsterConfig {
+    optional int32 id = 1;
+    optional string position = 2;
+    optional string name = 3;
+    optional string desc = 4;
+    optional int32 quality = 5;
+    optional string appearanceId = 6;
+    optional string icon = 7;
+    optional string attackEffectName = 8;
+    optional string skillEffectName = 9;
+    optional string attackHoldType = 10;
+    optional string attackExcursion = 11;
+    optional string attackHitExcursion = 12;
+    optional int32 bodyHeight = 13;
+    optional int32 bodyScale = 14;
+    optional int32 attackBodyScale = 15;
+    optional int32 skillEffect = 16;
+    optional int32 attack = 17;
+    optional int32 hp = 18;
+    optional string skill = 19;
+  }
+  message SuppressEvilLevelConfig {
+    optional int32 id = 1;
+    optional int32 exp = 2;
+    optional int32 attack = 3;
+    optional int32 hp = 4;
+  }
+  message SuppressEvilSkillConfig {
+    optional int32 id = 1;
+    optional int32 skillType = 2;
+    optional int32 type = 3;
+    optional int32 element = 4;
+    optional string param = 5;
+    optional string name = 6;
+    optional string desc = 7;
+  }
+  /************** 通用结构 **************/
+  message SuppressEvilBaseData {
+    optional int32 stage = 1;
+    optional int32 wave = 2;
+    optional int32 energy = 3;
+    optional int64 energyRecoverTime = 4;
+    optional int32 level = 5;
+    optional int32 exp = 6;
+  }
+  message SuppressEvilGameDataMsg {
+    repeated SuppressEvilBlock blocks = 1;
+    optional SuppressEvilUserDataMsg playerData = 2;
+    repeated SuppressEvilMonster monsters = 3;
+    optional int32 round = 4;
+    optional bool guide = 5;
+    optional int32 state = 6;
+    optional int32 stage = 7;
+    optional int32 wave = 8;
+  }
+  message SuppressEvilUserDataMsg {
+    optional int32 curHp = 1;
+    repeated SuppressEvilSkill skills = 2;
+    optional int32 maxHp = 3;
+    optional int32 atk = 4;
+    repeated SuppressEvilBuff buffs = 5;
+  }
+  message SuppressEvilMonster {
+    optional int32 id = 1;
+    optional int32 monsterId = 2;
+    optional int32 curHp = 3;
+    optional int32 actionRound = 4;
+    repeated int32 pos = 5;
+    optional int32 maxHp = 6;
+    optional int32 atk = 7;
+    repeated SuppressEvilBuff buffs = 8;
+  }
+  message SuppressEvilSkill {
+    optional int32 id = 1;
+    optional int32 energy = 2;
+  }
+  message SuppressEvilBuff {
+    optional int32 buffId = 1;
+    optional int32 leftRound = 2;
+    optional int32 level = 3;
+  }
+  message SuppressEvilBlock {
+    optional int32 x = 1;
+    optional int32 y = 2;
+    optional int32 type = 3;
+    optional int32 state = 4;
+    repeated SuppressEvilChange changes = 5;
+  }
+  message SuppressEvilChange {
+    optional int32 id = 1;
+    optional int32 addHp = 2;
+    optional int32 addMp = 3;
+  }
+  message SuppressEvilRoundMsg {
+    optional int32 type = 1;
+    repeated SuppressEvilStageMsg stages = 2;
+    repeated SuppressEvilBlock createBombs = 3;
+    repeated SuppressEvilBlock board = 4;
+  }
+  message SuppressEvilStageMsg {
+    repeated SuppressEvilBlock blocks = 1;
+    repeated SuppressEvilBombMsg bombs = 2;
+    repeated SuppressEvilMonster monsters = 3;
+  }
+  message SuppressEvilBombMsg {
+    optional int32 x = 1;
+    optional int32 y = 2;
+    optional int32 type = 3;
+    repeated SuppressEvilBlock blocks = 4;
+  }
+  message SuppressEvilMonsterActionMsg {
+    optional int32 monsterId = 1;
+    optional int32 skillId = 2;
+    repeated SuppressEvilChange changes = 3;
+  }
+  message SuppressEvilEnterReq {
+    optional int32 activityId = 1;
+  }
+  message SuppressEvilEnterRsp {
+    required int32 ret = 1;
+    optional SuppressEvilBaseData data = 2;
+    optional int32 gameState = 3;
+  }
+  message SuppressEvilEnterGameReq {
+    optional int32 activityId = 1;
+  }
+  message SuppressEvilEnterGameRsp {
+    required int32 ret = 1;
+    optional SuppressEvilGameDataMsg gameData = 2;
+  }
+  message SuppressEvilOperateReq {
+    optional int32 activityId = 1;
+    optional int32 type = 2;
+    optional int32 fromX = 3;
+    optional int32 fromY = 4;
+    optional int32 toX = 5;
+    optional int32 toY = 6;
+    optional int32 skillId = 7;
+    optional int32 monsterId = 8;
+  }
+  message SuppressEvilOperateRsp {
+    required int32 ret = 1;
+    repeated SuppressEvilRoundMsg roundMsg = 2;
+    repeated SuppressEvilMonsterActionMsg monsterActionMsg = 3;
+    optional SuppressEvilGameDataMsg gameData = 4;
+    optional int32 battleResult = 5;
+    optional SuppressEvilMonsterActionMsg castSkillMsg = 6;
+    optional string reward = 7;
+  }
+  message SuppressEvilUpgradeReq {
+    optional int32 activityId = 1;
+    optional bool oneKey = 2;
+  }
+  message SuppressEvilUpgradeRsp {
+    required int32 ret = 1;
+    optional int32 level = 2;
+    optional int32 exp = 3;
+  }
+  message SuppressEvilSweepReq {
+    optional int32 activityId = 1;
+    optional int32 stage = 2;
+    optional int32 times = 3;
+  }
+  message SuppressEvilSweepRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 leftEnergy = 3;
+  }
+  message SuppressEvilEndGameReq {
+    optional int32 activityId = 1;
+  }
+  message SuppressEvilEndGameRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional SuppressEvilBaseData data = 3;
+    optional int32 gameState = 4;
+  }
+  message SuppressEvilGetTipReq {
+    optional int32 activityId = 1;
+  }
+  message SuppressEvilGetTipRsp {
+    required int32 ret = 1;
+    optional int32 fromX = 2;
+    optional int32 fromY = 3;
+    optional int32 toX = 4;
+    optional int32 toY = 5;
+  }

@@ -9,18 +9,48 @@ message FestivalCelebrationsPlayerInfoMsg {
     optional FestivalCelebrationsEasterEggMsg easterEggMsg = 4;
     optional FestivalCelebrationsAnnualMemoryMsg annualMemoryMsg = 5;
 }
+message ThreeYearFloorMsg {
+  optional int32 floor = 1;
+  optional bool crit = 2;
+  optional PlayerBaseDataMsg playerData = 3;
+}
+message ThreeYearBuildMsg {
+  optional int32 floor = 1;
+  optional int32 rank = 2;
+  optional int32 topFloor = 3;
+  optional string secondUnionName = 4;
+  optional int32 secondFloor = 5;
+  repeated ThreeYearFloorMsg floorList = 6;
+}
+message ThreeYearBuildEnterReq {
+  optional int32 activityId = 1;
+}
+message ThreeYearBuildEnterRsp {
+  optional int32 ret = 1;
+  optional ThreeYearBuildMsg buildMsg = 2;
+}
+message ThreeYearBuildFloorReq {
+  optional int32 activityId = 1;
+  optional int32 count = 2;
+}
+message ThreeYearBuildFloorRsp {
+  optional int32 ret = 1;
+  repeated ThreeYearFloorMsg floorList = 2;
+  optional ThreeYearBuildMsg buildMsg = 3;
+  optional string overUnionName = 4;
+}
 message FestivalCelebrationsAnnualMemoryMsg{
-    optional int32 worshipTimes = 1; 
-  }
-  message FestivalCelebrationsGetAnnualMemoryReq{
+    optional int32 worshipTimes = 1;
+}
+message FestivalCelebrationsGetAnnualMemoryReq{
     optional int32 activityId = 1;
     optional int32 dataType = 2;
-  }
-  message FestivalCelebrationsGetAnnualMemoryRsp{
+}
+message FestivalCelebrationsGetAnnualMemoryRsp{
     optional int32 ret = 1;
     repeated FestivalCelebrationsAnnualMemoryItemMsg AnnualMemoryItemMsg = 2;
-  }
-  message FestivalCelebrationsAnnualMemoryItemMsg{
+}
+message FestivalCelebrationsAnnualMemoryItemMsg{
     repeated PalacePlayerShowMsg dataList = 1;
     optional int64 val = 2;
     optional int64 collectEndTime = 3;
@@ -28,50 +58,60 @@ message FestivalCelebrationsAnnualMemoryMsg{
     optional int32 rosterId = 5;
     optional int32 competitionId = 6;
     optional UnionBaseData unionMsg = 7;
-  }
-  message FestivalCelebrationsWorshipReq{
+}
+message FestivalCelebrationsWorshipReq{
     optional int32 activityId = 1;
-  }
-  message FestivalCelebrationsWorshipResp{
-      optional int32 ret = 1;
-      optional string rewards = 2;
-  }
+}
+message FestivalCelebrationsWorshipResp{
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}
 message FestivalCelebrationsBanquetMsg{
     repeated FestivalCelebrationsBanquetItemMsg useItemList = 1;
     repeated int32 receivedIdList = 2;
     optional int64 bindUnionId = 3;
 }
 message FestivalCelebrationsBanquetScoreMsg{
-    optional PlayerBaseDataMsg playerData=1;
-    optional int32 score=2;
+    optional PlayerBaseDataMsg playerData = 1;
+    optional int32 score = 2;
 }
 message FestivalCelebrationsBanquetItemMsg{
-    optional int32 id=1;
-    optional int32 count=2;
+    optional int32 id = 1;
+    optional int32 count = 2;
 }
 message FestivalCelebrationsUseBanquetItemReq {
-    optional int32 activityId = 1; 
-    optional FestivalCelebrationsBanquetItemMsg itemMsg=2;
+    optional int32 activityId = 1;
+    optional FestivalCelebrationsBanquetItemMsg itemMsg = 2;
 }
 message FestivalCelebrationsUseBanquetItemRsp {
     optional int32 ret = 1;
 }
 message FestivalCelebrationsDrawBanquetRewardReq {
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
 }
 message FestivalCelebrationsDrawBanquetRewardRsp {
     optional int32 ret = 1;
     optional string rewards = 2;
 }
 message FestivalCelebrationsGetBanquetScoreDetailReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
 }
 message FestivalCelebrationsGetBanquetScoreDetailRsp{
     optional int32 ret = 1;
-    repeated FestivalCelebrationsBanquetScoreMsg scoreMsgList=2;
+    repeated FestivalCelebrationsBanquetScoreMsg scoreMsgList = 2;
+}
+message FestivalCelebrationsGetBindUnionMemberDataListReq {
+    optional int32 activityId = 1;
+}
+message FestivalCelebrationsGetBindUnionMemberDataListRsp {
+    optional int32 ret = 1;
+    repeated UnionMemberData memberList = 2;
+}
+message FestivalCelebrationsLuckyFateMsg{
+    optional int32 score = 1;
 }
 message FestivalCelebrationsUseLuckyFateItemReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
 }
 message FestivalCelebrationsUseLuckyFateItemRsp{
     optional int32 ret = 1;
@@ -79,30 +119,30 @@ message FestivalCelebrationsUseLuckyFateItemRsp{
     optional int32 value = 3;
 }
 message FestivalCelebrationsFuYuanGetRewardReq{
-  optional int32 activityId = 1;
-  optional bool isBox = 2;
+    optional int32 activityId = 1;
+    optional bool isBox = 2;
 }
 message FestivalCelebrationsFuYuanGetRewardResp{
-  optional int32 ret = 1;
-  optional string reward = 2;
+    optional int32 ret = 1;
+    optional string reward = 2;
 }
 message FestivalCelebrationsSignMsg{
-    repeated int32 signInDays = 1; 
-    optional int64 lastSignInTime = 2; 
+    repeated int32 signInDays = 1;
+    optional int64 lastSignInTime = 2;
 }
 message FestivalCelebrationsGetSignRewardReq {
-    optional int32 activityId = 1; 
-    optional int32 conditionId = 2; 
-    optional int32 type = 3; 
+    optional int32 activityId = 1;
+    optional int32 conditionId = 2;
+    optional int32 type = 3;
 }
 message FestivalCelebrationsGetSignRewardRsp {
     optional int32 ret = 1;
     optional string rewards = 2;
 }
 message FestivalCelebrationsCollectMsg{
-    repeated int32 collectedList = 1; 
-    optional bool isSynthesis = 2; 
-    optional int32 lotteryResults = 3; 
+    repeated int32 collectedList = 1;
+    optional bool isSynthesis = 2;
+    optional int32 lotteryResults = 3;
     repeated FestivalCelebrationsCollectGiveMsg giveMsg = 4;
     optional int64 lastAskForTime = 5;
 }
@@ -114,27 +154,27 @@ message FestivalCelebrationsCollectGiveMsg{
     optional string unionName = 5;
 }
 message FestivalCelebrationsCollectSynthesisReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
 }
 message FestivalCelebrationsCollectSynthesisRsp{
     optional int32 ret = 1;
 }
 message FestivalCelebrationsCollectFillReq{
-    optional int32 activityId = 1; 
-    optional int32 itemId = 2; 
+    optional int32 activityId = 1;
+    optional int32 itemId = 2;
 }
 message FestivalCelebrationsCollectFillRsp{
     optional int32 ret = 1;
 }
 message FestivalCelebrationsCollectDrawBigRewardReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
 }
 message FestivalCelebrationsCollectDrawBigRewardRsp{
     optional int32 ret = 1;
     optional string reward = 2;
 }
 message FestivalCelebrationsCollectGetClaimListReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional int32 rewardId = 2;
 }
 message FestivalCelebrationsCollectGetClaimListRsp{
@@ -142,17 +182,17 @@ message FestivalCelebrationsCollectGetClaimListRsp{
     repeated PlayerShowInfoMsg headInfo = 2;
 }
 message FestivalCelebrationsCollectSearchPlayerReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional string param = 2;
     optional int64 serverId = 3;
-} 
+}
 message FestivalCelebrationsCollectSearchPlayerRsp{
     optional int32 ret = 1;
     optional PlayerShowInfoMsg headInfo = 2;
-    optional string unionName =3;
+    optional string unionName = 3;
 }
 message FestivalCelebrationsCollectGiveReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional int64 playerId = 2;
     optional int32 itemId = 3;
     optional string reqUid = 4;
@@ -161,7 +201,7 @@ message FestivalCelebrationsCollectGiveRsp{
     optional int32 ret = 1;
 }
 message FestivalCelebrationsCollectAskForReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional int32 type = 2;
     optional int32 itemId = 3;
 }
@@ -169,7 +209,7 @@ message FestivalCelebrationsCollectAskForRsp{
     optional int32 ret = 1;
 }
 message FestivalCelebrationsCollectGetGivenReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional string reqUid = 2;
 }
 message FestivalCelebrationsCollectGetGivenResp{
@@ -177,46 +217,287 @@ message FestivalCelebrationsCollectGetGivenResp{
     optional string reward = 2;
 }
 message FestivalCelebrationsEasterEggMsg{
-    repeated int32 findEasterEggIdList = 1; 
+    repeated int32 findEasterEggIdList = 1;
 }
 message FestivalCelebrationsEasterEggGetRewardReq{
-    optional int32 activityId = 1; 
+    optional int32 activityId = 1;
     optional int32 easterEggId = 2;
 }
 message FestivalCelebrationsEasterEggGetRewardRsp{
     optional int32 ret = 1;
     optional string reward = 2;
 }
-message FestivalCelebrationsGetBindUnionMemberDataListReq {
-    optional int32 activityId = 1; 
+message SpringCookTaskMsg {
+    optional int32 taskId = 1;
+    optional int32 configId = 2;
+    optional int32 state = 3;
+    optional PlayerShowInfoMsg playerInfo = 4;
 }
-message FestivalCelebrationsGetBindUnionMemberDataListRsp {
+message SpringCookTaskDetailMsg {
+    optional int32 taskId = 1;
+    optional int32 configId = 2;
+    optional int64 refreshTime = 3;
+    optional PlayerShowInfoMsg playerInfo = 4;
+    repeated SpringCookMemberItemMsg memberList = 5;
+}
+message SpringCookMemberItemMsg {
+    optional PlayerShowInfoMsg memberInfo = 1;
+    optional int32 count = 2;
+}
+message SpringCookMemberScoreMsg {
+    optional PlayerBaseDataMsg playerInfo = 1;
+    optional int64 score = 2;
+}
+message SpringCookItemMsg {
+    optional int32 itemId = 1;
+    optional int32 count = 2;
+}
+message SpringCookTaskCountMsg {
+    optional int32 taskType = 1;
+    optional int32 count = 2;
+}
+message SpringCookPotMsg {
+    optional int32 potId = 1;
+    optional int32 menuId = 2;
+    optional int64 startTime = 3;
+}
+message SpringCookTaskInfo {
+    repeated SpringCookTaskMsg taskList = 1;
+    repeated SpringCookTaskCountMsg dayTaskCount = 2;
+    optional int32 unionScore = 3;
+    optional int32 unionRank = 4;
+}
+message SpringCookMenuMsg {
+    optional int32 menuId = 1;
+    optional int32 count = 2;
+}
+message SpringCookTaskEnterReq{
+    optional int32 activityId = 1;
+}
+message SpringCookTaskEnterRsp{
     optional int32 ret = 1;
-    repeated UnionMemberData memberList = 2;
+    repeated SpringCookTaskMsg taskList = 2;
+    repeated SpringCookItemMsg itemList = 3;
+    repeated int32 menuList = 4;
+    repeated SpringCookTaskCountMsg dayTaskCount = 5;
+    optional int32 unionScore = 6;
+    optional int32 unionRank = 7;
+}
+message SpringCookTaskInfoReq{
+    optional int32 activityId = 1;
+    optional int32 taskId = 2;
+}
+message SpringCookTaskInfoRsp{
+    optional int32 ret = 1;
+    optional SpringCookTaskDetailMsg taskDetail = 2;
+}
+message SpringCookTaskAcceptReq {
+    optional int32 activityId = 1;
+    optional int32 taskId = 2;
+}
+message SpringCookTaskAcceptRsp {
+    optional int32 ret = 1;
+}
+message SpringCookTaskSubmitReq {
+    optional int32 activityId = 1;
+    optional int32 taskId = 2;
+}
+message SpringCookTaskSubmitRsp {
+    optional int32 ret = 1;
+    optional int32 unionScore = 2;
+    repeated SpringCookItemMsg itemList = 3;
+    optional int32 unionRank = 4;
+}
+message SpringCookTaskGiveUpReq {
+    optional int32 activityId = 1;
+    optional int32 taskId = 2;
+}
+message SpringCookTaskGiveUpRsp {
+    optional int32 ret = 1;
+}
+message SpringCookMemberScoreReq {
+    optional int32 activityId = 1;
+}
+message SpringCookMemberScoreRsp {
+    optional int32 ret = 1;
+    repeated SpringCookMemberScoreMsg memberScoreList = 2;
+}
+message SpringCookTaskRefreshReq {
+    optional int32 activityId = 1;
+}
+message SpringCookTaskRefreshRsp {
+    optional int32 ret = 1;
+    optional SpringCookTaskInfo taskInfo = 2;
+}
+message SpringCookTaskRefreshSync {
+    optional SpringCookTaskInfo taskInfo = 1;
+}
+message SpringCookFoodEnterReq{
+    optional int32 activityId = 1;
+}
+message SpringCookFoodEnterRsp{
+    optional int32 ret = 1;
+    repeated SpringCookPotMsg potList = 2;
+    optional int32 cookLevel = 3;
+    optional int32 cookExp = 4;
+    repeated SpringCookMenuMsg newMenuList = 5;
+}
+message SpringCookFoodMakeReq{
+    optional int32 activityId = 1;
+    repeated int32 potId = 2;
+    optional int32 menuId = 3;
+}
+message SpringCookFoodMakeRsp{
+    optional int32 ret = 1;
+    repeated SpringCookPotMsg pot = 2;
+}
+message SpringCookFoodSpeedReq{
+    optional int32 activityId = 1;
+    optional int32 potId = 2;
+    optional bool oneKey = 3;
+    optional int32 count = 4;
+}
+message SpringCookFoodSpeedRsp {
+    optional int32 ret = 1;
+    repeated SpringCookPotMsg pot = 2;
+}
+message SpringCookFoodFinishReq {
+    optional int32 activityId = 1;
+    optional int32 potId = 2;
+    optional bool oneKey = 3;
+}
+message SpringCookFoodFinishRsp {
+    optional int32 ret = 1;
+    repeated SpringCookPotMsg pot = 2;
+    repeated SpringCookMenuMsg newMenuList = 3;
+    optional int32 cookLevel = 4;
+    optional int32 cookExp = 5;
+    repeated SpringCookItemMsg addItemList = 6;
+    repeated SpringCookItemMsg itemList = 7;
+}
+message SpringCookFoodLearnReq{
+    optional int32 activityId = 1;
+    optional int32 menuId = 2;
+}
+message SpringCookFoodLearnRsp{
+    optional int32 ret = 1;
+    repeated SpringCookMenuMsg newMenuList = 2;
+    repeated int32 menuList = 3;
+}
+message SpringCookFoodClearReq{
+    optional int32 activityId = 1;
+    optional int32 potId = 2;
+    optional bool oneKey = 3;
+}
+message SpringCookFoodClearRsp{
+    optional int32 ret = 1;
+    repeated SpringCookPotMsg pot = 2;
+    repeated SpringCookItemMsg itemList = 3;
+}
+message SpringCookFoodRecycleReq{
+    optional int32 activityId = 1;
+    repeated SpringCookItemMsg itemList = 2;
+}
+message SpringCookFoodRecycleRsp{
+    optional int32 ret = 1;
+    repeated SpringCookItemMsg itemList = 2;
+    optional int32 addScore = 3;
+    optional int32 unionScore = 4;
+    optional int32 unionRank = 5;
+}
+message SpringCookYanHuiEnterReq {
+    optional int32 activityId = 1;
+}
+message SpringCookYanHuiEnterRsp {
+    optional int32 ret = 1;
+    optional int32 unionScore = 2;
+    optional int32 unionRank = 3;
+    repeated FestivalCelebrationsBanquetScoreMsg memberScoreList = 4;
+}
+message SpringCookFoodUseItemReq {
+    optional int32 activityId = 1;
+    optional int32 itemId = 2;
+    optional int32 count = 3;
+}
+message SpringCookFoodUseItemRsp {
+    optional int32 ret = 1;
+    repeated int32 menuId = 2;
+}
+message SpringCookRedPointReq {
+    optional int32 activityId = 1;
+}
+message SpringCookRedPointRsp {
+    optional int32 ret = 1;
+    optional int32 activityId = 2;
+    optional string data = 3;
 }
 message FestivalCelebrationsConfigSync{
     repeated FestivalCelebrationsBanquetConfig banquetConfigList = 1;
     repeated FestivalCelebrationsCollectBigDrawConfig collectBigDrawConfigList = 2;
     repeated FestivalCelebrationsEasterEggConfig easterEggConfigList = 3;
+    repeated FestivalYanHuiConfig yanHuiList = 4;
+    repeated FestivalTaskConfig taskConfigList = 5;
+    repeated FestivalNumConfig numConfigList = 6;
+    repeated FestivalLevelConfig levelConfigList = 7;
+    repeated FestivalFoodConfig foodConfigList = 8;
+    repeated FestivalTimeConfig timeConfigList = 9;
 }
 message FestivalCelebrationsBanquetConfig{
-    optional int32 id = 1; 
-    optional int32 level = 2; 
-    optional int32 type = 3; 
-    optional int32 banquetID = 4; 
+    optional int32 id = 1;
+    optional int32 level = 2;
+    optional int32 type = 3;
+    optional int32 banquetID = 4;
     optional string item = 5;
     optional int32 broadcast = 6;
     optional string reward = 7;
 }
 message FestivalCelebrationsCollectBigDrawConfig{
-    optional int32 id = 1; 
-    optional int32 weight = 2; 
-    optional int32 limit = 3; 
+    optional int32 id = 1;
+    optional int32 weight = 2;
+    optional int32 limit = 3;
     optional string reward = 4;
     optional int32 big = 5;
     optional int32 protect = 6;
 }
 message FestivalCelebrationsEasterEggConfig{
-    optional int32 id = 1; 
+    optional int32 id = 1;
     optional int32 day = 2;
+}
+message FestivalYanHuiConfig{
+    optional int32 id = 1;
+    optional int32 level = 2;
+    optional int32 point = 3;
+    optional int32 nameId = 4;
+}
+message FestivalTaskConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional string food = 3;
+    optional int32 time = 4;
+}
+message FestivalNumConfig {
+    optional int32 id = 1;
+    optional string limit = 2;
+    optional string num = 3;
+}
+message FestivalLevelConfig {
+    optional int32 id = 1;
+    optional int32 level = 2;
+    optional int32 num = 3;
+    optional string highRank = 4;
+    optional int32 tableNum = 5;
+    optional int32 upNum = 6;
+    optional int32 nameId = 7;
+}
+message FestivalFoodConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional int32 num = 3;
+    optional int32 point = 4;
+    optional int32 icon = 5;
+}
+message FestivalTimeConfig {
+    optional int32 id = 1;
+    optional int32 beginTime = 2;
+    optional int32 durationTime = 3;
 }

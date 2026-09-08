@@ -1,0 +1,622 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Palace";
+/* ==================== 基础配置 ======================== */
+/* ===================================================== */
+message PeakFightTimeConfig {
+  optional int32 timeId = 1;
+  optional int32 session = 2;
+  optional int32 type = 3;
+  optional int32 beginDay = 4;
+  optional int32 beginTime = 5;
+  optional int32 durTime = 6;
+}
+message PeakFightGroupConfig {
+  optional int32 rankId = 1;
+  optional int32 size = 2;
+  optional int32 up = 3;
+  optional int32 limit = 4;
+}
+message PeakFightDrawConfig {
+  optional int32 id = 1;
+  optional string reward = 2;
+  optional int32 type = 3;
+}
+message PeakFightConfigSync {
+  required int32 activityId = 1;
+  repeated PeakFightTimeConfig timeConfig = 2;
+  repeated PeakFightGroupConfig groupConfig = 3;
+  repeated PeakFightDrawConfig drawConfig = 4;
+}
+/* ==================== 实体包装 ======================== */
+/* ===================================================== */
+message PeakFightUnionBaseMsg {
+  optional int64 unionId = 1;
+  optional int32 flag = 2;
+  optional string name = 3;
+  optional int64 serverId = 4;
+  optional string masterName = 5;
+  optional string fightValue = 6;
+  optional int32 score = 7;
+}
+message PeakFightSiteMsg {
+  optional int64 unionId = 1;
+  optional int32 site = 2;
+  optional int32 memberNum = 3;
+  optional string totalFight = 4;
+}
+message PeakFightMemberBodyMsg {
+  optional int64 playerBattleId = 1;
+  optional PlayerHeadDataMsg head = 2;
+  optional string name = 3;
+  optional string fight = 4;
+  optional int32 body = 5;
+  optional int32 order = 6;
+  optional int32 site = 7;
+  repeated AttributeDataMsg attr = 8;
+}
+message PeakFightWordsMsg {
+  optional PlayerHeadDataMsg head = 1;
+  optional string words = 2;
+}
+message PeakFightPlayerDonateRecord {
+  optional int64 playerId = 1;
+  optional string name = 2;
+  optional int32 donateNum = 3;
+  optional int64 lastDonateTime = 4;
+}
+message PeakFightAppearanceMsg {
+  optional int64 playerId = 1;
+  optional string nickName = 2;
+  optional int32 appearanceId = 3;
+  optional int32 equipCloudId = 4;
+  optional int64 playerBattleId = 5;
+  optional int32 body = 6;
+  optional int32 site = 7;
+  optional int64 unionId = 8;
+  optional int32 energy = 9;
+}
+message PeakFightPlayerBodyLocateMsg {
+  optional PlayerHeadDataMsg head = 1;
+  optional int32 body = 2;
+  optional int32 order = 3;
+  optional int32 site = 4;
+  optional string fight = 5;
+  repeated AttributeDataMsg attr = 8;
+}
+message PeakFightBodySiteMsg {
+  optional int32 body = 1;
+  optional int32 site = 2;
+}
+message PeakFightPlayerBaseMsg {
+  optional PlayerHeadDataMsg head = 1;
+  optional string name = 2;
+  optional int32 position = 3;
+  optional int64 lastOnlineTime = 4;
+  optional string fightValue = 5;
+  optional int32 winCount = 6;
+  optional int32 reviveCount = 7;
+}
+message PeakFightSiteBattleMsg {
+  optional int32 site = 1;
+  repeated PeakFightAppearanceMsg waitingMember = 2;
+  repeated PeakFightAppearanceMsg battle = 3;
+  optional int64 playerBattleId = 4;
+  optional int64 triggerTime = 5;
+  optional int64 winTime = 6;
+  optional bool end = 7;
+  optional int32 totalOccupySec = 8;
+  optional int32 winStreak = 9;
+  optional int32 triggerEffectCount = 10;
+  optional int32 roomId = 11;
+  optional int32 battleSeq = 12;
+  repeated PeakFightWaitingMsg waitingMsg = 13;
+}
+message PeakFightWaitingMsg {
+  optional int64 unionId = 1;
+  optional int32 num = 2;
+}
+message PeakFightGlobalBuff {
+  optional int64 unionId = 1;
+  repeated PeakFightBuffMsg buff = 2;
+}
+message PeakFightBuffMsg {
+  optional int64 playerId = 1;
+  optional int64 triggerTime = 2;
+}
+message PeakFightCostLog {
+  optional int32 timeId = 1;
+  repeated PeakFightItemCostInfo itemCostInfo = 2;
+}
+message PeakFightPlayerCostLog {
+  optional int64 playerId = 1;
+  optional string playerName = 2;
+  repeated PeakFightItemCostInfo itemCostInfo = 3;
+}
+message PeakFightItemCostInfo {
+  optional int32 site = 1;
+  optional int32 costNum = 2;
+}
+message PeakFightReviveCountMsg {
+  optional int64 playerBattleId = 1;
+  optional int32 reviveCount = 2;
+}
+message PeakFightReportMsg {
+  optional PlayerHeadDataMsg headData = 1;
+  optional string nickName = 2;
+  optional int64 unionId = 3;
+  optional string unionName = 4;
+  optional int64 battleId = 5;
+  optional int32 site = 6;
+  optional int32 value = 7;
+  optional string targetName = 8;
+  optional int64 targetUnionId = 9;
+  optional int64 time = 10;
+}
+message PeakFightSettleMsg {
+  repeated PeakFightUnionBaseMsg unionBase = 1;
+  repeated int32 score = 2;
+  optional int64 winUnionId = 3;
+  optional int32 addScore = 4;
+  optional int32 roomId = 5;
+}
+message PeakFightUnionInfo {
+  optional PeakFightUnionBaseMsg unionBase = 1;
+  optional int32 siteCount = 2;
+}
+message PeakFightBattleDetailMsg {
+  repeated PeakFightUnionInfo unionInfo = 1;
+  optional int32 roomId = 2;
+  optional int32 groupId = 3;
+}
+message PeakFightBattleHistoryMsg {
+  optional PeakFightUnionBaseMsg unionBase = 1;
+  repeated int32 score = 2;
+  optional int32 result = 3;
+  optional int32 addScore = 4;
+  optional int32 day = 5;
+}
+message PeakFightRoundGroupInfo {
+  optional int32 round = 1;
+  repeated int32 groups = 2;
+}
+message PeakFightGuessUnion {
+  optional PeakFightUnionBaseMsg unionBase = 1;
+  optional int32 supportNum = 2;
+}
+message PeakFightGuessMsg {
+  repeated PeakFightGuessUnion union = 1;
+  optional int64 winUnionId = 2;
+  optional int32 roomId = 3;
+  optional int64 supportUnionId = 4;
+}
+message PeakFightAchieveMsg {
+  optional int32 day = 1;
+  optional int32 value = 2;
+  repeated int32 receive = 3;
+}
+message PeakFightBattleResultMsg {
+  optional PlayerHeadDataMsg head = 1;
+  optional int64 unionId = 2;
+  optional int64 battleId = 3;
+  optional int32 body = 4;
+  optional int32 energy = 5;
+  optional int32 costEnergy = 6;
+  optional bool win = 7;
+  optional string nickName = 8;
+}
+message PeakFightSiteRecord {
+  optional int64 time = 1;
+  optional int32 battleSeq = 2;
+  repeated PeakFightBattleResultMsg battleResult = 3;
+}
+/* ==================== 请求协议 ======================== */
+/* ===================================================== */
+message PeakFightEnterActivityReq {
+  required int32 activityId = 1;
+}
+message PeakFightEnterActivityResp {
+  required int32 ret = 1;
+  optional int32 group = 2;
+  optional PalacePlayerShowMsg worshipPlayer = 3;
+  repeated PeakFightUnionBaseMsg top3Unions = 4;
+  optional bool hasWorship = 5;
+  optional int32 position = 6;
+  optional int64 unionId = 7;
+  optional int32 applyRanking = 8;
+  repeated PeakFightRoundGroupInfo roundGroups = 9;
+  optional PeakFightSettleMsg settleMsg = 10;
+  optional int32 roomId = 11;
+  repeated PeakFightUnionBaseMsg showStageUnion = 12;
+  repeated PeakFightGuessMsg guessResultPop = 13;
+  optional int32 activityId = 14;
+  optional int64 finalSettleTime = 15;
+  optional bytes extra = 16;
+}
+message PeakFightEnterReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+}
+message PeakFightEnterResp {
+  required int32 ret = 1;
+  repeated PeakFightUnionBaseMsg union = 2;
+  repeated PeakFightSiteMsg siteMsg = 3;
+  optional PeakFightWordsMsg words = 4;
+  /* 在战斗期两小时内进战场会给双方阵营的分身形象表现 （房间内玩家倒计时八点时客户端自己重新获取数据表现） */
+  repeated PeakFightSiteBattleMsg siteBattle = 5;
+  repeated int64 commander = 6;
+  optional PeakFightReportMsg report = 7;
+  optional int32 roomId = 8;
+  repeated int32 wordIndex = 9;
+  repeated PeakFightGlobalBuff globalBuff = 10;
+}
+message PeakFightUnionSitReq {
+  required int32 activityId = 1;
+  optional int32 site = 2;
+}
+message PeakFightUnionSitResp {
+  required int32 ret = 1;
+  repeated PeakFightMemberBodyMsg memberBody = 2;
+  optional string totalFight = 3;
+  optional bool commanderAuth = 4;
+  optional int32 ver = 5;
+  /* ---- 用于复活指挥 ----- */
+  repeated PeakFightReviveCountMsg reviveCount = 6;
+  repeated int64 defeatPlayerBattleId = 7;
+  optional int32 remainNum = 8;
+  optional int64 battleId = 9;
+  optional int32 roomCostNum = 10;
+}
+message PeakFightChangeBattleOrderReq {
+  required int32 activityId = 1;
+  repeated int64 playerBattleId = 2;
+  optional int32 site = 3;
+  optional int32 ver = 4;
+}
+message PeakFightChangeBattleOrderResp {
+  required int32 ret = 1;
+  repeated PeakFightMemberBodyMsg memberBody = 2;
+  optional string totalFight = 3;
+  optional bool commanderAuth = 4;
+  optional int32 ver = 5;
+  optional bool success = 6;
+}
+message PeakFightGetBodyReq {
+  required int32 activityId = 1;
+}
+message PeakFightGetBodyResp {
+  required int32 ret = 1;
+  repeated PeakFightSiteMsg sitMsg = 2;
+  repeated PeakFightPlayerBodyLocateMsg bodyLocateMsg = 3;
+  optional int32 activityId = 4;
+}
+message PeakFightDispatchBodyReq {
+  required int32 activityId = 1;
+  repeated PeakFightBodySiteMsg bodySit = 2;
+}
+message PeakFightDispatchBodyResp {
+  required int32 ret = 1;
+  repeated PeakFightSiteMsg siteMsg = 3;
+}
+message PeakFightEditWordReq {
+  required int32 activityId = 1;
+  optional string words = 2;
+}
+message PeakFightEditWordResp {
+  required int32 ret = 1;
+  optional PeakFightWordsMsg words = 2;
+}
+message PeakFightGetDonateInfoReq {
+  required int32 activityId = 1;
+}
+message PeakFightGetDonateInfoResp {
+  required int32 ret = 1;
+  optional int32 totalNum = 2;
+  optional int32 remainNum = 3;
+  repeated PeakFightPlayerDonateRecord record = 4;
+}
+message PeakFightDonateReq {
+  required int32 activityId = 1;
+  optional int32 num = 2;
+}
+message PeakFightDonateResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional int32 totalNum = 3;
+  optional int32 remainNum = 4;
+  optional string costProp = 5;
+  optional int32 activityId = 6;
+  optional PeakFightPlayerDonateRecord record = 7;
+}
+message PeakFightGetDonateCostLogReq {
+  required int32 activityId = 1;
+}
+message PeakFightGetDonateCostLogResp {
+  required int32 ret = 1;
+  repeated PeakFightCostLog costLog = 2;
+}
+message PeakFightGetCommanderReq {
+  required int32 activityId = 1;
+}
+message PeakFightGetCommanderResp {
+  required int32 ret = 1;
+  repeated int64 commander = 2;
+  repeated PeakFightPlayerBaseMsg member = 3;
+}
+message PeakFightAppointReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional int32 stat = 3;
+}
+message PeakFightAppointResp {
+  required int32 ret = 1;
+  repeated int64 commander = 2;
+}
+message PeakFightRoomHeartBeatReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+  optional bool exit = 3;
+}
+message PeakFightRoomHeartBeatResp {
+  required int32 ret = 1;
+}
+message PeakFightReviveReq {
+  required int32 activityId = 1;
+  optional int32 site = 2;
+  optional int64 battleId = 3;
+}
+message PeakFightReviveResp {
+  required int32 ret = 1;
+  repeated PeakFightReviveCountMsg reviveCount = 2;
+  optional int32 remainNum = 3;
+  optional int32 roomCostNum = 4;
+  repeated PeakFightWaitingMsg waitingMsg = 5;
+}
+message PeakFightGroupInfoReq {
+  required int32 activityId = 1;
+  required int32 groupId = 2;
+}
+message PeakFightGroupInfoResp {
+  required int32 ret = 1;
+  repeated PeakFightUnionBaseMsg groupInfo = 2;
+}
+message PeakFightReportInfoReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+}
+message PeakFightReportInfoResp {
+  required int32 ret = 1;
+  repeated PeakFightReportMsg reportInfo = 2;
+}
+message PeakFightWinCountRankReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+  optional int64 unionId = 3;
+}
+message PeakFightWinCountRankResp {
+  required int32 ret = 1;
+  repeated RankTempMsg rankTemp = 2;
+  optional int32 myRanking = 3;
+  optional int32 myValue = 4;
+}
+message PeakFightPopSettleReq {
+  required int32 activityId = 1;
+}
+message PeakFightPopSettleResp {
+  required int32 ret = 1;
+}
+message PeakFightDrawCountReq {
+  required int32 activityId = 1;
+}
+message PeakFightDrawCountResp {
+  required int32 ret = 1;
+  optional int32 winDrawCount = 2;
+  optional int32 defeatDrawCount = 3;
+}
+message PeakFightSpinDrawReq {
+  required int32 activityId = 1;
+  optional int32 drawType = 2;
+}
+message PeakFightSpinDrawResp {
+  required int32 ret = 1;
+  optional int32 id = 2;
+  optional string rewards = 3;
+}
+message PeakFightGetBattleDetailReq {
+  required int32 activityId = 1;
+}
+message PeakFightGetBattleDetailResp {
+  required int32 ret = 1;
+  repeated PeakFightBattleDetailMsg detailMsg = 2;
+}
+message PeakFightBattleHistoryReq {
+  required int32 activityId = 1;
+}
+message PeakFightBattleHistoryResp {
+  required int32 ret = 1;
+  repeated PeakFightBattleHistoryMsg historyMsg = 2;
+  optional int32 score = 3;
+}
+message PeakFightGroupDetailReq {
+  required int32 activityId = 1;
+  optional int32 groupId = 2;
+}
+message PeakFightGroupDetailResp {
+  required int32 ret = 1;
+  repeated PeakFightUnionBaseMsg unionBase = 2;
+  repeated int64 riseUnions = 3;
+}
+message PeakFightRoomItemCostLogReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+}
+message PeakFightRoomItemCostLogResp {
+  required int32 ret = 1;
+  optional int32 costNum = 2;
+  repeated PeakFightPlayerCostLog playerCostLog = 3;
+}
+message PeakFightBodyDetailReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional int32 body = 3;
+}
+message PeakFightBodyDetailResp {
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg detailData = 2;
+  optional int32 site = 3;
+  optional int32 order = 4;
+}
+message PeakFightGuessInfoReq {
+  required int32 activityId = 1;
+}
+message PeakFightGuessInfoResp {
+  required int32 ret = 1;
+  repeated PeakFightGuessMsg guessMsg = 2;
+  optional int32 activityId = 3;
+}
+message PeakFightGuessReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+  optional int64 unionId = 3;
+}
+message PeakFightGuessResp {
+  required int32 ret = 1;
+  optional PeakFightGuessMsg guessMsg = 2;
+  optional int32 activityId = 3;
+}
+message PeakFightWorshipReq {
+  required int32 activityId = 1;
+}
+message PeakFightWorshipResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional PalacePlayerShowMsg worshipPlayer = 3;
+  optional int32 activityId = 4;
+}
+message PeakFightGuessAchieveReq {
+  required int32 activityId = 1;
+}
+message PeakFightGuessAchieveResp {
+  required int32 ret = 1;
+  repeated PeakFightAchieveMsg achieve = 2;
+  repeated int32 anySupportDays = 3;
+}
+message PeakFightGuessRewardReq {
+  required int32 activityId = 1;
+  optional int32 day = 2;
+  repeated int32 conditionId = 3;
+}
+message PeakFightGuessRewardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional PeakFightAchieveMsg achieve = 3;
+}
+message PeakFightVisitWordsReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+  optional int32 wordIndex = 3;
+}
+message PeakFightVisitWordsResp {
+  required int32 ret = 1;
+  optional int64 lastSendTime = 2;
+  optional int32 activityId = 3;
+}
+message PeakFightAddBuffReq {
+  required int32 activityId = 1;
+}
+message PeakFightAddBuffResp {
+  required int32 ret = 1;
+  optional int64 buffTriggerTime = 2;
+}
+message PeakFightSiteBattleRecordReq {
+  required int32 activityId = 1;
+  optional int32 roomId = 2;
+  optional int32 site = 3;
+}
+message PeakFightSiteBattleRecordResp {
+  required int32 ret = 1;
+  repeated PeakFightSiteRecord record = 2;
+}
+message PeakFightUnionMemberInfoReq {
+  required int32 activityId = 1;
+  optional int64 unionId = 2;
+  optional int32 roomId = 3;
+}
+message PeakFightUnionMemberInfoResp {
+  required int32 ret = 1;
+  repeated PeakFightPlayerBaseMsg member = 2;
+  optional PeakFightUnionBaseMsg unionBase = 3;
+  optional int32 rank = 4;
+  optional int64 unionExp = 5;
+}
+message PeakFightUpdateAllBodyReq {
+  required int32 activityId = 1;
+}
+message PeakFightUpdateAllBodyResp {
+  required int32 ret = 1;
+  repeated GodBodyDetailDataMsg detailData = 2;
+  optional int32 activityId = 3;
+}
+/**
+1 活动入口图标红点（- 客户端本地判断）
+2 排行奖励红点
+3 活动开战红点（- 客户端本地判断）
+4 竞猜红点
+5 竞猜领奖红点
+6 转盘红点
+7 捐献红点
+8 上阵红点
+9 指挥官红点
+10 膜拜红点
+11 妖盟充值红点
+12 免费礼包可领取
+ */
+message PeakFightRedPointReq {
+  required int32 activityId = 1;
+}
+message PeakFightRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+  optional int32 activityId = 3;
+}
+message PeakFightGetDispatchReportReq {
+    optional int32 activityId = 1;
+}
+message PeakFightGetDispatchReportResp {
+    required int32 ret = 1;
+    repeated PeakFightReportData dispatchReport = 2;
+}
+message PeakFightReportData {
+  optional PeakFightPlayerBaseMsg member = 1;
+  optional int32 fightNum = 2;
+}
+/* ==================== 同步协议 ======================== */
+/* ===================================================== */
+message PeakFightBattleSync {
+  optional PeakFightSiteBattleMsg battle = 1;
+  optional PeakFightReportMsg report = 2;
+}
+message PeakFightWordsSync {
+  optional PeakFightWordsMsg words = 2;
+}
+message PeakFightReviveSync {
+  optional int64 unionId = 1;
+  optional int32 site = 2;
+  optional int64 reviveBattleId = 3;
+  optional int32 reviveItemNum = 4;
+  optional int32 totalOccupySec = 5;
+  optional int32 roomCostNum = 6;
+  optional PeakFightWaitingMsg waitingMsg = 14;
+}
+message PeakFightSettleSync {
+  optional PeakFightSettleMsg settleMsg = 1;
+}
+message PeakFightVisitWordsSync {
+  optional int32 wordIndex = 1;
+}
+message PeakFightGlobalBuffSync {
+  optional int64 unionId = 1;
+  optional int64 playerId = 2;
+  optional int64 buffTriggerTime = 3;
+}

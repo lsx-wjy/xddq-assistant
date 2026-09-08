@@ -1,0 +1,78 @@
+package com.yq.msg.CityMsg;
+import "Common";
+message PlayerBattleMainPbMsg {
+  optional int64 playerId = 1;
+  optional int64 serverId = 2;
+  optional RedisBattleModelMsg model = 3;
+  repeated ISMapMsg attrMap = 4;
+  repeated IIMapMsg talentSkillMap = 5;
+  repeated ISMapMsg magicTreasureSkillMap = 6;
+  repeated IIIMapMsg chaoticPetSkillMap = 7;
+  repeated IIMapMsg commonSkillMap = 8;
+  optional string param1 = 13;
+  optional string param2 = 14;
+  optional string param3 = 15;
+}
+message RedisBattleModelMsg {
+  optional int32 appearanceId = 1;
+  optional int32 cloudId = 2;
+  optional int32 atkEffectId = 3;
+  repeated RedisPetBattleObjMsg petObjs = 4;
+  repeated IIMapMsg spiritObjMap = 5;
+  repeated RedisSpiritBattleObjMsg spiritExtendMap = 6;
+  repeated IIMapMsg magicSkillsMap = 7;
+  optional int32 godBodySkill = 8;
+  optional RedisUniverseBattleObjMsg RedisUniverseBattleObj = 9;
+  optional int32 professionId = 10;
+  repeated IIMapMsg careerSkillMap = 11;
+  optional RedisLawLookBattleObjMsg lawLookObjs = 12;
+  optional string param1 = 13;
+  optional string param2 = 14;
+  optional string param3 = 15;
+  repeated IIMapMsg cloudSoulMap = 16;
+  optional RedisDivineInsightBattleObjMsg divineInsightObjs = 17;
+  optional int32 careerMaxAtkShowId = 18;
+}
+message RedisPetBattleObjMsg {
+  optional int32 petId = 1;
+  optional int32 skillId = 2;
+  optional int32 skillLv = 3;
+  optional int32 resChange = 4;
+  optional int32 petSoulShapeLv = 5;
+  optional int32 kernelLv = 6;
+  optional int32 linkageId = 7;
+  repeated PetKernelInfo equipKernelIdList = 8;
+  optional int32 godStage = 9;
+  optional string param1 = 11;
+  optional string param2 = 12;
+}
+message IIMapMsg {
+  optional int32 iKey = 1;
+  optional int32 iValue = 2;
+}
+message ISMapMsg {
+  optional int32 iKey = 1;
+  optional string sValue = 2;
+}
+message IIIMapMsg {
+  optional int32 iKey = 1;
+  repeated IIMapMsg mapValue = 2;
+}
+message RedisSpiritBattleObjMsg {
+  optional int32 spiritId = 1;
+  optional int32 linkageId = 2;
+  optional string param1 = 3;
+}
+message RedisUniverseBattleObjMsg {
+  optional int32 level = 1;
+  repeated IIMapMsg equipSkillList = 2;
+  optional string param1 = 3;
+}
+message RedisLawLookBattleObjMsg {
+  optional int32 id = 1;
+  repeated IIMapMsg skillMap = 2;
+}
+message RedisDivineInsightBattleObjMsg {
+  optional int32 lv = 1;
+  repeated IIMapMsg skillMap = 2;
+}

@@ -4,44 +4,55 @@ import "Pet";
         repeated BagDataMsg bagData = 1;
     }
     message BagDataMsg{
-        required int32 propId = 1; 
-        required string num = 2;  
+        required int32 propId = 1;
+        required string num = 2;
     }
     message UsePropReq {
-        required int32 propId = 1; 
-        required string count = 2; 
-        optional bytes extraParam = 3; 
+        required int32 propId = 1;
+        required string count = 2;
+        optional bytes extraParam = 3;
+        optional int32 useType = 4;
     }
     message UsePropResp {
         required int32 ret = 1;
         optional string reward = 2;
+        optional string spillReward = 3;
     }
     message CompoundPropReq{
-        required int32 id = 1; 
-        required string count = 2; 
+        required int32 id = 1;
+        required string count = 2;
     }
     message CompoundPropResp{
         required int32 ret = 1;
         optional string reward = 2;
-        optional int32 type = 3; 
-        optional PetDataMsg petData = 4; 
-        repeated int32 collectPetId = 5; 
+        optional int32 type = 3;
+        optional PetDataMsg petData = 4;
+        repeated int32 collectPetId = 5;
     }
     message UseOptionalBoxParam {
-        repeated BagDataMsg chooseItem = 1; 
+        repeated BagDataMsg chooseItem = 1;
+        optional int32 operateType = 2;
     }
     message HoldPetEggDataSync {
-        optional int64 holdStartTimes = 1; 
-        repeated int32 petUid = 2; 
+        optional int64 holdStartTimes = 1;
+        repeated int64 petUid = 2;
     }
     message HoldNestedBoxData {
-        optional int32 systemId = 1; 
-        optional int64 holdStartTimes = 2; 
-        repeated int32 ItemId = 3; 
+        optional int32 systemId = 1;
+        optional int64 holdStartTimes = 2;
+        repeated int32 ItemId = 3;
     }
     message HoldNestedBoxDataSync {
-        repeated HoldNestedBoxData itemData = 1; 
+        repeated HoldNestedBoxData itemData = 1;
     }
     message ChangeRoleParam {
-        required int32 roleId = 1; 
+        required int32 roleId = 1;
+    }
+    message ActivityInviteItem {
+        optional int32 propId = 1;
+        optional int32 num = 2;
+        optional string param = 3;
+    }
+    message ActivityInviteItemSync {
+        repeated ActivityInviteItem itemList = 1;
     }

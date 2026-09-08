@@ -2,6 +2,7 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class SpiritMgr {
     constructor() {
@@ -41,6 +42,7 @@ export default class SpiritMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('cave.ad-spirit')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

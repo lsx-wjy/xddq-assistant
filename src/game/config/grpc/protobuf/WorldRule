@@ -59,3 +59,9 @@ message WorldRuleSwitchProgrammeReq{
 message WorldRuleSwitchProgrammeResp {
     required int32 ret = 1;
 }
+message WorldRuleBuyUnlockHoleReq{
+  required int32 id = 1;
+}
+message WorldRuleBuyUnlockHoleResp {
+  required int32 ret = 1;
+}

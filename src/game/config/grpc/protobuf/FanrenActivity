@@ -1,0 +1,9 @@
+package com.yq.msg.CityMsg;
+message FanrenInjectPowerReq {
+    required int32 activityId = 1;
+}
+message FanrenInjectPowerResp_Test {
+    required int32 ret = 1;
+    optional string reward = 2;
+    required int32 hitDouble = 3;
+}

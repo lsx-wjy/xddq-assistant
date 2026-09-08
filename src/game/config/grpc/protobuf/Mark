@@ -9,7 +9,7 @@ message SyncMarkStateMsg {
   optional bool markState = 2;
 }
 message MarkFinishReq {
-  required int32 markType = 1;  
+  required int32 markType = 1;
 }
 message MarkFinishResp {
   required int32 ret = 1;

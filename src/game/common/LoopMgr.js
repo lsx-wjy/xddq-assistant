@@ -20,7 +20,10 @@ class LoopMgr {
     }
 
     end() {
-        clearInterval(this.intervalTimeId);
+        if (this.intervalTimeId !== null) {
+            clearInterval(this.intervalTimeId);
+            this.intervalTimeId = null;
+        }
     }
 
     add(loopable) {

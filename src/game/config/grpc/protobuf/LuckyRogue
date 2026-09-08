@@ -1,0 +1,421 @@
+package com.yq.msg.CityMsg;
+import "Common";
+/** 须弥魔塔协议号 */
+enum LuckyRoguePb {
+    S_LUCKY_ROGUE_NULL = 0;
+    S_LUCKY_ROGUE_STAGE_ENTER = 234401;
+    S_LUCKY_ROGUE_CHALLENGE = 234402;
+    S_LUCKY_ROGUE_SUMMON_ATTACK = 234403;
+    S_LUCKY_ROGUE_CHOOSE_MAGIC = 234404;
+    S_LUCKY_ROGUE_REMOVE_MAGIC = 234405;
+    S_LUCKY_ROGUE_RELOAD_MAGIC = 234406;
+    S_LUCKY_ROGUE_GIVE_UP = 234407;
+    S_LUCKY_ROGUE_SWEEP = 234408;
+    S_LUCKY_ROGUE_GET_SECT = 234409;
+    S_LUCKY_ROGUE_SECT_LV_UP = 234410;
+    S_LUCKY_ROGUE_OPEN_BAG_MAGIC = 234411;
+    S_LUCKY_ROGUE_SWEEP_ENTER = 234412;
+    S_LUCKY_ROGUE_SHOW_RED_POINT = 234413;
+}
+enum OptionalType {
+    NORMAL_MAGIC = 0;
+    HIGH_MAGIC = 1;
+    ITEM = 2;
+}
+enum MagicCoinType {
+    RELOAD = 2;
+    REMOVE = 3;
+}
+message LuckRoguePlayerDataMsg {
+    optional int32 curStageId = 1;
+    optional bool hasStageData = 2;
+    optional int32 currWave = 3;
+    optional int32 historyWave = 4;
+}
+message LuckRogueEnergyMsg {
+    optional int32 num = 1;
+    optional int64 lastRecoverAt = 2;
+}
+message StageCharacterStateMsg {
+    optional int64 maxHp = 1;
+    optional int64 currHp = 2;
+    optional int64 attack = 3;
+}
+message StageMonsterStateMsg {
+    optional int32 monsterId = 1;
+    optional int64 maxHp = 2;
+    optional int64 currHp = 3;
+    optional int64 attack = 4;
+    optional int32 attackRound = 5;
+}
+message StageChessboardGirdMsg {
+    optional int32 x = 1;
+    optional int32 y = 2;
+    optional ChessboardMagicMsg magic = 3;
+}
+message ChessboardMagicMsg {
+    optional int32 uuid = 1;
+    optional int32 id = 2;
+    optional int32 level = 3;
+    optional int64 attributeValue = 4;
+    optional int32 showRound = 5;
+}
+message StageMagicMsg {
+    optional int32 id = 1;
+    optional int32 level = 2;
+}
+message StageItemMsg {
+    optional int32 id = 1;
+    optional int32 num = 2;
+}
+message AttackRoundMsg {
+    optional int32 target = 1;
+    optional int64 damage = 2;
+    optional int64 remainHp = 3;
+    optional int32 round = 4;
+    optional int32 attackAttr = 5;
+}
+message LuckyRogueSectMsg {
+    optional int32 sectId = 1;
+    optional int32 sectLevel = 2;
+}
+message OptionalMagicsMsg {
+    optional int32 id = 1;
+    optional int32 optionalType = 2;
+    repeated int32 magicIds = 3;
+    optional bool stopSkip = 4;
+    optional int32 totalNum = 5;
+    optional int32 remainNum = 6;
+    optional int32 waveId = 7;
+    optional int32 waveRound = 8;
+}
+message BuffEffectMsg {
+    optional int32 buffId = 1;
+    optional CellMagicMsg ownerMagic = 2;
+    repeated CellMagicMsg targetMagics = 3;
+    optional string param = 4;
+}
+message CellMagicMsg {
+    optional int32 x = 1;
+    optional int32 y = 2;
+    optional int32 magicUuid = 3;
+}
+message ChessboardCalResultMsg {
+    repeated AttrDamageMsg attrDamages = 1;
+    repeated StageChessboardGirdMsg chessboardGirds = 2;
+    repeated BuffEffectMsg triggeredBuffEffect = 3;
+}
+message AttrDamageMsg {
+    optional CellMagicMsg source = 1;
+    optional int32 attackAttr = 2;
+    optional int64 damage = 3;
+}
+message MagicCoinMsg {
+    optional int32 coinType = 1;
+    optional int32 coinCount = 2;
+}
+message LuckyRogueStageMsg {
+    optional int32 stageId = 1;
+    optional int32 modelId = 2;
+    repeated int32 monsterIds = 3;
+}
+message LuckyRogueStageEnterReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueStageEnterResp {
+    required int32 ret = 1;
+    optional LuckRogueEnergyMsg energy = 2;
+    optional int32 currWave = 3;
+    optional StageCharacterStateMsg characterState = 4;
+    optional StageMonsterStateMsg monsterState = 5;
+    optional int32 currModelId = 6;
+    repeated int32 currMonsterIds = 7;
+    optional int32 currStageId = 8;
+    repeated LuckyRogueSectMsg sectMsgs = 9;
+    repeated LuckyRogueStageMsg stageMsgs = 10;
+}
+message LuckyRogueChallengeReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueChallengeResp {
+    required int32 ret = 1;
+    optional int32 currWave = 2;
+    optional StageCharacterStateMsg characterState = 3;
+    optional StageMonsterStateMsg monsterState = 4;
+    repeated ChessboardMagicMsg magicItems = 5;
+    repeated StageChessboardGirdMsg chessboardGirds = 6;
+    repeated MagicCoinMsg magicCoins = 7;
+    optional int32 modelId = 8;
+    optional int32 round = 9;
+    optional LuckRogueEnergyMsg energy = 10;
+    repeated OptionalMagicsMsg optionalMagicsList = 11;
+    repeated int32 currMonsterIds = 12;
+    repeated ChessboardMagicMsg bagMagics = 13;
+    repeated ChessboardMagicMsg sectMagics = 14;
+}
+message LuckyRogueSummonAttackReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueSummonAttackResp {
+    optional int32 ret = 1;
+    repeated AttackRoundMsg attackRounds = 2;
+    optional StageCharacterStateMsg characterState = 3;
+    optional int32 currWave = 4;
+    optional StageMonsterStateMsg monsterState = 5;
+    repeated StageChessboardGirdMsg chessboardGirds = 6;
+    optional int32 result = 7;
+    optional string reward = 8;
+    repeated OptionalMagicsMsg optionalMagicsList = 9;
+    optional int32 round = 10;
+    repeated ChessboardCalResultMsg calResults = 11;
+    repeated MagicCoinMsg magicCoins = 12;
+    optional int32 currStageId = 13;
+    optional LuckRogueEnergyMsg energy = 14;
+    optional int32 currModelId = 15;
+    repeated int32 currMonsterIds = 16;
+    optional int32 historyWave = 17;
+    optional int64 damageValue = 18;
+    optional int64 maxDamage = 19;
+    optional int32 rank = 20;
+    repeated ChessboardMagicMsg magicItems = 21;
+    repeated ChessboardMagicMsg bagMagics = 22;
+}
+message LuckyRogueChooseMagicReq {
+    required int32 activityId = 1;
+    optional int32 optionalId = 2;
+    optional int32 magicId = 3;
+}
+message LuckyRogueChooseMagicResp {
+    optional int32 ret = 1;
+    optional StageChessboardGirdMsg chessboardGirds = 2;
+    optional ChessboardMagicMsg magicItem = 3;
+    optional OptionalMagicsMsg nextOptionalMagics = 4;
+}
+message LuckyRogueRemoveMagicReq {
+    required int32 activityId = 1;
+    optional int32 magicUuid = 2;
+    optional int32 magicType = 3;
+}
+message LuckyRogueRemoveMagicResp {
+    optional int32 ret = 1;
+    optional MagicCoinMsg magicCoin = 2;
+}
+message LuckyRogueReloadMagicReq {
+    required int32 activityId = 1;
+    optional int32 optionalId = 2;
+}
+message LuckyRogueReloadMagicResp {
+    optional int32 ret = 1;
+    optional OptionalMagicsMsg optionalMagics = 2;
+    optional MagicCoinMsg magicCoin = 3;
+}
+message LuckyRogueGiveUpReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueGiveUpResp {
+    optional int32 ret = 1;
+    optional string reward = 2;
+    optional LuckRogueEnergyMsg energy = 3;
+    optional int64 damageValue = 4;
+    optional int64 maxDamage = 5;
+    optional int32 rank = 6;
+    optional int32 historyWave = 7;
+}
+message LuckyRogueSweepEnterReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueSweepEnterResp {
+    required int32 ret = 1;
+    optional int32 sweepStageId = 2;
+    repeated int32 sweepMonsterIds = 3;
+    optional LuckRogueEnergyMsg energy = 4;
+}
+message LuckyRogueSweepReq {
+    required int32 activityId = 1;
+    optional int32 powerRate = 2;
+}
+message LuckyRogueSweepResp {
+    required int32 ret = 1;
+    repeated string rewards = 2;
+    optional LuckRogueEnergyMsg energy = 3;
+}
+message LuckyRogueGetSectMsgReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueGetSectMsgResp {
+    required int32 ret = 1;
+    repeated LuckyRogueSectMsg sectMsgs = 2;
+}
+message LuckyRogueLvUpSectReq {
+    required int32 activityId = 1;
+    optional int32 sectId = 2;
+}
+message LuckyRogueLvUpSectResp {
+    required int32 ret = 1;
+    repeated LuckyRogueSectMsg sectMsgs = 2;
+}
+message LuckyRogueOpenBagMagicReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueOpenBagMagicResp {
+    required int32 ret = 1;
+    repeated ChessboardMagicMsg bagMagics = 2;
+    repeated ChessboardMagicMsg magicItems = 3;
+}
+message LuckyRogueShowRedPointReq {
+    required int32 activityId = 1;
+}
+message LuckyRogueShowRedPointResp {
+    required int32 ret = 1;
+    optional string data = 2;
+}
+message LuckyRogueConfigMsg {
+    repeated LuckyRogueLevelConfigMsg levelConfig = 1;
+    repeated LuckyRogueModelConfigMsg modelConfig = 2;
+    repeated LuckyRogueMonsterConfigMsg monsterConfig = 3;
+    repeated LuckyRogueGiftConfigMsg giftConfig = 4;
+    repeated LuckyRogueCharaConfigMsg charaConfig = 5;
+    repeated LuckyRogueEffectConfigMsg effectConfig = 6;
+    repeated LuckyRogueMagicConfigMsg magicConfig = 7;
+    repeated LuckyRogueSkillConfigMsg skillConfig = 8;
+    repeated LuckyRogueBuffConfigMsg buffConfig = 9;
+    repeated LuckyRogueGroupConfigMsg groupConfig = 10;
+}
+message LuckyRogueLevelConfigMsg {
+    required int32 id = 1;
+    optional int32 chapter = 2;
+    optional int32 type = 3;
+    optional string name = 4;
+    optional string chapterModel = 5;
+    optional string monsterParam = 6;
+    optional string itemReward = 7;
+    optional int32 bossId = 8;
+    optional int32 recommendLevel = 9;
+    optional string returnEnergy = 10;
+    optional string unlockMagic = 11;
+    optional string rareRound = 12;
+}
+message LuckyRogueModelConfigMsg {
+    required int32 id = 1;
+    optional int32 modelType = 2;
+    optional int32 wave = 3;
+    optional string roundMagic = 4;
+    optional string waveMagic = 5;
+    optional string monsterParam = 6;
+    optional string roundRogue = 7;
+    optional string waveRogue = 8;
+    optional int32 recoverHp = 9;
+    optional int32 monsterType = 10;
+}
+message LuckyRogueMonsterConfigMsg {
+    required int32 id = 1;
+    optional string name = 2;
+    optional string desc = 3;
+    optional int32 type = 4;
+    optional int32 quality = 5;
+    optional int32 backStage = 6;
+    optional string appearanceId = 7;
+    optional string icon = 8;
+    optional string attackEffectName = 9;
+    optional string skillEffectName = 10;
+    optional string attackHoldType = 11;
+    optional string attackExcursion = 12;
+    optional string attackHitExcursion = 13;
+    optional string mutilAttackParam = 14;
+    optional string attackSkillExcursion = 15;
+    optional string mutilSkillAttackParam = 16;
+    optional int32 bodyHeight = 17;
+    optional int32 bodyScale = 18;
+    optional int32 attackBodyScale = 19;
+    optional int32 skillEffect = 20;
+    optional int32 isBoss = 21;
+    optional int32 wuXing = 22;
+    optional string wuXingCounter = 23;
+}
+message LuckyRogueGiftConfigMsg {
+    required int32 id = 1;
+    optional int32 level = 2;
+    optional string cost = 3;
+    optional int32 hp = 4;
+    optional int32 atk = 5;
+    optional string unlockSkill = 6;
+}
+message LuckyRogueCharaConfigMsg {
+    required int32 id = 1;
+    optional string appearanceId = 2;
+    optional string icon = 3;
+    optional string attackHoldType = 4;
+    optional string act = 5;
+    optional string hit = 6;
+    optional string attackHitExcursion = 7;
+    optional int32 bodyHeight = 8;
+    optional int32 bodyScale = 9;
+    optional int32 attackBodyScale = 10;
+    optional int32 skillEffect = 11;
+    optional string name = 12;
+}
+message LuckyRogueEffectConfigMsg {
+    required int32 id = 1;
+    optional string name = 2;
+    optional string path = 3;
+    optional int32 type = 4;
+    optional int32 posType = 5;
+    optional int32 isFollowScale = 6;
+    optional int32 offsetX = 7;
+    optional int32 offsetY = 8;
+    optional int32 moveSpeed = 9;
+    optional int32 audioId = 10;
+    optional int32 priority = 11;
+    optional string multiHit = 12;
+    optional string beAtkEffectName = 13;
+    optional string delay = 14;
+    optional int32 playCircle = 15;
+}
+message LuckyRogueMagicConfigMsg {
+    required int32 id = 1;
+    optional string name = 2;
+    optional string desc = 3;
+    optional string icon = 4;
+    optional int32 cornerIcon = 5;
+    optional int32 quality = 6;
+    optional int32 symbolType = 7;
+    optional int32 maxNum = 8;
+    optional int32 isGiftMagic = 9;
+    optional int32 maxLevel = 10;
+    optional int32 baseWuxing = 11;
+    optional int32 baseValue = 12;
+    optional int32 upgradeValue = 13;
+    optional int32 weight = 14;
+    optional string weightUp = 15;
+    optional string skillList = 16;
+    optional int32 isLevelMagic = 17;
+    optional int32 showRound = 18;
+    optional int32 style = 19;
+    optional int32 suggest = 20;
+}
+message LuckyRogueSkillConfigMsg {
+    required int32 id = 1;
+    optional string buffList = 2;
+    optional int32 maxLevel = 3;
+}
+message LuckyRogueBuffConfigMsg {
+    required int32 id = 1;
+    optional int32 buffType = 2;
+    optional string triggerList = 3;
+    optional string triggerRate = 4;
+    optional int32 triggerType = 5;
+    optional string triggerParam = 6;
+    optional string effectName = 7;
+    optional int32 behaviorType = 8;
+    optional string behaviorParam = 9;
+    optional int32 endType = 10;
+    optional string endParam = 11;
+    optional string targetParam = 12;
+    optional int32 adventureLimit = 13;
+    optional int32 priority = 14;
+}
+message LuckyRogueGroupConfigMsg {
+    required int32 id = 1;
+    optional string name = 2;
+    optional string triggerList = 3;
+}

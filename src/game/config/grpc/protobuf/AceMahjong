@@ -1,0 +1,202 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum AcePb {
+  ace_enter_activity = 234800;
+  ace_enter_game = 234801;
+  ace_roll = 234802;
+  ace_keep_roll = 234803;
+  ace_battle = 234804;
+  ace_battle_get_award = 234805;
+  ace_use_item = 234806;
+  ace_select_event = 234807;
+  ace_sync_data = 234808;
+  ace_end_game = 234809;
+  ace_settle_info = 234810;
+}
+/** 活动配置 **/
+message AceActivityConfig {
+  repeated AceLevelConfig aceLevelConfig = 1;
+  repeated AceEventConfig aceEventConfig = 2;
+  repeated AceLevelBattleConfig aceLevelBattleConfig = 3;
+  repeated AceTreasureConfig aceTreasureConfig = 4;
+  repeated AceDiceConfig aceDiceConfig = 5;
+  repeated AceNumConfig aceNumConfig = 6;
+}
+message AceLevelConfig {
+  required int32 id = 1;
+  required int32 order = 2;
+  required int32 type = 3;
+  required string readid = 4;
+}
+message AceEventConfig {
+  required int32 id = 1;
+  required int32 type = 2;
+  required string param = 3;
+}
+message AceLevelBattleConfig {
+  required int32 id = 1;
+  required string majong = 2;
+  required string treasure = 3;
+  required string getnum = 4;
+  required string majong1 = 5;
+  required string majongroll = 6;
+  required string majongspe = 7;
+  required string majongsperoll = 8;
+}
+message AceTreasureConfig {
+  required int32 id = 1;
+  required int32 type = 2;
+  required string param = 3;
+}
+message AceDiceConfig {
+  required int32 id = 1;
+  required int32 spe = 2;
+  required int32 type = 3;
+  required string param = 4;
+}
+message AceNumConfig {
+  required int32 id = 1;
+  required int32 num = 2;
+}
+message AceEnterActivityReq{
+  required int32 activityId = 1;
+}
+message AceEnterActivityResp{
+  required int32 ret = 1;
+  optional int32 stageId = 2;
+  optional int32 dailyFreeBattleNum = 3;
+  optional int32 rank = 4;
+  optional int32 historyStage = 5;
+}
+message AceActionInfo {
+  required bool isPlayerAction = 1;
+  required int32 actionType = 2;
+  repeated AceHurtInfo actHurtInfo = 3;
+  repeated AceRecoverInfo recoverInfo = 4;
+  optional AceChangePosInfo changePosInfo = 5;
+  repeated int32 rollPointNum = 6;
+}
+message AceHurtInfo {
+  optional int32 hurt = 1;
+  optional int32 curPointNum = 2;
+  optional int32 pos = 3;
+  optional int32 skillId = 4;
+  optional int32 againstPos = 5;
+}
+message AceChangePosInfo {
+  required int32 oldPos = 1;
+  required int32 newPos = 2;
+}
+message AceRecoverInfo {
+  optional int32 pos = 1;
+  optional int32 recover = 2;
+}
+message AceGameInfo {
+  optional AcePlayerInfo playerInfo = 1;
+  optional AcePlayerInfo robotInfo = 2;
+  repeated AceActionInfo actionInfo = 3;
+  optional int32 round = 4;
+}
+message AceEnterGameReq {
+  required int32 activityId = 1;
+}
+message AceEnterGameResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AcePropUse {
+  required int32 itemId = 1;
+  required int32 num = 2;
+}
+message AcePlayerInfo {
+  repeated AceInfo aceInfo = 1;
+  repeated int32 skillId = 2;
+  optional int32 rollNum = 3;
+  optional int32 maxRollNum = 4;
+  optional int32 maxSkillNum = 5;
+  optional int32 stageId = 6;
+  optional int32 status = 7;
+  required int32 playerType = 8;
+  optional int32 eventId = 9;
+  repeated AceInfo waitDealAceInfo = 10;
+  repeated int32 waitSelectSkillId = 11;
+  repeated AcePropUse propUse = 12;
+  repeated AceInfo origAceInfo = 13;
+}
+message AceInfo {
+  required int32 pointNum = 1;
+  required int32 id = 2;
+  optional int32 pos = 3;
+}
+message AceRollReq {
+  required int32 activityId = 1;
+}
+message AceRollResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceKeepRollReq {
+  required int32 activityId = 1;
+}
+message AceKeepRollResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceBattleReq {
+  required int32 activityId = 1;
+  required int32 pos = 2;
+}
+message AceBattleResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceBattleGetAwardReq {
+  required int32 activityId = 1;
+  optional int32 index = 2;
+  optional int32 pos = 3;
+  optional bool leave = 4;
+}
+message AceBattleGetAwardResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceUseItemReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  optional int32 pos = 3;
+  optional int32 aceId = 4;
+}
+message AceUseItemResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceSelectEventReq {
+  required int32 activityId = 1;
+  optional int32 index = 2;
+  optional bool leave = 3;
+  optional int32 changeIndex = 4;
+}
+message AceSelectEventResp {
+  required int32 ret = 1;
+  optional AceGameInfo gameInfo = 2;
+}
+message AceSyncData{
+  optional AcePlayerInfo playerInfo = 1;
+  optional int32 dailyFreeBattleNum = 2;
+}
+message AceEndGameReq{
+  required int32 activityId = 1;
+}
+message AceEndGameResp{
+  required int32 ret = 1;
+  optional int32 stage = 2;
+  optional int32 rank = 3;
+}
+message AceSettleInfoReq{
+  required int32 activityId = 1;
+}
+message AceSettleInfoResp{
+  required int32 ret = 1;
+  optional int32 stage = 2;
+  optional int32 rank = 3;
+}

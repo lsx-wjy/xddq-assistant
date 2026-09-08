@@ -1,0 +1,576 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "Battle";
+import "Common";
+enum BodyTrialPb {
+  bodyTrialCreateTeam = 230901;
+  bodyTrialReadyBattle = 230902;
+  bodyTrialTriggerFloorEvent = 230903;
+  bodyTrialStartSelectBuff = 230904;
+  bodyTrialLuckBuffSelect = 230905;
+  bodyTrialShopBuy = 230906;
+  bodyTrialEnter = 230908;
+  bodyTrialHeartBeat = 230909;
+  bodyTrialNotifyBattleResult = 230910;
+  bodyTrialTeamUpGetInfo = 230911;
+  bodyTrialTeamUpTeamList = 230912;
+  bodyTrialTeamUpGetTeamInfo = 230913;
+  bodyTrialTeamApplyJoin = 230914;
+  bodyTrialTeamApplyOperate = 230915;
+  bodyTrialTeamOperate = 230916;
+  bodyTrialTeamUpMatchPlayerList = 230917;
+  bodyTrialChatTeamInvite = 230918;
+  bodyTrialTeamInviteList = 230919;
+  bodyTrialTeamInviteOperate = 230920;
+  bodyTrialEnterBattleView = 230921;
+  bodyTrialEnterSwitchSeparation = 230922;
+  bodyTrialSwitchSeparation = 230923;
+  bodyTrialSeparationDetail = 230924;
+  bodyTrialSeparationDetailOtherServer = 230925;
+  bodyTrialSeparationDetailOtherServerBack = 230926;
+  bodyTrialChangePos = 230927;
+  bodyTrialInviteOpenOff = 230929;
+  bodyTrialWorship = 230930;
+  bodyTrialSuppressed = 230931;
+  bodyTrialGodBodyDetail = 230932;
+  bodyTrialGodBodyUpdate = 230933;
+  bodyTrialSelectFloorAward = 230934;
+  bodyTrialFloorAward = 230935;
+  bodyTrialSelectFloorAwardDetail = 230936;
+  bodyTrialPreSetBuff = 230937;
+  bodyTrialPreSetBuffInfo = 230938;
+  bodyTrialTeamMemberNotice = 230941;
+  bodyTrialTeamLeaderNotice = 230942;
+  bodyTrialTeamLoginSync = 230943;
+  bodyTrialSkipBattle = 230944;
+  bodyTrialRedPointInfo = 230945;
+  bodyTrialGetSelectedBuff = 230946;
+  bodyTrialBossInfo = 230947;
+  bodyTrialBossPower = 230948;
+  BodyTrialGetBigAwardInfo = 230939;
+  BodyTrialGetBigAward = 230940;
+}
+enum BodyTrialRedPointEnum {
+  bodyTrialHasBattleRedPoint = 0;
+  bodyTrialFloorAwardRedPoint = 1;
+  bodyTrialFloorTeamApplyRedPoint = 2;
+  bodyTrialGodBodyUpdateRedPoint = 3;
+  bodyTrialWorshipRedPoint = 4;
+  bodyTrialBigAwardRedPoint = 5;
+}
+message BodyTrialCreateTeamReq {
+  required string teamName = 1;
+}
+message BodyTrialCreateTeamResp {
+  required int32 ret = 1;
+  optional BodyTrialTeamDetail teamDetail = 2;
+}
+message BodyTrialTeamDetail {
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  optional int64 leaderId = 3;
+  optional int64 leaderServerId = 4;
+  optional string leaderName = 5;
+  repeated BodyTrialTeamMemberInfo members = 6;
+  optional int64 createTime = 7;
+  repeated BodyTrialTeamApplyInfo applyList = 8;
+  optional int32 status = 9;
+  optional int32 type = 10;
+  optional int32 battleNum = 11;
+  optional int32 curFloorId = 12;
+  optional int32 loseTimes = 13;
+}
+message BodyTrialTeamMemberInfo {
+  optional PlayerAppearanceDataMsg memberInfo = 1;
+  optional int32 status = 2;
+  optional int32 historyMaxFloor = 3;
+  optional int64 changeTeamStatusTime = 4;
+  optional bool isRobot = 5;
+  optional int32 pos = 6;
+  optional int32 challengeTimes = 7;
+  optional bool selectedBuff = 8;
+  optional int32 headIconId = 9;
+  optional string wxHeadUrl = 10;
+  optional int32 headFrameId = 11;
+  repeated BodyTrialBuffObj buffVec = 12;
+}
+message BodyTrialBuffObj{
+  optional int32 buffId = 1;
+  optional int32 buffLv = 2;
+}
+message BodyTrialTeamApplyInfo {
+  optional PlayerHeadAndNameMsg playerInfo = 1;
+  optional int64 applyTime = 2;
+  optional string fightValue = 3;
+  optional int32 historyMaxFloorId = 4;
+}
+message BodyTrialTeamUpGetInfoReq{
+}
+message BodyTrialTeamUpGetInfoResp{
+  required int32 ret = 1;
+  optional int64 lastLeaveTeam = 2;
+  repeated int64 applyJoinTeamIdList = 3;
+}
+message BodyTrialTeamUpTeamListReq {
+  required int32 type = 1;
+  required int32 page = 2;
+}
+message BodyTrialTeamUpTeamListResp {
+  required int32 ret = 1;
+  repeated BodyTrialTeamUpTeamInfo teamList = 2;
+}
+message BodyTrialTeamUpTeamInfo{
+  optional int64 teamId = 1;
+  optional string teamName = 2;
+  optional int64 leaderId = 3;
+  optional string leaderName = 4;
+  optional int64 leaderServerId = 5;
+  optional string fightValue = 6;
+  optional int64 createTime = 7;
+  repeated BodyTrialTeamUpMemberInfo members = 8;
+  optional int64 inviteTime = 9;
+}
+message BodyTrialTeamUpMemberInfo{
+  optional PlayerHeadAndNameMsg memberInfo = 1;
+  optional string fightValue = 2;
+  optional bool isRobot = 3;
+  optional int32 maxFloor = 4;
+  optional bool isInvite = 5;
+}
+message BodyTrialTeamUpGetTeamInfoReq {
+  required int64 teamId = 1;
+}
+message BodyTrialTeamUpGetTeamInfoResp {
+  required int32 ret = 1;
+  optional BodyTrialTeamUpTeamInfo teamInfo = 2;
+}
+message BodyTrialTeamApplyOperateReq {
+  optional int64 teamId = 1;
+  optional int64 playerId = 2;
+  required int32 operateType = 3;
+}
+message BodyTrialTeamApplyOperateResp {
+  required int32 ret = 1;
+  optional BodyTrialTeamDetail teamInfo = 2;
+}
+message BodyTrialTeamOperateReq {
+  required int32 operateType = 1;
+  optional int64 playerId = 2;
+}
+message BodyTrialTeamOperateResp {
+  required int32 ret = 1;
+}
+message BodyTrialTeamUpMatchPlayerListReq {
+  required bool refresh = 1;
+}
+message BodyTrialTeamUpMatchPlayerListResp {
+  required int32 ret = 1;
+  repeated BodyTrialTeamUpMemberInfo playerList = 2;
+  repeated BodyTrialTeamUpMemberInfo robotList = 3;
+}
+message BodyTrialReadyBattleReq {
+}
+message BodyTrialReadyBattleResp {
+  required int32 ret = 1;
+  repeated BodyTrialFloorInfo floorList = 2;
+  optional int32 curFloorId = 3;
+  optional BodyTrialTriggerFloorEventInfo eventInfo = 4;
+  optional int64 score = 5;
+}
+message BodyTrialFloorInfo {
+  required int32 floorId = 1;
+  repeated BodyTrialEventInfo eventInfo = 2;
+  optional int32 selectIndex = 3;
+}
+message BodyTrialEventInfo {
+  required int32 eventId = 1;
+  repeated int32 monsterId = 2;
+}
+message BodyTrialTriggerFloorEventReq {
+  required int32 floorId = 1;
+  required int32 selectIndex = 2;
+  required int32 type = 3;
+  required int64 teamId = 4;
+}
+message BodyTrialTriggerFloorEventResp {
+  required int32 ret = 1;
+  optional BodyTrialTriggerFloorEventInfo eventInfo = 2;
+}
+message BodyTrialTriggerFloorEventInfo {
+  optional BodyTrialBattleResultDetail battleResult = 1;
+  optional BodyTrialSelectBuffInfo selectBuffInfo = 2;
+  optional BodyTrialResetBuffInfo resetBuffInfo = 3;
+  repeated BodyTrialShopInfo shopInfo = 4;
+  repeated int32 monsterId = 5;
+  repeated BodyTrialFloorInfo floorList = 6;
+  optional string boxRewards = 7;
+  optional int32 randomEventType = 8;
+  optional int32 curFloorId = 9;
+  optional int32 selectIndex = 10;
+  optional int64 time = 11;
+  optional string reward = 12;
+  optional int64 score = 13;
+  repeated BodyTrialTeamBuffLimitInfo teamBuffLimitInfo = 14;
+}
+message BodyTrialShopInfo {
+  optional int32 buyNum = 1;
+  optional int32 randBuffId = 2;
+}
+message BodyTrialResetBuffInfo{
+  repeated int32 buffId = 1;
+  optional int32 type = 2;
+}
+message BodyTrialTeamBuffLimitInfo{
+  required int32 buffId = 1;
+  required int32 useNum = 2;
+}
+message BodyTrialBattleResultDetail{
+  required BattleRecordMsg allBattleRecord = 1;
+  optional string rewards = 2;
+  repeated BattleMain bossData = 3;
+  optional bool isFinalFloor = 4;
+  optional int64 teamId = 5;
+  optional int32 loseTimes = 6;
+  optional int32 curFloorId = 7;
+  optional int32 selectIndex = 8;
+  optional int64 time = 9;
+}
+message BodyTrialStartSelectBuffReq {
+  required int32 floorId = 1;
+  required int32 selectIndex = 2;
+}
+message BodyTrialStartSelectBuffResp {
+  required int32 ret = 1;
+  optional int64 time = 2;
+}
+message BodyTrialLuckBuffSelectReq {
+  required int32 floorId = 1;
+  required int32 selectIndex = 2;
+  required int32 buffIndex = 3;
+  required int32 type = 4;
+}
+message BodyTrialLuckBuffSelectResp {
+  required int32 ret = 1;
+}
+message BodyTrialShopBuyReq {
+  required int32 floorId = 1;
+  required int32 selectIndex = 2;
+  required int32 itemIndex = 3;
+}
+message BodyTrialShopBuyResp {
+  required int32 ret = 1;
+  optional int32 giftQuality = 2;
+  optional int32 buyNum = 3;
+  optional int64 score = 4;
+}
+message BodyTrialEnterReq {
+}
+message BodyTrialEnterResp {
+  required int32 ret = 1;
+  optional int64 teamId = 2;
+  optional int32 memberNum = 3;
+  optional int32 challengeTimes = 4;
+  optional int32 trailType = 5;
+  optional int32 curFloorId = 6;
+  optional int32 maxFloor = 7;
+  optional BodyTrialTeamDetail teamInfo = 8;
+  optional int32 teamStatus = 9;
+  repeated int64 serverId = 10;
+  repeated BodyTrialGodBodyChangeInfo godBodyChange = 11;
+  optional int32 awardMaxFloor = 12;
+  optional bool isWorship = 13;
+  optional int32 inviteOpenOff = 14;
+  optional int64 lastLeaveTeam = 15;
+  repeated int64 applyJoinTeamIdList = 16;
+}
+message BodyTrialTeamMemberNotice {
+  required int32 type = 1;
+  optional BodyTrialTeamDetail teamInfo = 2;
+  repeated BodyTrialChangePosData changePosData = 3;
+  optional BodyTrialSwitchSeparationNotice switchSeparationNotify = 4;
+  optional BodyTrialTriggerFloorEventInfo eventInfo = 5;
+  optional int32 inviteNum = 6;
+}
+message BodyTrialTeamLeaderNotice {
+  required int32 type = 1;
+  optional BodyTrialTeamApplyInfo applyMemberInfo = 2;
+}
+message BodyTrialSelectBuffInfo{
+  repeated int32 canSelectBuff = 1;
+  optional int32 buff = 2;
+  optional int64 startSelectTime = 3;
+}
+message BodyTrialChangePosData{
+  required int64 playerId = 1;
+  required int32 pos = 2;
+}
+message BodyTrialSwitchSeparationNotice{
+  repeated BattleMain battleMain = 1;
+  optional int64 targetId = 2;
+  optional int32 separationId = 3;
+  optional int64 teamId = 4;
+}
+message BodyTrialGodBodyChangeInfo{
+  optional int32 index = 1;
+  optional int64 changeTime = 2;
+}
+message BodyTrialHeartBeatReq{
+}
+message BodyTrialHeartBeatResp{
+  required int32 ret = 1;
+}
+message BodyTrialBuffInfo {
+  required int32 buffId = 1;
+  required int32 floorId = 2;
+}
+message BodyTrialRankListMsg{
+  repeated BodyTrialRankData rankList = 1;
+}
+message BodyTrialRankData {
+  required int64 id = 1;
+  optional string teamName = 2;
+  optional int64 leaderServerId = 3;
+  repeated PlayerCharacterImageMsg members = 4;
+  optional int64 battleTime = 5;
+  optional string fightValue = 6;
+  optional int32 floorId = 7;
+  repeated int64 robotPlayerId = 8;
+  optional int32 rank = 9;
+}
+message BodyTrialWorshipReq {
+}
+message BodyTrialWorshipResp {
+  required int32 ret = 1;
+  repeated BodyTrialWorshipShowMsg showData = 2;
+  optional string reward = 3;
+}
+message BodyTrialWorshipShowMsg{
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pets = 4;
+  optional int32 appearanceId = 5;
+  optional int32 equipCloudId = 6;
+  optional int32 realmsId = 7;
+  repeated int32 petSoulShapeList = 14;
+  optional int32 titleId = 15;
+  repeated int32 petLinkageId = 16;
+}
+message BodyTrialSuppressedReq {
+  optional int32 trialType = 1;
+}
+message BodyTrialSuppressedResp {
+  required int32 ret = 1;
+  optional PlayerSuppressAttribute suppressAttr = 2;
+}
+message BodyTrialChatTeamInviteReq {
+  required int32 type = 1;
+}
+message BodyTrialChatTeamInviteResp {
+  required int32 ret = 1;
+}
+message BodyTrialTeamInviteListReq{
+  optional int32 type = 1;
+}
+message BodyTrialTeamInviteListResp{
+  required int32 ret = 1;
+  repeated BodyTrialTeamUpTeamInfo teamList = 2;
+  optional bool isAccept = 3;
+}
+message BodyTrialTeamInviteOperateReq{
+  required int32 operateType = 1;
+  optional int64 teamId = 2;
+  optional int64 playerId = 3;
+}
+message BodyTrialTeamInviteOperateResp{
+  required int32 ret = 1;
+}
+message BodyTrialEnterBattleViewReq{}
+message BodyTrialEnterBattleViewResp{
+  required int32 ret = 1;
+  optional BodyTrialEnterBattleData data = 2;
+  optional BodyTrialSelectBuffInfo selectBuffData = 3;
+  repeated int64 robotPlayerIds = 4;
+  optional int32 curFloorId = 5;
+  optional bool needSendBuffReq = 6;
+  repeated BodyTrialSeparationSimpleData separationData = 7;
+}
+message BodyTrialEnterBattleData{
+  repeated BattleMain data = 1;
+}
+message BodyTrialEnterSwitchSeparationReq{}
+message BodyTrialEnterSwitchSeparationResp{
+  required int32 ret = 1;
+  repeated BodyTrialSeparationSimpleData data = 2;
+}
+message BodyTrialSeparationSimpleData{
+  required PlayerHeadAndNameMsg data = 1;
+  optional int32 select = 2;
+  repeated string powers = 3;
+  optional bool isRobot = 4;
+}
+message BodyTrialSwitchSeparationReq{
+  required int64 targetId = 1;
+  required int32 separationId = 2;
+  required bool isRobot = 3;
+  required int64 teamId = 4;
+  repeated BattleMain battleMain = 5;
+}
+message BodyTrialSwitchSeparationResp{
+  required int32 ret = 1;
+  optional BodyTrialSwitchSeparationNotice notify = 2;
+}
+message BodyTrialSeparationDetailReq{
+  required int64 targetPlayerId = 1;
+  required int64 teamId = 2;
+  required int64 leaderServerId = 3;
+}
+message BodyTrialSeparationDetailResp{
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+  optional int32 appearanceId = 3;
+}
+message BodyTrialSeparationDetailOtherServerReq{
+  required int64 targetPlayerId = 1;
+  required int64 teamId = 2;
+  required int64 watcherServerId = 3;
+  required int64 watcherPlayerId = 4;
+}
+message BodyTrialSeparationDetailOtherServerResp{
+  required int32 ret = 1;
+  required BodyTrialSeparationDetailResp resp = 2;
+  required int64 watcherPlayerId = 3;
+}
+message  BodyTrialChangePosReq{
+  required int64 resPlayerId = 1;
+  required int64 tarPlayerId = 2;
+  required int32 tarPos = 3;
+  required int64 teamId = 4;
+}
+message  BodyTrialChangePosResp{
+  required int32 ret = 1;
+}
+message BodyTrialChatCardData {
+  optional int64 serverId = 1;
+  optional string teamName = 2;
+  optional int32 trialType = 3;
+  optional int64 teamId = 4;
+  optional int32 chatType = 5;
+}
+message BodyTrialChangePosNotify{
+  repeated BodyTrialChangePosData data = 1;
+}
+message BodyTrialGodBodyDetailReq{
+}
+message BodyTrialGodBodyDetailResp {
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+}
+message BodyTrialGodBodyUpdateReq {
+  required int32 separationIdx = 1;
+  required int32 trailType = 2;
+}
+message BodyTrialGodBodyUpdateResp {
+  required int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+}
+message BodyTrialSelectFloorAwardReq {
+  optional int32 floor = 1;
+  optional int32 rewardIndex = 2;
+  optional int32 gridIndex = 3;
+}
+message BodyTrialSelectFloorAwardResp {
+  required int32 ret = 1;
+}
+message BodyTrialFloorAwardReq{
+}
+message BodyTrialFloorAwardResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 awardMaxFloorId = 3;
+}
+message BodyTrialSelectFloorAwardDetailReq  {
+}
+message BodyTrialSelectFloorAwardDetailResp {
+  required int32 ret = 1;
+  optional string unlockSystem = 2;
+  repeated BodyTrialSelectRewardMsg selectReward = 3;
+  optional int32 openDay = 4;
+}
+message BodyTrialSelectRewardMsg {
+  optional int32 floor = 1;
+  optional int32 gridIndex = 2;
+  optional int32 rewardIndex = 3;
+}
+message BodyTrialInviteOpenOffReq{
+  required int32 type = 1;
+}
+message BodyTrialInviteOpenOffResp{
+  required int32 ret = 1;
+}
+message BodyTrialPreSetBuffReq {
+  repeated BodyTrialPreSetBuffInfo preSetInfo = 1;
+}
+message BodyTrialPreSetBuffInfo{
+  optional int32 priority = 1;
+  optional int32 skillType = 2;
+  optional int32 skillAttr = 3;
+}
+message BodyTrialPreSetBuffResp {
+  required int32 ret = 1;
+}
+message BodyTrialPreSetBuffInfoReq {
+}
+message BodyTrialPreSetBuffInfoResp {
+  required int32 ret = 1;
+  repeated BodyTrialPreSetBuffInfo preSetInfo = 2;
+}
+message BodyTrialSkipBattleReq {
+}
+message BodyTrialSkipBattleResp {
+    required int32 ret = 1;
+}
+message BodyTrialRedPointInfoReq{
+}
+message BodyTrialRedPointInfoResp{
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message BodyTrialGetSelectedBuffReq {
+  optional int64 targetPlayerId = 1;
+  optional bool isRobot = 2;
+}
+message BodyTrialGetSelectedBuffResp {
+  required int32 ret = 1;
+  repeated BodyTrialBuffObj buffInfo = 2;
+}
+message BodyTrialBossInfoReq {
+  required int32 bossId = 1;
+}
+message BodyTrialBossInfoResp {
+  required int32 ret = 1;
+  optional PlayerDetailDataMsg bossInfo = 2;
+}
+message BodyTrialBossPowerReq {
+  repeated int32 monsterId = 1;
+}
+message BodyTrialBossPowerResp{
+  required int32 ret = 1;
+  repeated string power = 2;
+}
+message BodyTrialBigAwardInfoReq {
+}
+message BodyTrialBigAwardInfoResp {
+  required int32 ret = 1;
+  repeated BodyTrialBigAwardInfo rewardData = 2;
+}
+message BodyTrialBigAwardInfo {
+  optional int32 boxIndex = 1;
+  optional int32 rewardIndex = 2;
+}
+message BodyTrialGetBigAwardReq {
+}
+message BodyTrialGetBigAwardResp {
+  required int32 ret = 1;
+  repeated BodyTrialBigAwardInfo rewardDataList = 2;
+}

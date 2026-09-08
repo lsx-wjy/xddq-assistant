@@ -1,0 +1,70 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum SpiritFootPb {
+  SpiritFootEnter = 235601;
+  SpiritFootDraw = 235602;
+  SpiritFootDataSync = 235603;
+  SpiritFootSelect = 235604;
+  SpiritFootSelectTopic = 235605;
+}
+message SpiritSelectData {
+  optional int32 id = 1;
+  optional int32 selectIndex = 2;
+}
+message SpiritFootPlayerData {
+  optional int32 drawTimes = 1;
+  repeated SpiritSelectData selectDatas = 2;
+  optional int32 topic = 3;
+  optional bool topicLock = 4;
+}
+message SpiritFootEnterReq {
+  required int32 activityId = 1;
+}
+message SpiritFootEnterRsp {
+  required int32 ret = 1;
+  optional SpiritFootPlayerData playerData = 2;
+}
+message SpiritFootDrawReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message SpiritFootDrawRsp {
+  required int32 ret = 1;
+  optional SpiritFootPlayerData playerData = 2;
+  repeated SpiritFootDrawResult result = 3;
+}
+message SpiritFootDrawResult {
+  optional int32 id = 1;
+  optional string reward = 2;
+}
+message SpiritFootSelectRewardReq {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 selectIndex = 3;
+}
+message SpiritFootSelectRewardRsp {
+  required int32 ret = 1;
+}
+message SpiritFootDrawConfigMsg {
+  optional int32 id = 1;
+  optional string reward = 2;
+  optional int32 weight = 3;
+  optional int32 topic = 4;
+}
+message SpiritFootTopicConfigMsg {
+  optional int32 id = 1;
+  optional int32 type = 2;
+  optional string keyReward = 3;
+  optional int32 isNew = 4;
+}
+message SpiritFootConfigMsg {
+  repeated SpiritFootDrawConfigMsg drawConfigs = 1;
+  repeated SpiritFootTopicConfigMsg topicCopnfigs = 2;
+}
+message SelectTopicReq {
+  required int32 activityId = 1;
+  required int32 topic = 2;
+}
+message SelectTopicResp {
+  required int32 ret = 1;
+}

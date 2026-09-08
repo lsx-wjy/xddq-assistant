@@ -1,0 +1,14 @@
+.git
+.env
+account.js
+data
+dist-dashboard
+/logs
+!web/src/features/logs/
+!web/src/features/logs/**
+node_modules
+work
+apk-analysis
+*.log
+deploy/caddy-data
+deploy/caddy-config

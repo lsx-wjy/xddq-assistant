@@ -1,0 +1,13 @@
+{
+    "version": "3.9.00",
+    "buildID": "10492",
+    "packageID": "31003001",
+    "packageUrl": "https://cdn-xddq-cn.ap3615.com/31003001/3.9.00.10492",
+    "protocolCount": 2914,
+    "protobufCount": 209,
+    "msgInfoAssetCount": 110,
+    "mappedRequestCount": 2879,
+    "mappedResponseCount": 2866,
+    "responseCollisionCount": 1,
+    "activityGroupCount": 208
+}

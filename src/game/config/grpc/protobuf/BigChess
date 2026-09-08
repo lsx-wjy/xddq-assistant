@@ -1,0 +1,177 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum ChineseChessPb {
+  ChineseChess_Enter = 234101;
+  ChineseChess_EnterGame = 234102;
+  ChineseChess_Move = 234103;
+  ChineseChess_End = 234104;
+  ChineseChess_UseItem = 234105;
+  ChineseChess_PracticeEnterGame = 234121;
+  ChineseChess_PracticeMove = 234122;
+  ChineseChess_PracticeEnd = 234123;
+}
+enum ChessType {
+  Pawns = 1001;
+  Mandarins = 1002;
+  Elephants = 1003;
+  Cannons = 1004;
+  Knight = 1005;
+  Rooks = 1006;
+  King = 2001;
+}
+enum ChessGameStatus {
+  Running = 0;
+  Revive = 1;
+  Over = 2;
+  Pass = 3;
+}
+message ChineseChessActivityConfig {
+  repeated ChessConfig chessConfigList = 1;
+}
+message ChessConfig {
+  optional int32 id = 1;
+  optional int32 score = 2;
+  optional string canGo = 3;
+  optional string moveLimit = 4;
+}
+message ChineseChessPlayerDataSync {
+  optional int32 freeCount = 1;
+  optional int32 maxScore = 2;
+  optional int32 gameStatus = 3;
+}
+message ChessData {
+  optional int32 chessNo = 1;
+  optional int32 chessId = 2;
+  optional int32 x = 3;
+  optional int32 y = 4;
+}
+message ChineseChessEnterReq {
+  required int32 activityId = 1;
+}
+message ChineseChessEnterResp {
+  required int32 ret = 1;
+  optional ChineseChessPlayerDataSync playerData = 2;
+}
+message ChineseChessEnterGameReq {
+  required int32 activityId = 1;
+}
+message ChineseChessEnterGameResp {
+  required int32 ret = 1;
+  repeated ChessData chessDataList = 2;
+  optional ChessData selfChessData = 3;
+  optional int32 itemReviveCount = 4;
+  optional int32 ingotReviveCount = 5;
+  optional int32 passReviveCount = 6;
+  optional bool guideOpen = 7;
+  optional int32 nextRound = 8;
+  repeated ChessData nextChess = 9;
+  optional int32 gameStatus = 10;
+  optional int64 score = 11;
+  optional int32 powerTimes = 12;
+  optional int32 round = 13;
+  optional int32 powerOnCount = 14;
+  optional int32 powerCrossCount = 15;
+  optional int32 powerRemoveTypeCount = 16;
+  optional int32 powerRemoveRandomCount = 17;
+  optional int32 freeCount = 18;
+}
+message ChineseChessMoveReq {
+  required int32 activityId = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+  required bool powerOn = 4;
+  required bool powerCross = 5;
+  required bool powerRemoveType = 6;
+}
+message ChineseChessMoveResp {
+  required int32 ret = 1;
+  repeated ChessData chess = 2;
+  optional ChessData selfChess = 3;
+  optional ChessData moveChess = 4;
+  optional int32 nextTurn = 5;
+  repeated ChessData nextChess = 6;
+  optional int32 gameStatus = 7;
+  optional int32 isRevive = 8;
+  optional int64 score = 9;
+  optional int32 step = 10;
+  optional int32 powerOnCount = 11;
+  optional int32 powerCrossCount = 12;
+  optional bool newPlayer = 13;
+  optional int32 passReviveCount = 14;
+  optional int32 powerRemoveTypeCount = 15;
+}
+message ChineseChessEndReq {
+  required int32 activityId = 1;
+}
+message ChineseChessEndResp {
+  required int32 ret = 1;
+  optional int64 score = 2;
+  optional int32 lastRank = 3;
+  optional int32 nowRank = 4;
+}
+message ChineseChessUseItemReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message ChineseChessUseItemResp {
+  required int32 ret = 1;
+  repeated ChessData chess = 2;
+  optional int32 itemReviveCount = 3;
+  optional int32 ingotReviveCount = 4;
+  optional bool guideOpen = 5;
+}
+message ChineseChessPracticeEnterGameReq {
+  required int32 activityId = 1;
+}
+message ChineseChessPracticeEnterGameResp {
+  required int32 ret = 1;
+  repeated ChessData chessDataList = 2;
+  optional ChessData selfChessData = 3;
+  optional int32 itemReviveCount = 4;
+  optional int32 ingotReviveCount = 5;
+  optional int32 passReviveCount = 6;
+  optional bool guideOpen = 7;
+  optional int32 nextRound = 8;
+  repeated ChessData nextChess = 9;
+  optional int32 gameStatus = 10;
+  optional int64 score = 11;
+  optional int32 powerTimes = 12;
+  optional int32 round = 13;
+}
+message ChineseChessUseRemoveItemReq {
+  required int32 activityId = 1;
+}
+message ChineseChessUseRemoveItemResp {
+  required int32 ret = 1;
+  repeated ChessData chess = 2;
+  optional int32 powerRemoveRandomCount = 16;
+}
+message ChineseChessPracticeMoveReq {
+  required int32 activityId = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+}
+message ChineseChessPracticeMoveResp {
+  required int32 ret = 1;
+  repeated ChessData chess = 2;
+  optional ChessData selfChess = 3;
+  optional ChessData moveChess = 4;
+  optional int32 nextTurn = 5;
+  repeated ChessData nextChess = 6;
+  optional int32 gameStatus = 7;
+  optional int32 isRevive = 8;
+  optional int64 score = 9;
+  optional int32 step = 10;
+  optional bool newPlayer = 11;
+}
+message ChineseChessPracticeEndReq {
+  required int32 activityId = 1;
+}
+message ChineseChessPracticeEndResp {
+  required int32 ret = 1;
+  repeated ChessData chess = 2;
+  optional int64 score = 3;
+  optional int32 lastRank = 4;
+  optional int32 nowRank = 5;
+  optional int32 maxRank = 6;
+}

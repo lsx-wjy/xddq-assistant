@@ -1,0 +1,658 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum TylooPb {
+  S_TYLOO_ENTER_ACTIVITY = 234501;
+  S_TYLOO_ENTER_MAP = 234502;
+  S_TYLOO_WORSHIP = 234503;
+  S_TYLOO_GROUP_INFO = 234504;
+  S_TYLOO_USE_ITEM = 234505;
+  S_TYLOO_GET_WELFARE_REQ = 234506;
+  S_TYLOO_SEND_WELFARE_REQ = 234507;
+  S_TYLOO_WELFARE_RECORD_REQ = 234508;
+  S_TYLOO_GET_WELFARE_INFO_REQ = 234509;
+  S_TYLOO_RECEIVE_WELFARE_REWARD_REQ = 234510;
+  S_TYLOO_UNLOCK_AUTO = 234511;
+  S_TYLOO_TREASURE_BAG = 234512;
+  S_TYLOO_EXPORE_FLOOR_CEIL = 234513;
+  S_TYLOO_CEIL_EVENT_HANDLE = 234514;
+  S_TYLOO_ENTER_NEXT_FLOOR = 234515;
+  S_TYLOO_QUIT_EXPORE = 234516;
+  S_TYLOO_BAG_OPERATE = 234517;
+  S_TYLOO_QUIT_RESULT = 234518;
+  S_TYLOO_EXPORE_LOG = 234519;
+  S_TYLOO_SLVAE_LIST = 234520;
+  S_TYLOO_SLVAE_LIST_OPERATE = 234521;
+  S_TYLOO_SLVAE_AGINST = 234522;
+  S_TYLOO_SLVAE_LOG_LIST = 234523;
+  S_TYLOO_SEND_HELP = 234524;
+  S_TYLOO_CHECK_RESULT = 234525;
+  S_TYLOO_SOUL_UPDATE = 234526;
+  S_TYLOO_SEND_BLESS_NOTIFY =  234527;
+  S_TYLOO_RECEIVE_BLESSING = 234528;
+  S_TYLOO_BLESSING_LIST = 234529;
+  S_TYLOO_GET_MEMBER = 234530;
+  S_TYLOO_UNION_SUMMARY = 234531;
+  S_TYLOO_RED_POINT = 234532;
+  S_TYLOO_GET_HELPLIST = 234533;
+  S_TYLOO_HELP = 234534;
+  S_TYLOO_HEART_BEAT = 234535;
+  S_TYLOO_NOTIFY_INFO = 234536;
+  S_TYLOO_ASSISTANT_INFO = 234537;
+  S_TYLOO_INNER_LOG = 234538;
+  S_TYLOO_SLAVE_LIST_TARGET = 234539;
+  S_TYLOO_RECEIVE_WELFARE_RESP = 234550;
+  S_TYLOO_GET_WELFARE_REQ_RESP = 234551;
+  S_TYLOO_SEND_WELFARE_REQ_RESP = 234552;
+  S_TYLOO_USE_FIGHT_NUM_ITEM_RESP = 234553;
+  S_TYLOO_WORSKIP_RESP = 234554;
+  S_TYLOO_UNLOCK_AUTO_RESP = 234555;
+  S_TYLOO_EXPORE_FLOOR_CEIL_RESP = 234556;
+  S_TYLOO_CEIL_EVENT_HANDLE_RESP = 234557;
+  S_TYLOO_REISSUE_REWARD_SYNC = 234558;
+  S_TYLOO_SYNC_PLAYER_QUALIFY = 234559;
+  S_TYLOO_RED_POINT_RESP = 234560;
+  S_TYLOO_RECEIVE_BLESSING_RESP = 234561;
+  S_TYLOO_COMMON_SYNC = 234562;
+}
+message TylooSettleInfo {
+  optional int32 round = 1;
+  optional int32 statues = 2;
+  optional int32 groupRank = 3;
+  optional int32 rank = 4;
+  optional int32 battleFieldSore = 5;
+  optional int32 totalScore = 6;
+}
+message TylooWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional int32 rank = 10;
+  optional PlayerHeadDataMsg headInfo = 13;
+  repeated int32 petSoulShapeList = 14;
+  optional int32 titleId = 15;
+  repeated int32 petLinkageId = 16;
+  repeated int32 spiritLinkageId = 17;
+}
+message TylooUnionBaseData {
+  optional int64 unionId = 1;
+  optional int32 flag = 2;
+  optional string name = 3;
+  optional int64 serverId = 4;
+  optional int64 score = 5;
+  optional string masterName = 6;
+}
+message TylooPlayerShowMsg {
+  optional string nickName = 1;
+  optional string unionName = 2;
+  optional int32 appearanceId = 3;
+  optional int64 soulPowerMax = 4;
+  optional PlayerHeadDataMsg headInfo = 5;
+  optional int64 soulPower = 6;
+  optional int64 serverId = 7;
+  optional int64 unionId = 8;
+  optional int64 playerId = 9;
+  optional int64 soulBasePower = 10;
+  optional int32 score = 11;
+}
+message TylooEnterActivityReq {
+    required int32 activityId = 1;
+}
+message TylooEnterActivityResp {
+  required int32 ret = 1;
+  optional int32 unionRank = 2;
+  optional int32 round = 3;
+  optional int32 group = 4;
+  optional int32 rankId = 5;
+  repeated int32 groups = 6;
+  optional int64 unionId = 7;
+  repeated TylooUnionBaseData top3Unions = 8;
+  optional TylooSettleInfo settleInfo = 9;
+  optional bool hasWorship = 10;
+  optional TylooWorshipPlayerMsg worshipPlayer = 11;
+  optional int32 position = 13;
+  optional int32 strength = 14;
+  optional int32 curFloor = 15;
+  optional int64 lastRecoveryTime = 16;
+  optional int32 totalValue = 17;
+  optional int32 dailyAginstTimes = 18;
+  optional int32 dailyHelpTimes = 19;
+  optional int32 maxFloor = 20;
+  optional bool isInExpore = 21;
+  optional TylooQuitResult result = 22;
+  optional int64 soulPowerMax = 23;
+  optional int32 score = 24;
+  optional string reward = 25;
+  optional int32 topicId = 26;
+  optional bool lockTopic = 27;
+}
+message TylooSelectTopicReq {
+  required int32 activityId = 1;
+  required int32 topic = 2;
+}
+message TylooSelectTopicResp {
+  required int32 ret = 1;
+  optional int32 topicId = 2;
+  optional bool lockTopic = 3;
+}
+message TylooCeilInfoMsg {
+  optional int32 ceilId = 1;
+  optional int32 eventId = 2;
+  optional int64 trapEndTime = 3;
+  optional int32 fixTimes = 4;
+  optional int64 treasureId = 5;
+  optional int64 monsterSoul = 6;
+  optional int32 monsterType = 7;
+  optional TylooPlayerShowMsg playerShow = 8;
+  optional TylooPlayerShowMsg masterShow = 9;
+  repeated TylooTreasureMsg targetBag = 10;
+  optional string extraData = 11;
+  optional bool isDefeat = 12;
+  optional int32 appreanceId = 13;
+}
+message TylooFloorInfoMsg {
+  optional int32 curFloor = 1;
+  repeated int32 openCeilIds = 2;
+  optional TylooCeilInfoMsg curCeil = 3;
+  optional int32 progress = 4;
+  optional int32 exporeTimes = 5;
+  optional int32 monsterPassRate = 6;
+  optional int32 freeEnergy = 7;
+  optional bool isNextFloorRecover = 8;
+  optional int32 passWayTimes = 9;
+  optional bool isInExpore = 10;
+  repeated TylooTreasureMsg currentBag = 11;
+  repeated TylooTreasureMsg tmpBag = 12;
+  optional int32 startFloor = 13;
+  optional int32 addSouleMaxTimes = 14;
+}
+message TylooPlayerDataMsg {
+  optional int32 strength = 1;
+  optional int64 lastRecoveryTime = 2;
+  optional int64 soulPower = 3;
+  optional TylooFloorInfoMsg floorInfo = 4;
+  optional int32 totalCostStrength = 5;
+  optional int64 maxSoulPower = 6;
+  optional int32 totalValue = 7;
+  optional int32 credit = 8;
+}
+message TylooEnterMapReq {
+  required int32 activityId = 1;
+}
+message TylooEnterMapResp {
+  required int32 ret = 1;
+  optional TylooPlayerDataMsg playerData = 2;
+  optional bool isAutoUnLock = 3;
+  optional int32 rank = 4;
+  optional int32 dangerousValue = 5;
+  optional int32 noticeNum = 6;
+}
+message TylooConfigSyncMsg {
+  repeated TylooTimeConfigMsg timeConfigs = 1;
+  repeated TylooGroupConfigMsg groupConfigs = 2;
+  repeated TylooEventConfigMsg eventConfigs = 3;
+  repeated TylooTreasureConfigMsg treasureConfigs = 4;
+  repeated TylooLevelConfigMsg levelConfigs = 5;
+  repeated TylooFloorConfigMsg floorConfigs = 6;
+}
+message TylooTimeConfigMsg {
+  required int32 activityId = 1;
+  optional int32 timeId = 2;
+  optional int32 type = 3;
+  optional int32 beginTime = 4;
+  optional int32 durationTime = 5;
+  optional string param = 6;
+}
+message TylooGroupConfigMsg {
+  required int32 activityId = 1;
+  required int32 rankId = 2;
+  required int32 size = 3;
+  required int32 up = 4;
+  required int32 down = 5;
+  required string score = 6;
+}
+message TylooEventConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required string param = 4;
+  required int32 progress = 5;
+  optional string reward = 6;
+  optional int32 points = 7;
+  optional int32 scores = 8;
+}
+message TylooTreasureConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string forge = 3;
+  optional int32 quality = 4;
+  optional string points = 5;
+  optional string exp = 6;
+  optional string name = 7;
+}
+message TylooLevelConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 exp = 3;
+  required int32 bagSize = 4;
+  required int32 captureLimit = 5;
+  required string powerAddPercent = 6;
+  required int32 powerAddFix = 7;
+  optional int32 energy = 8;
+}
+message TylooFloorConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 backFloor = 3;
+  required int32 energy = 4;
+  required int32 progress = 5;
+  required string monsterParam = 6;
+  required string treasureParam = 7;
+  optional int32 retreatLimit = 8;
+  optional string monsterTreasure = 9;
+  optional string drawTreasure = 10;
+  optional int32 size = 11;
+  optional string monsterWarning = 12;
+  optional string playerWarning = 13;
+  optional string rewardGrade = 14;
+}
+message TylooWorshipReq {
+  required int32 activityId = 1;
+}
+message TylooWorshipResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional TylooWorshipPlayerMsg worshipPlayer = 3;
+}
+message TylooGroupInfoReq {
+  required int32 activityId = 1;
+  required int32 groupId = 2;
+}
+message TylooGroupInfoResp {
+  required int32 ret = 1;
+  repeated TylooUnionBaseData groupInfo = 2;
+}
+message TylooStrengthReq {
+  required int32 activityId = 1;
+  required int32 useCount = 2;
+}
+message TylooStrengthResp {
+  required int32 ret = 1;
+  optional string costInfo = 2 ;
+  optional int32 strength = 3;
+  optional int64 lastRecoveryTime = 4;
+}
+message TylooWelfareInfo {
+  optional string name = 1;
+  optional int32 itemId = 2;
+  optional int64 id = 3;
+  optional int32 status = 4;
+  optional int64 time = 5;
+}
+message TylooWelfareRecord {
+  optional string nickName = 1;
+  optional string reward = 2;
+}
+message TylooSendWelfareReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  required int32 num = 3;
+}
+message TylooSendWelfareResp {
+  required int32 ret = 1;
+  optional TylooWelfareInfo info = 2;
+}
+message TylooWelfareRecordReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message TylooWelfareRecordResp {
+  required int32 ret = 1;
+  repeated TylooWelfareRecord record = 2;
+}
+message TylooGetWelfareReq {
+  required int32 activityId = 1;
+  required int64 id = 2;
+}
+message TylooGetWelfareResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message TylooGetSparPowerReq {
+  required int32 activityId = 1;
+}
+message TylooGetSparPowerResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 exp = 3;
+  optional int32 canReceive = 4;
+}
+message TylooSparInfoReq {
+  required int32 activityId = 1;
+}
+message TylooSparInfoResp {
+  required int32 ret = 1;
+  optional int32 exp = 2;
+  repeated TylooWelfareInfo info = 3;
+  optional int32 canReceive = 4;
+}
+message TylooUnlockAutoReq {
+  required int32 activityId = 1;
+}
+message TylooUnlockAutoResp {
+  required int32 ret = 1;
+  optional int32 activityId = 2;
+}
+message TylooTreasureMsg {
+  optional int64 id = 1;
+  optional int32 treasureId = 2;
+  optional int32 quality = 3;
+  optional int32 value = 4;
+  optional int32 credit = 5;
+  optional int32 star = 6;
+}
+message TylooTreasureBagReq {
+  required int32 activityId = 1;
+}
+message TylooTreasureBagResp {
+  required int32 ret = 1;
+  repeated TylooTreasureMsg bag = 2;
+}
+message TylooExporeFloorCeilReq {
+  required int32 activityId = 1;
+  required int32 ceilId = 2;
+  optional bool isUserItem = 3;
+  optional int32 floorId = 4;
+}
+message TylooExporeFloorCeilResp {
+  required int32 ret = 1;
+  optional TylooCeilInfoMsg ceilInfo = 2;
+  optional TylooPlayerDataMsg playData = 3;
+  optional string reward = 4;
+  optional bool isUserItem = 5;
+  optional int32 floorId = 6;
+  optional int32 activityId = 7;
+  optional int32 rank = 8;
+}
+message TylooCeilEventHandleReq {
+  required int32 activityId = 1;
+  optional int32 fixParam = 2;
+  optional int64 treasureId = 3;
+  optional int32 monsterParam = 4;
+  optional int64 playerBasePower = 5;
+}
+message TylooCeilEventHandleResp {
+  required int32 ret = 1;
+  optional TylooPlayerDataMsg playerData = 2;
+  optional int32 monsterResult = 3;
+  repeated TylooTreasureMsg treasurelist = 4;
+  optional string reward = 5;
+  optional string drawString = 6;
+}
+message TylooEnterNextFloorReq {
+  required int32 activityId = 1;
+}
+message TylooEnterNextFloorResp {
+  required int32 ret = 1;
+  optional TylooPlayerDataMsg playerData = 2;
+  optional int64 recoverPower = 3;
+  optional int32 dangerousValue = 4;
+}
+message TylooQuitExporeReq {
+  required int32 activityId = 1;
+  optional int32 quitType = 2;
+}
+message TylooQuitExporeResp {
+  required int32 ret = 1;
+  optional TylooPlayerDataMsg playerData = 2;
+}
+message TylooExporeLogReq {
+  required int32 activityId = 1;
+}
+message TylooExporeLogResp {
+  optional int32 ret = 1;
+  repeated TylooExporeLogMsg logs = 2;
+}
+message TylooExporeLogMsg {
+  optional int32 type = 1;
+  repeated TylooTreasureMsg treasure = 2;
+  optional int32 value = 3;
+  optional int32 monsterId = 4;
+  optional int32 floor = 5;
+  optional int64 time = 6;
+  optional string name = 7;
+  optional int32 credit = 8;
+  optional TylooPlayerShowMsg target = 9;
+  optional TylooTreasureMsg beConquer = 10;
+}
+message TylooInnerLogReq {
+  required int32 activityId = 1;
+}
+message TylooInnerLogResp {
+  required int32 ret = 1;
+  repeated TylooInnerLogMsg logs = 2;
+}
+message TylooInnerLogMsg {
+  optional int64 uniqueId = 1;
+  optional int32 eventId = 2;
+  optional string name = 3;
+  optional int32 id = 4;
+  optional string extra = 5;
+  optional TylooPlayerShowMsg target = 6;
+}
+message TylooQuitResult {
+  optional int32 floor = 1;
+  optional int32 backFloor = 2;
+  optional int32 maxFloor = 3;
+  repeated TylooTreasureMsg treasureBag = 4;
+  optional int32 rank = 5;
+  optional int32 treasureValue = 6;
+  optional int32 quitType = 7;
+  optional int32 beforeRank = 8;
+  optional int32 credit = 9;
+  repeated TylooTreasureMsg loseTreasure = 10;
+  optional TylooTreasureMsg beConquer = 11;
+  optional TylooPlayerShowMsg targetPlayer = 12;
+}
+message TylooBagOperateReq {
+  required int32 activityId = 1;
+  optional int64 tmpId = 2;
+  optional int64 bagId = 3;
+}
+message TylooBagOperateResp {
+  optional int32 ret = 1;
+  optional TylooPlayerDataMsg playerData = 3;
+}
+message TylooSlaveListReq {
+  required int32 activityId = 1;
+  optional bool isMaster = 2;
+}
+message TylooSlaveListResp {
+  required int32 ret = 1;
+  repeated TylooPlayerShowMsg slaves = 2;
+  repeated TylooPlayerShowMsg slavesExtra = 3;
+  optional TylooPlayerShowMsg master = 4;
+  optional int32 totalCredit = 5;
+}
+message TylooSlaveListOperateReq {
+  required int32 activityId = 1;
+  optional int64 slaveExtraId = 2;
+  optional int64 slaveId = 3;
+}
+message TylooSlaveListOperateResp {
+  required int32 ret = 1;
+  repeated TylooPlayerShowMsg slaves = 2;
+  repeated TylooPlayerShowMsg slavesExtra = 3;
+}
+message TylooSlaveAginstReq {
+  required int32 activityId = 1;
+  optional int64 targetId = 2;
+}
+message TylooSlaveAginstResp {
+  required int32 ret = 1;
+  optional int32 againstTime = 2;
+  optional int32 againstResult = 3;
+}
+message TylooSlaveLogMsg {
+  optional int32 logType = 1;
+  optional string masterName = 2;
+  optional TylooPlayerShowMsg slaveName = 3;
+  optional string otherName = 4;
+  optional int64 time = 5;
+}
+message TylooSlaveLogListReq {
+  required int32 activityId = 1;
+}
+message TylooSlaveLogListResp {
+  required int32 ret = 1;
+  repeated TylooSlaveLogMsg logs = 2;
+}
+message TylooUnionPlayerScoreInfo {
+  required int64 playerId = 1 ;
+  required string memberName = 2 ;
+  required string score = 3;
+  optional string slaveScore = 4;
+}
+message TylooUnionPlayerListReq {
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+}
+message TylooUnionPlayerListResp {
+  required int32 ret = 1;
+  repeated TylooUnionPlayerScoreInfo playerList = 2;
+  optional int64 reduceScore = 3;
+}
+message TylooRoundBaseInfo {
+  required int32 groupId = 1 ;
+  required int32 rank =2 ;
+  required string score = 3;
+  required int64 point = 4;
+  required int32 danId = 5;
+}
+message TylooUnionSummaryReq {
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+}
+message TylooUnionSummaryResp {
+  required int32 ret = 1;
+  repeated TylooRoundBaseInfo info = 2;
+}
+message TylooRedPointReqMsg {
+  required int32 activityId = 1;
+}
+message TylooRedPointRespMsg {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message TylooHelpInfo {
+  optional int64 slaveId = 1;
+  optional TylooPlayerShowMsg slaveShow = 2;
+  optional TylooPlayerShowMsg masterShow = 3;
+  required int64 publishTime = 4;
+}
+message TylooGetHelpListReq {
+  required int32 activityId = 1;
+}
+message TylooGetHelpListResp {
+  required int32 ret = 1;
+  optional int32 helpCount = 2;
+  repeated TylooHelpInfo helpList = 3;
+}
+message TylooSendHelpReq {
+  required int32 activityId = 1;
+  required int64 targetId = 2;
+}
+message TylooSendHelpResp {
+  required int32 ret = 1;
+  optional int32 helpTimes = 2;
+}
+message TylooAssistantReq {
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+  required int64 masterId = 3;
+}
+message TylooAssistantResp {
+  required int32 ret = 1;
+  optional int32 helpResult = 2;
+}
+message TylooCheckResultReq {
+  required int32 activityId = 1;
+}
+message TylooCheckResultResp {
+  optional int32 ret = 1;
+}
+message TylooSoulUpdateSync {
+  optional int64 soulPower = 1;
+  optional TylooPlayerShowMsg attackPlayer = 2;
+  optional int64 losePower = 3;
+}
+message TylooBlessNotify {
+  optional int32 noticeNum = 1;
+}
+message TylooReceiveBlessingReq {
+  required int32 activityId = 1;
+  required int64 recordId = 2;
+}
+message TylooReceiveBlessingResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message TylooBlessedNoticeInfo {
+  required int64 id = 1;
+  required PlayerCharacterImageMsg playerData = 2;
+  optional int32 status = 3;
+  optional int64 time = 4;
+  optional string reward = 5;
+  optional string giftName = 6;
+}
+message TylooBlessingListReq {
+  required int32 activityId = 1;
+}
+message TylooBlessingListResp {
+  required int32 ret = 1;
+  repeated TylooBlessedNoticeInfo blessingList = 2;
+}
+message TylooChallengeInfoSync {
+  required int64 playerId = 1;
+  optional string name = 2;
+  optional int32 type = 3;
+  optional int32 param = 4;
+}
+message TylooChallengeHeartBeatReq {
+  required int32 activityId = 1;
+}
+message TylooChallengeHeartBeatResp {
+  required int32 ret = 1;
+}
+message TylooAssistantInfoSync {
+  optional string name = 1;
+  optional TylooPlayerShowMsg playerShow = 2;
+}
+message TylooSlaveListTargetReq {
+  required int32 activityId = 1;
+  optional int64 playerId = 2;
+}
+message TylooSlaveListTargetResp {
+  required int32 ret = 1;
+  repeated TylooPlayerShowMsg slaves = 2;
+}
+enum TylooRedPointEnum {
+  TYLOO_NULL = 0;
+  TYLOO_STRENGTH = 1;
+  TYLOO_BEQUIT = 2;
+  TYLOO_UNION_REWARD = 3;
+  TYLOO_PLAYER_RANK_REWARD = 4;
+  TYLOO_UNION_RANK_REWARD = 5;
+  TYLOO_UINON_TREE = 6;
+  TYLOO_WORSHIP = 7;
+  TYLOO_BATTLE = 8;
+  TYLOO_ACHEIEVE = 9;
+  TYLOO_HELP = 10;
+  TYLOO_LOG = 11;
+}

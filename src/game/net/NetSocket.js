@@ -167,6 +167,14 @@ class NetSocket {
         }
     }
 
+    heartbeatStop() {
+        this.heartbeatFlag = false;
+        if (this.heartbeatTimeId !== null) {
+            clearInterval(this.heartbeatTimeId);
+            this.heartbeatTimeId = null;
+        }
+    }
+
     send(buffer) {
         try {
             if (this.sio && this.sio.readyState === WSState.OPEN) {

@@ -1,0 +1,78 @@
+package com.yq.msg.CityMsg;
+message FairyRabbitDrawConfig{
+    required int32 activityId = 1;
+    required int32 Id = 2;
+    required string reward = 3;
+    required int32 floor = 4;
+    required int32 round = 5;
+    required int32 weight = 6;
+  }
+  message FairyRabbitBigRewardConfig{
+    required int32 activityId = 1;
+    required int32 Id = 2;
+    required string reward = 3;
+    required int32 floor = 4;
+    optional int32 drawCost = 5;
+    optional string selectReward = 6;
+  }
+  message FairyRabbitRewardConfigSync{
+    repeated FairyRabbitDrawConfig drawConfigList = 1;
+    repeated FairyRabbitBigRewardConfig bigRewardConfigList = 2;
+  }
+  message FairyRabbitActivityData{
+    optional int32 floor = 1;
+    optional int32 round = 2;
+    repeated FairyRabbitBaseListData baseListDataList = 3;
+    optional int32 drawTimes = 4;
+    optional int32 selectBigRewardId = 5;
+    repeated FairyRabbitSelectRewardData selectRewardData = 6;
+  }
+  message FairyRabbitSelectRewardData {
+    optional int32 floor = 1;
+    optional int32 selectIndex = 2;
+    optional int32 rewardIndex = 3;
+  }
+  message FairyRabbitBaseListData{
+    optional int32 round = 1;
+    repeated int32 baseList = 2;
+  }
+  message FairyRabbitDrawReq{
+    required int32 activityId = 1;
+  }
+  message FairyRabbitDrawResp{
+    required int32 ret = 1;
+    required string drawReward = 2;
+  }
+  message FairyRabbitSelectBigRewardReq {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    optional int32 index = 3;
+    optional int32 floor = 4;
+  }
+  message FairyRabbitSelectBigRewardResp {
+      required int32 ret = 1;
+      optional int32 id = 2;
+      optional int32 index = 3;
+      optional int32 floor = 4;
+  }
+message FairyRabbitDrawAllReq{
+  required int32 activityId = 1;
+}
+message FairyRabbitDrawAllResp {
+  required int32 ret = 1;
+  required string drawReward = 2;
+  repeated int32 targetIdxList = 3;
+}
+message FairyRabbitSelectMsg {
+  optional int32 id = 1;
+  optional int32 index = 2;
+  optional int32 floor = 3;
+}
+message FairyRabbitSelectBigRewardAllReq {
+  required int32 activityId = 1;
+  repeated FairyRabbitSelectMsg selected = 2;
+}
+message FairyRabbitSelectBigRewardAllResp {
+  required int32 ret = 1;
+  repeated FairyRabbitSelectMsg selected = 2;
+}

@@ -3,15 +3,16 @@ import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
 import PalaceMgr from "#game/mgr/PalaceMgr.js";
-import account from "../../../account.js";
+import account from "#config/runtimeAccount.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class TowerMgr {
     constructor() {
         this.isProcessing = false;
         this.data = {};
         this.hasReward = false;
-        this.challenge = account.switch.challenge || 0;
-        this.showResult = account.switch.showResult || false;
+        this.challenge = account.switch.towerChallenge || 0;
+        this.showResult = account.switch.towerShowResult || false;
         LoopMgr.inst.add(this);
     }
 
@@ -57,6 +58,7 @@ export default class TowerMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('challenge.demon-tower')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

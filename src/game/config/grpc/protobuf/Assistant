@@ -1,0 +1,412 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Spirit";
+import "Magic";
+import "LawLooks";
+import "Attribute";
+import "Magic";
+import "MagicTreasure";
+import "DivineInsight";
+import "PetKernel";
+message AssistantYardBuildDetailMsg{
+    optional int32 level = 1;
+    optional int32 status  = 2;
+    optional int32 productId = 3;
+    optional int64 startTime = 4;
+    optional int64 endTime = 5;
+    optional int32 collectNum = 6;
+    optional int64 levelUpEndTime =7;
+    optional int64 totalNum =8;
+    optional int32 speedTimes =9;
+    optional bool isUnionHelp = 10;
+}
+message AssistantUniverseSkillDataMsg {
+  required int32 runeId = 1;
+  required int32 lv = 2;
+}
+message AssistantUniverseSkillDrawResultTemp {
+  optional int32 runeId = 1;
+  optional bool full = 2;
+  optional string reward = 3;
+  optional bool isNew = 4;
+  optional string items = 5;
+}
+message AssistantYardDrawResultTemp {
+  optional string rewards = 1;
+  optional string items = 2;
+  optional bool inNew = 3;
+  optional bool isTransPiece = 4;
+}
+message AssistantYardDrawDataMsg{
+ optional int32 freeDrawTimes = 1;
+  optional int32 drawCount = 2;
+  optional int32 ensureCount = 3;
+  optional int32 adCount =4;
+}
+message AssistantActionSettingMsg {
+    required int32 assistantActionType = 1;
+    repeated string assistantActionParam = 2;
+  }
+  message AssistantShopSettingMsg {
+    required int32 mallId = 1;
+    required int32 mallCount = 2;
+  }
+  message AssistantTrialMsg {
+    required int32 trialNum = 1;
+    required int64 trialEndTime = 2;
+  }
+  message AssistantSkinMsg {
+    required int32 skinId = 1;
+    required int32 skinLevel = 2;
+    required int64 expiredTime = 3;
+  }
+    message AssistantWelfareResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional DreamDataMsg dreamDataMsg = 3;
+    }
+    message AssistantYardDrawResult {
+    required int32 ret = 1;
+    repeated AssistantYardDrawResultTemp drawResult = 2;
+    optional AssistantYardDrawDataMsg drawData = 3;
+    optional bool  pieceShopOpen = 4;
+    optional bool isUseADTime = 5;
+    }
+    message AssistantMagicDerivationResult {
+    required int32 ret = 1;
+    repeated int32 magicId = 2;
+    optional string reward = 3;
+    repeated MagicDataMsg magicMsgList = 4;
+    optional int32 floorsTimes = 5;
+    optional int32 freeDrawTimes = 6;
+    optional MagicFreeAdData magicFreeAd = 7;
+    }
+    message AssistantMagicTreasureDrawResult {
+    required int32 ret = 1;
+    repeated MagicTreasureResultItemMsg rewards = 2;
+    optional MagicTreasurePlayerDataMsg syncMsg = 3;
+    optional int32 poolId = 4;
+    }
+    message AssistantSpiritDrawResult {
+    required int32 ret = 1;
+    repeated SpiritDrawResult drawResult = 2;
+    optional SpiritPlayerDataMsg syncMsg = 3;
+    optional int32 score = 4;
+    }
+    message AssistantPupilGetAdRewardResult {
+    required int32  ret = 1;
+    optional int32  getTimes = 2;
+    optional string reward = 3;
+    }
+    message AssistantGatherEnergyGetADAwardResult {
+    required int32 ret = 1;
+    optional AwardInfoList reward = 2;
+    optional int32 getTimes = 3;
+    }
+    message AssistantDivineInsightMindResult {
+    required int32 ret = 1;
+    optional DivineInsightMindMsg divineInsightMindMsg = 2;
+    optional int32 receiveNum = 3;
+    optional int32 inspireAddNum = 4;
+    }
+    message AssistantPetKernelDrawResult {
+    required int32 ret = 1;
+    repeated PetKernelDrawResult drawResult = 2;
+    repeated PetKernelDataMsg syncKernelMsg = 3;
+    optional int32 freeDrawTimes = 4;
+    optional int32 drawCount = 5;
+    optional int32 ensureCount = 6;
+    optional bool  pieceShopOpen = 7;
+    }
+    message AssistantLawLooksDrawResult {
+      required int32 ret = 1;
+      optional string reward = 2;
+      repeated LawLooksDataMsg lawLooksDataList = 3;
+      optional int32 adDrawTimesToday = 4;
+      optional int32 freeDrawTimesToday = 5;
+    }
+    message AssistantUniverseSkillDrawResult {
+    required int32 ret = 1;
+    repeated AssistantUniverseSkillDrawResultTemp universeSkillDrawResult = 2;
+    optional int32 protectTimes = 3;
+    optional int32 freeDrawTimes = 4;
+    optional int32 drawTimes = 5;
+    repeated AssistantUniverseSkillDataMsg universeSkillList = 6;
+    }
+message AssistantUniverseDrawResult {
+  required int32 ret = 1;
+  optional int32 type = 2;
+  optional string rewards = 3;
+  optional int32 stoneNum = 4;
+  optional int64 lastRecoverTime = 5;
+  optional int32 id = 6;
+  optional UniverseLookMsg universeLookMsg = 7;
+  optional int32 cost = 8;
+  optional int32 rewardIndex = 9;
+  optional double beiLv = 10;
+  optional int32 index = 11;
+}
+  message AssistantMonthCardRewardResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+  }
+  message AssistantLifeCardRewardResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+  }
+  message AssistantShopBuyResult {
+    required int32 ret = 1;
+    required int32 shopType = 2;
+    repeated AssistantShopSettingMsg preAssistantShopSetting = 3;
+    repeated AssistantShopSettingMsg checkPassAssistantShopSetting = 4;
+    repeated AssistantShopSettingMsg actualAssistantShopSetting = 5;
+    optional string reward = 6;
+    optional string cost = 7;
+  }
+  message AssistantIngotHomeWithdrawResult {
+    required int32 ret = 1;
+    optional string baseIngot = 2;
+    optional string rewardIngot = 3;
+  }
+  message AssistantIngotHomeDepositResult {
+    required int32 ret = 1;
+    optional int32 depositIndex = 2;
+    optional string baseIngot = 3;
+  }
+  message AssistantCrazyCornucopiaBackResult {
+    required int32 ret = 1;
+    optional int32 backDay = 2;
+    optional string reward = 3;
+    optional string cost = 4;
+  }
+  message AssistantCrazyCornucopiaSignResult {
+    required int32 ret = 1;
+    optional CrazyCornucopiaSignRewardResult baseResult = 2;
+    optional CrazyCornucopiaSignRewardResult superResult = 3;
+  }
+  message CrazyCornucopiaSignRewardResult {
+    required int32 signDay = 1;
+    optional string reward = 2;
+  }
+  message AssistantDestinyEnergyResult {
+    required int32 ret = 1;
+    optional string cost = 2;
+    optional int32 rewardEnergy = 3;
+  }
+  message AssistantDestinyTravelResult {
+    required int32 ret = 1;
+    optional int32 travelNum = 2;
+    optional int32 costEnergy = 3;
+    repeated int32 eventId = 4;
+  }
+  message AssistantYardCollectResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional string inspireReward = 3;
+  }
+  message AssistantYardProduceResult {
+    required int32 ret = 1;
+    optional string costItem = 2;
+    optional string produceItem = 3;
+    optional int32 produceSeconds = 4;
+  }
+  message AssistantCareerBattleLastPassBossResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional string inspireReward = 3;
+  }
+  message AssistantWildBossFreeRepeatResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional string miracleReward = 3;
+    optional string destinyReward = 4;
+  }
+  message AssistantWildBossPayRepeatResult {
+    required int32 ret = 1;
+    optional int32 preRepeatNum = 2;
+    optional int32 actualRepeatNum = 3;
+    optional string cost = 4;
+    optional string reward = 5;
+    optional string miracleReward = 6;
+    optional string destinyReward = 7;
+  }
+  message AssistantTowerQuickChallengeResult {
+    required int32 ret = 1;
+    optional int32 curPassId = 2;
+    optional int32 passMaxId = 3;
+    optional string reward = 4;
+    optional string miracleReward = 5;
+    optional string inspireReward = 6;
+  }
+  message AssistantRuleTrialRepeatResult {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional string inspireReward = 3;
+  }
+  message AssistantPalaceWorshipResult {
+    required int32 ret = 1;
+    optional int32 miracleId = 2;
+    optional string reward = 3;
+  }
+  message AssistantUnionTreasureDrawChipResult {
+    required int32 ret = 1;
+    optional int32 preTreasureNum = 2;
+    optional int32 actualTreasureNum = 3;
+    optional int32 unlockMapNum = 4;
+    optional string reward = 5;
+  }
+  message AssistantFriendSendGiftResult {
+    required int32 ret = 1;
+    optional int32 sendGiftNum = 2;
+  }
+  message AssistantFriendReceiveGiftResult {
+    required int32 ret = 1;
+    optional int32 receiveGiftNum = 2;
+    repeated string friendName = 3;
+    optional string reward = 4;
+  }
+  message AssistantInvadeChallengeResult {
+    required int32 ret = 1;
+    optional int32 times = 2;
+    optional string reward = 3;
+    optional string inspireReward = 4;
+  }
+  message AssistantPupilCultivateResult {
+    required int32 ret = 1;
+    optional bool isGraduation = 2;
+    optional int32 cost = 3;
+  }
+  message AssistantUnionFightSignUpResult {
+    required int32 ret = 1;
+  }
+  message AssistantSyncResp {
+    repeated AssistantActionSettingMsg assistantActionSettingMsg = 1;
+    repeated AssistantShopSettingMsg assistantShopSettingMsg = 2;
+    required AssistantTrialMsg assistantTrialMsg = 3;
+    required int32 currentSkinId = 4;
+    repeated AssistantSkinMsg assistantSkinMsg = 5;
+  }
+  message AssistantShopSettingReq {
+    required int32 shopType = 1;
+    repeated AssistantShopSettingMsg assistantShopSetting = 2;
+  }
+  message AssistantShopSettingResp {
+    required int32 ret = 1;
+  }
+  message AssistantActionReq {
+    repeated AssistantActionSettingMsg assistantActionSettingMsg = 1;
+    required bool isOnlySave = 2;
+  }
+  message AssistantActionResp {
+    required int32 ret = 1;
+    repeated AssistantActionSettingMsg assistantActionSettingMsg = 2;
+    optional AssistantMonthCardRewardResult assistantMonthCardRewardResult = 3;
+    optional AssistantLifeCardRewardResult assistantLifeCardRewardResult = 4;
+    optional AssistantShopBuyResult assistantGameShopBuyResult = 5;
+    optional AssistantShopBuyResult assistantUnionShopBuyResult = 6;
+    optional AssistantShopBuyResult assistantUnionFightShopBuyResult = 7;
+    optional AssistantShopBuyResult assistantHolyLandBattleShopBuyResult = 8;
+    optional AssistantShopBuyResult assistantHeroRankShopBuyResult = 9;
+    optional AssistantIngotHomeWithdrawResult assistantIngotHomeWithdrawResult = 10;
+    optional AssistantIngotHomeDepositResult assistantIngotHomeDepositResult = 11;
+    optional AssistantCrazyCornucopiaBackResult assistantCrazyCornucopiaBackResult = 12;
+    optional AssistantCrazyCornucopiaSignResult assistantCrazyCornucopiaSignResult = 13;
+    optional AssistantDestinyEnergyResult assistantDestinyEnergyResult = 14;
+    optional AssistantDestinyTravelResult assistantDestinyTravelResult = 15;
+    optional AssistantYardCollectResult assistantYardPeachCollectResult = 16;
+    optional AssistantYardCollectResult assistantYardGrassCollectResult = 17;
+    optional AssistantYardCollectResult assistantYardAlchemyCollectResult = 18;
+    optional AssistantYardProduceResult assistantYardAlchemyRefiningResult = 19;
+    optional AssistantYardCollectResult assistantYardCisternCollectResult = 20;
+    optional AssistantYardProduceResult assistantYardCisternGestateResult = 21;
+    optional AssistantCareerBattleLastPassBossResult assistantCareerBattleLastPassBossResult = 22;
+    optional AssistantWildBossFreeRepeatResult assistantWildBossFreeRepeatResult = 23;
+    optional AssistantWildBossPayRepeatResult assistantWildBossPayRepeatResult = 24;
+    optional AssistantTowerQuickChallengeResult assistantTowerQuickChallengeResult = 25;
+    optional AssistantRuleTrialRepeatResult assistantRuleTrialRepeatResult = 26;
+    optional AssistantPalaceWorshipResult assistantPalaceWorshipResult = 27;
+    optional AssistantUnionTreasureDrawChipResult assistantUnionTreasureDrawChipResult = 28;
+    optional AssistantFriendSendGiftResult assistantFriendSendGiftResult = 29;
+    optional AssistantFriendReceiveGiftResult assistantFriendReceiveGiftResult = 30;
+    optional AssistantInvadeChallengeResult assistantInvadeChallengeResult = 31;
+    optional AssistantUnionFightSignUpResult assistantUnionFightSignUpResult = 32;
+    optional AssistantShopBuyResult assistantPlanesTrialShopBuyResult = 33;
+    optional AssistantPupilCultivateResult pupilCultivateResult = 34;
+    optional AssistantWelfareResult dreamlandReduceResult = 35;
+    optional AssistantYardDrawResult yardFreeResult = 36;
+    optional AssistantYardDrawResult yardVideoResult = 37;
+    optional AssistantMagicDerivationResult magicDerverationFreeResult = 38;
+    optional AssistantMagicDerivationResult magicDerverationVideoResult = 39;
+    repeated AssistantMagicTreasureDrawResult magicTreasureFreeResult = 40;
+    repeated AssistantMagicTreasureDrawResult magicTreasureVideoResult = 41;
+    optional AssistantPetKernelDrawResult kernelResult = 42;
+    optional AssistantLawLooksDrawResult lawLookResult = 43;
+    optional AssistantSpiritDrawResult spritRewardResult = 44;
+    optional AssistantPupilGetAdRewardResult pupilResult = 45;
+    optional AssistantGatherEnergyGetADAwardResult gatherEnergyResult = 46;
+    optional AssistantDivineInsightMindResult divineResult = 47;
+    optional AssistantUniverseSkillDrawResult univerResult = 48;
+    optional AssistantShopBuyResult divineShopBuyResult = 49;
+    repeated AssistantUniverseDrawResult universeDrawResult = 50;
+  }
+  message AssistantYardBaseInfoReq {
+  }
+  message AssistantYardBaseInfoResp {
+    required int32 ret = 1;
+    repeated AssistantYardBuildDetailMsg buildDetailMsg = 2;
+    optional int32 cropLevel = 3;
+    optional int32 alchemyLevel = 4;
+    optional int32 yardLevel = 5;
+  }
+  message AssistantTrialReq {
+  }
+  message AssistantTrialResp {
+    required int32 ret = 1;
+    optional AssistantTrialMsg assistantTrialMsg = 2;
+  }
+  message AssistantSkinUnlockReq {
+    required int32 skinId = 1;
+  }
+  message AssistantSkinUnlockResp {
+    required int32 ret = 1;
+    optional AssistantSkinMsg assistantSkinMsg = 2;
+  }
+  message AssistantSkinUpgradeReq {
+    required int32 skinId = 1;
+  }
+  message AssistantSkinUpgradeResp {
+    required int32 ret = 1;
+    optional AssistantSkinMsg assistantSkinMsg = 2;
+  }
+  message AssistantSkinChangeReq {
+    required int32 skinId = 1;
+  }
+  message AssistantSkinChangeResp {
+    required int32 ret = 1;
+    optional int32 currentSkinId = 2;
+  }
+  message AssistantSyncCurrentSkinIdResp {
+    required int32 currentSkinId = 1;
+  }
+  message AssistantSyncTrialInfoResp {
+    required AssistantTrialMsg assistantTrialMsg = 1;
+  }
+  message AssistantGetPlanesTrialBaseDataReq{
+  }
+  message AssistantGetPlanesTrialBaseDataResp{
+    required int32 ret = 1;
+    optional int32 type = 2;
+  }
+  message AssistantGetBodyTrialBaseDataReq{
+  }
+  message AssistantGetBodyTrialBaseDataResp{
+  required int32 ret = 1;
+  optional int32 trailType = 2;
+  optional int32 maxFloor = 3;
+  }
+  message DailyFollowRemindReq {
+  }
+  message DailyFollowRemindResp {
+    required int32 ret = 1;
+    required int32 remindVal = 2;
+  }

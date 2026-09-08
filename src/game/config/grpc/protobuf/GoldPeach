@@ -1,0 +1,12 @@
+package com.yq.msg.CityMsg;
+import "Attribute";
+message MotionSenseDreamReq {
+    optional bool auto = 1;
+    repeated int32 attr = 2;
+}
+message MotionSenseDreamResp {
+    optional int32 ret = 1;
+    repeated DropReward dropReward = 2;
+    optional PlayerAttributeDataMsg playerAttributeDataMsg = 3;
+    optional int32 dailyGoldenPeachCost = 4;
+}

@@ -1,0 +1,796 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "PackagesBase";
+import "ElixirCompetition";
+enum ElixirPb {
+  ELIXIR_ELVES_ENTER = 235550;
+  ELIXIR_ELVES_DRAW = 235554;
+  ELIXIR_ELVES_DISPATCH = 235555;
+  ELIXIR_ELVES_UNLOCK_GRID = 235559;
+  ELIXIR_SYNC_DATA = 235501;
+  ELIXIR_ENTER_HOME = 235502;
+  ELIXIR_UNLOCK_LAND = 235503;
+  ELIXIR_PLANT_GRASS = 235504;
+  ELIXIR_WATER_GRASS = 235505;
+  ELIXIR_GET_GRASS = 235506;
+  ELIXIR_SPEED_PLANT_GRASS = 235507;
+  ELIXIR_START_ACTIVE_GRASS_SEED = 235508;
+  ELIXIR_SPEED_GRASS_SEED = 235509;
+  ELIXIR_GET_ACTIVE_GRASS = 235510;
+  ELIXIR_LV_UP_GRASS = 235511;
+  ELIXIR_DAN_YAO_COMBINE = 235512;
+  ELIXIR_DAN_YAO_QUICK_COMBINE = 235513;
+  ELIXIR_DAN_YAO_EAT = 235514;
+  ELIXIR_PUSH_ORDER = 235515;
+  ELIXIR_GIVE_UP_ORDER = 235516;
+  ELIXIR_REFRESH_ORDER = 235517;
+  ELIXIR_SELL_LIST = 235523;
+  ELIXIR_PUSH_GRASS_SELL = 235524;
+  ELIXIR_UNLOCK_SELL_INDEX = 235525;
+  ELIXIR_DOWN_GRASS_SELL = 235526;
+  ELIXIR_BUY_GRASS_SELL = 235527;
+  ELIXIR_GET_NEW_GRASS_DATA = 235528;
+  ELIXIR_FRIEND_LIST = 235518;
+  ELIXIR_FRIEND_GRASS_INFO = 235519;
+  ELIXIR_SEARCH_FRIEND = 235520;
+  ELIXIR_FRIEND_RECOMMEND = 235521;
+  ELIXIR_FRIEND_OPERATE = 235522;
+  ELIXIR_FRIEND_APPLY_LIST = 235529;
+  ELIXIR_FRIEND_HELP_FRIEND = 235530;
+  ELIXIR_FRIEND_PRIVATE_CHAT = 235531;
+  ELIXIR_FRIEND_GET_MSG_LIST = 235532;
+  ELIXIR_FRIEND_CHAT_MESSAGE_SYNC = 235533;
+  ELIXIR_GET_WATER_BUCKET = 235535;
+  ELIXIR_GET_TIME_WATER = 235536;
+  ELIXIR_DEL_PLANT_GRASS = 235537;
+  ELIXIR_GET_ORDER_INFO = 235538;
+  ELIXIR_BUY_GROW_GRASS_SEED_ITEM = 235539;
+  ELIXIR_ROB_PLAYER_LAND = 235540;
+  ELIXIR_ACHIEVE_AWARD = 235541;
+  ELIXIR_RELEASE_HELP = 235542;
+  ELIXIR_RECEIVE_HELP = 235543;
+  ELIXIR_FRIEND_COIN_EXCHANGE = 235544;
+  ELIXIR_BE_ROB_RECORD = 235545;
+  ELIXIR_SELL_GRASS = 235546;
+  ELIXIR_BUY_SELL_NUM = 235547;
+  ELIXIR_UNION_PLAYER_LIST = 235548;
+  ELIXIR_SET_GRASS_SHOW = 235549;
+  ELIXIR_GET_GRASS_SHOW = 235570;
+  ELIXIR_SHARE_AWARD = 235571;
+  ELIXIR_SHARE_LIST = 235572;
+  ELIXIR_SELL_BUY_RECORD = 235573;
+  ELIXIR_SELL_INVALID = 235574;
+  ELIXIR_GRASS_COMBINE_LV_UP = 235575;
+  ELIXIR_INNER_RED_POINT_INFO = 235576;
+  ELIXIR_ASK_GRASS = 235577;
+  ELIXIR_SEND_GRASS = 235578;
+}
+enum ElixirInnerRedPointEnum {
+  elixirFriendApplyRed = 0;
+  elixirBeRobRecordRed = 1;
+  elixirFreeDrawRed = 2;
+  elixirDrawTaskRed = 3;
+  elixirDrawGiftRed = 4;
+  elixirCoinClaimableRed = 5;
+  elixirShopRefreshRed = 6;
+  elixirShopUnlockRed = 7;
+  elixirDispatchRed = 8;
+  elixirGrassAskReceiveRed = 9;
+}
+message ElixirElvesEnterReq {
+}
+message ElixirElvesEnterResp {
+  required int32 ret = 1;
+  optional ElixirElvesPlayerData elvesPlayerData = 2;
+}
+message ElixirElvesPlayerData {
+  optional int32 todayGetCount = 1;
+  optional int32 todayStealCount = 2;
+  repeated ElixirElvesSlotInfo slots = 3;
+  optional int32 unlockGridIndex = 4;
+  optional int64 gainElvesCoinNum = 5;
+  optional bool freeDraw = 6;
+  optional int32 drawCount = 7;
+}
+message ElixirElvesSlotInfo {
+  required int32 slotId = 1;
+  optional ElixirElvesSendInfo sendInfo = 2;
+}
+message ElixirElvesSendInfo {
+  optional int32 itemId = 1;
+  optional int32 sendCount = 2;
+  optional int64 sendStartTime = 3;
+}
+message ElixirElvesDrawReq {
+  required int32 drawTimes = 1;
+  optional int32 drawType = 2;
+  optional bool isUseKillTimeItem = 3;
+}
+message ElixirElvesDrawResp {
+  required int32 ret = 1;
+  repeated ElixirElvesDrawResult drawResults = 2;
+  optional ElixirElvesPlayerData elvesPlayerData = 3;
+}
+message ElixirElvesDrawResult {
+    optional string beforRewards = 1;
+    optional string afterRewards = 2;
+}
+message ElixirElvesDispatchReq {
+  repeated ElixirElvesDispatchData dispatchData = 1;
+}
+message ElixirElvesDispatchData {
+  required int32 itemId = 1;
+  required int32 count = 2;
+}
+message ElixirElvesDispatchResp {
+  required int32 ret = 1;
+  optional ElixirElvesPlayerData elvesPlayerData = 2;
+  optional string reward = 3;
+}
+message ElixirElvesUnlockGridReq {
+  required int32 slotId = 1;
+}
+message ElixirElvesUnlockGridResp {
+  required int32 ret = 1;
+  optional ElixirElvesPlayerData elvesPlayerData = 2;
+}
+message ElixirSyncData {
+  optional ElixirUserInfo userInfo = 1;
+  optional ElixirOrderInfo orderInfo = 2;
+  repeated ElixirPrivatChatInfo friendInfos = 3;
+  optional ElixirHelpInfo helpInfo = 4;
+  optional ElixirBattleTaskProgress battleTaskProgress = 6;
+}
+message ElixirBattleTaskProgress {
+  required int32 taskId = 1;
+  required int32 progress = 2;
+}
+message ElixirInnerRedPointInfoReq {
+}
+message ElixirInnerRedPointInfoResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message ElixirGrassCombineMsg {
+  required int32 combineId = 1;
+  required int32 lv = 2;
+}
+message ElixirGrassSeedInfo {
+  required int32 grassSeedId = 1;
+  required int32 state = 2;
+  optional int64 startTime = 3;
+  optional int32 lookAdNum = 4;
+}
+message ElixirGrassInfo {
+  required int32 grassId = 1;
+  optional int32 lv = 2;
+  optional int32 num = 3;
+}
+message ElixirDanYaoInfo {
+  required int32 danYaoId = 1;
+  optional int32 num = 2;
+  optional int32 eatNum = 3;
+}
+message ElixirHelpInfo{
+  repeated PlayerHeadAndNameMsg playerInfo = 1;
+  required int64 receiveTime = 2;
+  required int64 createTime = 3;
+}
+message ElixirUserInfo {
+  required PlayerHeadAndNameMsg playerInfo = 1;
+  required int32 exp = 2;
+  optional int32 water = 3;
+  optional bool elvesOpenOff = 4;
+  repeated ElixirGrassInfo grassInfos = 5;
+  optional int32 dailyRobNum = 6;
+  repeated ElixirGrassSeedInfo grassSeedInfos = 7;
+  repeated int32 danFang = 8;
+  repeated ElixirDanYaoInfo danYaoInfos = 9;
+  optional int64 lastRecoverWaterTime = 10;
+  optional int32 waterBucket = 11;
+  optional int64 lastRecoverWaterBucketTime = 12;
+  repeated int32 dailyGetWaterNum = 13;
+  optional bool randomBigWaterBucket = 14;
+  repeated int32 danFangHasProduct = 15;
+  optional int32 maxGrassAchieveAward = 16;
+  optional int32 maxDanFangAchieveAwardNum = 17;
+  optional int32 dailyRobNumLimit = 18;
+  optional ElixirDailyInfo dailyInfo = 19;
+  optional int32 friendCoinNum = 20;
+  optional int64 consumeDanFanCoinTotal = 21;
+  repeated ElixirGrassCombineMsg grassCombineInfos = 22;
+}
+message ElixirDailyInfo {
+  repeated ElixirDailyQtlInfo qtlInfos = 1;
+  optional int32 todayGetCount = 2;
+  optional int32 freeSpeedPlant = 3;
+  optional int32 getWaterBucketNum = 4;
+  optional int32 dailyGetFriendCoinNum = 5;
+  repeated ElixirDailyQtlInfo targetQtlInfos = 6;
+  optional int32 dailyEatGrade101Num = 7;
+  optional int32 dailyHarvestReikiNum = 8;
+}
+message ElixirRobGrassInfo {
+  required int64 playerId = 1;
+  required int32 robNum = 2;
+  optional int32 robElves = 3;
+}
+message ElixirLandInfo {
+  required int32 landId = 1;
+  required int32 state = 2;
+  optional int32 grassId = 3;
+  optional int32 grassLv = 4;
+  optional int64 roundStartTime = 5;
+  optional int32 canAwardRound = 6;
+  optional int32 elvesNum = 7;
+  optional bool canRob = 8;
+  optional int32 hadReceiveRound = 9;
+  optional int32 canAwardElvesNum = 10;
+}
+message ElixirDestinyOrderInfo {
+  required int32 destinyId = 1;
+  repeated ElixirGrassInfo grassInfos = 2;
+}
+message ElixirPetOrderInfo {
+  required int32 petId = 1;
+  repeated ElixirDanYaoInfo danYaoInfos = 2;
+  optional int64 giveUpTime = 3;
+  required int32 configId = 4;
+  required int32 pos = 5;
+}
+message ElixirTransOrderInfo {
+  repeated ElixirGrassInfo grassInfos = 1;
+  required int64 startTime = 2;
+  optional bool isOver = 3;
+  optional int32 refreshNum = 4;
+}
+message ElixirTransOrderFinishRecord {
+  required int64 completeTime = 1;
+  repeated ElixirGrassInfo submitGrassInfos = 2;
+  optional string rewards = 3;
+}
+message ElixirOrderInfo {
+  repeated ElixirDestinyOrderInfo destinyOrderInfos = 1;
+  optional int64 lastDestinyOrderTime = 2;
+  repeated ElixirPetOrderInfo petOrderInfos = 3;
+  optional int64 lastPetOrderTime = 4;
+  repeated ElixirTransOrderInfo transOrderInfos = 5;
+  optional int32 todayDestinyCompleteTimes = 6;
+  optional int32 todayPetCompleteTimes = 7;
+  repeated ElixirTransOrderFinishRecord transOrderFinishRecords = 8;
+}
+message ElixirEnterHomeReq {
+  optional int64 playerId = 1;
+}
+message ElixirEnterHomeResp {
+  required int32 ret = 1;
+  optional ElixirUserInfo userInfo = 2;
+  repeated ElixirLandInfo lands = 3;
+  optional ElixirOrderInfo orderInfo = 4;
+  repeated int64 serverIds = 5;
+  optional ElixirHelpInfo helpInfo = 6;
+  repeated ElixirGrassSeedInfo growingGrassSeeds = 7;
+  optional int32 todayAskNum = 8;
+  repeated int32 sharedDanYaoIds = 9;
+  optional ElixirBattleTaskInfo curTask = 10;
+}
+message ElixirUnlockLandReq {
+  required int32 landId = 1;
+}
+message ElixirUnlockLandResp {
+  required int32 ret = 1;
+  optional ElixirLandInfo land = 2;
+}
+message ElixirPlantGrassReq {
+  repeated ElixirPlantGrassInfo grassInfo = 1;
+  optional bool oneKey = 2;
+  optional bool isPlantElves = 3;
+}
+message ElixirPlantGrassResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo land = 2;
+}
+message ElixirPlantGrassInfo{
+  required int32 landId = 1;
+  required int32 grassId = 2;
+}
+message ElixirWaterGrassReq {
+  repeated int32 landId = 1;
+  optional bool oneKey = 2;
+}
+message ElixirWaterGrassResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo land = 2;
+  optional ElixirUserInfo userInfo = 3;
+}
+message ElixirGetGrassReq {
+  repeated int32 landId = 1;
+  optional bool oneKey = 2;
+}
+message ElixirLandRoundAward{
+  required string reward = 1;
+  optional int32 speed = 2;
+  optional string lvReward = 3;
+}
+message ElixirLandReward {
+  required int32 landId = 1;
+  repeated ElixirLandRoundAward roundAwards = 2;
+}
+message ElixirGetGrassResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo land = 2;
+  repeated ElixirGrassInfo grassInfo = 3;
+  repeated ElixirLandReward landRewards = 4;
+}
+message ElixirSpeedPlantGrassReq {
+  repeated int32 landId = 1;
+  optional bool oneKey = 2;
+  optional int32 oneKeyType = 3;
+  optional bool isUseKillTimeItem = 4;
+  optional bool oneKeySpeedCardFillAll = 5;
+}
+message ElixirSpeedPlantGrassResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo land = 2;
+}
+message ElixirStartActiveGrassSeedReq {
+  required int32 grassSeedId = 1;
+}
+message ElixirStartActiveGrassSeedResp {
+  required int32 ret = 1;
+  optional ElixirGrassSeedInfo grassSeedInfo = 2;
+}
+message ElixirSpeedGrassSeedReq {
+  required int32 grassSeedId = 1;
+  required int32 type = 2;
+  optional bool isUseKillTimeItem = 3;
+}
+message ElixirSpeedGrassSeedResp {
+  required int32 ret = 1;
+  optional ElixirGrassSeedInfo grassSeedInfo = 2;
+}
+message ElixirGetActiveGrassReq {
+  required int32 grassSeedId = 1;
+}
+message ElixirGetActiveGrassResp {
+  required int32 ret = 1;
+  optional ElixirGrassInfo grassInfo = 2;
+  optional ElixirGrassSeedInfo grassSeedInfo = 3;
+}
+message ElixirGrassLvUpReq {
+  required int32 grassId = 1;
+}
+message ElixirGrassLvUpResp {
+  required int32 ret = 1;
+  optional ElixirGrassInfo grassInfo = 2;
+}
+message ElixirGrassCombineLvUpReq {
+  required int32 combineId = 1;
+}
+message ElixirGrassCombineLvUpResp {
+  required int32 ret = 1;
+  optional ElixirGrassCombineMsg combineMsg = 2;
+}
+message ElixirDanYaoCombineReq {
+  required int32 danYaoId = 1;
+  required int32 num = 2;
+}
+message ElixirDanYaoCombineResp {
+  required int32 ret = 1;
+  optional ElixirDanYaoInfo danYaoInfo = 2;
+  optional bool isFirstShare = 3;
+}
+message ElixirDanYaoQuickCombineReq {
+}
+message ElixirDanYaoQuickCombineResp {
+  required int32 ret = 1;
+  repeated ElixirDanYaoInfo danYaoInfos = 2;
+}
+message ElixirDanYaoEatReq {
+  optional int32 danYaoId = 1;
+  optional int32 num = 3;
+  optional bool oneKey = 2;
+}
+message ElixirDanYaoEatResp {
+  required int32 ret = 1;
+  repeated ElixirDanYaoInfo danYaoInfo = 2;
+}
+message ElixirPushOrderReq {
+  required int32 type = 1;
+  optional int32 index = 2;
+}
+message ElixirPushOrderResp {
+  required int32 ret = 1;
+  repeated ElixirGrassInfo grassInfos = 2;
+  repeated ElixirDanYaoInfo danYaoInfos = 3;
+  optional string rewards = 4;
+}
+message ElixirGiveUpOrderReq {
+  required int32 index = 1;
+}
+message ElixirGiveUpOrderResp {
+  required int32 ret = 1;
+  optional ElixirOrderInfo orderInfo = 2;
+}
+message ElixirRefreshOrderReq {
+}
+message ElixirRefreshOrderResp {
+  required int32 ret = 1;
+  optional ElixirOrderInfo orderInfo = 2;
+}
+message ElixirFriendInfo{
+  required PlayerBaseDataMsg playerBaseData = 1;
+  required int32 exp = 2;
+  optional bool canRob = 3;
+  optional bool canHelp = 4;
+  optional int64 lastLoginTime = 5;
+  optional bool isApply = 6;
+  optional bool isRemark = 7;
+  optional bool canAskGrass = 8;
+  optional int32 recommendRelationState = 9;
+}
+message ElixirFriendListReq {
+}
+message ElixirFriendListResp {
+  required int32 ret = 1;
+  repeated ElixirFriendInfo friendInfos = 2;
+}
+message ElixirFriendGrassInfoReq {
+  required int32 playerId = 1;
+}
+message ElixirFriendGrassInfoResp {
+  required int32 ret = 1;
+  repeated ElixirGrassInfo grassInfos = 2;
+}
+message ElixirSearchFriendReq {
+  required string searchKey = 1;
+  optional int64 serverId = 2;
+}
+message ElixirSearchFriendResp {
+  required int32 ret = 1;
+  repeated ElixirFriendInfo friendInfos = 2;
+}
+message ElixirFriendRecommendReq {
+  optional bool refresh = 1;
+  optional int32 recommendType = 2;
+}
+message ElixirFriendRecommendResp {
+  required int32 ret = 1;
+  repeated ElixirFriendInfo friendInfos = 2;
+  optional int64 lastUpdateTime = 3;
+}
+message ElixirFriendOperateReq {
+  required int32 operateType = 1;
+  repeated int64 playerIds = 2;
+  optional int32 sourceType = 3;
+}
+message ElixirFriendOperateResp {
+  required int32 ret = 1;
+  repeated ElixirFriendInfo friendInfos = 2;
+}
+message ElixirFriendApplyListReq{
+}
+message ElixirFriendApplyListResp{
+  required int32 ret = 1;
+  repeated ElixirFriendInfo friendInfos = 2;
+}
+message ElixirFriendHelpFriendReq {
+  required int64 playerId = 1;
+}
+message ElixirFriendHelpFriendResp {
+  required int32 ret = 1;
+  optional ElixirHelpInfo helpInfo = 2;
+}
+message ElixirPrivatChatInfo {
+  required FriendInfo friendInfo = 1;
+  optional int32 lv = 2;
+}
+message ElixirFriendPrivateChatReq {
+  required int64 playerId = 1;
+}
+message ElixirFriendPrivateChatRsp {
+  required int32 ret = 1;
+  repeated ElixirPrivatChatInfo friendInfos = 2;
+}
+message ElixirFriendGetMsgListReq {
+  required int64 targetPlayerId = 1;
+}
+message ElixirSellItemInfo{
+  required int32 index = 1;
+  required int32 state = 2;
+  optional int32 grassId = 3;
+  optional int32 num = 4;
+  optional int32 price = 5;
+  optional int64 endTime = 6;
+  optional string passWord = 7;
+  optional bool hasPassWord = 8;
+}
+message ElixirSellInfo{
+  required PlayerBaseDataMsg playerBaseData = 1;
+  repeated ElixirSellItemInfo sellItemInfos = 2;
+}
+message ElixirSellListReq {
+  optional int64 playerId = 1;
+}
+message ElixirSellDetailItem {
+  required int32 grassId = 1;
+  required int32 num = 2;
+  required int64 totalPrice = 3;
+}
+message ElixirSellListResp {
+  required int32 ret = 1;
+  repeated ElixirSellInfo sellInfos = 2;
+  optional ElixirSellUserInfo userInfo = 3;
+  repeated ElixirSellDetailItem sellDetails = 4;
+}
+message ElixirSellUserInfo {
+  optional int32 pushNum = 1;
+  optional int32 pushMaxNum = 2;
+  optional int32 buyPushNum = 3;
+  repeated ElixirSellPushQtlInfo pushQtlInfos = 4;
+}
+message ElixirSellPushQtlInfo {
+  required int32 qtl = 1;
+  required int32 num = 2;
+}
+message ElixirPushGrassSellReq {
+  required int32 grassId = 1;
+  required int32 num = 2;
+  required int32 price = 3;
+  required int32 index = 4;
+  optional string passWord = 5;
+}
+message ElixirPushGrassSellResp {
+  required int32 ret = 1;
+  optional ElixirSellItemInfo sellItemInfo = 2;
+}
+message ElixirUnlockSellIndexReq {
+  required int32 index = 1;
+}
+message ElixirUnlockSellIndexResp {
+  required int32 ret = 1;
+  optional ElixirSellItemInfo sellItemInfos = 2;
+}
+message ElixirDownGrassSellReq {
+  required int32 index = 1;
+}
+message ElixirDownGrassSellResp {
+  required int32 ret = 1;
+  optional ElixirSellItemInfo sellItemInfo = 2;
+}
+message ElixirBuyGrassSellReq {
+  required int32 index = 1;
+  required int64 playerId = 2;
+  optional string passWord = 3;
+}
+message ElixirBuyGrassSellResp {
+  required int32 ret = 1;
+  optional ElixirSellItemInfo sellItemInfo = 2;
+  optional ElixirGrassInfo grassInfo = 3;
+}
+message ElixirGetNewGrassDataReq {
+}
+message ElixirGetNewGrassDataResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo lands = 2;
+}
+message ElixirGetWaterBucketReq {
+  required int32 step = 1;
+  optional bool isUseKillTimeItem = 2;
+}
+message ElixirGetWaterBucketResp {
+  required int32 ret = 1;
+  optional ElixirUserInfo userInfo = 2;
+  optional int32 waterNum = 3;
+}
+message ElixirGetTimeWaterReq {
+  optional bool isUseKillTimeItem = 1;
+  required int32 step = 2;
+}
+message ElixirGetTimeWaterResp {
+  required int32 ret = 1;
+  optional string reward =2;
+}
+message ElixirDelPlantGrassReq {
+  repeated int32 landId = 1;
+  optional bool oneKey = 2;
+}
+message ElixirDelPlantGrassResp {
+  required int32 ret = 1;
+  repeated ElixirLandInfo landInfo = 2;
+  optional string reward = 3;
+  optional ElixirUserInfo userInfo = 4;
+}
+message ElixirGetOrderInfoReq {
+}
+message ElixirGetOrderInfoResp {
+  required int32 ret = 1;
+  optional ElixirOrderInfo orderInfo = 2;
+}
+message ElixirBuyGrowGrassSeedItemReq {
+  required int32 grassSeedId = 1;
+  required int32 itemId = 2;
+}
+message ElixirBuyGrowGrassSeedItemResp {
+  required int32 ret = 1;
+}
+message ElixirRobPlayerLandReq {
+  required int64 playerId = 1;
+  required int32 landId = 2;
+  optional bool oneKey = 3;
+}
+message ElixirRobPlayerLandResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 dailyRobNum = 3;
+}
+message ElixirAchieveAwardReq {
+  required int32 type = 1;
+}
+message ElixirAchieveAwardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 confId = 3;
+}
+message ElixirReleaseHelpReq {
+}
+message ElixirReleaseHelpResp {
+  required int32 ret = 1;
+  optional ElixirHelpInfo helpInfo = 2;
+}
+message ElixirReceiveHelpReq {
+}
+message ElixirReceiveHelpResp {
+  required int32 ret = 1;
+  optional ElixirHelpInfo helpInfo = 2;
+}
+message ElixirFriendCoinExchangeReq {
+  required int64 playerId = 1;
+  required int32 num = 2;
+}
+message ElixirFriendCoinExchangeResp {
+  required int32 ret = 1;
+  optional ElixirUserInfo userInfo = 2;
+  optional int32 dailyRobLimit = 3;
+}
+message ElixirBeRobRecordReq {
+}
+message ElixirBeRobRecordResp {
+  required int32 ret = 1;
+  repeated ElixirBeRobRecordInfo beRobRecordInfos = 2;
+  repeated ElixirDailyQtlInfo qtlInfos = 3;
+}
+message ElixirDailyQtlInfo{
+  required int32 qtl = 1;
+  required int32 num = 2;
+}
+message ElixirElvesInfo {
+  required int32 id = 1;
+  optional int32 num = 2;
+}
+message ElixirBeRobRecordInfo{
+  required PlayerBaseDataMsg playerBaseData = 1;
+  repeated ElixirGrassInfo GrassInfo = 2;
+  repeated ElixirElvesInfo elvesInfo = 3;
+  required int64 time = 4;
+  required bool canRob = 5;
+  required bool canVisit = 6;
+}
+message ElixirSellGrassReq {
+  required int32 grassId = 1;
+  required int32 num = 2;
+}
+message ElixirSellGrassResp {
+  required int32 ret = 1;
+  optional ElixirUserInfo userInfo = 2;
+  optional string rewards = 3;
+}
+message ElixirBuySellNumReq {
+  optional int32 num = 1;
+}
+message ElixirBuySellNumResp {
+  required int32 ret = 1;
+  optional ElixirUserInfo userInfo = 2;
+}
+message ElixirUnionPlayerListReq {
+}
+message ElixirUnionPlayerListResp {
+  required int32 ret = 1;
+  repeated ElixirFriendInfo unionPlayerInfos = 2;
+}
+message ElixirSetGrassShowReq {
+  repeated int32 grassId = 1;
+}
+message ElixirSetGrassShowResp {
+  required int32 ret = 1;
+  repeated int32 grassIds = 2;
+}
+message ElixirGetGrassShowReq {
+  required int64 playerId = 1;
+}
+message ElixirGetGrassShowResp {
+  required int32 ret = 1;
+  repeated int32 grassIds = 2;
+}
+message ElixirShareAwardReq {
+  required int32 type = 1;
+  optional int32 id = 2;
+}
+message ElixirShareAwardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message ElixirShareListReq {
+  required int32 type = 1;
+}
+message ElixirShareListResp {
+  required int32 ret = 1;
+  repeated int32 ids = 2;
+}
+message ElixirSellBuyRecordReq {
+}
+message ElixirSellBuyRecordResp {
+  required int32 ret = 1;
+  repeated ElixirSellBuyRecordInfo sellBuyRecordInfos = 2;
+}
+message ElixirSellBuyRecordInfo{
+  required PlayerBaseDataMsg playerBaseData = 1;
+  required int32 lv = 2;
+  required int32 grassId = 3;
+  required int32 num = 4;
+  required int64 coin = 5;
+  required int64 time = 6;
+}
+message ElixirAskGrassReq {
+  required int32 channelType = 1;
+  required int32 grassId = 2;
+  required int32 count = 3;
+  optional int64 friendPlayerId = 4;
+}
+message ElixirAskGrassResp {
+  required int32 ret = 1;
+  optional int32 todayAskNum = 2;
+}
+message ElixirSendGrassReq {
+  required string askUid = 1;
+  required int64 receivePlayerId = 2;
+  required int32 grassId = 3;
+  required int32 count = 4;
+  required int32 channelType = 5;
+}
+message ElixirSendGrassResp {
+  required int32 ret = 1;
+  optional int32 todaySendNum = 2;
+}
+message ElixirGrassGiftLogListReq {
+  required int32 logTabType = 1;
+}
+message ElixirGrassGiftLogEntryPb {
+  required int32 index = 1;
+  required int64 senderId = 2;
+  required int32 grassId = 3;
+  required int32 count = 4;
+  required int64 createTime = 5;
+  required bool claimed = 6;
+  required int32 logTabType = 7;
+  optional ElixirFriendInfo friendInfo = 8;
+  optional int32 channelType = 9;
+}
+message ElixirGrassGiftLogListResp {
+  required int32 ret = 1;
+  repeated ElixirGrassGiftLogEntryPb entries = 2;
+}
+message ElixirGrassGiftLogClaimReq {
+  required int32 index = 1;
+}
+message ElixirGrassGiftLogClaimResp {
+  required int32 ret = 1;
+  optional string grassAward = 2;
+}
+message ElixirSellInvalidReq {
+}
+message ElixirSellInvalidResp {
+  required int32 ret = 1;
+  optional int32 reason = 2;
+  repeated ElixirGrassInfo grassList = 3;
+}

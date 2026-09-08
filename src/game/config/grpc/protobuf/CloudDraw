@@ -1,0 +1,41 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum CloudDrawPb {
+  CloudDraw_Detail = 236901;
+  CloudDraw_DayRecord = 236902;
+  CloudDraw_winnerNotice = 236903;
+  CloudDraw_newGroupJoinSync = 236904;
+}
+message CloudDrawWinnerInfo {
+  optional PlayerHeadDataMsg headData = 1;
+  optional string playerName = 2;
+}
+message CloudDrawDetailReq {
+}
+message CloudDrawDetailResp {
+  optional int32 ret = 1;
+  optional int32 seasonId = 2;
+  optional int32 themeId = 3;
+  optional int64 groupId = 4;
+  repeated int64 serverIds = 5;
+  optional bool todayBought = 6;
+  optional bool drew = 7;
+  repeated CloudDrawWinnerInfo winnerList = 8;
+  optional int64 joinGroupTime = 9;
+}
+message CloudDrawDayRecordReq {
+  required int64 queryTime = 1;
+}
+message CloudDrawDayRecordResp {
+  optional int32 ret = 1;
+  optional bool drew = 2;
+  optional bool bought = 3;
+  repeated CloudDrawWinnerInfo winnerList = 4;
+}
+message CloudDrawWinnerNoticeSync {
+  optional int32 dayYmd = 1;
+}
+message CloudDrawGroupSync {
+  optional int64 groupId = 1;
+  optional int64 joinTime = 2;
+}

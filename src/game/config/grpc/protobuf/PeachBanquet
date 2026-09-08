@@ -1,0 +1,133 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "PackagesBase";
+enum FeastPb{
+    Feast_Sync_Player_Data = 213500;
+    Feast_Get_Feast_List = 213501;
+    Feast_Try_Sit = 213502;
+    Feast_Enter_Feast = 213503;
+    Feast_Exit_Feast = 213504;
+    Feast_Modify_Feast_Auto_Info = 213505;
+    Feast_Get_Apply_List = 213506;
+    Feast_Agree_Apply = 213507;
+    Feast_Refuse_All = 213508;
+    Feast_Search_Apply_Player = 213509;
+    Feast_Main_Page_Show_Feast = 213510;
+    Feast_Vip_Seat_Info_Sync = 213511;
+    Feast_Reward_Send = 213512;
+    Feast_CTG_Enter_Reward_Sync = 213513;
+    Feast_Mail_Reward_Send = 213514;
+    Feast_Main_Page_Show_Enter = 213515;
+    Feast_CTG_Main_Page_Show_Enter = 213516;
+}
+message SeatInfo {
+    required int32 index = 1;
+    optional PlayerBaseDataMsg playerInfo = 2;
+}
+message AutoInfo {
+    optional SingleAutoInfo unionAuto = 1;
+    optional SingleAutoInfo realmsAuto = 2;
+}
+message SingleAutoInfo{
+    optional bool isOpen = 1;
+    optional int32 val = 2;
+}
+/**申请信息 */
+message ApplyInfo {
+    optional PlayerBaseDataMsg playerInfo = 1;
+    optional int64 applyTime = 2;
+}
+message JoinPeachBanquetListSync {
+    repeated string joinPeachBanquetIdList = 1;
+    repeated int32 todayJoinBanquetNumList = 2;
+}
+message SeniorSeatRewardSync {
+    optional string banquetType = 1;
+    optional string reward = 2;
+}
+message SeniorSeatInfoSync {
+    optional string banquetId = 1;
+    repeated SeatInfo seatInfo = 2;
+}
+message PeachBanquetApplySync {
+    optional string banquetId = 1;
+    optional bool hasApply = 2;
+}
+message OpenPeachBanquetReq {
+    required int32 banquetLv = 1;
+}
+message OpenPeachBanquetResp {
+    required int32 ret = 1;
+}
+message GetPeachBanquetListReq {
+    required int32 page = 1;
+    optional int64 timeParam = 2;
+}
+message GetPeachBanquetListResp {
+    required int32 ret = 1;
+    repeated PeachBanquetInfo list = 2;
+}
+message EnterPeachBanquetReq {
+    required string banquetId = 1;
+}
+message EnterPeachBanquetResp {
+    required int32 ret = 1;
+    optional PeachBanquetInfo info = 2;
+    repeated SeatInfo seniorSeatList = 3;
+    repeated SeatInfo normalSeatList = 4;
+    optional AutoInfo autoInfo = 5;
+    optional bool showTheSameUnion = 6;
+    optional int32 showRealms = 7;
+}
+message ExitPeachBanquetReq {
+    required string banquetId = 1;
+}
+message ExitPeachBanquetResp {
+    required int32 ret = 1;
+}
+message SitDownReq {
+    required string banquetId = 1;
+    required int32 seatIndex = 2;
+}
+message SitDownResp {
+    required int32 ret = 1;
+    optional SeatInfo seatInfo = 2;
+    optional string reward = 3;
+}
+message SetAutoReq {
+    required string banquetId = 1;
+    required AutoInfo setInfo = 2;
+}
+message SetAutoResp {
+    required int32 ret = 1;
+}
+message GetApplyListReq {
+    required string banquetId = 1;
+    required bool showTheSameUnion = 2;
+    required int32 showRealms = 3;
+}
+message GetApplyListResp {
+    required int32 ret = 1;
+    repeated ApplyInfo dataList = 2;
+}
+message AgreeApplyReq {
+    required string banquetId = 1;
+    required int64 playerId = 2;
+}
+message AgreeApplyResp {
+    required int32 ret = 1;
+}
+message RefuseAllReq {
+    required string banquetId = 1;
+}
+message RefuseAllResp {
+    required int32 ret = 1;
+}
+message SearchBanquetApplyPlayerReq {
+   required string searchKey = 1;
+   optional string banquetId = 2;
+}
+message SearchBanquetApplyPlayerResp {
+   required int32 ret = 1;
+   optional ApplyInfo playerData = 2;
+}

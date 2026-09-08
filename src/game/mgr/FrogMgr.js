@@ -2,6 +2,7 @@ import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
 import LoopMgr from "#game/common/LoopMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class FrogMgr {
     constructor() {
@@ -41,6 +42,7 @@ export default class FrogMgr {
     }
 
     async loopUpdate() {
+        if (!isAutomationTaskEnabled('basic.ad-frog')) return;
         if (this.isProcessing) return;
         this.isProcessing = true;
 

@@ -1,0 +1,81 @@
+package com.yq.msg.CityMsg;
+import "Common";
+message PoolTreasureEnterReq {
+  required int32 activityId = 1;
+}
+message PoolTreasureEnterRsp {
+  required int32 ret = 1;
+  optional PoolTreasureSync data = 2;
+}
+message PoolTreasureDrawReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+}
+message PoolTreasureDrawRsp {
+  required int32 ret = 1;
+  optional PoolTreasureSync data = 2;
+  repeated int32 diceNums = 3;
+  optional string reward = 4;
+  optional string bigReward = 5;
+  repeated int32 events = 6;
+  repeated int32 multiNums = 7;
+}
+message PoolTreasureSelectBigRewardReq {
+  required int32 activityId = 1;
+  required int32 round = 2;
+  required int32 rewardId = 3;
+  required int32 selectIndex = 4;
+  required bool isSelectAll = 5;
+}
+message PoolTreasureSelectBigRewardRsp {
+  required int32 ret = 1;
+}
+message PoolTreasureSync {
+  optional int32 drawTimes = 1;
+  optional int32 step = 2;
+  repeated PoolTreasureRewardedEntry rewardedList = 3;
+  repeated PoolTreasureSelectEntry selectList = 4;
+  optional int32 multi = 5;
+  optional int32 topicId = 6;
+  optional bool lockTopic = 7;
+}
+message PoolTreasureRewardedEntry {
+  required int32 round = 1;
+  required int32 rewardId = 2;
+  required int32 count = 3;
+}
+message PoolTreasureSelectEntry {
+  required int32 round = 1;
+  required int32 rewardId = 2;
+  required int32 selectIndex = 3;
+}
+message PoolTreasureConfigSync {
+    repeated PoolTreasureDrawConfigMsg poolTreasureDrawConfigList = 1;
+    repeated PoolTreasureRoundConfigMsg poolTreasureRoundConfigMsgList = 2;
+    repeated CommonTopicConfig topicConfig = 3;
+}
+message PoolTreasureDrawConfigMsg {
+  optional int32 round = 1;
+  optional string reward = 2;
+  optional int32 cost = 3;
+  optional string bonus = 4;
+  optional string rewardType = 5;
+}
+message PoolTreasureRoundConfigMsg {
+  optional int32 id = 1;
+  optional int32 round = 2;
+  optional string reward = 3;
+  optional string weight = 4;
+  optional string time = 5;
+  optional string quality = 6;
+  optional int32 isShow = 7;
+  optional int32 topic = 8;
+}
+message PoolTreasureSelectTopicReq {
+  required int32 activityId = 1;
+  required int32 topicId = 2;
+}
+message PoolTreasureSelectTopicRsp {
+  required int32 ret = 1;
+  optional int32 topicId = 2;
+}

@@ -1,0 +1,827 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Battle";
+import "PupilRogueBattle";
+enum pupilExploreProtocols{
+    S_PUPIL_EXPLORE_NULL = 0;
+    S_PUPIL_EXPLORE_ADVENTURE = 230401;
+    S_PUPIL_EXPLORE_RANDOM = 230402;
+    S_PUPIL_EXPLORE_START = 230403;
+    S_PUPIL_EXPLORE_GIVE_UP = 230404;
+    S_PUPIL_EXPLORE_NEXT_DAY = 230405;
+    S_PUPIL_EXPLORE_TRAVEL_START = 230406;
+    S_PUPIL_EXPLORE_TRAVEL_GIVE_UP = 230407;
+    S_PUPIL_EXPLORE_TRAVEL_PASS_TODAY = 230408;
+    S_PUPIL_EXPLORE_RELOAD_SKILL = 230409;
+    S_PUPIL_EXPLORE_CHOOSE_SKILL = 230410;
+    S_PUPIL_EXPLORE_DIRECT_FIGHT_BOSS = 230411;
+    S_PUPIL_EXPLORE_BATTLE = 230412;
+    S_PUPIL_EXPLORE_SPRING_WATER = 230413;
+    S_PUPIL_EXPLORE_REC_TURN_TABLE = 230414;
+    S_PUPIL_EXPLORE_WANDER_MONSTER = 230415;
+    S_PUPIL_EXPLORE_MULTI_DECIDE = 230416;
+    S_PUPIL_EXPLORE_WAGER = 230417;
+    S_PUPIL_EXPLORE_ORDINARY = 230418;
+    S_PUPIL_EXPLORE_ROUND_TURN_TABLE = 230419;
+    S_PUPIL_EXPLORE_TEXT = 230420;
+    S_PUPIL_EXPLORE_MAGIC_BOOK = 230421;
+    S_PUPIL_EXPLORE_CUT_TREE = 230422;
+    S_PUPIL_EXPLORE_GET_SECT = 230423;
+    S_PUPIL_EXPLORE_SECT_LV_UP = 230424;
+    S_PUPIL_EXPLORE_SKILL_UPGRADE = 230425;
+    S_PUPIL_EXPLORE_DESTINY = 230426;
+    S_PUPIL_EXPLORE_SKILL_SELECT = 230427;
+    S_PUPIL_EXPLORE_REWARD = 230428;
+    S_PUPIL_EXPLORE_EXCHANGE = 230429;
+    S_PUPIL_EXPLORE_HISTORY = 230433;
+    S_PUPIL_BATTLE_SIMULATE = 230499;
+    S_PUPIL_EXPLORE_SKILL_SWAP = 230434;
+    S_PUPIL_EXPLORE_CHOOSE_ENEMY = 230435;
+    S_PUPIL_EXPLORE_TRAVEL_SKIP = 230436;
+    S_PUPIL_EXPLORE_BOSS_CHALLENGE_RELOAD_SKILL = 230437;
+    S_PUPIL_EXPLORE_CONTINUOUS_SKILL = 230438;
+}
+enum ExploreEventType {
+    ExploreEventType_Battle = 1;
+    ExploreEventType_SpringWater = 2;
+    ExploreEventType_RoundTurntable = 3;
+    ExploreEventType_RectTurntable = 4;
+    ExploreEventType_WanderMonster = 5;
+    ExploreEventType_ChooseSkillCost = 6;
+    ExploreEventType_Wager = 7;
+    ExploreEventType_Skill = 8;
+    ExploreEventType_ChooseSkill = 9;
+    ExploreEventType_Attribute = 10;
+    ExploreEventType_Boss = 11;
+    ExploreEventType_SkillUpgrade = 12;
+    ExploreEventType_Destiny = 13;
+    ExploreEventType_Capsule_Toys = 14;
+    ExploreEventType_SkillSwap = 16;
+    ExploreEventType_ChoseEnemy = 17;
+    ExploreEventType_ContinuousSkill = 18;
+}
+enum ExploreEventState {
+    ExploreEventState_Undo = 0;
+    ExploreEventState_Finish = 1;
+}
+enum ExploreEventValueType {
+    ExploreEventValueType_NULL = 0;
+    ExploreEventValueType_MAX_HP = 1;
+    ExploreEventValueType_HP = 2;
+    ExploreEventValueType_Attack = 3;
+    ExploreEventValueType_Defend = 4;
+}
+enum ExploreReloadSkillWay {
+    ExploreReloadSkillWay_Init = 1;
+}
+enum ExploreEventMultiDecideAddType {
+    ExploreEventMultiDecideAddType_Atk = 0;
+    ExploreEventMultiDecideAddType_MaxHP = 1;
+}
+message PupilRogueConfigMsg {
+    repeated PupilRogueEventConfigMsg eventConfig = 1;
+    repeated PupilRogueLevelConfigMsg levelConfig = 2;
+    repeated PupilRogueModelConfigMsg modelConfig = 3;
+    repeated PupilRogueMonsterConfigMsg monsterConfig = 4;
+    repeated PupilRogueGiftConfigMsg giftConfig = 5;
+    repeated PupilRogueSkillConfigMsg skillConfig = 6;
+    repeated PupilRogueBuffConfigMsg buffConfig = 7;
+    repeated PupilRogueCharaConfigMsg charaConfig = 8;
+    repeated PupilRogueEffectConfigMsg effectConfig = 9;
+    repeated PupilRogueAdSkillConfigMsg adSkillConfig = 10;
+}
+message PupilRogueEventConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required string param = 3;
+    required string exp = 4;
+    required string itemRate = 5;
+    required int32 walkLong = 6;
+    required int32 quality = 7;
+    required string label = 8;
+}
+message PupilRogueLevelConfigMsg {
+    required int32 id = 1;
+    required int32 chapter = 2;
+    required int32 type = 3;
+    required string name = 4;
+    required string chapterModel = 5;
+    required string monsterParam = 6;
+    required string itemReward = 7;
+    required int32 bossId = 8;
+    required int32 recommendLevel = 9;
+}
+message PupilRogueModelConfigMsg {
+    required int32 id = 1;
+    required int32 modelType = 2;
+    required int32 day = 3;
+    required string randomPool = 4;
+    required string monsterParam = 5;
+}
+message PupilRogueMonsterConfigMsg {
+    required int32 id = 1;
+    required string name = 2;
+    required string desc = 3;
+    required string type = 4;
+    required int32 quality = 5;
+    required int32 backStage = 6;
+    required string appearanceId = 7;
+    required string icon = 8;
+    required string attackEffectName = 9;
+    required string skillEffectName = 10;
+    required string attackHoldType = 11;
+    required string attackExcursion = 12;
+    required string attackHitExcursion = 13;
+    required string mutilAttackParam = 14;
+    required string attackSkillExcursion = 15;
+    required string mutilSkillAttackParam = 16;
+    required int32 bodyHeight = 17;
+    required int32 bodyScale = 18;
+    required int32 attackBodyScale = 19;
+    required int32 skillEffect = 20;
+    required int32 isBoss = 21;
+    required int32 attackEmp = 22;
+    required int32 hpEmp = 23;
+    required int32 defEmp = 24;
+    required int32 speedEmp = 25;
+    required string skill = 26;
+}
+message PupilRogueGiftConfigMsg {
+    required int32 id = 1;
+    required int32 level = 2;
+    required string cost = 3;
+    required int32 type = 4;
+    required string param = 5;
+}
+message PupilRogueSkillConfigMsg {
+    required int32 id = 1;
+    required string name = 2;
+    required string desc = 3;
+    required string icon = 4;
+    required int32 star = 5;
+    required string buffList = 6;
+    required string paramsStyle = 7;
+    required string params = 8;
+    required string upgradeParams = 9;
+    required int32 maxLevel = 10;
+    required string upgradeItem = 11;
+    required string upgradeType = 12;
+    required int32 sort = 13;
+    required int32 textStyle = 14;
+    required string specialSign = 15;
+    required int32 unlock = 16;
+    required int32 type = 17;
+    optional int32 cornerIcon =18;
+    optional int32 littleType = 19;
+    optional int32 isShake = 20;
+}
+message PupilRogueBuffConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required int32 triggerType = 3;
+    required string triggerParam = 4;
+    required int32 behaviorType = 5;
+    required string behaviorParam = 6;
+    required int32 endType = 7;
+    required string endParam = 8;
+    required string effectName = 9;
+    required string targetParam = 10;
+    required int32 buffSign = 11;
+    required int32 canSilent = 12;
+    required string rate = 13;
+    required int32 bodySizeRate = 14;
+}
+message PupilRogueCharaConfigMsg {
+    required int32 id = 1;
+    required string appearanceId = 2;
+    required string icon = 3;
+    required string attackHoldType = 4;
+    required string act = 5;
+    required string hit = 6;
+    required string attackHitExcursion = 7;
+    required int32 bodyHeight = 8;
+    required int32 bodyScale = 9;
+    required int32 attackBodyScale = 10;
+    required int32 skillEffect = 11;
+    required string name = 12;
+}
+message PupilRogueEffectConfigMsg {
+    required int32 id = 1;
+    required string name = 2;
+    required string path = 3;
+    required int32 type = 4;
+    required int32 posType = 5;
+    required int32 isFollowScale = 6;
+    required int32 offsetX = 7;
+    required int32 offsetY = 8;
+    required int32 moveSpeed = 9;
+    required int32 audioId = 10;
+    required int32 priority = 11;
+    required string multiHit = 12;
+    required string beAtkEffectName = 13;
+    required string delay = 14;
+    required int32 playCircle = 15;
+}
+message PupilRogueAdSkillConfigMsg {
+    required int32 id = 1;
+    required int32 type = 2;
+    required int32 skillID = 3;
+    required int32 weight = 4;
+    required string label = 5;
+    required string weightAdd = 6;
+    required string cost = 7;
+    required string poolType = 8;
+    required string lockParam = 9;
+    required string initialStart = 10;
+    required string canLevelup = 11;
+    required string iconShow = 12;
+}
+message ExplorePlayerDataMsg {
+    optional int32 curStageId = 1;
+    optional int32 curStageDays = 2;
+    optional int64 bossDamage = 3;
+    optional PlayerExploreMsg exploreMsg = 4;
+}
+message PlayerExploreMsg {
+    optional int32 curStageId = 1;
+    optional int32 curStageDays = 2;
+    optional ExploreEnergyMsg energy = 3;
+    optional PupilExploreData curPupil = 4;
+    repeated PupilExploreData pupilList = 5;
+    optional PupilExploreData curTravelPupil = 6;
+    optional ExploreStageMsg playingStage = 7;
+    optional ExploreTravelMsg playerTravel = 8;
+    optional int32 leftRefreshTimes = 9;
+    optional ExploreBossChallengeMsg bossChallenge = 10;
+}
+message ExploreStageMsg {
+    optional int32 stageId = 1;
+    optional int32 day = 2;
+    optional int32 lv = 3;
+    optional int32 exp = 4;
+    repeated AttributeDataMsg attrs = 5;
+    optional int64 hp = 6;
+    repeated ExploreEventTidy events = 7;
+    optional ExploreEvent curEvent = 8;
+    repeated ExploreStageSkill skills = 9;
+    repeated int32 stageBuffSkill = 10;
+    optional int32 reloadSkillNum = 11;
+    optional int32 reloadSkillLimit = 12;
+    optional ExploreEventTidy nextEvent = 13;
+    optional int32 gold = 14;
+    optional int32 modleType = 15;
+}
+message ExploreTravelMsg {
+    optional int32 stageId = 1;
+    optional int32 day = 2;
+    optional int32 multi = 3;
+    optional ExploreTravelEvent event = 4;
+    repeated AwardInfo reward = 5;
+    optional int32 totalDay = 6;
+    optional int32 awardGoldTimes = 7;
+    optional int32 curTravelPupil = 8;
+}
+message ExploreBossChallengeMsg {
+    optional BossChallengeSkillChoose skillChoose = 1;
+    optional int32 bossMonsterId = 2;
+    optional int32 reloadSkillNum = 3;
+    optional int32 reloadSkillLimit = 4;
+}
+message BossChallengeSkillChoose {
+    repeated SkillChooseRound round = 1;
+    optional int32 curRound = 2;
+    optional int32 totalRound = 3;
+}
+message SkillChooseRound {
+    optional int32 round = 1;
+    repeated int32 skillId = 2;
+    optional int32 canChooseNum = 3;
+    repeated int32 choose = 4;
+}
+message ExploreTravelEvent {
+    optional ExploreEventType type = 1;
+    optional int32 eventId = 2;
+    repeated int32 params = 3;
+}
+message ExploreEnergyMsg {
+    optional int32 num = 1;
+    optional int64 lastRecoverAt = 2;
+}
+message ExploreEventTidy {
+    optional int32 day = 1;
+    optional ExploreEventType type = 2;
+    optional int32 eventId = 3;
+    optional int32 idx = 4;
+}
+message ExploreEvent {
+    optional int32 day = 1;
+    optional ExploreEventType type = 2;
+    optional int32 eventId = 3;
+    optional bytes data = 4;
+    optional ExploreEventState state = 5;
+    optional int32 idx = 6;
+}
+message ExploreTravelEndMsg {
+    repeated AwardInfo reward = 1;
+    optional int32 stageId = 2;
+    optional int32 historyDay = 3;
+}
+message ExploreStageSkill {
+    optional int32 skillId = 1;
+    optional int32 lv = 2;
+    optional int64 gainAt = 4;
+    optional int32 param1 = 3;
+    optional bool isReplace = 5;
+}
+message ExploreEndMsg {
+    optional bool pass = 1;
+    optional string reward = 2;
+    optional int32 stageId = 3;
+    optional int32 historyDay = 4;
+}
+message ExploreEventResultShow {
+    repeated AwardInfo reward = 1;
+    repeated ExploreEventValueChange change = 2;
+    repeated int32 skills = 3;
+    repeated int32 lostSkills = 4;
+}
+message ExploreEventValueChange {
+    optional ExploreEventValueType type = 1;
+    optional int32 value = 2;
+    optional bool isRatio = 3;
+}
+message SkillChoose {
+  repeated SkillChooseOption options = 1;
+  optional int32 selectRound = 2;
+  optional int32 roundLimit = 3;
+}
+message SkillChooseOption {
+  optional int32 skillId = 1;
+}
+message ExploreHandleEventBattleMonsterOutput {
+    optional int32 objId = 1;
+    optional int32 ball = 2;
+    repeated AwardInfo reward = 3;
+}
+message ExploreEventMonsterPos {
+    optional int32 monsterId = 1;
+    optional int32 pos = 2;
+}
+message TurntableSkillChoose {
+    repeated SkillChooseOption options = 1;
+    optional int32 multiSelect = 2;
+    repeated int32 selectIndex = 3;
+    optional int32 adReloadNum = 4;
+    optional int32 adReloadLimit = 5;
+}
+message PupilExploreData {
+    optional int32 configId = 1;
+    optional int32 pupilId = 2;
+    repeated AttributeDataMsg addAtts = 3;
+    repeated int32 skills = 4;
+    optional int32 quality = 5;
+}
+message PupilExploreSectMsg{
+    optional int32 sectId = 1;
+    optional int32 sectLevel = 2;
+}
+message ExploreEventBattleMsg {
+    optional bool endBattle = 1;
+    optional SkillChoose skillChoose = 2;
+    optional int32 monsterId = 3;
+    optional TurntableSkillChoose turntableSkillChoose = 4;
+}
+message ExploreEventSpringWaterMsg {
+    optional int32 recoverRatio = 1;
+}
+message ExploreEventRectTurntableMsg {
+    repeated int32 skills = 1;
+    repeated int32 selectIndex = 2;
+    optional int32 costHPRatio = 3;
+}
+message ExploreEventWanderMonsterMsg {
+    optional int32 monsterId = 1;
+}
+message ExploreEventMultiDecideMsg {
+    optional int32 successRatio = 1;
+    optional int32 addRatio = 2;
+    optional ExploreEventMultiDecideAddType addType = 3;
+    optional int32 decideNum = 4;
+}
+message ExploreEventWagerMsg {
+    optional int32 joinCost = 1;
+    optional int32 leftSkill = 2;
+    optional int32 leftRate = 3;
+    optional int32 rightRate = 4;
+    optional bool endJoin = 5;
+    optional bool endBattle = 6;
+    optional SkillChoose skillChoose = 7;
+    optional bool cheerLeft = 8;
+    optional bool leftWin = 9;
+}
+message ExploreEventChoseEnemyMsg {
+    optional bool endBattle = 1;
+    optional int32 enemy = 2;
+    optional SkillChoose skillChoose = 3;
+}
+message ExploreEventSkillSwapMsg {
+    optional bool endDiscard = 1;
+    optional SkillChoose SkillChoose = 2;
+    optional int32 giveSkillId = 3;
+}
+message ExploreEventRoundTurntableMsg {
+    repeated int32 skills = 1;
+}
+message ExploreEventTextMsg {
+}
+message ExploreEventMagicBookMsg {
+    optional int32 rollCostHPRatio = 1;
+    optional SkillChoose skillChoose = 2;
+    optional int32 rollNum = 3;
+    optional int32 lastChoiceCostHPRatio = 4;
+    optional int32 successRatio = 5;
+}
+message ExploreEventCutTreeMsg {
+    optional int32 leftCurrency = 1;
+    repeated int32 gainSkill = 2;
+}
+message ExploreEventDestinyMsg {
+    optional int32 skill1 = 1;
+    optional int32 skill2 = 2;
+}
+message ExploreExchangeMsg {
+    optional int32 costHPRatio = 1;
+    optional int32 costAtkRatio = 2;
+    optional SkillChoose skillChoose = 3;
+}
+message ExploreEventSkillUpgradeMsg {
+    optional SkillChoose skillChoose = 1;
+    optional bool endDecide = 2;
+}
+message ExploreHandleEventSkillUpgradeReq {
+    optional int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventSkillUpgradeResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreEventRewardMsg {
+}
+message ExploreHandleEventRewardReq {
+    optional int32 activityId = 1;
+}
+message ExploreHandleEventRewardResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreEventLevelUpMsg {
+    optional SkillChoose skillChoose = 1;
+}
+message ExploreContinuousSkillMsg {
+    optional SkillChoose skillChoose = 1;
+}
+message EnterAdventureReq {
+    required int32 activityId = 1;
+}
+message EnterAdventureResp {
+    required int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+}
+message RandomExplorePupiReq {
+    required int32 activityId = 1;
+    required int32 isInit = 2;
+}
+message RandomExplorePupiResp {
+    required int32 ret = 1;
+    optional int32 leftRefreshTimes = 2;
+    repeated PupilExploreData pupilList = 3;
+}
+message ExploreStartReq {
+    required int32 activityId = 1;
+    required int32 pupilId = 2;
+}
+message ExploreStartResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+}
+message ExploreGiveUpReq {
+    required int32 activityId = 1;
+}
+message ExploreGiveUpResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+    optional ExploreEndMsg end = 3;
+}
+message ExploreNextDayReq {
+    required int32 activityId = 1;
+}
+message ExploreNextDayResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+}
+message ExploreTravelStartReq {
+    required int32 activityId = 1;
+    optional int32 option = 2;
+}
+message ExploreTravelStartResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+}
+message ExploreTravelGiveUpReq {
+    required int32 activityId = 1;
+}
+message ExploreTravelGiveUpResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+    optional ExploreTravelEndMsg end = 3;
+}
+message ExploreTravelPassTodayReq {
+    required int32 activityId = 1;
+}
+message ExploreTravelPassTodayResp {
+    optional int32 ret = 1;
+    optional ExploreTravelMsg travel = 2;
+    optional ExploreTravelEndMsg end = 3;
+    repeated AwardInfo todayReward = 4;
+    repeated int32 params = 5;
+}
+message ExploreTravelSkipReq {
+    required int32 activityId = 1;
+}
+message ExploreTravelSkipResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+    optional ExploreTravelEndMsg end = 3;
+}
+message PupilExploreRedPointReq {
+    required int32 activityId = 1;
+}
+message PupilExploreRedPointResp {
+    required int32 ret = 1;
+    optional string data = 2;
+    optional int32 activityId = 3;
+}
+message ExploreReloadSkillReq {
+    required int32 activityId = 1;
+}
+message ExploreReloadSkillResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+}
+message ExploreChooseSkillReq {
+    required int32 activityId = 1;
+    repeated int32 selectIndex = 2;
+}
+message ExploreChooseSkillResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEventResultShow show = 3;
+    optional ExploreEndMsg end = 4;
+    optional SkillChoose skillChoose = 5;
+    repeated int32 allSelectSkill = 6;
+}
+message ExploreDirectFightBossReq {
+    required int32 activityId = 1;
+    optional int32 pupilId = 2;
+}
+message ExploreDirectFightBossResp {
+    optional int32 ret = 1;
+    optional PlayerExploreMsg data = 2;
+}
+message BossChallengeChooseSkillReq {
+    required int32 activityId = 1;
+    optional int32 round = 2;
+    repeated int32 choice = 3;
+}
+message BossChallengeChooseSkillResp {
+    optional int32 ret = 1;
+    optional ExploreBossChallengeMsg bossChallenge = 2;
+}
+message BossChallengeBattleReq {
+    required int32 activityId = 1;
+}
+message BossChallengeBattleResp {
+    required int32 ret = 1;
+    optional PupilRogueBattleRecordMsg battle = 2;
+    optional int64 totalDamage = 3;
+    optional PlayerExploreMsg data = 4;
+    optional int32 rank = 5;
+    optional int64 maxDamage = 6;
+}
+message ExploreHandleEventBattleReq {
+    required int32 activityId = 1;
+}
+message ExploreHandleEventBattleResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional PupilRogueBattleRecordMsg battle = 4;
+    repeated ExploreHandleEventBattleMonsterOutput monsterOutput = 5;
+    optional ExploreEventResultShow show = 6;
+}
+message ExploreHandleEventSpringWaterReq {
+    required int32 activityId = 1;
+}
+message ExploreHandleEventSpringWaterResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreHandleEventRectTurntableReq {
+    required int32 activityId = 1;
+    optional bool continue = 2;
+}
+message ExploreHandleEventRectTurntableResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional int32 rollIndex = 4;
+    optional ExploreEventResultShow show = 5;
+}
+message ExploreHandleEventWanderMonsterReq {
+    required int32 activityId = 1;
+    optional bool fight = 2;
+}
+message ExploreHandleEventWanderMonsterResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional PupilRogueBattleRecordMsg battle = 4;
+    optional ExploreEventResultShow show = 5;
+}
+message ExploreHandleEventMultiDecideReq {
+    required int32 activityId = 1;
+    optional bool continue = 2;
+}
+message ExploreHandleEventMultiDecideResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+    optional bool success = 5;
+}
+message ExploreHandleEventWagerReq {
+    required int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventWagerResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+    optional bool leftWin = 5;
+    optional bool success = 6;
+}
+message ExploreHandleOrdinaryReq {
+    required int32 activityId = 1;
+}
+message ExploreHandleOrdinaryResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreHandleEventRoundTurntableReq {
+    required int32 activityId = 1;
+}
+message ExploreHandleEventRoundTurntableResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional int32 rollIndex = 4;
+    optional ExploreEventResultShow show = 5;
+}
+message ExploreHandleEventTextReq {
+    required int32 activityId = 1;
+}
+message ExploreHandleEventTextResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreHandleEventMagicBookReq {
+    required int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventMagicBookResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+    optional bool success = 5;
+}
+message ExploreHandleEventChoseEnemyReq {
+    required int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventChoseEnemyResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+    optional PupilRogueBattleRecordMsg battle = 5;
+}
+message ExploreHandleEventSkillSwapReq {
+    optional int32 activityId = 1;
+    optional int32 skillIndex = 2;
+}
+message ExploreHandleEventSkillSwapResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreHandleEventCutTreeReq {
+    required int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventCutTreeResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+    optional int32 rollSkill = 5;
+    optional int32 leftCurrency = 6;
+}
+message ExploreHandleEventDestinyReq {
+    optional int32 activityId = 1;
+    optional int32 chooseSkill = 2;
+}
+message ExploreHandleEventDestinyResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreHandleEventExchangeReq {
+    optional int32 activityId = 1;
+    optional int32 choice = 2;
+}
+message ExploreHandleEventExchangeResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreEventSkillSelectMsg {
+    optional SkillChoose skillChoose = 1;
+}
+message ExploreHandleEventSkillSelectReq {
+    optional int32 activityId = 1;
+}
+message ExploreHandleEventSkillSelectResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message ExploreBossChallengeRecordReq {
+    optional int32 activityId = 1;
+}
+message ExploreBossChallengeRecordResp {
+    optional int32 ret = 1;
+    repeated BossChallengeRecordData dataList = 2;
+}
+message BossChallengeRecordData {
+    optional int32 pupilId = 1;
+    optional int64 damage = 2;
+    repeated int32 skills = 3;
+}
+message BossChallengeReloadSkillReq {
+    required int32 activityId = 1;
+}
+message BossChallengeReloadSkillResp {
+    optional int32 ret = 1;
+    optional ExploreBossChallengeMsg bossChallenge = 2;
+}
+message ExploreHandleEventContinuousSkillReq {
+    optional int32 activityId = 1;
+}
+message ExploreHandleEventContinuousSkillResp {
+    optional int32 ret = 1;
+    optional ExploreStageMsg stage = 2;
+    optional ExploreEndMsg end = 3;
+    optional ExploreEventResultShow show = 4;
+}
+message PupilExploreGetSectMsgReq {
+    optional int32 activityId = 1;
+}
+message PupilExploreGetSectMsgResp {
+    optional int32 ret = 1;
+    repeated PupilExploreSectMsg msgList = 2;
+}
+message PupilExploreLvUpSectReq {
+    optional int32 activityId = 1;
+    optional int32 sectId = 2;
+}
+message PupilExploreLvUpSectResp {
+    optional int32 ret = 1;
+    repeated PupilExploreSectMsg sectMsg = 2;
+}

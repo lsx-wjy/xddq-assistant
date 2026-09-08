@@ -1,0 +1,399 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "PackagesBase";
+import "TreasureAuction";
+enum ChaosLawPb {
+    ChaosLaw_Enter = 236701;
+    ChaosLaw_Perceive = 236702;
+    ChaosLaw_Evolve = 236703;
+    ChaosLaw_EvolveReward = 236704;
+    ChaosLaw_Identify = 236705;
+    ChaosLaw_Equip = 236706;
+    ChaosLaw_Unequip = 236707;
+    ChaosLaw_Disassemble = 236708;
+    ChaosLaw_Lock = 236709;
+    ChaosLaw_ExtendWare = 236710;
+    ChaosLaw_Help = 236711;
+    ChaosLaw_OneKeyHelp = 236712;
+    ChaosLaw_GetHelpList = 236713;
+    ChaosLaw_ShopBuy = 236714;
+    ChaosLaw_SyncPlayerData = 236715;
+    ChaosLaw_Sell = 236716;
+    ChaosLaw_SellDown = 236717;
+    ChaosLaw_Buy = 236718;
+    ChaosLaw_GetGoodsList = 236719;
+    ChaosLaw_Collect = 236720;
+    ChaosLaw_GetRecord = 236721;
+    ChaosLaw_PriceAdjust = 236722;
+    ChaosLaw_Comment = 236723;
+    ChaosLaw_GetCommentList = 236724;
+    ChaosLaw_LikeComment = 236725;
+    ChaosLaw_DeleteComment = 236726;
+    ChaosLaw_PrivateChat = 236727;
+    ChaosLaw_GetMsgList = 236728;
+    ChaosLaw_ChatDelete = 236729;
+    ChaosLaw_SyncChatList = 236730;
+    ChaosLaw_ChatMessageSync = 236735;
+    ChaosLaw_PushEvolveDone = 236732;
+    ChaosLaw_PushPerceiveRecover = 236733;
+    ChaosLaw_SyncRedPoint = 236734;
+    ChaosLaw_InitialIdentify = 236736;
+    ChaosLaw_MallAddLawsSync = 236737;
+  }
+  enum ChaosLawEnumRedPoint {
+    ChaosLaw_RedPoint_PerceiveReady = 0;
+    ChaosLaw_RedPoint_EvolveDone = 1;
+    ChaosLaw_RedPoint_CanEquip = 2;
+    ChaosLaw_RedPoint_Record = 3;
+    ChaosLaw_RedPoint_CanBuy = 4;
+    ChaosLaw_RedPoint_NewItem = 5;
+  }
+  message ChaosLawUnformedLawData {
+    required int32 id = 1;
+    required int32 quality = 2;
+    optional bool canTrade = 3;
+    optional int64 createTime = 4;
+    required bool evolving = 5;
+    required int64 evolveStartTime = 6;
+    required int64 evolveEndTime = 7;
+    required int32 helpCount = 8;
+    optional bool helped = 9;
+  }
+  message ChaosLawEnterReq {
+  }
+  message ChaosLawEnterRsp {
+    required int32 ret = 1;
+    optional ChaosLawPlayerDataMsg playerData = 2;
+    repeated ChaosLawItemData items = 3;
+    optional string redPoint = 4;
+  }
+  message ChaosLawPlayerDataMsg {
+    required int32 perceiveCount = 1;
+    required int64 perceiveNextAccumulateTime = 2;
+    required int32 perceiveGuaranteeCount = 3;
+    required int32 evolveCount = 4;
+    required int32 helpCount = 5;
+    repeated ChaosLawUnformedLawData unformedLaws = 6;
+    required int32 wareHouseLimit = 7;
+    repeated int32 equippedLawIds = 8;
+    required int32 sellCount = 9;
+    repeated ChaosLawSeparationEquipMsg separationEquips = 10;
+  }
+  message ChaosLawSeparationEquipMsg {
+    required int64 index = 1;
+    repeated int32 equippedLawIds = 2;
+  }
+  message ChaosLawPerceiveReq {
+  }
+  message ChaosLawPerceiveRsp {
+    required int32 ret = 1;
+    optional ChaosLawUnformedLawData unformedLaw = 2;
+    repeated ChaosLawItemData newItems = 3;
+    optional int32 perceiveCount = 4;
+    optional int32 perceiveGuaranteeCount = 5;
+    optional ChaosLawPlayerDataMsg playerData = 6;
+    optional string reward = 7;
+  }
+  message ChaosLawEvolveReq {
+    required int32 unformedLawId = 1;
+  }
+  message ChaosLawEvolveRsp {
+    required int32 ret = 1;
+    optional ChaosLawUnformedLawData unformedLaw = 2;
+  }
+  message ChaosLawEvolveRewardReq {
+    required int32 unformedLawId = 1;
+  }
+  message ChaosLawEvolveRewardRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    optional ChaosLawPlayerDataMsg playerData = 3;
+    optional string reward = 4;
+    repeated int32 finishTaskId = 5;
+  }
+  message ChaosLawIdentifyReq{
+    required int32 lawId = 1;
+  }
+  message ChaosLawIdentifyRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    repeated int32 finishTaskId = 3;
+  }
+  message ChaosLawEquipReq {
+    required int32 lawId = 1;
+    required int32 separationIndex = 2;
+  }
+  message ChaosLawEquipRsp {
+    required int32 ret = 1;
+    optional ChaosLawPlayerDataMsg playerData = 2;
+    repeated ChaosLawItemData updatedItems = 3;
+    repeated ChaosLawSeparationEquipMsg separationEquips = 4;
+  }
+  message ChaosLawUnequipReq {
+    required int32 slot = 1;
+    required int32 separationIndex = 2;
+  }
+  message ChaosLawUnequipRsp {
+    required int32 ret = 1;
+    optional ChaosLawPlayerDataMsg playerData = 2;
+    optional ChaosLawItemData unequippedItem = 3;
+    repeated ChaosLawSeparationEquipMsg separationEquips = 4;
+  }
+  message ChaosLawDisassembleReq {
+    repeated int32 lawIds = 1;
+    required int32 qualityFilter = 2;
+  }
+  message ChaosLawDisassembleRsp {
+    required int32 ret = 1;
+    optional ChaosLawPlayerDataMsg playerData = 2;
+    optional string reward = 3;
+  }
+  message ChaosLawLockReq {
+    required int32 lawId = 1;
+    required bool lock = 2;
+    required string password = 3;
+    optional int32 type = 4;
+  }
+  message ChaosLawLockRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+  }
+  message ChaosLawExtendWareReq {
+  }
+  message ChaosLawExtendWareRsp {
+    required int32 ret = 1;
+    optional ChaosLawPlayerDataMsg playerData = 2;
+  }
+  message ChaosLawHelpReq {
+    required int64 targetPlayerId = 1;
+    required int32 unformedLawId = 2;
+  }
+  message ChaosLawHelpRsp {
+    required int32 ret = 1;
+    optional int32 helpCount = 2;
+    optional string reward = 3;
+  }
+  message ChaosLawOneKeyHelpReq {
+  }
+  message ChaosLawOneKeyHelpRsp {
+    required int32 ret = 1;
+    optional int32 helpCount = 2;
+    optional string reward = 3;
+  }
+  message ChaosLawGetHelpListReq {
+  }
+  message ChaosLawHelpTargetData {
+    optional TreasureAuctionPlayerAppearanceDataMsg playerInfo = 1;
+    repeated ChaosLawUnformedLawData unformedLaws = 2;
+  }
+  message ChaosLawGetHelpListRsp {
+    required int32 ret = 1;
+    repeated ChaosLawHelpTargetData targets = 2;
+  }
+  message ChaosLawShopBuyReq {
+    required int32 shopId = 1;
+    required int32 count = 2;
+  }
+  message ChaosLawShopBuyRsp {
+    required int32 ret = 1;
+  }
+  message ChaosLawSyncPlayerData {
+    optional ChaosLawPlayerDataMsg playerData = 1;
+    repeated ChaosLawItemData updatedItems = 2;
+  }
+  message ChaosLawPushEvolveDone {
+    required int32 unformedLawId = 1;
+  }
+  message ChaosLawPushPerceiveRecover {
+    required int32 perceiveCount = 1;
+    required int64 perceiveNextAccumulateTime = 2;
+  }
+  message ChaosLawSyncRedPointMsg {
+    required string redPoint = 1;
+  }
+ message ChaosLawInitialIdentifyReq {
+  required int32 lawId = 1;
+ }
+ message ChaosLawInitialIdentifyRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    repeated int32 finishTaskId = 3;
+  }
+  message ChaosLawSellReq {
+    required int32 lawId = 1;
+    required int32 price = 2;
+    required string password = 3;
+    required bool anonymous = 4;
+  }
+  message ChaosLawSellRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    optional ChaosLawPlayerDataMsg playerData = 3;
+  }
+  message ChaosLawSellDownReq {
+    required int32 lawId = 1;
+  }
+  message ChaosLawSellDownRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    optional ChaosLawPlayerDataMsg playerData = 3;
+  }
+  message ChaosLawBuyReq {
+    required string goodsId = 1;
+    required int32 price = 2;
+    required string password = 3;
+  }
+  message ChaosLawBuyRsp {
+    required int32 ret = 1;
+    optional ChaosLawItemData item = 2;
+    optional ChaosLawPlayerDataMsg playerData = 3;
+  }
+  message ChaosLawGetGoodsListReq {
+    optional int32 suitType = 1;
+    optional int32 quality = 2;
+    optional int32 hasSkill = 3;
+    optional int32 sortType = 4;
+    optional int32 sortOrder = 5;
+    optional int32 pageNum = 6;
+    optional int64 stamp = 7;
+    optional int32 collect = 8;
+    optional int32 lawType = 9;
+    repeated int32 attrType = 10;
+    repeated int32 qualityList = 11;
+    optional string seller = 12;
+    optional int32 starLevel = 13;
+    optional int32 hasIdentified = 14;
+  }
+  message ChaosLawGetGoodsListRsp {
+    required int32 ret = 1;
+    repeated ChaosLawGoodsData goodsList = 2;
+    optional int32 maxSize = 3;
+    optional int64 stamp = 4;
+    optional int32 collectSize = 5;
+  }
+  message ChaosLawGoodsData {
+    required string goodsId = 1;
+    required int32 suitType = 2;
+    required int32 appearance = 3;
+    required int32 quality = 4;
+    repeated ChaosLawEntryData entries = 5;
+    required string score = 6;
+    required int32 price = 7;
+    required int64 beginSellTime = 8;
+    required bool anonymous = 9;
+    optional TreasureAuctionPlayerAppearanceDataMsg sellerInfo = 10;
+    required bool collect = 11;
+    required int32 collectNum = 12;
+    optional int32 lawType = 13;
+    optional int32 commentNum = 14;
+    optional string createNickName = 15;
+  }
+  message ChaosLawCollectReq {
+    required string goodsId = 1;
+    required bool collect = 2;
+  }
+  message ChaosLawCollectRsp {
+    required int32 ret = 1;
+    optional int32 collectSize = 2;
+    optional int32 collectNum = 3;
+  }
+  message ChaosLawGetRecordReq {}
+  message ChaosLawGetRecordRsp {
+    required int32 ret = 1;
+    repeated ChaosLawRecordMsg records = 2;
+  }
+  message ChaosLawRecordMsg {
+    required int64 time = 1;
+    required int32 type = 2;
+    required int32 quality = 3;
+    required int32 price = 4;
+    required string score = 5;
+    required int64 targetPlayerId = 6;
+    required int64 targetServerId = 7;
+    required string targetPlayerName = 8;
+    optional int32 lawType = 9;
+    optional int32 suitType = 10;
+    optional int32 appearance = 11;
+    repeated ChaosLawEntryData entries = 12;
+  }
+  message ChaosLawPriceAdjustReq {
+    required int32 id = 1;
+    required string password = 2;
+    required int32 price = 3;
+  }
+  message ChaosLawPriceAdjustRsp {
+    required int32 ret = 1;
+    repeated ChaosLawItemData items = 2;
+    optional ChaosLawPlayerDataMsg playerData = 3;
+  }
+  message ChaosLawGetCommentListReq {
+    required string goodsId = 1;
+  }
+  message ChaosLawGetCommentListRsp {
+    required int32 ret = 1;
+    repeated ChaosLawCommentData commentList = 2;
+  }
+  message ChaosLawCommentReq {
+    required string goodsId = 1;
+    required string content = 2;
+  }
+  message ChaosLawCommentRsp {
+    required int32 ret = 1;
+    optional int32 commentNum = 2;
+    optional ChaosLawCommentData newComment = 3;
+  }
+  message ChaosLawLikeCommentReq {
+    required string goodsId = 1;
+    required int64 commentId = 2;
+  }
+  message ChaosLawLikeCommentRsp {
+    required int32 ret = 1;
+    optional int32 likeNum = 2;
+    optional int32 likeCommentNum = 3;
+    optional int64 commentId = 4;
+  }
+  message ChaosLawDeleteCommentReq {
+    required string goodsId = 1;
+    required int64 commentId = 2;
+  }
+  message ChaosLawDeleteCommentRsp {
+    required int32 ret = 1;
+  }
+  message ChaosLawFriendInfo {
+    required FriendInfo friendInfo = 1;
+    optional ChaosLawGoodsData goods = 2;
+    optional bool anonymous = 3;
+  }
+  message ChaosLawPrivateChatReq {
+    required int64 playerId = 1;
+    optional string goodsId = 2;
+  }
+  message ChaosLawPrivateChatRsp {
+    required int32 ret = 1;
+    repeated ChaosLawFriendInfo friendInfos = 2;
+  }
+  message ChaosLawGetMsgListReq {
+    required int64 targetPlayerId = 1;
+  }
+  message ChaosLawChatDeleteReq {
+    required int64 playerId = 1;
+    optional bool isAnonymous = 2;
+  }
+  message ChaosLawChatDeleteRsp {
+    required int32 ret = 1;
+    repeated ChaosLawFriendInfo friendInfos = 2;
+  }
+  message ChaosLawSyncChatList {
+    repeated ChaosLawFriendInfo friendInfos = 1;
+  }
+message ChaosLawCommentData {
+    required int64 commentId = 1;
+    optional int32 likeNum = 2;
+    optional bool isLike = 3;
+    optional string content = 4;
+    optional TreasureAuctionPlayerAppearanceDataMsg commenter = 5;
+    optional int64 time = 6;
+}
+message ChaosMallAddLawsSyncMsg {
+    repeated ChaosLawEvolveRewardRsp evolveLaw = 1;
+}

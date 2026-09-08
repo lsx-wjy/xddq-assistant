@@ -21,6 +21,7 @@ import HeroRankMgr from "#game/mgr/HeroRankMgr.js";
 import ActivityMgr from "#game/mgr/ActivityMgr.js";
 import UnionMgr from "#game/mgr/UnionMgr.js";
 import HomelandMgr from "#game/mgr/HomelandMgr.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 class MsgRecvMgr {
     constructor() {
@@ -31,6 +32,16 @@ class MsgRecvMgr {
             Protocol.S_DREAM_DATA_SYNC,          // 207 做梦数据同步(树状态及未处理装备) Done
             Protocol.S_TASK_DATA_SEND,           // 501 玩家登录任务数据下发 TODO
         ];
+    }
+
+    // 1 WebSocket 游戏登录响应。官方客户端只在这里启动心跳。
+    static RspLoginMsg(t) {
+        GameNetMgr.inst.handleLoginResponse(t);
+    }
+
+    // 2 登录数据下发完成。自动任务必须等到这一阶段才可运行。
+    static LoginOverMsg() {
+        GameNetMgr.inst.handleLoginOver();
     }
 
     // 101 用户信息同步
@@ -148,8 +159,7 @@ class MsgRecvMgr {
     // 11801 进入宗门系统
     static EnterPupilSystemResp(t) {
         logger.debug("[MsgRecvMgr] 进入宗门系统");
-        PupilMgr.inst.checkReward(t);
-        PupilMgr.inst.checkGraduatation(t);
+        void PupilMgr.inst.handlePupilData(t);
     }
 
     // 4400 神通数据同步
@@ -187,7 +197,9 @@ class MsgRecvMgr {
     // 551 邮件列表数据同步
     static MailListMsg(t) {
         logger.debug("[MsgRecvMgr] 一键领取邮件奖励");
-        GameNetMgr.inst.sendPbMsg(Protocol.S_MAIL_GET_ALL_REWARD, {}, null);
+        if (isAutomationTaskEnabled('basic.mail-rewards')) {
+            GameNetMgr.inst.sendPbMsg(Protocol.S_MAIL_GET_ALL_REWARD, {}, null);
+        }
     }
 
     // 731 妖王数据同步
@@ -241,14 +253,38 @@ class MsgRecvMgr {
     // 1002 活动 同步详细配置
     static ActivityCommonDataListSync(t) {
         logger.debug("[MsgRecvMgr] 同步活动详细");
-        // ActivityMgr.inst.getReward(t); // 有问题
-        // ActivityMgr.inst.buyFree(t);   // 有问题
+        ActivityMgr.inst.getReward(t);
+        ActivityMgr.inst.buyFree(t);
+    }
+
+    // 1001 活动主配置。缓存后只对当前有效活动请求详情，供条件奖励和免费礼包任务使用。
+    static PushActivityList(t) {
+        logger.debug('[MsgRecvMgr] 同步活动主配置');
+        ActivityMgr.inst.syncMainConfigs(t);
+    }
+
+    // 1003 按活动 ID 请求的详情响应。
+    static RspGetActivityDetail(t) {
+        logger.debug('[MsgRecvMgr] 收到活动详情');
+        ActivityMgr.inst.receiveActivityDetail(t);
+    }
+
+    // 2102 进入妖盟后的当前妖盟数据。
+    static RspUnionEnter(t) {
+        logger.debug('[MsgRecvMgr] 进入妖盟');
+        UnionMgr.inst.receiveUnionEnter(t);
+    }
+
+    // 2117 妖盟每日任务进度，用于确认任务完成后再领奖。
+    static RspUnionDailyTask(t) {
+        logger.debug('[MsgRecvMgr] 妖盟每日任务数据');
+        UnionMgr.inst.receiveDailyTask(t);
     }
 
     // 1007 活动 增量同步活动数据 
     static ActivityConditionDataListSync(t) {
         logger.debug("[MsgRecvMgr] 增量同步数据");
-        // ActivityMgr.inst.getReward(t); // 有问题
+        ActivityMgr.inst.getReward(t);
     }
 
     // 1051 同步福地鼠宝数据

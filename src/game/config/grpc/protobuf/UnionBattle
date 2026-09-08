@@ -1,4 +1,4 @@
-package com.yq.msg.CityMsg;    
+package com.yq.msg.CityMsg;
 import "Union";
 import "WatchPlayer";
 import "Common";
@@ -20,25 +20,29 @@ message UnionBattleGetJoinMemberListRsp{
 }
 message UnionBattleMatchReq{
     required int32 activityId = 1;
-    required int64 targetId = 2;        
-    optional int32 itemChallengeTimes = 3;  
+    required int64 targetId = 2;
+    optional int32 itemChallengeTimes = 3;
+    optional int32 multiple = 4;
 }
 message UnionBattleMatchRsp{
     optional int32 ret = 1;
     optional UnionBattlePlayerInfo playerInfo = 2;
     optional AwardInfoList cost = 3;
-    optional AwardInfoList reward = 4;         
+    optional AwardInfoList reward = 4;
+    optional int32 activityId = 5;
+    optional int32 multiple = 6;
 }
 message UnionBattleChallengeReq{
     required int32 activityId = 1;
-    optional int64 playerId = 2;                        
+    optional int64 playerId = 2;
+    optional int32 autoType = 3;
 }
 message UnionBattleChallengeRsp{
     optional int32 ret = 1;
     optional UnionBattlePlayerInfo playerInfo = 2;
-    optional UnionBattleBattleResultMsg battleResult = 3;   
-    optional UnionBattleRoundResultMsg roundResult = 4;     
-    optional AwardInfoList reward = 5;                      
+    optional UnionBattleBattleResultMsg battleResult = 3;
+    optional UnionBattleRoundResultMsg roundResult = 4;
+    optional AwardInfoList reward = 5;
 }
 message UnionBattleGetReportReq{
     required int32 activityId = 1;
@@ -47,18 +51,28 @@ message UnionBattleGetReportReq{
 message UnionBattleGetReportRsp{
     optional int32 ret = 1;
     repeated UnionBattleReportInfo reportList = 2;
+    optional UnionBattleChangeInfo lastChangeInfo = 3;
+}
+message UnionBattleChangeInfo{
+    optional PlayerHeadAndNameMsg playerInfo = 1;
+    optional string unionName = 2;
+    optional int64 score = 3;
+    optional int32 rank = 4;
+    optional int32 titleId = 5;
 }
 message UnionBattleBuyOpenBuffReq{
     required int32 activityId = 1;
-    required int32 index = 2;                          
+    required int32 index = 2;
+    optional int32 multiple = 3;
 }
 message UnionBattleBuyOpenBuffRsp{
     optional int32 ret = 1;
     optional UnionBattlePlayerInfo playerInfo = 2;
+    optional int32 multiple = 3;
 }
 message UnionBattleSelectBuffReq{
     required int32 activityId = 1;
-    required int32 index = 2;   
+    required int32 index = 2;
 }
 message UnionBattleSelectBuffRsp{
     optional int32 ret = 1;
@@ -83,74 +97,77 @@ message UnionBattleGetUnionMemberScoreRsp{
 message UnionBattlePlayerInfo{
     optional int32 score = 1;
     optional int32 rank = 2;
-    optional int32 energy = 3;                                  
-    optional int64 lastRefreshTime = 4;                         
-    optional UnionBattlePlayerChallengeInfo challengeInfo = 5;  
-    optional int32 itemChallengeTimes = 6;                      
-    optional int64 unionId = 7;                                 
-    repeated int32 receivedConditionList = 8;                   
-    optional int32 unionMatchTimes = 9;                         
-    optional int32 historyScore = 10;                            
-    optional int32 killNum = 11;                                
-    optional int32 position = 12;                              
+    optional int32 energy = 3;
+    optional int64 lastRefreshTime = 4;
+    optional UnionBattlePlayerChallengeInfo challengeInfo = 5;
+    optional int32 itemChallengeTimes = 6;
+    optional int64 unionId = 7;
+    repeated int32 receivedConditionList = 8;
+    optional int32 unionMatchTimes = 9;
+    optional int32 historyScore = 10;
+    optional int32 killNum = 11;
+    optional int32 position = 12;
+    optional int32 challengeUnionTimes = 13;
 }
 message UnionBattlePlayerChallengeInfo{
-    optional int64 blood = 1;           
-    optional int32 tired = 2;           
-    optional int32 killNum = 3;         
+    optional string blood = 1;
+    optional int32 tired = 2;
+    optional int32 killNum = 3;
     optional UnionBattleChallengeTargetUnionInfo targetUnionInfo = 4;
-    optional int64 power = 5;            
-    repeated SkillMsg buffList = 6;      
-    repeated AttributeDataMsg attributeData = 7;       
-    optional int32 openBuyBuffIndex = 8;               
-    repeated SkillMsg unSelectBuffList = 9;           
-    optional int32 totalKillScore = 10;                 
-    optional int32 lockAppearanceId = 11;    
-    optional int32 lockEquipCloudId = 12;    
-    optional int32 lockEquipPetId = 13;    
-    optional int32 lockPetSoulShapeLv = 14; 
+    optional string power = 5;
+    repeated SkillMsg buffList = 6;
+    repeated AttributeDataMsg attributeData = 7;
+    optional int32 openBuyBuffIndex = 8;
+    repeated SkillMsg unSelectBuffList = 9;
+    optional int32 totalKillScore = 10;
+    optional int32 lockAppearanceId = 11;
+    optional int32 lockEquipCloudId = 12;
+    optional int32 lockEquipPetId = 13;
+    optional int32 lockPetSoulShapeLv = 14;
+    optional int32 multiple = 15;
 }
 message UnionBattleChallengeTargetUnionInfo{
-    optional int32 unionMemberNum = 1;                       
-    optional UnionSimpleData unionSimpleData = 2;            
-    repeated PlayerAppearanceDataMsg targetInfoList = 3;     
+    optional int32 unionMemberNum = 1;
+    optional UnionSimpleData unionSimpleData = 2;
+    repeated PlayerAppearanceDataMsg targetInfoList = 3;
 }
 message UnionBattleReportInfo{
-    optional int32 recordId = 1;                                 
-    optional int32 type = 2;                     
-    optional PlayerHeadAndNameMsg attackedHeadAndNameMsg = 3;    
-    optional int64 attackUnionId = 4;                            
-    optional string attackUnionName = 5;                       
-    optional string targetUnionName = 6;                         
-    optional string srcPlayerName = 7;                           
-    optional int32 memberNum = 8;                                
-    optional int32 killNum = 9;                                  
-    optional int32 scoreChange = 10;                              
-    optional int64 time = 11;                                    
-    optional int32 titleId = 12;                                 
+    optional int32 recordId = 1;
+    optional int32 type = 2;
+    optional PlayerHeadAndNameMsg attackedHeadAndNameMsg = 3;
+    optional int64 attackUnionId = 4;
+    optional string attackUnionName = 5;
+    optional string targetUnionName = 6;
+    optional string srcPlayerName = 7;
+    optional int32 memberNum = 8;
+    optional int32 killNum = 9;
+    optional int32 scoreChange = 10;
+    optional int64 time = 11;
+    optional int32 titleId = 12;
+    optional int32 multiple = 13;
 }
 message UnionBattleBattleResultMsg {
-    optional BattleRecordMsg allBattleRecord = 1; 
-    optional bool challengeSuccess = 2; 
-    optional PlayerHeadAndNameMsg targetPlayerInfo = 3;    
-    optional int32 addKillScore = 4;                        
+    optional BattleRecordMsg allBattleRecord = 1;
+    optional bool challengeSuccess = 2;
+    optional PlayerHeadAndNameMsg targetPlayerInfo = 3;
+    optional int32 addKillScore = 4;
 }
 message UnionBattleRoundResultMsg{
-    optional int32 killNum = 1;                       
-    optional AwardInfoList reward = 2;                
-    optional int32 myScoreChange = 3;                 
-    optional int32 rivalScoreChange = 4;              
-    optional bool challengeSuccess = 5;               
-    optional int32 recordId = 6;                      
+    optional int32 killNum = 1;
+    optional AwardInfoList reward = 2;
+    optional int32 myScoreChange = 3;
+    optional int32 rivalScoreChange = 4;
+    optional bool challengeSuccess = 5;
+    optional int32 recordId = 6;
 }
 message UnionBattlePlayBackInfoMsg{
-    repeated UnionBattleHpChangeMsg battleHpChangeMsg = 1; 
-    optional int32 score = 2;       
+    repeated UnionBattleHpChangeMsg battleHpChangeMsg = 1;
+    optional int32 score = 2;
 }
 message UnionBattleHpChangeMsg{
     optional PlayerHeadAndNameMsg headAndNameMsg = 1;
-    optional int64 totalHp = 2;
-    optional int64 curHp = 3;
+    optional string totalHp = 2;
+    optional string curHp = 3;
 }
 message UnionBattleReceiveUnionAchieveRewardReq{
     required int32 activityId = 1;
@@ -158,15 +175,27 @@ message UnionBattleReceiveUnionAchieveRewardReq{
 }
 message UnionBattleReceiveUnionAchieveRewardRsp{
     optional int32 ret = 1;
-    optional UnionBattlePlayerInfo playerInfo = 2;          
-    optional AwardInfoList reward = 3;                      
+    optional UnionBattlePlayerInfo playerInfo = 2;
+    optional AwardInfoList reward = 3;
+    optional int32 activityId = 4;
 }
 message SynPlayerInfo{
-    optional UnionBattlePlayerInfo playerInfo = 1;          
-    optional bool challenged = 2;                           
+    optional UnionBattlePlayerInfo playerInfo = 1;
+    optional bool challenged = 2;
 }
 message UnionMemberScore{
     optional int64 playerId = 1;
     optional string memberName = 2;
     optional int32 score = 3;
+}
+message UnionBattleRedDotReqMsg {
+    required int32 activityId = 1;
+}
+message UnionBattleRedDotRespMsg {
+    required int32 ret = 1;
+    optional string data = 2;
+}
+enum UnionBattleReportType{
+    UnionBattleReportType_All = 0;
+    UnionBattleReportType_Union = 1;
 }

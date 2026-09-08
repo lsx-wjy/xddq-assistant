@@ -1,0 +1,23 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "PackagesBase";
+message GetRenewPlayerListReq {
+}
+message GetRenewPlayerListResp {
+    optional int32 ret  = 1;
+}
+message SyncRenewPlayerInfoMsg{
+   optional RenewPlayerInfo RenewPlayerInfo = 1;
+}
+message RenewBindPlayerReq {
+   required int64 targetPlayerId = 1;
+}
+message GetRenewBindPlayerResp {
+    optional int32 ret  = 1;
+    optional RenewPlayerInfo RenewPlayerInfo = 2;
+}
+message RenewLifeCardActiveReq {
+}
+message RenewLifeCardActiveResp {
+    optional int32 ret  = 1;
+}

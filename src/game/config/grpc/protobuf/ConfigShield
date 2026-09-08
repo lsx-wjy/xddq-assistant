@@ -1,0 +1,8 @@
+package com.yq.msg.CityMsg;
+message ConfigShieldSync{
+    repeated ConfigShieldData configShieldList = 1;
+}
+message ConfigShieldData{
+    optional string dbName = 1;
+    optional string dbValue = 2;
+}

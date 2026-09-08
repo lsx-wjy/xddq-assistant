@@ -1,0 +1,357 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "PackagesBase";
+import "WorldMessage";
+message TreasureAuctionEnterReq {
+}
+message TreasureAuctionEnterRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+  repeated TreasureAuctionItemData items = 3;
+  optional string redPoint = 4;
+  optional int32 groupId = 5;
+}
+message TreasureAuctionPlayerData {
+  required int32 treasureCount = 1;
+  required int32 helpCount = 2;
+  repeated TreasureAuctionEventData events = 3;
+  repeated TreasureAuctionPlaceData places = 4;
+  required int32 warehouseLimit = 5;
+  repeated int32 equipIds = 6;
+  required int32 sellCount = 7;
+  required bool hasPassword = 8;
+  required int64 errorPasswordStamp = 9;
+  required int64 clearPasswordStamp = 10;
+  repeated TreasureAuctionSeparationEquipMsg separationEquips = 11;
+  required int64 lastCreateEventTime = 12;
+  required int32 likeCommentNum = 13;
+  required int32 commentNum = 14;
+}
+message TreasureAuctionSeparationEquipMsg {
+  required int64 index = 1;
+  repeated int32 equipIds = 2;
+}
+message TreasureAuctionEventData {
+  required int32 eventId = 1;
+  required int32 configId = 2;
+  required int32 state = 3;
+  required int32 appearance = 4;
+}
+message TreasureAuctionPlaceData {
+  required int32 id = 1;
+  required int32 treasureMapId = 2;
+  optional int32 placeIndex = 3;
+  required int64 beginTime = 4;
+  required int32 helpCount = 5;
+  required int32 realmsId = 6;
+}
+message TreasureAuctionSelectEventReq {
+  required int32 eventId = 1;
+  required int32 selectIndex = 2;
+}
+message TreasureAuctionSelectEventRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+  optional string reward = 3;
+}
+message TreasureAuctionTreasureReq {
+  required int32 treasureMapId = 1;
+}
+message TreasureAuctionTreasureRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+}
+message TreasureAuctionBeginExploreReq {
+  required int32 id = 1;
+}
+message TreasureAuctionBeginExploreRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlaceData place = 2;
+}
+message TreasureAuctionRewardReq {
+  repeated int32 placeIds = 1;
+}
+message TreasureAuctionRewardRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+  optional string reward = 3;
+  repeated TreasureAuctionItemData items = 4;
+  repeated TreasureAuctionPlayerAppearanceDataMsg helperList = 5;
+}
+message TreasureAuctionSyncPlayerDataSync {
+  required TreasureAuctionPlayerData playerData = 1;
+}
+message TreasureAuctionHelpTreasureReq {
+  optional int32 id = 1;
+  optional int64 targetPlayerId = 2;
+  optional bool oneKey = 3;
+}
+message TreasureAuctionHelpTreasureRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+  optional string reward = 3;
+  repeated TreasureAuctionHelpDataMsg helpDataList = 4;
+}
+message TreasureAuctionEquipTreasureReq {
+  required int32 id = 1;
+  required int32 posIndex = 2;
+  required int32 separationIndex = 3;
+}
+message TreasureAuctionEquipTreasureRsp {
+  required int32 ret = 1;
+  repeated int32 equipIds = 2;
+  optional TreasureAuctionItemData item = 3;
+  repeated TreasureAuctionSeparationEquipMsg separationEquips = 4;
+}
+message TreasureAuctionIdentifyTreasureReq {
+  required int32 id = 1;
+}
+message TreasureAuctionIdentifyTreasureRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionItemData item = 2;
+  repeated int32 finishTaskId = 3;
+}
+message TreasureAuctionExtendWareHouseLimitReq {
+}
+message TreasureAuctionExtendWareHouseLimitRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+}
+message TreasureAuctionDisassembleTreasureReq {
+  repeated int32 ids = 4;
+}
+message TreasureAuctionDisassembleTreasureRsp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated TreasureAuctionItemData items = 3;
+}
+message TreasureAuctionGetHelpListReq {
+}
+message TreasureAuctionGetHelpListRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionHelpDataMsg helpList = 2;
+}
+message TreasureAuctionHelpDataMsg {
+  required TreasureAuctionPlaceData placeData = 1;
+  optional TreasureAuctionPlayerAppearanceDataMsg playerInfo = 2;
+  repeated int64 helperList = 3;
+}
+message TreasureAuctionSellReq {
+  repeated int32 ids = 1;
+  required string password = 2;
+  required int32 price = 3;
+  required bool anonymous = 4;
+}
+message TreasureAuctionSellRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionItemData items = 2;
+  optional TreasureAuctionPlayerData playerData = 3;
+}
+message TreasureAuctionGetGoodsListReq {
+  required int64 stamp = 1;
+  optional int32 treasureId = 2;
+  optional string seller = 3;
+  required int32 treasureType = 4;
+  repeated int32 attrType = 5;
+  repeated int32 qualityList = 6;
+  required int32 collect = 7;
+  required int32 sortType = 8;
+  required int32 sortIndex = 9;
+  required int32 pageNum = 10;
+  optional bool unIdentify = 11;
+  optional int32 specialSkillFilter = 12;
+}
+message TreasureAuctionGetGoodsListRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionGoodsData goodsList = 2;
+  optional int64 stamp = 3;
+  optional int32 maxSize = 4;
+  optional int32 collectSize = 5;
+}
+message TreasureAuctionGoodsData {
+  required string goodsId = 1;
+  required int32 treasureId = 2;
+  required int32 quality = 3;
+  repeated TreasureAuctionAttributeData attributeList = 4;
+  required string score = 5;
+  required int64 beginSellTime = 6;
+  optional TreasureAuctionPlayerAppearanceDataMsg sellerInfo = 7;
+  required int32 price = 8;
+  required bool anonymous = 9;
+  required bool collect = 10;
+  required string createNickName = 11;
+  required int32 collectNum = 12;
+  required int32 commentNum = 13;
+  optional TreasureAuctionCommentData comment = 14;
+  repeated int32 skillList = 15;
+  optional int32 num = 16;
+}
+message TreasureAuctionPlayerAppearanceDataMsg {
+  optional int64 playerId = 1;
+  optional string nickName = 2;
+  optional int32 headIcon = 3;
+  optional int64 serverId = 4;
+  optional int32 equipHeadIconFrame = 5;
+  optional int32 titleId = 6;
+  optional int32 realmsId = 7;
+  optional string fightValue = 8;
+  optional string wxHeadUrl = 9;
+}
+message TreasureAuctionBuyReq {
+  required string goodsId = 1;
+  required string password = 2;
+  required int32 price = 3;
+  optional int32 num = 4;
+}
+message TreasureAuctionBuyRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionItemData items = 2;
+}
+message TreasureAuctionCollectReq {
+  required string goodsId = 1;
+  required bool collect = 2;
+}
+message TreasureAuctionCollectRsp {
+  required int32 ret = 1;
+  optional int32 collectSize = 2;
+  required int32 collectNum = 3;
+}
+message TreasureAuctionSyncTreasureItemsSync {
+  repeated TreasureAuctionItemData items = 1;
+}
+message TreasureAuctionLockReq {
+  required int32 id = 1;
+  required bool lock = 2;
+  required string password = 3;
+}
+message TreasureAuctionLockRsp {
+  required int32 ret = 1;
+}
+message TreasureAuctionGetRecordReq {
+}
+message TreasureAuctionGetRecordRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionRecordMsg records = 2;
+}
+message TreasureAuctionRecordMsg {
+  required int32 type = 1;
+  required int64 targetPlayerId = 2;
+  required int64 targetServerId = 3;
+  required int32 price = 4;
+  required int32 quality = 5;
+  repeated TreasureAuctionAttributeData attributeList = 6;
+  required string score = 7;
+  required int64 time = 8;
+  required int32 treasureId = 9;
+  required string targetPlayerName = 10;
+  optional int32 num = 11;
+  repeated int32 skillList = 12;
+}
+message TreasureAuctionSellDownReq {
+  required int32 id = 1;
+}
+message TreasureAuctionSellDownRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionItemData items = 2;
+}
+message TreasureAuctionSetPasswordReq {
+  required string password = 1;
+  optional string oldpassword = 2;
+}
+message TreasureAuctionSetPasswordRsp {
+  required int32 ret = 1;
+}
+message TreasureAuctionClearPasswordReq {
+  required bool isStop = 1;
+}
+message TreasureAuctionClearPasswordRsp {
+  required int32 ret = 1;
+}
+message TreasureAuctionFriendInfo {
+  required FriendInfo friendInfo = 1;
+  optional TreasureAuctionGoodsData goods = 2;
+  optional bool anonymous = 3;
+}
+message TreasureAuctionPrivateChatReq {
+  required int64 playerId = 1;
+  optional string goodsId = 2;
+}
+message TreasureAuctionPrivateChatRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionFriendInfo friendInfos = 2;
+}
+message TreasureAuctionGetMsgListReq {
+  required int64 targetPlayerId = 1;
+}
+message TreasureAuctionSyncChatList {
+  repeated TreasureAuctionFriendInfo friendInfos = 1;
+}
+message TreasureAuctionSyncRedPoint {
+  required string redPoint = 1;
+}
+message TreasureAuctionCommentData {
+  required int64 commentId = 1;
+  optional int32 likeNum = 2;
+  optional bool isLike = 3;
+  optional string content = 4;
+  optional TreasureAuctionPlayerAppearanceDataMsg commenter = 5;
+  optional int64 time = 6;
+}
+message TreasureAuctionGetCommentListReq {
+  required string goodsId = 1;
+}
+message TreasureAuctionGetCommentListRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionCommentData commentList = 2;
+}
+message TreasureAuctionLikeCommentReq {
+  required string goodsId = 1;
+  required int64 commentId = 2;
+}
+message TreasureAuctionLikeCommentRsp {
+  required int32 ret = 1;
+  optional int32 likeNum = 2;
+  optional int32 likeCommentNum = 3;
+  optional int64 commentId = 4;
+}
+message TreasureAuctionCommentReq {
+  required string goodsId = 1;
+  required string content = 2;
+}
+message TreasureAuctionCommentRsp {
+  required int32 ret = 1;
+  optional int32 commentNum = 2;
+  optional TreasureAuctionCommentData newComment = 3;
+}
+message TreasureAuctionDeleteCommentReq {
+  required string goodsId = 1;
+  required int64 commentId = 2;
+}
+message TreasureAuctionDeleteCommentRsp {
+  required int32 ret = 1;
+}
+message TreasureAuctionPriceAdjustReq {
+  required int32 id = 1;
+  required string password = 2;
+  required int32 price = 3;
+}
+message TreasureAuctionPriceAdjustRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionItemData item = 2;
+  optional TreasureAuctionPlayerData playerData = 3;
+}
+message TreasureAuctionUpgradeMapReq {
+  required int32 id = 1;
+}
+message TreasureAuctionUpgradeMapRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlaceData placeData = 2;
+}
+message TreasureAuctionChatDeleteReq {
+  required int64 playerId = 1;
+  optional bool isAnonymous = 2;
+}
+message TreasureAuctionChatDeleteRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionFriendInfo friendInfos = 2;
+}

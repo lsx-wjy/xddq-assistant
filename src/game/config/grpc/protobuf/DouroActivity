@@ -1,0 +1,42 @@
+package com.yq.msg.CityMsg;
+message DouroActivityConfig {
+    repeated DouroChallengeConfig douroChallengeConfig = 1;
+}
+message DouroChallengeConfig {
+    optional int32 type = 1;
+    optional int32 floors = 2;
+    optional int32 pharm = 3;
+}
+message DouroPlayerDataMsg {
+    optional int32 curScore = 1;
+    optional int32 curSoulPower = 2;
+    optional int32 curBoxProgress = 3;
+    optional int32 curBoxNum = 4;
+}
+message GetPlayerDouroDataReq{
+}
+message GetPlayerDouroDataResp{
+    required int32 ret = 1;
+    optional DouroPlayerDataMsg douroPlayerDataMsg = 3;
+    repeated int32 rankList = 4;
+}
+message DouroInjectSoulPowerReq {
+}
+message DouroInjectSoulPowerResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional DouroPlayerDataMsg  douroPlayerDataMsg = 3;
+    optional int32 hitDouble = 4;
+}
+message GetDouroScoreRewardReq {
+}
+message GetDouroScoreRewardResp {
+    required int32 ret = 1;
+    repeated string reward = 2;
+}
+message GetDouroItemGainNumReq {
+}
+message GetDouroItemGainNumResp {
+    required int32 ret = 1;
+    optional int32 gainNum = 2;
+}

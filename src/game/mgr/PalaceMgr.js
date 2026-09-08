@@ -1,6 +1,7 @@
 import GameNetMgr from "#game/net/GameNetMgr.js";
 import Protocol from "#game/net/Protocol.js";
 import logger from "#utils/logger.js";
+import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 
 export default class PalaceMgr {
     constructor() {}
@@ -17,6 +18,7 @@ export default class PalaceMgr {
     clear() {}
 
     async checkReward(t) {
+        if (!isAutomationTaskEnabled('cave.palace')) return;
         for (let i = 0; i < t.data.length; i++) {
             const id = t.data[i].id;
             logger.info(`[仙宫管理] 收获礼物 ${id}`);
@@ -26,12 +28,14 @@ export default class PalaceMgr {
     }
 
     PalaceWorshipRsp(t) {
+        if (!isAutomationTaskEnabled('cave.palace')) return;
         if (t.titleId) {
             GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_WORSHIP, {titleId: t.titleId, isRandom: 0}, null);
         }
     }
 
     checkWorship(t) {
+        if (!isAutomationTaskEnabled('cave.palace')) return;
         logger.debug(`[仙宫管理] 检查崇拜`);
         if (t.worship && t.worshipRandom) {
             GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {titleId: 0, isRandom: 1}, null);
@@ -42,9 +46,11 @@ export default class PalaceMgr {
         if (t.miracleId !== 0) {
             logger.info(`[仙宫管理] 已膜拜成功`);
             PalaceMgr.isMiracle = true;
-        } else {
+        } else if (isAutomationTaskEnabled('cave.palace')) {
             PalaceMgr.isMiracle = false;
             GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {titleId: 0, isRandom: 1}, null);
+        } else {
+            PalaceMgr.isMiracle = false;
         }
     }
 }

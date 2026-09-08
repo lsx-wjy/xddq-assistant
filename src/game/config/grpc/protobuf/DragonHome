@@ -1,0 +1,590 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Battle";
+import "Rank";
+enum DragonHomeProtocols {
+  dragon_home_enter_activity = 210800;
+  dragon_home_team_list = 210802;
+  dragon_home_team_create = 210803;
+  dragon_home_team_join = 210804;
+  dragon_home_team_join_agree = 210805;
+  dragon_home_team_leave = 210806;
+  dragon_home_team_kick_out = 210807;
+  dragon_home_team_dissolve = 210808;
+  dragon_home_team_search = 210809;
+  dragon_home_team_detail = 210810;
+  dragon_home_team_applylist = 210811;
+  dragon_home_team_cancel_apply = 210812;
+  dragon_home_explore_data = 210820;
+  dragon_home_explore_move = 210821;
+  dragon_home_explore_go_next_floor = 210823;
+  dragon_home_explore = 210824;
+  dragon_home_receive_reward = 210830;
+  dragon_home_log_list = 210840;
+  dragon_home_replenish_strength = 210841;
+  dragon_home_break_free = 210842;
+  dragon_home_use_light = 210843;
+  dragon_home_notify_teammate_into_map = 210845;
+  dragon_home_notify_teammate_move = 210846;
+  dragon_home_notify_teammate_explore = 210847;
+  dragon_home_team_log_list = 210848;
+  dragon_home_rescue_trap = 210851;
+  dragon_home_assist_attack_monster = 210852;
+  dragon_home_receive_assist_reward = 210853;
+  dragon_home_notify_be_rescue_trap = 210854;
+  dragon_home_notify_monster_disappear = 210855;
+  dragon_home_notify_end_trap = 210856;
+  dragon_home_invite_player = 210857;
+  dragon_home_monster_att = 210858;
+  dragon_home_red_point = 210859;
+  dragon_home_remove_assist = 210860;
+  dragon_home_best_team_info = 210861;
+  dragon_home_create_team_back = 210870;
+  dragon_home_sync_server_player_attr = 210871;
+  dragon_home_receive_reward_back = 210873;
+  dragon_home_explore_back = 210874;
+  dragon_home_enter_activity_back = 210875;
+  dragon_home_go_next_floor_back = 210876;
+  dragon_home_sync_mall_can_buy_Count = 210877;
+  dragon_home_unlock_auto_handle_back = 210878;
+  dragon_home_send_rank_reward = 210879;
+  dragon_home_receive_assist_reward_back = 210880;
+  dragon_home_assist_attack_monster_back = 210881;
+}
+message DragonHomeConfigSyncMsg {
+  repeated DragonHomeDrawConfigMsg drawConfigs = 1;
+  repeated DragonHomeEventConfigMsg eventConfigs = 2;
+  repeated DragonHomeMapConfigMsg mapConfigs = 3;
+  repeated DragonHomeMonsterConfigMsg monsterConfig = 4;
+}
+message DragonHomeDrawConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 mapId = 3;
+  required int32 cost = 4;
+  required string reward = 5;
+}
+message DragonHomeEventConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required string name = 4;
+  required string param = 5;
+  required string desc = 6;
+  required string reward = 7;
+}
+message DragonHomeMapConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 length = 3;
+  required string event = 4;
+  required int32 extraEvent = 5;
+  required string extraEventLimit = 6;
+  required string probability1 = 7;
+  required string probability2 = 8;
+  optional string param = 9;
+  optional string randomEvent = 10;
+}
+message DragonHomeMonsterConfigMsg {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string targetId = 3;
+  required int32 monsterLength = 4;
+  required string param = 5;
+}
+message DragonHomeEnterActivityReq {
+  required int32 activityId = 1;
+}
+message DragonHomeEnterActivityResp {
+  optional int32 ret = 1;
+  optional DragonHomeTeamMsg teamMsg = 2;
+  optional int32 createTeamCount = 3;
+  optional int32 totalCostEnergy = 4;
+  optional int32 maxFloor = 5;
+  repeated DragonHomeInviteCdMsg inviteCdList = 6;
+  optional int32 currentFloor = 7;
+}
+message DragonHomeInviteCdMsg {
+  optional int32 type = 1;
+  optional int64 lastInviteTime = 2;
+}
+message DragonHomeTeamCreateReq {
+  required int32 activityId = 1;
+  required string teamName = 2;
+  required int32 createTeamCount = 3;
+}
+message DragonHomeTeamCreateResp {
+  optional int32 ret = 1;
+  optional DragonHomeTeamMsg teamMsg = 2;
+  optional int32 createTeamCount = 3;
+  optional string costInfo = 4;
+}
+message DragonHomeTeamMsg {
+  required int64 teamId = 1;
+  optional string teamName = 2;
+  optional int64 captainId = 3;
+  repeated DragonHomeTeamMemberMsg members = 4;
+}
+message DragonHomeTeamMemberMsg {
+  optional PlayerHeadAndNameMsg headData = 1;
+  optional int32 strength = 2;
+  optional string fightValue = 3;
+  optional bool online = 4;
+}
+message DragonHomePlayerApplyMsg {
+  optional PlayerHeadAndNameMsg playerInfo = 1;
+  optional string fightValue = 5;
+  optional int64 applyTime = 6;
+}
+message DragonHomeTeamListReq {
+  required int32 activityId = 1;
+  optional int32 type = 2;
+}
+message DragonHomeTeamListResp {
+  optional int32 ret = 1;
+  repeated DragonHomeTeamSimpleMsg teamList = 2;
+  repeated int64 applyTeamList = 3;
+}
+message DragonHomeTeamSimpleMsg {
+  required int64 teamId = 1;
+  optional string teamName = 2;
+  optional string fightValue = 3;
+  optional int32 memberCount = 4;
+  optional int64 serverId = 5;
+  optional string leaderName = 6;
+  optional int64 leaderId = 7;
+}
+message DragonHomeTeamAgreeJoinReq {
+  required int32 activityId = 1;
+  optional int64 targetId = 2;
+  optional bool agree = 3;
+}
+message DragonHomeTeamAgreeJoinResp {
+  optional int32 ret = 1;
+  optional bool agree = 2;
+  optional int64 targetId = 3;
+  optional DragonHomeTeamMsg teamMsg = 4;
+}
+message DragonHomeTeamSearchReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message DragonHomeLeaveTeamReq {
+  required int32 activityId = 1;
+}
+message DragonHomeLeaveTeamResp {
+  optional int32 ret = 1;
+}
+message DragonHomeTeamKickOutReq {
+  required int32 activityId = 1;
+  optional int64 targetId = 2;
+}
+message DragonHomeTeamKickOutResp {
+  optional int32 ret = 1;
+}
+message DragonHomeDissolveTeamReq {
+  required int32 activityId = 1;
+}
+message DragonHomeDissolveTeamResp {
+  optional int32 ret = 1;
+}
+message DragonHomeTeamSearchResp {
+  optional int32 ret = 1;
+  optional DragonHomeTeamSimpleMsg teamInfo = 2;
+}
+message DragonHomeDetailReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message DragonHomeDetailResp {
+  optional int32 ret = 1;
+  optional DragonHomeTeamDetailMsg teamInfo = 3;
+}
+message DragonHomeTeamApplyListReq {
+  required int32 activityId = 1;
+}
+message DragonHomeTeamApplyListResp{
+    required int32 ret = 1;
+    repeated DragonHomePlayerApplyMsg applyList = 2 ;
+}
+message DragonHomeTeamDetailMsg {
+  required int64 teamId = 1;
+  optional string TeamName = 2;
+  optional int32 maxFloor = 3;
+  repeated DragonHomeTeamMemberMsg members = 4;
+  optional int64 serverId = 5;
+}
+message DragonHomeCancelApplyReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message DragonHomeCancelApplyResp {
+  optional int32 ret = 1;
+  optional int64 teamId =2;
+}
+message DragonHomeTeamRankMsg {
+  repeated PlayerBaseDataMsg playerData = 1;
+  required int32 maxFloor = 2;
+  required int64 score = 3;
+  optional int32 rank = 4;
+}
+message DragonHomeTeamRankMsgList {
+    repeated DragonHomeTeamRankMsg rankTemp = 1;
+}
+message DragonHomePlayerRankMsg {
+  required PlayerBaseDataMsg playerData = 1;
+  required int64 score = 2;
+  optional int32 rank = 3;
+}
+message DragonHomePlayerRankMsgList {
+  repeated DragonHomePlayerRankMsg rankList = 1;
+}
+message MapTile {
+  required DragonHomePositionMsg position = 1;
+  required int32 type = 2;
+  optional int32 eventId = 3;
+  optional int64 eventUid = 4;
+}
+message DragonHomePositionMsg {
+  required int32 x = 1;
+  required int32 y = 2;
+}
+message DragonHomeExploreDataMsg {
+  required int32 floor = 1;
+  repeated MapTile data = 2;
+  repeated DragonHomeExplorePlayerDataMsg playerData = 3;
+  optional int32 rank = 4;
+  optional int32 keyCount = 5;
+  optional bool isAutoUnLock = 7;
+  repeated DragonHomePositionMsg exitPosition = 8;
+  repeated DragonHomeMonsterMsg monsterInfo = 9;
+  optional bool haveKey1 = 10;
+  optional bool haveKey2 = 11;
+  repeated DragonHomeMallInfo mallInfo = 12;
+}
+message DragonHomeMonsterMsg {
+  required int64 monsterUid = 1;
+  required int32 monsterId = 2;
+  required string maxHp = 3;
+  required string leftHp = 4;
+  optional int64 triggerPlayerId = 5;
+  optional int32 eventId = 6;
+  optional string fightValue = 7;
+}
+message DragonHomeExplorePlayerDataMsg{
+  optional PlayerHeadDataMsg headData = 1;
+  optional DragonHomePositionMsg currentPosition = 2;
+  optional int32 appearanceId = 3;
+  optional int32 cloudId = 4;
+  optional string nickName = 5;
+  optional int32 strength = 6;
+  optional string fightValue = 7;
+  optional int64 lastRecoveryTime  = 8;
+  optional int32 currFloor = 9;
+  optional int64 trapEndTime = 10;
+  optional int32 doubleTickerCount = 11;
+}
+message DragonHomeRewardFloor {
+  required int32 floor = 1;
+  repeated DragonHomeRewardTile rewardTitle = 2;
+  repeated DragonHomeTeamMemberMsg teamMsg = 3;
+  optional int32 rank = 4;
+  optional int32 appearanceId = 5;
+  optional int32 cloudId = 6;
+  optional bool isAutoUnLock = 7;
+  repeated DragonHomeMallInfo mallInfo = 8;
+}
+message DragonHomeRewardTile {
+  optional int32 index = 1;
+  optional string reward = 2;
+  optional bool received = 3;
+}
+message DragonHomeExploreDataReq {
+  required int32 activityId = 1;
+}
+message DragonHomeExploreDataResp {
+  optional int32 ret = 1;
+  optional DragonHomeExploreDataMsg data = 2;
+  optional DragonHomeRewardFloor rewardData = 3;
+}
+message DragonHomeMoveReq {
+  required int32 activityId = 1;
+  repeated DragonHomePositionMsg targetPosition = 2;
+}
+message DragonHomeMoveResp {
+  optional int32 ret = 1;
+  optional DragonHomePositionMsg targetPosition = 2;
+}
+message DragonHomeGoNextFloorReq{
+  required int32 activityId = 1;
+}
+message DragonHomeGoNextFloorResp{
+  optional int32 ret = 1;
+  optional string passReward = 2;
+}
+message DragonHomePlayerEnterExploreNotify{
+  optional int32 floor = 1;
+  optional DragonHomeExplorePlayerDataMsg teammateInfo = 2;
+}
+message DragonHomeExploreDoMoveNotify{
+  optional DragonHomePositionMsg targetPosition = 1;
+}
+message DragonHomeExploreTriggerEventNotify{
+  optional int32 floor = 1;
+  optional DragonHomePositionMsg currPosition = 2;
+  repeated MapTile exploreTile = 3;
+  optional DragonHomeMonsterMsg monsterInfo = 4;
+  optional int32 strength = 5;
+  optional int64 lastRecoveryTime  = 6;
+  optional DragonHomeExploreNotifyDataMsg notifyData = 7;
+  required int64 teammateId = 8;
+  optional int64 trapEndTime = 9;
+  optional int32 rank = 10;
+}
+message DragonHomeExploreNotifyDataMsg{
+  repeated MapTile data = 1;
+  repeated DragonHomeMonsterMsg monsterInfo = 2;
+}
+message DragonHomeExploreReq {
+  required int32 activityId = 1;
+  required DragonHomePositionMsg targetPosition = 2;
+  optional int32 keysNum = 3;
+}
+message DragonHomeExploreResp {
+  optional int32 ret = 1;
+  optional DragonHomeExploreResultData data = 2;
+  optional DragonHomeExploreResultData exData = 3;
+  optional int32 strength = 4;
+  optional int64 lastRecoveryTime  = 5;
+  optional int32 totalCostEnergy = 6;
+  optional DragonHomePositionMsg transferPosition = 7;
+  optional int32 rank = 8;
+}
+message DragonHomeExploreResultData {
+  repeated MapTile exploreTile = 1;
+  optional string reward = 2;
+  optional DragonHomeMonsterMsg monsterInfo = 3;
+  optional BattleRecordMsg battleRecord = 4;
+  optional DragonHomeExploreNotifyDataMsg notifyData = 5;
+  optional bool haveKey1 = 6;
+  optional bool haveKey2 = 7;
+  repeated DragonHomeMallInfo mallInfo = 8;
+  optional int64 trapEndTime = 9;
+  optional int32 doubleTickerCount = 10;
+}
+message DragonHomeReceiveRewardReq {
+  required int32 activityId = 1;
+  required int32 rewardIndex = 2;
+}
+message DragonHomeReceiveRewardResp {
+  optional int32 ret = 1;
+  optional int32 rewardIndex = 2;
+  optional string reward = 3;
+}
+message DragonHomeLogListReq {
+  required int32 activityId = 1;
+  required int32 tab = 2;
+}
+message DragonHomeLogListResp {
+  optional int32 ret = 1;
+  optional int32 tab = 2;
+  repeated DragonHomeLogMsg logList = 3;
+}
+message DragonHomeLogMsg {
+  optional int32 floor = 2;
+  optional DragonHomeTrapPlayerMsg trapInfo = 3;
+  optional DragonHomeAssistMonsterMsg assistMonsterInfo = 4;
+  optional DragonHomeMonsterLogMsg monsterLogInfo = 5;
+}
+message DragonHomeTrapPlayerMsg {
+  optional int64 playerId = 1;
+  optional int32 appearanceId = 2;
+  optional string nickName = 3;
+  optional int64 endTime = 4;
+}
+message DragonHomeAssistMonsterMsg {
+  optional int64 monsterUid = 1;
+  optional int64 monsterId = 2;
+  optional string hp = 3;
+  optional string leftHp = 4;
+  optional string nickName = 5;
+  optional int32 eventId = 6;
+  optional string fightValue = 7;
+}
+message DragonHomeMonsterLogMsg {
+  optional int64 monsterUid = 1;
+  optional int64 monsterId = 2;
+  optional string assistName = 3;
+  optional int32 state = 4;
+  optional string reward = 5;
+}
+message DragonHomeReplenishStrengthReq {
+  required int32 activityId = 1;
+  required int32 useCount = 2;
+}
+message DragonHomeReplenishStrengthResp {
+  optional int32 ret = 1;
+  optional string costInfo =2 ;
+  optional int32 strength = 3;
+  optional int64 lastRecoveryTime  = 4;
+}
+message DragonHomeMallInfo {
+  optional int32 mallId = 1;
+  optional int64 expiredTime = 2;
+  optional int32 canBuyCount = 3;
+}
+message DragonHomeBreakFreeReq {
+  required int32 activityId = 1;
+}
+message DragonHomeBreakFreeResp {
+  optional int32 ret = 1;
+  optional int32 strength = 2;
+  optional int64 lastRecoveryTime  = 3;
+  optional int32 totalCostEnergy = 4;
+}
+message DragonHomeUseLightReq {
+  required int32 activityId = 1;
+  required int64 eventUid = 2;
+  repeated DragonHomePositionMsg lightPositions = 3;
+}
+message DragonHomeUseLightResp {
+  optional int32 ret = 1;
+  optional DragonHomeExploreNotifyDataMsg notifyData = 2;
+}
+message DragonHomeUnlockAutoHandleReq {
+  required int32 activityId = 1;
+}
+message DragonHomeUnlockAutoHandleResp {
+  optional int32 ret = 1;
+  optional string costInfo = 2;
+}
+message DragonHomeRescueTrapReq {
+  required int32 activityId = 1;
+  required int64 teammateId = 2;
+}
+message DragonHomeRescueTrapResp {
+  optional int32 ret = 1;
+}
+message DragonHomeNotifyPlayerRescuedMsg {
+  optional int32 activityId = 1;
+}
+message DragonHomeAssistAttackMonsterReq {
+  optional int32 activityId = 1;
+  optional int64 monsterUid = 2;
+}
+message DragonHomeAssistAttackMonsterResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional DragonHomeMonsterMsg monsterInfo = 3;
+  optional BattleRecordMsg battleRecord = 4;
+}
+message DragonHomeReceiveMonsterRewardReq {
+  optional int32 activityId = 1;
+  optional int64 monsterUid = 2;
+}
+message DragonHomeReceiveMonsterRewardResp {
+  optional int32 ret = 1;
+  optional int32 activityId = 2;
+  optional int64 monsterUid = 3;
+  optional string reward = 4;
+}
+message DragonHomeNotifyMonsterDisappearMsg {
+  optional int32 activityId = 1;
+  optional int32 floor = 2;
+  repeated MapTile data = 3;
+  optional int64 monsterUid = 4;
+}
+message DragonHomeNotifyPlayerEndTrap {
+  optional int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional bool active = 3;
+}
+message DragonHomeInvitePlayerReq {
+  required int32 activityId = 1;
+  required int32 inviteType = 2;
+}
+message DragonHomeInvitePlayerResp {
+  optional int32 ret = 1;
+  optional DragonHomeInviteCdMsg inviteCd =2;
+}
+message DragonHomeTeamLogListReq {
+  required int32 activityId = 1;
+}
+message DragonHomeTeamLogListResp {
+  optional int32 ret = 1;
+  repeated DragonHomeTeamLogMsg logList = 2;
+}
+message DragonHomeTeamLogMsg {
+  optional int32 floor = 1;
+  optional int64 playerId = 2;
+  optional int64 time = 3;
+  optional int32 eventId = 4;
+  optional bool findKey1 = 5;
+  optional bool findKey2 = 6;
+  optional string reward = 7;
+  optional int64 monsterId = 8;
+  optional int32 monsterState = 9;
+}
+message DragonHomeTeamChangeNotifyMsg {
+  optional int32 activityId = 1;
+  optional int32 type = 2;
+  optional int64 teamId = 3;
+  optional string leaderName = 4;
+  optional string teamName = 5;
+}
+message DragonHomeTeamApplyReq {
+  required int32 activityId = 1;
+  required int64 teamId = 2;
+}
+message DragonHomeTeamApplyResp {
+  optional int32 ret = 1;
+}
+message DragonHomeMonsterAttrReq {
+  required int32 activityId = 1;
+  required int64 monsterUid = 2;
+}
+message DragonHomeMonsterAttrResp {
+  required int32 ret = 1;
+  repeated AttributeDataMsg attributeList = 2;
+}
+enum DragonHomeRedPointEnum {
+  DragonHomeRedPoint_null = 0;
+  DragonHomeRedPoint_strength = 1;
+  DragonHomeRedPoint_rankReward = 2;
+  DragonHomeRedPoint_personalBattlePass = 3;
+  DragonHomeRedPoint_teamBattlePass = 4;
+  DragonHomeRedPoint_assistFinish = 5;
+  DragonHomeRedPoint_assistEvent = 6;
+  DragonHomeRedPoint_teamApply = 7;
+  DragonHomeRedPoint_freeGift = 8;
+  DragonHomeRedPoint_playerRankReward = 9;
+}
+message DragonHomeRedPointReqMsg {
+  required int32 activityId = 1;
+}
+message DragonHomeRedPointRespMsg {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message DragonHomeRemoveAssistReq {
+  required int32 activityId = 1;
+  optional int64 monsterUid = 2;
+}
+message DragonHomeRemoveAssistResp {
+  required int32 ret = 1;
+}
+message DragoHomeBestTeamReq {
+  required int32 activityId = 1;
+}
+message DragonHomeBestTeamResp {
+  required int32 ret = 1;
+  repeated PlayerBaseDataMsg playerData = 2;
+  optional int32 floor = 3;
+  optional string teamName = 4;
+  optional int64 serverId = 5;
+}
+message DragonHomeTeammateTrapNotify {
+  optional int32 activityId = 1;
+  optional int32 type = 2;
+}

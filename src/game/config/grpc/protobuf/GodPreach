@@ -1,0 +1,787 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Battle";
+import "Rank";
+import "WatchPlayer";
+import "WorldMessage";
+import "PlayerBattleMainPb";
+/** 诸仙证道协议号 */
+enum ProveWayPb {
+    ProveWayPb_Null = 0;
+    ProveWayPb_Enter = 232901;
+    ProveWayPb_Match = 232902;
+    ProveWayPb_Battle = 232903;
+    ProveWayPb_GetReport = 232904;
+    ProveWayPb_BattleReply = 232905;
+    ProveWayPb_ReceiveRankReward = 232906;
+    ProveWayPb_ReceiveScoreReward = 232907;
+    ProveWayPb_BuyFightTicket = 232908;
+    ProveWayPb_GetScoreRank = 232909;
+    ProveWayPb_SyncBattleScore = 232934;
+    ProveWayPb_ReceiveGuessCoin = 232910;
+    ProveWayPb_KnockoutGuess = 232911;
+    ProveWayPb_KnockoutBattleReply = 232912;
+    ProveWayPb_ReceiveKnockoutRankReward = 232914;
+    ProveWayPb_GetKnockoutBattleResult = 232916;
+    ProveWayPb_GetKnockoutGuessInfo = 232917;
+    ProveWayPb_GetKnockoutReport = 232918;
+    ProveWayPb_GetPlayerRestrainData = 232919;
+    ProveWayPb_GetPreviousChampions = 232915;
+    ProveWayPb_GetCurStateInfo = 232932;
+    ProveWayPb_CancelReportRedPoint = 232933;
+    ProveWayPb_HeartBeat = 232936;
+    ProveWayPb_redPoint = 232935;
+    ProveWayPb_createTeam = 232940;
+    ProveWayPb_teamDetail = 232941;
+    ProveWayPb_teamList = 232942;
+    ProveWayPb_quitTeam = 232943;
+    ProveWayPb_applyJoinTeam = 232944;
+    ProveWayPb_agreeJoin = 232945;
+    ProveWayPb_sendInviteMsg = 232946;
+    ProveWayPb_agreeInviteJoin = 232947;
+    ProveWayPb_getApplyList = 232948;
+    ProveWayPb_getInviteList = 232949;
+    ProveWayPb_searchTeam = 232950;
+    ProveWayPb_getTeamPosition = 232951;
+    ProveWayPb_changeTeamPosition = 232952;
+    ProveWayPb_changeTeamCaptain = 232953;
+    ProveWayPb_teamStateSync = 232954;
+    ProveWayPb_kickoutTeam = 232955;
+    ProveWayPb_inviteCd = 232956;
+    ProveWayPb_Worship = 232958;
+    ProveWayPb_selectFormationType = 232960;
+    ProveWayPb_GetAvatarDetail = 232961;
+    ProveWayPb_LockAvatarAttr = 232962;
+    ProveWayPb_redPoint_back = 232963;
+    /**
+     * 服务器跨服调用，客户端不用看
+     */
+    CTG_ProveWayPb_LockCompetition = 232980;
+    CTG_ProveWayPb_Match = 232981;
+    CTG_ProveWayPb_Battle_Start = 232998;
+    CTG_ProveWayPb_Battle_Finish = 232982;
+    CTG_ProveWayPb_ReceiveRankReward = 232983;
+    CTG_ProveWayPb_ReceiveKnockoutRankReward = 232984;
+    CTG_ProveWayPb_BuyFightTicket = 232985;
+    CTG_ProveWayPb_Enter = 232986;
+    CTG_ProveWayPb_GuessReward = 232987;
+    CTG_ProveWayPb_SendRankReward = 232988;
+    CTG_ProveWayPb_LockRoster = 232989;
+    CTG_ProveWayPb_CrossToGameWorship = 232990;
+    CTG_ProveWay_GetPlayerAvatar = 232991;
+    CTG_ProveWay_LockAvatar = 232992;
+    CTG_ProveWay_AutoLockAvatar = 232993;
+    CTG_ProveWayPb_sendInviteBack = 232994;
+    GTG_ProveWayPb_PullBattleBodyOtherServer = 232995;
+    GTG_ProveWayPb_PullBattleBodyOtherServerBack = 232996;
+    CTG_ProveWayPb_ReceiveScoreReward = 232997;
+}
+enum ProveWayPosterState {
+    ProveWayPosterState_Show = 0;
+    ProveWayPosterState_FormTeam = 1;
+    ProveWayPosterState_Battle = 2;
+    ProveWayPosterState_BattleRank = 3;
+    ProveWayPosterState_Knockout = 4;
+    ProveWayPosterState_Celebration = 5;
+}
+enum ProveWayRedPointEnum {
+    ProveWayNonePoint = 0;
+    ProveWayFirstEnterPoint  =1 ;
+    ProveWayTeamPoint = 2;
+    ProveWayTeamApplyPoint = 3;
+    ProveWayChallengePoint = 4;
+    ProveWayBattleReportPoint = 5;
+    ProveWaySettleRewardPoint = 6;
+    ProveWayGuessCoinPoint= 7;
+    ProveWayGuessPoint = 8;
+    ProveWayRankRewardPoint = 9;
+    ProveWayWorshipPoint= 10;
+    ProveWaySomeOneInvitePoint= 11;
+}
+message ProveWayEnterReq {
+    required int32 activityId = 1;
+}
+message ProveWayEnterResp {
+    required int32 ret = 1;
+    optional int32 activityId = 2;
+    optional ProveWayPlayerInfo playerInfo = 3;
+    optional ProveWayTeamInfo teamInfo = 4;
+    repeated ProveWayCompetitionGroupInfo competitionGroup = 5;
+    optional RankMsg rankMsgTop3 = 6;
+    optional RankMsg championRankMsg = 8;
+    optional bool isFightQualification = 9;
+    optional bool isKnockoutQualification = 10;
+    optional int32 sessionNum = 11;
+    repeated TeamGuessInfoMsg teamGuessInfos = 12;
+    optional ProveWayPlayerRestrainInfoMsg restrainData = 13;
+    optional int32 maxJoinRealms = 15;
+    optional ProveWayKnockoutPlayerInfo KnockoutPlayerInfo = 16;
+    repeated int64 serverId = 17;
+    optional int32 activityState = 18;
+    repeated int64 applyJoinTeamIdList = 19;
+    optional ProveWayTeamCDInfo teamCDInfo = 20;
+    repeated ProveWaySettlementMsg settlementMsgs = 21;
+    optional bool isWorshipChampion = 22;
+    optional int64 worshipAwardTime = 23;
+    optional int32 guessRewardNum = 24;
+    optional int32 guessTotalRewardNum = 25;
+    repeated int64 teamServerIds = 26;
+}
+message ProveWaySettlementMsg {
+    optional int32 activityState = 1;
+    optional int32 battleScore = 2;
+    optional int32 rank = 3;
+    optional bool isRise = 4;
+}
+message ProveWayTeamCDInfo {
+    optional int64 lastLeaveTeam = 1;
+    optional int64 unionNextInviteTime = 2;
+    optional int64 activityNextInviteTime = 3;
+}
+message ProveWayMatchReq {
+    required int32 activityId = 1;
+    required int32 refreshTimes = 2;
+}
+message ProveWayMatchResp {
+    required int32 ret = 1;
+    repeated ProveWayTeamChallengeInfo teamInfos = 2;
+    optional AwardInfoList cost = 3;
+    optional int32 activityId = 4;
+    optional int32 refreshTimes = 5;
+}
+message ProveWayBattleReq {
+    required int32 activityId = 1;
+    optional int64 targetTeamId = 2;
+    optional int32 competitionId = 3;
+}
+message ProveWayBattleResp {
+    required int32 ret = 1;
+    optional AwardInfoList reward = 2;
+    optional int32 challengeTimes = 3;
+    repeated ProveWayTeamChallengeInfo challengeInfos = 4;
+    optional int32 battleScore = 5;
+    optional int32 historyMaxScore = 6;
+    optional int32 scoreRank = 7;
+    optional ProveWayBattleResultMsg battleResult = 8;
+    optional int32 activityId = 9;
+    optional int32 scoreUpTimes = 10;
+}
+message ProveWayBuyFightTicketReq {
+    required int32 activityId = 1;
+    optional int32 buyCount = 2;
+    optional int32 hadBuyCount = 3;
+}
+message ProveWayBuyFightTicketResp {
+    required int32 ret = 1;
+    optional AwardInfoList cost = 2;
+    optional int32 activityId = 3;
+    optional int32 challengeTimes = 4;
+    optional int32 buyChallengeTimes = 5;
+}
+message ProveWayGetReportReq {
+    required int32 activityId = 1;
+}
+message ProveWayGetReportResp {
+    optional int32 ret = 1;
+    repeated ProveWayBattleReportInfo reportList = 2;
+}
+message ProveWayBattleReplyReq {
+    required int32 activityId = 1;
+    required int32 recordId = 2;
+}
+message ProveWayBattleReplyResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg allBattleRecord = 2;
+}
+message ProveWayReceiveScoreRewardReq {
+    required int32 activityId = 1;
+    required int32 scoreId = 2;
+}
+message ProveWayReceiveScoreRewardResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    repeated int32 scoreRewardList = 3;
+    optional int32 activityId = 4;
+}
+message ProveWayReceiveRankRewardReq {
+    required int32 activityId = 1;
+    required int32 rank = 2;
+}
+message ProveWayReceiveRankRewardResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional ProveWayPlayerInfo playerInfo = 3;
+    optional int32 activityId = 4;
+}
+message ProveWayGetKnockoutGuessInfoReq {
+    required int32 activityId = 1;
+    optional int32 roundId = 2;
+    optional int32 competitionId = 3;
+    optional int32 groupId = 4;
+}
+message ProveWayGetKnockoutGuessInfoResp {
+    required int32 ret = 1;
+    optional int32 guessCoin = 2;
+    repeated TeamGuessInfoMsg teamGuessInfo = 3;
+    optional int32 curGroup = 4;
+    optional int32 maxGroup = 5;
+}
+message ProveWayReceiveGuessCoinReq {
+    required int32 activityId = 1;
+}
+message ProveWayReceiveGuessCoinResp {
+    required int32 ret = 1;
+    optional int32 guessCoin = 2;
+}
+message ProveWayKnockoutGuessReq {
+    required int32 activityId = 1;
+    required int64 targetTeamId = 2;
+    required int32 guessCoinCost = 3;
+    required int32 roundId = 4;
+}
+message ProveWayKnockoutGuessResp {
+    required int32 ret = 1;
+    optional int32 guessCoin = 2;
+    optional TeamGuessInfoMsg teamGuessInfo = 3;
+}
+message ProveWaySyncGuessReward {
+    required int32 ret = 1;
+    optional int32 num = 2;
+    optional int32 activityId = 3;
+}
+message ProveWayKnockoutBattleReplyReq {
+    required int32 activityId = 1;
+    required int32 battleId = 2;
+}
+message ProveWayKnockoutBattleReplyResp {
+    required int32 ret = 1;
+    optional BattleRecordMsg allBattleRecord = 2;
+    optional TeamSimpleInfo leftTeamInfo = 3;
+    optional TeamSimpleInfo rightTeamInfo = 4;
+    optional int32 leftFormationType = 5;
+    optional int32 rightFormationType = 6;
+}
+message ProveWayReceiveKnockoutRankRewardReq {
+    required int32 activityId = 1;
+    required int32 rank = 2;
+}
+message ProveWayReceiveKnockoutRankRewardResp {
+    required int32 ret = 1;
+    optional AwardInfoList reward = 2;
+}
+message ProveWayGetPreviousChampionsReq {
+    optional int32 activityId = 1;
+    optional int32 sessionNum = 2;
+}
+message ProveWayGetPreviousChampionsResp {
+    required int32 ret = 1;
+    optional int32 sessionNum = 2;
+    repeated ProveWayChampionTeam TeamChampions = 3;
+}
+message ProveWayGetScoreRankReq {
+    optional int32 activityId = 1;
+    optional int64 teamId = 2;
+    optional int32 rankNum = 3;
+}
+message ProveWayGetScoreRankResp {
+    required int32 ret = 1;
+    repeated ScoreRankMsg scoreRankMsgList = 3;
+}
+message ProveWaySyncBattleScore {
+    required int64 teamId = 1;
+    optional int32 battleScore = 2;
+    optional int32 battleScoreRank = 3;
+    optional int32 historyMaxScore = 4;
+}
+message ScoreRankMsg {
+    required ProveWayTeamBaseInfo teamBaseInfo = 1;
+    optional int32 score = 2;
+    optional int32 rank = 3;
+}
+message ProveWayGetKnockoutBattleResultReq {
+    required int32 activityId = 1;
+    required int32 competitionId = 2;
+    required int32 roundId = 3;
+    required int32 groupId = 4;
+}
+message ProveWayGetKnockoutBattleResultResp {
+    required int32 ret = 1;
+    optional KnockoutBattleResult battleResult = 2;
+    optional bool isLoser = 3;
+}
+message ProveWayGetKnockoutReportReq {
+    required int32 activityId = 1;
+    required int32 battleId = 2;
+}
+message ProveWayGetKnockoutReportResp {
+    optional int32 ret = 1;
+    repeated ProveWayBattleResult battleResult = 2;
+}
+message ProveWayGetPlayerRestrainDataReq {
+    required int32 activityId = 1;
+    optional int32 competitionId = 2;
+    optional int32 realmsId = 3;
+}
+message ProveWayGetCurStateInfoReq {
+    required int32 activityId = 1;
+}
+message ProveWayGetCurStateInfoResp {
+    optional int32 ret = 1;
+    optional ProveWayPosterState state = 2;
+    optional int64 stateEndTime = 3;
+}
+message ProveWayCancelReportRedPointReq {
+    required int32 activityId = 1;
+    required int32 recordId = 2;
+}
+message ProveWayCancelReportRedPointResp {
+    required int32 ret = 1;
+    optional ProveWayBattleReportInfo reportInfo = 2;
+}
+message ProveWayPlayerInfo {
+    optional int32 challengeTimes = 1;
+    optional int32 buyChallengeTimes = 2;
+    optional int32 refreshTimes = 3;
+    repeated ProveWayTeamChallengeInfo challengeInfos = 4;
+    optional int64 refreshTime = 7;
+    optional int32 competitionArea = 8;
+    repeated int32 scoreRewardList = 9;
+    optional bool isGetScoreRankReward = 10;
+    optional int64 teamId = 11;
+    optional int32 scoreUpTimes = 12;
+}
+message ProveWayKnockoutPlayerInfo {
+    optional int32 competitionArea = 1;
+    optional bool isGetGuessCoin = 2;
+    optional bool isGetKnockoutRankReward = 3;
+}
+message ProveWayTeamChallengeInfo {
+    required ProveWayTeamBaseInfo targetTeamInfo = 1;
+    optional int32 winScore = 2;
+    optional int32 winTimes = 3;
+    optional int32 loseTimes = 4;
+}
+message ProveWayTeamInfo {
+    required ProveWayTeamBaseInfo baseInfo = 1;
+    optional int32 battleScore = 2;
+    optional int32 historyMaxScore = 3;
+    optional int32 scoreRank = 4;
+    optional int32 guessScore = 5;
+    optional int64 hotValue = 6;
+    repeated ProveWayRoundGroupInfo roundGroupInfoList = 7;
+    optional int32 winTimesRank = 8;
+}
+message ProveWayCompetitionGroupInfo {
+    optional int32 competitionId = 1;
+    optional int32 minLevel = 2;
+    optional int32 maxLevel = 3;
+    optional int32 standardLevel = 4;
+    repeated int32 groupNum = 5;
+}
+message ProveWayBattleResultMsg {
+    optional BattleRecordMsg allBattleRecord = 1;
+    optional bool challengeSuccess = 2;
+    optional string attackTeamName = 3;
+    repeated PlayerHeadAndNameMsg attackTeamMembers = 4;
+    optional string defendTeamName = 5;
+    repeated PlayerHeadAndNameMsg defendTeamMembers = 6;
+    optional int32 attackScore = 7;
+    optional int32 attackScoreChange = 8;
+    optional int32 targetScore = 9;
+    optional int32 targetScoreChange = 10;
+}
+message ProveWayBattleResultTeamInfo {
+    optional ProveWayTeamBaseInfo teamBaseInfo = 1;
+    optional int64 controlPlayerId = 4;
+    optional int32 defeatedNum = 6;
+    optional int32 reviveNum = 7;
+    optional int32 rank = 8;
+    optional int64 floorChangeProtectTime = 9;
+}
+message ProveWayBattleReportInfo {
+    optional int32 recordId = 1;
+    optional PlayerHeadAndNameMsg attackerPlayerMsg = 2;
+    optional BattleReportTeamMsg defenderTeamMsg = 3;
+    optional int32 scoreChange = 4;
+    optional int64 time = 5;
+    optional bool isWin = 6;
+    optional bool isRead = 7;
+    optional int32 score = 8;
+}
+message BattleReportTeamMsg {
+    required int64 teamId = 1;
+    optional string teamName = 2;
+    optional string fightValue = 3;
+    repeated PlayerHeadDataMsg memberHeadMsg = 4;
+}
+message KnockoutBattleResult {
+    optional int32 groupNum = 1;
+    repeated ProveWayRoundResult roundResult = 2;
+    optional int32 totalGroupNum = 3;
+}
+message ProveWayRoundResult {
+    optional int32 round = 1;
+    repeated ProveWayBattleResult battleResultList = 2;
+}
+message ProveWayBattleResult {
+    optional int32 battleId = 1;
+    optional TeamSimpleInfo leftTeamInfo = 2;
+    optional TeamSimpleInfo rightTeamInfo = 3;
+    optional bool isWin = 4;
+    optional bool isFinished = 5;
+    optional int32 leftWinTimes = 6;
+    optional int32 rightWinTimes = 7;
+}
+message TeamSimpleInfo {
+    optional PlayerHeadDataMsg headDataMsg = 1;
+    optional int64 heatValue = 2;
+    optional string teamName = 3;
+    optional string fightValue = 4;
+    optional int64 teamId = 5;
+    optional ProveWayTeamBaseInfo teamBaseInfo = 6;
+    optional int32 formationType = 7;
+}
+message ProveWayChampionTeam {
+    required int32 competitionId = 1;
+    repeated ProveWayChampionPlayerMsg playerList = 2;
+    optional string teamName = 3;
+    optional int64 teamId = 4;
+    optional int64 teamServerId = 5;
+    optional int64 captainId = 6;
+}
+message ProveWayChampionPlayerMsg {
+    optional int32 realsId = 1;
+    optional int64 playerId = 2;
+    optional string nickName = 3;
+    optional int64 serverId = 4;
+    optional int32 cloudId = 5;
+    optional int32 appearanceId = 6;
+    optional int32 headIcon = 7;
+    optional string fightValue = 8;
+    repeated int32 petList = 9;
+    repeated int32 petSoulShapeList = 10;
+    optional int32 title = 11;
+    repeated int32 petLinkageId = 12;
+}
+message TeamGuessInfoMsg {
+    optional ProveWayTeamBaseInfo TeamInfo = 1;
+    optional int32 myGuessCoin = 2;
+    optional int32 odds = 3;
+    optional int32 battleResult = 4;
+    optional int32 groupId = 5;
+    optional int32 roundId = 6;
+    optional int64 hotValue = 7;
+}
+message ProveWayPlayerRestrainInfoMsg {
+    repeated EquipmentDataMsg equipList = 1;
+    optional int32 preRealms = 2;
+    optional int32 afterRealms = 3;
+    repeated AttributeDataMsg preAttribute = 4;
+    repeated AttributeDataMsg afterAttribute = 5;
+}
+message ProveWayConfigSyncMsg {
+    repeated ProveWayTimeConfigTemp timeConfig = 1;
+    repeated ProveWayMatchConfigTemp matchConfig = 2;
+    repeated ProveWayDivisionConfigTemp divisionConfig = 3;
+    repeated ProveWaySettlementConfigTemp settlementConfig = 4;
+    repeated ProveWayTacticalConfigTemp tacticalConfig = 5;
+}
+message ProveWayTacticalConfigTemp {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required string name = 3;
+    required string effectParam = 4;
+}
+message ProveWayTimeConfigTemp {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 round = 3;
+    required int32 type = 4;
+    required int32 beginDay = 5;
+    required int32 beginTime = 6;
+    required int32 durationTime = 7;
+}
+message ProveWayMatchConfigTemp {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required string name = 3;
+    required int32 minLevel = 4;
+    required int32 maxLevel = 5;
+    required int32 standardLevel = 6;
+    required int32 minNum = 7;
+    required string groupNum = 8;
+    required string minNumList = 9;
+}
+message ProveWayDivisionConfigTemp {
+    required int32 activityId = 1;
+    required int32 divisionId = 2;
+    required int32 minScore = 3;
+    required string reward = 4;
+}
+message ProveWaySettlementConfigTemp {
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 minScore = 3;
+    required string reward = 4;
+}
+message ProveWayRoundGroupInfo {
+    optional int32 roundId = 1;
+    optional int32 groupId = 2;
+}
+/**队伍相关**/
+message ProveWayCreateTeamReq {
+    required int32 activityId = 1;
+    required string teamName = 2;
+}
+message ProveWayCreateTeamRsp {
+    required int32 ret = 1;
+    optional ProveWayTeamBaseInfo data = 2;
+}
+message ProveWayPositionData {
+    repeated ProveWaySinglePositionData datas = 2;
+    optional int64 controlPlayerId = 3;
+    optional int64 captainId = 4;
+    optional string teamName = 5;
+    optional int32 zoneId = 6;
+    optional int64 teamId = 7;
+    optional int32 winTimesRank = 8;
+}
+message ProveWaySinglePositionData {
+    optional int32 index = 1;
+    optional PlayerCharacterImageMsg playerImageData = 2;
+    optional int64 separationIndex = 3;
+    optional int64 hasChangeTimes = 4;
+}
+message ProveWayTeamDetailReq {
+    required int32 activityId = 1;
+    required int64 teamId = 2;
+}
+message ProveWayTeamDetailResp {
+    required int32 ret = 1;
+    optional ProveWayTeamBaseInfo teamInfo = 2;
+    optional int32 rank = 3 ;
+}
+message ProveWayTeamBaseInfo {
+    optional int64 teamId = 1;
+    optional string teamName = 2;
+    repeated PlayerCharacterImageMsg playerImageData = 3;
+    optional string fightValue = 4;
+    optional int32 zoneId = 5;
+    optional int64 captainId = 6;
+    optional int32 formationType = 7;
+    optional int64 serverId = 8;
+}
+message ProveWayGetTeamListReq {
+    required int32 activityId = 1;
+    required int32 type =2;
+}
+message ProveWayGetTeamListResp {
+    required int32 ret = 1;
+    repeated ProveWayOrganizeTeamInfo teamList = 2;
+}
+message ProveWayOrganizeTeamInfo {
+    optional int64 teamId = 1;
+    optional string teamName = 2;
+    optional PlayerHeadAndNameMsg leaderData = 3;
+    optional string fightValue = 4;
+    optional int32 zoneId = 5;
+    optional int32 playerCount = 6;
+    repeated PlayerHeadAndFightMsg memberList = 7;
+}
+message ProveWayQuitTeamRsp {
+    required int32 ret = 1;
+    optional int64 quitTime = 2;
+}
+message ProveWayApplyReq {
+    required int32 activityId = 1;
+    required int64 teamId = 2;
+    required bool join = 3;
+}
+message ProveWayApplyResp {
+    required int32 ret = 1;
+    repeated int64 applyTeamIdList = 7;
+}
+message ProveWayApplyJoinTeamAgreeReq {
+    required int32 activityId = 1;
+    optional int64 playerId = 2;
+    optional bool agree = 3;
+}
+message ProveWayApplyJoinTeamAgreeRsp {
+    required int32 ret = 1;
+    optional bool agree = 2;
+    optional ProveWayTeamBaseInfo positionaData = 3;
+}
+message ProveWaySendInviteReq {
+    required int32 activityId = 1;
+    optional int32 type = 2;
+    optional int64 playerId = 3;
+}
+message ProveWaySendInviteResp {
+    required int32 ret = 1;
+}
+message ProveWayAgreeInviteReq {
+    required int32 activityId = 1;
+    optional int64 teamId = 2;
+    required bool agree = 3;
+}
+message ProveWayAgreeInviteResp {
+    required int32 ret = 1;
+    optional ProveWayTeamBaseInfo data = 2;
+}
+message ProveWayGetApplyListResp {
+    required int32 ret = 1;
+    repeated ProveWayPlayerApplyData applyList = 2;
+}
+message ProveWayPlayerApplyData {
+    optional PlayerHeadAndFightMsg playerData = 1;
+    optional int64 applyTime = 2;
+}
+message ProveWayGetInviteListResp {
+    required int32 ret = 1;
+    repeated ProveWayOrganizeTeamInfo teamList = 2;
+}
+message ProveWaySearchTeamReq {
+    required int32 activityId = 1;
+    required int64 teamId = 2;
+}
+message ProveWaySearchTeamResp {
+    required int32 ret = 1;
+    optional ProveWayOrganizeTeamInfo teamInfo = 2;
+}
+message GetProveWayPositionReq {
+    required int32 activityId = 1;
+    required int64 teamId = 2;
+}
+message GetProveWayPositionResp {
+    required int32 ret = 1;
+    optional ProveWayPositionData data = 2;
+}
+message SetProveWayPositionIndexReq {
+    required int32 activityId = 1;
+    repeated ProveWayPositionIndexMsg datas = 3;
+}
+message ProveWayPositionIndexMsg {
+    optional int64 playerId = 1;
+    optional int32 index = 2;
+}
+message SetProveWayPositionIndexResp {
+    optional int32 ret = 1;
+}
+message SetProveWayCaptainReq {
+    required int32 activityId = 1;
+    required int64 playerId = 3;
+}
+message SetProveWayCaptainResp {
+    required int32 ret = 1;
+}
+message ProveWayTeamSync {
+    optional int32 type = 1;
+    optional int64 teamId = 2;
+    optional int64 controlPlayerId = 3;
+    optional string teamName = 4;
+    repeated ProveWayPositionIndexMsg datas = 5;
+    optional int32 TacticalId = 6;
+    optional ProveWayTeamBaseInfo teamBaseInfo = 7;
+}
+message ProveWayKickOutTeamReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message ProveWayKickOutTeamRsp {
+    required int32 ret = 1;
+    optional ProveWayTeamBaseInfo data = 2;
+}
+message ProveWayInviteDataResp {
+    required int32 ret = 1;
+    optional int64 unionNextInviteTime = 2;
+    optional int64 activityNextInviteTime = 3;
+}
+enum ProveWayTeamSyncType {
+    ProveWayKicked = 1;
+    ProveWayDissolve = 2;
+    ProveWayChange = 3;
+    ProveWayControl = 4;
+    ProveWayPositionChange = 5;
+    ProveWayTacticalChange = 6;
+}
+message ProveWayWorshipReq {
+    required int32 activityId = 1;
+}
+message ProveWayWorshipResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional int32 activityId = 3;
+}
+message ProveWayTeamRankEntityList {
+    repeated ProveWayTeamRankEntity dataList = 1;
+}
+message ProveWayTeamRankEntity {
+    required ProveWayTeamBaseInfo teamData = 1;
+    required int32 rank = 2;
+    required int32 score = 3;
+}
+message ProveWaySelectTacticalIdReq {
+    required int32 activityId = 1;
+    required int32 tacticalId = 2;
+}
+message ProveWaySelectTacticalIdResp {
+    optional int32 ret = 1;
+}
+message ProveWayGetAvatarDetailReq {
+    required int32 activityId = 1;
+    required int64 playerId = 2;
+}
+message ProveWayGetAvatarDetailResp {
+    required int32 ret = 1;
+    optional PlayerDetailDataMsg playerDetail = 2;
+    optional bool hasQualifying = 3;
+}
+message ProveWayInviteBackResp {
+    optional int32 activityId = 1;
+    optional int32 ret = 2;
+    optional int32 type = 3;
+    optional int64 teamId = 4;
+    optional int64 unionId = 5;
+    optional int32 zoneId = 6;
+    optional WorldMessageTempMsg msg = 7;
+}
+message ProveWayPullBattleBodyOtherServerReq {
+    repeated TeamMemberInfo targetMembers = 1;
+    required int64 sendServerId = 3;
+    required int64 sendPlayerId = 4;
+    required int32 activityId = 5;
+    required int64 targetTeamId = 6;
+    required int64 targetServerId = 7;
+    optional int32 competitionAreaId = 8;
+}
+message ProveWayPullBattleBodyOtherServerResp {
+    required int32 ret = 1;
+    repeated ProveWayBattleBodyMsg battleBodyMsgList = 2;
+    required int32 activityId = 3;
+    required int64 sendPlayerId = 4;
+    required int64 targetServerId = 5;
+    required int64 targetTeamId = 6;
+}
+message ProveWayBattleBodyMsg {
+    required PlayerBattleMainPbMsg playerBattleMainMsg = 1;
+    required string nickName = 2;
+}
+message ProveWayBattleAvatarLockClientAgent {
+    required int32 activityId = 1;
+    required int64 bodyId = 2;
+}
+message ProveWayCommonReq {
+    required int32 activityId = 1;
+}
+message ProveWayRedPointResp {
+    required int32 ret = 1;
+    optional string data = 2;
+}
+message ProveWayHeartBeatResp {
+    required int32 ret = 1;
+}
+message TeamMemberInfo {
+    required int64 playerId = 1;
+    required int64 serverId = 2;
+    optional int32 realmsId = 3;
+}

@@ -1,0 +1,483 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Rank";
+import "Battle";
+enum SpChampProtocol {
+  sp_champ_enter_activity = 219201;
+  sp_champ_refresh_match =  219202;
+  sp_champ_fight = 219203;
+  sp_champ_buy_fight_ticket = 219204;
+  sp_champ_get_battle_report = 219205;
+  sp_champ_get_video_replay = 219206;
+  sp_champ_receive_gear_reward = 219207;
+  sp_champ_lock_god_body = 219208;
+  sp_champ_get_lock_body = 219209;
+  sp_champ_get_promotion_info =  219210;
+  sp_champ_get_promotion_report = 219211;
+  sp_champ_change_order = 219217;
+  sp_champ_receive_base_guess_coin = 219218;
+  sp_champ_get_suppress_equipment = 219220;
+  sp_champ_sync_battle_result = 219221;
+  sp_champ_sync_guess_reward = 219225;
+  sp_champ_get_guess2 = 219226;
+  sp_champ_guess2 = 219227;
+  sp_champ_guess2_record = 219228;
+  sp_champ_red_point = 219230;
+  sp_champ_batch_lock_battle_bodies = 219280;
+}
+message SpChampConfigSyncMsg {
+  repeated SpChampTimeConfig timeConfig = 1;
+  repeated SpChampMatchConfig matchConfig = 2;
+  repeated SpChampDivisionConfig divisionConfig = 3;
+  repeated SpChampSettlementConfig settlementConfig = 4;
+}
+message SpChampTimeConfig {
+  required int32 activityId = 1;
+  required int32 timeId = 2;
+  required int32 type = 3;
+  required int32 session = 4;
+  required int32 beginDay = 5;
+  required int32 beginTime = 6;
+  required int32 durTime = 7;
+}
+message SpChampMatchConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required string name = 3;
+  required int32 level = 4;
+  required string minNum = 7;
+  required string groupNum = 8;
+  required string protectNum = 9;
+  required int32 minLv = 10;
+  required int32 maxLv = 11;
+}
+message SpChampDivisionConfig {
+  required int32 activityId = 1;
+  required int32 divisionId = 2;
+  required string divisionName = 3;
+  required int32 minScore = 4;
+  required string reward = 5;
+}
+message SpChampSettlementConfig {
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 minScore = 3;
+  required string reward = 4;
+}
+message SpChampPlayerMsg {
+  optional int32 zoneId = 1;
+  optional int32 dailyBuyCount = 2;
+  optional int32 dailyBattleCount = 3;
+  optional int32 dailyRefreshEnemyCount = 4;
+  optional string fightValue = 5;
+  optional int32 score = 6;
+  repeated int32 tierAwardInfoList = 8;
+  optional int32 myRank = 9;
+  repeated SpChampChallengePlayerInfo challengeInfo = 10;
+  optional int32 toSkyRank = 11;
+  optional int32 historyScore = 12;
+  optional string param = 13;
+}
+message SpChampChallengePlayerInfo{
+  optional PlayerAppearanceDataMsg targetInfo = 1;
+  optional int64 winScore = 2;
+}
+message SpChampRealsMatchMsg {
+  optional int32 id = 1;
+  optional int32 minBigRealmsType = 2;
+  optional int32 maxBigRealmsType = 3;
+  optional int32 gameFormat = 4;
+}
+message SpChampBattleResultMsg {
+  optional BattleRecordMsg allBattleRecord = 1;
+  optional bool challengeSuccess = 2;
+  optional PlayerHeadAndNameMsg targetPlayerInfo = 3;
+  optional int32 getScore = 4;
+  optional int32 targetScore = 5;
+  optional int32 targetScoreChange = 6;
+}
+message SpChampBattleReportInfo{
+  optional int64 recordId = 1;
+  optional SpChampPlayerLogInfoMsg leftPlayerInfo = 2;
+  optional SpChampPlayerLogInfoMsg rightPlayerInfo = 3;
+  optional int32 scoreChange = 4;
+  optional int64 time = 5;
+  repeated bool winList = 6;
+}
+message SpChampPlayerLogInfoMsg{
+  optional PlayerBaseDataMsg headInfo = 1;
+  optional int32 realmsId = 2;
+  optional int32 curScore = 3;
+  optional int32 scoreChange = 4;
+  optional bool isWin = 5;
+}
+message SpChampRoundResult{
+  optional int32 round = 1;
+  repeated SpChampMatchResult battleResultList = 2;
+}
+message SpChampMatchResult{
+  optional int64 matchId = 1;
+  optional SpChampToSkyPlayerInfo leftPlayerInfo = 2;
+  optional SpChampToSkyPlayerInfo rightPlayerInfo = 3;
+  optional int64 winnerId = 4;
+}
+message SpChampBattleResult{
+  optional int64 battleId = 1;
+  optional SpChampToSkyPlayerInfo leftPlayerInfo = 2;
+  optional SpChampToSkyPlayerInfo rightPlayerInfo = 3;
+  optional int64 winnerId = 4;
+}
+message SpChampRoundGroupInfo {
+  optional int32 roundId = 1;
+  optional int32 groupId = 2;
+  optional int32 zoneId = 3;
+}
+message SpChampToSkyPlayerInfo{
+  optional PlayerBaseDataMsg headInfo = 1;
+  optional int64 heatValue = 2;
+  optional string fightValue = 3;
+}
+message SpChampLockRoster{
+  optional int32 zoneId = 1;
+  optional SpChampRosterShowMsg toSkyPlayerNo1 = 2;
+}
+message SpChampRosterShowMsg{
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional int32 headIcon = 11;
+  optional string wxHeadUrl = 12;
+  optional PlayerHeadDataMsg headInfo = 13;
+  repeated int32 petSoulShapeList = 14;
+  repeated int32 petLinkageId = 15;
+  repeated int32 spiritLinkageId = 16;
+}
+message SpChampPlayerGuessInfoMsg{
+  optional SpChampToSkyPlayerInfo playerInfo = 1;
+  optional int32 guessCoin = 2;
+  optional int32 odds = 3;
+  optional int32 battleResult = 4;
+  optional int32 groupId = 5;
+  optional int32 roundId = 6;
+}
+message SpChampFinalsPlayerGuessInfoMsg{
+  optional int64 matchId = 1;
+  optional SpChampFinalsGuessInfoMsg leftPlayerInfo = 2;
+  optional SpChampFinalsGuessInfoMsg rightPlayerInfo = 3;
+  optional int64 winnerId = 4;
+  optional int32 session = 5;
+  optional int32 winType = 6;
+}
+message SpChampFinalsGuessInfoMsg {
+  optional SpChampToSkyPlayerInfo playerInfo = 1;
+  optional SpChampFinalsBattleGuessMsg totalBattle = 2;
+  repeated SpChampFinalsBattleGuessMsg singleBattle = 3;
+  optional int32 equipPetId = 4;
+  optional int32 petSoulShapeLv = 5;
+  optional int32 petLinkageId = 6;
+}
+message SpChampFinalsBattleGuessMsg {
+  optional SpChampWinTypeEnum winType = 1;
+  optional int32 odds = 2;
+  optional int32 guessCoin = 3;
+}
+message SpChampFinalGuessResultMsg{
+  optional SpChampToSkyPlayerInfo playerInfo = 1;
+  repeated SpChampFinalsGuessSingleResultMsg result = 2;
+}
+message SpChampFinalsGuessSingleResultMsg {
+  optional SpChampWinTypeEnum winType = 1;
+  optional int32 odds = 2;
+  optional int32 guessCoin = 3;
+  optional int32 guessResult = 4;
+}
+message SpChampGuessHistoryMsg {
+  optional SpChampWinTypeEnum winType = 1;
+  optional string nickName = 2;
+  optional int32 guessCoin = 3;
+  optional int32 guessResult = 4;
+  optional string reward = 5 ;
+  optional int32 session = 6;
+}
+enum SpChampWinTypeEnum {
+  SpChampAllWin = 0;
+  SpChampWin5 = 1;
+  SpChampWin6 = 2;
+  SpChampWin7 = 3;
+  SpChampWin8 = 4;
+  SpChampWin9 = 5;
+}
+enum SpChampRedPointEnum {
+  spChampRed_none = 0;
+  spChampRed_matchGame = 1;
+  spChampRed_unReport = 2;
+  spChampRed_worship = 3;
+  spChampRed_cheer = 4;
+  spChampRed_guessCoin = 5;
+  spChampRed_guess = 6;
+  spChampRed_achieveReward = 7;
+  spChampRed_store = 8;
+  spChampRed_matchRankReward = 9;
+  spChampRed_matchFinalReward = 10;
+}
+message SpChampCommonReq {
+  required int32 activityId = 1;
+}
+message SpChampEnterActivityResp {
+  optional int32 ret = 1;
+  optional int32 session = 2;
+  repeated SpChampRealsMatchMsg zoneMatchList = 3;
+  optional SpChampPlayerMsg playerInfo = 4;
+  optional RankMsg rankMsgTop = 5;
+  optional RankMsg toSkyRankMsgTop1 = 6;
+  repeated SpChampRoundGroupInfo roundGroupInfoList = 7;
+  optional bool isWorshiped = 8;
+  optional int64 heat = 9;
+  repeated int32 heatAwardInfoList = 10;
+  optional bool suppressed = 11;
+  optional int32 dailyPraiseCount = 12;
+  optional string params = 13;
+}
+message SpChampRefreshMatchReq {
+  required int32 activityId = 1;
+  optional bool useProp = 2;
+}
+message SpChampRefreshMatchResp{
+  required int32 ret = 1;
+  optional int32 dailyRefreshEnemyCount = 2;
+  repeated SpChampChallengePlayerInfo challengeInfo = 3;
+}
+message SpChampBattleReq{
+  required int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message SpChampBattleResp {
+  required int32 ret = 1;
+  repeated SpChampSeparationSimplyInfo mySeparationInfo = 2;
+  repeated SpChampSeparationSimplyInfo otherSeparationInfo = 3;
+  repeated BattleRecordMsg battleRecordMsg = 4;
+}
+message SpChampSeparationSimplyInfo {
+  optional string fightValue = 1;
+  optional int32 separationIndex = 2;
+}
+message SpChampBuyFightTicketReq{
+  required int32 activityId = 1;
+  optional int32 buyCount = 2;
+}
+message SpChampBuyFightTicketResp{
+  required int32 ret = 1;
+  optional int32 dailyBuyCount = 2;
+  optional int32 dailyBattleCount = 3;
+}
+message SpChampGetReportResp{
+  optional int32 ret = 1;
+  repeated SpChampBattleReportInfo reportList = 2;
+}
+message SpChampBattleReplayReq{
+  required int32 activityId = 1;
+  required int64 recordId = 2;
+  optional bool toSky = 3;
+}
+message SpChampBattleReplayResp{
+  required int32 ret = 1;
+  repeated SpChampSeparationSimplyInfo mySeparationInfo = 2;
+  repeated SpChampSeparationSimplyInfo otherSeparationInfo = 3;
+  repeated BattleRecordMsg battleRecordMsg = 4;
+  repeated bool winList = 5;
+}
+message SpChampReceiveTierRewardReq{
+  required int32 activityId = 1;
+  required int32 tier = 2;
+}
+message SpChampReceiveTierRewardResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated int32 tierAwardInfoList = 3;
+}
+message SpChampLockGodBodyDataReq {
+  required int32 activityId = 1;
+  optional int32 separationIdx = 2;
+}
+message SpChampLockGodBodyDataResp {
+  optional int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+}
+message SpChampGetGodBodyDataReq {
+  required int32 activityId = 1;
+  optional int32 bodyIndex = 2;
+  optional int64 targetId = 3;
+  optional int64 targetServerId = 4;
+}
+message SpChampGetGodBodyDataResp {
+  optional int32 ret = 1;
+  optional GodBodyDetailDataMsg data = 2;
+  repeated int32 battleIndex = 3;
+}
+message SpChampToSkyGetBattleResultReq{
+  required int32 activityId = 1;
+  optional int32 zoneId = 2;
+  optional int32 roundId = 3;
+  optional int32 groupId = 4;
+}
+message SpChampToSkyGetBattleResultResp{
+  required int32 ret = 1;
+  optional int32 groupId = 2;
+  repeated SpChampRoundResult roundResult = 3;
+  optional int32 totalGroupNum = 4;
+}
+message SpChampToSkyGetReportReq{
+  required int32 activityId = 1;
+  required int64 matchId = 2;
+}
+message SpChampToSkyGetReportResp{
+  optional int32 ret = 1;
+  repeated SpChampBattleResult battleResult = 2;
+}
+message SpChampBattleRankInfoReq {
+  optional int32 activityId = 1;
+  optional int32 zoneId = 2;
+}
+message SpChampBattleRankInfoResp {
+  required int32 ret = 1;
+  optional RankMsg rankInfo = 2;
+}
+message SpChampWorshipResp{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message SpChampToSkyRosterReq{
+  optional int32 activityId = 1;
+  optional int32 sessionNum = 2;
+}
+message SpChampToSkyRosterResp{
+  required int32 ret = 1;
+  optional int32 sessionNum = 2;
+  repeated SpChampLockRoster toSkyPlayerNo1 = 3;
+}
+message SpChampGetGuessInfoReq{
+  required int32 activityId = 1;
+  optional int32 roundId = 2;
+  optional int32 zoneId = 3;
+  optional int32 groupId = 4;
+}
+message SpChampGetGuessInfoResp{
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  repeated SpChampPlayerGuessInfoMsg playerGuessInfoArr = 3;
+  optional int32 curGroup = 4;
+  optional int32 maxGroup = 5;
+  optional bool hasGetGuessCoin = 6;
+}
+message SpChampToSkyGuessReq{
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+  required int32 guessCoinCost = 3;
+  required int32 roundId = 4;
+}
+message SpChampToSkyGuessResp{
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  optional SpChampPlayerGuessInfoMsg playerGuessInfoArr = 3;
+}
+message SpChampSetOrderReq {
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+  repeated int32 separationIndex = 3;
+}
+message SpChampSetOrderResp {
+  required int32 ret = 1;
+}
+message SpChampSuppressedReq{
+  required int32 activityId = 1;
+}
+message SpChampSuppressedResp {
+  required int32 ret = 1;
+  optional PlayerSuppressAttribute suppressAttr = 2;
+}
+message SpChampGetCheerDataReq {
+  required int32 activityId = 1;
+  required int32 zoneId = 2;
+}
+message SpChampGetCheerDataResp {
+  required int32 ret = 1;
+  optional RankMsg heatRank = 2;
+}
+message SpChampCheerReq {
+  required int32 activityId = 1;
+  required int64 playerId = 2;
+}
+message SpChampCheerResp {
+  optional int32 ret = 1;
+  optional int32 dailyPraiseCount = 2;
+  optional int64 targetId = 3;
+  optional int32 targetHot = 4;
+  optional int64 heat = 5;
+  optional string reward = 6;
+}
+message SpChampRecHeatRewardReq {
+  required int32 activityId = 1;
+  required int32 heatRewardId = 2;
+}
+message SpChampRecHeatRewardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated int32 heatAwardInfoList = 3;
+}
+message SpChampReceiveBaseGuessCoinResp {
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+}
+message SpChampFinalsGuessInfoResp {
+  optional int32 ret = 1;
+  repeated SpChampFinalsPlayerGuessInfoMsg msg = 2;
+  optional int32 guessCoin = 3;
+  optional bool hasGetGuessCoin = 4;
+}
+message SpChampFinalsGuessReq {
+  optional int32 activityId = 1;
+  optional int64 matchId = 2;
+  optional SpChampWinTypeEnum type = 3;
+  optional int64 targetPlayerId = 4;
+  optional int32 guessCoin = 5;
+}
+message SpChampFinalsGuessResp {
+  optional int32 ret = 1;
+  optional int32 guessCoin = 2;
+  optional SpChampFinalsPlayerGuessInfoMsg msg = 3;
+}
+message SpChampGuessHistoryResp {
+  optional int32 ret = 1;
+  repeated SpChampGuessHistoryMsg history = 2;
+}
+message SpChampRedPointReqMsg {
+  required int32 activityId = 1;
+}
+message SpChampRedPointRespMsg {
+  optional int32 ret = 1;
+  optional string data = 2;
+}
+message SpChampSyncBattleResult {
+  optional int32 activityId = 1;
+  optional string reward = 2;
+  optional int32 addScore = 3;
+  optional SpChampPlayerMsg playerInfo = 4;
+  optional PlayerBaseDataMsg targetPlayer = 5;
+  repeated bool winList = 6;
+}
+message SpChampSendGuessRewardMsg {
+  optional int32 activityId = 1;
+  optional string reward = 2;
+  repeated SpChampPlayerGuessInfoMsg guessResult = 3;
+  repeated SpChampFinalGuessResultMsg finalGuessResult = 4;
+}
+message SpChampSyncBattleInfo {
+  optional int32 activityId = 1;
+  optional int32 score = 2;
+}

@@ -1,0 +1,62 @@
+package com.yq.msg.CityMsg;
+import "Common";
+message WishPoolBuyerInfo{
+  optional string nickName = 1;
+  optional int64 buyTime = 2;
+}
+message WishPoolSyncBuyInfoMsg{
+  repeated WishPoolBuyerInfo buyerInfoList = 1;
+}
+message WishPoolEnterReq{
+  optional int32 activityId = 1;
+  optional bool heartBeat = 2;
+}
+message WishPoolEnterResp{
+  optional int32 ret = 1;
+  repeated WishPoolBuyerInfo buyerInfoList = 2;
+  optional string reward = 3;
+  optional WishPoolDrawInfoMsg drawInfo = 4;
+}
+message WishPoolDrawInfoMsg{
+  optional int32 totalRoundCount = 1;
+  optional int32 lastDrawRound = 2;
+  optional int64 drawInterval = 3;
+}
+message WishPoolSyncRewardMsg{
+  optional int32 activityId = 1;
+  optional string reward = 2;
+  repeated WishPoolWinnerInfo winnerList = 3;
+  optional bool isOpenReward = 4;
+  optional string totalReward = 5;
+}
+message WishPoolGetWinnerListReq{
+  optional int32 activityId = 1;
+}
+message WishPoolGetWinnerListResp{
+  optional int32 ret = 1;
+  repeated WishPoolWinnerInfoList winnerList = 2;
+}
+message WishPoolWinnerInfoList{
+  optional int32 round = 1;
+  repeated WishPoolWinnerInfo winnerList = 2;
+}
+message WishPoolWinnerInfo{
+  optional string nickName = 1;
+  optional string reward = 2;
+  optional int64 playerId = 3;
+}
+message WishPoolExitReq{
+  optional int32 activityId = 1;
+}
+message WishPoolExitResp{
+  optional int32 ret = 1;
+}
+message WishPoolRewardConfig{
+  optional int32 id = 1;
+  optional string reward = 2;
+  optional int32 quality = 3;
+  optional int32 num = 4;
+}
+message WishPoolRewardConfigMsg{
+  repeated WishPoolRewardConfig configList = 1;
+}

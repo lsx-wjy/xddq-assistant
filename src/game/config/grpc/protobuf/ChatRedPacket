@@ -1,0 +1,69 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+/* ==================== 实体包装 ======================== */
+/* ===================================================== */
+message ChatRedPacketMsg {
+  required string id = 1;
+  optional string classifyTag = 2;
+  optional int32 total = 3;
+  optional PlayerBaseDataMsg sender = 4;
+  repeated ChatRedPacketReceived received = 5;
+  optional int64 expiredTime = 6;
+  optional int64 luckyPlayer = 7;
+  optional string content = 8;
+  optional int32 type = 9;
+}
+message ChatRedPacketReceived {
+  optional PlayerBaseDataMsg player = 1;
+  optional string rewards = 2;
+}
+message ChatRedPacketSimpleMsg {
+  required string id = 1;
+  required int32 state = 2;
+  optional string content = 3;
+  optional string name = 4;
+  optional int64 expiredTime = 5;
+  optional int64 playerId = 6;
+  optional int32 shopId = 7;
+}
+message ChatRedPacketDrawCount {
+  required string content = 1;
+  required int32 num = 2;
+}
+/* ==================== 请求协议 ======================== */
+/* ===================================================== */
+message ChatRedPacketOpenReq {
+  required int32 type = 1;
+  required string classifyTag = 2;
+  required string id = 3;
+}
+message ChatRedPacketOpenResp {
+  required int32 ret = 1;
+  optional ChatRedPacketMsg data = 2;
+}
+message ChatRedPacketDrawReq {
+  required int32 type = 1;
+  required string classifyTag = 2;
+  required string id = 3;
+  required string content = 4;
+  optional int64 unionId = 5;
+}
+message ChatRedPacketDrawResp {
+  required int32 ret = 1;
+  optional ChatRedPacketMsg data = 2;
+  optional string rewards = 3;
+}
+message ChatRedPacketStateReq {
+  required int32 type = 1;
+  required string classifyTag = 2;
+}
+message ChatRedPacketStateSync {
+  required int32 ret = 1;
+  required int32 type = 2;
+  required string classifyTag = 3;
+  repeated ChatRedPacketSimpleMsg stateList = 4;
+  repeated ChatRedPacketDrawCount drawCount = 5;
+  repeated ChatRedPacketDrawCount dailyCount = 6;
+}
+/* ==================== 同步协议 ======================== */
+/* ===================================================== */

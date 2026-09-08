@@ -1,0 +1,289 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+import "PackagesBase";
+enum RoadDefendPb {
+  S_ROAD_DEFEND_ENTER_ACTIVITY = 230101;
+  S_ROAD_DEFEND_ENTER_GAME = 230102;
+  S_ROAD_DEFEND_GOODS_PLACE = 230103;
+  S_ROAD_DEFEND_GOODS_COMPOSE = 230104;
+  S_ROAD_DEFEND_PLATE_EXPAND = 230105;
+  S_ROAD_DEFEND_UPDATE_SHOPS_GOODS = 230106;
+  S_ROAD_DEFEND_UPDATE_GOODS_AD = 230107;
+  S_ROAD_DEFEND_SAVE_GOODS = 230108;
+  S_ROAD_DEFEND_FIGHT_RESULT = 230109;
+  S_ROAD_DEFEND_SELECT_BUFF = 230110;
+  S_ROAD_DEFEND_RANDOM_BUFF_LIST = 230111;
+  S_ROAD_DEFEND_START_BATTLE = 230112;
+  S_ROAD_DEFEND_USE_ITEM = 230115;
+  S_ROAD_DEFEND_RESTART = 230116;
+  CrossRoadDefendPb_Auto_Reward = 230113;
+  CrossRoadDefendPb_AskFor_Rank_Info = 230114;
+}
+message RoadDefendCharaConfig{
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string chara = 3;
+  optional string name = 4;
+  optional string desc = 5;
+  optional string skill = 6;
+  optional int32 type = 7;
+  optional string vfx = 8;
+  optional string weight = 9;
+  optional string grid = 10;
+  optional int32 targetType = 11;
+  optional string targetNum = 12;
+  optional string attack = 13;
+  optional string hp = 14;
+  optional string coldTime = 15;
+  optional string boomVfx = 16;
+  optional int32 totalFrame = 17;
+  optional int32 attackFrame = 18;
+  optional int32 distance = 19;
+}
+message RoadDefendStageConfig{
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional bool isBoss = 3;
+  optional int32 coin = 4;
+  optional string monsterList = 5;
+  optional string interval = 6;
+  optional int32  level = 7;
+}
+message RoadDefendBlankConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 weight = 3;
+  optional bool isAd = 4;
+  optional string grid = 5;
+}
+message RoadDefendBuffConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 icon = 3;
+  optional int32 type = 4;
+  optional int32 quality = 5;
+  optional int32 weight = 6;
+  optional int32 limit = 7;
+  optional int32 weapon = 8;
+  optional string param = 9;
+  optional string paramDesc = 10;
+  optional string desc = 11;
+  optional int32 front = 12;
+  optional string name = 13;
+}
+message RoadDefendMonsterConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 chara = 3;
+  optional bool isBoss = 4;
+  optional int32 attackEmp = 5;
+  optional int32 hpEmp = 6;
+  optional int32 speed = 7;
+  optional int32 damageReduction = 8;
+  optional int32 specialSkill = 9;
+  optional int32 expEmp = 10;
+  optional int32 scale = 11;
+  optional int32 coldDownTime = 12;
+  optional int32 attackType = 13;
+  optional int32 bullet = 14;
+  optional int32 totalFrame = 15;
+  optional int32 attackFrame = 16;
+  optional string name = 17;
+  optional string desc = 18;
+}
+message RoadDefendMonsterLevelConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 attackBase = 3;
+  optional int32 hpBase = 4;
+  optional int32 exp = 5;
+  optional int32 speedBase = 6;
+}
+message RoadDefendLevelConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 exp = 3;
+}
+message RoadDefendUniqueConfigMsg{
+  repeated RoadDefendCharaConfig charaConfig = 1;
+  repeated RoadDefendStageConfig stageConfig = 2;
+  repeated RoadDefendBlankConfig blankConfig = 3;
+  repeated RoadDefendBuffConfig buffConfig = 4;
+  repeated RoadDefendMonsterConfig monsterConfig = 5;
+  repeated RoadDefendMonsterLevelConfig monsterLevelConfig = 6;
+  repeated RoadDefendLevelConfig levelConfig = 7;
+}
+message RoadDefendGoodsItemInfo {
+  required int32 baseId = 1;
+  required int32 itemId = 2;
+  optional int32 lv = 3;
+  repeated RoadDefendGridData gridList = 4;
+}
+message RoadDefendEnergyUseInfo {
+  optional int32 useTime = 1;
+  optional int32 stopTime = 2;
+}
+message RoadDefendGridData {
+  optional int32 x = 1;
+  optional int32 y = 2;
+}
+message RoadDefendFightData {
+  optional int32 exp = 1;
+  repeated RoadDefendBuffData buffList = 2;
+  repeated RoadDefendCanSelectedBuffInfo canSelectedBuffList = 3;
+  optional int32 playerLv = 4;
+  optional bool hasLose = 5;
+  optional int32 energy = 6;
+}
+message RoadDefendBuffData{
+  optional int32 buffId = 1;
+  optional int32 lv = 2;
+}
+message RoadDefendCanSelectedBuffInfo{
+  optional int32 buffId = 1;
+  optional int32 belongLv = 2;
+}
+message RoadDefendPlayerData{
+  optional RoadDefendFightData fightData = 1;
+  optional int32 wave = 2;
+  repeated RoadDefendGoodsItemInfo plateGoods = 3;
+  repeated RoadDefendGoodsItemInfo shopGoods = 4;
+  repeated RoadDefendGoodsItemInfo saveGood = 5;
+  optional int32 silverCoins = 6;
+  repeated RoadDefendGridData plateGridList = 7;
+  repeated int32 standItemIdList = 8;
+  optional int32 curFreePlayTimes = 9;
+}
+message RoadDefendEnterReq {
+  required int32 activityId = 1;
+}
+message RoadDefendEnterResp {
+  required int32 ret = 1;
+  optional int32 curFreePlayTimes = 2;
+}
+message RoadDefendEnterGameReq {
+  required int32 activityId = 1;
+}
+message RoadDefendEnterGameResp {
+  required int32 ret = 1;
+  optional RoadDefendPlayerData playerData = 2;
+}
+message RoadDefendGoodsPlaceReq {
+  required int32 activityId = 1;
+  optional int32 areaType = 2;
+  optional RoadDefendGoodsItemInfo newGoodInfo = 3;
+}
+message RoadDefendGoodsPlaceResp {
+  required int32 ret = 1;
+  repeated RoadDefendGoodsItemInfo plateGoods = 2;
+  repeated RoadDefendGoodsItemInfo shopGoods = 3;
+  repeated int32 standItemIdList = 4;
+}
+message RoadDefendGoodsComposeReq {
+  required int32 activityId = 1;
+  required int32 baseId1 = 2;
+  required int32 baseId2 = 3;
+}
+message RoadDefendGoodsComposeResp {
+  required int32 ret = 1;
+  repeated RoadDefendGoodsItemInfo plateGoods = 2;
+  repeated RoadDefendGoodsItemInfo shopGoods = 3;
+  repeated RoadDefendGoodsItemInfo saveGood = 4;
+}
+message RoadDefendPlateExpandReq {
+  required int32 activityId = 1;
+  repeated RoadDefendGridData newPlateGridList = 2;
+  repeated RoadDefendGoodsItemInfo newPlateGoods = 3;
+  repeated RoadDefendGoodsItemInfo goodsList = 4;
+}
+message RoadDefendPlateExpandResp {
+  required int32 ret = 1;
+  repeated RoadDefendGoodsItemInfo shopGoods = 2;
+  repeated RoadDefendGridData newPlateGridList = 3;
+}
+message RoadDefendUpdateShopsGoodsReq {
+  required int32 activityId = 1;
+}
+message RoadDefendUpdateShopsGoodsResp {
+  required int32 ret = 1;
+  repeated RoadDefendGoodsItemInfo shopGoods = 2;
+  optional int32 silverCoins = 3;
+}
+message RoadDefendUpdateGoodsAdReq {
+  required int32 activityId = 1;
+  required int32 baseId = 2;
+  optional bool isUseADTime = 3;
+}
+message RoadDefendUpdateGoodsAdResp {
+  required int32 ret = 1;
+}
+message RoadDefendSaveGoodsReq {
+  required int32 activityId = 1;
+  required int32 baseId = 2;
+  required int32 seatIndex = 3;
+}
+message RoadDefendSaveGoodsResp {
+  required int32 ret = 1;
+  repeated RoadDefendGoodsItemInfo plateGoods = 3;
+  repeated RoadDefendGoodsItemInfo shopGoods = 4;
+  repeated RoadDefendGoodsItemInfo saveGood = 5;
+  repeated int32 standItemIdList = 6;
+}
+message RoadDefendFightResultReq {
+  required int32 activityId = 1;
+  optional bool win = 2;
+  optional int32 energy = 3;
+  repeated int32 buffIdList = 4;
+  optional int32 lv = 5;
+  optional int32 exp = 6;
+  optional int32 silverCoins = 7;
+  optional int32 killNum = 8;
+  repeated RoadDefendEnergyUseInfo energyUseInfoList = 9;
+  repeated int32 useEnergyItemTimeList = 10;
+}
+message RoadDefendFightResultResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  optional RoadDefendPlayerData playerData = 3;
+  optional bool win = 4;
+}
+message RoadDefendSelectBuffReq {
+  required int32 activityId = 1;
+  required int32 buffId = 2;
+}
+message RoadDefendSelectBuffResp {
+  required int32 ret = 1;
+  repeated int32 buffIdList = 2;
+}
+message RoadDefendRandomBuffListReq {
+  required int32 activityId = 1;
+  required int32 type = 2;
+  optional bool isUseADTime = 3;
+}
+message RoadDefendRandomBuffListResp {
+  required int32 ret = 1;
+  repeated int32 buffPool = 2;
+}
+message RoadDefendStartBattleReq {
+  required int32 activityId = 1;
+}
+message RoadDefendStartBattleResp {
+  required int32 ret = 1;
+  optional int32 randomSeed= 2;
+}
+message RoadDefendUseItemReq {
+  required int32 activityId = 1;
+  required int32 itemId = 2;
+  optional string param = 3;
+}
+message RoadDefendUseItemResp {
+  required int32 ret = 1;
+  optional RoadDefendPlayerData playerData = 2;
+}
+message RoadDefendRestartReq {
+  required int32 activityId = 1;
+}
+message RoadDefendRestartResp {
+  required int32 ret = 1;
+  optional RoadDefendPlayerData playerData = 2;
+}

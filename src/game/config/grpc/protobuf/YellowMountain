@@ -1,0 +1,43 @@
+package com.yq.msg.CityMsg;
+import "Common";
+message YellowMountainConfigMsg{
+    repeated YellowMountainStageConfig stageConfig = 1;
+    repeated YellowMountainEventConfig eventConfig = 2;
+}
+message YellowMountainStageConfig{
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 floor = 3;
+    required int32 unlock = 4;
+    required string reward = 5;
+    required string param = 6;
+    required string block = 7;
+    required string boss = 8;
+    required string eventBonus = 9;
+    required string eventExtra = 10;
+    required int32 attackUp = 11;
+}
+message YellowMountainEventConfig{
+    required int32 activityId = 1;
+    required int32 id = 2;
+    required int32 type = 3;
+    required string param = 4;
+    required string name = 5;
+    required string desc = 6;
+}
+message YellowMountainPassStageReq{
+    required int32 activityId = 1;
+    required int32 stageId = 2;
+}
+message YellowMountainPassStageResp{
+    optional int32 ret = 1;
+    optional string reward = 2;
+}
+message YellowMountainHandbookGetReq{
+    required int32 activityId = 1;
+    required int32 conditionId = 2;
+}
+message YellowMountainHandbookGetResp{
+    optional int32 ret = 1;
+    optional string reward = 2;
+}

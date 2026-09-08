@@ -1,15 +1,15 @@
 package com.yq.msg.CityMsg;
 message EquipmentDataMsg{
-    required int64 id = 1;                                  
-    required int32 equipmentId = 2;                         
-    required int32 level = 3;                               
-    required int32 quality = 4;                             
-    repeated AttributeDataMsg attributeList = 5;            
-    required int32 src = 6;                                 
+    required int64 id = 1;
+    required int32 equipmentId = 2;
+    required int32 level = 3;
+    required int32 quality = 4;
+    repeated AttributeDataMsg attributeList = 5;
+    required int32 src = 6;
 }
 message AttributeDataMsg{
     required int32 type = 1;
-    required int64 value = 2;
+    required string value = 2;
 }
 message PlayerEquipCloudDataMsg {
     optional int32 equipCloudId = 1;
@@ -22,16 +22,95 @@ message AwardInfoList{
     repeated AwardInfo awardInfoList = 1;
 }
 message AwardInfo{
-    optional int32 propId = 1;              
-    optional string num = 2;                
-    optional string extra = 3;              
+    optional int32 propId = 1;
+    optional string num = 2;
+    optional string extra = 3;
 }
 message SkillMsg {
-    required int32 skillId = 1; 
-    required int32 lv = 2; 
+    required int32 skillId = 1;
+    required int32 lv = 2;
 }
 message EquipUniverseSkillMsg {
     required int32 index = 1;
-    required int32 skillId = 2; 
+    required int32 skillId = 2;
     optional int32 skillLv = 3;
 }
+message UnionServerIdData {
+    optional int64 unionId = 1;
+    optional int64 serverId = 2;
+}
+message UnionNameServerIdData {
+    optional string unionName = 1;
+    optional int64 serverId = 2;
+}
+message PlayerSuppressAttribute {
+  repeated EquipmentDataMsg equipList = 1;
+  optional int32 preRealms = 2;
+  optional int32 afterRealms = 3;
+  repeated AttributeDataMsg preAttribute = 4;
+  repeated AttributeDataMsg afterAttribute = 5;
+}
+message CommonTopicConfig{
+  required int32 activityId = 1;
+  required int32 id = 2;
+  required int32 type = 3;
+  required string keyReward = 4;
+  required int32 isNew = 5;
+  optional int32 systemId = 6;
+}
+message PetKernelInfo {
+  required int32 kernelId = 1;
+  required int32 kernelWakeLv = 2;
+  required int32 petId = 3;
+}
+message TreasureAuctionAttributeData{
+    required int32 quality = 1;
+    optional AttributeDataMsg attribute = 2;
+    required int32 isGood = 3;
+    required int32 configId = 4;
+}
+message TreasureAuctionItemData {
+    required int32 id = 1;
+    required int32 treasureId = 2;
+    required int32 quality = 3;
+    repeated int32 identifyList = 4;
+    repeated TreasureAuctionAttributeData attributeList = 5;
+    required string score = 6;
+    required bool isCanSell = 7;
+    required int64 lastEquipTime = 8;
+    required int64 beginSellTime = 9;
+    required int32 price = 10;
+    required bool lock = 11;
+    required string createNickName = 12;
+    required int32 priceAdd = 13;
+    required int64 lastTransactionTime = 14;
+    optional int32 collectNum = 15;
+    repeated int32 skillList = 16;
+    optional int32 masterItemId = 17;
+}
+message ChaosLawEntryData {
+    required int32 entryQuality = 1;
+    required int32 attrType = 2;
+    required string attrValue = 3;
+    required bool identified = 4;
+}
+message ChaosLawItemData {
+    required int32 id = 1;
+    required int32 suitType = 2;
+    required int32 appearance = 3;
+    required int32 quality = 4;
+    repeated ChaosLawEntryData entries = 5;
+    required int32 totalIdentifySlots = 6;
+    required int32 identifiedCount = 7;
+    required string score = 8;
+    required bool canTrade = 9;
+    required bool locked = 10;
+    required bool isNew = 11;
+    required string createNickName = 12;
+    required int64 sellTime = 13;
+    required int32 price = 14;
+    optional int32 lawType = 15;
+    optional int32 collectNum = 16;
+    optional int64 lastEquipTime = 17;
+    optional int64 lastTransactionTime = 18;
+  }

@@ -1,0 +1,586 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "PackagesBase";
+import "ActivityBase";
+import "WatchPlayer";
+import "Union";
+import "Rank";
+enum AskDingProtocols {
+  ask_ding_union_apply_info = 205901;
+  ask_ding_enter_activity = 205903;
+  ask_ding_enter_room = 205904;
+  ask_ding_leave_room = 205905;
+  ask_ding_move = 205906;
+  ask_ding_attack = 205907;
+  ask_ding_get_box_reward = 205908;
+  ask_ding_sync_get_place = 205911;
+  ask_ding_sync_attacked = 205913;
+  ask_ding_sync_score = 205914;
+  ask_ding_sync_place = 205915;
+  ask_ding_sync_notice = 205916;
+  ask_ding_sync_beat = 205918;
+  ask_ding_sync_seize = 205919;
+  ask_ding_sync_enter_room = 205920;
+  ask_ding_sync_leave_room = 205921;
+  ask_ding_sync_blowout_msg  = 205922;
+  ask_ding_settle_result_sync = 205923;
+  ask_ding_union_info_list = 205924;
+  ask_ding_union_member_list  = 205925;
+  ask_ding_break_game_list = 205926;
+  ask_ding_break_game_list_all = 205927;
+  ask_ding_asking_game_settle_info = 205928;
+  ask_ding_final_game_list_all = 205929;
+  ask_ding_worship_info = 205930;
+  ask_ding_worship = 205931;
+  ask_ding_final_game_info = 205932;
+  ask_ding_get_champion_history = 205933;
+  ask_ding_break_through_score_list = 205934;
+  ask_ding_get_champion_info = 205935;
+  ask_ding_get_red_point = 205936;
+  ask_ding_final_game_end_sync = 205937;
+  ask_ding_sync_player_join = 205938 ;
+  ask_ding_watch_game = 205939;
+  ask_ding_union_apply = 205971;
+  ask_ding_broadcast_agent = 205972;
+  ask_ding_worship_back = 205973;
+  ask_ding_cross_to_game_send_rank_reward = 205974;
+  ask_ding_cross_to_game_get_box_reward = 205975;
+  ask_ding_add_new_champion_history = 205976;
+  ask_ding_query_champion_history = 205977;
+  ask_ding_lock_member_position = 205978;
+  ask_ding_get_red_point_back = 205979;
+  ask_ding_get_sync_players_join_agent = 205980;
+  ask_ding_watch_game_sync_agent = 205981;
+}
+/*message AskDingActivityDataTemp {
+  required int32 activityId = 1;
+  required int32 unionId = 2;
+  optional int32 endNum = 4;
+}*/
+message AskDingUserDataTemp {
+  required int32 activityId = 1;
+  required AskDingUserPropertyTemp property = 2;
+  required int32 placeId = 4;
+  required int64 transferTime = 5;
+  required int64 attackTime = 6;
+  required int64 reviveTime = 7;
+  required int64 unionId = 8;
+  optional int32 energy = 9;
+  optional int32 powerRank = 10;
+  optional int32 killCount = 11;
+}
+message AskDingOtherUserTemp {
+  required int64 unionId = 1;
+  required AskDingPlayerSimpleData playerData = 2;
+  required AskDingUserPropertyTemp property = 3;
+  required int32 placeId = 4;
+  required AskDingPositionTemp position = 5;
+  required int64 reviveTime = 6;
+  optional int32 energy = 7;
+  optional int32 powerRank = 8;
+  optional int32 killCount = 9;
+}
+message AskDingPlayerSimpleData {
+  optional int64 playerId = 1;
+  optional int32 headIcon = 2;
+  optional string nickName = 3;
+  optional string wxHeadUrl = 4;
+  optional int64 serverId = 5;
+  optional int32 equipCloudId = 6;
+}
+message AskDingPlayerResultData {
+  optional int64 playerId = 1;
+  optional string nickName = 2;
+  optional int64 serverId = 3;
+  optional int32 appearanceId = 4;
+}
+message AskDingSimpleUserTemp {
+  required int64 playerId = 1;
+  required AskDingPositionTemp position = 2;
+}
+message AskDingUserPropertyTemp {
+  required string totalHp = 1;
+  required string hp = 2;
+  required string fightValue = 3;
+  required int32 realmsId = 4;
+  required int32 attackSpeed = 5;
+}
+message AskDingPositionTemp {
+  required string x = 1;
+  required string y = 2;
+  required string dirX = 3;
+  required string dirY = 4;
+  required int64 time = 5;
+}
+message AskDingPlaceDataTemp {
+  required int32 placeId = 1;
+  repeated AskDingOtherUserTemp user = 2;
+  required int64 seizeTime = 3;
+  required int64 unionId = 4;
+}
+message AskDingPlaceSeizeInfoTemp {
+  required int64 unionId = 1;
+  required int32 seizeTime = 2;
+  required int32 num = 3;
+}
+message AskDingUnionScoreSyncTemp {
+  required int64 unionId = 1;
+  required int64 score = 2;
+}
+message AskDingPlaceSimpleTemp {
+  required int32 placeId = 1;
+  required int64 seizeUnionId = 2;
+  repeated AskDingPlaceUnionMemberMsg unionMember = 3;
+}
+message AskDingPlaceUnionMemberMsg {
+  required int64 unionId = 1;
+  required int32 num = 2;
+}
+message AskDingBattleScoreUserTemp {
+  required int64 playerId = 1;
+  required PlayerCharacterImageMsg user = 2;
+  required AskDingBattleScoreTemp score = 3;
+  required int32 unionId = 4;
+}
+message AskDingBattleScoreTemp {
+  required int32 kill = 1;
+  required int32 seize = 2;
+}
+message AskDingUnionNameListReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingUnionNameListRespMsg {
+  required int32 ret = 1;
+  repeated string unionName = 2;
+}
+message AskDingApplicationReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingApplicationRespMsg {
+  required int32 ret = 1;
+  optional int32 activityId = 2;
+  optional bool joined = 3;
+  optional int32 applyRank = 4;
+  optional bool battleEnd = 5;
+  optional bool haveGaming = 6;
+}
+message AskDingAbilityRankNumReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingAbilityRankNumRespMsg {
+  required int32 ret = 1;
+  optional int32 myRank = 2;
+}
+message AskDingEnterActivityReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingEnterActivityRespMsg {
+  required int32 ret = 1;
+  optional AskDingUserDataTemp userData = 2;
+  optional AskDingPlaceDataTemp placeData = 4;
+  repeated AskDingUnionScoreSyncTemp score = 5;
+  optional AskDingNoticeListMsg noticeList = 6;
+  optional int32 minLv = 7;
+  optional int32 maxLv = 8;
+  repeated UnionBirthplaceMsg birthplaces = 9 ;
+  optional AskDingBlowOutMsg blowoutMsg = 10;
+}
+message AskDingBlowOutMsg {
+  optional int64 portendTime = 1;
+  optional int64 beginTime = 2;
+  optional int64 endTime = 3;
+  repeated int32 placeList = 4;
+}
+message UnionBirthplaceMsg {
+  optional int64 unionId = 1;
+  optional int32 placeId = 2;
+}
+message AskDingEnterPlaceReqMsg {
+  required int32 activityId = 1;
+  required int32 placeId = 2;
+}
+message AskDingEnterPlaceRespMsg {
+  required int32 ret = 1;
+  optional AskDingPlaceDataTemp placeData = 2;
+  optional int32 placeId = 3;
+  optional int64 transferTime = 4;
+}
+message AskDingLeavePlaceReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingLeavePlaceRespMsg {
+  required int32 ret = 1;
+}
+message AskDingMoveReqMsg {
+  required int32 activityId = 1;
+  required AskDingPositionTemp position = 2;
+}
+message AskDingMoveRespMsg {
+  required int32 ret = 1;
+}
+message AskDingAttackReqMsg {
+  required int32 activityId = 1;
+  required int64 attackPlayerId = 2;
+}
+message AskDingAttackRespMsg {
+  required int32 ret = 1;
+  optional int64 attackTime = 2;
+  optional AskDingAttackedTemp attack = 3;
+  optional int64 attackScore = 4;
+  optional AskDingBattleScoreResultTemp scoreResult = 6;
+}
+message AskDingGetBoxRewardReq {
+  required int32 activityId = 1;
+  required int32 timeId = 2;
+}
+message AskDingGetBoxRewardRsp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message AskDingGetPlaceInfoReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingGetPlaceInfoRespMsg {
+  required int32 ret = 1;
+  repeated AskDingPlaceSimpleTemp place = 2;
+}
+message AskDingUnionRankList {
+  repeated AskDingUnionRankMsg rankTemp = 1;
+}
+message AskDingUnionRankMsg {
+  optional OtherUnionData baseData = 1;
+  required string value = 2;
+  optional int32 rank = 3;
+}
+message AskDingGetUnionUserListReqMsg {
+  required int32 activityId = 1;
+  required int64 serverId = 2;
+  required int64 unionId = 3;
+}
+message AskDingGetUnionUserListRespMsg {
+  required int32 ret = 1;
+  repeated AskDingUnionMemberScore unionMemberScoreList = 2;
+}
+message AskDingUnionMemberScore{
+  optional int64 playerId = 1;
+  optional string memberName = 2;
+  optional int32 score = 3;
+}
+message AskDingAttackedSyncMsg {
+  repeated AskDingAttackedTemp attack = 1;
+}
+message AskDingAttackedTemp {
+  optional int64 attackPlayerId = 1;
+  optional int64 attackedPlayerId = 2;
+  optional bool isShun = 3;
+  optional string attackHp = 4;
+  optional string attackedHp = 5;
+  repeated AskDingOneAttackedTemp atkTempList = 6;
+  optional int32 attackEnergy = 7;
+  optional int32 killCount = 8;
+}
+message AskDingOneAttackedTemp{
+  optional string damage = 1;
+  optional string suckHp = 2;
+  optional bool isDodge = 3;
+  optional bool isCrit = 4;
+  optional string backDamge = 5;
+}
+message AskDingUnionScoreSyncMsg {
+  repeated AskDingUnionScoreSyncTemp unionScore = 1;
+}
+message AskDingPlaceSyncMsg {
+  repeated AskDingSimpleUserTemp user = 1;
+}
+message AskDingNoticeListMsg {
+  repeated AskDingNoticeTemp notice = 1;
+  repeated AskDingNoticeTemp unionNotice = 2;
+}
+message AskDingNoticeTemp {
+  optional AskDingNoticeUserTemp user1 = 1;
+  optional AskDingNoticeUserTemp user2 = 2;
+  optional int64 unionId = 3;
+  optional int32 noticeType = 4;
+  optional string content = 5;
+  optional int64 noticeTime = 6;
+  optional int32 isRoll = 7;
+}
+message AskDingNoticeUserTemp {
+  optional string nickName = 1;
+  optional int32 realmsId  = 2;
+  optional PlayerHeadDataMsg headInfo = 3;
+}
+message AskDingNoticeSyncMsg {
+  optional AskDingNoticeTemp notice = 1;
+  optional AskDingNoticeTemp unionNotice = 2;
+}
+message AskDingAttackedUserSyncMsg {
+  required AskDingOtherUserTemp attackUserData = 1;
+  optional AskDingAttackedTemp attack = 2;
+  optional int64 attackTime = 3;
+  required AskDingUserDataTemp userData = 4;
+  optional AskDingBattleScoreResultTemp scoreResult = 5;
+}
+message AskDingBattleScoreResultTemp {
+  optional AskDingBattleScoreTemp battleScore = 1;
+  optional AskDingBattleScoreTemp TotalBattleScore = 2;
+}
+message AskDingPlaceSeizeSyncMsg {
+  required int32 placeId = 1;
+  repeated AskDingPlaceSeizeInfoTemp seize = 2;
+  required int64 seizeUnionId = 4;
+  required int64 seizeTime = 5;
+  required int64 unionId = 6;
+}
+message AskDingEnterPlaceSync {
+  required AskDingOtherUserTemp user = 1;
+}
+message AskDingLeavePlaceSync {
+  required int64 playerId = 1;
+  required int32 type = 2;
+}
+message AskDingEndDataSyncMsg {
+  required AskDingEndDataMsg endData = 1;
+}
+message AskDingEndDataMsg {
+  repeated AskDingUnionScoreMsg unionResult = 1;
+  optional int32 timeId = 2;
+  optional AskDingBestPerformancePlayerMsg totalKillBestInfo = 3;
+  optional AskDingBestPerformancePlayerMsg totalSeizeBestInfo = 4;
+  optional AskDingBestPerformancePlayerMsg unionKillBestInfo = 5;
+  optional AskDingBestPerformancePlayerMsg unionSeizeBestInfo = 6;
+  repeated AskDingPlayerRoundRecordMsg memberRecord = 7;
+  optional int64 gameId = 8;
+}
+message AskDingPlayerRoundRecordMsg {
+  optional string name = 1;
+  optional int32 killCount = 2;
+  optional int32 seizeCount = 3;
+}
+message AskDingBestPerformancePlayerMsg {
+  optional AskDingPlayerResultData playerData = 1;
+  optional int64 unionId = 2;
+  optional int32 count = 3;
+}
+message AskDingUnionScoreMsg {
+  optional UnionBaseData unionInfo = 1;
+  optional int64 score = 2;
+  optional int32 rank = 3;
+  optional int64 totalScore = 4;
+  optional bool upGrade = 5;
+  optional int32 placeId = 6;
+}
+enum AskDingNoticeType  {
+  AskDingNotice1PKill = 0;
+  AskDingNotice1RKill = 1;
+  AskDingEndKill = 2;
+  AskDingNoticeSeizePlace = 3;
+  AskDingNoticeSeizeTime = 4;
+  AskDingLosePlace = 5;
+}
+message AskDingBreakGameListReq {
+  required int32 activityId = 1;
+}
+message AskDingBreakGameListResp {
+  optional int32 ret = 1;
+  repeated AskDingGameMsg gameList = 3;
+  optional int32 myRank = 4;
+  optional int64 score = 5;
+  repeated int32 receiveRewardTimes = 6;
+  repeated int32 joinedTimes = 7;
+}
+message AskDingGameMsg {
+  optional int64 gameId = 1;
+  optional int32 timeId = 2;
+  repeated AskDingGameUnionMsg unionList = 3;
+  optional bool isEnd = 4;
+}
+message AskDingGameUnionMsg {
+  optional UnionBaseData unionData = 1;
+  optional int64 rank = 2;
+  optional string power = 3;
+  optional int64 betHot = 4;
+  optional int32 birthPlaceId = 5;
+}
+message AskDingBreakGameListAllReq {
+  required int32 activityId = 1;
+  required int32 timeId = 2;
+}
+message AskDingBreakGameListAllResp {
+  optional int32 ret = 1;
+  optional int32 timeId = 2;
+  repeated AskDingGameSimpleMsg gameList = 3;
+}
+message AskDingGameSimpleMsg {
+  repeated AskDingUnionNameMsg unionNameList = 1;
+}
+message AskDingUnionNameMsg {
+  optional int64 serverId = 1;
+  optional string unionName = 2;
+  optional int64 unionId = 3;
+}
+message AskDingGetGuessRewardReq{
+  required int32 activityId = 1;
+  required int32 timeId = 2;
+}
+message AskDingGetGuessRewardRsp{
+  optional int32 ret = 1;
+  optional int32 timeId = 2;
+  repeated AskDingGameMsg gameList = 3;
+  optional string reward = 4;
+}
+message AskDingBetUnionInfoList {
+  repeated AskDingBetUnionInfo infoList = 1;
+}
+message AskDingBetUnionInfo {
+  optional AskDingUnionRankMsg rankInfo = 1;
+  optional int32 selectedCount = 2;
+}
+message AskDingGameSettleInfoReq {
+  required int32 activityId = 1;
+  required int64 gameId = 2;
+}
+message AskDingGameSettleInfoResp {
+  optional int32 ret = 1;
+  optional int64 gameId = 2;
+  optional AskDingEndDataMsg endData = 3;
+}
+message AskDingFinalGameListAllReq {
+  required int32 activityId = 1;
+  required int32 timeId = 2;
+  required int32 groupId = 3;
+}
+message AskDingFinalGameListAllResp {
+  optional int32 ret = 1;
+  optional int32 timeId = 2;
+  optional int32 groupId = 3;
+  optional AskDingGameMsg game = 4;
+  optional bool receiveReward = 6;
+  optional bool joined = 7;
+}
+message AskDingWorshipInfoReq {
+  required int32 activityId = 1;
+}
+message AskDingWorshipInfoResp {
+  optional int32 ret = 1;
+  optional bool canWorship = 2;
+  optional  AskDingWorshipPlayerMsg worshipPlayer = 3;
+  repeated UnionBaseData top3Union = 4;
+}
+message AskDingWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional PlayerHeadDataMsg headInfo = 9;
+  repeated int32 petSoulShapeList = 10;
+  optional int32 titleId = 11;
+  repeated int32 petLinkageId = 12;
+  repeated int32 spiritLinkageId = 13;
+}
+message AskDingWorshipReq{
+  required int32 activityId = 1;
+}
+message AskDingWorshipRsp{
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message AskDingSyncBlowoutMsg {
+  optional int64 gameId = 1;
+  optional AskDingBlowOutMsg syncInfo = 2;
+}
+message AskDingFinalGameInfoReq {
+  required int32 activityId = 1;
+}
+message AskDingFinalGameInfoResp {
+  required int32 ret = 1;
+  optional bool joined = 2;
+  optional int32 timeId = 3;
+  optional int32 groupId = 4;
+}
+message AskDingChampionHistoryMsg {
+  optional int64 unionId = 1;
+  optional int64 serverId = 2;
+  optional string unionName = 3;
+  optional int32 activityId = 4;
+  optional int64 winTime = 5;
+  optional int64 activityTime = 6;
+  optional int32 flag = 7;
+  optional int64 exp = 8;
+}
+message AskDingChampionHistoryReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingChampionHistoryRespMsg {
+  optional int32 ret = 1;
+  repeated AskDingChampionHistoryMsg histories = 2;
+}
+message AskDingBreakRoundScoreListReqMsg{
+  required int32 activityId = 1;
+  required int64 unionId = 2;
+}
+message AskDingBreakRoundScoreListRespMsg{
+  required int32 ret = 1;
+  optional int64 unionId = 2;
+  optional string fightValue = 3;
+  repeated AskDingRoundScoreMsg scoreList = 4;
+}
+message AskDingRoundScoreMsg {
+  optional int32 timeId = 1;
+  optional int32 rank = 2;
+  optional int64 seizeScore = 3;
+  optional int32 rankScore = 4;
+}
+enum AskDingRedPointEnum {
+  askDingRedNone = 0;
+  askDingRedBattle = 1;
+  askDingRedBreakRankReward = 2;
+  askDingRedFinalRankReward = 3;
+  askDingRedBoxReward = 4;
+  askDingRedGuess = 5;
+  askDingRedWorship = 7;
+}
+message AskDingRedPointReqMsg {
+  required int32 activityId = 1;
+}
+message AskDingRedPointRespMsg {
+  required int32 ret = 1;
+  optional string data = 2;
+  repeated int32 canReceiveBoxTimeId = 3;
+  repeated int32 guessRewardTimeId = 4;
+}
+message AskDingFinalGameEndSyncMsg {
+  required int32 activityId = 1;
+}
+message AskDingWatchGameReqMsg {
+  required int32 activityId = 1;
+  required int64 gameId = 2;
+}
+message AskDingWatchGameRespMsg {
+  required int32 ret = 1;
+  optional AskDingWatchGameMsg watchGame = 2;
+}
+message AskDingWatchGameMsg {
+  optional int64 gameId = 1;
+  optional int64 updateTime = 2;
+  repeated AskDingWatchUnionMsg unionScore = 3;
+  repeated AskDingNoticeTemp noticeList = 4;
+  repeated AskDingWatchPlaceMsg placeMsg = 5;
+  optional AskDingBlowOutMsg blowoutMsg = 6;
+  optional bool end = 7;
+  repeated UnionBirthplaceMsg birthplaces = 8 ;
+}
+message AskDingWatchUnionMsg {
+  optional int64 unionId = 1;
+  optional int64 score = 2;
+  optional string unionName = 3;
+}
+message AskDingWatchPlaceMsg {
+  optional int32 placeId = 1;
+  optional int64 unionId = 2;
+  repeated AskDingPlaceSeizeInfoTemp seize = 3;
+}

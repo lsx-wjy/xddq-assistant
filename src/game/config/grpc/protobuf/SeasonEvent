@@ -1,0 +1,152 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum SeasonEventPb {
+    SeasonEvent_SignIn = 235701;
+    SeasonEvent_Draw = 235702;
+    SeasonEvent_Draw_lock = 235703;
+    SeasonEvent_Draw_select = 235704;
+    SeasonEvent_Gacha = 235705;
+    SeasonEvent_Visit_reward = 235706;
+    SeasonEvent_Enter = 235707;
+    SeasonEvent_Select_Spirit = 235708;
+    SeasonEvent_Enter_Shop = 235709;
+}
+message SeasonEventConfig {
+    repeated SeasonEventDrawConfig drawConfig = 1;
+    repeated SeasonEventGachaConfig gachaConfig = 2;
+    repeated SeasonEventVisitConfig visitConfig = 3;
+    repeated SeasonEventTopicConfig topicConfig = 4;
+}
+message SeasonEventDrawConfig {
+    optional int32 id = 1;
+    optional string floor = 2;
+    optional string reward = 3;
+    optional int32 draw = 4;
+}
+message SeasonEventGachaConfig {
+    optional int32 id = 1;
+    optional string reward = 2;
+    optional int32 weight = 3;
+    optional int32 topic = 4;
+}
+message SeasonEventVisitConfig {
+    optional int32 id = 1;
+    optional int32 headId = 2;
+    optional int32 beginDay = 3;
+    optional int32 beginTime = 4;
+    optional string mailReward = 5;
+}
+message SeasonEventTopicConfig {
+    optional int32 id = 1;
+    optional int32 type = 2;
+    optional string keyReward = 3;
+    optional int32 isNew = 4;
+}
+message SeasonEventSignInData {
+    optional int64 lastSignInTime = 1;
+    repeated int32 signInDays = 2;
+    optional int32 type = 3;
+}
+message SeasonEventDrawData {
+    optional int32 count = 1;
+    optional int32 level = 2;
+    repeated int32 rewardIds = 3;
+    optional int32 rareIndex = 4;
+    repeated SeasonDrawSelectData selectData = 5;
+    repeated SeasonDrawRareData rareData = 6;
+}
+message SeasonDrawRareData {
+    optional int32 rareIndex = 1;
+    optional int32 count = 2;
+}
+message SeasonDrawSelectData {
+    optional int32 rareIndex = 1;
+    optional int32 selectIndex = 2;
+}
+message SeasonEventGachaData {
+    optional int32 count = 1;
+    optional int32 sumCount = 2;
+    optional int32 index = 3;
+}
+message SeasonEventPlayerDataMsg {
+    repeated SeasonEventSignInData signInData = 1;
+    optional SeasonEventDrawData drawData = 2;
+    optional SeasonEventGachaData gachaData = 3;
+    repeated int32 rewardVisit= 4;
+    optional int32 point = 5;
+    optional int32 dayPoint = 6;
+}
+message SeasonEventEnterReq {
+    optional int32 activityId = 1;
+}
+message SeasonEventEnterRsp {
+    optional int32 ret = 1;
+    optional SeasonEventPlayerDataMsg playerData = 2;
+    optional bool hasShopRedPoint = 3;
+}
+message SeasonEventSignInReq {
+    optional int32 activityId = 1;
+    optional int32 conditionId = 2;
+    optional int32 type = 3;
+}
+message SeasonEventSignInRsp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}
+message SeasonEventDrawReq {
+    optional int32 activityId = 1;
+    optional int32 count = 2;
+}
+message SeasonEventDrawRsp {
+    optional int32 ret = 1;
+    repeated string rewards = 2;
+    optional SeasonEventDrawData drawData = 3;
+}
+message SeasonEventDrawLockReq {
+    optional int32 activityId = 1;
+    optional int32 rareIndex = 2;
+}
+message SeasonEventDrawLockRsp {
+    optional int32 ret = 1;
+}
+message SeasonEventDrawSelectReq {
+    optional int32 activityId = 1;
+    optional int32 rareIndex = 2;
+    optional int32 selectIndex = 3;
+}
+message SeasonEventDrawSelectRsp {
+    optional int32 ret = 1;
+}
+message SeasonEventGachaReq {
+    optional int32 activityId = 1;
+    optional int32 count = 2;
+}
+message SeasonEventGachaRsp {
+    optional int32 ret = 1;
+    repeated string rewards = 2;
+    optional SeasonEventGachaData gachaData = 3;
+    optional int32 point = 4;
+    optional int32 dayPoint = 5;
+    repeated int32 rewardIds = 6;
+}
+message SeasonEventVisitRewardReq {
+    optional int32 activityId = 1;
+    optional int32 visitId = 2;
+}
+message SeasonEventVisitRewardRsp {
+    optional int32 ret = 1;
+    optional string rewards = 2;
+}
+message SeasonEventSelectSpiritReq {
+    optional int32 activityId = 1;
+    optional int32 index = 2;
+}
+message SeasonEventSelectSpiritRsp {
+    optional int32 ret = 1;
+}
+message SeasonEventEnterShopReq {
+    optional int32 activityId = 1;
+}
+message SeasonEventEnterShopRsp {
+    optional int32 ret = 1;
+}
