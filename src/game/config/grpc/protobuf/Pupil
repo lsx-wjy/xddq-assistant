@@ -18,6 +18,24 @@ enum PupilPb {
 	S_PUPIL_GET_AD_AWARD = 211814;
     S_PUPIL_LOCK = 211815;
     S_PUPIL_EXACT_SEARCH = 211816;
+    S_PUPIL_RANK_LIST = 211817;
+    S_PUPIL_RANK_SHIELD = 211818;
+    S_PUPIL_RANK_ASK = 211819;
+    S_PUPIL_RANK_SET_CONDITION = 211820;
+    S_PUPIL_RANK_COMMENT_LIST = 211821;
+    S_PUPIL_RANK_COMMENT_LIKE = 211822;
+    S_PUPIL_RANK_COMMENT_SEND = 211823;
+    S_PUPIL_RANK_COMMENT_DELETE = 211824;
+    S_PUPIL_RANK_PRIVATE_CHAT = 211825;
+    S_PUPIL_RANK_GET_MSG_LIST = 211826;
+    S_PUPIL_RANK_CHAT_DELETE = 211827;
+    S_PUPIL_RANK_SYNC_CHAT_LIST = 211828;
+    S_PUPIL_RANK_CHAT_MESSAGE_SYNC = 211829;
+    S_PUPIL_RANK_ASK_LIST = 211830;
+    S_PUPIL_RANK_ASK_AGREE = 211831;
+    S_PUPIL_RANK_ASK_REFUSE = 211832;
+    S_PUPIL_RANK_ASK_CANCEL = 211834;
+    S_PUPIL_RED_POINT_SYNC = 211835;
     S_MARRIAGE_USER_DATA_SYNC    = 211850;
 	S_MARRIAGE_GET_APPOINT_APPLY_SYNC = 211851;
     S_PUPIL_GRADUATED_UNMARRY_LIST_SYNC = 211852;
@@ -43,6 +61,11 @@ enum PupilState {
     Graduation_RequestMarry_Server = 3;
     Graduation_RequestMarry_Union = 4;
     Graduation_RequestMarry_Player = 5;
+    Graduation_RequestMarry_Rank = 6;
+    Graduation_OnRank = 7;
+}
+enum PupilRedPoint {
+    PupilRedPoint_RankAsk = 0;
 }
 message CoupleDataMsg{
     required string playerName = 1;
@@ -74,6 +97,7 @@ message PupilDataMsg {
     optional string pupilFightValue = 12;
     optional int32 evaluateParam = 13;
     optional int32 isLock =14;
+    optional int64 rankAskExpireAt = 15;
 }
 message PupilSiteDataMsg {
     required int32 index = 1;
@@ -104,6 +128,10 @@ message PupilTrainTimesRecover{
     required int32  index = 1;
     required int32  useCount = 2;
 }
+message PupilSkyRankSelfItem {
+    optional int32 pupilUid = 1;
+    optional int32 rank = 2;
+}
 message EnterPupilSystemReq {
 }
 message EnterPupilSystemResp {
@@ -112,6 +140,8 @@ message EnterPupilSystemResp {
     optional int32 allGraduatedNums = 3;
     optional int32  getTimes = 4;
     repeated int64 serverIdList = 5;
+    optional int32 groupId = 6;
+    repeated PupilSkyRankSelfItem myRankList = 7;
 }
 message PupilTrainReq {
     optional int32 isOneKey = 1;
@@ -119,6 +149,8 @@ message PupilTrainReq {
 message PupilTrainResp {
     optional int32 ret = 1;
     repeated PupilSiteDataMsg siteList = 2;
+    optional int32 totalCostEnergy = 3;
+    optional bool haveGraduation = 4;
 }
 message PupilSiteTrainTimesRecoverReq {
     repeated PupilTrainTimesRecover trainTimesRecoverList=1;
@@ -192,4 +224,190 @@ message PupilExactSearchReq{
 message PupilExactSearchResp{
     required int32  ret = 1;
     repeated PupilDataMsg pupilDataList = 2;
+}
+message PupilRankAttrLimit {
+    required int32 type = 1;
+    required int32 value = 2;
+}
+message PupilSkyRankItem {
+    optional int64 playerId = 1;
+    optional string ownerName = 2;
+    optional int64 serverId = 3;
+    optional int32 score = 4;
+    optional int32 askCount = 5;
+    repeated PupilRankAttrLimit attrLimitList = 6;
+    optional PupilDataMsg pupilData = 7;
+    optional int32 commentCount = 8;
+    optional int32 levelLimit = 9;
+    repeated PupilSkyRankAskItem askItem = 10;
+}
+message PupilSkyRankListReq {
+}
+message PupilSkyRankListResp {
+    required int32 ret = 1;
+    repeated PupilSkyRankItem rankList = 2;
+    optional bool rankShield = 3;
+    repeated PupilRankAttrLimit attrLimitList = 4;
+    optional int32 levelLimit = 5;
+    optional int32 likeCommentNum = 6;
+    optional int32 commentNum = 7;
+}
+message PupilSkyRankShieldReq {
+    required bool shield = 1;
+}
+message PupilSkyRankShieldResp {
+    required int32 ret = 1;
+    optional bool rankShield = 2;
+    repeated int32 acceptedUidList = 3;
+}
+message PupilSkyRankSwitchResp {
+    required int32 ret = 1;
+    optional PupilDataMsg pupilData = 2;
+}
+message PupilSkyRankAskReq {
+    required int32 myPupilUid = 1;
+    required int64 targetPlayerId = 2;
+    required int32 targetPupilUid = 3;
+}
+message PupilSkyRankAskResp {
+    required int32 ret = 1;
+}
+message PupilSkyRankAskItem {
+    optional int64 playerId = 1;
+    optional PupilDataMsg pupilData = 2;
+    optional string nickName = 3;
+    optional int64 serverId = 4;
+    optional int64 expireAt = 5;
+    optional int32 ownerPupilUid = 6;
+    optional int32 score = 7;
+}
+message PupilSkyRankAskListReq {
+    repeated int32 pupilUid = 1;
+}
+message PupilSkyRankAskListResp {
+    required int32 ret = 1;
+    repeated PupilSkyRankAskItem askList = 2;
+}
+message PupilSkyRankAskAgreeReq {
+    required int32 myPupilUid = 1;
+    required int64 askPlayerId = 2;
+    required int32 askPupilUid = 3;
+}
+message PupilSkyRankAskAgreeResp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional bytes marriageData = 3;
+}
+message PupilSkyRankAskRefuseReq {
+    required int32 myPupilUid = 1;
+    required int64 askPlayerId = 2;
+    optional int32 askPupilUid = 3;
+}
+message PupilSkyRankAskRefuseResp {
+    required int32 ret = 1;
+}
+message PupilSkyRankAskCancelReq {
+    required int32 pupilUid = 1;
+}
+message PupilSkyRankAskCancelResp {
+    required int32 ret = 1;
+    optional PupilDataMsg pupilData = 2;
+}
+message PupilSkyRankSetConditionReq {
+    repeated PupilRankAttrLimit attrLimitList = 1;
+    optional int32 levelLimit = 2;
+}
+message PupilSkyRankSetConditionResp {
+    required int32 ret = 1;
+    repeated PupilRankAttrLimit attrLimitList = 2;
+    optional int32 levelLimit = 3;
+}
+message PupilRankCommenter {
+    optional int64 playerId = 1;
+    optional string nickName = 2;
+    optional int32 headIcon = 3;
+    optional int64 serverId = 4;
+    optional int32 equipHeadIconFrame = 5;
+    optional int32 titleId = 6;
+    optional int32 realmsId = 7;
+    optional string fightValue = 8;
+    optional string wxHeadUrl = 9;
+}
+message PupilRankCommentData {
+    required int64 commentId = 1;
+    optional int32 likeNum = 2;
+    optional bool isLike = 3;
+    optional string content = 4;
+    optional PupilRankCommenter commenter = 5;
+    optional int64 time = 6;
+}
+message PupilRankCommentListReq {
+    required int64 targetPlayerId = 1;
+    required int32 targetPupilUid = 2;
+}
+message PupilRankCommentListResp {
+    required int32 ret = 1;
+    repeated PupilRankCommentData commentList = 2;
+    optional int32 likeCommentNum = 3;
+    optional int32 commentNum = 4;
+}
+message PupilRankCommentLikeReq {
+    required int64 targetPlayerId = 1;
+    required int32 targetPupilUid = 2;
+    required int64 commentId = 3;
+}
+message PupilRankCommentLikeResp {
+    required int32 ret = 1;
+    optional int32 likeNum = 2;
+    optional int32 likeCommentNum = 3;
+    optional int64 commentId = 4;
+}
+message PupilRankCommentSendReq {
+    required int64 targetPlayerId = 1;
+    required int32 targetPupilUid = 2;
+    required string content = 3;
+}
+message PupilRankCommentSendResp {
+    required int32 ret = 1;
+    optional int32 commentNum = 2;
+    optional PupilRankCommentData newComment = 3;
+}
+message PupilRankCommentDeleteReq {
+    required int64 targetPlayerId = 1;
+    required int32 targetPupilUid = 2;
+    required int64 commentId = 3;
+}
+message PupilRankCommentDeleteResp {
+    required int32 ret = 1;
+}
+message PupilRankFriendInfo {
+    required FriendInfo friendInfo = 1;
+    optional int64 targetPlayerId = 2;
+    optional int32 targetPupilUid = 3;
+    optional PupilDataMsg pupilData = 4;
+    optional int32 score = 5;
+}
+message PupilRankPrivateChatReq {
+    required int64 playerId = 1;
+    optional int32 pupilUid = 2;
+}
+message PupilRankPrivateChatRsp {
+    required int32 ret = 1;
+    repeated PupilRankFriendInfo friendInfos = 2;
+}
+message PupilRankGetMsgListReq {
+    required int64 targetPlayerId = 1;
+}
+message PupilRankChatDeleteReq {
+    required int64 playerId = 1;
+}
+message PupilRankChatDeleteRsp {
+    required int32 ret = 1;
+    repeated PupilRankFriendInfo friendInfos = 2;
+}
+message PupilRankSyncChatList {
+    repeated PupilRankFriendInfo friendInfos = 1;
+}
+message PupilRedPointSync {
+    required string redPoint = 1;
 }

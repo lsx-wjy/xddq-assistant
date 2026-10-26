@@ -2747,6 +2747,18 @@
         "protocol": "S_MAGIC_TREASURE_LINK_CHANGE_REQ",
         "method": "CityMsg.MagicTreasureSwitchLinkageSkinReq"
     },
+    "26308": {
+        "name": "MagicTreasure",
+        "comments": "法宝一键炼化预览",
+        "protocol": "S_MAGIC_TREASURE_ONE_KEY_REFINE_PREVIEW_REQ",
+        "method": "CityMsg.MagicTreasureOneKeyRefinePreviewReq"
+    },
+    "26309": {
+        "name": "MagicTreasure",
+        "comments": "法宝一键炼化",
+        "protocol": "S_MAGIC_TREASURE_ONE_KEY_REFINE_REQ",
+        "method": "CityMsg.MagicTreasureOneKeyRefineReq"
+    },
     "27101": {
         "name": "FairyRabbitActivity",
         "comments": "抽奖请求",
@@ -2860,6 +2872,12 @@
         "comments": "查看本分组妖盟详情",
         "protocol": "S_UNION_DETAIL_IN_GROUP",
         "method": "CityMsg.ReqUnionDetail"
+    },
+    "201629": {
+        "name": "Union",
+        "comments": "获取自家妖盟的7日和14日活跃",
+        "protocol": "S_UNION_ACTIVE_VALUE_QUERY",
+        "method": ""
     },
     "201630": {
         "name": "Union",
@@ -5926,6 +5944,114 @@
         "comments": "精准查找",
         "protocol": "S_PUPIL_EXACT",
         "method": "CityMsg.PupilExactSearchReq"
+    },
+    "211817": {
+        "name": "Pupil",
+        "comments": "弟子天榜列表",
+        "protocol": "S_PUPIL_RANK_LIST",
+        "method": "CityMsg.PupilSkyRankListReq"
+    },
+    "211818": {
+        "name": "Pupil",
+        "comments": "弟子天榜屏蔽开关",
+        "protocol": "S_PUPIL_RANK_SHIELD",
+        "method": "CityMsg.PupilSkyRankShieldReq"
+    },
+    "211819": {
+        "name": "Pupil",
+        "comments": "天榜申请结伴",
+        "protocol": "S_PUPIL_RANK_ASK",
+        "method": "CityMsg.PupilSkyRankAskReq"
+    },
+    "211820": {
+        "name": "Pupil",
+        "comments": "设置天榜被请求条件（增减伤合计+等级）",
+        "protocol": "S_PUPIL_RANK_SET_CONDITION",
+        "method": "CityMsg.PupilSkyRankSetConditionReq"
+    },
+    "211821": {
+        "name": "Pupil",
+        "comments": "天榜评论列表",
+        "protocol": "S_PUPIL_RANK_COMMENT_LIST",
+        "method": "CityMsg.PupilRankCommentListReq"
+    },
+    "211822": {
+        "name": "Pupil",
+        "comments": "天榜评论点赞",
+        "protocol": "S_PUPIL_RANK_COMMENT_LIKE",
+        "method": "CityMsg.PupilRankCommentLikeReq"
+    },
+    "211823": {
+        "name": "Pupil",
+        "comments": "天榜发表评论",
+        "protocol": "S_PUPIL_RANK_COMMENT_SEND",
+        "method": "CityMsg.PupilRankCommentSendReq"
+    },
+    "211824": {
+        "name": "Pupil",
+        "comments": "天榜删除评论",
+        "protocol": "S_PUPIL_RANK_COMMENT_DELETE",
+        "method": "CityMsg.PupilRankCommentDeleteReq"
+    },
+    "211825": {
+        "name": "Pupil",
+        "comments": "天榜私聊会话列表",
+        "protocol": "S_PUPIL_RANK_PRIVATE_CHAT",
+        "method": "CityMsg.PupilRankPrivateChatReq"
+    },
+    "211826": {
+        "name": "Pupil",
+        "comments": "天榜私聊消息列表 全量",
+        "protocol": "S_PUPIL_RANK_GET_MSG_LIST",
+        "method": "CityMsg.PupilRankGetMsgListReq"
+    },
+    "211827": {
+        "name": "Pupil",
+        "comments": "天榜删除私聊",
+        "protocol": "S_PUPIL_RANK_CHAT_DELETE",
+        "method": "CityMsg.PupilRankChatDeleteReq"
+    },
+    "211828": {
+        "name": "Pupil",
+        "comments": "天榜私聊会话同步",
+        "protocol": "S_PUPIL_RANK_SYNC_CHAT_LIST",
+        "method": ""
+    },
+    "211829": {
+        "name": "Pupil",
+        "comments": "天榜私聊消息增量同步",
+        "protocol": "S_PUPIL_RANK_CHAT_MESSAGE_SYNC",
+        "method": ""
+    },
+    "211830": {
+        "name": "Pupil",
+        "comments": "天榜申请记录列表",
+        "protocol": "S_PUPIL_RANK_ASK_LIST",
+        "method": "CityMsg.PupilSkyRankAskListReq"
+    },
+    "211831": {
+        "name": "Pupil",
+        "comments": "天榜同意结伴",
+        "protocol": "S_PUPIL_RANK_ASK_AGREE",
+        "method": "CityMsg.PupilSkyRankAskAgreeReq"
+    },
+    "211832": {
+        "name": "Pupil",
+        "comments": "天榜拒绝申请",
+        "protocol": "S_PUPIL_RANK_ASK_REFUSE",
+        "method": "CityMsg.PupilSkyRankAskRefuseReq"
+    },
+    "211834": {
+        "name": "Pupil",
+        "comments": "天榜取消申请",
+        "protocol": "S_PUPIL_RANK_ASK_CANCEL",
+        "method": "CityMsg.PupilSkyRankAskCancelReq"
+    },
+    "211835": {
+        "name": "Pupil",
+        "comments": "宗门局内红点同步",
+        "protocol": "S_PUPIL_RED_POINT_SYNC",
+        "method": ""
     },
     "211850": {
         "name": "Marriage",
@@ -12143,6 +12269,18 @@
         "protocol": "S_ASSISTANT_DAILY_FOLLOW_REMIND_REQ",
         "method": "CityMsg.DailyFollowRemindReq"
     },
+    "230213": {
+        "name": "Assistant",
+        "comments": "仙官赐福自动领取信息同步",
+        "protocol": "S_ASSISTANT_PALACE_AUTO_SYNC",
+        "method": ""
+    },
+    "230214": {
+        "name": "Assistant",
+        "comments": "仙官赐福聚宝盆领取",
+        "protocol": "S_ASSISTANT_PALACE_AUTO_REWARD",
+        "method": "CityMsg.AssistantPalaceAutoRewardReq"
+    },
     "230301": {
         "name": "LuckyWheel",
         "comments": "进入活动",
@@ -15173,6 +15311,84 @@
         "protocol": "S_TREASUREAUCTION_CHATDELETE",
         "method": "CityMsg.TreasureAuctionChatDeleteReq"
     },
+    "234035": {
+        "name": "TreasureAuction",
+        "comments": "一键处理事件",
+        "protocol": "S_TREASUREAUCTION_SELECTEVENT_ONEKEY",
+        "method": "CityMsg.TreasureAuctionSelectEventOneKeyReq"
+    },
+    "234036": {
+        "name": "TreasureAuction",
+        "comments": "验证密码",
+        "protocol": "S_TREASUREAUCTION_VERIFYPASSWORD",
+        "method": "CityMsg.TreasureAuctionVerifyPasswordReq"
+    },
+    "234037": {
+        "name": "TreasureAuction",
+        "comments": "一键鉴定（含自动分解）",
+        "protocol": "S_TREASUREAUCTION_ONE_KEYIDENTIFY",
+        "method": "CityMsg.TreasureAuctionOneKeyIdentifyReq"
+    },
+    "234038": {
+        "name": "TreasureAuction",
+        "comments": "一键探宝",
+        "protocol": "S_TREASUREAUCTION_ONE_KEY_EXPLORE",
+        "method": "CityMsg.TreasureAuctionBeginExploreOneKeyReq"
+    },
+    "234039": {
+        "name": "TreasureAuction",
+        "comments": "拍卖上架",
+        "protocol": "S_TREASUREAUCTION_AUCTION_SELL",
+        "method": "CityMsg.TreasureAuctionAuctionSellReq"
+    },
+    "234040": {
+        "name": "TreasureAuction",
+        "comments": "竞拍出价",
+        "protocol": "S_TREASUREAUCTION_AUCTION_BID",
+        "method": "CityMsg.TreasureAuctionAuctionBidReq"
+    },
+    "234041": {
+        "name": "TreasureAuction",
+        "comments": "拍卖下架",
+        "protocol": "S_TREASUREAUCTION_AUCTION_SELLDOWN",
+        "method": "CityMsg.TreasureAuctionAuctionSellDownReq"
+    },
+    "234042": {
+        "name": "TreasureAuction",
+        "comments": "寻宝 通过商品id获取拍卖商品",
+        "protocol": "S_TREASUREAUCTION_AUCTION_GET_GOODS",
+        "method": "CityMsg.TreasureAuctionAuctionGetGoodsReq"
+    },
+    "234043": {
+        "name": "TreasureAuction",
+        "comments": "推送-出价同步",
+        "protocol": "S_TREASUREAUCTION_AUCTION_SYNCBID",
+        "method": ""
+    },
+    "234044": {
+        "name": "TreasureAuction",
+        "comments": "推送-被超越通知",
+        "protocol": "S_TREASUREAUCTION_AUCTION_OUTBIDNOTIFY",
+        "method": ""
+    },
+    "234045": {
+        "name": "TreasureAuction",
+        "comments": "推送-结算通知",
+        "protocol": "S_TREASUREAUCTION_AUCTION_SETTLENOTIFY",
+        "method": ""
+    },
+    "234046": {
+        "name": "TreasureAuction",
+        "comments": "寻宝 拍卖界面心跳（无回包）",
+        "protocol": "S_TREASUREAUCTION_AUCTION_HEARTBEAT",
+        "method": "CityMsg.TreasureAuctionAuctionHeartbeatReq"
+    },
+    "234047": {
+        "name": "TreasureAuction",
+        "comments": "寻宝 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+        "protocol": "S_TREASUREAUCTION_AUCTION_NOTIFY_READ",
+        "method": "CityMsg.TreasureAuctionAuctionNotifyReadReq"
+    },
     "234101": {
         "name": "BigChess",
         "comments": "象棋 进入活动",
@@ -16313,6 +16529,12 @@
         "protocol": "S_ELIXIR_ELVES_COUNT_SYNC",
         "method": ""
     },
+    "235561": {
+        "name": "Elixir",
+        "comments": "同步抽奖赛季时间",
+        "protocol": "S_ELIXIR_ELVES_DRAW_SEASON_SYNC",
+        "method": ""
+    },
     "235570": {
         "name": "Elixir",
         "comments": "获取玩家药草展",
@@ -16360,6 +16582,12 @@
         "comments": "赠送药草",
         "protocol": "S_ELIXIR_SEND_GRASS",
         "method": "CityMsg.ElixirSendGrassReq"
+    },
+    "235582": {
+        "name": "Elixir",
+        "comments": "仙友订单药材快速种植",
+        "protocol": "S_ELIXIR_DESTINY_ORDER_QUICK_PLANT",
+        "method": "CityMsg.ElixirDestinyOrderQuickPlantReq"
     },
     "235594": {
         "name": "Elixir",
@@ -17099,6 +17327,60 @@
         "protocol": "S_CHAOS_LAW_MALL_ADD_LAWS_SYNC",
         "method": ""
     },
+    "236740": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 拍卖上架",
+        "protocol": "S_CHAOS_LAW_AUCTION_SELL",
+        "method": "CityMsg.ChaosLawAuctionSellReq"
+    },
+    "236741": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 竞拍出价",
+        "protocol": "S_CHAOS_LAW_AUCTION_BID",
+        "method": "CityMsg.ChaosLawAuctionBidReq"
+    },
+    "236742": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 拍卖下架",
+        "protocol": "S_CHAOS_LAW_AUCTION_SELL_DOWN",
+        "method": "CityMsg.ChaosLawAuctionSellDownReq"
+    },
+    "236743": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 通过商品id获取拍卖商品",
+        "protocol": "S_CHAOS_LAW_AUCTION_GET_GOODS",
+        "method": "CityMsg.ChaosLawAuctionGetGoodsReq"
+    },
+    "236744": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 推送-出价同步（无上行体）",
+        "protocol": "S_CHAOS_LAW_AUCTION_SYNC_BID",
+        "method": ""
+    },
+    "236745": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 推送-被超越通知（无上行体）",
+        "protocol": "S_CHAOS_LAW_AUCTION_OUTBID_NOTIFY",
+        "method": ""
+    },
+    "236746": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 推送-结算通知（无上行体）",
+        "protocol": "S_CHAOS_LAW_AUCTION_SETTLE_NOTIFY",
+        "method": ""
+    },
+    "236747": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 拍卖界面心跳（无回包）",
+        "protocol": "S_CHAOS_LAW_AUCTION_HEARTBEAT",
+        "method": "CityMsg.ChaosLawAuctionHeartbeatReq"
+    },
+    "236748": {
+        "name": "ChaosLaw",
+        "comments": "混沌法则 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+        "protocol": "S_CHAOS_LAW_AUCTION_NOTIFY_READ",
+        "method": "CityMsg.ChaosLawAuctionNotifyReadReq"
+    },
     "236901": {
         "name": "CloudDraw",
         "comments": "座驾申购-获取详情",
@@ -17134,6 +17416,1308 @@
         "comments": "双汇联动-查询基础信息",
         "protocol": "S_SHUANG_HUI_BASE_INFO",
         "method": "CityMsg.ShuangHuiBaseInfoReq"
+    },
+    "237200": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 进入活动",
+        "protocol": "S_PETS_FIGHT_ENTER",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237201": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 灵兽抽取",
+        "protocol": "S_PETS_FIGHT_DRAW",
+        "method": "CityMsg.PetsFightDrawReq"
+    },
+    "237202": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 源生之岭升级",
+        "protocol": "S_PETS_FIGHT_HILL_UPGRADE",
+        "method": "CityMsg.PetsFightHillUpgradeReq"
+    },
+    "237203": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 灵兽炼妖",
+        "protocol": "S_PETS_FIGHT_FUSION",
+        "method": "CityMsg.PetsFightFusionReq"
+    },
+    "237204": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 灵兽列表全量",
+        "protocol": "S_PETS_FIGHT_PET_LIST",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237205": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 灵兽增量推送",
+        "protocol": "S_PETS_FIGHT_PET_SYNC",
+        "method": ""
+    },
+    "237206": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 发起妖盟协同炼妖",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_APPLY",
+        "method": "CityMsg.PetsFightUnionFusionApplyReq"
+    },
+    "237207": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 撤销妖盟协同炼妖",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_CANCEL",
+        "method": "CityMsg.PetsFightUnionFusionCancelReq"
+    },
+    "237208": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 响应妖盟协同炼妖",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_ACCEPT",
+        "method": "CityMsg.PetsFightUnionFusionAcceptReq"
+    },
+    "237209": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 执行妖盟协同炼妖",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_BREED",
+        "method": "CityMsg.PetsFightUnionFusionBreedReq"
+    },
+    "237210": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 PVE关卡战斗",
+        "protocol": "S_PETS_FIGHT_STAGE_BATTLE",
+        "method": "CityMsg.PetsFightStageBattleReq"
+    },
+    "237211": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 妖盟关卡Boss挑战",
+        "protocol": "S_PETS_FIGHT_UNION_BOSS_BATTLE",
+        "method": "CityMsg.PetsFightUnionBossBattleReq"
+    },
+    "237212": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 领取妖盟关卡通关奖励",
+        "protocol": "S_PETS_FIGHT_UNION_BOSS_REWARD",
+        "method": "CityMsg.PetsFightUnionBossRewardReq"
+    },
+    "237213": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询当前生效的协同炼妖列表",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_LIST",
+        "method": "CityMsg.PetsFightUnionFusionListReq"
+    },
+    "237214": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 选择或拒绝协同炼妖申请人",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_SELECT",
+        "method": "CityMsg.PetsFightUnionFusionSelectReq"
+    },
+    "237215": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询申请我的协同炼妖列表",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_APPLICANT_LIST",
+        "method": "CityMsg.PetsFightUnionFusionApplicantListReq"
+    },
+    "237216": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询已响应但未炼妖的协同炼妖列表",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_BREED_LIST",
+        "method": "CityMsg.PetsFightUnionFusionBreedListReq"
+    },
+    "237217": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 分享协同邀请或炼妖结果",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_SHARE",
+        "method": "CityMsg.PetsFightUnionFusionShareReq"
+    },
+    "237218": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询妖盟关卡Boss信息",
+        "protocol": "S_PETS_FIGHT_UNION_BOSS_INFO",
+        "method": "CityMsg.PetsFightUnionBossInfoReq"
+    },
+    "237219": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 斗宠道台布阵",
+        "protocol": "S_PETS_FIGHT_ARENA_FORMATION",
+        "method": "CityMsg.PetsFightArenaFormationReq"
+    },
+    "237220": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询斗宠道台信息和匹配对手",
+        "protocol": "S_PETS_FIGHT_ARENA_INFO",
+        "method": "CityMsg.PetsFightArenaInfoReq"
+    },
+    "237221": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 刷新斗宠道台对手",
+        "protocol": "S_PETS_FIGHT_ARENA_REFRESH",
+        "method": "CityMsg.PetsFightArenaRefreshReq"
+    },
+    "237222": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 斗宠道台挑战",
+        "protocol": "S_PETS_FIGHT_ARENA_BATTLE",
+        "method": "CityMsg.PetsFightArenaBattleReq"
+    },
+    "237223": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 购买斗宠道台挑战券",
+        "protocol": "S_PETS_FIGHT_ARENA_BUY_TICKET",
+        "method": "CityMsg.PetsFightArenaBuyTicketReq"
+    },
+    "237224": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 膜拜",
+        "protocol": "S_PETS_FIGHT_WORSHIP",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237225": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 领取斗宠道台每日榜奖励",
+        "protocol": "S_PETS_FIGHT_ARENA_DAILY_REWARD",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237226": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询斗宠道台挑战日志",
+        "protocol": "S_PETS_FIGHT_ARENA_LOG",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237227": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 斗宠道台扫荡",
+        "protocol": "S_PETS_FIGHT_ARENA_SWEEP",
+        "method": "CityMsg.PetsFightArenaSweepReq"
+    },
+    "237228": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询妖盟Boss关卡挑战记录",
+        "protocol": "S_PETS_FIGHT_UNION_BOSS_RECORD",
+        "method": "CityMsg.PetsFightUnionBossRecordReq"
+    },
+    "237229": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询妖盟Boss关卡累计伤害最高玩家",
+        "protocol": "S_PETS_FIGHT_UNION_BOSS_TOP_DAMAGE",
+        "method": "CityMsg.PetsFightUnionBossTopDamageReq"
+    },
+    "237230": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 抽取次数同步(服务端推送)",
+        "protocol": "S_PETS_FIGHT_DRAW_TICKET_SYNC",
+        "method": ""
+    },
+    "237231": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 查询红点详情",
+        "protocol": "S_PETS_FIGHT_RED_POINT",
+        "method": "CityMsg.PetsFightCommonReq"
+    },
+    "237232": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 战斗模拟同步(服务端推送)",
+        "protocol": "S_PETS_FIGHT_BATTLE_FOR_DEBUG",
+        "method": ""
+    },
+    "237233": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 一键炼妖",
+        "protocol": "S_PETS_FIGHT_ONE_KEY_BREED",
+        "method": "CityMsg.PetsFightOneKeyBreedReq"
+    },
+    "237234": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 一键炼妖上锁",
+        "protocol": "S_PETS_FIGHT_ONE_KEY_LOCK",
+        "method": "CityMsg.PetsFightOneKeyLockReq"
+    },
+    "237235": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 选择特殊品质炼妖结果",
+        "protocol": "S_PETS_FIGHT_FUSION_SELECT",
+        "method": "CityMsg.PetsFightFusionSelectReq"
+    },
+    "237236": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 抽灵兽道具转抽取次数",
+        "protocol": "S_PETS_FIGHT_USE_DRAW_ITEM",
+        "method": "CityMsg.PetsFightUseDrawItemReq"
+    },
+    "237237": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 遗忘灵兽被动技能",
+        "protocol": "S_PETS_FIGHT_DELETE_PASSIVE_SKILL",
+        "method": "CityMsg.PetsFightDeletePassiveSkillReq"
+    },
+    "237238": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 妖盟协同繁育的记录",
+        "protocol": "S_PETS_FIGHT_UNION_FUSION_RECORDS",
+        "method": "CityMsg.PetsFightUnionFusionRecordReq"
+    },
+    "237239": {
+        "name": "PetsFight",
+        "comments": "灵兽乱斗 灵兽面板交换",
+        "protocol": "S_PETS_FIGHT_PET_EXCHANGE",
+        "method": "CityMsg.PetsFightPetExchangeReq"
+    },
+    "237301": {
+        "name": "WorldBid",
+        "comments": "进入 237301",
+        "protocol": "S_WORLDBID_ENTER",
+        "method": "CityMsg.WorldBidEnterReq"
+    },
+    "237302": {
+        "name": "WorldBid",
+        "comments": "进入匹配 237302",
+        "protocol": "S_WORLDBID_MATCH",
+        "method": "CityMsg.WorldBidMatchReq"
+    },
+    "237303": {
+        "name": "WorldBid",
+        "comments": "匹配成功推送 237303",
+        "protocol": "S_WORLDBID_MATCH_SUCCESS_SYNC",
+        "method": ""
+    },
+    "237304": {
+        "name": "WorldBid",
+        "comments": "获取房间信息 237304",
+        "protocol": "S_WORLDBID_ROOM_INFO",
+        "method": "CityMsg.WorldBidGetRoomInfoReq"
+    },
+    "237305": {
+        "name": "WorldBid",
+        "comments": "房间信息同步 237305",
+        "protocol": "S_WORLDBID_ROOM_SYNC",
+        "method": ""
+    },
+    "237306": {
+        "name": "WorldBid",
+        "comments": "出价 237306",
+        "protocol": "S_WORLDBID_BID",
+        "method": "CityMsg.WorldBidBidReq"
+    },
+    "237307": {
+        "name": "WorldBid",
+        "comments": "使用道具 237307",
+        "protocol": "S_WORLDBID_USE_ITEM",
+        "method": "CityMsg.WorldBidUseItemReq"
+    },
+    "237308": {
+        "name": "WorldBid",
+        "comments": "结算同步 237308",
+        "protocol": "S_WORLDBID_SETTLE_SYNC",
+        "method": ""
+    },
+    "237309": {
+        "name": "WorldBid",
+        "comments": "离开房间 237309",
+        "protocol": "S_WORLDBID_LEAVE",
+        "method": "CityMsg.WorldBidLeaveReq"
+    },
+    "237310": {
+        "name": "WorldBid",
+        "comments": "离开房间同步 237310",
+        "protocol": "S_WORLDBID_LEAVE_SYNC",
+        "method": ""
+    },
+    "237311": {
+        "name": "WorldBid",
+        "comments": "房间关闭同步 237311",
+        "protocol": "S_WORLDBID_ROOM_CLOSE_SYNC",
+        "method": ""
+    },
+    "237312": {
+        "name": "WorldBid",
+        "comments": "购买角色/道具 237312",
+        "protocol": "S_WORLDBID_BUY_PROP",
+        "method": "CityMsg.WorldBidBuyPropReq"
+    },
+    "237313": {
+        "name": "WorldBid",
+        "comments": "保存设置 237313",
+        "protocol": "S_WORLDBID_SAVE_SET",
+        "method": "CityMsg.WorldBidSaveSetReq"
+    },
+    "237314": {
+        "name": "WorldBid",
+        "comments": "创建房间 237314",
+        "protocol": "S_WORLDBID_CREATE_ROOM",
+        "method": "CityMsg.WorldBidCreateRoomReq"
+    },
+    "237315": {
+        "name": "WorldBid",
+        "comments": "加入房间 237315",
+        "protocol": "S_WORLDBID_JOIN_ROOM",
+        "method": "CityMsg.WorldBidJoinRoomReq"
+    },
+    "237316": {
+        "name": "WorldBid",
+        "comments": "加入房间同步 237316",
+        "protocol": "S_WORLDBID_JOIN_ROOM_SYNC",
+        "method": ""
+    },
+    "237317": {
+        "name": "WorldBid",
+        "comments": "开始游戏 237317",
+        "protocol": "S_WORLDBID_START_ROOM",
+        "method": "CityMsg.WorldBidStartRoomReq"
+    },
+    "237318": {
+        "name": "WorldBid",
+        "comments": "踢人 237318",
+        "protocol": "S_WORLDBID_KICK_PLAYER",
+        "method": "CityMsg.WorldBidKickPlayerReq"
+    },
+    "237319": {
+        "name": "WorldBid",
+        "comments": "踢人同步 237319",
+        "protocol": "S_WORLDBID_KICK_PLAYER_SYNC",
+        "method": ""
+    },
+    "237320": {
+        "name": "WorldBid",
+        "comments": "获取玩家数据 237320",
+        "protocol": "S_WORLDBID_PLAYER_BASE_REQ",
+        "method": "CityMsg.WorldBidPlayerBaseReq"
+    },
+    "237321": {
+        "name": "WorldBid",
+        "comments": "发表情 237321",
+        "protocol": "S_WORLDBID_EMOTION",
+        "method": "CityMsg.WorldBidEmotionReq"
+    },
+    "237322": {
+        "name": "WorldBid",
+        "comments": "发表情同步 237322",
+        "protocol": "S_WORLDBID_EMOTION_SYNC",
+        "method": ""
+    },
+    "237323": {
+        "name": "WorldBid",
+        "comments": "取消匹配 237323",
+        "protocol": "S_WORLDBID_CANCEL_MATCH",
+        "method": "CityMsg.WorldBidCancelMatchReq"
+    },
+    "237324": {
+        "name": "WorldBid",
+        "comments": "自建房准备 237324",
+        "protocol": "S_WORLDBID_ROOM_READY",
+        "method": "CityMsg.WorldBidRoomReadyReq"
+    },
+    "237325": {
+        "name": "WorldBid",
+        "comments": "准备同步 237325",
+        "protocol": "S_WORLDBID_ROOM_READY_SYNC",
+        "method": ""
+    },
+    "237326": {
+        "name": "WorldBid",
+        "comments": "房间开始同步 237326",
+        "protocol": "S_WORLDBID_ROOM_START_SYNC",
+        "method": ""
+    },
+    "237327": {
+        "name": "WorldBid",
+        "comments": "房间小局结算完成 237327",
+        "protocol": "S_WORLDBID_ROOM_SETTLE",
+        "method": "CityMsg.WorldBidRoomSettleReq"
+    },
+    "237328": {
+        "name": "WorldBid",
+        "comments": "出价完成同步 237328",
+        "protocol": "S_WORLDBID_PRICE_FINISH_SYNC",
+        "method": ""
+    },
+    "237329": {
+        "name": "WorldBid",
+        "comments": "放弃 237329",
+        "protocol": "S_WORLDBID_PLAYER_GIVE_UP",
+        "method": "CityMsg.WorldBidGiveUpReq"
+    },
+    "237330": {
+        "name": "WorldBid",
+        "comments": "放弃同步 237330",
+        "protocol": "S_WORLDBID_PLAYER_GIVE_UP_SYNC",
+        "method": ""
+    },
+    "237331": {
+        "name": "WorldBid",
+        "comments": "领取每日奖励 237331",
+        "protocol": "S_WORLDBID_DAY_REWARD",
+        "method": "CityMsg.WorldBidDayRewardReq"
+    },
+    "237332": {
+        "name": "WorldBid",
+        "comments": "获取图鉴信息 237332",
+        "protocol": "S_WORLDBID_COLLECT_INFO",
+        "method": "CityMsg.WorldBidCollectInfoReq"
+    },
+    "237333": {
+        "name": "WorldBid",
+        "comments": "升级图鉴 237333",
+        "protocol": "S_WORLDBID_COLLECT_UP",
+        "method": "CityMsg.WorldBidCollectUpReq"
+    },
+    "237334": {
+        "name": "WorldBid",
+        "comments": "获取对战记录 237334",
+        "protocol": "S_WORLDBID_GET_HISTORY",
+        "method": "CityMsg.WorldBidGetHistoryReq"
+    },
+    "237335": {
+        "name": "WorldBid",
+        "comments": "红点同步 237335",
+        "protocol": "S_WORLDBID_RED_POINT_SYNC",
+        "method": ""
+    },
+    "237501": {
+        "name": "CardCollect",
+        "comments": "进入",
+        "protocol": "S_CARD_COLLECT_ENTER",
+        "method": "CityMsg.NewCardCollectEnterReq"
+    },
+    "237502": {
+        "name": "CardCollect",
+        "comments": "新集卡登录同步",
+        "protocol": "S_CARD_COLLECT_LOGIN_SYNC",
+        "method": ""
+    },
+    "237503": {
+        "name": "CardCollect",
+        "comments": "开卡包",
+        "protocol": "S_CARD_COLLECT_OPEN_BAG",
+        "method": "CityMsg.NewCardCollectOpenBagReq"
+    },
+    "237504": {
+        "name": "CardCollect",
+        "comments": "卡牌领奖",
+        "protocol": "S_CARD_COLLECT_ACTIVATE",
+        "method": "CityMsg.NewCardCollectActivateReq"
+    },
+    "237505": {
+        "name": "CardCollect",
+        "comments": "篇章集齐节点",
+        "protocol": "S_CARD_COLLECT_CLAIM_CHAPTER_STAGE",
+        "method": "CityMsg.NewCardCollectClaimChapterStageReq"
+    },
+    "237506": {
+        "name": "CardCollect",
+        "comments": "玄尘战令签到",
+        "protocol": "S_CARD_COLLECT_SIGN_IN",
+        "method": "CityMsg.NewCardCollectSignInReq"
+    },
+    "237507": {
+        "name": "CardCollect",
+        "comments": "发布交换",
+        "protocol": "S_CARD_COLLECT_RELEASE",
+        "method": "CityMsg.NewCardCollectReleaseReq"
+    },
+    "237508": {
+        "name": "CardCollect",
+        "comments": "成交交换",
+        "protocol": "S_CARD_COLLECT_CHANGE",
+        "method": "CityMsg.NewCardCollectChangeReq"
+    },
+    "237509": {
+        "name": "CardCollect",
+        "comments": "交换列表",
+        "protocol": "S_CARD_COLLECT_CHANGE_LIST",
+        "method": "CityMsg.NewCardCollectChangeListReq"
+    },
+    "237510": {
+        "name": "CardCollect",
+        "comments": "指定交换搜人",
+        "protocol": "S_CARD_COLLECT_SEARCH_PLAYER",
+        "method": "CityMsg.NewCardCollectSearchPlayerReq"
+    },
+    "237511": {
+        "name": "CardCollect",
+        "comments": "开随机宝箱",
+        "protocol": "S_CARD_COLLECT_OPEN_RANDOM_BOX",
+        "method": "CityMsg.NewCardCollectOpenRandomBoxReq"
+    },
+    "237512": {
+        "name": "CardCollect",
+        "comments": "卡牌分解",
+        "protocol": "S_CARD_COLLECT_CARD_RECYCLE",
+        "method": "CityMsg.NewCardCollectCardRecycleReq"
+    },
+    "237513": {
+        "name": "CardCollect",
+        "comments": "局内红点",
+        "protocol": "S_CARD_COLLECT_INNER_RED_POINT",
+        "method": "CityMsg.NewCardCollectInnerRedPointReq"
+    },
+    "237514": {
+        "name": "CardCollect",
+        "comments": "忆梦图鉴",
+        "protocol": "S_CARD_COLLECT_HISTORY_VIEW",
+        "method": "CityMsg.NewCardCollectHistoryViewReq"
+    },
+    "237515": {
+        "name": "CardCollect",
+        "comments": "赛季全收集奖",
+        "protocol": "S_CARD_COLLECT_CLAIM_SEASON_AWARD",
+        "method": "CityMsg.NewCardCollectClaimSeasonAwardReq"
+    },
+    "237516": {
+        "name": "CardCollect",
+        "comments": "离开卡册界面",
+        "protocol": "S_CARD_COLLECT_LEAVE",
+        "method": "CityMsg.NewCardCollectLeaveReq"
+    },
+    "237517": {
+        "name": "CardCollect",
+        "comments": "玩家可用卡册列表",
+        "protocol": "S_CARD_COLLECT_USEABLE_CARD_LIST",
+        "method": "CityMsg.NewCardCollectUseAbleCardListReq"
+    },
+    "237518": {
+        "name": "CardCollect",
+        "comments": "玩家历史卡册列表",
+        "protocol": "S_CARD_COLLECT_PLAYER_COLLECT_RECORD_LIST",
+        "method": "CityMsg.NewCardCollectPlayerCollectRecordListReq"
+    },
+    "237519": {
+        "name": "CardCollect",
+        "comments": "玩家赛季列表",
+        "protocol": "S_CARD_COLLECT_PLAYER_SEASON_LIST",
+        "method": "CityMsg.NewCardCollectPlayerSeasonListReq"
+    },
+    "237520": {
+        "name": "CardCollect",
+        "comments": "失效交换弹窗",
+        "protocol": "S_CARD_COLLECT_SYNC_LOSE_DATA",
+        "method": ""
+    },
+    "237521": {
+        "name": "CardCollect",
+        "comments": "玩家全部卡牌列表",
+        "protocol": "S_CARD_COLLECT_ALL_CARD_LIST",
+        "method": "CityMsg.NewCardCollectAllCardListReq"
+    },
+    "237522": {
+        "name": "CardCollect",
+        "comments": "玩家全部赛季各星级卡牌总数量",
+        "protocol": "S_CARD_COLLECT_ALL_CARD_COUNT",
+        "method": "CityMsg.NewCardCollectAllCardCountReq"
+    },
+    "237523": {
+        "name": "CardCollect",
+        "comments": "查询战令额外钥匙可领数量",
+        "protocol": "S_CARD_COLLECT_GET_KEY_INFO",
+        "method": "CityMsg.NewCardCollectGetKeyInfoReq"
+    },
+    "237524": {
+        "name": "CardCollect",
+        "comments": "领取战令额外钥匙",
+        "protocol": "S_CARD_COLLECT_RECEIVE_BATTLE_PASS_KEY",
+        "method": "CityMsg.NewCardCollectReceiveBattlePassKeyReq"
+    },
+    "237525": {
+        "name": "CardCollect",
+        "comments": "五星闪卡按数量锁定",
+        "protocol": "S_CARD_COLLECT_CARD_LOCK",
+        "method": "CityMsg.NewCardCollectCardLockReq"
+    },
+    "237526": {
+        "name": "CardCollect",
+        "comments": "选择本期参与番外",
+        "protocol": "S_CARD_COLLECT_SELECT_SEASON",
+        "method": "CityMsg.NewCardCollectSelectSeasonReq"
+    },
+    "237590": {
+        "name": "CardCollect",
+        "comments": "增量推送",
+        "protocol": "S_CARD_COLLECT_SYNC_DATA",
+        "method": ""
+    },
+    "237601": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 进入活动",
+        "protocol": "S_BUBBLE_DRAGON_ENTER_ACTIVITY",
+        "method": "CityMsg.BubbleDragonEnterActivityReq"
+    },
+    "237602": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 进入倍率场",
+        "protocol": "S_BUBBLE_DRAGON_ENTER_GAME",
+        "method": "CityMsg.BubbleDragonEnterGameReq"
+    },
+    "237603": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 发射泡泡",
+        "protocol": "S_BUBBLE_DRAGON_SHOOT",
+        "method": "CityMsg.BubbleDragonShootReq"
+    },
+    "237604": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 使用体力道具",
+        "protocol": "S_BUBBLE_DRAGON_USE_STAMINA_ITEM",
+        "method": "CityMsg.BubbleDragonUseStaminaItemReq"
+    },
+    "237605": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 定风珠消除前N行",
+        "protocol": "S_BUBBLE_DRAGON_USE_CHARGE_ITEM",
+        "method": "CityMsg.BubbleDragonUseChargeItemReq"
+    },
+    "237606": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 神山宝库抽奖",
+        "protocol": "S_BUBBLE_DRAGON_DRAW",
+        "method": "CityMsg.BubbleDragonDrawReq"
+    },
+    "237607": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 自选大奖",
+        "protocol": "S_BUBBLE_DRAGON_SELECT_RARE",
+        "method": "CityMsg.BubbleDragonSelectRareReq"
+    },
+    "237608": {
+        "name": "BubbleDragon",
+        "comments": "灵果寻仙 战令特权刷新当前灵果",
+        "protocol": "S_BUBBLE_DRAGON_REFRESH_BUBBLE",
+        "method": "CityMsg.BubbleDragonRefreshBubbleReq"
+    },
+    "237701": {
+        "name": "Assistant",
+        "comments": "找回列表同步",
+        "protocol": "S_REWARD_RECLAIM_INFO",
+        "method": ""
+    },
+    "237702": {
+        "name": "Assistant",
+        "comments": "一键找回",
+        "protocol": "S_REWARD_RECLAIM_BATCH_CLAIM",
+        "method": "CityMsg.RewardReclaimBatchClaimReq"
+    },
+    "237703": {
+        "name": "Assistant",
+        "comments": "一键购买",
+        "protocol": "S_REWARD_RECLAIM_BATCH_BUY",
+        "method": "CityMsg.RewardReclaimBatchBuyReq"
+    },
+    "237704": {
+        "name": "Assistant",
+        "comments": "全部放弃付费找回",
+        "protocol": "S_REWARD_RECLAIM_BATCH_ABANDON_PAY",
+        "method": "CityMsg.RewardReclaimAbandonPayReq"
+    },
+    "238001": {
+        "name": "Fishing",
+        "comments": "进入主界面",
+        "protocol": "S_FISHING_ENTER",
+        "method": "CityMsg.FishingEnterReq"
+    },
+    "238002": {
+        "name": "Fishing",
+        "comments": "钓鱼",
+        "protocol": "S_FISHING_CAST",
+        "method": "CityMsg.FishingCastReq"
+    },
+    "238003": {
+        "name": "Fishing",
+        "comments": "上报 QTE",
+        "protocol": "S_FISHING_REPORT_QTE",
+        "method": "CityMsg.FishingReportQteReq"
+    },
+    "238004": {
+        "name": "Fishing",
+        "comments": "切换鱼池",
+        "protocol": "S_FISHING_SWITCH_POOL",
+        "method": "CityMsg.FishingSwitchPoolReq"
+    },
+    "238005": {
+        "name": "Fishing",
+        "comments": "鱼灵篓列表",
+        "protocol": "S_FISHING_GET_FISH_LIST",
+        "method": "CityMsg.FishingGetFishListReq"
+    },
+    "238006": {
+        "name": "Fishing",
+        "comments": "扩容鱼篓",
+        "protocol": "S_FISHING_EXPAND_BAG",
+        "method": "CityMsg.FishingExpandBagReq"
+    },
+    "238007": {
+        "name": "Fishing",
+        "comments": "分解",
+        "protocol": "S_FISHING_DECOMPOSE",
+        "method": "CityMsg.FishingDecomposeReq"
+    },
+    "238008": {
+        "name": "Fishing",
+        "comments": "锁定鱼",
+        "protocol": "S_FISHING_LOCK",
+        "method": "CityMsg.FishingLockReq"
+    },
+    "238009": {
+        "name": "Fishing",
+        "comments": "属性继承",
+        "protocol": "S_FISHING_INHERIT",
+        "method": "CityMsg.FishingInheritReq"
+    },
+    "238010": {
+        "name": "Fishing",
+        "comments": "待确认保存/取消",
+        "protocol": "S_FISHING_CONFIRM_PENDING",
+        "method": "CityMsg.FishingConfirmPendingReq"
+    },
+    "238011": {
+        "name": "Fishing",
+        "comments": "玄诀洗练",
+        "protocol": "S_FISHING_SKILL_BOOK",
+        "method": "CityMsg.FishingSkillBookReq"
+    },
+    "238012": {
+        "name": "Fishing",
+        "comments": "上阵",
+        "protocol": "S_FISHING_DEPLOY",
+        "method": "CityMsg.FishingDeployReq"
+    },
+    "238013": {
+        "name": "Fishing",
+        "comments": "图鉴领奖",
+        "protocol": "S_FISHING_CLAIM_ATLAS_REWARD",
+        "method": "CityMsg.FishingClaimAtlasRewardReq"
+    },
+    "238014": {
+        "name": "Fishing",
+        "comments": "升级",
+        "protocol": "S_FISHING_LEVEL_UP",
+        "method": "CityMsg.FishingLevelUpReq"
+    },
+    "238016": {
+        "name": "Fishing",
+        "comments": "鱼实例升级",
+        "protocol": "S_FISHING_FISH_LEVEL_UP",
+        "method": "CityMsg.FishingFishLevelUpReq"
+    },
+    "238017": {
+        "name": "Fishing",
+        "comments": "鱼实例升星",
+        "protocol": "S_FISHING_FISH_STAR_UP",
+        "method": "CityMsg.FishingFishStarUpReq"
+    },
+    "238018": {
+        "name": "Fishing",
+        "comments": "鱼实例等级重置",
+        "protocol": "S_FISHING_FISH_LEVEL_RESET",
+        "method": "CityMsg.FishingFishLevelResetReq"
+    },
+    "238099": {
+        "name": "PackagesBase",
+        "comments": "灵兽/灵鱼锁数据同步",
+        "protocol": "S_PET_LOCK_SYNC",
+        "method": ""
+    },
+    "238101": {
+        "name": "PeakDuel",
+        "comments": "进入万盟争锋",
+        "protocol": "S_PEAK_DUEL_ENTER",
+        "method": "CityMsg.PeakDuelEnterReq"
+    },
+    "238102": {
+        "name": "PeakDuel",
+        "comments": "万盟争锋登录/重连同步",
+        "protocol": "S_PEAK_DUEL_LOGIN_SYNC",
+        "method": ""
+    },
+    "238103": {
+        "name": "PeakDuel",
+        "comments": "大组完整区服列表",
+        "protocol": "S_PEAK_DUEL_SERVER_LIST",
+        "method": "CityMsg.PeakDuelServerListReq"
+    },
+    "238104": {
+        "name": "PeakDuel",
+        "comments": "赛程详情",
+        "protocol": "S_PEAK_DUEL_SCHEDULE",
+        "method": "CityMsg.PeakDuelScheduleReq"
+    },
+    "238105": {
+        "name": "PeakDuel",
+        "comments": "组内妖盟排行",
+        "protocol": "S_PEAK_DUEL_GROUP_RANK",
+        "method": "CityMsg.PeakDuelGroupRankReq"
+    },
+    "238106": {
+        "name": "PeakDuel",
+        "comments": "对决战况",
+        "protocol": "S_PEAK_DUEL_BATTLE_INFO",
+        "method": "CityMsg.PeakDuelBattleInfoReq"
+    },
+    "238107": {
+        "name": "PeakDuel",
+        "comments": "对决积分全榜",
+        "protocol": "S_PEAK_DUEL_BATTLE_RANK",
+        "method": "CityMsg.PeakDuelBattleRankReq"
+    },
+    "238108": {
+        "name": "PeakDuel",
+        "comments": "对决详情-对抗列表",
+        "protocol": "S_PEAK_DUEL_BATTLE_REPORT",
+        "method": "CityMsg.PeakDuelBattleReportReq"
+    },
+    "238109": {
+        "name": "PeakDuel",
+        "comments": "对决详情-历史对战",
+        "protocol": "S_PEAK_DUEL_BATTLE_HISTORY",
+        "method": "CityMsg.PeakDuelBattleHistoryReq"
+    },
+    "238110": {
+        "name": "PeakDuel",
+        "comments": "贡献详情",
+        "protocol": "S_PEAK_DUEL_CONTRIBUTION",
+        "method": "CityMsg.PeakDuelContributionReq"
+    },
+    "238111": {
+        "name": "PeakDuel",
+        "comments": "点赞",
+        "protocol": "S_PEAK_DUEL_LIKE",
+        "method": "CityMsg.PeakDuelLikeReq"
+    },
+    "238112": {
+        "name": "Union",
+        "comments": "获取万盟争锋当前双方战斗信息",
+        "protocol": "S_UNION_PEAK_DUEL_GET_FIGHT_INFO",
+        "method": "CityMsg.PeakDuelGetFightInfoReq"
+    },
+    "238113": {
+        "name": "PeakDuel",
+        "comments": "任务类型66充值循环档批量领取",
+        "protocol": "S_PEAK_DUEL_CLAIM_RECHARGE_BATCH",
+        "method": "CityMsg.PeakDuelClaimRechargeBatchReq"
+    },
+    "238114": {
+        "name": "PeakDuel",
+        "comments": "竞猜页信息",
+        "protocol": "S_PEAK_DUEL_GUESS_INFO",
+        "method": "CityMsg.PeakDuelGuessInfoReq"
+    },
+    "238115": {
+        "name": "PeakDuel",
+        "comments": "领取竞猜币",
+        "protocol": "S_PEAK_DUEL_RECEIVE_GUESS_COIN",
+        "method": "CityMsg.PeakDuelReceiveGuessCoinReq"
+    },
+    "238116": {
+        "name": "PeakDuel",
+        "comments": "押注妖盟",
+        "protocol": "S_PEAK_DUEL_GUESS",
+        "method": "CityMsg.PeakDuelGuessReq"
+    },
+    "238117": {
+        "name": "PeakDuel",
+        "comments": "热度榜",
+        "protocol": "S_PEAK_DUEL_HEAT_RANK",
+        "method": "CityMsg.PeakDuelHeatRankReq"
+    },
+    "238118": {
+        "name": "PeakDuel",
+        "comments": "竞猜榜",
+        "protocol": "S_PEAK_DUEL_GUESS_RANK",
+        "method": "CityMsg.PeakDuelGuessRankReq"
+    },
+    "238119": {
+        "name": "PeakDuel",
+        "comments": "往届冠军",
+        "protocol": "S_PEAK_DUEL_HISTORY",
+        "method": "CityMsg.PeakDuelHistoryReq"
+    },
+    "238120": {
+        "name": "PeakDuel",
+        "comments": "庆典信息",
+        "protocol": "S_PEAK_DUEL_CELEBRATION",
+        "method": "CityMsg.PeakDuelCelebrationReq"
+    },
+    "238121": {
+        "name": "PeakDuel",
+        "comments": "膜拜领奖",
+        "protocol": "S_PEAK_DUEL_WORSHIP",
+        "method": "CityMsg.PeakDuelWorshipReq"
+    },
+    "238122": {
+        "name": "PeakDuel",
+        "comments": "妖盟各场次排行积分",
+        "protocol": "S_PEAK_DUEL_UNION_MATCH_SCORE",
+        "method": "CityMsg.PeakDuelUnionMatchScoreReq"
+    },
+    "238123": {
+        "name": "PeakDuel",
+        "comments": "获取最新个人任务积分",
+        "protocol": "S_PEAK_DUEL_PLAYER_SCORE",
+        "method": "CityMsg.PeakDuelPlayerScoreReq"
+    },
+    "238124": {
+        "name": "PeakDuel",
+        "comments": "红点详情",
+        "protocol": "S_PEAK_DUEL_RED_POINT",
+        "method": "CityMsg.PeakDuelRedPointReq"
+    },
+    "238201": {
+        "name": "SwitchDraw",
+        "comments": "玄机觅宝 进入活动",
+        "protocol": "S_SWITCH_DRAW_ENTER",
+        "method": "CityMsg.SwitchDrawEnterReq"
+    },
+    "238202": {
+        "name": "SwitchDraw",
+        "comments": "玄机觅宝 觅宝抽取",
+        "protocol": "S_SWITCH_DRAW_DRAW",
+        "method": "CityMsg.SwitchDrawDrawReq"
+    },
+    "238203": {
+        "name": "SwitchDraw",
+        "comments": "玄机觅宝 自选/更换大奖",
+        "protocol": "S_SWITCH_DRAW_SELECT_BIG_REWARD",
+        "method": "CityMsg.SwitchDrawSelectBigRewardReq"
+    },
+    "238205": {
+        "name": "SwitchDraw",
+        "comments": "玄机觅宝 数据同步",
+        "protocol": "S_SWITCH_DRAW_SYNC",
+        "method": ""
+    },
+    "238206": {
+        "name": "SwitchDraw",
+        "comments": "玄机觅宝 一键觅宝",
+        "protocol": "S_SWITCH_DRAW_DRAW_ALL",
+        "method": "CityMsg.SwitchDrawDrawAllReq"
+    },
+    "238301": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石进入系统",
+        "protocol": "S_TREASURE_STONE_ENTER",
+        "method": "CityMsg.TreasureStoneEnterReq"
+    },
+    "238302": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石镶嵌",
+        "protocol": "S_TREASURE_STONE_EQUIP",
+        "method": "CityMsg.TreasureStoneEquipReq"
+    },
+    "238303": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石拆卸",
+        "protocol": "S_TREASURE_STONE_UNEQUIP",
+        "method": "CityMsg.TreasureStoneUnequipReq"
+    },
+    "238304": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石锁定/解锁",
+        "protocol": "S_TREASURE_STONE_LOCK",
+        "method": "CityMsg.TreasureStoneLockReq"
+    },
+    "238305": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石同步",
+        "protocol": "S_TREASURE_STONE_SYNC",
+        "method": ""
+    },
+    "238306": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石批量融合升阶",
+        "protocol": "S_TREASURE_STONE_COMPOSE_BATCH",
+        "method": "CityMsg.TreasureStoneComposeBatchReq"
+    },
+    "238307": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石合成日志",
+        "protocol": "S_TREASURE_STONE_COMPOSE_LOG",
+        "method": "CityMsg.TreasureStoneComposeLogReq"
+    },
+    "238308": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石红点同步",
+        "protocol": "S_TREASURE_STONE_SYNC_RED_POINT",
+        "method": ""
+    },
+    "238310": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石上架",
+        "protocol": "S_TREASURE_STONE_DEAL_SELL",
+        "method": "CityMsg.TreasureStoneDealSellReq"
+    },
+    "238311": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石下架",
+        "protocol": "S_TREASURE_STONE_DEAL_SELL_DOWN",
+        "method": "CityMsg.TreasureStoneDealSellDownReq"
+    },
+    "238312": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石购买",
+        "protocol": "S_TREASURE_STONE_DEAL_BUY",
+        "method": "CityMsg.TreasureStoneDealBuyReq"
+    },
+    "238313": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石获取交易记录",
+        "protocol": "S_TREASURE_STONE_DEAL_GET_RECORD",
+        "method": "CityMsg.TreasureStoneDealGetRecordReq"
+    },
+    "238314": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石收藏/取消收藏",
+        "protocol": "S_TREASURE_STONE_DEAL_COLLECT",
+        "method": "CityMsg.TreasureStoneDealCollectReq"
+    },
+    "238315": {
+        "name": "TreasureStone",
+        "comments": "异宝宝石改价",
+        "protocol": "S_TREASURE_STONE_DEAL_PRICE_ADJUST",
+        "method": "CityMsg.TreasureStoneDealPriceAdjustReq"
+    },
+    "238401": {
+        "name": "LawStone",
+        "comments": "法则宝石进入系统",
+        "protocol": "S_LAW_STONE_ENTER",
+        "method": "CityMsg.LawStoneEnterReq"
+    },
+    "238402": {
+        "name": "LawStone",
+        "comments": "法则宝石镶嵌",
+        "protocol": "S_LAW_STONE_EQUIP",
+        "method": "CityMsg.LawStoneEquipReq"
+    },
+    "238403": {
+        "name": "LawStone",
+        "comments": "法则宝石拆卸",
+        "protocol": "S_LAW_STONE_UNEQUIP",
+        "method": "CityMsg.LawStoneUnequipReq"
+    },
+    "238404": {
+        "name": "LawStone",
+        "comments": "法则宝石锁定/解锁",
+        "protocol": "S_LAW_STONE_LOCK",
+        "method": "CityMsg.LawStoneLockReq"
+    },
+    "238405": {
+        "name": "LawStone",
+        "comments": "法则宝石同步",
+        "protocol": "S_LAW_STONE_SYNC",
+        "method": ""
+    },
+    "238406": {
+        "name": "LawStone",
+        "comments": "法则宝石批量融合升阶",
+        "protocol": "S_LAW_STONE_COMPOSE_BATCH",
+        "method": "CityMsg.LawStoneComposeBatchReq"
+    },
+    "238407": {
+        "name": "LawStone",
+        "comments": "法则宝石合成日志",
+        "protocol": "S_LAW_STONE_COMPOSE_LOG",
+        "method": "CityMsg.LawStoneComposeLogReq"
+    },
+    "238408": {
+        "name": "LawStone",
+        "comments": "法则宝石红点同步",
+        "protocol": "S_LAW_STONE_SYNC_RED_POINT",
+        "method": ""
+    },
+    "238410": {
+        "name": "LawStone",
+        "comments": "法则宝石上架",
+        "protocol": "S_LAW_STONE_DEAL_SELL",
+        "method": "CityMsg.LawStoneDealSellReq"
+    },
+    "238411": {
+        "name": "LawStone",
+        "comments": "法则宝石下架",
+        "protocol": "S_LAW_STONE_DEAL_SELL_DOWN",
+        "method": "CityMsg.LawStoneDealSellDownReq"
+    },
+    "238412": {
+        "name": "LawStone",
+        "comments": "法则宝石购买",
+        "protocol": "S_LAW_STONE_DEAL_BUY",
+        "method": "CityMsg.LawStoneDealBuyReq"
+    },
+    "238413": {
+        "name": "LawStone",
+        "comments": "法则宝石获取交易记录",
+        "protocol": "S_LAW_STONE_DEAL_GET_RECORD",
+        "method": "CityMsg.LawStoneDealGetRecordReq"
+    },
+    "238414": {
+        "name": "LawStone",
+        "comments": "法则宝石收藏/取消收藏",
+        "protocol": "S_LAW_STONE_DEAL_COLLECT",
+        "method": "CityMsg.LawStoneDealCollectReq"
+    },
+    "238415": {
+        "name": "LawStone",
+        "comments": "法则宝石改价",
+        "protocol": "S_LAW_STONE_DEAL_PRICE_ADJUST",
+        "method": "CityMsg.LawStoneDealPriceAdjustReq"
+    },
+    "238601": {
+        "name": "TextTower",
+        "comments": "文字塔防联动-进入活动",
+        "protocol": "S_TEXTTOWER_ENTER",
+        "method": "CityMsg.TextTowerEnterReq"
+    },
+    "238602": {
+        "name": "TextTower",
+        "comments": "文字塔防联动-过关领奖",
+        "protocol": "S_TEXTTOWER_RECEIVE_REWARD",
+        "method": "CityMsg.TextTowerReceiveRewardReq"
+    },
+    "238603": {
+        "name": "TextTower",
+        "comments": "文字塔防联动-按关请求录像",
+        "protocol": "S_TEXTTOWER_GET_VIDEO",
+        "method": "CityMsg.TextTowerGetVideoReq"
+    },
+    "238604": {
+        "name": "TextTower",
+        "comments": "文字塔防联动-挑战数据上报",
+        "protocol": "S_TEXTTOWER_REPORT",
+        "method": "CityMsg.TextTowerReportReq"
+    },
+    "238700": {
+        "name": "TopFeastTime",
+        "comments": "问鼎道台入口状态同步",
+        "protocol": "S_TOP_FEAST_TIME_ENTRY_SYNC",
+        "method": ""
+    },
+    "238701": {
+        "name": "TopFeastTime",
+        "comments": "进入问鼎道台",
+        "protocol": "S_TOP_FEAST_TIME_ENTER",
+        "method": "CityMsg.TopFeastTimeEnterReq"
+    },
+    "238702": {
+        "name": "TopFeastTime",
+        "comments": "申请入座",
+        "protocol": "S_TOP_FEAST_TIME_APPLY",
+        "method": "CityMsg.TopFeastTimeApplyReq"
+    },
+    "238703": {
+        "name": "TopFeastTime",
+        "comments": "取消申请",
+        "protocol": "S_TOP_FEAST_TIME_CANCEL_APPLY",
+        "method": "CityMsg.TopFeastTimeCancelApplyReq"
+    },
+    "238704": {
+        "name": "TopFeastTime",
+        "comments": "领取累计产出",
+        "protocol": "S_TOP_FEAST_TIME_CLAIM_OUTPUT",
+        "method": "CityMsg.TopFeastTimeClaimOutputReq"
+    },
+    "238705": {
+        "name": "TopFeastTime",
+        "comments": "道台主踢出入座玩家",
+        "protocol": "S_TOP_FEAST_TIME_KICK",
+        "method": "CityMsg.TopFeastTimeKickReq"
+    },
+    "238706": {
+        "name": "TopFeastTime",
+        "comments": "道台场景数据变化",
+        "protocol": "S_TOP_FEAST_TIME_SCENE_SYNC",
+        "method": ""
+    },
+    "238707": {
+        "name": "TopFeastTime",
+        "comments": "玩家被踢出道台",
+        "protocol": "S_TOP_FEAST_TIME_KICKED_SYNC",
+        "method": ""
+    },
+    "238708": {
+        "name": "TopFeastTime",
+        "comments": "道台主邀请玩家入座",
+        "protocol": "S_TOP_FEAST_TIME_INVITE",
+        "method": "CityMsg.TopFeastTimeInviteReq"
+    },
+    "238709": {
+        "name": "TopFeastTime",
+        "comments": "道台主同意入座申请",
+        "protocol": "S_TOP_FEAST_TIME_AGREE_APPLY",
+        "method": "CityMsg.TopFeastTimeAgreeApplyReq"
+    },
+    "238710": {
+        "name": "TopFeastTime",
+        "comments": "道台主一键拒绝入座申请",
+        "protocol": "S_TOP_FEAST_TIME_REFUSE_ALL_APPLY",
+        "method": "CityMsg.TopFeastTimeRefuseAllApplyReq"
+    },
+    "238711": {
+        "name": "TopFeastTime",
+        "comments": "进入问鼎宝箱",
+        "protocol": "S_TOP_FEAST_TIME_LOTTERY_ENTER",
+        "method": "CityMsg.TopFeastTimeLotteryEnterReq"
+    },
+    "238713": {
+        "name": "TopFeastTime",
+        "comments": "开启问鼎宝箱",
+        "protocol": "S_TOP_FEAST_TIME_LOTTERY_DRAW",
+        "method": "CityMsg.TopFeastTimeLotteryDrawReq"
+    },
+    "238714": {
+        "name": "TopFeastTime",
+        "comments": "道台场景心跳（无回包）",
+        "protocol": "S_TOP_FEAST_TIME_HEARTBEAT",
+        "method": "CityMsg.TopFeastTimeHeartbeatReq"
+    },
+    "238715": {
+        "name": "TopFeastTime",
+        "comments": "红点详情",
+        "protocol": "S_TOP_FEAST_TIME_RED_POINT",
+        "method": "CityMsg.TopFeastTimeRedPointReq"
+    },
+    "238716": {
+        "name": "TopFeastTime",
+        "comments": "查看我申请其他人道台的记录",
+        "protocol": "S_TOP_FEAST_TIME_MY_APPLY_LIST",
+        "method": "CityMsg.TopFeastTimeMyApplyListReq"
+    },
+    "238717": {
+        "name": "TopFeastTime",
+        "comments": "查看谁向我申请入座道台",
+        "protocol": "S_TOP_FEAST_TIME_APPLY_TO_ME_LIST",
+        "method": "CityMsg.TopFeastTimeApplyListReq"
+    },
+    "238718": {
+        "name": "TopFeastTime",
+        "comments": "谁邀请我入座的",
+        "protocol": "S_TOP_FEAST_TIME_MY_INVITE_INFO",
+        "method": "CityMsg.TopFeastTimeInviteListReq"
+    },
+    "238719": {
+        "name": "TopFeastTime",
+        "comments": "是否接受邀请入座",
+        "protocol": "S_TOP_FEAST_TIME_AGREE_INVITE",
+        "method": "CityMsg.TopFeastTimeAgreeInviteListReq"
+    },
+    "238720": {
+        "name": "TopFeastTime",
+        "comments": "查看完整的位面列表",
+        "protocol": "S_TOP_FEAST_TIME_FULL_SERVER_LIST",
+        "method": "CityMsg.TopFeastTimeListReq"
+    },
+    "238721": {
+        "name": "TopFeastTime",
+        "comments": "申请被同意后收到的同步",
+        "protocol": "S_TOP_FEAST_TIME_AGREED_SYNC",
+        "method": ""
+    },
+    "238722": {
+        "name": "TopFeastTime",
+        "comments": "道台的座位详情",
+        "protocol": "S_TOP_FEAST_TIME_SEAT_DETAIL",
+        "method": "CityMsg.TopFeastTimeSeatDetailReq"
+    },
+    "238723": {
+        "name": "TopFeastTime",
+        "comments": "被邀请人一键拒绝入座邀请",
+        "protocol": "S_TOP_FEAST_TIME_REFUSE_ALL_INVITE",
+        "method": "CityMsg.TopFeastTimeRefuseAllInviteReq"
+    },
+    "238730": {
+        "name": "TopFeastTime",
+        "comments": "道台的广播",
+        "protocol": "S_TOP_FEAST_TIME_BROADCAST",
+        "method": ""
     },
     "290101": {
         "name": "Gift",

@@ -39,7 +39,16 @@ enum ChaosLawPb {
     ChaosLaw_SyncRedPoint = 236734;
     ChaosLaw_InitialIdentify = 236736;
     ChaosLaw_MallAddLawsSync = 236737;
-  }
+    ChaosLaw_AuctionSell = 236740;
+    ChaosLaw_AuctionBid = 236741;
+    ChaosLaw_AuctionSellDown = 236742;
+    ChaosLaw_AuctionGetGoods = 236743;
+    ChaosLaw_AuctionSyncBid = 236744;
+    ChaosLaw_AuctionOutbidNotify = 236745;
+    ChaosLaw_AuctionSettleNotify = 236746;
+    ChaosLaw_AuctionHeartbeat = 236747;
+    ChaosLaw_AuctionNotifyRead = 236748;
+}
   enum ChaosLawEnumRedPoint {
     ChaosLaw_RedPoint_PerceiveReady = 0;
     ChaosLaw_RedPoint_EvolveDone = 1;
@@ -47,6 +56,8 @@ enum ChaosLawPb {
     ChaosLaw_RedPoint_Record = 3;
     ChaosLaw_RedPoint_CanBuy = 4;
     ChaosLaw_RedPoint_NewItem = 5;
+    ChaosLaw_RedPoint_AuctionOutbid = 6;
+    ChaosLaw_RedPoint_Auction = 7;
   }
   message ChaosLawUnformedLawData {
     required int32 id = 1;
@@ -66,6 +77,8 @@ enum ChaosLawPb {
     optional ChaosLawPlayerDataMsg playerData = 2;
     repeated ChaosLawItemData items = 3;
     optional string redPoint = 4;
+    repeated ChaosLawAuctionSettleNotify settleNotifyList = 5;
+    repeated ChaosLawAuctionOutbidNotify outbidNotifyList = 6;
   }
   message ChaosLawPlayerDataMsg {
     required int32 perceiveCount = 1;
@@ -78,6 +91,10 @@ enum ChaosLawPb {
     repeated int32 equippedLawIds = 8;
     required int32 sellCount = 9;
     repeated ChaosLawSeparationEquipMsg separationEquips = 10;
+    optional int32 auctionSellCount = 11;
+    optional int32 remainDailyBuyTimes = 12;
+    optional int32 remainUnidentifiedDailyBuyTimes = 13;
+    optional int32 remainDailyAuctionTimes = 14;
   }
   message ChaosLawSeparationEquipMsg {
     required int64 index = 1;
@@ -221,7 +238,7 @@ enum ChaosLawPb {
   }
   message ChaosLawSellReq {
     required int32 lawId = 1;
-    required int32 price = 2;
+    required int64 price = 2;
     required string password = 3;
     required bool anonymous = 4;
   }
@@ -240,7 +257,7 @@ enum ChaosLawPb {
   }
   message ChaosLawBuyReq {
     required string goodsId = 1;
-    required int32 price = 2;
+    required int64 price = 2;
     required string password = 3;
   }
   message ChaosLawBuyRsp {
@@ -257,19 +274,24 @@ enum ChaosLawPb {
     optional int32 pageNum = 6;
     optional int64 stamp = 7;
     optional int32 collect = 8;
-    optional int32 lawType = 9;
+    repeated int32 lawType = 9;
     repeated int32 attrType = 10;
     repeated int32 qualityList = 11;
     optional string seller = 12;
     optional int32 starLevel = 13;
     optional int32 hasIdentified = 14;
-  }
+    optional int32 listType = 15;
+    optional int64 lastViewTime = 16;
+    optional int32 participateStatus = 17;
+    optional int32 hasSpecial = 18;
+}
   message ChaosLawGetGoodsListRsp {
     required int32 ret = 1;
     repeated ChaosLawGoodsData goodsList = 2;
     optional int32 maxSize = 3;
     optional int64 stamp = 4;
     optional int32 collectSize = 5;
+    repeated ChaosLawGoodsAuctionData auctionGoodsList = 6;
   }
   message ChaosLawGoodsData {
     required string goodsId = 1;
@@ -278,7 +300,7 @@ enum ChaosLawPb {
     required int32 quality = 4;
     repeated ChaosLawEntryData entries = 5;
     required string score = 6;
-    required int32 price = 7;
+    required int64 price = 7;
     required int64 beginSellTime = 8;
     required bool anonymous = 9;
     optional TreasureAuctionPlayerAppearanceDataMsg sellerInfo = 10;
@@ -287,6 +309,7 @@ enum ChaosLawPb {
     optional int32 lawType = 13;
     optional int32 commentNum = 14;
     optional string createNickName = 15;
+    repeated int32 featureSkillIds = 16;
   }
   message ChaosLawCollectReq {
     required string goodsId = 1;
@@ -306,7 +329,7 @@ enum ChaosLawPb {
     required int64 time = 1;
     required int32 type = 2;
     required int32 quality = 3;
-    required int32 price = 4;
+    required int64 price = 4;
     required string score = 5;
     required int64 targetPlayerId = 6;
     required int64 targetServerId = 7;
@@ -315,11 +338,13 @@ enum ChaosLawPb {
     optional int32 suitType = 10;
     optional int32 appearance = 11;
     repeated ChaosLawEntryData entries = 12;
+    optional bool auction = 13;
+    repeated int32 featureSkillIds = 14;
   }
   message ChaosLawPriceAdjustReq {
     required int32 id = 1;
     required string password = 2;
-    required int32 price = 3;
+    required int64 price = 3;
   }
   message ChaosLawPriceAdjustRsp {
     required int32 ret = 1;
@@ -396,4 +421,87 @@ message ChaosLawCommentData {
 }
 message ChaosMallAddLawsSyncMsg {
     repeated ChaosLawEvolveRewardRsp evolveLaw = 1;
+}
+message ChaosLawAuctionBidRecordMsg {
+    required int64 playerId = 1;
+    required int64 serverId = 2;
+    required int64 price = 3;
+    required int64 bidTime = 4;
+    required string nickName = 5;
+    required bool anonymous = 6;
+}
+message ChaosLawGoodsAuctionData {
+    required ChaosLawGoodsData base = 1;
+    required int64 currentPrice = 2;
+    required int64 auctionEndTime = 5;
+    required int64 showEndTime = 6;
+    required int32 bidCount = 8;
+    optional TreasureAuctionPlayerAppearanceDataMsg currentBidder = 9;
+    repeated ChaosLawAuctionBidRecordMsg recentBids = 10;
+}
+message ChaosLawAuctionSellReq {
+    required int32 lawId = 1;
+    required int64 startPrice = 2;
+    required bool anonymous = 3;
+    required string password = 4;
+}
+message ChaosLawAuctionSellRsp {
+    required int32 ret = 1;
+    optional ChaosLawGoodsAuctionData goods = 2;
+    optional int32 remainSellCount = 3;
+    optional ChaosLawPlayerDataMsg playerData = 4;
+}
+message ChaosLawAuctionBidReq {
+    required string goodsId = 1;
+    required int64 bidPrice = 2;
+    required string password = 3;
+}
+message ChaosLawAuctionBidRsp {
+    required int32 ret = 1;
+    optional ChaosLawGoodsAuctionData goods = 2;
+}
+message ChaosLawAuctionSellDownReq {
+    required int32 lawId = 1;
+}
+message ChaosLawAuctionSellDownRsp {
+    required int32 ret = 1;
+    optional string goodsId = 2;
+    optional ChaosLawItemData item = 3;
+    optional ChaosLawPlayerDataMsg playerData = 4;
+}
+message ChaosLawAuctionGetGoodsReq {
+  required string goodsId = 1;
+}
+message ChaosLawAuctionGetGoodsRsp {
+  required int32 ret = 1;
+  optional ChaosLawGoodsAuctionData goods = 2;
+}
+message ChaosLawAuctionSyncBid {
+    required ChaosLawGoodsAuctionData goods = 1;
+}
+message ChaosLawAuctionOutbidNotify {
+    required string goodsId = 1;
+    required int32 suitType = 2;
+    required int64 refundPrice = 3;
+    required int64 nowBidPrice = 4;
+    optional int64 auctionEndTime = 5;
+    optional int64 timestamp = 6;
+}
+message ChaosLawAuctionSettleNotify {
+    required string goodsId = 1;
+    required int32 suitType = 2;
+    required int32 role = 3;
+    required int64 finalPrice = 4;
+    required int64 sellerIncome = 5;
+    optional ChaosLawGoodsData goods = 6;
+    optional int64 timestamp = 7;
+}
+message ChaosLawAuctionHeartbeatReq {
+}
+message ChaosLawAuctionNotifyReadReq {
+    repeated int64 settleTimestamps = 1;
+    repeated int64 outbidTimestamps = 2;
+}
+message ChaosLawAuctionNotifyReadRsp {
+    required int32 ret = 1;
 }

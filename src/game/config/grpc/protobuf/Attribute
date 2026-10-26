@@ -59,6 +59,9 @@ message SeparationDataMsg{
     optional int32 universePuzzleLevel = 27;
     optional PuzzlePresetMsg puzzlePreset = 28;
     repeated ChaosLawViewItemData chaosLawEquipItems = 29;
+    optional bytes fishMsg = 30;
+    optional int32 equipBackOrnament = 31;
+    repeated GemstoneViewItemData gemstoneEquipItems = 32;
   }
     message PupilDetailDataMsg {
         repeated AttributeDataMsg baseAttr = 1;

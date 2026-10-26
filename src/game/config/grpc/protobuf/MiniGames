@@ -15,6 +15,7 @@ enum MiniGamesType {
   Shoot = 3;
   WestJourney = 4;
   BreakPath = 5;
+  TextDefence = 7;
 }
 message MiniGamesWestJourneyData {
   optional int32 maxStage = 1;

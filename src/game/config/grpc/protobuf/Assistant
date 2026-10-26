@@ -146,6 +146,11 @@ message AssistantUniverseDrawResult {
   optional double beiLv = 10;
   optional int32 index = 11;
 }
+message AssistantPalaceAutoRewardResult {
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated AssistantPalaceAutoRecordMsg records = 3;
+}
   message AssistantMonthCardRewardResult {
     required int32 ret = 1;
     optional string reward = 2;
@@ -348,6 +353,7 @@ message AssistantUniverseDrawResult {
     optional AssistantUniverseSkillDrawResult univerResult = 48;
     optional AssistantShopBuyResult divineShopBuyResult = 49;
     repeated AssistantUniverseDrawResult universeDrawResult = 50;
+    optional AssistantPalaceAutoRewardResult palaceAutoRewardResult = 51;
   }
   message AssistantYardBaseInfoReq {
   }
@@ -410,3 +416,89 @@ message AssistantUniverseDrawResult {
     required int32 ret = 1;
     required int32 remindVal = 2;
   }
+message AssistantPalaceAutoRecordMsg {
+  optional int32 count = 1;
+  optional int32 type = 2;
+  optional int64 time = 3;
+  optional bool reward = 4;
+}
+message AssistantPalaceAutoInfoSync {
+  repeated AssistantPalaceAutoRecordMsg records = 1;
+}
+message AssistantPalaceAutoRewardReq {
+}
+message AssistantPalaceAutoRewardResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  repeated AssistantPalaceAutoRecordMsg records = 3;
+}
+message ReclaimRecordMsg {
+    required int32 reclaimType = 1;
+    required int64 recordDate = 2;
+    required int32 status = 3;
+    optional string rewards = 4;
+    optional int32 reclaimCount = 5;
+    optional int32 levelSnapshot = 6;
+    optional int32 payReclaimCount = 7;
+    optional int32 payStatus = 8;
+    optional int32 nextBuyStartIdx = 9;
+}
+message RewardReclaimInfoReq {
+}
+message RewardReclaimInfoPush {
+    repeated ReclaimRecordMsg records = 1;
+}
+message RewardReclaimBatchClaimReq {
+    optional int32 reclaimType = 1;
+}
+message RewardReclaimBatchClaimRsp {
+    required int32 ret = 1;
+    repeated RewardReclaimBatchClaimRspItemMsg list = 2;
+}
+message RewardReclaimBatchBuyReq {
+    repeated RewardReclaimBatchBuyReqItemMsg selectList = 1;
+}
+message RewardReclaimBatchBuyRsp {
+    required int32 ret = 1;
+    repeated RewardReclaimBatchBuyRespItemMsg list = 2;
+}
+message RewardReclaimAbandonPayReq {
+}
+message RewardReclaimAbandonPayRsp {
+    required int32 ret = 1;
+}
+message UnionReclaimResult {
+    required int64 recordDate = 1;
+    required int32 ret = 2;
+    optional string rewards = 3;
+}
+message RewardReclaimUnionTreasurePush {
+    repeated UnionReclaimResult results = 1;
+}
+message RewardReclaimUnionCrossReq {
+    required int64 recordDate = 1;
+    required int32 count = 2;
+}
+message RewardReclaimUnionCrossResp {
+    required int32 ret = 1;
+    required int64 recordDate = 2;
+    optional string rewards = 3;
+}
+message RewardReclaimBatchBuyReqItemMsg{
+    optional int32 reclaimType = 1;
+    optional int32 times = 2;
+    optional int32 levelSnapshot = 3;
+    optional int32 nextBuyStartIdx = 4;
+}
+message RewardReclaimBatchBuyRespItemMsg{
+    optional int32 reclaimType = 1;
+    optional int32 actualBuyCount = 2;
+    optional string cost = 3;
+    optional string rewards = 4;
+}
+message RewardReclaimBatchClaimRspItemMsg {
+    required int32 reclaimType = 1;
+    optional string rewards = 2;
+    optional int32 reclaimCount = 3;
+    optional int32 levelSnapshot = 4;
+}

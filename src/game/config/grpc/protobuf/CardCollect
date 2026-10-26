@@ -1,0 +1,380 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum NewCardCollectPb {
+  newCardCollectEnter = 237501;
+  newCardCollectLoginSync = 237502;
+  newCardCollectOpenBag = 237503;
+  newCardCollectActivate = 237504;
+  newCardCollectClaimChapterStage = 237505;
+  newCardCollectSignIn = 237506;
+  newCardCollectRelease = 237507;
+  newCardCollectChange = 237508;
+  newCardCollectChangeList = 237509;
+  newCardCollectSearchPlayer = 237510;
+  newCardCollectOpenRandomBox = 237511;
+  newCardCollectCardRecycle = 237512;
+  newCardCollectInnerRedPoint = 237513;
+  newCardCollectHistoryView = 237514;
+  newCardCollectClaimSeasonAward = 237515;
+  newCardCollectLeave = 237516;
+  newCardCollectUseAbleCardList = 237517;
+  newCardCollectPlayerCollectRecordList = 237518;
+  newCardCollectPlayerSeasonList = 237519;
+  newCardCollectSyncLoseData = 237520;
+  newCardCollectAllCardList = 237521;
+  newCardCollectAllCardCount = 237522;
+  newCardCollectGetKeyInfo = 237523;
+  newCardCollectReceiveBattlePassKey = 237524;
+  newCardCollectCardLock = 237525;
+  newCardCollectSelectSeason = 237526;
+  newCardCollectSyncData = 237590;
+}
+enum NewCardCollectInnerRedPointEnum {
+  newCardCollectPlayerChangeListRed = 0;
+  newCardCollectChangeRecordListRed = 1;
+  newCardCollectSeasonAwardRed = 2;
+  newCardCollectSignInRed = 3;
+}
+message NewCardCollectCardInfo {
+  required int32 id = 1;
+  required int32 num = 2;
+  optional bool activated = 3;
+  optional bool rewardClaimed = 4;
+  optional int32 lockNum = 5;
+}
+message NewCardCollectAlertCardInfo {
+  required int32 id = 1;
+  optional string name = 2;
+  optional int32 num = 3;
+  optional bool isNew = 4;
+}
+message NewCardCollectCardBagInfo {
+  required int32 id = 1;
+  required int32 num = 2;
+}
+message NewCardCollectChapterStageInfo {
+  optional int32 chapterId = 1;
+  repeated int32 stageValueList = 2;
+}
+message NewCardCollectSignInInfo {
+  optional int32 type = 1;
+  optional int64 lastSignInTime = 2;
+  repeated int32 signInBackDay = 3;
+}
+message NewCardCollectServerInfo {
+  required int64 serverId = 1;
+  optional int32 season = 2;
+  required int64 startShowTime = 3;
+  required int64 startTime = 4;
+  required int64 endTime = 5;
+  required int64 endShowTime = 6;
+}
+message NewCardCollectExchangeNumInfo {
+  optional int32 star = 1;
+  optional int32 changeNum = 2;
+}
+message NewCardCollectChangeCardInfo {
+  required int32 id = 1;
+  required int32 num = 2;
+  optional int32 season = 3;
+  optional int32 ownNum = 4;
+}
+message NewCardCollectChangeInfo {
+  optional int64 id = 1;
+  repeated NewCardCollectChangeCardInfo needCard = 2;
+  repeated NewCardCollectChangeCardInfo provideCard = 3;
+  optional int32 status = 4;
+  optional int64 expire = 5;
+  optional PlayerBaseDataMsg playerData = 6;
+  optional PlayerBaseDataMsg otherPlayerData = 7;
+  optional int32 seasonId = 8;
+}
+message NewCardCollectLoseChangeInfo {
+  optional int32 cardId = 1;
+  optional PlayerBaseDataMsg playerData = 2;
+}
+message NewCardCollectLoseChange {
+  repeated NewCardCollectLoseChangeInfo loseChangeInfo = 1;
+}
+message NewCardCollectHistorySeasonInfo {
+  optional int32 season = 1;
+  optional int32 value = 2;
+  optional int32 maxValue = 3;
+  optional bool isFull = 4;
+}
+message NewCardCollectSeasonDetail {
+  optional int32 value = 1;
+  optional int32 maxValue = 2;
+}
+message NewCardCollectSeasonData {
+  required int32 season = 1;
+  optional NewCardCollectSeasonDetail seasonData = 2;
+  optional NewCardCollectSeasonDetail historySeasonData = 3;
+  optional bool isCurSeason = 4;
+  optional bool isFull = 5;
+  optional bool awardRed = 6;
+}
+message NewCardCollectEnterReq {
+}
+message NewCardCollectEnterResp {
+  required int32 ret = 1;
+  optional int32 seasonId = 2;
+  optional int64 startShowTime = 3;
+  optional int64 endShowTime = 4;
+  optional int64 startTime = 5;
+  optional int64 endTime = 6;
+  repeated NewCardCollectCardInfo cardList = 7;
+  repeated NewCardCollectCardBagInfo cardBagList = 8;
+  repeated NewCardCollectChapterStageInfo chapterStageList = 9;
+  optional bool seasonAwardClaimed = 10;
+  repeated NewCardCollectSignInInfo signInDataList = 11;
+  repeated int32 attrOverview = 12;
+  optional string redPoint = 13;
+  optional bool unlockOldSeason7 = 14;
+  repeated NewCardCollectAlertCardInfo alertCardList = 15;
+  optional int32 releaseNum = 16;
+  repeated NewCardCollectServerInfo serverInfoList = 17;
+  optional NewCardCollectLoseChange loseData = 18;
+  repeated NewCardCollectExchangeNumInfo changeNumData = 19;
+  repeated int32 deck = 20;
+  optional string unlockSystem = 21;
+  optional string extra = 22;
+  optional int32 selectedSeason = 23;
+  repeated int32 openSeasonList = 25;
+  repeated int32 extraSwitchSeasonList = 26;
+}
+message NewCardCollectLoginSyncReq {
+}
+message NewCardCollectLoginSyncResp {
+  required int32 ret = 1;
+  optional int32 seasonId = 2;
+  optional bool unlockOldSeason7 = 3;
+  optional string redPoint = 4;
+  optional NewCardCollectServerInfo serverInfo = 5;
+  optional string extra = 6;
+  optional int32 selectedSeason = 7;
+  optional bool awardRed = 8;
+  repeated int32 openSeasonList = 9;
+  repeated int32 extraSwitchSeasonList = 10;
+}
+message NewCardCollectOpenBagReq {
+  optional int32 id = 1;
+  optional int32 num = 2;
+  optional bytes extraParam = 3;
+}
+message NewCardCollectOpenBagResp {
+  required int32 ret = 1;
+  repeated NewCardCollectOpenBagData cardData = 2;
+}
+message NewCardCollectOpenBagData {
+  optional int32 cardBagId = 1;
+  repeated NewCardCollectAlertCardInfo cardList = 2;
+}
+message NewCardCollectActivateReq {
+  required int32 cardId = 1;
+}
+message NewCardCollectActivateResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  repeated NewCardCollectAlertCardInfo alertCardList = 3;
+  repeated int32 newAttrIds = 4;
+  optional NewCardCollectCardInfo cardInfo = 5;
+}
+message NewCardCollectClaimChapterStageReq {
+  required int32 chapterId = 1;
+  required int32 stageValue = 2;
+  optional int32 seasonId = 3;
+}
+message NewCardCollectClaimChapterStageResp {
+  required int32 ret = 1;
+  repeated int32 attrIds = 2;
+  repeated NewCardCollectChapterStageInfo chapterStageList = 3;
+  optional string rewards = 4;
+}
+message NewCardCollectSignInReq {
+  optional int32 conditionId = 1;
+  optional int32 type = 2;
+}
+message NewCardCollectSignInResp {
+  optional int32 ret = 1;
+  optional string rewards = 2;
+}
+message NewCardCollectReleaseReq {
+  required NewCardCollectChangeInfo changeInfo = 1;
+  required int32 type = 2;
+  optional int64 otherPlayerId = 3;
+  required int32 seasonId = 4;
+}
+message NewCardCollectReleaseResp {
+  required int32 ret = 1;
+}
+message NewCardCollectChangeReq {
+  optional int64 id = 1;
+  optional NewCardCollectChangeInfo changeInfo = 2;
+  optional int32 operateStatus = 3;
+  required int32 seasonId = 4;
+}
+message NewCardCollectChangeResp {
+  required int32 ret = 1;
+  optional NewCardCollectAlertCardInfo alertCardData = 2;
+}
+message NewCardCollectChangeListReq {
+  required int32 type = 1;
+  repeated int32 cardIdList = 2;
+  optional bool isSelf = 3;
+  optional int32 status = 4;
+  optional bool canChange = 5;
+  required int32 seasonId = 6;
+}
+message NewCardCollectChangeListResp {
+  required int32 ret = 1;
+  repeated NewCardCollectChangeInfo changeInfoList = 2;
+}
+message NewCardCollectSearchPlayerReq {
+  required string searchKey = 1;
+  optional int64 serverId = 2;
+}
+message NewCardCollectSearchPlayerResp {
+  required int32 ret = 1;
+  optional NewCardCollectPlayerData playerMsg = 2;
+}
+message NewCardCollectPlayerData {
+  optional PlayerBaseDataMsg playerBaseDataMsg = 1;
+  repeated NewCardCollectExchangeNumInfo changeNumData = 2;
+  optional int32 season = 3;
+  optional int32 collectNum = 4;
+}
+message NewCardCollectCardRecycleReq {
+  repeated NewCardCollectCardInfo recycleInfo = 1;
+}
+message NewCardCollectCardRecycleResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+}
+message NewCardCollectOpenRandomBoxReq {
+  optional int32 id = 1;
+  optional int32 num = 2;
+}
+message NewCardCollectOpenRandomBoxResp {
+  required int32 ret = 1;
+  repeated NewCardCollectOpenBagData cardData= 2;
+}
+message NewCardCollectInnerRedPointReq {
+}
+message NewCardCollectInnerRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message NewCardCollectHistoryViewReq {
+  optional int32 season = 1;
+}
+message NewCardCollectHistoryViewResp {
+  required int32 ret = 1;
+  repeated NewCardCollectHistorySeasonInfo seasonList = 2;
+  repeated NewCardCollectCardInfo cardList = 3;
+  optional int32 season = 4;
+}
+message NewCardCollectClaimSeasonAwardReq {
+  optional int32 seasonId = 1;
+}
+message NewCardCollectClaimSeasonAwardResp {
+  required int32 ret = 1;
+  optional string rewards = 2;
+  repeated int32 attrIds = 3;
+}
+message NewCardCollectLeaveReq {
+}
+message NewCardCollectLeaveResp {
+  required int32 ret = 1;
+}
+message NewCardCollectUseAbleCardListReq {
+  optional int32 type = 1;
+  optional int32 seasonId = 2;
+}
+message NewCardCollectUseAbleCardListResp {
+  required int32 ret = 1;
+  repeated NewCardCollectCardInfo cardList = 2;
+}
+message NewCardCollectPlayerCollectRecordListReq {
+  required int32 season = 1;
+}
+message NewCardCollectPlayerCollectRecordListResp {
+  required int32 ret = 1;
+  repeated NewCardCollectCardInfo cardList = 2;
+  optional int32 season = 3;
+  repeated NewCardCollectChapterStageInfo chapterStageList = 4;
+  optional bool seasonAwardClaimed = 5;
+  repeated int32 attrOverview = 6;
+}
+message NewCardCollectPlayerSeasonListReq {
+  required int32 type = 1;
+}
+message NewCardCollectPlayerSeasonListResp {
+  required int32 ret = 1;
+  repeated NewCardCollectSeasonData seasonData = 2;
+}
+message NewCardCollectSeasonCardInfo {
+  optional int32 season = 1;
+  repeated NewCardCollectCardInfo cardList = 2;
+}
+message NewCardCollectAllCardListReq {
+  required int32 season = 1;
+  required int32 star = 2;
+}
+message NewCardCollectAllCardListResp {
+  required int32 ret = 1;
+  repeated NewCardCollectCardInfo cardList = 2;
+}
+message NewCardCollectStarCardCountInfo {
+  optional int32 star = 1;
+  optional int32 num = 2;
+}
+message NewCardCollectSeasonCardCountInfo {
+  optional int32 season = 1;
+  repeated NewCardCollectStarCardCountInfo starCountList = 2;
+}
+message NewCardCollectAllCardCountReq {
+}
+message NewCardCollectAllCardCountResp {
+  required int32 ret = 1;
+  repeated NewCardCollectSeasonCardCountInfo seasonCountList = 2;
+}
+message NewCardCollectGetKeyInfoReq {
+}
+message NewCardCollectGetKeyInfoResp {
+  required int32 ret = 1;
+  optional int32 canReceiveCount = 2;
+}
+message NewCardCollectReceiveBattlePassKeyReq {
+}
+message NewCardCollectReceiveBattlePassKeyResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message NewCardCollectCardLockReq {
+  required int32 cardId = 1;
+  required int32 lockNum = 2;
+}
+message NewCardCollectCardLockResp {
+  required int32 ret = 1;
+  optional NewCardCollectCardInfo cardInfo = 2;
+}
+message NewCardCollectSelectSeasonReq {
+  required int32 season = 1;
+}
+message NewCardCollectSelectSeasonResp {
+  required int32 ret = 1;
+  optional int32 selectedSeason = 2;
+  repeated int32 openSeasonList = 3;
+  repeated int32 extraSwitchSeasonList = 4;
+  optional string reward = 6;
+}
+message NewCardCollectSyncData {
+  repeated NewCardCollectCardInfo cardChangeList = 1;
+  repeated NewCardCollectCardBagInfo cardBagChangeList = 2;
+  repeated NewCardCollectExchangeNumInfo changeNumData = 3;
+  optional NewCardCollectAlertCardInfo alertCardData = 4;
+  optional int32 releaseNum = 5;
+  optional bool playerChangerListRedPoint = 6;
+  optional bool changerRecordListRedPoint = 7;
+}

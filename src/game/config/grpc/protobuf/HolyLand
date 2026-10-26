@@ -119,6 +119,7 @@ message HolyLandRoundSettleDisplayData{
   optional int32 killCount = 3;
   optional int32 occupyCount = 4;
   optional int32 title = 5;
+  optional int32 backOrnamentId = 6;
 }
 message HolyLandRoundSettleUnionRankData {
   optional int32 unionRank = 1;
@@ -319,6 +320,7 @@ message HolyLandChampionMemberInfo{
   optional int32 appearanceId = 2;
   optional int32 position = 3;
   optional int32 contribution = 4;
+  optional int32 backOrnamentId = 5;
 }
 message HolyLandAllJoinServerReq{
 }
@@ -376,6 +378,7 @@ message HolyLandRouterAppearanceMsg {
   optional string wxHeadUrl = 2;
   optional int32  appearanceId = 3;
   optional int32 equipCloudId = 4;
+  optional int32 backOrnamentId = 5;
 }
 message HolyLandGameCityInfoReqMsg{
   repeated int32 cityVec = 1;
@@ -593,6 +596,7 @@ message HolyLandGamePlayerWinInfo{
   optional PlayerHeadDataMsg headInfo = 4;
   optional int32 appearanceId = 5;
   optional int64 serverId = 6;
+  optional int32 backOrnamentId = 7;
 }
 message HolyLandGameLineInfoSyncMsg{
   repeated HolyLandGameLineInfo lineInfo = 1;

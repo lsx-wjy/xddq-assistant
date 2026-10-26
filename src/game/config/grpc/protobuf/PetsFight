@@ -1,0 +1,792 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "ActivityBase";
+import "WatchPlayer";
+import "Union";
+enum PetsFightProtocols {
+  pets_fight_enter = 237200;
+  pets_fight_draw = 237201;
+  pets_fight_hill_upgrade = 237202;
+  pets_fight_fusion = 237203;
+  pets_fight_pet_list = 237204;
+  pets_fight_pet_sync = 237205;
+  pets_fight_union_fusion_apply = 237206;
+  pets_fight_union_fusion_cancel = 237207;
+  pets_fight_union_fusion_accept = 237208;
+  pets_fight_union_fusion_breed = 237209;
+  pets_fight_stage_battle = 237210;
+  pets_fight_union_boss_battle = 237211;
+  pets_fight_union_boss_reward = 237212;
+  pets_fight_union_fusion_list = 237213;
+  pets_fight_union_fusion_select = 237214;
+  pets_fight_union_fusion_applicant_list = 237215;
+  pets_fight_union_fusion_breed_list = 237216;
+  pets_fight_union_fusion_share = 237217;
+  pets_fight_union_boss_info = 237218;
+  pets_fight_arena_formation = 237219;
+  pets_fight_arena_info = 237220;
+  pets_fight_arena_refresh = 237221;
+  pets_fight_arena_battle = 237222;
+  pets_fight_arena_buy_ticket = 237223;
+  pets_fight_worship = 237224;
+  pets_fight_arena_daily_reward = 237225;
+  pets_fight_arena_log = 237226;
+  pets_fight_arena_sweep = 237227;
+  pets_fight_union_boss_record = 237228;
+  pets_fight_union_boss_top_damage = 237229;
+  pets_fight_draw_ticket_sync = 237230;
+  pets_fight_red_point = 237231;
+  pets_fight_battle_for_debug = 237232;
+  pets_fight_one_key_breed = 237233;
+  pets_fight_one_key_lock = 237234;
+  pets_fight_fusion_select = 237235;
+  pets_fight_ues_draw_item = 237236;
+  pets_fight_delete_passive_skill = 237237;
+  pets_fight_union_fusion_records = 237238;
+  pets_fight_pet_exchange = 237239;
+}
+message PetsFightBossConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string name = 3;
+  optional string desc = 4;
+  optional string monster = 5;
+  optional string reward = 6;
+  optional string unlock = 7;
+  optional string bonus = 8;
+  optional int64 atk = 9;
+  optional int64 hp = 10;
+  optional int64 def = 11;
+  optional int32 skillId = 12;
+  optional string skillAnim = 13;
+  optional int32 skillFrame = 14;
+  optional int32 skillTime = 15;
+  optional int32 moveSpeed = 16;
+  optional string atkParam = 17;
+  optional int32 critical = 18;
+  optional int32 dodge = 19;
+  optional int32 size = 20;
+  optional string atkAnim = 21;
+  optional int32 atkFrame = 22;
+  optional int32 atkTime = 23;
+  optional int32 atkDistance = 24;
+  optional int32 skillDistance = 25;
+  optional string cloud = 26;
+  optional int32 realHp = 27;
+  optional string damage = 28;
+  optional string passive = 29;
+}
+message PetsFightHybridConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 main = 3;
+  optional int32 vice = 4;
+  optional int32 stable = 5;
+  optional string mutation = 6;
+  optional int32 guaranteed = 7;
+}
+message PetsFightMonsterConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 pet = 3;
+  optional int64 atk = 4;
+  optional int64 hp = 5;
+  optional string passive = 6;
+  optional int64 def = 7;
+}
+message PetsFightSkillConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 type = 3;
+  optional string name = 4;
+  optional string desc = 5;
+  optional string params = 6;
+  optional string upgradeParams = 7;
+  optional int32 coolTime = 8;
+  optional int32 effectType = 9;
+  optional string effectParam = 10;
+  optional int32 firstCool = 11;
+}
+message PetsFightStageConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string name = 3;
+  optional string desc = 4;
+  optional string monster = 5;
+  optional string reward = 6;
+  optional int64 recommend = 7;
+}
+message PetsFightPetConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string name = 3;
+  optional string desc = 4;
+  optional int32 type = 5;
+  optional int32 weight = 6;
+  optional int32 quality = 7;
+  optional int64 initHp = 8;
+  optional int64 initDef = 9;
+  optional int64 initAtk = 10;
+  optional int64 moveSpeed = 11;
+  optional string atkParam = 12;
+  optional int32 skillId = 13;
+  optional int32 passiveInit = 14;
+  optional string passiveInitQuality = 15;
+  optional string passiveLimit = 16;
+  optional string passiveQulity = 17;
+  optional int32 size = 18;
+  optional int32 critical = 19;
+  optional int32 dodge = 20;
+  optional string atkAnim = 21;
+  optional string skillAnim = 22;
+  optional int32 atkFrame = 23;
+  optional int32 skillFrame = 24;
+  optional int32 atkDistance = 25;
+  optional int32 skillDistance = 26;
+  optional int32 chara = 27;
+  optional int32 atkTime = 28;
+  optional int32 skillTime = 29;
+  optional int32 addAtk = 30;
+  optional int32 addHp = 31;
+  optional int32 addDef = 32;
+  optional int32 battleType = 33;
+}
+message PetsFightArenaRankMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string floor = 3;
+  optional string mosterIdList = 4;
+  optional int32 matchRangeLimit = 5;
+  optional string matchHighParamList = 6;
+  optional string matchLowParamList = 7;
+}
+message PetsFightConfigSyncMsg {
+  repeated PetsFightHillConfigMsg hillConfigs = 1;
+  repeated PetsFightBossConfigMsg bossConfigs = 2;
+  repeated PetsFightHybridConfigMsg hybridConfigs = 3;
+  repeated PetsFightMonsterConfigMsg monsterConfigs = 4;
+  repeated PetsFightSkillConfigMsg skillConfigs = 5;
+  repeated PetsFightStageConfigMsg stageConfigs = 6;
+  repeated PetsFightPetConfigMsg petConfigs = 7;
+  repeated PetsFightArenaRankMsg arenaRankConfigs = 8;
+}
+message PetsFightCommonReq {
+  optional int32 activityId = 1;
+}
+message PetsFightHillConfigMsg {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 unlock = 3;
+  optional string rate = 4;
+  optional int32 unlockStage = 5;
+}
+/** 玩家活动基础数据(不含灵兽列表，灵兽请走 pets_fight_pet_list / pets_fight_pet_sync) */
+message PetsFightPlayerDataMsg {
+  optional int64 unionId = 1;
+  optional int64 hillExp = 2;
+  optional int32 drawTicket = 3;
+  optional int32 stageId = 4;
+  optional int32 hillLevel = 5;
+  optional int32 dailyPersonalFailTime = 6;
+  optional int64 updateStageTime = 7;
+  optional int32 dailyBossBattleCount = 8;
+  optional int32 arenaTicketCount = 10;
+  optional int32 dailyBuyArenaCount = 11;
+  optional int32 dailyArenaBattleCount = 12;
+  repeated int32 arenaPetUids = 14;
+  optional int32 dailyArenaRefreshCount = 15;
+  optional int32 bpPrivilegeCount = 16;
+  optional int64 dailyUnionFusionCount = 17;
+  optional int32 bpForgetSkillCount = 18;
+  optional int32 drawProtectTimes = 19;
+  optional int32 dailyUnionFusionPublishCount = 20;
+  optional int32 exchangeCount = 21;
+  optional int32 exchangeDrawProgress = 22;
+}
+/** 玩家活动基础数据增量更新；只填本次接口实际变化的字段 */
+message PetsFightPlayerDataUpdateMsg {
+  optional int32 activityId = 1;
+  optional int64 hillExp = 2;
+  optional int32 drawTicket = 3;
+  optional int32 stageId = 4;
+  optional int32 hillLevel = 5;
+  optional int32 dailyPersonalFailTime = 6;
+  optional int64 updateStageTime = 7;
+  optional int32 dailyBossBattleCount = 8;
+  optional int32 arenaTicketCount = 10;
+  optional int32 dailyBuyArenaCount = 11;
+  optional int32 dailyArenaBattleCount = 12;
+  optional int32 dailyArenaRefreshCount = 13;
+  optional int32 bpPrivilegeCount = 14;
+  optional int64 dailyUnionFusionCount = 15;
+  optional int32 bpForgetSkillCount = 16;
+  optional int32 drawProtectTimes = 17;
+  optional int32 dailyUnionFusionPublishCount = 18;
+  optional int32 exchangeCount = 19;
+  optional int32 exchangeDrawProgress = 20;
+}
+/** 灵兽乱斗红点位置；redPointValue按枚举value对应的bit位记录 */
+enum PetsFightRedPointEnum {
+  pets_fight_red_point_draw = 1;
+  pets_fight_red_point_hill_upgrade = 2;
+  pets_fight_red_point_union_fusion_applicant = 3;
+  pets_fight_red_point_union_fusion_breed = 4;
+  pets_fight_red_point_union_boss_battle = 5;
+  pets_fight_red_point_union_boss_reward = 6;
+  pets_fight_red_point_achievement = 7;
+  pets_fight_red_point_battle_pass = 8;
+  pets_fight_red_point_stage_rank_reward = 9;
+  pets_fight_red_point_union_rank_reward = 10;
+  pets_fight_red_point_arena_unread_log = 11;
+  pets_fight_red_point_exchange_mall = 12;
+}
+message PetsFightRedPointResp {
+  optional int32 ret = 1;
+  optional int32 activityId = 2;
+  optional string redPointValue = 3;
+}
+/** 活动灵兽被动技能 */
+message PetsFightPetPassiveSkillMsg {
+  optional int32 skillId = 1;
+  optional int32 level = 2;
+}
+/** 活动灵兽数据(限时独立, 仅本活动生效) */
+message PetsFightPetDataMsg {
+  optional int32 uid = 1;
+  optional int32 configId = 2;
+  repeated PetsFightPetPassiveSkillMsg passiveSkills = 3;
+  optional string atk = 4;
+  optional string def = 5;
+  optional string hp = 6;
+  optional int32 generation = 7;
+  optional bool oneKeyLocked = 10;
+  optional int32 atkMultiple = 14;
+  optional int32 defMultiple = 15;
+  optional int32 hpMultiple = 16;
+  optional int64 atkAddition = 17;
+  optional int64 defAddition = 18;
+  optional int64 hpAddition = 19;
+}
+message PetsFightEnterResp {
+  optional int32 ret = 1;
+  optional PetsFightPlayerDataMsg playerData = 2;
+  optional string unionRechargeReward = 3;
+  optional bool canWorship = 4;
+  optional PetsFightWorshipPlayerMsg worshipPlayer = 5;
+  optional int64 arenaDailyRewardTime = 6;
+  repeated UnionBaseData top3Union = 7;
+  optional string extraParams = 8;
+  optional int32 serverApplyRank = 9;
+  optional string dailyDrawItemReward = 10;
+  repeated int64 receivedBossId = 11;
+}
+message PetsFightDrawReq {
+  optional int32 activityId = 1;
+  optional int32 times = 2;
+}
+message PetsFightDrawResp {
+  optional int32 ret = 1;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 2;
+  repeated PetsFightPetDataMsg newPets = 3;
+}
+message PetsFightDrawTicketSyncMsg {
+  optional int32 activityId = 1;
+  optional int32 drawTicket = 2;
+  optional int32 bpPrivilegeCount = 3;
+  optional int32 bpForgetSkillCount = 4;
+}
+message PetsFightHillUpgradeReq {
+  optional int32 activityId = 1;
+}
+message PetsFightHillUpgradeResp {
+  optional int32 ret = 1;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 2;
+}
+message PetsFightFusionReq {
+  optional int32 activityId = 1;
+  optional int32 fatherUid = 2;
+  repeated int32 motherUids = 3;
+}
+message PetsFightFusionResp {
+  optional int32 ret = 1;
+  optional PetsFightPetDataMsg newPet = 2;
+  repeated int32 removedPetUids = 3;
+  optional ArenaFormationChange changeInfo = 4;
+  optional PetsFightFusionPendingMsg pending = 5;
+}
+message ArenaFormationChange {
+  repeated int32 arenaPetUids = 1;
+}
+message PetsFightPetListResp {
+  optional int32 ret = 1;
+  repeated PetsFightPetDataMsg pets = 2;
+  optional PetsFightFusionPendingMsg pending = 3;
+}
+/** 特殊品质炼妖待选结果；候选灵兽uid为0，选中后服务端才分配正式uid */
+message PetsFightFusionPendingMsg {
+  optional string selectId = 1;
+  repeated PetsFightPetDataMsg candidates = 2;
+}
+message PetsFightFusionSelectReq {
+  optional int32 activityId = 1;
+  optional string selectId = 2;
+  optional int32 configId = 3;
+}
+message PetsFightFusionSelectResp {
+  optional int32 ret = 1;
+  optional PetsFightPetDataMsg newPet = 2;
+}
+message PetsFightPetSyncMsg {
+  optional int32 activityId = 1;
+  repeated PetsFightPetDataMsg addPets = 2;
+  repeated int32 removeUids = 3;
+}
+message PetsFightUnionFusionApplyReq {
+  optional int32 activityId = 1;
+  optional int32 petUid = 2;
+  optional bool needAudit = 3;
+}
+message PetsFightUnionFusionApplyResp {
+  optional int32 ret = 1;
+  optional string requestId = 2;
+  optional int64 expireTime = 3;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 4;
+}
+message PetsFightUnionFusionCancelReq {
+  optional int32 activityId = 1;
+  optional string requestId = 2;
+}
+message PetsFightUnionFusionCancelResp {
+  optional int32 ret = 1;
+  optional string requestId = 2;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 3;
+}
+message PetsFightUnionFusionAcceptReq {
+  optional int32 activityId = 1;
+  optional string requestId = 2;
+}
+message PetsFightUnionFusionAcceptResp {
+  optional int32 ret = 1;
+  optional string requestId = 2;
+  optional bool selected = 3;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 4;
+}
+message PetsFightUnionFusionSelectReq {
+  optional int32 activityId = 1;
+  optional string requestId = 2;
+  optional int64 acceptPlayerId = 3;
+  optional bool reject = 4;
+  optional bool rejectAll = 5;
+}
+message PetsFightUnionFusionSelectResp {
+  optional int32 ret = 1;
+  optional string requestId = 2;
+  optional int64 acceptPlayerId = 3;
+  optional bool reject = 4;
+  optional bool rejectAll = 5;
+}
+message PetsFightUnionFusionApplicantListReq {
+  optional int32 activityId = 1;
+}
+message PetsFightUnionFusionApplicantListResp {
+  optional int32 ret = 1;
+  repeated PetsFightUnionFusionPublishApplyListMsg list = 2;
+}
+message PetsFightUnionFusionPublishApplyListMsg {
+  optional string requestId = 1;
+  optional PetsFightPetDataMsg applyPet = 2;
+  repeated PetsFightUnionFusionApplicantItemMsg applicantList = 3;
+}
+message PetsFightUnionFusionApplicantItemMsg {
+  optional PlayerHeadAndNameMsg headMsg = 1;
+  optional int64 applyPlayerId = 2;
+  optional int64 applyTime = 3;
+  optional string fightValue = 4;
+  optional int32 status = 5;
+}
+message PetsFightUnionFusionBreedListReq {
+  optional int32 activityId = 1;
+}
+message PetsFightUnionFusionBreedListResp {
+  optional int32 ret = 1;
+  repeated PetsFightUnionFusionBreedListItemMsg list = 2;
+}
+/** 待执行伪繁育条目：已配对且当前玩家是申请方尚未执行 */
+message PetsFightUnionFusionBreedListItemMsg {
+  optional string requestId = 1;
+  optional int64 applyPlayerId = 2;
+  optional PetsFightPetDataMsg applyPet = 3;
+  optional int64 expireTime = 4;
+}
+message PetsFightUnionFusionShareReq {
+  optional int32 activityId = 1;
+  optional string requestId = 2;
+  optional int32 channelType = 3;
+  optional int32 shareType = 4;
+  optional int32 petUid = 5;
+}
+message PetsFightUnionFusionShareResp {
+  optional int32 ret = 1;
+}
+message PetsFightUnionFusionBreedReq {
+  optional int32 activityId = 1;
+  optional string requestId = 2;
+  optional bool useSelfPetAsMain = 3;
+  optional int32 selfPetUid = 4;
+}
+message PetsFightUnionFusionBreedResp {
+  optional int32 ret = 1;
+  optional string requestId = 2;
+  optional PetsFightPetDataMsg newPet = 3;
+  repeated int32 removedPetUids = 4;
+  optional ArenaFormationChange changeInfo = 5;
+  optional PetsFightFusionPendingMsg pending = 6;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 7;
+}
+message PetsFightStageBattleReq {
+  optional int32 activityId = 1;
+  optional int32 stageId = 2;
+  repeated int32 petUids = 3;
+}
+message PetsFightStageBattleResp {
+  optional int32 ret = 1;
+  optional bool win = 2;
+  optional int32 stageId = 3;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 4;
+  repeated PetsFightBattleRecordMsg battleRecords = 5;
+  optional string reward = 6;
+  optional ArenaFormationChange changeInfo = 7;
+}
+message PetsFightUnionBossBattleReq {
+  optional int32 activityId = 1;
+  optional int32 bossId = 2;
+  repeated int32 petUids = 3;
+}
+/** 妖盟Boss车轮战单场结果 */
+message PetsFightUnionBossBattleRoundMsg {
+  optional int32 petUid = 1;
+  optional int64 damage = 2;
+  optional PetsFightBattleRecordMsg battleRecord = 3;
+  optional bool applied = 4;
+  optional int64 realDamage = 5;
+}
+message PetsFightUnionBossBattleResp {
+  optional int32 ret = 1;
+  optional int32 bossId = 2;
+  optional int64 damage = 4;
+  optional int64 bossLeftHp = 5;
+  optional bool bossKilled = 6;
+  optional string bonusReward = 7;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 8;
+  repeated PetsFightUnionBossBattleRoundMsg rounds = 9;
+}
+message PetsFightUnionBossRewardReq {
+  optional int32 activityId = 1;
+  optional int32 bossId = 2;
+}
+message PetsFightUnionBossRewardResp {
+  optional int32 ret = 1;
+  optional int32 bossId = 2;
+  optional string reward = 3;
+}
+message PetsFightUnionBossInfoReq {
+  optional int32 activityId = 1;
+}
+message PetsFightUnionBossInfoResp {
+  optional int32 ret = 1;
+  optional int32 bossId = 2;
+  optional int64 bossLeftHp = 3;
+  optional int64 bossMaxHp = 4;
+  optional bool unlocked = 5;
+  optional bool bossKilled = 6;
+  optional int64 updateBossTime = 7;
+}
+message PetsFightUnionBossRecordReq {
+  optional int32 activityId = 1;
+  optional int32 bossId = 2;
+}
+message PetsFightUnionBossRecordResp {
+  optional int32 ret = 1;
+  optional int32 bossId = 2;
+  repeated PetsFightUnionBossRecordItemMsg records = 3;
+}
+message PetsFightUnionBossRecordItemMsg {
+  optional PlayerHeadAndNameMsg headMsg = 1;
+  optional int32 challengeCount = 2;
+  optional int64 totalDamage = 3;
+}
+message PetsFightUnionBossTopDamageReq {
+  optional int32 activityId = 1;
+  optional int32 bossId = 2;
+}
+message PetsFightUnionBossTopDamageResp {
+  optional int32 ret = 1;
+  optional int32 bossId = 2;
+  optional int64 playerId = 3;
+  optional int64 totalDamage = 4;
+  optional PlayerCharacterImageMsg playerImage = 5;
+}
+message PetsFightArenaFormationReq {
+  optional int32 activityId = 1;
+  optional int32 formationType = 2;
+  repeated int32 petUids = 3;
+}
+message PetsFightArenaFormationResp {
+  optional int32 ret = 1;
+  optional int32 formationType = 2;
+  repeated int32 petUids = 3;
+}
+message PetsFightArenaInfoReq {
+  optional int32 activityId = 1;
+}
+message PetsFightArenaInfoResp {
+  optional int32 ret = 1;
+  optional int32 rank = 2;
+  repeated PetsFightArenaOpponentMsg opponents = 3;
+  optional int64 arenaDailyRewardTime = 4;
+  repeated PetsFightArenaOpponentMsg top3Players = 5;
+}
+message PetsFightArenaRefreshReq {
+  optional int32 activityId = 1;
+}
+message PetsFightArenaRefreshResp {
+  optional int32 ret = 1;
+  repeated PetsFightArenaOpponentMsg opponents = 2;
+  optional int32 dailyArenaRefreshCount = 3;
+  optional int32 rank = 4;
+}
+message PetsFightArenaBattleReq {
+  optional int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 targetRank = 3;
+}
+message PetsFightArenaBattleResp {
+  optional int32 ret = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 targetRank = 3;
+  optional bool win = 4;
+  optional int32 oldRank = 5;
+  optional int32 newRank = 6;
+  optional string reward = 7;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 8;
+  repeated PetsFightBattleRecordMsg battleRecords = 9;
+  repeated PetsFightArenaOpponentMsg opponents = 10;
+}
+message PetsFightArenaBuyTicketReq {
+  optional int32 activityId = 1;
+  optional int32 count = 2;
+}
+message PetsFightArenaBuyTicketResp {
+  optional int32 ret = 1;
+  optional int32 buyCount = 2;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 3;
+}
+message PetsFightWorshipResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional PetsFightWorshipPlayerMsg worshipPlayer = 3;
+}
+message PetsFightArenaDailyRewardResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int32 rank = 3;
+  optional int32 rewardDay = 4;
+  optional int64 arenaDailyRewardTime = 5;
+}
+message PetsFightArenaLogResp {
+  optional int32 ret = 1;
+  repeated PetsFightArenaLogItemMsg logs = 2;
+}
+message PetsFightArenaLogItemMsg {
+  optional PlayerHeadAndNameMsg attackerHead = 1;
+  optional PlayerHeadAndNameMsg defenderHead = 2;
+  optional int32 attackerRank = 3;
+  optional int32 defenderRank = 4;
+  optional bool attackerWin = 5;
+  optional int64 battleTime = 6;
+}
+message PetsFightArenaSweepReq {
+  optional int32 activityId = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 targetRank = 3;
+  optional int32 count = 4;
+}
+message PetsFightArenaSweepResp {
+  optional int32 ret = 1;
+  optional int64 targetPlayerId = 2;
+  optional int32 targetRank = 3;
+  optional int32 count = 4;
+  optional string reward = 5;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 6;
+}
+message PetsFightArenaOpponentMsg {
+  optional int64 playerId = 1;
+  optional int32 rank = 2;
+  optional bool npc = 3;
+  optional PlayerHeadAndNameMsg headMsg = 4;
+  repeated PetsFightPetDataMsg defensePets = 5;
+  repeated int32 npcMonsterIds = 6;
+}
+/** 当前仍生效的协同炼妖条目 */
+message PetsFightUnionFusionListItemMsg {
+  optional string requestId = 1;
+  optional int64 applyPlayerId = 2;
+  optional PetsFightPetDataMsg applyPet = 3;
+  optional int64 expireTime = 4;
+  optional bool needAudit = 5;
+  optional int32 applyStatus = 6;
+  optional string name = 7;
+}
+/** 妖盟协同炼妖聊天卡片(WorldMessageTempMsg.extraData, 37201活动频道/37202妖盟频道，无状态) */
+message PetsFightUnionFusionCardMsg {
+  optional string requestId = 1;
+  optional int32 activityId = 2;
+  optional int64 applyPlayerId = 3;
+  optional PetsFightPetDataMsg applyPet = 4;
+  optional int64 expireTime = 5;
+  optional bool needAudit = 6;
+}
+/** 炼妖结果灵兽分享卡片(WorldMessageTempMsg.extraData, 37201活动频道/37202妖盟频道) */
+message PetsFightBreedResultShareCardMsg {
+  optional int32 activityId = 1;
+  optional int64 playerId = 2;
+  optional PetsFightPetDataMsg pet = 3;
+}
+message PetsFightUnionFusionListReq {
+  optional int32 activityId = 1;
+}
+message PetsFightUnionFusionListResp {
+  optional int32 ret = 1;
+  repeated PetsFightUnionFusionListItemMsg list = 2;
+}
+message PetsFightBattleRecordMsg {
+  optional int64 winnerId = 1;
+  repeated PetsFightBattlePlayer players = 2;
+}
+message PetsFightBattlePlayer {
+  optional int64 playerId = 1;
+  optional int32 petId = 2;
+  optional int32 monsterId = 3;
+  optional int64 hp = 4;
+  optional int64 maxHp = 5;
+  optional int64 shieldVal = 6;
+  optional int32 activeSkillId = 7;
+  repeated int32 passiveSkillArr = 8;
+  repeated PetsFightBuffData initBuffArr = 9;
+  /*战斗日志*/
+  repeated PetsFightMove moveLog = 10;
+  repeated PetsFightAction actionLog = 11;
+  repeated PetsFightDamage damageLog = 12;
+  repeated PetsFightBuffChange buffLog = 13;
+}
+message PetsFightMove {
+  required int32 frame = 1;
+  required int32 speed = 2;
+}
+message PetsFightAction {
+  required int32 frame = 1;
+  optional int32 skillId = 2;
+  optional int32 cdFrame = 3;
+  repeated int32 extra = 4;
+}
+message PetsFightDamage {
+  required int32 frame = 1;
+  optional int64 hp = 2;
+  optional int64 shieldVal = 3;
+  optional bool isCritical = 4;
+  optional int32 skillId = 5;
+  optional bool isMiss = 6;
+}
+message PetsFightBuffData {
+  required int32 skillId = 1;
+  optional int32 layer = 2;
+  optional int32 leftTime = 3;
+  optional int32 duration = 4;
+}
+message PetsFightBuffChange {
+  required int32 frame = 1;
+  repeated PetsFightBuffData data = 2;
+}
+message PetsFightBattleDebugSync {
+  optional PetsFightBattleRecordMsg record = 1;
+}
+message PetsFightOneKeyBreedReq {
+  optional int32 activityId = 1;
+  optional int32 highQuality = 2;
+  optional int32 stopGeneration = 3;
+  repeated int32 limitSkillIds = 4;
+}
+message PetsFightOneKeyBreedResp {
+  required int32 ret = 1;
+  repeated PetsFightPetDataMsg newPet = 2;
+  repeated int32 removedPetUids = 3;
+  optional ArenaFormationChange changeInfo = 4;
+  optional PetsFightFusionPendingMsg pending = 5;
+}
+message PetsFightOneKeyLockReq {
+  optional int32 activityId = 1;
+  optional int32 uid = 2;
+  optional bool lock = 3;
+}
+message PetsFightOneKeyLockResp {
+  required int32 ret = 1;
+  optional bool isLock = 2;
+}
+message PetsFightWorshipPlayerMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required string nickName = 3;
+  repeated int32 pet = 4;
+  repeated int32 spirit = 5;
+  optional int32 appearanceId = 6;
+  optional int32 equipCloudId = 7;
+  optional int32 realmsId = 8;
+  optional int32 rank = 10;
+  optional PlayerHeadDataMsg headInfo = 13;
+  repeated int32 petSoulShapeList = 14;
+  optional int32 titleId = 15;
+  repeated int32 petLinkageId = 16;
+  repeated int32 spiritLinkageId = 17;
+}
+message PetsFightUseDrawItemReq {
+  optional int32 activityId = 1;
+  optional int32 propCount = 2;
+}
+message PetsFightUseDrawItemResp {
+  optional int32 ret = 1;
+  optional int32 drawTicket = 2;
+}
+message PetsFightDeletePassiveSkillReq {
+  optional int32 activityId = 1;
+  optional int32 petUid = 2;
+  optional int32 skillId = 3;
+}
+message PetsFightDeletePassiveSkillResp {
+  optional int32 ret = 1;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 2;
+  optional PetsFightPetDataMsg pet = 3;
+}
+message PestFightUnionFusionRecord {
+  optional int64 time = 1;
+  optional bool self = 2;
+  optional string targetName = 3;
+  optional int32 selfPetConfigId = 4;
+  optional int32 targetPetConfigId = 5;
+}
+message PetsFightUnionFusionRecordReq {
+  optional int32 activityId = 1;
+}
+message PetsFightUnionFusionRecordResp {
+  optional int32 ret = 1;
+  repeated PestFightUnionFusionRecord records = 2;
+}
+message PetsFightPetExchangeReq {
+  optional int32 activityId = 1;
+  optional int32 petUid1 = 2;
+  optional int32 petUid2 = 3;
+}
+message PetsFightPetExchangeResp {
+  optional int32 ret = 1;
+  repeated PetsFightPetDataMsg pets = 2;
+  optional PetsFightPlayerDataUpdateMsg playerDataUpdate = 3;
+}

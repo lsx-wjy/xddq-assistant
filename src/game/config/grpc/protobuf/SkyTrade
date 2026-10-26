@@ -168,6 +168,7 @@ message SkyTradeAppearanceMsg {
   optional string wxHeadUrl = 2;
   optional int32  appearanceId = 3;
   optional int32 equipCloudId = 4;
+  optional int32 backOrnamentId = 5;
 }
 /* ==================== 请求协议 ======================== */
 message SkyTradeEnterActivityReq {

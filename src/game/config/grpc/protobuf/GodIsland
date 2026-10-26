@@ -229,6 +229,7 @@ message GodIslandWorshipPlayerMsg {
   optional int32 titleId = 15;
   repeated int32 petLinkageId = 16;
   repeated int32 spiritLinkageId = 17;
+  optional int32 equipBackOrnament = 18;
 }
 message GodIslandUnionDamageReqMsg{
   required int32 activityId = 1;
@@ -444,6 +445,7 @@ message GodIslandRouterAppearanceMsg {
   optional string wxHeadUrl = 2;
   optional int32  appearanceId = 3;
   optional int32 equipCloudId = 4;
+  optional int32 backOrnamentId = 5;
 }
 message GodIslandGameRouteInfoSyncMsg{
   repeated GodIslandGameRouteInfo routeInfo = 2;
@@ -1011,6 +1013,7 @@ message GodIslandRedEnvelopeMsg {
   optional int64 senderId = 4;
   optional string senderName = 5;
   optional int32 appearanceId = 6;
+  optional int32 equipBackOrnament = 7;
 }
 message GodIslandRedEnvelopeSync {
   optional GodIslandRedEnvelopeMsg syncMsg = 1;

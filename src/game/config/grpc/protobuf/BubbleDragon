@@ -1,0 +1,199 @@
+package com.yq.msg.CityMsg;
+import "Common";
+/** 灵果寻仙（泡泡龙 BubbleDragon） systemId=376，协议号段 237601-237608 **/
+enum BubbleDragonPb {
+  bubble_dragon_enter_activity = 237601;
+  bubble_dragon_enter_game = 237602;
+  bubble_dragon_shoot = 237603;
+  bubble_dragon_use_stamina_item = 237604;
+  bubble_dragon_use_charge_item = 237605;
+  bubble_dragon_draw = 237606;
+  bubble_dragon_select_rare = 237607;
+  bubble_dragon_refresh_bubble = 237608;
+}
+/**
+ * 通用能力复用 ActivityBase，不在本 proto 定义：
+ * - 成就（积分 580 / 消耗体力 581 条件）→ ReqGetActivityConditionReward / ActivityConditionData
+ * - 战令（COMMON_BATTLEPASS_TYPE 自选）→ ActivityMall + SelectActivityConditionGoods
+ * - 礼包 → ReqBuyActivityGoods / ActivityMallConfig（t_s_activity_mall）
+ * - 排行（跨服、同分先到先排）→ ReqGetActivityRankState / ReqGetActivityRankReward（t_s_activity_rank）
+ * 标量参数走 ActivityParamConfig（t_s_activity_config），不在本 proto 建表：
+ * - BUBBLEDRAGON_INIT_STAMINA=200 初始体力
+ * - BUBBLEDRAGON_STAMINA_RECOVER_TIME=600 回复1点体力秒数
+ * - BUBBLEDRAGON_CHARGE_GRID=1|5 击落奖励泡泡充能格数|激活所需格数
+ * - BUBBLEDRAGON_RATIO_CONFIG=1|5|10 倍率配置
+ * - BUBBLEDRAGON_WARNING_LINE=17 警戒线行数（超过则盘面重置）
+ * - BUBBLEDRAGON_SUPPLY_LINE=4 少于该行数触发补行
+ * - BUBBLEDRAGON_INIT_BUBBLE_LINE=7 初始泡泡行数
+ * - BUBBLEDRAGON_SUPPLY_LINE_NUM=7 补足到的行数
+ * - BUBBLEDRAGON_GRID_SIZE=18|10 格子行|列；BUBBLEDRAGON_BUBBLE_NUM=10|11 奇|偶行格数
+ * - BUBBLEDRAGON_SHOOT_ORIGIN=352|1072 发射起点（container_board 本地坐标，左上角 0,0）
+ * - BUBBLEDRAGON_COLOR_ID=1|2|3|4|5|6 红色|绿色|紫色|黄色|粉色|奖励泡泡
+ * - BUBBLEDRAGON_ELIMINATION_SCORE=10 消除单泡积分
+ * - BUBBLEDRAGON_DROP_SCORE=10 掉落单泡积分
+ * - BUBBLEDRAGON_COMBO_SCORE_MULTIPLIER=1|2|3|4|5|6|7 连击倍率系数（数组长度=最大连击次数）
+ * - BUBBLEDRAGON_REDDOT_NUM=100 体力红点阈值
+ * - BUBBLEDRAGON_LAYOUT_INTERVAL_ROUND=3 同类型布局最小间隔场次
+ * - BUBBLEDRAGON_LOTTERY_TICKET_ID=100351 抽奖券道具（数量走背包同步）
+ * - BUBBLEDRAGON_STAMINA_ITEM_ID=100350 体力道具（灵露）
+ * - BUBBLEDRAGON_CHARGE_ITEM_ID=100349 充能作弊道具（定风珠）
+ * - BUBBLEDRAGON_GACHA_OPP_MAX=100 抽奖保底次数
+ * - BUBBLEDRAGON_GACHA_RARE_WEIGHT_PARAM=1|0;3|10;5|200;100|1000 大奖概率随抽数变化
+ * - BUBBLEDRAGON_DRAW_TEN=0 解锁十连/跳过动画所需抽数（0=默认解锁）
+ * - BUBBLEDRAGON_GACHA_RARE_POOL=100232=1;310;140|5|0,100181=5;0;0|5|2 大奖自选池（PropArray|限制次数|限制轮次）
+ * - BUBBLEDRAGON_BP_REWARD_NUM=10 战令特权：发射X次获得一次刷新机会（refreshShootCount>=X 可刷新；refresh 成功后归零；已达 X 时 shoot 不再累加）
+ * - BUBBLEDRAGON_FLOAT_TEXT_RULE=0|5;6|10;11|15;16|20;21|-1 消除数量区间（-1=无穷），首段无飘字，后续四段对应档位切图 ppl_title3~6
+ **/
+/** 活动独有配置（ActivityDetailConfig.uniqueConfig 解码） **/
+message BubbleDragonActivityConfig {
+  repeated BubbleDragonGachaConfig gachaConfig = 1;
+  repeated BubbleDragonMapConfig mapConfig = 2;
+}
+/** 抽奖奖池（付费抽奖盘面，大奖不在此表，单独读 BUBBLEDRAGON_GACHA_RARE_POOL） **/
+message BubbleDragonGachaConfig {
+  required int32 id = 1;
+  required string reward = 2;
+  required int32 weight = 3;
+}
+/** 布局配置 **/
+message BubbleDragonMapConfig {
+  required int32 id = 1;
+  required int32 type = 2;
+  required string content = 3;
+  required int32 weight = 4;
+}
+/** 盘面单个泡泡 **/
+message BubbleDragonBubbleInfo {
+  required int32 row = 1;
+  required int32 col = 2;
+  required int32 type = 3;
+}
+/** 单倍率场盘面数据（各倍率场进度互相独立） **/
+message BubbleDragonBoardInfo {
+  required int32 rate = 1;
+  repeated BubbleDragonBubbleInfo bubbles = 2;
+  repeated int32 nextTypes = 3;
+  optional int64 fieldScore = 4;
+  optional int32 chargeNum = 5;
+  optional int32 rowParity = 6;
+  optional int32 refreshShootCount = 7;
+}
+/** 倍率场积分概要（主界面展示用） **/
+message BubbleDragonRateScoreInfo {
+  required int32 rate = 1;
+  optional int64 fieldScore = 2;
+}
+/** 自选大奖各格已抽次数（BUBBLEDRAGON_GACHA_RARE_POOL 下标对齐） **/
+message BubbleDragonRareReceiveData {
+  optional int32 rareIndex = 1;
+  optional int32 count = 2;
+}
+/** 玩家跨倍率场公共数据 **/
+message BubbleDragonPlayerData {
+  optional int32 stamina = 1;
+  optional int64 lastRecoverTime = 2;
+  optional int64 totalScore = 3;
+  optional int32 drawTimes = 4;
+  optional int32 rareIndex = 5;
+  repeated BubbleDragonRareReceiveData rareData = 6;
+  optional int32 round = 7;
+}
+/** 单次发射结算结果 **/
+message BubbleDragonShootResult {
+  optional int32 landRow = 1;
+  optional int32 landCol = 2;
+  repeated BubbleDragonBubbleInfo hitBubbles = 3;
+  repeated BubbleDragonBubbleInfo dropBubbles = 4;
+  optional int64 scoreAdd = 5;
+  optional int32 chargeAdd = 6;
+  optional bool isReset = 7;
+  repeated SupplyRoundResult supplyRoundResult = 8;
+  optional int32 comboNum = 9;
+}
+message SupplyRoundResult {
+    repeated BubbleDragonBubbleInfo newBubbles = 1;
+    repeated BubbleDragonBubbleInfo supplyDropBubbles = 2;
+    optional int32 rowParity = 3;
+}
+/** 抽奖单次结果 **/
+message BubbleDragonDrawResult {
+  optional int32 id = 1;
+  optional string reward = 2;
+  optional bool isRare = 3;
+}
+message BubbleDragonEnterActivityReq {
+  required int32 activityId = 1;
+}
+message BubbleDragonEnterActivityResp {
+  required int32 ret = 1;
+  optional BubbleDragonPlayerData playerData = 2;
+  repeated BubbleDragonRateScoreInfo rateScoreList = 3;
+}
+message BubbleDragonEnterGameReq {
+  required int32 activityId = 1;
+  required int32 rate = 2;
+}
+message BubbleDragonEnterGameResp {
+  required int32 ret = 1;
+  optional BubbleDragonBoardInfo boardInfo = 2;
+  optional BubbleDragonPlayerData playerData = 3;
+}
+message BubbleDragonShootReq {
+  required int32 activityId = 1;
+  required int32 rate = 2;
+  required int32 targetRow = 3;
+  required int32 targetCol = 4;
+  required string angle = 5;
+}
+message BubbleDragonShootResp {
+  required int32 ret = 1;
+  optional BubbleDragonShootResult shootResult = 2;
+  optional BubbleDragonBoardInfo boardInfo = 3;
+  optional BubbleDragonPlayerData playerData = 4;
+}
+message BubbleDragonUseStaminaItemReq {
+  required int32 activityId = 1;
+  required int32 num = 2;
+}
+message BubbleDragonUseStaminaItemResp {
+  required int32 ret = 1;
+  optional int32 stamina = 2;
+  optional int64 lastRecoverTime = 3;
+}
+message BubbleDragonUseChargeItemReq {
+  required int32 activityId = 1;
+  required int32 rate = 2;
+}
+message BubbleDragonUseChargeItemResp {
+  required int32 ret = 1;
+  optional int64 scoreAdd = 2;
+  optional BubbleDragonBoardInfo boardInfo = 3;
+  optional BubbleDragonPlayerData playerData = 4;
+}
+message BubbleDragonDrawReq {
+  required int32 activityId = 1;
+  required int32 times = 2;
+}
+message BubbleDragonDrawResp {
+  required int32 ret = 1;
+  repeated BubbleDragonDrawResult result = 2;
+  optional int32 drawTimes = 3;
+  repeated BubbleDragonRareReceiveData rareData = 4;
+  optional int32 rareIndex = 5;
+}
+message BubbleDragonSelectRareReq {
+  required int32 activityId = 1;
+  required int32 rareIndex = 2;
+}
+message BubbleDragonSelectRareResp {
+  required int32 ret = 1;
+  optional int32 rareIndex = 2;
+}
+message BubbleDragonRefreshBubbleReq {
+  required int32 activityId = 1;
+  required int32 rate = 2;
+}
+message BubbleDragonRefreshBubbleResp {
+  required int32 ret = 1;
+  optional BubbleDragonBoardInfo boardInfo = 2;
+}

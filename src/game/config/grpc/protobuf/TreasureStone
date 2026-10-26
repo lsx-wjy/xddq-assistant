@@ -1,0 +1,148 @@
+package com.yq.msg.CityMsg;
+import "StoneCommon";
+enum TreasureStonePb {
+    TreasureStone_Enter = 238301;
+    TreasureStone_Equip = 238302;
+    TreasureStone_Unequip = 238303;
+    TreasureStone_Lock = 238304;
+    TreasureStone_Sync = 238305;
+    TreasureStone_ComposeBatch = 238306;
+    TreasureStone_ComposeLog = 238307;
+    TreasureStone_SyncRedPoint = 238308;
+    TreasureStone_DealSell = 238310;
+    TreasureStone_DealPriceAdjust = 238315;
+    TreasureStone_DealSellDown = 238311;
+    TreasureStone_DealBuy = 238312;
+    TreasureStone_DealGetRecord = 238313;
+    TreasureStone_DealCollect = 238314;
+}
+message TreasureStoneDealSellReq {
+    repeated int32 ids = 1;
+    required string password = 2;
+    required int64 price = 3;
+    required bool anonymous = 4;
+}
+message TreasureStoneDealSellRsp {
+    required int32 ret = 1;
+}
+message TreasureStoneDealSellDownReq {
+    required int32 id = 1;
+}
+message TreasureStoneDealSellDownRsp {
+    required int32 ret = 1;
+}
+message TreasureStoneDealBuyReq {
+    required string goodsId = 1;
+    required string password = 2;
+    required int64 price = 3;
+    optional int32 num = 4;
+}
+message TreasureStoneDealBuyRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData items = 2;
+}
+message TreasureStoneDealGetRecordReq {
+}
+message TreasureStoneDealGetRecordRsp {
+    required int32 ret = 1;
+    repeated GemstoneMallRecordMsg records = 2;
+}
+message TreasureStoneDealCollectReq {
+    required string goodsId = 1;
+    required bool collect = 2;
+}
+message TreasureStoneDealCollectRsp {
+    required int32 ret = 1;
+    optional int32 collectSize = 2;
+    optional int32 collectNum = 3;
+}
+message TreasureStoneDealPriceAdjustReq {
+    required int32 id = 1;
+    required string password = 2;
+    required int64 price = 3;
+}
+message TreasureStoneDealPriceAdjustRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData items = 2;
+    optional int32 sellCount = 3;
+}
+message TreasureStoneEnterReq {
+}
+message TreasureStoneEnterRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData itemList = 2;
+    repeated int32 slotItemIds = 4;
+    repeated StoneComposeFailData composeFailList = 5;
+    optional int32 remainDailyBuyTimes = 6;
+    optional string redPoint = 7;
+    optional int32 sellCount = 8;
+    repeated StoneSeparationEquipMsg separationEquips = 9;
+}
+message TreasureStoneEquipReq {
+    required int32 slotId = 1;
+    required int32 itemId = 2;
+    optional int32 separationIndex = 3;
+}
+message TreasureStoneEquipRsp {
+    required int32 ret = 1;
+    optional int32 slotId = 2;
+    optional int32 itemId = 3;
+    repeated StoneSeparationEquipMsg separationEquips = 4;
+}
+message TreasureStoneUnequipReq {
+    required int32 slotId = 1;
+    optional int32 separationIndex = 2;
+}
+message TreasureStoneUnequipRsp {
+    required int32 ret = 1;
+    optional int32 slotId = 2;
+    repeated StoneSeparationEquipMsg separationEquips = 3;
+}
+message TreasureStoneLockReq {
+    required int32 id = 1;
+    required bool lock = 2;
+    required string password = 3;
+}
+message TreasureStoneLockRsp {
+    required int32 ret = 1;
+    optional GemstoneItemData item = 2;
+}
+message TreasureStoneComposeReq {
+    repeated int32 mainIds = 1;
+    required int32 helperId = 2;
+}
+message TreasureStoneComposeRsp {
+    required int32 ret = 1;
+    optional GemstoneItemData resultItem = 2;
+    optional bool success = 3;
+    optional int32 failCount = 4;
+}
+message TreasureStoneComposeLogReq {
+}
+message TreasureStoneComposeLogRsp {
+    required int32 ret = 1;
+    repeated StoneComposeLogData logs = 2;
+}
+message TreasureStoneSync {
+    repeated GemstoneItemData itemList = 1;
+    repeated int32 slotItemIds = 2;
+    optional int32 remainDailyBuyTimes = 3;
+    optional int32 serverRound = 4;
+    optional int32 sellCount = 5;
+    repeated StoneSeparationEquipMsg separationEquips = 6;
+}
+message TreasureStoneComposeBatchReq {
+    repeated TreasureStoneComposeReq composeList = 1;
+}
+message TreasureStoneComposeBatchRsp {
+    required int32 ret = 1;
+    repeated TreasureStoneComposeRsp composeList = 2;
+}
+enum TreasureStoneEnumRedPoint {
+    TreasureStone_RedPoint_NewItem = 0;
+    TreasureStone_RedPoint_Record = 1;
+    TreasureStone_RedPoint_CanInlay = 2;
+}
+message TreasureStoneSyncRedPoint {
+    required string redPoint = 1;
+}

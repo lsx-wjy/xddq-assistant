@@ -294,6 +294,7 @@ message HeavenBattleAppearanceIconMsg {
   optional string wxHeadUrl = 4;
   optional int32 appearanceId = 5;
   optional int32 contributeRank = 6;
+  optional int32 backOrnamentId = 7;
 }
 message HeavenBattleGridAttackMsg{
   optional PlayerAppearanceDataMsg appearance = 1;
@@ -374,6 +375,7 @@ message HeavenBattlePlayerAppearanceMsg {
   optional int64 playerId = 1;
   optional string nickName = 2;
   optional int32 appearanceId = 3;
+  optional int32 backOrnamentId = 4;
 }
 message HeavenBattlePlayerFightInfoMsg{
   optional string fightValue = 1;
@@ -444,6 +446,7 @@ message HeavenBattleGridOccupyRewardMsg {
 message HeavenBattleReceiveGridRewardReq {
   optional int32 activityId = 1;
   optional int32 gridId = 2;
+  repeated int32 gridIdList = 3;
 }
 message HeavenBattleReceiveGridRewardResp {
   optional int32 ret = 1;
@@ -611,6 +614,7 @@ message HeavenBattleWorshipPlayerMsg {
   repeated int32 petSoulShapeList = 10;
   optional int32 titleId = 11;
   optional int32 campId = 12;
+  optional int32 equipBackOrnament = 13;
 }
 message HeavenBattleTreasureGridSummaryReq {
   optional int32 activityId = 1;

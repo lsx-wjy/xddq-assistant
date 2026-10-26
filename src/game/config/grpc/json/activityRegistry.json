@@ -1152,6 +1152,15 @@
                 "risk": "observe"
             },
             {
+                "key": "S_ASSISTANT_PALACE_AUTO_REWARD",
+                "id": 230214,
+                "responseId": 30214,
+                "comment": "仙官赐福聚宝盆领取",
+                "requestMethod": "CityMsg.AssistantPalaceAutoRewardReq",
+                "responseMethod": "CityMsg.AssistantPalaceAutoRewardResp",
+                "risk": "combat"
+            },
+            {
                 "key": "S_ASSISTANT_SETTING_SYNC",
                 "id": 230200,
                 "responseId": 30200,
@@ -1186,6 +1195,60 @@
                 "requestMethod": "CityMsg.DailyFollowRemindReq",
                 "responseMethod": "CityMsg.DailyFollowRemindResp",
                 "risk": "observe"
+            },
+            {
+                "key": "S_ASSISTANT_PALACE_AUTO_SYNC",
+                "id": 230213,
+                "responseId": 30213,
+                "comment": "仙官赐福自动领取信息同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.AssistantPalaceAutoInfoSync",
+                "risk": "observe"
+            },
+            {
+                "key": "S_REWARD_RECLAIM_INFO",
+                "id": 237701,
+                "responseId": 37701,
+                "comment": "查询找回列表",
+                "requestMethod": "CityMsg.RewardReclaimInfoReq",
+                "responseMethod": "CityMsg.RewardReclaimInfoPush",
+                "risk": "combat"
+            },
+            {
+                "key": "S_REWARD_RECLAIM_INFO",
+                "id": 237701,
+                "responseId": 37701,
+                "comment": "找回列表同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.RewardReclaimInfoPush",
+                "risk": "combat"
+            },
+            {
+                "key": "S_REWARD_RECLAIM_BATCH_CLAIM",
+                "id": 237702,
+                "responseId": 37702,
+                "comment": "一键找回",
+                "requestMethod": "CityMsg.RewardReclaimBatchClaimReq",
+                "responseMethod": "CityMsg.RewardReclaimBatchClaimRsp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_REWARD_RECLAIM_BATCH_BUY",
+                "id": 237703,
+                "responseId": 37703,
+                "comment": "一键购买",
+                "requestMethod": "CityMsg.RewardReclaimBatchBuyReq",
+                "responseMethod": "CityMsg.RewardReclaimBatchBuyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_REWARD_RECLAIM_BATCH_ABANDON_PAY",
+                "id": 237704,
+                "responseId": 37704,
+                "comment": "全部放弃付费找回",
+                "requestMethod": "CityMsg.RewardReclaimAbandonPayReq",
+                "responseMethod": "CityMsg.RewardReclaimAbandonPayRsp",
+                "risk": "purchase"
             }
         ]
     },
@@ -2370,6 +2433,342 @@
         ]
     },
     {
+        "name": "BubbleDragon",
+        "sources": [
+            "RemoteBubbleDragonMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_BUBBLE_DRAGON_ENTER_ACTIVITY",
+                "id": 237601,
+                "responseId": 37601,
+                "comment": "灵果寻仙 进入活动",
+                "requestMethod": "CityMsg.BubbleDragonEnterActivityReq",
+                "responseMethod": "CityMsg.BubbleDragonEnterActivityResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_ENTER_GAME",
+                "id": 237602,
+                "responseId": 37602,
+                "comment": "灵果寻仙 进入倍率场",
+                "requestMethod": "CityMsg.BubbleDragonEnterGameReq",
+                "responseMethod": "CityMsg.BubbleDragonEnterGameResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_SHOOT",
+                "id": 237603,
+                "responseId": 37603,
+                "comment": "灵果寻仙 发射泡泡",
+                "requestMethod": "CityMsg.BubbleDragonShootReq",
+                "responseMethod": "CityMsg.BubbleDragonShootResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_USE_STAMINA_ITEM",
+                "id": 237604,
+                "responseId": 37604,
+                "comment": "灵果寻仙 使用体力道具",
+                "requestMethod": "CityMsg.BubbleDragonUseStaminaItemReq",
+                "responseMethod": "CityMsg.BubbleDragonUseStaminaItemResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_USE_CHARGE_ITEM",
+                "id": 237605,
+                "responseId": 37605,
+                "comment": "灵果寻仙 定风珠消除前N行",
+                "requestMethod": "CityMsg.BubbleDragonUseChargeItemReq",
+                "responseMethod": "CityMsg.BubbleDragonUseChargeItemResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_DRAW",
+                "id": 237606,
+                "responseId": 37606,
+                "comment": "灵果寻仙 神山宝库抽奖",
+                "requestMethod": "CityMsg.BubbleDragonDrawReq",
+                "responseMethod": "CityMsg.BubbleDragonDrawResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_SELECT_RARE",
+                "id": 237607,
+                "responseId": 37607,
+                "comment": "灵果寻仙 自选大奖",
+                "requestMethod": "CityMsg.BubbleDragonSelectRareReq",
+                "responseMethod": "CityMsg.BubbleDragonSelectRareResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_BUBBLE_DRAGON_REFRESH_BUBBLE",
+                "id": 237608,
+                "responseId": 37608,
+                "comment": "灵果寻仙 战令特权刷新当前灵果",
+                "requestMethod": "CityMsg.BubbleDragonRefreshBubbleReq",
+                "responseMethod": "CityMsg.BubbleDragonRefreshBubbleResp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
+        "name": "CardCollect",
+        "sources": [
+            "CardCollectMsgInfo",
+            "CityMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_CARD_COLLECT_SYNC_DATA",
+                "id": 237590,
+                "responseId": 37590,
+                "comment": "增量推送",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.NewCardCollectSyncData",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_SYNC_LOSE_DATA",
+                "id": 237520,
+                "responseId": 37520,
+                "comment": "失效交换弹窗",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.NewCardCollectLoseChange",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_ENTER",
+                "id": 237501,
+                "responseId": 37501,
+                "comment": "进入",
+                "requestMethod": "CityMsg.NewCardCollectEnterReq",
+                "responseMethod": "CityMsg.NewCardCollectEnterResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_OPEN_BAG",
+                "id": 237503,
+                "responseId": 37503,
+                "comment": "开卡包",
+                "requestMethod": "CityMsg.NewCardCollectOpenBagReq",
+                "responseMethod": "CityMsg.NewCardCollectOpenBagResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_ACTIVATE",
+                "id": 237504,
+                "responseId": 37504,
+                "comment": "卡牌领奖",
+                "requestMethod": "CityMsg.NewCardCollectActivateReq",
+                "responseMethod": "CityMsg.NewCardCollectActivateResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_CLAIM_CHAPTER_STAGE",
+                "id": 237505,
+                "responseId": 37505,
+                "comment": "篇章集齐节点",
+                "requestMethod": "CityMsg.NewCardCollectClaimChapterStageReq",
+                "responseMethod": "CityMsg.NewCardCollectClaimChapterStageResp",
+                "risk": "claim"
+            },
+            {
+                "key": "S_CARD_COLLECT_SIGN_IN",
+                "id": 237506,
+                "responseId": 37506,
+                "comment": "玄尘战令签到",
+                "requestMethod": "CityMsg.NewCardCollectSignInReq",
+                "responseMethod": "CityMsg.NewCardCollectSignInResp",
+                "risk": "claim"
+            },
+            {
+                "key": "S_CARD_COLLECT_RELEASE",
+                "id": 237507,
+                "responseId": 37507,
+                "comment": "发布交换",
+                "requestMethod": "CityMsg.NewCardCollectReleaseReq",
+                "responseMethod": "CityMsg.NewCardCollectReleaseResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_CHANGE",
+                "id": 237508,
+                "responseId": 37508,
+                "comment": "成交交换",
+                "requestMethod": "CityMsg.NewCardCollectChangeReq",
+                "responseMethod": "CityMsg.NewCardCollectChangeResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_CHANGE_LIST",
+                "id": 237509,
+                "responseId": 37509,
+                "comment": "交换列表",
+                "requestMethod": "CityMsg.NewCardCollectChangeListReq",
+                "responseMethod": "CityMsg.NewCardCollectChangeListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_SEARCH_PLAYER",
+                "id": 237510,
+                "responseId": 37510,
+                "comment": "指定交换搜人",
+                "requestMethod": "CityMsg.NewCardCollectSearchPlayerReq",
+                "responseMethod": "CityMsg.NewCardCollectSearchPlayerResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_OPEN_RANDOM_BOX",
+                "id": 237511,
+                "responseId": 37511,
+                "comment": "开随机宝箱",
+                "requestMethod": "CityMsg.NewCardCollectOpenRandomBoxReq",
+                "responseMethod": "CityMsg.NewCardCollectOpenRandomBoxResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_CARD_RECYCLE",
+                "id": 237512,
+                "responseId": 37512,
+                "comment": "卡牌分解",
+                "requestMethod": "CityMsg.NewCardCollectCardRecycleReq",
+                "responseMethod": "CityMsg.NewCardCollectCardRecycleResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_INNER_RED_POINT",
+                "id": 237513,
+                "responseId": 37513,
+                "comment": "局内红点",
+                "requestMethod": "CityMsg.NewCardCollectInnerRedPointReq",
+                "responseMethod": "CityMsg.NewCardCollectInnerRedPointResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_HISTORY_VIEW",
+                "id": 237514,
+                "responseId": 37514,
+                "comment": "忆梦图鉴",
+                "requestMethod": "CityMsg.NewCardCollectHistoryViewReq",
+                "responseMethod": "CityMsg.NewCardCollectHistoryViewResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_CLAIM_SEASON_AWARD",
+                "id": 237515,
+                "responseId": 37515,
+                "comment": "赛季全收集奖",
+                "requestMethod": "CityMsg.NewCardCollectClaimSeasonAwardReq",
+                "responseMethod": "CityMsg.NewCardCollectClaimSeasonAwardResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_CARD_COLLECT_LEAVE",
+                "id": 237516,
+                "responseId": 37516,
+                "comment": "离开卡册界面",
+                "requestMethod": "CityMsg.NewCardCollectLeaveReq",
+                "responseMethod": "CityMsg.NewCardCollectLeaveResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_USEABLE_CARD_LIST",
+                "id": 237517,
+                "responseId": 37517,
+                "comment": "玩家可用卡册列表",
+                "requestMethod": "CityMsg.NewCardCollectUseAbleCardListReq",
+                "responseMethod": "CityMsg.NewCardCollectUseAbleCardListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_PLAYER_COLLECT_RECORD_LIST",
+                "id": 237518,
+                "responseId": 37518,
+                "comment": "玩家历史卡册列表",
+                "requestMethod": "CityMsg.NewCardCollectPlayerCollectRecordListReq",
+                "responseMethod": "CityMsg.NewCardCollectPlayerCollectRecordListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_PLAYER_SEASON_LIST",
+                "id": 237519,
+                "responseId": 37519,
+                "comment": "玩家赛季列表",
+                "requestMethod": "CityMsg.NewCardCollectPlayerSeasonListReq",
+                "responseMethod": "CityMsg.NewCardCollectPlayerSeasonListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_ALL_CARD_LIST",
+                "id": 237521,
+                "responseId": 37521,
+                "comment": "玩家全部卡牌列表",
+                "requestMethod": "CityMsg.NewCardCollectAllCardListReq",
+                "responseMethod": "CityMsg.NewCardCollectAllCardListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_ALL_CARD_COUNT",
+                "id": 237522,
+                "responseId": 37522,
+                "comment": "玩家全部赛季各星级卡牌总数量",
+                "requestMethod": "CityMsg.NewCardCollectAllCardCountReq",
+                "responseMethod": "CityMsg.NewCardCollectAllCardCountResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_GET_KEY_INFO",
+                "id": 237523,
+                "responseId": 37523,
+                "comment": "查询战令额外钥匙可领数量",
+                "requestMethod": "CityMsg.NewCardCollectGetKeyInfoReq",
+                "responseMethod": "CityMsg.NewCardCollectGetKeyInfoResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_RECEIVE_BATTLE_PASS_KEY",
+                "id": 237524,
+                "responseId": 37524,
+                "comment": "领取战令额外钥匙",
+                "requestMethod": "CityMsg.NewCardCollectReceiveBattlePassKeyReq",
+                "responseMethod": "CityMsg.NewCardCollectReceiveBattlePassKeyResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_CARD_COLLECT_CARD_LOCK",
+                "id": 237525,
+                "responseId": 37525,
+                "comment": "五星闪卡按数量锁定",
+                "requestMethod": "CityMsg.NewCardCollectCardLockReq",
+                "responseMethod": "CityMsg.NewCardCollectCardLockResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_SELECT_SEASON",
+                "id": 237526,
+                "responseId": 37526,
+                "comment": "选择本期参与番外",
+                "requestMethod": "CityMsg.NewCardCollectSelectSeasonReq",
+                "responseMethod": "CityMsg.NewCardCollectSelectSeasonResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_CARD_COLLECT_LOGIN_SYNC",
+                "id": 237502,
+                "responseId": 37502,
+                "comment": "新集卡登录同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.NewCardCollectLoginSyncResp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
         "name": "CastSwordActivity",
         "sources": [
             "RemoteCastSwordMsgInfo"
@@ -2811,6 +3210,87 @@
                 "requestMethod": "",
                 "responseMethod": "CityMsg.ChaosMallAddLawsSyncMsg",
                 "risk": "observe"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_SELL",
+                "id": 236740,
+                "responseId": 36740,
+                "comment": "混沌法则 拍卖上架",
+                "requestMethod": "CityMsg.ChaosLawAuctionSellReq",
+                "responseMethod": "CityMsg.ChaosLawAuctionSellRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_BID",
+                "id": 236741,
+                "responseId": 36741,
+                "comment": "混沌法则 竞拍出价",
+                "requestMethod": "CityMsg.ChaosLawAuctionBidReq",
+                "responseMethod": "CityMsg.ChaosLawAuctionBidRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_SELL_DOWN",
+                "id": 236742,
+                "responseId": 36742,
+                "comment": "混沌法则 拍卖下架",
+                "requestMethod": "CityMsg.ChaosLawAuctionSellDownReq",
+                "responseMethod": "CityMsg.ChaosLawAuctionSellDownRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_SYNC_BID",
+                "id": 236744,
+                "responseId": 36744,
+                "comment": "混沌法则 推送-出价同步（无上行体）",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.ChaosLawAuctionSyncBid",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_OUTBID_NOTIFY",
+                "id": 236745,
+                "responseId": 36745,
+                "comment": "混沌法则 推送-被超越通知（无上行体）",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.ChaosLawAuctionOutbidNotify",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_SETTLE_NOTIFY",
+                "id": 236746,
+                "responseId": 36746,
+                "comment": "混沌法则 推送-结算通知（无上行体）",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.ChaosLawAuctionSettleNotify",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_HEARTBEAT",
+                "id": 236747,
+                "responseId": 36747,
+                "comment": "混沌法则 拍卖界面心跳（无回包）",
+                "requestMethod": "CityMsg.ChaosLawAuctionHeartbeatReq",
+                "responseMethod": "",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_GET_GOODS",
+                "id": 236743,
+                "responseId": 36743,
+                "comment": "混沌法则 通过商品id获取拍卖商品",
+                "requestMethod": "CityMsg.ChaosLawAuctionGetGoodsReq",
+                "responseMethod": "CityMsg.ChaosLawAuctionGetGoodsRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_CHAOS_LAW_AUCTION_NOTIFY_READ",
+                "id": 236748,
+                "responseId": 36748,
+                "comment": "混沌法则 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+                "requestMethod": "CityMsg.ChaosLawAuctionNotifyReadReq",
+                "responseMethod": "CityMsg.ChaosLawAuctionNotifyReadRsp",
+                "risk": "purchase"
             },
             {
                 "key": "S_CHAOS_LAW_SYNC_CHAT_LIST",
@@ -4932,6 +5412,15 @@
                 "risk": "observe"
             },
             {
+                "key": "S_ELIXIR_ELVES_DRAW_SEASON_SYNC",
+                "id": 235561,
+                "responseId": 35561,
+                "comment": "同步抽奖赛季时间",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.ElixirElvesDrawSeasonSync",
+                "risk": "observe"
+            },
+            {
                 "key": "S_ELIXIR_SYNC_DATA",
                 "id": 235501,
                 "responseId": 35501,
@@ -5424,6 +5913,15 @@
                 "comment": "索要药草",
                 "requestMethod": "CityMsg.ElixirAskGrassReq",
                 "responseMethod": "CityMsg.ElixirAskGrassResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_ELIXIR_DESTINY_ORDER_QUICK_PLANT",
+                "id": 235582,
+                "responseId": 35582,
+                "comment": "仙友订单药材快速种植",
+                "requestMethod": "CityMsg.ElixirDestinyOrderQuickPlantReq",
+                "responseMethod": "CityMsg.ElixirDestinyOrderQuickPlantResp",
                 "risk": "observe"
             },
             {
@@ -6697,6 +7195,169 @@
                 "requestMethod": "CityMsg.GetMallRewardReq",
                 "responseMethod": "CityMsg.GetMallRewardResp",
                 "risk": "purchase"
+            }
+        ]
+    },
+    {
+        "name": "Fishing",
+        "sources": [
+            "RemoteFishingMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_FISHING_ENTER",
+                "id": 238001,
+                "responseId": 38001,
+                "comment": "进入主界面",
+                "requestMethod": "CityMsg.FishingEnterReq",
+                "responseMethod": "CityMsg.FishingEnterRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_CAST",
+                "id": 238002,
+                "responseId": 38002,
+                "comment": "钓鱼",
+                "requestMethod": "CityMsg.FishingCastReq",
+                "responseMethod": "CityMsg.FishingCastRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_REPORT_QTE",
+                "id": 238003,
+                "responseId": 38003,
+                "comment": "上报 QTE",
+                "requestMethod": "CityMsg.FishingReportQteReq",
+                "responseMethod": "CityMsg.FishingReportQteRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_SWITCH_POOL",
+                "id": 238004,
+                "responseId": 38004,
+                "comment": "切换鱼池",
+                "requestMethod": "CityMsg.FishingSwitchPoolReq",
+                "responseMethod": "CityMsg.FishingSwitchPoolRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_GET_FISH_LIST",
+                "id": 238005,
+                "responseId": 38005,
+                "comment": "鱼灵篓列表",
+                "requestMethod": "CityMsg.FishingGetFishListReq",
+                "responseMethod": "CityMsg.FishingGetFishListRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_EXPAND_BAG",
+                "id": 238006,
+                "responseId": 38006,
+                "comment": "扩容鱼篓",
+                "requestMethod": "CityMsg.FishingExpandBagReq",
+                "responseMethod": "CityMsg.FishingExpandBagRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_DECOMPOSE",
+                "id": 238007,
+                "responseId": 38007,
+                "comment": "分解",
+                "requestMethod": "CityMsg.FishingDecomposeReq",
+                "responseMethod": "CityMsg.FishingDecomposeRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_LOCK",
+                "id": 238008,
+                "responseId": 38008,
+                "comment": "锁定鱼",
+                "requestMethod": "CityMsg.FishingLockReq",
+                "responseMethod": "CityMsg.FishingLockRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_INHERIT",
+                "id": 238009,
+                "responseId": 38009,
+                "comment": "属性继承",
+                "requestMethod": "CityMsg.FishingInheritReq",
+                "responseMethod": "CityMsg.FishingInheritRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_CONFIRM_PENDING",
+                "id": 238010,
+                "responseId": 38010,
+                "comment": "待确认保存/取消",
+                "requestMethod": "CityMsg.FishingConfirmPendingReq",
+                "responseMethod": "CityMsg.FishingConfirmPendingRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_SKILL_BOOK",
+                "id": 238011,
+                "responseId": 38011,
+                "comment": "玄诀洗练",
+                "requestMethod": "CityMsg.FishingSkillBookReq",
+                "responseMethod": "CityMsg.FishingSkillBookRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_DEPLOY",
+                "id": 238012,
+                "responseId": 38012,
+                "comment": "上阵",
+                "requestMethod": "CityMsg.FishingDeployReq",
+                "responseMethod": "CityMsg.FishingDeployRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_CLAIM_ATLAS_REWARD",
+                "id": 238013,
+                "responseId": 38013,
+                "comment": "图鉴领奖",
+                "requestMethod": "CityMsg.FishingClaimAtlasRewardReq",
+                "responseMethod": "CityMsg.FishingClaimAtlasRewardRsp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_FISHING_LEVEL_UP",
+                "id": 238014,
+                "responseId": 38014,
+                "comment": "升级",
+                "requestMethod": "CityMsg.FishingLevelUpReq",
+                "responseMethod": "CityMsg.FishingLevelUpRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_FISH_LEVEL_UP",
+                "id": 238016,
+                "responseId": 38016,
+                "comment": "鱼实例升级",
+                "requestMethod": "CityMsg.FishingFishLevelUpReq",
+                "responseMethod": "CityMsg.FishingFishLevelUpRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_FISH_STAR_UP",
+                "id": 238017,
+                "responseId": 38017,
+                "comment": "鱼实例升星",
+                "requestMethod": "CityMsg.FishingFishStarUpReq",
+                "responseMethod": "CityMsg.FishingFishStarUpRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_FISHING_FISH_LEVEL_RESET",
+                "id": 238018,
+                "responseId": 38018,
+                "comment": "鱼实例等级重置",
+                "requestMethod": "CityMsg.FishingFishLevelResetReq",
+                "responseMethod": "CityMsg.FishingFishLevelResetRsp",
+                "risk": "observe"
             }
         ]
     },
@@ -11061,6 +11722,142 @@
         ]
     },
     {
+        "name": "LawStone",
+        "sources": [
+            "CityMsgInfo"
+        ],
+        "remote": false,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_LAW_STONE_ENTER",
+                "id": 238401,
+                "responseId": 38401,
+                "comment": "法则宝石进入系统",
+                "requestMethod": "CityMsg.LawStoneEnterReq",
+                "responseMethod": "CityMsg.LawStoneEnterRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_EQUIP",
+                "id": 238402,
+                "responseId": 38402,
+                "comment": "法则宝石镶嵌",
+                "requestMethod": "CityMsg.LawStoneEquipReq",
+                "responseMethod": "CityMsg.LawStoneEquipRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_UNEQUIP",
+                "id": 238403,
+                "responseId": 38403,
+                "comment": "法则宝石拆卸",
+                "requestMethod": "CityMsg.LawStoneUnequipReq",
+                "responseMethod": "CityMsg.LawStoneUnequipRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_LOCK",
+                "id": 238404,
+                "responseId": 38404,
+                "comment": "法则宝石锁定/解锁",
+                "requestMethod": "CityMsg.LawStoneLockReq",
+                "responseMethod": "CityMsg.LawStoneLockRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_SYNC",
+                "id": 238405,
+                "responseId": 38405,
+                "comment": "法则宝石同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.LawStoneSync",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_COMPOSE_BATCH",
+                "id": 238406,
+                "responseId": 38406,
+                "comment": "法则宝石批量融合升阶",
+                "requestMethod": "CityMsg.LawStoneComposeBatchReq",
+                "responseMethod": "CityMsg.LawStoneComposeBatchRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_COMPOSE_LOG",
+                "id": 238407,
+                "responseId": 38407,
+                "comment": "法则宝石合成日志",
+                "requestMethod": "CityMsg.LawStoneComposeLogReq",
+                "responseMethod": "CityMsg.LawStoneComposeLogRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_SYNC_RED_POINT",
+                "id": 238408,
+                "responseId": 38408,
+                "comment": "法则宝石红点同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.LawStoneSyncRedPoint",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_SELL",
+                "id": 238410,
+                "responseId": 38410,
+                "comment": "法则宝石上架",
+                "requestMethod": "CityMsg.LawStoneDealSellReq",
+                "responseMethod": "CityMsg.LawStoneDealSellRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_SELL_DOWN",
+                "id": 238411,
+                "responseId": 38411,
+                "comment": "法则宝石下架",
+                "requestMethod": "CityMsg.LawStoneDealSellDownReq",
+                "responseMethod": "CityMsg.LawStoneDealSellDownRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_BUY",
+                "id": 238412,
+                "responseId": 38412,
+                "comment": "法则宝石购买",
+                "requestMethod": "CityMsg.LawStoneDealBuyReq",
+                "responseMethod": "CityMsg.LawStoneDealBuyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_GET_RECORD",
+                "id": 238413,
+                "responseId": 38413,
+                "comment": "法则宝石获取交易记录",
+                "requestMethod": "CityMsg.LawStoneDealGetRecordReq",
+                "responseMethod": "CityMsg.LawStoneDealGetRecordRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_COLLECT",
+                "id": 238414,
+                "responseId": 38414,
+                "comment": "法则宝石收藏/取消收藏",
+                "requestMethod": "CityMsg.LawStoneDealCollectReq",
+                "responseMethod": "CityMsg.LawStoneDealCollectRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_LAW_STONE_DEAL_PRICE_ADJUST",
+                "id": 238415,
+                "responseId": 38415,
+                "comment": "法则宝石改价",
+                "requestMethod": "CityMsg.LawStoneDealPriceAdjustReq",
+                "responseMethod": "CityMsg.LawStoneDealPriceAdjustRsp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
         "name": "LimitTimeGroupBuy",
         "sources": [
             "RemoteLimitTimeGroupBuyMsgInfo"
@@ -11687,6 +12484,24 @@
                 "comment": "法宝形象切换",
                 "requestMethod": "CityMsg.MagicTreasureSwitchLinkageSkinReq",
                 "responseMethod": "CityMsg.MagicTreasureSwitchLinkageSkinResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MAGIC_TREASURE_ONE_KEY_REFINE_PREVIEW_REQ",
+                "id": 26308,
+                "responseId": 6308,
+                "comment": "法宝一键炼化预览",
+                "requestMethod": "CityMsg.MagicTreasureOneKeyRefinePreviewReq",
+                "responseMethod": "CityMsg.MagicTreasureOneKeyRefinePreviewResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MAGIC_TREASURE_ONE_KEY_REFINE_REQ",
+                "id": 26309,
+                "responseId": 6309,
+                "comment": "法宝一键炼化",
+                "requestMethod": "CityMsg.MagicTreasureOneKeyRefineReq",
+                "responseMethod": "CityMsg.MagicTreasureOneKeyRefineResp",
                 "risk": "observe"
             }
         ]
@@ -13122,165 +13937,12 @@
     {
         "name": "MountainSea",
         "sources": [
-            "CityMsgInfo",
-            "RemoteVientianeMsgInfo"
+            "RemoteVientianeMsgInfo",
+            "CityMsgInfo"
         ],
         "remote": true,
         "enabled": true,
         "protocols": [
-            {
-                "key": "S_MOUNTAIN_SEA_ENTER_BATTLE",
-                "id": 209750,
-                "responseId": 9750,
-                "comment": "进入布阵界面",
-                "requestMethod": "CityMsg.MountainSeaEnterBattleReq",
-                "responseMethod": "CityMsg.MountainSeaEnterBattleResp",
-                "risk": "combat"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_ENTER_SWITCH_SEPARATION",
-                "id": 209752,
-                "responseId": 9752,
-                "comment": "进入切换分身界面",
-                "requestMethod": "CityMsg.MountainSeaEnterSwitchSeparationReq",
-                "responseMethod": "CityMsg.MountainSeaEnterSwitchSeparationRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_SWITCH_SEPARATION",
-                "id": 209753,
-                "responseId": 9753,
-                "comment": "切换上阵的分身",
-                "requestMethod": "CityMsg.MountainSeaSwitchSeparationReq",
-                "responseMethod": "CityMsg.MountainSeaSwitchSeparationRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_SEPARATION_DETAIL",
-                "id": 209754,
-                "responseId": 9754,
-                "comment": "查看分身详细数据",
-                "requestMethod": "CityMsg.MountainSeaSeparationDetailReq",
-                "responseMethod": "CityMsg.MountainSeaSeparationDetailRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_CHANGE_POS",
-                "id": 209755,
-                "responseId": 9755,
-                "comment": "改变参战对象位置",
-                "requestMethod": "CityMsg.MountainSeaChangePosReq",
-                "responseMethod": "CityMsg.MountainSeaChangePosRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_CHANGE_TEAM_SKILL",
-                "id": 209756,
-                "responseId": 9756,
-                "comment": "改变装配的队伍技能",
-                "requestMethod": "CityMsg.MountainSeaChangeTeamSkillReq",
-                "responseMethod": "CityMsg.MountainSeaChangeTeamSkillRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_DO_BATTLE",
-                "id": 209757,
-                "responseId": 9757,
-                "comment": "进行战斗",
-                "requestMethod": "CityMsg.MountainSeaDoBattleReq",
-                "responseMethod": "CityMsg.MountainSeaDoBattleRsp",
-                "risk": "combat"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_ENTER_BATTLE_NOTIFY",
-                "id": 209770,
-                "responseId": 9770,
-                "comment": "广播进入布阵界面",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaEnterBattleNotify",
-                "risk": "combat"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_SWITCH_SEPARATION_NOTIFY",
-                "id": 209771,
-                "responseId": 9771,
-                "comment": "切换上阵分身广播",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaSwitchSeparationNotify",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_CHANGE_TEAM_SKILL_NOTIFY",
-                "id": 209772,
-                "responseId": 9772,
-                "comment": "装配的队伍技能变更广播",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaChangeTeamSkillNotify",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_CHANGE_POS_NOTIFY",
-                "id": 209774,
-                "responseId": 9774,
-                "comment": "参战对象位置变更广播",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaChangePosNotify",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_DO_BATTLE_NOTIFY",
-                "id": 209773,
-                "responseId": 9773,
-                "comment": "广播战斗数据",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaDoBattleNotify",
-                "risk": "combat"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_INVITE_LIST",
-                "id": 209783,
-                "responseId": 9783,
-                "comment": "邀请列表",
-                "requestMethod": "CityMsg.MountainSeaInviteListReq",
-                "responseMethod": "CityMsg.MountainSeaInviteListResp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_INVITE_JOIN_TEAM",
-                "id": 209787,
-                "responseId": 9787,
-                "comment": "加入指定邀请队伍",
-                "requestMethod": "CityMsg.MountainSeaApplyJoinTeamReq",
-                "responseMethod": "CityMsg.MountainSeaApplyJoinTeamRsp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_INVITE_REFUSE",
-                "id": 209785,
-                "responseId": 9785,
-                "comment": "一键拒绝邀请队伍",
-                "requestMethod": "CityMsg.MountainSeaInviteRefuseReq",
-                "responseMethod": "CityMsg.MountainSeaInviteRefuseResp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_SEARCH_SET_APPOINT",
-                "id": 209786,
-                "responseId": 9786,
-                "comment": "设置接受指定邀请开关",
-                "requestMethod": "CityMsg.MountainSeaSetAppointReq",
-                "responseMethod": "CityMsg.MountainSeaSetAppointResp",
-                "risk": "observe"
-            },
-            {
-                "key": "S_MOUNTAIN_SEA_RED_INFO",
-                "id": 209784,
-                "responseId": 9784,
-                "comment": "请求红点",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.MountainSeaRedPointResp",
-                "risk": "observe"
-            },
             {
                 "key": "S_MOUNTAIN_SEA_ENTER",
                 "id": 209701,
@@ -13505,6 +14167,159 @@
                 "requestMethod": "CityMsg.MountainSeaGetBattleVideoReq",
                 "responseMethod": "CityMsg.MountainSeaGetBattleVideoRsp",
                 "risk": "combat"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_ENTER_BATTLE",
+                "id": 209750,
+                "responseId": 9750,
+                "comment": "进入布阵界面",
+                "requestMethod": "CityMsg.MountainSeaEnterBattleReq",
+                "responseMethod": "CityMsg.MountainSeaEnterBattleResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_ENTER_SWITCH_SEPARATION",
+                "id": 209752,
+                "responseId": 9752,
+                "comment": "进入切换分身界面",
+                "requestMethod": "CityMsg.MountainSeaEnterSwitchSeparationReq",
+                "responseMethod": "CityMsg.MountainSeaEnterSwitchSeparationRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_SWITCH_SEPARATION",
+                "id": 209753,
+                "responseId": 9753,
+                "comment": "切换上阵的分身",
+                "requestMethod": "CityMsg.MountainSeaSwitchSeparationReq",
+                "responseMethod": "CityMsg.MountainSeaSwitchSeparationRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_SEPARATION_DETAIL",
+                "id": 209754,
+                "responseId": 9754,
+                "comment": "查看分身详细数据",
+                "requestMethod": "CityMsg.MountainSeaSeparationDetailReq",
+                "responseMethod": "CityMsg.MountainSeaSeparationDetailRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_CHANGE_POS",
+                "id": 209755,
+                "responseId": 9755,
+                "comment": "改变参战对象位置",
+                "requestMethod": "CityMsg.MountainSeaChangePosReq",
+                "responseMethod": "CityMsg.MountainSeaChangePosRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_CHANGE_TEAM_SKILL",
+                "id": 209756,
+                "responseId": 9756,
+                "comment": "改变装配的队伍技能",
+                "requestMethod": "CityMsg.MountainSeaChangeTeamSkillReq",
+                "responseMethod": "CityMsg.MountainSeaChangeTeamSkillRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_DO_BATTLE",
+                "id": 209757,
+                "responseId": 9757,
+                "comment": "进行战斗",
+                "requestMethod": "CityMsg.MountainSeaDoBattleReq",
+                "responseMethod": "CityMsg.MountainSeaDoBattleRsp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_ENTER_BATTLE_NOTIFY",
+                "id": 209770,
+                "responseId": 9770,
+                "comment": "广播进入布阵界面",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaEnterBattleNotify",
+                "risk": "combat"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_SWITCH_SEPARATION_NOTIFY",
+                "id": 209771,
+                "responseId": 9771,
+                "comment": "切换上阵分身广播",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaSwitchSeparationNotify",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_CHANGE_TEAM_SKILL_NOTIFY",
+                "id": 209772,
+                "responseId": 9772,
+                "comment": "装配的队伍技能变更广播",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaChangeTeamSkillNotify",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_CHANGE_POS_NOTIFY",
+                "id": 209774,
+                "responseId": 9774,
+                "comment": "参战对象位置变更广播",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaChangePosNotify",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_DO_BATTLE_NOTIFY",
+                "id": 209773,
+                "responseId": 9773,
+                "comment": "广播战斗数据",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaDoBattleNotify",
+                "risk": "combat"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_INVITE_LIST",
+                "id": 209783,
+                "responseId": 9783,
+                "comment": "邀请列表",
+                "requestMethod": "CityMsg.MountainSeaInviteListReq",
+                "responseMethod": "CityMsg.MountainSeaInviteListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_INVITE_JOIN_TEAM",
+                "id": 209787,
+                "responseId": 9787,
+                "comment": "加入指定邀请队伍",
+                "requestMethod": "CityMsg.MountainSeaApplyJoinTeamReq",
+                "responseMethod": "CityMsg.MountainSeaApplyJoinTeamRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_INVITE_REFUSE",
+                "id": 209785,
+                "responseId": 9785,
+                "comment": "一键拒绝邀请队伍",
+                "requestMethod": "CityMsg.MountainSeaInviteRefuseReq",
+                "responseMethod": "CityMsg.MountainSeaInviteRefuseResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_SEARCH_SET_APPOINT",
+                "id": 209786,
+                "responseId": 9786,
+                "comment": "设置接受指定邀请开关",
+                "requestMethod": "CityMsg.MountainSeaSetAppointReq",
+                "responseMethod": "CityMsg.MountainSeaSetAppointResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_MOUNTAIN_SEA_RED_INFO",
+                "id": 209784,
+                "responseId": 9784,
+                "comment": "请求红点",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.MountainSeaRedPointResp",
+                "risk": "observe"
             }
         ]
     },
@@ -14209,6 +15024,15 @@
                 "comment": "同步药材和丹方数据",
                 "requestMethod": "",
                 "responseMethod": "CityMsg.ElixirLoginSyncData",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PET_LOCK_SYNC",
+                "id": 238099,
+                "responseId": 38099,
+                "comment": "灵兽/灵鱼锁数据同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PetLockSync",
                 "risk": "observe"
             }
         ]
@@ -14965,6 +15789,224 @@
         ]
     },
     {
+        "name": "PeakDuel",
+        "sources": [
+            "CityMsgInfo",
+            "PeakDuelMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_PEAK_DUEL_LOGIN_SYNC",
+                "id": 238102,
+                "responseId": 38102,
+                "comment": "万盟争锋登录/重连同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PeakDuelLoginSyncMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_ENTER",
+                "id": 238101,
+                "responseId": 38101,
+                "comment": "进入万盟争锋",
+                "requestMethod": "CityMsg.PeakDuelEnterReq",
+                "responseMethod": "CityMsg.PeakDuelEnterResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_SERVER_LIST",
+                "id": 238103,
+                "responseId": 38103,
+                "comment": "大组完整区服列表",
+                "requestMethod": "CityMsg.PeakDuelServerListReq",
+                "responseMethod": "CityMsg.PeakDuelServerListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_SCHEDULE",
+                "id": 238104,
+                "responseId": 38104,
+                "comment": "赛程详情",
+                "requestMethod": "CityMsg.PeakDuelScheduleReq",
+                "responseMethod": "CityMsg.PeakDuelScheduleResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_GROUP_RANK",
+                "id": 238105,
+                "responseId": 38105,
+                "comment": "组内妖盟排行",
+                "requestMethod": "CityMsg.PeakDuelGroupRankReq",
+                "responseMethod": "CityMsg.PeakDuelGroupRankResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_BATTLE_INFO",
+                "id": 238106,
+                "responseId": 38106,
+                "comment": "对决战况",
+                "requestMethod": "CityMsg.PeakDuelBattleInfoReq",
+                "responseMethod": "CityMsg.PeakDuelBattleInfoResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PEAK_DUEL_BATTLE_RANK",
+                "id": 238107,
+                "responseId": 38107,
+                "comment": "对决积分全榜",
+                "requestMethod": "CityMsg.PeakDuelBattleRankReq",
+                "responseMethod": "CityMsg.PeakDuelBattleRankResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PEAK_DUEL_BATTLE_REPORT",
+                "id": 238108,
+                "responseId": 38108,
+                "comment": "对决详情-对抗列表",
+                "requestMethod": "CityMsg.PeakDuelBattleReportReq",
+                "responseMethod": "CityMsg.PeakDuelBattleReportResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PEAK_DUEL_BATTLE_HISTORY",
+                "id": 238109,
+                "responseId": 38109,
+                "comment": "对决详情-历史对战",
+                "requestMethod": "CityMsg.PeakDuelBattleHistoryReq",
+                "responseMethod": "CityMsg.PeakDuelBattleHistoryResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PEAK_DUEL_CONTRIBUTION",
+                "id": 238110,
+                "responseId": 38110,
+                "comment": "贡献详情",
+                "requestMethod": "CityMsg.PeakDuelContributionReq",
+                "responseMethod": "CityMsg.PeakDuelContributionResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_LIKE",
+                "id": 238111,
+                "responseId": 38111,
+                "comment": "点赞",
+                "requestMethod": "CityMsg.PeakDuelLikeReq",
+                "responseMethod": "CityMsg.PeakDuelLikeResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_CLAIM_RECHARGE_BATCH",
+                "id": 238113,
+                "responseId": 38113,
+                "comment": "任务类型66充值循环档批量领取",
+                "requestMethod": "CityMsg.PeakDuelClaimRechargeBatchReq",
+                "responseMethod": "CityMsg.PeakDuelClaimRechargeBatchResp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_PEAK_DUEL_GUESS_INFO",
+                "id": 238114,
+                "responseId": 38114,
+                "comment": "竞猜页信息",
+                "requestMethod": "CityMsg.PeakDuelGuessInfoReq",
+                "responseMethod": "CityMsg.PeakDuelGuessInfoResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_RECEIVE_GUESS_COIN",
+                "id": 238115,
+                "responseId": 38115,
+                "comment": "领取竞猜币",
+                "requestMethod": "CityMsg.PeakDuelReceiveGuessCoinReq",
+                "responseMethod": "CityMsg.PeakDuelReceiveGuessCoinResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_GUESS",
+                "id": 238116,
+                "responseId": 38116,
+                "comment": "押注妖盟",
+                "requestMethod": "CityMsg.PeakDuelGuessReq",
+                "responseMethod": "CityMsg.PeakDuelGuessResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_HEAT_RANK",
+                "id": 238117,
+                "responseId": 38117,
+                "comment": "热度榜",
+                "requestMethod": "CityMsg.PeakDuelHeatRankReq",
+                "responseMethod": "CityMsg.PeakDuelHeatRankResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_GUESS_RANK",
+                "id": 238118,
+                "responseId": 38118,
+                "comment": "竞猜榜",
+                "requestMethod": "CityMsg.PeakDuelGuessRankReq",
+                "responseMethod": "CityMsg.PeakDuelGuessRankResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_HISTORY",
+                "id": 238119,
+                "responseId": 38119,
+                "comment": "往届冠军",
+                "requestMethod": "CityMsg.PeakDuelHistoryReq",
+                "responseMethod": "CityMsg.PeakDuelHistoryResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_CELEBRATION",
+                "id": 238120,
+                "responseId": 38120,
+                "comment": "庆典信息",
+                "requestMethod": "CityMsg.PeakDuelCelebrationReq",
+                "responseMethod": "CityMsg.PeakDuelCelebrationResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_WORSHIP",
+                "id": 238121,
+                "responseId": 38121,
+                "comment": "膜拜领奖",
+                "requestMethod": "CityMsg.PeakDuelWorshipReq",
+                "responseMethod": "CityMsg.PeakDuelWorshipResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_UNION_MATCH_SCORE",
+                "id": 238122,
+                "responseId": 38122,
+                "comment": "妖盟各场次排行积分",
+                "requestMethod": "CityMsg.PeakDuelUnionMatchScoreReq",
+                "responseMethod": "CityMsg.PeakDuelUnionMatchScoreResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PEAK_DUEL_PLAYER_SCORE",
+                "id": 238123,
+                "responseId": 38123,
+                "comment": "获取最新个人任务积分",
+                "requestMethod": "CityMsg.PeakDuelPlayerScoreReq",
+                "responseMethod": "CityMsg.PeakDuelPlayerScoreResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PEAK_DUEL_RED_POINT",
+                "id": 238124,
+                "responseId": 38124,
+                "comment": "红点详情",
+                "requestMethod": "CityMsg.PeakDuelRedPointReq",
+                "responseMethod": "CityMsg.PeakDuelRedPointResp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
         "name": "Pet",
         "sources": [
             "CityMsgInfo"
@@ -15415,6 +16457,376 @@
                 "requestMethod": "CityMsg.PetKernelWakeResetReq",
                 "responseMethod": "CityMsg.PetKernelWakeResetResp",
                 "risk": "observe"
+            }
+        ]
+    },
+    {
+        "name": "PetsFight",
+        "sources": [
+            "RemotePetsFightMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_PETS_FIGHT_ENTER",
+                "id": 237200,
+                "responseId": 37200,
+                "comment": "灵兽乱斗 进入活动",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightEnterResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_DRAW",
+                "id": 237201,
+                "responseId": 37201,
+                "comment": "灵兽乱斗 灵兽抽取",
+                "requestMethod": "CityMsg.PetsFightDrawReq",
+                "responseMethod": "CityMsg.PetsFightDrawResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_HILL_UPGRADE",
+                "id": 237202,
+                "responseId": 37202,
+                "comment": "灵兽乱斗 源生之岭升级",
+                "requestMethod": "CityMsg.PetsFightHillUpgradeReq",
+                "responseMethod": "CityMsg.PetsFightHillUpgradeResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_FUSION",
+                "id": 237203,
+                "responseId": 37203,
+                "comment": "灵兽乱斗 灵兽炼妖",
+                "requestMethod": "CityMsg.PetsFightFusionReq",
+                "responseMethod": "CityMsg.PetsFightFusionResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_PET_LIST",
+                "id": 237204,
+                "responseId": 37204,
+                "comment": "灵兽乱斗 灵兽列表全量",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightPetListResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_PET_SYNC",
+                "id": 237205,
+                "responseId": 37205,
+                "comment": "灵兽乱斗 灵兽增量推送",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PetsFightPetSyncMsg",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_APPLY",
+                "id": 237206,
+                "responseId": 37206,
+                "comment": "灵兽乱斗 发起妖盟协同炼妖",
+                "requestMethod": "CityMsg.PetsFightUnionFusionApplyReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionApplyResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_CANCEL",
+                "id": 237207,
+                "responseId": 37207,
+                "comment": "灵兽乱斗 撤销妖盟协同炼妖",
+                "requestMethod": "CityMsg.PetsFightUnionFusionCancelReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionCancelResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_ACCEPT",
+                "id": 237208,
+                "responseId": 37208,
+                "comment": "灵兽乱斗 响应妖盟协同炼妖",
+                "requestMethod": "CityMsg.PetsFightUnionFusionAcceptReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionAcceptResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_BREED",
+                "id": 237209,
+                "responseId": 37209,
+                "comment": "灵兽乱斗 执行妖盟协同炼妖",
+                "requestMethod": "CityMsg.PetsFightUnionFusionBreedReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionBreedResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_STAGE_BATTLE",
+                "id": 237210,
+                "responseId": 37210,
+                "comment": "灵兽乱斗 PVE关卡战斗",
+                "requestMethod": "CityMsg.PetsFightStageBattleReq",
+                "responseMethod": "CityMsg.PetsFightStageBattleResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_BOSS_BATTLE",
+                "id": 237211,
+                "responseId": 37211,
+                "comment": "灵兽乱斗 妖盟关卡Boss挑战",
+                "requestMethod": "CityMsg.PetsFightUnionBossBattleReq",
+                "responseMethod": "CityMsg.PetsFightUnionBossBattleResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_BOSS_REWARD",
+                "id": 237212,
+                "responseId": 37212,
+                "comment": "灵兽乱斗 领取妖盟关卡通关奖励",
+                "requestMethod": "CityMsg.PetsFightUnionBossRewardReq",
+                "responseMethod": "CityMsg.PetsFightUnionBossRewardResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_LIST",
+                "id": 237213,
+                "responseId": 37213,
+                "comment": "灵兽乱斗 查询当前生效的协同炼妖列表",
+                "requestMethod": "CityMsg.PetsFightUnionFusionListReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionListResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_SELECT",
+                "id": 237214,
+                "responseId": 37214,
+                "comment": "灵兽乱斗 选择或拒绝协同炼妖申请人",
+                "requestMethod": "CityMsg.PetsFightUnionFusionSelectReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionSelectResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_APPLICANT_LIST",
+                "id": 237215,
+                "responseId": 37215,
+                "comment": "灵兽乱斗 查询申请我的协同炼妖列表",
+                "requestMethod": "CityMsg.PetsFightUnionFusionApplicantListReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionApplicantListResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_BREED_LIST",
+                "id": 237216,
+                "responseId": 37216,
+                "comment": "灵兽乱斗 查询已响应但未炼妖的协同炼妖列表",
+                "requestMethod": "CityMsg.PetsFightUnionFusionBreedListReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionBreedListResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_SHARE",
+                "id": 237217,
+                "responseId": 37217,
+                "comment": "灵兽乱斗 分享协同邀请或炼妖结果",
+                "requestMethod": "CityMsg.PetsFightUnionFusionShareReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionShareResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_BOSS_INFO",
+                "id": 237218,
+                "responseId": 37218,
+                "comment": "灵兽乱斗 查询妖盟关卡Boss信息",
+                "requestMethod": "CityMsg.PetsFightUnionBossInfoReq",
+                "responseMethod": "CityMsg.PetsFightUnionBossInfoResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_FORMATION",
+                "id": 237219,
+                "responseId": 37219,
+                "comment": "灵兽乱斗 斗宠道台布阵",
+                "requestMethod": "CityMsg.PetsFightArenaFormationReq",
+                "responseMethod": "CityMsg.PetsFightArenaFormationResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_INFO",
+                "id": 237220,
+                "responseId": 37220,
+                "comment": "灵兽乱斗 查询斗宠道台信息和匹配对手",
+                "requestMethod": "CityMsg.PetsFightArenaInfoReq",
+                "responseMethod": "CityMsg.PetsFightArenaInfoResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_REFRESH",
+                "id": 237221,
+                "responseId": 37221,
+                "comment": "灵兽乱斗 刷新斗宠道台对手",
+                "requestMethod": "CityMsg.PetsFightArenaRefreshReq",
+                "responseMethod": "CityMsg.PetsFightArenaRefreshResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_BATTLE",
+                "id": 237222,
+                "responseId": 37222,
+                "comment": "灵兽乱斗 斗宠道台挑战",
+                "requestMethod": "CityMsg.PetsFightArenaBattleReq",
+                "responseMethod": "CityMsg.PetsFightArenaBattleResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_BUY_TICKET",
+                "id": 237223,
+                "responseId": 37223,
+                "comment": "灵兽乱斗 购买斗宠道台挑战券",
+                "requestMethod": "CityMsg.PetsFightArenaBuyTicketReq",
+                "responseMethod": "CityMsg.PetsFightArenaBuyTicketResp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_PETS_FIGHT_WORSHIP",
+                "id": 237224,
+                "responseId": 37224,
+                "comment": "灵兽乱斗 膜拜",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightWorshipResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_DAILY_REWARD",
+                "id": 237225,
+                "responseId": 37225,
+                "comment": "灵兽乱斗 领取斗宠道台每日榜奖励",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightArenaDailyRewardResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_LOG",
+                "id": 237226,
+                "responseId": 37226,
+                "comment": "灵兽乱斗 查询斗宠道台挑战日志",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightArenaLogResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ARENA_SWEEP",
+                "id": 237227,
+                "responseId": 37227,
+                "comment": "灵兽乱斗 斗宠道台扫荡",
+                "requestMethod": "CityMsg.PetsFightArenaSweepReq",
+                "responseMethod": "CityMsg.PetsFightArenaSweepResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_BOSS_RECORD",
+                "id": 237228,
+                "responseId": 37228,
+                "comment": "灵兽乱斗 查询妖盟Boss关卡挑战记录",
+                "requestMethod": "CityMsg.PetsFightUnionBossRecordReq",
+                "responseMethod": "CityMsg.PetsFightUnionBossRecordResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_BOSS_TOP_DAMAGE",
+                "id": 237229,
+                "responseId": 37229,
+                "comment": "灵兽乱斗 查询妖盟Boss关卡累计伤害最高玩家",
+                "requestMethod": "CityMsg.PetsFightUnionBossTopDamageReq",
+                "responseMethod": "CityMsg.PetsFightUnionBossTopDamageResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_DRAW_TICKET_SYNC",
+                "id": 237230,
+                "responseId": 37230,
+                "comment": "灵兽乱斗 抽取次数同步(服务端推送)",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PetsFightDrawTicketSyncMsg",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_RED_POINT",
+                "id": 237231,
+                "responseId": 37231,
+                "comment": "灵兽乱斗 查询红点详情",
+                "requestMethod": "CityMsg.PetsFightCommonReq",
+                "responseMethod": "CityMsg.PetsFightRedPointResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_BATTLE_FOR_DEBUG",
+                "id": 237232,
+                "responseId": 37232,
+                "comment": "灵兽乱斗 战斗模拟同步(服务端推送)",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PetsFightBattleDebugSync",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ONE_KEY_BREED",
+                "id": 237233,
+                "responseId": 37233,
+                "comment": "灵兽乱斗 一键炼妖",
+                "requestMethod": "CityMsg.PetsFightOneKeyBreedReq",
+                "responseMethod": "CityMsg.PetsFightOneKeyBreedResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_ONE_KEY_LOCK",
+                "id": 237234,
+                "responseId": 37234,
+                "comment": "灵兽乱斗 一键炼妖上锁",
+                "requestMethod": "CityMsg.PetsFightOneKeyLockReq",
+                "responseMethod": "CityMsg.PetsFightOneKeyLockResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_FUSION_SELECT",
+                "id": 237235,
+                "responseId": 37235,
+                "comment": "灵兽乱斗 选择特殊品质炼妖结果",
+                "requestMethod": "CityMsg.PetsFightFusionSelectReq",
+                "responseMethod": "CityMsg.PetsFightFusionSelectResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_USE_DRAW_ITEM",
+                "id": 237236,
+                "responseId": 37236,
+                "comment": "灵兽乱斗 抽灵兽道具转抽取次数",
+                "requestMethod": "CityMsg.PetsFightUseDrawItemReq",
+                "responseMethod": "CityMsg.PetsFightUseDrawItemResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_DELETE_PASSIVE_SKILL",
+                "id": 237237,
+                "responseId": 37237,
+                "comment": "灵兽乱斗 遗忘灵兽被动技能",
+                "requestMethod": "CityMsg.PetsFightDeletePassiveSkillReq",
+                "responseMethod": "CityMsg.PetsFightDeletePassiveSkillResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_UNION_FUSION_RECORDS",
+                "id": 237238,
+                "responseId": 37238,
+                "comment": "灵兽乱斗 妖盟协同繁育的记录",
+                "requestMethod": "CityMsg.PetsFightUnionFusionRecordReq",
+                "responseMethod": "CityMsg.PetsFightUnionFusionRecordResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_PETS_FIGHT_PET_EXCHANGE",
+                "id": 237239,
+                "responseId": 37239,
+                "comment": "灵兽乱斗 灵兽面板交换",
+                "requestMethod": "CityMsg.PetsFightPetExchangeReq",
+                "responseMethod": "CityMsg.PetsFightPetExchangeResp",
+                "risk": "combat"
             }
         ]
     },
@@ -16716,21 +18128,12 @@
     {
         "name": "Profession",
         "sources": [
-            "CityMsgInfo",
-            "RemoteProfessionMsgInfo"
+            "RemoteProfessionMsgInfo",
+            "CityMsgInfo"
         ],
         "remote": true,
         "enabled": true,
         "protocols": [
-            {
-                "key": "S_PROFESSION_SYNC_PLAYER_DATA",
-                "id": 218002,
-                "responseId": 18002,
-                "comment": "职业系统玩家属性数据同步",
-                "requestMethod": "",
-                "responseMethod": "CityMsg.CareerPlayerDataMsg",
-                "risk": "observe"
-            },
             {
                 "key": "S_PROFESSION_SYNC_CHANGE_PROFRESSION",
                 "id": 218001,
@@ -16784,6 +18187,15 @@
                 "requestMethod": "CityMsg.CareerGetPreTaskRewardReq",
                 "responseMethod": "CityMsg.CareerGetPreTaskRewardResp",
                 "risk": "combat"
+            },
+            {
+                "key": "S_PROFESSION_SYNC_PLAYER_DATA",
+                "id": 218002,
+                "responseId": 18002,
+                "comment": "职业系统玩家属性数据同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.CareerPlayerDataMsg",
+                "risk": "observe"
             }
         ]
     },
@@ -16910,6 +18322,168 @@
                 "comment": "精准查找",
                 "requestMethod": "CityMsg.PupilExactSearchReq",
                 "responseMethod": "CityMsg.PupilExactSearchResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_LIST",
+                "id": 211817,
+                "responseId": 11817,
+                "comment": "弟子天榜列表",
+                "requestMethod": "CityMsg.PupilSkyRankListReq",
+                "responseMethod": "CityMsg.PupilSkyRankListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_SHIELD",
+                "id": 211818,
+                "responseId": 11818,
+                "comment": "弟子天榜屏蔽开关",
+                "requestMethod": "CityMsg.PupilSkyRankShieldReq",
+                "responseMethod": "CityMsg.PupilSkyRankShieldResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_ASK",
+                "id": 211819,
+                "responseId": 11819,
+                "comment": "天榜申请结伴",
+                "requestMethod": "CityMsg.PupilSkyRankAskReq",
+                "responseMethod": "CityMsg.PupilSkyRankAskResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_SET_CONDITION",
+                "id": 211820,
+                "responseId": 11820,
+                "comment": "设置天榜被请求条件（增减伤合计+等级）",
+                "requestMethod": "CityMsg.PupilSkyRankSetConditionReq",
+                "responseMethod": "CityMsg.PupilSkyRankSetConditionResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_COMMENT_LIST",
+                "id": 211821,
+                "responseId": 11821,
+                "comment": "天榜评论列表",
+                "requestMethod": "CityMsg.PupilRankCommentListReq",
+                "responseMethod": "CityMsg.PupilRankCommentListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_COMMENT_LIKE",
+                "id": 211822,
+                "responseId": 11822,
+                "comment": "天榜评论点赞",
+                "requestMethod": "CityMsg.PupilRankCommentLikeReq",
+                "responseMethod": "CityMsg.PupilRankCommentLikeResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_COMMENT_SEND",
+                "id": 211823,
+                "responseId": 11823,
+                "comment": "天榜发表评论",
+                "requestMethod": "CityMsg.PupilRankCommentSendReq",
+                "responseMethod": "CityMsg.PupilRankCommentSendResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_COMMENT_DELETE",
+                "id": 211824,
+                "responseId": 11824,
+                "comment": "天榜删除评论",
+                "requestMethod": "CityMsg.PupilRankCommentDeleteReq",
+                "responseMethod": "CityMsg.PupilRankCommentDeleteResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_PRIVATE_CHAT",
+                "id": 211825,
+                "responseId": 11825,
+                "comment": "天榜私聊会话列表",
+                "requestMethod": "CityMsg.PupilRankPrivateChatReq",
+                "responseMethod": "CityMsg.PupilRankPrivateChatRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_GET_MSG_LIST",
+                "id": 211826,
+                "responseId": 11826,
+                "comment": "天榜私聊消息列表 全量",
+                "requestMethod": "CityMsg.PupilRankGetMsgListReq",
+                "responseMethod": "CityMsg.WorldMessageListMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_CHAT_DELETE",
+                "id": 211827,
+                "responseId": 11827,
+                "comment": "天榜删除私聊",
+                "requestMethod": "CityMsg.PupilRankChatDeleteReq",
+                "responseMethod": "CityMsg.PupilRankChatDeleteRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_SYNC_CHAT_LIST",
+                "id": 211828,
+                "responseId": 11828,
+                "comment": "天榜私聊会话同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PupilRankSyncChatList",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_CHAT_MESSAGE_SYNC",
+                "id": 211829,
+                "responseId": 11829,
+                "comment": "天榜私聊消息增量同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldMessageListMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_ASK_LIST",
+                "id": 211830,
+                "responseId": 11830,
+                "comment": "天榜申请记录列表",
+                "requestMethod": "CityMsg.PupilSkyRankAskListReq",
+                "responseMethod": "CityMsg.PupilSkyRankAskListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_ASK_AGREE",
+                "id": 211831,
+                "responseId": 11831,
+                "comment": "天榜同意结伴",
+                "requestMethod": "CityMsg.PupilSkyRankAskAgreeReq",
+                "responseMethod": "CityMsg.PupilSkyRankAskAgreeResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_ASK_REFUSE",
+                "id": 211832,
+                "responseId": 11832,
+                "comment": "天榜拒绝申请",
+                "requestMethod": "CityMsg.PupilSkyRankAskRefuseReq",
+                "responseMethod": "CityMsg.PupilSkyRankAskRefuseResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RANK_ASK_CANCEL",
+                "id": 211834,
+                "responseId": 11834,
+                "comment": "天榜取消申请",
+                "requestMethod": "CityMsg.PupilSkyRankAskCancelReq",
+                "responseMethod": "CityMsg.PupilSkyRankAskCancelResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_PUPIL_RED_POINT_SYNC",
+                "id": 211835,
+                "responseId": 11835,
+                "comment": "宗门局内红点同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.PupilRedPointSync",
                 "risk": "observe"
             }
         ]
@@ -21228,6 +22802,15 @@
         ]
     },
     {
+        "name": "StoneCommon",
+        "sources": [
+            "CityMsgInfo"
+        ],
+        "remote": false,
+        "enabled": true,
+        "protocols": []
+    },
+    {
         "name": "SuppressDemon",
         "sources": [
             "SuppressDemonMsgInfo"
@@ -21509,6 +23092,61 @@
         ]
     },
     {
+        "name": "SwitchDraw",
+        "sources": [
+            "RemoteSwitchDrawMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_SWITCH_DRAW_ENTER",
+                "id": 238201,
+                "responseId": 38201,
+                "comment": "玄机觅宝 进入活动",
+                "requestMethod": "CityMsg.SwitchDrawEnterReq",
+                "responseMethod": "CityMsg.SwitchDrawEnterRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_SWITCH_DRAW_DRAW",
+                "id": 238202,
+                "responseId": 38202,
+                "comment": "玄机觅宝 觅宝抽取",
+                "requestMethod": "CityMsg.SwitchDrawDrawReq",
+                "responseMethod": "CityMsg.SwitchDrawDrawRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_SWITCH_DRAW_SELECT_BIG_REWARD",
+                "id": 238203,
+                "responseId": 38203,
+                "comment": "玄机觅宝 自选/更换大奖",
+                "requestMethod": "CityMsg.SwitchDrawSelectBigRewardReq",
+                "responseMethod": "CityMsg.SwitchDrawSelectBigRewardRsp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_SWITCH_DRAW_SYNC",
+                "id": 238205,
+                "responseId": 38205,
+                "comment": "玄机觅宝 数据同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.SwitchDrawSync",
+                "risk": "observe"
+            },
+            {
+                "key": "S_SWITCH_DRAW_DRAW_ALL",
+                "id": 238206,
+                "responseId": 38206,
+                "comment": "玄机觅宝 一键觅宝",
+                "requestMethod": "CityMsg.SwitchDrawDrawAllReq",
+                "responseMethod": "CityMsg.SwitchDrawDrawAllRsp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
         "name": "SystemShield",
         "sources": [
             "CityMsgInfo"
@@ -21661,6 +23299,279 @@
                 "requestMethod": "CityMsg.TaskBatchSelectRewardReq",
                 "responseMethod": "CityMsg.TaskBatchSelectRewardResp",
                 "risk": "combat"
+            }
+        ]
+    },
+    {
+        "name": "TextTower",
+        "sources": [
+            "RemoteTextDefenceLinkageMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_TEXTTOWER_ENTER",
+                "id": 238601,
+                "responseId": 38601,
+                "comment": "文字塔防联动-进入活动",
+                "requestMethod": "CityMsg.TextTowerEnterReq",
+                "responseMethod": "CityMsg.TextTowerEnterResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TEXTTOWER_RECEIVE_REWARD",
+                "id": 238602,
+                "responseId": 38602,
+                "comment": "文字塔防联动-过关领奖",
+                "requestMethod": "CityMsg.TextTowerReceiveRewardReq",
+                "responseMethod": "CityMsg.TextTowerReceiveRewardResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_TEXTTOWER_GET_VIDEO",
+                "id": 238603,
+                "responseId": 38603,
+                "comment": "文字塔防联动-按关请求录像",
+                "requestMethod": "CityMsg.TextTowerGetVideoReq",
+                "responseMethod": "CityMsg.TextTowerGetVideoResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TEXTTOWER_REPORT",
+                "id": 238604,
+                "responseId": 38604,
+                "comment": "文字塔防联动-挑战数据上报",
+                "requestMethod": "CityMsg.TextTowerReportReq",
+                "responseMethod": "CityMsg.TextTowerReportResp",
+                "risk": "observe"
+            }
+        ]
+    },
+    {
+        "name": "TopFeastTime",
+        "sources": [
+            "TopFeastTimeMsgInfo",
+            "CityMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_TOP_FEAST_TIME_ENTER",
+                "id": 238701,
+                "responseId": 38701,
+                "comment": "进入问鼎道台",
+                "requestMethod": "CityMsg.TopFeastTimeEnterReq",
+                "responseMethod": "CityMsg.TopFeastTimeEnterResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_APPLY",
+                "id": 238702,
+                "responseId": 38702,
+                "comment": "申请入座",
+                "requestMethod": "CityMsg.TopFeastTimeApplyReq",
+                "responseMethod": "CityMsg.TopFeastTimeApplyResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_CANCEL_APPLY",
+                "id": 238703,
+                "responseId": 38703,
+                "comment": "取消申请",
+                "requestMethod": "CityMsg.TopFeastTimeCancelApplyReq",
+                "responseMethod": "CityMsg.TopFeastTimeCancelApplyResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_CLAIM_OUTPUT",
+                "id": 238704,
+                "responseId": 38704,
+                "comment": "领取累计产出",
+                "requestMethod": "CityMsg.TopFeastTimeClaimOutputReq",
+                "responseMethod": "CityMsg.TopFeastTimeClaimOutputResp",
+                "risk": "claim"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_KICK",
+                "id": 238705,
+                "responseId": 38705,
+                "comment": "道台主踢出入座玩家",
+                "requestMethod": "CityMsg.TopFeastTimeKickReq",
+                "responseMethod": "CityMsg.TopFeastTimeKickResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_INVITE",
+                "id": 238708,
+                "responseId": 38708,
+                "comment": "道台主邀请玩家入座",
+                "requestMethod": "CityMsg.TopFeastTimeInviteReq",
+                "responseMethod": "CityMsg.TopFeastTimeInviteResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_AGREE_APPLY",
+                "id": 238709,
+                "responseId": 38709,
+                "comment": "道台主同意入座申请",
+                "requestMethod": "CityMsg.TopFeastTimeAgreeApplyReq",
+                "responseMethod": "CityMsg.TopFeastTimeAgreeApplyResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_REFUSE_ALL_APPLY",
+                "id": 238710,
+                "responseId": 38710,
+                "comment": "道台主一键拒绝入座申请",
+                "requestMethod": "CityMsg.TopFeastTimeRefuseAllApplyReq",
+                "responseMethod": "CityMsg.TopFeastTimeRefuseAllApplyResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_LOTTERY_ENTER",
+                "id": 238711,
+                "responseId": 38711,
+                "comment": "进入问鼎宝箱",
+                "requestMethod": "CityMsg.TopFeastTimeLotteryEnterReq",
+                "responseMethod": "CityMsg.TopFeastTimeLotteryEnterResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_LOTTERY_DRAW",
+                "id": 238713,
+                "responseId": 38713,
+                "comment": "开启问鼎宝箱",
+                "requestMethod": "CityMsg.TopFeastTimeLotteryDrawReq",
+                "responseMethod": "CityMsg.TopFeastTimeLotteryDrawResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_RED_POINT",
+                "id": 238715,
+                "responseId": 38715,
+                "comment": "红点详情",
+                "requestMethod": "CityMsg.TopFeastTimeRedPointReq",
+                "responseMethod": "CityMsg.TopFeastTimeRedPointResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_SCENE_SYNC",
+                "id": 238706,
+                "responseId": 38706,
+                "comment": "道台场景数据变化",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TopFeastTimeSceneSyncMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_KICKED_SYNC",
+                "id": 238707,
+                "responseId": 38707,
+                "comment": "玩家被踢出道台",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TopFeastTimeKickedSyncMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_SEAT_DETAIL",
+                "id": 238722,
+                "responseId": 38722,
+                "comment": "道台的座位详情",
+                "requestMethod": "CityMsg.TopFeastTimeSeatDetailReq",
+                "responseMethod": "CityMsg.TopFeastTimeSeatDetailResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_HEARTBEAT",
+                "id": 238714,
+                "responseId": 38714,
+                "comment": "道台场景心跳（无回包）",
+                "requestMethod": "CityMsg.TopFeastTimeHeartbeatReq",
+                "responseMethod": "",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_MY_APPLY_LIST",
+                "id": 238716,
+                "responseId": 38716,
+                "comment": "查看我申请其他人道台的记录",
+                "requestMethod": "CityMsg.TopFeastTimeMyApplyListReq",
+                "responseMethod": "CityMsg.TopFeastTimeMyApplyListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_APPLY_TO_ME_LIST",
+                "id": 238717,
+                "responseId": 38717,
+                "comment": "查看谁向我申请入座道台",
+                "requestMethod": "CityMsg.TopFeastTimeApplyListReq",
+                "responseMethod": "CityMsg.TopFeastTimeApplyListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_MY_INVITE_INFO",
+                "id": 238718,
+                "responseId": 38718,
+                "comment": "谁邀请我入座的",
+                "requestMethod": "CityMsg.TopFeastTimeInviteListReq",
+                "responseMethod": "CityMsg.TopFeastTimeInviteListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_AGREE_INVITE",
+                "id": 238719,
+                "responseId": 38719,
+                "comment": "是否接受邀请入座",
+                "requestMethod": "CityMsg.TopFeastTimeAgreeInviteListReq",
+                "responseMethod": "CityMsg.TopFeastTimeAgreeInviteListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_REFUSE_ALL_INVITE",
+                "id": 238723,
+                "responseId": 38723,
+                "comment": "被邀请人一键拒绝入座邀请",
+                "requestMethod": "CityMsg.TopFeastTimeRefuseAllInviteReq",
+                "responseMethod": "CityMsg.TopFeastTimeRefuseAllInviteResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_FULL_SERVER_LIST",
+                "id": 238720,
+                "responseId": 38720,
+                "comment": "查看完整的位面列表",
+                "requestMethod": "CityMsg.TopFeastTimeListReq",
+                "responseMethod": "CityMsg.TopFeastTimeListResp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_AGREED_SYNC",
+                "id": 238721,
+                "responseId": 38721,
+                "comment": "申请被同意后收到的同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TopFeastTimeAgreeJoinSyncMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_ENTRY_SYNC",
+                "id": 238700,
+                "responseId": 38700,
+                "comment": "问鼎道台入口状态同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TopFeastTimeEntrySyncMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TOP_FEAST_TIME_BROADCAST",
+                "id": 238730,
+                "responseId": 38730,
+                "comment": "道台的广播",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TopFeastTimeBroadcast",
+                "risk": "observe"
             }
         ]
     },
@@ -21825,6 +23736,24 @@
                 "comment": "清空寻宝/法则交易密码",
                 "requestMethod": "CityMsg.TreasureAuctionClearPasswordReq",
                 "responseMethod": "CityMsg.TreasureAuctionClearPasswordRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_SELECTEVENT_ONEKEY",
+                "id": 234035,
+                "responseId": 34035,
+                "comment": "一键处理事件",
+                "requestMethod": "CityMsg.TreasureAuctionSelectEventOneKeyReq",
+                "responseMethod": "CityMsg.TreasureAuctionSelectEventOneKeyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_VERIFYPASSWORD",
+                "id": 234036,
+                "responseId": 34036,
+                "comment": "验证密码",
+                "requestMethod": "CityMsg.TreasureAuctionVerifyPasswordReq",
+                "responseMethod": "CityMsg.TreasureAuctionVerifyPasswordRsp",
                 "risk": "purchase"
             },
             {
@@ -22051,6 +23980,105 @@
                 "requestMethod": "CityMsg.TreasureAuctionChatDeleteReq",
                 "responseMethod": "CityMsg.TreasureAuctionChatDeleteRsp",
                 "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_SELL",
+                "id": 234039,
+                "responseId": 34039,
+                "comment": "拍卖上架",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionSellReq",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionSellRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_BID",
+                "id": 234040,
+                "responseId": 34040,
+                "comment": "竞拍出价",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionBidReq",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionBidRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_SELLDOWN",
+                "id": 234041,
+                "responseId": 34041,
+                "comment": "拍卖下架",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionSellDownReq",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionSellDownRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_SYNCBID",
+                "id": 234043,
+                "responseId": 34043,
+                "comment": "推送-出价同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionSyncBid",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_OUTBIDNOTIFY",
+                "id": 234044,
+                "responseId": 34044,
+                "comment": "推送-被超越通知",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionOutbidNotify",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_SETTLENOTIFY",
+                "id": 234045,
+                "responseId": 34045,
+                "comment": "推送-结算通知",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionSettleNotify",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_HEARTBEAT",
+                "id": 234046,
+                "responseId": 34046,
+                "comment": "寻宝 拍卖界面心跳（无回包）",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionHeartbeatReq",
+                "responseMethod": "",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_GET_GOODS",
+                "id": 234042,
+                "responseId": 34042,
+                "comment": "寻宝 通过商品id获取拍卖商品",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionGetGoodsReq",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionGetGoodsRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_AUCTION_NOTIFY_READ",
+                "id": 234047,
+                "responseId": 34047,
+                "comment": "寻宝 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+                "requestMethod": "CityMsg.TreasureAuctionAuctionNotifyReadReq",
+                "responseMethod": "CityMsg.TreasureAuctionAuctionNotifyReadRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_ONE_KEYIDENTIFY",
+                "id": 234037,
+                "responseId": 34037,
+                "comment": "一键鉴定（含自动分解）",
+                "requestMethod": "CityMsg.TreasureAuctionOneKeyIdentifyReq",
+                "responseMethod": "CityMsg.TreasureAuctionOneKeyIdentifyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASUREAUCTION_ONE_KEY_EXPLORE",
+                "id": 234038,
+                "responseId": 34038,
+                "comment": "一键探宝",
+                "requestMethod": "CityMsg.TreasureAuctionBeginExploreOneKeyReq",
+                "responseMethod": "CityMsg.TreasureAuctionBeginExploreOneKeyRsp",
+                "risk": "purchase"
             }
         ]
     },
@@ -22070,6 +24098,142 @@
                 "requestMethod": "CityMsg.ReqGetConditionReward",
                 "responseMethod": "CityMsg.RspGetConditionReward",
                 "risk": "claim"
+            }
+        ]
+    },
+    {
+        "name": "TreasureStone",
+        "sources": [
+            "CityMsgInfo"
+        ],
+        "remote": false,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_TREASURE_STONE_ENTER",
+                "id": 238301,
+                "responseId": 38301,
+                "comment": "异宝宝石进入系统",
+                "requestMethod": "CityMsg.TreasureStoneEnterReq",
+                "responseMethod": "CityMsg.TreasureStoneEnterRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_EQUIP",
+                "id": 238302,
+                "responseId": 38302,
+                "comment": "异宝宝石镶嵌",
+                "requestMethod": "CityMsg.TreasureStoneEquipReq",
+                "responseMethod": "CityMsg.TreasureStoneEquipRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_UNEQUIP",
+                "id": 238303,
+                "responseId": 38303,
+                "comment": "异宝宝石拆卸",
+                "requestMethod": "CityMsg.TreasureStoneUnequipReq",
+                "responseMethod": "CityMsg.TreasureStoneUnequipRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_LOCK",
+                "id": 238304,
+                "responseId": 38304,
+                "comment": "异宝宝石锁定/解锁",
+                "requestMethod": "CityMsg.TreasureStoneLockReq",
+                "responseMethod": "CityMsg.TreasureStoneLockRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_SYNC",
+                "id": 238305,
+                "responseId": 38305,
+                "comment": "异宝宝石同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TreasureStoneSync",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_COMPOSE_BATCH",
+                "id": 238306,
+                "responseId": 38306,
+                "comment": "异宝宝石批量融合升阶",
+                "requestMethod": "CityMsg.TreasureStoneComposeBatchReq",
+                "responseMethod": "CityMsg.TreasureStoneComposeBatchRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_COMPOSE_LOG",
+                "id": 238307,
+                "responseId": 38307,
+                "comment": "异宝宝石合成日志",
+                "requestMethod": "CityMsg.TreasureStoneComposeLogReq",
+                "responseMethod": "CityMsg.TreasureStoneComposeLogRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_SYNC_RED_POINT",
+                "id": 238308,
+                "responseId": 38308,
+                "comment": "异宝宝石红点同步",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.TreasureStoneSyncRedPoint",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_SELL",
+                "id": 238310,
+                "responseId": 38310,
+                "comment": "异宝宝石上架",
+                "requestMethod": "CityMsg.TreasureStoneDealSellReq",
+                "responseMethod": "CityMsg.TreasureStoneDealSellRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_SELL_DOWN",
+                "id": 238311,
+                "responseId": 38311,
+                "comment": "异宝宝石下架",
+                "requestMethod": "CityMsg.TreasureStoneDealSellDownReq",
+                "responseMethod": "CityMsg.TreasureStoneDealSellDownRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_BUY",
+                "id": 238312,
+                "responseId": 38312,
+                "comment": "异宝宝石购买",
+                "requestMethod": "CityMsg.TreasureStoneDealBuyReq",
+                "responseMethod": "CityMsg.TreasureStoneDealBuyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_GET_RECORD",
+                "id": 238313,
+                "responseId": 38313,
+                "comment": "异宝宝石获取交易记录",
+                "requestMethod": "CityMsg.TreasureStoneDealGetRecordReq",
+                "responseMethod": "CityMsg.TreasureStoneDealGetRecordRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_COLLECT",
+                "id": 238314,
+                "responseId": 38314,
+                "comment": "异宝宝石收藏/取消收藏",
+                "requestMethod": "CityMsg.TreasureStoneDealCollectReq",
+                "responseMethod": "CityMsg.TreasureStoneDealCollectRsp",
+                "risk": "observe"
+            },
+            {
+                "key": "S_TREASURE_STONE_DEAL_PRICE_ADJUST",
+                "id": 238315,
+                "responseId": 38315,
+                "comment": "异宝宝石改价",
+                "requestMethod": "CityMsg.TreasureStoneDealPriceAdjustReq",
+                "responseMethod": "CityMsg.TreasureStoneDealPriceAdjustRsp",
+                "risk": "observe"
             }
         ]
     },
@@ -22764,6 +24928,24 @@
                 "comment": "同步招募次数",
                 "requestMethod": "",
                 "responseMethod": "CityMsg.NotifyUnionRecruitCountMsg",
+                "risk": "observe"
+            },
+            {
+                "key": "S_UNION_PEAK_DUEL_GET_FIGHT_INFO",
+                "id": 238112,
+                "responseId": 38112,
+                "comment": "获取万盟争锋当前双方战斗信息",
+                "requestMethod": "CityMsg.PeakDuelGetFightInfoReq",
+                "responseMethod": "CityMsg.PeakDuelGetFightInfoResp",
+                "risk": "combat"
+            },
+            {
+                "key": "S_UNION_ACTIVE_VALUE_QUERY",
+                "id": 201629,
+                "responseId": 1629,
+                "comment": "获取自家妖盟的7日和14日活跃",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.UnionActiveValueQueryResp",
                 "risk": "observe"
             },
             {
@@ -26914,6 +29096,331 @@
                 "requestMethod": "",
                 "responseMethod": "CityMsg.WishPoolDrawInfoMsg",
                 "risk": "observe"
+            }
+        ]
+    },
+    {
+        "name": "WorldBid",
+        "sources": [
+            "RemoteWorldBidMsgInfo"
+        ],
+        "remote": true,
+        "enabled": true,
+        "protocols": [
+            {
+                "key": "S_WORLDBID_ENTER",
+                "id": 237301,
+                "responseId": 37301,
+                "comment": "进入 237301",
+                "requestMethod": "CityMsg.WorldBidEnterReq",
+                "responseMethod": "CityMsg.WorldBidEnterRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_MATCH",
+                "id": 237302,
+                "responseId": 37302,
+                "comment": "进入匹配 237302",
+                "requestMethod": "CityMsg.WorldBidMatchReq",
+                "responseMethod": "CityMsg.WorldBidMatchRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_MATCH_SUCCESS_SYNC",
+                "id": 237303,
+                "responseId": 37303,
+                "comment": "匹配成功推送 237303",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidMatchSuccessSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_INFO",
+                "id": 237304,
+                "responseId": 37304,
+                "comment": "获取房间信息 237304",
+                "requestMethod": "CityMsg.WorldBidGetRoomInfoReq",
+                "responseMethod": "CityMsg.WorldBidGetRoomInfoRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_SYNC",
+                "id": 237305,
+                "responseId": 37305,
+                "comment": "房间信息同步 237305",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidRoomInfoSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_BID",
+                "id": 237306,
+                "responseId": 37306,
+                "comment": "出价 237306",
+                "requestMethod": "CityMsg.WorldBidBidReq",
+                "responseMethod": "CityMsg.WorldBidBidRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_USE_ITEM",
+                "id": 237307,
+                "responseId": 37307,
+                "comment": "使用道具 237307",
+                "requestMethod": "CityMsg.WorldBidUseItemReq",
+                "responseMethod": "CityMsg.WorldBidUseItemRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_SETTLE_SYNC",
+                "id": 237308,
+                "responseId": 37308,
+                "comment": "结算同步 237308",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidSettleSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_LEAVE",
+                "id": 237309,
+                "responseId": 37309,
+                "comment": "离开房间 237309",
+                "requestMethod": "CityMsg.WorldBidLeaveReq",
+                "responseMethod": "CityMsg.WorldBidLeaveRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_LEAVE_SYNC",
+                "id": 237310,
+                "responseId": 37310,
+                "comment": "离开房间同步 237310",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidLeaveSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_CLOSE_SYNC",
+                "id": 237311,
+                "responseId": 37311,
+                "comment": "房间关闭同步 237311",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidRoomCloseSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_BUY_PROP",
+                "id": 237312,
+                "responseId": 37312,
+                "comment": "购买角色/道具 237312",
+                "requestMethod": "CityMsg.WorldBidBuyPropReq",
+                "responseMethod": "CityMsg.WorldBidBuyPropRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_SAVE_SET",
+                "id": 237313,
+                "responseId": 37313,
+                "comment": "保存设置 237313",
+                "requestMethod": "CityMsg.WorldBidSaveSetReq",
+                "responseMethod": "CityMsg.WorldBidSaveSetRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_CREATE_ROOM",
+                "id": 237314,
+                "responseId": 37314,
+                "comment": "创建房间 237314",
+                "requestMethod": "CityMsg.WorldBidCreateRoomReq",
+                "responseMethod": "CityMsg.WorldBidCreateRoomRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_JOIN_ROOM",
+                "id": 237315,
+                "responseId": 37315,
+                "comment": "加入房间 237315",
+                "requestMethod": "CityMsg.WorldBidJoinRoomReq",
+                "responseMethod": "CityMsg.WorldBidJoinRoomRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_JOIN_ROOM_SYNC",
+                "id": 237316,
+                "responseId": 37316,
+                "comment": "加入房间同步 237316",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidJoinRoomSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_START_ROOM",
+                "id": 237317,
+                "responseId": 37317,
+                "comment": "开始游戏 237317",
+                "requestMethod": "CityMsg.WorldBidStartRoomReq",
+                "responseMethod": "CityMsg.WorldBidStartRoomRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_KICK_PLAYER",
+                "id": 237318,
+                "responseId": 37318,
+                "comment": "踢人 237318",
+                "requestMethod": "CityMsg.WorldBidKickPlayerReq",
+                "responseMethod": "CityMsg.WorldBidKickPlayerRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_KICK_PLAYER_SYNC",
+                "id": 237319,
+                "responseId": 37319,
+                "comment": "踢人同步 237319",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidKickPlayerSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_PLAYER_BASE_REQ",
+                "id": 237320,
+                "responseId": 37320,
+                "comment": "获取玩家数据 237320",
+                "requestMethod": "CityMsg.WorldBidPlayerBaseReq",
+                "responseMethod": "CityMsg.WorldBidPlayerBaseRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_EMOTION",
+                "id": 237321,
+                "responseId": 37321,
+                "comment": "发表情 237321",
+                "requestMethod": "CityMsg.WorldBidEmotionReq",
+                "responseMethod": "CityMsg.WorldBidEmotionRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_EMOTION_SYNC",
+                "id": 237322,
+                "responseId": 37322,
+                "comment": "发表情同步 237322",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidEmotionSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_CANCEL_MATCH",
+                "id": 237323,
+                "responseId": 37323,
+                "comment": "取消匹配 237323",
+                "requestMethod": "CityMsg.WorldBidCancelMatchReq",
+                "responseMethod": "CityMsg.WorldBidCancelMatchRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_READY",
+                "id": 237324,
+                "responseId": 37324,
+                "comment": "自建房准备 237324",
+                "requestMethod": "CityMsg.WorldBidRoomReadyReq",
+                "responseMethod": "CityMsg.WorldBidRoomReadyRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_READY_SYNC",
+                "id": 237325,
+                "responseId": 37325,
+                "comment": "准备同步 237325",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidRoomReadySync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_START_SYNC",
+                "id": 237326,
+                "responseId": 37326,
+                "comment": "房间开始同步 237326",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidRoomStartSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_ROOM_SETTLE",
+                "id": 237327,
+                "responseId": 37327,
+                "comment": "房间小局结算完成 237327",
+                "requestMethod": "CityMsg.WorldBidRoomSettleReq",
+                "responseMethod": "CityMsg.WorldBidRoomSettleRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_PRICE_FINISH_SYNC",
+                "id": 237328,
+                "responseId": 37328,
+                "comment": "出价完成同步 237328",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidPriceFinishSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_PLAYER_GIVE_UP",
+                "id": 237329,
+                "responseId": 37329,
+                "comment": "放弃 237329",
+                "requestMethod": "CityMsg.WorldBidGiveUpReq",
+                "responseMethod": "CityMsg.WorldBidGiveUpRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_PLAYER_GIVE_UP_SYNC",
+                "id": 237330,
+                "responseId": 37330,
+                "comment": "放弃同步 237330",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidGiveUpSync",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_DAY_REWARD",
+                "id": 237331,
+                "responseId": 37331,
+                "comment": "领取每日奖励 237331",
+                "requestMethod": "CityMsg.WorldBidDayRewardReq",
+                "responseMethod": "CityMsg.WorldBidDayRewardRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_COLLECT_INFO",
+                "id": 237332,
+                "responseId": 37332,
+                "comment": "获取图鉴信息 237332",
+                "requestMethod": "CityMsg.WorldBidCollectInfoReq",
+                "responseMethod": "CityMsg.WorldBidCollectInfoRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_COLLECT_UP",
+                "id": 237333,
+                "responseId": 37333,
+                "comment": "升级图鉴 237333",
+                "requestMethod": "CityMsg.WorldBidCollectUpReq",
+                "responseMethod": "CityMsg.WorldBidCollectUpRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_GET_HISTORY",
+                "id": 237334,
+                "responseId": 37334,
+                "comment": "获取对战记录 237334",
+                "requestMethod": "CityMsg.WorldBidGetHistoryReq",
+                "responseMethod": "CityMsg.WorldBidGetHistoryRsp",
+                "risk": "purchase"
+            },
+            {
+                "key": "S_WORLDBID_RED_POINT_SYNC",
+                "id": 237335,
+                "responseId": 37335,
+                "comment": "红点同步 237335",
+                "requestMethod": "",
+                "responseMethod": "CityMsg.WorldBidRedPointSync",
+                "risk": "purchase"
             }
         ]
     },

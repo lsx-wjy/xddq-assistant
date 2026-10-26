@@ -3,15 +3,20 @@ import CryptoJS from "crypto-js";
 import qs from "qs";
 import { v4 as uuidv4 } from "uuid";
 import logger from "#utils/logger.js";
+import { readFileSync } from 'node:fs';
+
+const protocolVersion = JSON.parse(readFileSync(
+    new URL('../game/config/grpc/version.json', import.meta.url), 'utf8',
+));
 
 const GAME_CONFIG = Object.freeze({
     serverListUrl: "https://login-xddq-cn.ap3615.com/server/list",
-    clientVersion: "3.9.00.10492",
+    clientVersion: `${protocolVersion.version}.${protocolVersion.buildID}`,
     platform: "android",
     deviceplate: "Android",
     channelId: 31,
     urlType: "mainLandAppUrl",
-    packageId: "31003001",
+    packageId: protocolVersion.packageID,
     loginType: 0,
     appid: "37h5",
     gameId: 223,

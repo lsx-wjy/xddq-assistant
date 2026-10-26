@@ -13,11 +13,12 @@ import "Common";
         optional int32 skillLv = 2;
     }
     message CloudRefineReq{
+    optional bool quick = 1;
     }
     message CloudRefineResp{
-        optional int32 ret = 1;
-        optional bool success = 2;
-        optional int32 skillId = 3;
+    optional int32 ret = 1;
+    optional bool success = 2;
+    optional int32 skillId = 3;
     }
     message CloudRefineStarLvUpReq{
     }

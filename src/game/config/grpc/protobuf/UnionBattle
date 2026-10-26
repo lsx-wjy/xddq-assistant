@@ -125,6 +125,7 @@ message UnionBattlePlayerChallengeInfo{
     optional int32 lockEquipPetId = 13;
     optional int32 lockPetSoulShapeLv = 14;
     optional int32 multiple = 15;
+    optional int32 backOrnamentId = 16;
 }
 message UnionBattleChallengeTargetUnionInfo{
     optional int32 unionMemberNum = 1;

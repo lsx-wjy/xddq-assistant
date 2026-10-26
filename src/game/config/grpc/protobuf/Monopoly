@@ -180,6 +180,7 @@ message MonopolySelfPlayerDataMsg{
   optional int32 triggerMoveBuff = 13;
   optional bool needMove = 14;
   optional int32 title = 15;
+  optional int32 backOrnamentId = 16;
 }
 message MonopolyBuffDataMsg{
   optional int32 eventId = 1;
@@ -193,6 +194,7 @@ message MonopolyOtherPlayerDataMsg{
   optional string nickName = 5;
   optional int64 trapEndTime = 6;
   optional int32 title = 7;
+  optional int32 backOrnamentId = 8;
 }
 message MonopolyRollDiceReq {
   required int32 activityId = 1;
@@ -674,6 +676,7 @@ message MonopolyWorshipPlayerMsg {
   optional int32 titleId = 15;
   repeated int32 petLinkageId = 16;
   repeated int32 spiritLinkageId = 17;
+  optional int32 equipBackOrnament = 18;
 }
 message MonopolyPlayerScoreChangeNotify{
   required int32 score = 1;

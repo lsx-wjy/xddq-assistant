@@ -30,6 +30,9 @@ message MarriageUserDataMsg{
 	optional int32  crossServerApplyRefreshTimes = 3;
 	required int32  serverApplyItemRefreshTimes =4;
     optional int32  crossServerApplyItemRefreshTimes = 5;
+    optional bool rankShield = 6;
+    repeated PupilRankAttrLimit attrLimitList = 7;
+    optional int32 levelLimit = 8;
 }
 message MarriageUserDataMsgSync{
 	required MarriageUserDataMsg userMarriageInfo = 1;

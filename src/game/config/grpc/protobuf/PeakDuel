@@ -1,0 +1,398 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "Union";
+import "WatchPlayer";
+import "Rank";
+enum PeakDuelProtocol {
+  PeakDuelPb_Enter = 238101;
+  PeakDuelPb_ServerList = 238103;
+  PeakDuelPb_Schedule = 238104;
+  PeakDuelPb_GroupRank = 238105;
+  PeakDuelPb_BattleInfo = 238106;
+  PeakDuelPb_BattleRank = 238107;
+  PeakDuelPb_BattleReport = 238108;
+  PeakDuelPb_BattleHistory = 238109;
+  PeakDuelPb_Contribution = 238110;
+  PeakDuelPb_Like = 238111;
+  PeakDuelPb_GetFightInfo = 238112;
+  PeakDuelPb_ClaimRechargeBatch = 238113;
+  PeakDuelPb_GuessInfo = 238114;
+  PeakDuelPb_ReceiveGuessCoin = 238115;
+  PeakDuelPb_Guess = 238116;
+  PeakDuelPb_HeatRank = 238117;
+  PeakDuelPb_GuessRank = 238118;
+  PeakDuelPb_History = 238119;
+  PeakDuelPb_Celebration = 238120;
+  PeakDuelPb_Worship = 238121;
+  PeakDuelPb_UnionMatchScore = 238122;
+  PeakDuelPb_PlayerScore = 238123;
+  PeakDuelPb_RedPoint = 238124;
+  PeakDuelPb_LoginSync = 238102;
+}
+enum PeakDuelRedPointEnum {
+  PeakDuelRedPoint_None = 0;
+  PeakDuelRedPoint_CanReceiveGuessCoin = 1;
+  PeakDuelRedPoint_HasUnusedGuessCoin = 2;
+  PeakDuelRedPoint_CanClaimRechargeTask = 3;
+  PeakDuelRedPoint_CanExchangeShop = 4;
+  PeakDuelRedPoint_RankReward = 5;
+}
+enum PeakDuelGroupType {
+  PeakDuelGroupType_PromotionGroup = 1;
+  PeakDuelGroupType_PeakGroup = 2;
+  PeakDuelGroupType_NormalGroup = 3;
+}
+message PeakDuelUnionBriefMsg {
+  optional int64 unionId = 1;
+  optional string name = 2;
+  optional int32 flag = 3;
+  optional int64 serverId = 4;
+  optional string power = 5;
+  optional int32 rank = 6;
+  optional int64 rankScore = 7;
+  optional int32 rankDelta = 8;
+}
+message PeakDuelMemberScoreMsg {
+  optional PlayerHeadAndNameMsg player = 1;
+  optional int64 unionId = 2;
+  optional string unionName = 3;
+  optional int64 score = 4;
+  optional int32 likeCount = 6;
+}
+message PeakDuelMatchItemMsg {
+  optional int64 battleId = 1;
+  optional int32 weekIndex = 2;
+  optional int32 matchIndex = 3;
+  optional int64 startTime = 4;
+  optional int64 endTime = 5;
+  optional PeakDuelUnionBriefMsg unionA = 8;
+  optional PeakDuelUnionBriefMsg unionB = 9;
+  optional int64 scoreA = 10;
+  optional int64 scoreB = 11;
+  optional int64 winnerId = 12;
+  optional bool bye = 13;
+}
+message PeakDuelScheduleUnionRankItemMsg {
+  optional int32 rank = 1;
+  optional int32 flag = 2;
+  optional int64 unionId = 3;
+  optional string name = 4;
+  optional string masterName = 5;
+  optional int64 score = 6;
+}
+message PeakDuelScheduleGroupItemMsg {
+  optional int32 smallGroupId = 1;
+  repeated PeakDuelScheduleUnionRankItemMsg rankList = 2;
+  optional PeakDuelGroupType groupType = 3;
+}
+message PeakDuelGuessUnionItemMsg {
+  optional PeakDuelUnionBriefMsg unionBrief = 1;
+  optional int64 heat = 2;
+  optional int32 myBet = 3;
+  optional int32 odds = 4;
+  optional int32 winSide = 5;
+  optional int64 battleId = 7;
+}
+message PeakDuelGuessResultItemMsg {
+  optional int64 battleId = 1;
+  optional PeakDuelUnionBriefMsg unionBrief = 2;
+  optional int32 betCoin = 3;
+  optional int32 rewardCoin = 4;
+  optional int32 odds = 5;
+  optional bool win = 6;
+}
+message PeakDuelBattleHistoryItemMsg {
+  optional int64 battleId = 1;
+  optional int32 weekIndex = 2;
+  optional int32 matchIndex = 3;
+  optional PeakDuelUnionBriefMsg unionA = 4;
+  optional PeakDuelUnionBriefMsg unionB = 5;
+  optional int64 scoreA = 6;
+  optional int64 scoreB = 7;
+  optional int64 winnerId = 8;
+  optional int64 battleTime = 9;
+  optional bool bye = 10;
+}
+message PeakDuelSettleContributorMsg {
+  optional int64 playerId = 1;
+  optional string name = 2;
+  optional int32 headIcon = 3;
+  optional int64 score = 4;
+  optional int32 rank = 5;
+  optional string wxHeadUrl = 6;
+}
+message PeakDuelPlayerMsg {
+  optional int64 weekPersonScore = 1;
+  optional int64 personScore = 2;
+  optional int64 seasonCoinCount = 3;
+  optional int64 normalScore = 4;
+  optional int64 finalScore = 5;
+  optional string extra = 6;
+}
+message PeakDuelServerListReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelServerListResp {
+  required int32 ret = 1;
+  optional int64 groupId = 2;
+  repeated int64 serverIdList = 3;
+}
+message PeakDuelEnterReq {
+}
+message PeakDuelEnterResp {
+  required int32 ret = 1;
+  optional bool joined = 2;
+  optional PeakDuelGroupType groupType = 3;
+  optional int64 groupId = 4;
+  optional PeakDuelUnionBriefMsg myUnion = 5;
+  optional PeakDuelUnionBriefMsg opponentUnion = 6;
+  repeated int64 serverIdList = 7;
+  optional PeakDuelPlayerMsg playerData = 8;
+  optional int32 smallGroupId = 9;
+  optional int64 battleId = 10;
+  optional int32 weekIndex = 11;
+  optional int32 matchIndex = 12;
+  optional bool bye = 13;
+  optional string params = 14;
+  optional PeakDuelGuessResultSyncMsg guessResult = 15;
+  repeated PeakDuelLikeRecordMsg todayLikeTargets = 16;
+  optional int32 smallGroupCount = 17;
+  optional int32 matchRound = 18;
+  optional PeakDuelMatchSettleSyncMsg matchSettle = 19;
+  optional int64 addScore = 20;
+  optional PeakDuelPromotionSettleSyncMsg promotionSettle = 21;
+  optional int64 winUnionId = 22;
+  optional int32 finalGameNormalGroupCount = 23;
+  optional string guessReward = 24;
+  optional int32 earliestSeasonId = 25;
+  optional int32 qualifyGroupId = 26;
+}
+message PeakDuelMatchSettleSyncMsg {
+  optional int64 battleId = 1;
+  optional bool win = 2;
+  optional int64 scoreA = 3;
+  optional int64 scoreB = 4;
+  repeated PeakDuelSettleContributorMsg contributorsA = 5;
+  repeated PeakDuelSettleContributorMsg contributorsB = 6;
+  optional string reward = 7;
+  optional int64 rankScoreA = 8;
+  optional int64 rankScoreB = 9;
+  optional PeakDuelUnionBriefMsg unionA = 10;
+  optional PeakDuelUnionBriefMsg unionB = 11;
+}
+message PeakDuelPromotionSettleSyncMsg {
+  optional int32 myRank = 1;
+}
+message PeakDuelGuessResultSyncMsg {
+  repeated PeakDuelGuessResultItemMsg resultList = 1;
+}
+message PeakDuelLikeRecordMsg {
+  optional int64 targetId = 1;
+  optional int32 count = 2;
+}
+message PeakDuelScheduleReq {
+  optional int64 groupId = 1;
+  optional PeakDuelGroupType groupType = 2;
+  optional int32 smallGroupId = 3;
+}
+message PeakDuelScheduleResp {
+  required int32 ret = 1;
+  repeated PeakDuelScheduleGroupItemMsg groupList = 2;
+  optional int64 groupId = 3;
+}
+message PeakDuelGroupRankReq {
+  optional PeakDuelGroupType groupType = 1;
+  optional int32 smallGroupId = 2;
+  optional int64 groupId = 3;
+}
+message PeakDuelGroupRankResp {
+  required int32 ret = 1;
+  repeated PeakDuelUnionBriefMsg rankList = 2;
+  optional PeakDuelUnionBriefMsg myUnion = 3;
+}
+message PeakDuelBattleInfoReq {
+  optional int64 battleId = 1;
+  optional int64 groupId = 2;
+}
+message PeakDuelBattleInfoResp {
+  required int32 ret = 1;
+  optional int64 battleId = 2;
+  optional PeakDuelUnionBriefMsg unionA = 3;
+  optional PeakDuelUnionBriefMsg unionB = 4;
+  optional int64 scoreA = 5;
+  optional int64 scoreB = 6;
+  repeated PeakDuelMemberScoreMsg memberRanks = 7;
+  optional bool bye = 8;
+  optional int64 winUnionId = 9;
+}
+message PeakDuelBattleRankReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelBattleRankResp {
+  required int32 ret = 1;
+  repeated PeakDuelMemberScoreMsg rankList = 2;
+}
+message PeakDuelBattleReportReq {
+  optional int64 groupId = 1;
+  optional int32 weekIndex = 2;
+  optional int32 smallGroupId = 3;
+}
+message PeakDuelBattleReportResp {
+  required int32 ret = 1;
+  repeated PeakDuelMatchItemMsg duelList = 2;
+}
+message PeakDuelBattleHistoryReq {
+}
+message PeakDuelBattleHistoryResp {
+  required int32 ret = 1;
+  repeated PeakDuelBattleHistoryItemMsg historyList = 2;
+}
+message PeakDuelContributionReq {
+  optional int64 battleId = 1;
+  optional int64 groupId = 2;
+}
+message PeakDuelContributionResp {
+  required int32 ret = 1;
+  repeated PeakDuelMemberScoreMsg contributorList = 2;
+}
+message PeakDuelLikeReq {
+  optional int64 targetPlayerId = 1;
+  optional int64 groupId = 2;
+  optional int64 battleId = 3;
+}
+message PeakDuelLikeResp {
+  required int32 ret = 1;
+  optional int32 todayLikeCount = 2;
+  optional string reward = 3;
+  optional int64 targetPlayerId = 4;
+}
+message PeakDuelClaimRechargeBatchReq {
+  optional int32 taskId = 1;
+  optional int32 claimTimes = 2;
+}
+message PeakDuelClaimRechargeBatchResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+  optional int32 actualClaimTimes = 3;
+  optional int32 claimTimes = 4;
+}
+message PeakDuelGuessInfoReq {
+  optional int64 groupId = 1;
+  optional int32 finalIndex = 2;
+}
+message PeakDuelGuessInfoResp {
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  optional bool canReceiveCoin = 3;
+  repeated PeakDuelGuessUnionItemMsg guessMatchList = 4;
+  optional int64 quizStartTime = 5;
+  optional int64 quizEndTime = 6;
+}
+message PeakDuelReceiveGuessCoinReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelReceiveGuessCoinResp {
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+}
+message PeakDuelGuessReq {
+  optional int64 battleId = 1;
+  optional int64 unionId = 2;
+  optional int32 betCoin = 3;
+  optional int64 groupId = 4;
+}
+message PeakDuelGuessResp {
+  required int32 ret = 1;
+  optional int32 guessCoin = 2;
+  optional PeakDuelGuessUnionItemMsg guessItem = 3;
+}
+message PeakDuelHeatRankReq {
+  optional int64 groupId = 2;
+}
+message PeakDuelHeatRankResp {
+  required int32 ret = 1;
+  repeated PeakDuelUnionBriefMsg rankList = 2;
+}
+message PeakDuelGuessRankReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelGuessRankResp {
+  required int32 ret = 1;
+  repeated RankTempMsg rankList = 2;
+  optional int32 myRank = 3;
+  optional string myValue = 4;
+}
+message PeakDuelHistoryReq {
+  optional int32 seasonId = 1;
+  optional int64 groupId = 2;
+}
+message PeakDuelHistoryResp {
+  required int32 ret = 1;
+  repeated PeakDuelHistorySeasonMsg seasonList = 2;
+}
+message PeakDuelHistorySeasonMsg {
+  optional int32 seasonId = 1;
+  optional PeakDuelUnionBriefMsg championUnion = 2;
+  repeated PeakDuelCelebrationMemberInfo memberList = 3;
+  optional int64 groupId = 4;
+}
+message PeakDuelCelebrationReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelCelebrationResp {
+  required int32 ret = 1;
+  optional PeakDuelUnionBriefMsg championUnion = 2;
+  optional bool canWorship = 3;
+  optional bool worshiped = 4;
+  repeated PeakDuelCelebrationMemberInfo memberList = 5;
+}
+message PeakDuelCelebrationMemberInfo{
+  required string nickName = 1;
+  optional int32 appearanceId = 2;
+  optional int32 position = 3;
+  optional int32 contribution = 4;
+  optional int64 playerId = 5;
+}
+message PeakDuelWorshipReq {
+  optional int64 groupId = 1;
+}
+message PeakDuelWorshipResp {
+  required int32 ret = 1;
+  optional string reward = 2;
+}
+message PeakDuelUnionMatchScoreItemMsg {
+  optional int32 matchIndex = 1;
+  optional int64 taskScore = 2;
+  optional int32 settleScore = 3;
+}
+enum PeakDuelUnionMatchScoreStage {
+  PeakDuelUnionMatchScoreStage_Promotion = 1;
+  PeakDuelUnionMatchScoreStage_Peak = 2;
+}
+message PeakDuelUnionMatchScoreReq {
+  optional int64 unionId = 1;
+  optional PeakDuelUnionMatchScoreStage stage = 2;
+  optional int64 groupId = 3;
+}
+message PeakDuelUnionMatchScoreResp {
+  required int32 ret = 1;
+  repeated PeakDuelUnionMatchScoreItemMsg scoreList = 2;
+}
+message PeakDuelPlayerScoreReq {
+}
+message PeakDuelPlayerScoreResp {
+  required int32 ret = 1;
+  optional PeakDuelPlayerMsg playerData = 2;
+}
+message PeakDuelRedPointReq {
+}
+message PeakDuelRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message PeakDuelLoginSyncMsg {
+  optional int32 seasonId = 1;
+  optional int64 beginShowTime = 2;
+  optional int64 endShowTime = 3;
+  optional string params = 4;
+}

@@ -141,3 +141,7 @@ deploy/caddy-data/
 deploy/caddy-config/
 
 test*
+
+# Local analysis, protocol backups and editor state
+/backups/
+/.idea/

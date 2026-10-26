@@ -79,7 +79,7 @@ message TreasureAuctionItemData {
     required bool isCanSell = 7;
     required int64 lastEquipTime = 8;
     required int64 beginSellTime = 9;
-    required int32 price = 10;
+    required int64 price = 10;
     required bool lock = 11;
     required string createNickName = 12;
     required int32 priceAdd = 13;
@@ -87,12 +87,22 @@ message TreasureAuctionItemData {
     optional int32 collectNum = 15;
     repeated int32 skillList = 16;
     optional int32 masterItemId = 17;
+    optional bool commentRedPoint = 18;
+    optional bool auction = 19;
+    optional int64 extendMillis = 20;
+    optional int32 bidCount = 21;
 }
 message ChaosLawEntryData {
     required int32 entryQuality = 1;
     required int32 attrType = 2;
     required string attrValue = 3;
     required bool identified = 4;
+}
+message GemstoneViewItemData {
+    required int32 slotId = 1;
+    required int32 type = 2;
+    required int32 configId = 3;
+    required int32 level = 4;
 }
 message ChaosLawItemData {
     required int32 id = 1;
@@ -108,9 +118,17 @@ message ChaosLawItemData {
     required bool isNew = 11;
     required string createNickName = 12;
     required int64 sellTime = 13;
-    required int32 price = 14;
+    required int64 price = 14;
     optional int32 lawType = 15;
     optional int32 collectNum = 16;
     optional int64 lastEquipTime = 17;
     optional int64 lastTransactionTime = 18;
-  }
+    optional bool auction = 19;
+    optional int64 extendMillis = 20;
+    optional int32 bidCount = 21;
+    repeated int32 featureSkillIds = 22;
+}
+message ServerIdRange {
+    required int64 startServerId = 1;
+    required int64 endServerId = 2;
+}

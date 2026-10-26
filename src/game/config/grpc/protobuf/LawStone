@@ -1,0 +1,148 @@
+package com.yq.msg.CityMsg;
+import "StoneCommon";
+enum LawStonePb {
+    LawStone_Enter = 238401;
+    LawStone_Equip = 238402;
+    LawStone_Unequip = 238403;
+    LawStone_Lock = 238404;
+    LawStone_Sync = 238405;
+    LawStone_ComposeBatch = 238406;
+    LawStone_ComposeLog = 238407;
+    LawStone_SyncRedPoint = 238408;
+    LawStone_DealSell = 238410;
+    LawStone_DealPriceAdjust = 238415;
+    LawStone_DealSellDown = 238411;
+    LawStone_DealBuy = 238412;
+    LawStone_DealGetRecord = 238413;
+    LawStone_DealCollect = 238414;
+}
+message LawStoneDealSellReq {
+    repeated int32 ids = 1;
+    required string password = 2;
+    required int64 price = 3;
+    required bool anonymous = 4;
+}
+message LawStoneDealSellRsp {
+    required int32 ret = 1;
+}
+message LawStoneDealSellDownReq {
+    required int32 id = 1;
+}
+message LawStoneDealSellDownRsp {
+    required int32 ret = 1;
+}
+message LawStoneDealBuyReq {
+    required string goodsId = 1;
+    required string password = 2;
+    required int64 price = 3;
+    optional int32 num = 4;
+}
+message LawStoneDealBuyRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData items = 2;
+}
+message LawStoneDealGetRecordReq {
+}
+message LawStoneDealGetRecordRsp {
+    required int32 ret = 1;
+    repeated GemstoneMallRecordMsg records = 2;
+}
+message LawStoneDealCollectReq {
+    required string goodsId = 1;
+    required bool collect = 2;
+}
+message LawStoneDealCollectRsp {
+    required int32 ret = 1;
+    optional int32 collectSize = 2;
+    optional int32 collectNum = 3;
+}
+message LawStoneDealPriceAdjustReq {
+    required int32 id = 1;
+    required string password = 2;
+    required int64 price = 3;
+}
+message LawStoneDealPriceAdjustRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData items = 2;
+    optional int32 sellCount = 3;
+}
+message LawStoneEnterReq {
+}
+message LawStoneEnterRsp {
+    required int32 ret = 1;
+    repeated GemstoneItemData itemList = 2;
+    repeated int32 slotItemIds = 3;
+    repeated StoneComposeFailData composeFailList = 4;
+    optional int32 remainDailyBuyTimes = 5;
+    optional string redPoint = 6;
+    optional int32 sellCount = 7;
+    repeated StoneSeparationEquipMsg separationEquips = 8;
+}
+message LawStoneEquipReq {
+    required int32 slotId = 1;
+    required int32 itemId = 2;
+    optional int32 separationIndex = 3;
+}
+message LawStoneEquipRsp {
+    required int32 ret = 1;
+    optional int32 slotId = 2;
+    optional int32 itemId = 3;
+    repeated StoneSeparationEquipMsg separationEquips = 4;
+}
+message LawStoneUnequipReq {
+    required int32 slotId = 1;
+    optional int32 separationIndex = 2;
+}
+message LawStoneUnequipRsp {
+    required int32 ret = 1;
+    optional int32 slotId = 2;
+    repeated StoneSeparationEquipMsg separationEquips = 3;
+}
+message LawStoneLockReq {
+    required int32 id = 1;
+    required bool lock = 2;
+    required string password = 3;
+}
+message LawStoneLockRsp {
+    required int32 ret = 1;
+    optional GemstoneItemData item = 2;
+}
+message LawStoneComposeReq {
+    repeated int32 mainIds = 1;
+    required int32 helperId = 2;
+}
+message LawStoneComposeRsp {
+    required int32 ret = 1;
+    optional GemstoneItemData resultItem = 2;
+    optional bool success = 3;
+    optional int32 failCount = 4;
+}
+message LawStoneComposeLogReq {
+}
+message LawStoneComposeLogRsp {
+    required int32 ret = 1;
+    repeated StoneComposeLogData logs = 2;
+}
+message LawStoneSync {
+    repeated GemstoneItemData itemList = 1;
+    repeated int32 slotItemIds = 2;
+    optional int32 remainDailyBuyTimes = 3;
+    optional int32 serverRound = 4;
+    optional int32 sellCount = 5;
+    repeated StoneSeparationEquipMsg separationEquips = 6;
+}
+message LawStoneComposeBatchReq {
+    repeated LawStoneComposeReq composeList = 1;
+}
+message LawStoneComposeBatchRsp {
+    required int32 ret = 1;
+    repeated LawStoneComposeRsp composeList = 2;
+}
+enum LawStoneEnumRedPoint {
+    LawStone_RedPoint_NewItem = 0;
+    LawStone_RedPoint_Record = 1;
+    LawStone_RedPoint_CanInlay = 2;
+}
+message LawStoneSyncRedPoint {
+    required string redPoint = 1;
+}

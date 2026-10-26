@@ -15,6 +15,7 @@ message UnionCeremonyCongratulationsInfo {
     optional int32 equipCloudId = 2;
     optional string wordsKey = 3;
     optional int64 sendTime = 4;
+    optional int32 backOrnamentId = 5;
 }
 message UnionCeremonyListReq {
 }

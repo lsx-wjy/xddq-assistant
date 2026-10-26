@@ -296,6 +296,7 @@ message UnionBountyPlayerInfo{
     optional string wxHeadUrl = 8;
     optional int32 equipHeadIconFrame = 9;
     optional int32 cloudId = 10;
+    optional int32 backOrnamentId = 11;
 }
 message UnionBountyBountyInfo{
     optional int32 curConfigId = 1;

@@ -35,6 +35,7 @@ message UnionBlessingPlayerShowMsg {
   optional int32 realmsId = 5;
   optional int32 position = 6;
   optional int32 titleId = 7;
+  optional int32 backOrnamentId = 8;
 }
 message UnionBlessingRewardReqMsg {
   required string id = 1;
