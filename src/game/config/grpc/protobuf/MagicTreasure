@@ -86,3 +86,31 @@ message MagicTreasureSwitchLinkageSkinResp {
   required int32 ret = 1;
   optional MagicTreasureDataMsg data = 2;
 }
+message MagicTreasureOneKeyRefinePreviewReq {
+    optional int32 qualityFilter = 1;
+    optional bool autoCompound = 2;
+  }
+  message MagicTreasureOneKeyRefinePreviewItem {
+    required int32 magicTreasureId = 1;
+    required int32 refineLv = 2;
+  }
+  message MagicTreasureOneKeyRefinePreviewResp {
+    required int32 ret = 1;
+    repeated MagicTreasureOneKeyRefinePreviewItem selectedList = 2;
+    optional string costPreview = 3;
+  }
+  message MagicTreasureOneKeyRefineReq {
+    optional int32 qualityFilter = 1;
+    optional bool autoCompound = 2;
+  }
+  message MagicTreasureOneKeyRefineResultItem {
+    required int32 magicTreasureId = 1;
+    required int32 oldLv = 2;
+    required int32 newLv = 3;
+  }
+  message MagicTreasureOneKeyRefineResp {
+    required int32 ret = 1;
+    optional string cost = 2;
+    repeated MagicTreasureOneKeyRefineResultItem refineResults = 3;
+    repeated MagicTreasureDataMsg magicTreasureData = 4;
+  }

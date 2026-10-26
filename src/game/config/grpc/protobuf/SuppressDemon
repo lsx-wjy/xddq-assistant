@@ -97,6 +97,7 @@ message TownDemonRoundSettleDisplayData{
   repeated int32 petSoulShapeList = 7;
   repeated int32 petLinkageId = 8;
   optional int32 realmsId = 9;
+  optional int32 equipBackOrnament = 10;
 }
 message TownDemonRoundSettleUnionRankData {
   optional int32 unionRank = 1;

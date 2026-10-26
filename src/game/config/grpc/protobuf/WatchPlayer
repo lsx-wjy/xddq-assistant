@@ -67,6 +67,8 @@ message PlayerDetailDataMsg {
     optional ElixirWatchAttrCalcDataMsg elixirAttrCalcData = 32;
     optional ElixirWatchCollectionMsg elixirCollection = 33;
     repeated ChaosLawViewItemData chaosLawEquipItems = 34;
+    optional bytes fishingMsg = 35;
+    repeated GemstoneViewItemData gemstoneEquipItems = 36;
 }
 message ChaosLawViewItemData {
     required int32 id = 1;
@@ -117,6 +119,7 @@ message PlayerBaseDataMsg {
 	optional ArtifactDataMsg artifactData = 18;
     optional bool isShowCode = 19;
     optional int32 cardSkinId = 20;
+    optional int32 backOrnamentId = 21;
 }
 message ArtifactDataMsg {
     optional int32 artifactId = 1;
@@ -173,6 +176,12 @@ message PlayerAppearanceDataMsg {
     optional int32 equipPetId = 8;
     optional int32 petSoulShapeLv = 9;
     optional int32 petLinkageId = 10;
+    optional int32 backOrnamentId = 11;
+    optional int32 titleId = 12;
+}
+message PlayerAppearanceAndHeadDataMsg {
+    optional PlayerAppearanceDataMsg appearanceMsg = 1;
+    optional PlayerHeadDataMsg headMsg = 2;
 }
 message GetTopPlayerInfoReq{
 }
@@ -279,6 +288,7 @@ message PlayerPilotShowDataMsg {
     optional int64 playerId = 1;
     optional int32 appearanceId = 2;
     optional int32 equipCloudId = 3;
+    optional int32 backOrnamentId = 4;
 }
 message getPlayerPilotShowDataMsgListReq {
     repeated int64 playerId = 1;

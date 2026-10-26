@@ -76,6 +76,7 @@ message PeakFightAppearanceMsg {
   optional int32 site = 7;
   optional int64 unionId = 8;
   optional int32 energy = 9;
+  optional int32 backOrnamentId = 10;
 }
 message PeakFightPlayerBodyLocateMsg {
   optional PlayerHeadDataMsg head = 1;

@@ -86,6 +86,7 @@ message PalacePlayerShowMsg{
   optional int32 equipArtifactLevel = 23;
   repeated PetKernelInfo petKernelInfo = 24;
   optional int32 equipCardSkin = 25;
+  optional int32 equipBackOrnament = 26;
 }
 message SendGiftReq{
   required string words = 1;
@@ -115,6 +116,7 @@ message GetSendGiftRewardReq{
   required string id =1;
   optional bool getReward = 2;
   optional SendGiftType type = 3;
+  optional bool autoCollect = 4;
 }
 message GetSendGiftRewardRsp{
   required int64 ret = 1;

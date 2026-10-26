@@ -481,6 +481,7 @@ message AskDingWorshipPlayerMsg {
   optional int32 titleId = 11;
   repeated int32 petLinkageId = 12;
   repeated int32 spiritLinkageId = 13;
+  optional int32 equipBackOrnament = 14;
 }
 message AskDingWorshipReq{
   required int32 activityId = 1;

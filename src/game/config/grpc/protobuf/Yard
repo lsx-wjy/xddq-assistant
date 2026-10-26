@@ -200,6 +200,7 @@ message YardDrawReq {
   optional bool isUseADTime = 2;
   optional bool isADType =3;
   optional int32 poolId = 4;
+  optional int32 times = 5;
 }
 message YardDrawResult {
   optional string rewards = 1;

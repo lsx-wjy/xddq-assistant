@@ -7,6 +7,7 @@ import "ActivityBase";
         repeated ActivityMultiReward multiReward = 4;
         repeated TaskSelectItemMsg selectItem = 5;
         optional int64 completeTime = 6;
+        optional int32 claimTimes = 7;
     }
     message TaskDataListMsg{
         repeated TaskDataTempMsg dataList =1;

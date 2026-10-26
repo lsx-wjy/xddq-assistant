@@ -299,6 +299,7 @@ message RosterShowMsg{
   optional string wxHeadUrl = 12;
   optional PlayerHeadDataMsg headInfo = 13;
   repeated int32 petSoulShapeList = 14;
+  optional int32 equipBackOrnament = 15;
 }
 message PlayerGuessInfoMsg{
   optional ToSkyPlayerInfo playerInfo = 1;

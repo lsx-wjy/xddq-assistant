@@ -117,6 +117,7 @@ message FlyToGodCongratulationsInfo {
     optional int32 equipCloudId = 2;
     optional int32 luckWordIndex = 3;
     optional int64 sendTime = 4;
+    optional int32 backOrnamentId = 5;
 }
 message FlyToGodCongratulationsGetReq {
     required int64 playerId = 1;

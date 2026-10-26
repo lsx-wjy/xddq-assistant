@@ -462,6 +462,7 @@ message ProveWayChampionPlayerMsg {
     repeated int32 petSoulShapeList = 10;
     optional int32 title = 11;
     repeated int32 petLinkageId = 12;
+    optional int32 backOrnamentId = 13;
 }
 message TeamGuessInfoMsg {
     optional ProveWayTeamBaseInfo TeamInfo = 1;

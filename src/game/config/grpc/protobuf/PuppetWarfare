@@ -196,6 +196,7 @@ message PuppetWorshipPlayerMsg {
     optional int32 titleId = 15;
     repeated int32 petLinkageId = 16;
     repeated int32 spiritLinkageId = 17;
+    optional int32 equipBackOrnament = 18;
 }
 message PuppetEquipMsg {
     optional int64 id = 1;

@@ -117,6 +117,7 @@ message PlanesTrialMemberEntity {
     optional int32 headIconId = 9;
     optional string wxHeadUrl = 10;
     optional int32 headFrameId = 11;
+    optional bool inSystem = 12;
 }
 message PlanesTrialApplyUserEntity {
     optional PlayerHeadAndNameMsg playerInfo = 1;

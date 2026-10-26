@@ -284,6 +284,7 @@ message DragonHomeExplorePlayerDataMsg{
   optional int32 currFloor = 9;
   optional int64 trapEndTime = 10;
   optional int32 doubleTickerCount = 11;
+  optional int32 backOrnamentId = 12;
 }
 message DragonHomeRewardFloor {
   required int32 floor = 1;
@@ -294,6 +295,7 @@ message DragonHomeRewardFloor {
   optional int32 cloudId = 6;
   optional bool isAutoUnLock = 7;
   repeated DragonHomeMallInfo mallInfo = 8;
+  optional int32 backOrnamentId = 9;
 }
 message DragonHomeRewardTile {
   optional int32 index = 1;
@@ -402,6 +404,7 @@ message DragonHomeTrapPlayerMsg {
   optional int32 appearanceId = 2;
   optional string nickName = 3;
   optional int64 endTime = 4;
+  optional int32 backOrnamentId = 5;
 }
 message DragonHomeAssistMonsterMsg {
   optional int64 monsterUid = 1;

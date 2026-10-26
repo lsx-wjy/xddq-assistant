@@ -349,6 +349,7 @@ message GodDemonBattlePreviousPlayerData{
     optional int32 titleId = 15;
     repeated int32 petLinkageId = 16;
     repeated int32 spiritLinkageId = 17;
+    optional int32 equipBackOrnament = 18;
 }
 message GodDemonBattleGetPlayerSettlementReq {
     optional int32 activityId = 1;

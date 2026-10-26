@@ -178,6 +178,7 @@ message OpenerMsg{
     optional int32 appearanceId = 3;
     optional int32 realmsId = 4;
     optional int32 titleId = 5;
+    optional int32 backOrnamentId = 6;
 }
 message GatherEnergySecondListViewReq{
     required int32 offset = 1;
@@ -240,6 +241,7 @@ message InsidePlayerBaseDataMsg {
     optional int32 appearanceId = 4;
     optional int64 serverId = 5;
     optional int32 titleId = 6;
+    optional int32 backOrnamentId = 7;
 }
 message GatherEnergyFightReportNewReq{
 }

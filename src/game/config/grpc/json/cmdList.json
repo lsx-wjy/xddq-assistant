@@ -1,88 +1,88 @@
 [
     {
-        "comment": "ActivityMagicShopLoopPoolMsg解析",
+        "comment": "MountainSeaRankTeamList解析",
         "smMsgId": 0,
-        "byteDecode": "CityMsg.ActivityMagicShopLoopPoolMsg"
-    },
-    {
-        "comment": "DoubleDemonsRankListMsg解析",
-        "smMsgId": 1,
-        "byteDecode": "CityMsg.DoubleDemonsRankListMsg"
-    },
-    {
-        "comment": "配置同步",
-        "smMsgId": 2,
-        "byteDecode": "CityMsg.MarbleConfigSync"
-    },
-    {
-        "comment": "璇珠宝境玩家数据",
-        "smMsgId": 3,
-        "byteDecode": "CityMsg.MarblePlayerDataMsg"
-    },
-    {
-        "comment": "KunlunWarConfigSyncMsg解析",
-        "smMsgId": 4,
-        "byteDecode": "CityMsg.KunlunWarConfigSync"
+        "byteDecode": "CityMsg.MountainSeaRankTeamList"
     },
     {
         "comment": "仙缘福彩配置解析",
-        "smMsgId": 5,
+        "smMsgId": 1,
         "byteDecode": "CityMsg.LotteryTicketActivityConfig"
     },
     {
         "comment": "KiddingSeaConfigMsg解析",
-        "smMsgId": 6,
+        "smMsgId": 2,
         "byteDecode": "CityMsg.KiddingSeaConfigMsg"
     },
     {
         "comment": "KiddingSeaDataMsg解析",
-        "smMsgId": 7,
+        "smMsgId": 3,
         "byteDecode": "CityMsg.KiddingSeaDataMsg"
     },
     {
+        "comment": "TextTowerUniqueConfigMsg解析",
+        "smMsgId": 4,
+        "byteDecode": "CityMsg.TextTowerUniqueConfigMsg"
+    },
+    {
         "comment": "WeYoundConfigSync解析",
-        "smMsgId": 8,
+        "smMsgId": 5,
         "byteDecode": "CityMsg.WeYoundConfigSync"
     },
     {
         "comment": "象棋配置解析",
-        "smMsgId": 9,
+        "smMsgId": 6,
         "byteDecode": "CityMsg.ChineseChessActivityConfig"
     },
     {
         "comment": "仙魔对决排行榜bytes解析",
-        "smMsgId": 10,
+        "smMsgId": 7,
         "byteDecode": "CityMsg.GodDemonRankList"
     },
     {
         "comment": "活动表配置",
-        "smMsgId": 11,
+        "smMsgId": 8,
         "byteDecode": "CityMsg.GodDemonBattleConfig"
     },
     {
         "comment": "WarSeasonConfigMsg解析",
-        "smMsgId": 12,
+        "smMsgId": 9,
         "byteDecode": "CityMsg.WarSeasonConfigMsg"
     },
     {
         "comment": "WarSeasonBaseDataMsg解析",
-        "smMsgId": 13,
+        "smMsgId": 10,
         "byteDecode": "CityMsg.WarSeasonBaseDataMsg"
     },
     {
         "comment": "WarSeasonAllGuessData解析",
-        "smMsgId": 14,
+        "smMsgId": 11,
         "byteDecode": "CityMsg.WarSeasonAllGuessData"
     },
     {
         "comment": "AskDingActivityDataTemp解析",
-        "smMsgId": 15,
+        "smMsgId": 12,
         "byteDecode": "CityMsg.AskDingActivityDataTemp"
     },
     {
         "comment": "AskDingConfigSyncMsg解析",
-        "smMsgId": 16,
+        "smMsgId": 13,
         "byteDecode": "CityMsg.AskDingConfigSyncMsg"
+    },
+    {
+        "comment": "AskDingUserRankList解析",
+        "smMsgId": 14,
+        "byteDecode": "CityMsg.AskDingUserRankList"
+    },
+    {
+        "comment": "AskDingUnionRankList解析",
+        "smMsgId": 15,
+        "byteDecode": "CityMsg.AskDingUnionRankList"
+    },
+    {
+        "comment": "AskDingCampRankList解析",
+        "smMsgId": 16,
+        "byteDecode": "CityMsg.AskDingCampRankList"
     },
     {
         "comment": "系统屏蔽列表同步",
@@ -95,887 +95,915 @@
         "smMethod": "CityMsg.SubsystemShieldSync"
     },
     {
-        "comment": "AskDingCampRankList解析",
-        "smMsgId": 19,
-        "byteDecode": "CityMsg.AskDingCampRankList"
-    },
-    {
-        "comment": "AskDingBetUnionInfoList解析",
-        "smMsgId": 20,
-        "byteDecode": "CityMsg.AskDingBetUnionInfoList"
-    },
-    {
-        "comment": "玩家活动数据",
-        "smMsgId": 21,
-        "byteDecode": "CityMsg.TeamBuyActivityData"
-    },
-    {
         "comment": "SpiritFootConfigMsg解析",
-        "smMsgId": 22,
+        "smMsgId": 19,
         "byteDecode": "CityMsg.SpiritFootConfigMsg"
     },
     {
         "comment": "MonopolyConfigSyncMsg解析",
-        "smMsgId": 23,
+        "smMsgId": 20,
         "byteDecode": "CityMsg.MonopolyConfigSyncMsg"
     },
     {
         "comment": "MonopolyBreakFreeReq解析",
-        "smMsgId": 24,
+        "smMsgId": 21,
         "byteDecode": "CityMsg.MonopolyBreakFreeReq"
     },
     {
         "comment": "MonopolyBreakFreeResp解析",
-        "smMsgId": 25,
+        "smMsgId": 22,
         "byteDecode": "CityMsg.MonopolyBreakFreeResp"
     },
     {
         "comment": "MonopolyDrawReq解析",
-        "smMsgId": 26,
+        "smMsgId": 23,
         "byteDecode": "CityMsg.MonopolyDrawReq"
     },
     {
         "comment": "MonopolyDrawResp解析",
-        "smMsgId": 27,
+        "smMsgId": 24,
         "byteDecode": "CityMsg.MonopolyDrawResp"
     },
     {
         "comment": "MonopolyEventActionReqMsg解析",
-        "smMsgId": 28,
+        "smMsgId": 25,
         "byteDecode": "CityMsg.MonopolyEventActionReqMsg"
     },
     {
         "comment": "MonopolyEventActionRespMsg解析",
-        "smMsgId": 29,
+        "smMsgId": 26,
         "byteDecode": "CityMsg.MonopolyEventActionRespMsg"
     },
     {
         "comment": "MonopolyRankList解析",
-        "smMsgId": 30,
+        "smMsgId": 27,
         "byteDecode": "CityMsg.MonopolyRankList"
     },
     {
         "comment": "TreasureBowlData解析",
-        "smMsgId": 31,
+        "smMsgId": 28,
         "byteDecode": "CityMsg.TreasureBowlData"
     },
     {
         "comment": "SpChampConfigSyncMsg解析",
-        "smMsgId": 32,
+        "smMsgId": 29,
         "byteDecode": "CityMsg.SpChampConfigSyncMsg"
     },
     {
         "comment": "PlanesTrialRankTeamList解析",
-        "smMsgId": 33,
+        "smMsgId": 30,
         "byteDecode": "CityMsg.PlanesTrialRankTeamList"
     },
     {
         "comment": "七夕活动排行数据bytes解析",
-        "smMsgId": 34,
+        "smMsgId": 31,
         "byteDecode": "CityMsg.DoubleSeventhList"
     },
     {
         "comment": "HaoActivityDrawConfig解析",
-        "smMsgId": 35,
+        "smMsgId": 32,
         "byteDecode": "CityMsg.HaoActivityDrawConfig"
     },
     {
         "comment": "HaoLuckyDrawActivityDataMsg解析",
-        "smMsgId": 36,
+        "smMsgId": 33,
         "byteDecode": "CityMsg.HaoLuckyDrawActivityDataMsg"
     },
     {
         "comment": "事件-挑战玩家",
-        "smMsgId": 37,
+        "smMsgId": 34,
         "byteDecode": "CityMsg.SeaWarEvent_ChallengePlayer"
     },
     {
         "comment": "事件-挑战怪物",
-        "smMsgId": 38,
+        "smMsgId": 35,
         "byteDecode": "CityMsg.SeaWarEvent_ChallengeMonster"
     },
     {
         "comment": "事件-开启普通宝箱",
-        "smMsgId": 39,
+        "smMsgId": 36,
         "byteDecode": "CityMsg.SeaWarEvent_OpenNormalBox"
     },
     {
         "comment": "事件-炼化宝石",
-        "smMsgId": 40,
+        "smMsgId": 37,
         "byteDecode": "CityMsg.SeaWarEvent_ForgeGem"
     },
     {
         "comment": "事件-开启协助宝箱",
-        "smMsgId": 41,
+        "smMsgId": 38,
         "byteDecode": "CityMsg.SeaWarEvent_OpenHelpBox"
     },
     {
         "comment": "事件-触发礼包",
-        "smMsgId": 42,
+        "smMsgId": 39,
         "byteDecode": "CityMsg.SeaWarEvent_TriggerGift"
     },
     {
         "comment": "事件-探查水泉",
-        "smMsgId": 43,
+        "smMsgId": 40,
         "byteDecode": "CityMsg.SeaWarEvent_ProbeWaterSpring"
     },
     {
         "comment": "竞猜列表",
-        "smMsgId": 44,
+        "smMsgId": 41,
         "byteDecode": "CityMsg.SeaWarGuessUnionInfoList"
     },
     {
         "comment": "配置表",
-        "smMsgId": 45,
+        "smMsgId": 42,
         "byteDecode": "CityMsg.SeaWarConfigSync"
     },
     {
         "comment": "GuardFairyTreeConfigMsg解析",
-        "smMsgId": 46,
+        "smMsgId": 43,
         "byteDecode": "CityMsg.GuardFairyTreeConfigMsg"
     },
     {
         "comment": "RoadDefendUniqueConfigMsg解析",
-        "smMsgId": 47,
+        "smMsgId": 44,
         "byteDecode": "CityMsg.RoadDefendUniqueConfigMsg"
     },
     {
         "comment": "PupilRankList解析",
-        "smMsgId": 48,
+        "smMsgId": 45,
         "byteDecode": "CityMsg.PupilRankList"
     },
     {
         "comment": "PupilDataMsg解析",
-        "smMsgId": 49,
+        "smMsgId": 46,
         "byteDecode": "CityMsg.PupilDataMsg"
     },
     {
         "comment": "MarriageRecordTempMsg解析",
-        "smMsgId": 50,
+        "smMsgId": 47,
         "byteDecode": "CityMsg.MarriageRecordTempMsg"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 51,
+        "smMsgId": 48,
         "byteDecode": "CityMsg.TownDemonUnionRankList"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 52,
+        "smMsgId": 49,
         "byteDecode": "CityMsg.TownDemonPlayerRankList"
     },
     {
+        "comment": "BubbleDragonActivityConfig解析",
+        "smMsgId": 50,
+        "byteDecode": "CityMsg.BubbleDragonActivityConfig"
+    },
+    {
         "comment": "ActionMsg解析",
-        "smMsgId": 53,
+        "smMsgId": 51,
         "byteDecode": "CityMsg.ActionMsg"
     },
     {
         "comment": "ActionRespMsg解析",
-        "smMsgId": 54,
+        "smMsgId": 52,
         "byteDecode": "CityMsg.ActionRespMsg"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 55,
+        "smMsgId": 53,
         "byteDecode": "CityMsg.YardPlayerRankList"
     },
     {
         "comment": "RebornTrialConfigSync解析",
-        "smMsgId": 56,
+        "smMsgId": 54,
         "byteDecode": "CityMsg.RebornTrialConfigSync"
     },
     {
         "comment": "RebornTrialExploreReq解析",
-        "smMsgId": 57,
+        "smMsgId": 55,
         "byteDecode": "CityMsg.RebornTrialExploreReq"
     },
     {
         "comment": "RebornTrialExploreResp解析",
-        "smMsgId": 58,
+        "smMsgId": 56,
         "byteDecode": "CityMsg.RebornTrialExploreResp"
     },
     {
         "comment": "RebornTrialSelectOptionReq解析",
-        "smMsgId": 59,
+        "smMsgId": 57,
         "byteDecode": "CityMsg.RebornTrialSelectOptionReq"
     },
     {
         "comment": "RebornTrialSelectOptionResp解析",
-        "smMsgId": 60,
+        "smMsgId": 58,
         "byteDecode": "CityMsg.RebornTrialSelectOptionResp"
     },
     {
         "comment": "RebornTrialUseMagicReq解析",
-        "smMsgId": 61,
+        "smMsgId": 59,
         "byteDecode": "CityMsg.RebornTrialUseMagicReq"
     },
     {
         "comment": "RebornTrialUseMagicResp解析",
-        "smMsgId": 62,
+        "smMsgId": 60,
         "byteDecode": "CityMsg.RebornTrialUseMagicResp"
     },
     {
         "comment": "RebornTrialSkipEventReq解析",
-        "smMsgId": 63,
+        "smMsgId": 61,
         "byteDecode": "CityMsg.RebornTrialSkipEventReq"
     },
     {
         "comment": "RebornTrialSkipEventResp解析",
-        "smMsgId": 64,
+        "smMsgId": 62,
         "byteDecode": "CityMsg.RebornTrialSkipEventResp"
     },
     {
         "comment": "PupilRankRankListMsg解析",
-        "smMsgId": 65,
+        "smMsgId": 63,
         "byteDecode": "CityMsg.PupilRankRankListMsg"
     },
     {
         "comment": "BounceActivityConfig解析",
-        "smMsgId": 66,
+        "smMsgId": 64,
         "byteDecode": "CityMsg.BounceActivityConfig"
     },
     {
         "comment": "配置表解析",
-        "smMsgId": 67,
+        "smMsgId": 65,
         "byteDecode": "CityMsg.DemonTowerConfig"
     },
     {
         "comment": "玩家数据解析",
-        "smMsgId": 68,
+        "smMsgId": 66,
         "byteDecode": "CityMsg.DemonTowerUserDataSync"
     },
     {
         "comment": "RemoteTylooMsgInfo解析",
-        "smMsgId": 69,
+        "smMsgId": 67,
         "byteDecode": "CityMsg.TylooConfigSyncMsg"
     },
     {
         "comment": "BodyTrialRankListMsg解析",
-        "smMsgId": 70,
+        "smMsgId": 68,
         "byteDecode": "CityMsg.BodyTrialRankListMsg"
     },
     {
         "comment": "BodyTrialChatCardData解析",
-        "smMsgId": 71,
+        "smMsgId": 69,
         "byteDecode": "CityMsg.BodyTrialChatCardData"
     },
     {
         "comment": "通天幺牌配置解析",
-        "smMsgId": 72,
+        "smMsgId": 70,
         "byteDecode": "CityMsg.AceActivityConfig"
     },
     {
         "comment": "BloodForbiddenConfigMsg解析",
-        "smMsgId": 73,
+        "smMsgId": 71,
         "byteDecode": "CityMsg.BloodForbiddenConfigMsg"
     },
     {
         "comment": "BloodForbiddenDataMsg解析",
-        "smMsgId": 74,
+        "smMsgId": 72,
         "byteDecode": "CityMsg.BloodForbiddenDataMsg"
     },
     {
         "comment": "DragonHomeConfigSyncMsg解析",
-        "smMsgId": 75,
+        "smMsgId": 73,
         "byteDecode": "CityMsg.DragonHomeConfigSyncMsg"
     },
     {
         "comment": "DragonHomeTeamRankMsgList解析",
-        "smMsgId": 76,
+        "smMsgId": 74,
         "byteDecode": "CityMsg.DragonHomeTeamRankMsgList"
     },
     {
         "comment": "DragonHomePlayerRankMsgList解析",
-        "smMsgId": 77,
+        "smMsgId": 75,
         "byteDecode": "CityMsg.DragonHomePlayerRankMsgList"
     },
     {
         "comment": "PeakFightConfigSync解析",
-        "smMsgId": 78,
+        "smMsgId": 76,
         "byteDecode": "CityMsg.PeakFightConfigSync"
     },
     {
-        "comment": "MountainSeaRankTeamList解析",
+        "comment": "ActivityMagicShopLoopPoolMsg解析",
+        "smMsgId": 77,
+        "byteDecode": "CityMsg.ActivityMagicShopLoopPoolMsg"
+    },
+    {
+        "comment": "DoubleDemonsRankListMsg解析",
+        "smMsgId": 78,
+        "byteDecode": "CityMsg.DoubleDemonsRankListMsg"
+    },
+    {
+        "comment": "配置同步",
         "smMsgId": 79,
-        "byteDecode": "CityMsg.MountainSeaRankTeamList"
+        "byteDecode": "CityMsg.MarbleConfigSync"
+    },
+    {
+        "comment": "璇珠宝境玩家数据",
+        "smMsgId": 80,
+        "byteDecode": "CityMsg.MarblePlayerDataMsg"
+    },
+    {
+        "comment": "KunlunWarConfigSyncMsg解析",
+        "smMsgId": 81,
+        "byteDecode": "CityMsg.KunlunWarConfigSync"
     },
     {
         "comment": "UseOptionalBoxParam解析",
-        "smMsgId": 80,
+        "smMsgId": 82,
         "byteDecode": "CityMsg.UseOptionalBoxParam"
     },
     {
         "comment": "ChangeRoleParam解析",
-        "smMsgId": 81,
+        "smMsgId": 83,
         "byteDecode": "CityMsg.ChangeRoleParam"
     },
     {
         "comment": "精怪行动bytes解析",
-        "smMsgId": 82,
+        "smMsgId": 84,
         "byteDecode": "CityMsg.SpiritAction"
     },
     {
         "comment": "灵兽行动bytes解析",
-        "smMsgId": 83,
+        "smMsgId": 85,
         "byteDecode": "CityMsg.PetAction"
     },
     {
         "comment": "人物行动bytes解析",
-        "smMsgId": 84,
+        "smMsgId": 86,
         "byteDecode": "CityMsg.MainAction"
     },
     {
         "comment": "神通行动bytes解析",
-        "smMsgId": 85,
+        "smMsgId": 87,
         "byteDecode": "CityMsg.MagicAction"
     },
     {
         "comment": "组队技能行动bytes解析",
-        "smMsgId": 86,
+        "smMsgId": 88,
         "byteDecode": "CityMsg.TeamSkillAction"
     },
     {
         "comment": "boss回合技能行动bytes解析",
-        "smMsgId": 87,
+        "smMsgId": 89,
         "byteDecode": "CityMsg.BossSkillAction"
     },
     {
         "comment": "boss特殊技能行动bytes解析",
-        "smMsgId": 88,
+        "smMsgId": 90,
         "byteDecode": "CityMsg.BossSpecialSkillAction"
     },
     {
         "comment": "多倍充值数据解析",
-        "smMsgId": 89,
+        "smMsgId": 91,
         "byteDecode": "CityMsg.MultipleRechargesPlayerDataMsg"
     },
     {
         "comment": "ExtraParam解析",
-        "smMsgId": 90,
+        "smMsgId": 92,
         "byteDecode": "CityMsg.ExtraParam"
     },
     {
         "comment": "WorldMessageExtraData解析",
-        "smMsgId": 91,
+        "smMsgId": 93,
         "byteDecode": "CityMsg.WorldMessageExtraData"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 92,
+        "smMsgId": 94,
         "byteDecode": "CityMsg.RankMsgList"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 93,
+        "smMsgId": 95,
         "byteDecode": "CityMsg.UnionMsgList"
     },
     {
         "comment": "BallGVGActivityDataTemp解析",
-        "smMsgId": 94,
+        "smMsgId": 96,
         "byteDecode": "CityMsg.BallGVGActivityDataTemp"
     },
     {
         "comment": "BallGVGConfigSyncMsg解析",
-        "smMsgId": 95,
+        "smMsgId": 97,
         "byteDecode": "CityMsg.BallGVGConfigSyncMsg"
     },
     {
         "comment": "BallGVGUserRankList解析",
-        "smMsgId": 96,
+        "smMsgId": 98,
         "byteDecode": "CityMsg.BallGVGUserRankList"
     },
     {
         "comment": "BallGVGUnionRankList解析",
-        "smMsgId": 97,
+        "smMsgId": 99,
         "byteDecode": "CityMsg.BallGVGUnionRankList"
     },
     {
         "comment": "BallGVGCampRankList解析",
-        "smMsgId": 98,
+        "smMsgId": 100,
         "byteDecode": "CityMsg.BallGVGCampRankList"
     },
     {
         "comment": "ActivityDrawConfig解析",
-        "smMsgId": 99,
+        "smMsgId": 101,
         "byteDecode": "CityMsg.ActivityDrawConfig"
     },
     {
         "comment": "LuckyDrawActivityDataMsg解析",
-        "smMsgId": 100,
+        "smMsgId": 102,
         "byteDecode": "CityMsg.LuckyDrawActivityDataMsg"
     },
     {
         "comment": "UnionAreaWarConfigsSync解析",
-        "smMsgId": 101,
+        "smMsgId": 103,
         "byteDecode": "CityMsg.UnionAreaWarConfigsSync"
     },
     {
         "comment": "UnionAreaWarRankList解析",
-        "smMsgId": 102,
+        "smMsgId": 104,
         "byteDecode": "CityMsg.UnionAreaWarRankList"
     },
     {
         "comment": "UnionAreaWarPlayerRankList解析",
-        "smMsgId": 103,
+        "smMsgId": 105,
         "byteDecode": "CityMsg.UnionAreaWarPlayerRankList"
     },
     {
         "comment": "SpiritTrialActivityConfig解析",
-        "smMsgId": 104,
+        "smMsgId": 106,
         "byteDecode": "CityMsg.SpiritTrialActivityConfig"
     },
     {
         "comment": "SpiritTrialActivityDataMsg解析",
-        "smMsgId": 105,
+        "smMsgId": 107,
         "byteDecode": "CityMsg.SpiritTrialActivityDataMsg"
     },
     {
         "comment": "OptionalGiftActivityDataMsg解析",
-        "smMsgId": 106,
+        "smMsgId": 108,
         "byteDecode": "CityMsg.OptionalGiftActivityDataMsg"
     },
     {
         "comment": "WelfareGiftActivityPlayerDataSync解析",
-        "smMsgId": 107,
+        "smMsgId": 109,
         "byteDecode": "CityMsg.WelfareGiftActivityPlayerDataSync"
     },
     {
         "comment": "WeekCardActivityDataSync解析",
-        "smMsgId": 108,
+        "smMsgId": 110,
         "byteDecode": "CityMsg.WeekCardActivityDataSync"
     },
     {
         "comment": "GoodFortunePlayerDataMsg解析",
-        "smMsgId": 109,
+        "smMsgId": 111,
         "byteDecode": "CityMsg.GoodFortunePlayerDataMsg"
     },
     {
         "comment": "PetDreamLandActivityConfig解析",
-        "smMsgId": 110,
+        "smMsgId": 112,
         "byteDecode": "CityMsg.PetDreamLandActivityConfig"
     },
     {
         "comment": "灵兽幻境玩家数据",
-        "smMsgId": 111,
+        "smMsgId": 113,
         "byteDecode": "CityMsg.PetDreamLandDataMsg"
     },
     {
         "comment": "蛮荒妖域活动数据解析解析",
-        "smMsgId": 112,
+        "smMsgId": 114,
         "byteDecode": "CityMsg.ManHuangUserDataEntity"
     },
     {
         "comment": "蛮荒妖域配置数据解析",
-        "smMsgId": 113,
+        "smMsgId": 115,
         "byteDecode": "CityMsg.ManHuangConfigSyncMsg"
     },
     {
         "comment": "seektreasure_draw配置表解析",
-        "smMsgId": 114,
+        "smMsgId": 116,
         "byteDecode": "CityMsg.SeekTreasureConfigsSync"
     },
     {
         "comment": "妖市觅宝玩家数据解析",
-        "smMsgId": 115,
+        "smMsgId": 117,
         "byteDecode": "CityMsg.SeekTreasureActivityData"
     },
     {
         "comment": "WestTravel玩家数据解析",
-        "smMsgId": 116,
+        "smMsgId": 118,
         "byteDecode": "CityMsg.WestTravelActivityPlayerDataSync"
     },
     {
         "comment": "westTravel西天关卡数据解析",
-        "smMsgId": 117,
+        "smMsgId": 119,
         "byteDecode": "CityMsg.WestTravelDataMsgSync"
     },
     {
         "comment": "问道特有配置解析",
-        "smMsgId": 118,
+        "smMsgId": 120,
         "byteDecode": "CityMsg.AskWayConfigSyncMsg"
     },
     {
         "comment": "GodIslandConfigSync解析",
-        "smMsgId": 119,
+        "smMsgId": 121,
         "byteDecode": "CityMsg.GodIslandConfigSync"
     },
     {
         "comment": "GodIslandUnionRankList解析",
-        "smMsgId": 120,
+        "smMsgId": 122,
         "byteDecode": "CityMsg.GodIslandUnionRankList"
     },
     {
         "comment": "GodIslandPlayerRankList解析",
-        "smMsgId": 121,
+        "smMsgId": 123,
         "byteDecode": "CityMsg.GodIslandPlayerRankList"
     },
     {
         "comment": "GodIslandBetUnionInfoList解析",
-        "smMsgId": 122,
+        "smMsgId": 124,
         "byteDecode": "CityMsg.GodIslandBetUnionInfoList"
     },
     {
         "comment": "HolidayGiftActivityPlayerDataMsg解析",
-        "smMsgId": 123,
+        "smMsgId": 125,
         "byteDecode": "CityMsg.HolidayGiftActivityPlayerDataMsg"
     },
     {
         "comment": "ADGiftActivityPlayerDataSync解析",
-        "smMsgId": 124,
+        "smMsgId": 126,
         "byteDecode": "CityMsg.ADGiftActivityPlayerDataSync"
     },
     {
         "comment": "问鼎八荒AskDingConfigSyncMsg解析",
-        "smMsgId": 125,
+        "smMsgId": 127,
         "byteDecode": "CityMsg.AskDingConfigSyncMsg"
     },
     {
         "comment": "瑞兽赐福 数据同步 解析",
-        "smMsgId": 126,
+        "smMsgId": 128,
         "byteDecode": "CityMsg.AuspiciousBlessDataSyncResp"
     },
     {
         "comment": "RecallPlayerDataMsg解析",
-        "smMsgId": 127,
+        "smMsgId": 129,
         "byteDecode": "CityMsg.RecallPlayerDataMsg"
     },
     {
         "comment": "RegressionActivePlayerData解析",
-        "smMsgId": 128,
+        "smMsgId": 130,
         "byteDecode": "CityMsg.RegressionActivePlayerData"
     },
     {
         "comment": "RenewNewPlayerDataMsg解析",
-        "smMsgId": 129,
+        "smMsgId": 131,
         "byteDecode": "CityMsg.RenewNewPlayerDataMsg"
     },
     {
         "comment": "SignInFundPlayerDataMsg解析",
-        "smMsgId": 130,
+        "smMsgId": 132,
         "byteDecode": "CityMsg.SignInFundPlayerDataMsg"
     },
     {
         "comment": "FirstRechargeActivityPlayerDataSync解析",
-        "smMsgId": 131,
+        "smMsgId": 133,
         "byteDecode": "CityMsg.FirstRechargeActivityPlayerDataSync"
     },
     {
         "comment": "FestivalCelebrationsPlayerInfoMsg解析",
-        "smMsgId": 132,
+        "smMsgId": 134,
         "byteDecode": "CityMsg.FestivalCelebrationsPlayerInfoMsg"
     },
     {
         "comment": "FestivalCelebrationsConfigSync解析",
-        "smMsgId": 133,
+        "smMsgId": 135,
         "byteDecode": "CityMsg.FestivalCelebrationsConfigSync"
     },
     {
         "comment": "GroupPurchaseConfigSync数据解析",
-        "smMsgId": 134,
+        "smMsgId": 136,
         "byteDecode": "CityMsg.GroupPurchaseConfigSync"
     },
     {
         "comment": "诸仙证道配置解析",
-        "smMsgId": 135,
+        "smMsgId": 137,
         "byteDecode": "CityMsg.ProveWayConfigSyncMsg"
     },
     {
         "comment": "诸仙证道排行数据解析",
-        "smMsgId": 136,
+        "smMsgId": 138,
         "byteDecode": "CityMsg.ProveWayTeamRankEntityList"
     },
     {
         "comment": "NewRechargeSyncMsg解析",
-        "smMsgId": 137,
+        "smMsgId": 139,
         "byteDecode": "CityMsg.NewRechargeSyncMsg"
     },
     {
         "comment": "冥域镇邪配置解析",
-        "smMsgId": 138,
+        "smMsgId": 140,
         "byteDecode": "CityMsg.SuppressEvilActivityConfigMsg"
     },
     {
+        "comment": "FishingDeployPanelMsg SeparationDataMsg.fishMsg / PlayerDetailDataMsg.fishingMsg 解析",
+        "smMsgId": 141,
+        "byteDecode": "CityMsg.FishingDeployPanelMsg"
+    },
+    {
         "comment": "SealMonsterConfigMsg 活动 detailConfig.uniqueConfig 解析",
-        "smMsgId": 139,
+        "smMsgId": 142,
         "byteDecode": "CityMsg.SealMonsterConfigMsg"
     },
     {
         "comment": "SealMonsterRankMsgList解析",
-        "smMsgId": 140,
+        "smMsgId": 143,
         "byteDecode": "CityMsg.SealMonsterRankMsgList"
     },
     {
         "comment": "PoolTreasureConfigSync解析",
-        "smMsgId": 141,
+        "smMsgId": 144,
         "byteDecode": "CityMsg.PoolTreasureConfigSync"
     },
     {
         "comment": "AuspiciousBlessActivityConfig解析",
-        "smMsgId": 142,
+        "smMsgId": 145,
         "byteDecode": "CityMsg.AuspiciousBlessActivityConfig"
     },
     {
         "comment": "PuppetConfigSyncMsg解析",
-        "smMsgId": 143,
+        "smMsgId": 146,
         "byteDecode": "CityMsg.PuppetConfigSyncMsg"
     },
     {
         "comment": "PuppetGuessUnionInfoList解析",
-        "smMsgId": 144,
+        "smMsgId": 147,
         "byteDecode": "CityMsg.PuppetGuessUnionInfoList"
     },
     {
         "comment": "PuppetPlayerDataMsg解析",
-        "smMsgId": 145,
+        "smMsgId": 148,
         "byteDecode": "CityMsg.PuppetPlayerDataMsg"
     },
     {
         "comment": "FairyRabbitRewardConfigSync解析",
-        "smMsgId": 146,
+        "smMsgId": 149,
         "byteDecode": "CityMsg.FairyRabbitRewardConfigSync"
     },
     {
         "comment": "FairyRabbitActivityData解析",
-        "smMsgId": 147,
+        "smMsgId": 150,
         "byteDecode": "CityMsg.FairyRabbitActivityData"
     },
     {
         "comment": "HeavenBattleConfigSyncMsg解析",
-        "smMsgId": 148,
+        "smMsgId": 151,
         "byteDecode": "CityMsg.HeavenBattleConfigSyncMsg"
     },
     {
         "comment": "HeavenCampRankMsgList解析",
-        "smMsgId": 149,
+        "smMsgId": 152,
         "byteDecode": "CityMsg.HeavenCampRankMsgList"
     },
     {
         "comment": "须弥魔塔活动配置",
-        "smMsgId": 150,
+        "smMsgId": 153,
         "byteDecode": "CityMsg.LuckyRogueConfigMsg"
     },
     {
         "comment": "须弥魔塔用户数据",
-        "smMsgId": 151,
+        "smMsgId": 154,
         "byteDecode": "CityMsg.LuckRoguePlayerDataMsg"
     },
     {
         "comment": "ComposeBallConfigSync解析",
-        "smMsgId": 152,
+        "smMsgId": 155,
         "byteDecode": "CityMsg.ComposeBallConfigSync"
     },
     {
         "comment": "ComposeBallUserDataSync解析",
-        "smMsgId": 153,
+        "smMsgId": 156,
         "byteDecode": "CityMsg.ComposeBallUserDataSync"
     },
     {
+        "comment": "PetsFightConfigSyncMsg解析",
+        "smMsgId": 157,
+        "byteDecode": "CityMsg.PetsFightConfigSyncMsg"
+    },
+    {
+        "comment": "PetsFightBreedResultShareCardMsg解析",
+        "smMsgId": 158,
+        "byteDecode": "CityMsg.PetsFightBreedResultShareCardMsg"
+    },
+    {
+        "comment": "PetsFightUnionFusionCardMsg解析",
+        "smMsgId": 159,
+        "byteDecode": "CityMsg.PetsFightUnionFusionCardMsg"
+    },
+    {
         "comment": "秘境封妖(三消)表格数据bytes解析",
-        "smMsgId": 154,
+        "smMsgId": 160,
         "byteDecode": "CityMsg.SecretRealmSealedDemonConfigSync"
     },
     {
         "comment": "DouroActivityConfig解析",
-        "smMsgId": 155,
+        "smMsgId": 161,
         "byteDecode": "CityMsg.DouroActivityConfig"
     },
     {
         "comment": "GoldSnakeActivityConfigMsg解析",
-        "smMsgId": 156,
+        "smMsgId": 162,
         "byteDecode": "CityMsg.GoldSnakeActivityConfigMsg"
     },
     {
         "comment": "ShuraBattleConfigMsg解析",
-        "smMsgId": 157,
+        "smMsgId": 163,
         "byteDecode": "CityMsg.ShuraBattleConfigMsg"
     },
     {
         "comment": "ShuraBattleRankTeamList解析",
-        "smMsgId": 158,
+        "smMsgId": 164,
         "byteDecode": "CityMsg.ShuraBattleRankTeamList"
     },
     {
         "comment": "许愿灵池奖励配置解析",
-        "smMsgId": 159,
+        "smMsgId": 165,
         "byteDecode": "CityMsg.WishPoolRewardConfigMsg"
     },
     {
         "comment": "PharmacyConfigSync解析",
-        "smMsgId": 160,
+        "smMsgId": 166,
         "byteDecode": "CityMsg.PharmacyConfigSync"
     },
     {
         "comment": "PharmacyRankList解析",
-        "smMsgId": 161,
+        "smMsgId": 167,
         "byteDecode": "CityMsg.PharmacyRankList"
     },
     {
         "comment": "PharmacyPlayerData解析",
-        "smMsgId": 162,
+        "smMsgId": 168,
         "byteDecode": "CityMsg.PharmacyPlayerData"
     },
     {
         "comment": "ExplorePlayerDataMsg解析",
-        "smMsgId": 163,
+        "smMsgId": 169,
         "byteDecode": "CityMsg.ExplorePlayerDataMsg"
     },
     {
         "comment": "PupilRogueConfigMsg解析",
-        "smMsgId": 164,
+        "smMsgId": 170,
         "byteDecode": "CityMsg.PupilRogueConfigMsg"
     },
     {
         "comment": "ExploreEventBattleMsg解析",
-        "smMsgId": 165,
+        "smMsgId": 171,
         "byteDecode": "CityMsg.ExploreEventBattleMsg"
     },
     {
         "comment": "ExploreEventWagerMsg解析",
-        "smMsgId": 166,
+        "smMsgId": 172,
         "byteDecode": "CityMsg.ExploreEventWagerMsg"
     },
     {
         "comment": "ExploreEventSpringWaterMsg解析",
-        "smMsgId": 167,
+        "smMsgId": 173,
         "byteDecode": "CityMsg.ExploreEventSpringWaterMsg"
     },
     {
         "comment": "ExploreEventRoundTurntableMsg解析",
-        "smMsgId": 168,
+        "smMsgId": 174,
         "byteDecode": "CityMsg.ExploreEventRoundTurntableMsg"
     },
     {
         "comment": "ExploreEventRectTurntableMsg解析",
-        "smMsgId": 169,
+        "smMsgId": 175,
         "byteDecode": "CityMsg.ExploreEventRectTurntableMsg"
     },
     {
         "comment": "ExploreEventWanderMonsterMsg解析",
-        "smMsgId": 170,
+        "smMsgId": 176,
         "byteDecode": "CityMsg.ExploreEventWanderMonsterMsg"
     },
     {
         "comment": "ExploreEventTextMsg解析",
-        "smMsgId": 171,
+        "smMsgId": 177,
         "byteDecode": "CityMsg.ExploreEventTextMsg"
     },
     {
         "comment": "ExploreExchangeMsg解析",
-        "smMsgId": 172,
+        "smMsgId": 178,
         "byteDecode": "CityMsg.ExploreExchangeMsg"
     },
     {
         "comment": "ExploreEventDestinyMsg解析",
-        "smMsgId": 173,
+        "smMsgId": 179,
         "byteDecode": "CityMsg.ExploreEventDestinyMsg"
     },
     {
         "comment": "ExploreEventSkillSelectMsg解析",
-        "smMsgId": 174,
+        "smMsgId": 180,
         "byteDecode": "CityMsg.ExploreEventSkillSelectMsg"
     },
     {
         "comment": "ExploreEventSkillUpgradeMsg解析",
-        "smMsgId": 175,
+        "smMsgId": 181,
         "byteDecode": "CityMsg.ExploreEventSkillUpgradeMsg"
     },
     {
         "comment": "ExploreEventRewardMsg解析",
-        "smMsgId": 176,
+        "smMsgId": 182,
         "byteDecode": "CityMsg.ExploreEventRewardMsg"
     },
     {
         "comment": "ExploreEventLevelUpMsg解析",
-        "smMsgId": 177,
+        "smMsgId": 183,
         "byteDecode": "CityMsg.ExploreEventLevelUpMsg"
     },
     {
         "comment": "ExploreEventCutTreeMsg解析",
-        "smMsgId": 178,
+        "smMsgId": 184,
         "byteDecode": "CityMsg.ExploreEventCutTreeMsg"
     },
     {
         "comment": "ExploreEventSkillSwapMsg解析",
-        "smMsgId": 179,
+        "smMsgId": 185,
         "byteDecode": "CityMsg.ExploreEventSkillSwapMsg"
     },
     {
         "comment": "ExploreEventChoseEnemyMsg解析",
-        "smMsgId": 180,
+        "smMsgId": 186,
         "byteDecode": "CityMsg.ExploreEventChoseEnemyMsg"
     },
     {
         "comment": "ExploreContinuousSkillMsg解析",
-        "smMsgId": 181,
+        "smMsgId": 187,
         "byteDecode": "CityMsg.ExploreContinuousSkillMsg"
     },
     {
         "comment": "PupilRogueMainAction 解析",
-        "smMsgId": 182,
+        "smMsgId": 188,
         "byteDecode": "CityMsg.PupilRogueMainAction"
     },
     {
         "comment": "PupilRogueBuffTakeEffect 解析",
-        "smMsgId": 183,
+        "smMsgId": 189,
         "byteDecode": "CityMsg.PupilRogueBuffTakeEffect"
     },
     {
         "comment": "BossRoundSkillAction 解析",
-        "smMsgId": 184,
+        "smMsgId": 190,
         "byteDecode": "CityMsg.BossRoundSkillAction"
     },
     {
         "comment": "PupilRogueSkillEffect 解析",
-        "smMsgId": 185,
+        "smMsgId": 191,
         "byteDecode": "CityMsg.PupilRogueSkillEffect"
     },
     {
         "comment": "排行榜bytes解析",
-        "smMsgId": 186,
+        "smMsgId": 192,
         "byteDecode": "CityMsg.DestinyFightRankList"
     },
     {
         "comment": "SkyTradeConfigSync解析",
-        "smMsgId": 187,
+        "smMsgId": 193,
         "byteDecode": "CityMsg.SkyTradeConfigSync"
     },
     {
         "comment": "赛季活动配置解析",
-        "smMsgId": 188,
+        "smMsgId": 194,
         "byteDecode": "CityMsg.SeasonEventConfig"
     },
     {
         "comment": "赛季活动用户数据解析",
-        "smMsgId": 189,
+        "smMsgId": 195,
         "byteDecode": "CityMsg.SeasonEventPlayerDataMsg"
     },
     {
         "comment": "RegressionActivityConfig解析",
-        "smMsgId": 190,
+        "smMsgId": 196,
         "byteDecode": "CityMsg.RegressionActivityConfig"
     },
     {
         "comment": "CastSwordConfig数据解析",
-        "smMsgId": 191,
+        "smMsgId": 197,
         "byteDecode": "CityMsg.CastSwordConfigSyncMsg"
     },
     {
         "comment": "配置表解析",
-        "smMsgId": 192,
+        "smMsgId": 198,
         "byteDecode": "CityMsg.LuckyWheelActivityConfig"
     },
     {
         "comment": "小鸟快跑(黄山联动)关卡配置",
-        "smMsgId": 193,
+        "smMsgId": 199,
         "byteDecode": "CityMsg.YellowMountainConfigMsg"
     },
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "comment": "玄机觅宝配置解析",
+        "smMsgId": 200,
+        "byteDecode": "CityMsg.SwitchDrawConfigSync"
+    },
     null,
     null,
     null,
@@ -29231,8 +29259,18 @@
         "cmMethod": "CityMsg.MagicTreasureSwitchLinkageSkinReq",
         "smMethod": "CityMsg.MagicTreasureSwitchLinkageSkinResp"
     },
-    null,
-    null,
+    {
+        "comment": "法宝一键炼化预览",
+        "smMsgId": 6308,
+        "cmMethod": "CityMsg.MagicTreasureOneKeyRefinePreviewReq",
+        "smMethod": "CityMsg.MagicTreasureOneKeyRefinePreviewResp"
+    },
+    {
+        "comment": "法宝一键炼化",
+        "smMsgId": 6309,
+        "cmMethod": "CityMsg.MagicTreasureOneKeyRefineReq",
+        "smMethod": "CityMsg.MagicTreasureOneKeyRefineResp"
+    },
     null,
     null,
     null,
@@ -204643,7 +204681,11 @@
     null,
     null,
     null,
-    null,
+    {
+        "comment": "获取自家妖盟的7日和14日活跃",
+        "smMsgId": 1629,
+        "smMethod": "CityMsg.UnionActiveValueQueryResp"
+    },
     {
         "comment": "获取分组评级排行",
         "smMsgId": 1630,
@@ -217291,25 +217333,112 @@
         "cmMethod": "CityMsg.PupilExactSearchReq",
         "smMethod": "CityMsg.PupilExactSearchResp"
     },
+    {
+        "comment": "弟子天榜列表",
+        "smMsgId": 11817,
+        "cmMethod": "CityMsg.PupilSkyRankListReq",
+        "smMethod": "CityMsg.PupilSkyRankListResp"
+    },
+    {
+        "comment": "弟子天榜屏蔽开关",
+        "smMsgId": 11818,
+        "cmMethod": "CityMsg.PupilSkyRankShieldReq",
+        "smMethod": "CityMsg.PupilSkyRankShieldResp"
+    },
+    {
+        "comment": "天榜申请结伴",
+        "smMsgId": 11819,
+        "cmMethod": "CityMsg.PupilSkyRankAskReq",
+        "smMethod": "CityMsg.PupilSkyRankAskResp"
+    },
+    {
+        "comment": "设置天榜被请求条件（增减伤合计+等级）",
+        "smMsgId": 11820,
+        "cmMethod": "CityMsg.PupilSkyRankSetConditionReq",
+        "smMethod": "CityMsg.PupilSkyRankSetConditionResp"
+    },
+    {
+        "comment": "天榜评论列表",
+        "smMsgId": 11821,
+        "cmMethod": "CityMsg.PupilRankCommentListReq",
+        "smMethod": "CityMsg.PupilRankCommentListResp"
+    },
+    {
+        "comment": "天榜评论点赞",
+        "smMsgId": 11822,
+        "cmMethod": "CityMsg.PupilRankCommentLikeReq",
+        "smMethod": "CityMsg.PupilRankCommentLikeResp"
+    },
+    {
+        "comment": "天榜发表评论",
+        "smMsgId": 11823,
+        "cmMethod": "CityMsg.PupilRankCommentSendReq",
+        "smMethod": "CityMsg.PupilRankCommentSendResp"
+    },
+    {
+        "comment": "天榜删除评论",
+        "smMsgId": 11824,
+        "cmMethod": "CityMsg.PupilRankCommentDeleteReq",
+        "smMethod": "CityMsg.PupilRankCommentDeleteResp"
+    },
+    {
+        "comment": "天榜私聊会话列表",
+        "smMsgId": 11825,
+        "cmMethod": "CityMsg.PupilRankPrivateChatReq",
+        "smMethod": "CityMsg.PupilRankPrivateChatRsp"
+    },
+    {
+        "comment": "天榜私聊消息列表 全量",
+        "smMsgId": 11826,
+        "cmMethod": "CityMsg.PupilRankGetMsgListReq",
+        "smMethod": "CityMsg.WorldMessageListMsg"
+    },
+    {
+        "comment": "天榜删除私聊",
+        "smMsgId": 11827,
+        "cmMethod": "CityMsg.PupilRankChatDeleteReq",
+        "smMethod": "CityMsg.PupilRankChatDeleteRsp"
+    },
+    {
+        "comment": "天榜私聊会话同步",
+        "smMsgId": 11828,
+        "smMethod": "CityMsg.PupilRankSyncChatList"
+    },
+    {
+        "comment": "天榜私聊消息增量同步",
+        "smMsgId": 11829,
+        "smMethod": "CityMsg.WorldMessageListMsg"
+    },
+    {
+        "comment": "天榜申请记录列表",
+        "smMsgId": 11830,
+        "cmMethod": "CityMsg.PupilSkyRankAskListReq",
+        "smMethod": "CityMsg.PupilSkyRankAskListResp"
+    },
+    {
+        "comment": "天榜同意结伴",
+        "smMsgId": 11831,
+        "cmMethod": "CityMsg.PupilSkyRankAskAgreeReq",
+        "smMethod": "CityMsg.PupilSkyRankAskAgreeResp"
+    },
+    {
+        "comment": "天榜拒绝申请",
+        "smMsgId": 11832,
+        "cmMethod": "CityMsg.PupilSkyRankAskRefuseReq",
+        "smMethod": "CityMsg.PupilSkyRankAskRefuseResp"
+    },
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "comment": "天榜取消申请",
+        "smMsgId": 11834,
+        "cmMethod": "CityMsg.PupilSkyRankAskCancelReq",
+        "smMethod": "CityMsg.PupilSkyRankAskCancelResp"
+    },
+    {
+        "comment": "宗门局内红点同步",
+        "smMsgId": 11835,
+        "smMethod": "CityMsg.PupilRedPointSync"
+    },
     null,
     null,
     null,
@@ -240684,8 +240813,17 @@
         "cmMethod": "CityMsg.DailyFollowRemindReq",
         "smMethod": "CityMsg.DailyFollowRemindResp"
     },
-    null,
-    null,
+    {
+        "comment": "仙官赐福自动领取信息同步",
+        "smMsgId": 30213,
+        "smMethod": "CityMsg.AssistantPalaceAutoInfoSync"
+    },
+    {
+        "comment": "仙官赐福聚宝盆领取",
+        "smMsgId": 30214,
+        "cmMethod": "CityMsg.AssistantPalaceAutoRewardReq",
+        "smMethod": "CityMsg.AssistantPalaceAutoRewardResp"
+    },
     null,
     null,
     null,
@@ -246952,19 +247090,80 @@
         "cmMethod": "CityMsg.TreasureAuctionChatDeleteReq",
         "smMethod": "CityMsg.TreasureAuctionChatDeleteRsp"
     },
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "comment": "一键处理事件",
+        "smMsgId": 34035,
+        "cmMethod": "CityMsg.TreasureAuctionSelectEventOneKeyReq",
+        "smMethod": "CityMsg.TreasureAuctionSelectEventOneKeyRsp"
+    },
+    {
+        "comment": "验证密码",
+        "smMsgId": 34036,
+        "cmMethod": "CityMsg.TreasureAuctionVerifyPasswordReq",
+        "smMethod": "CityMsg.TreasureAuctionVerifyPasswordRsp"
+    },
+    {
+        "comment": "一键鉴定（含自动分解）",
+        "smMsgId": 34037,
+        "cmMethod": "CityMsg.TreasureAuctionOneKeyIdentifyReq",
+        "smMethod": "CityMsg.TreasureAuctionOneKeyIdentifyRsp"
+    },
+    {
+        "comment": "一键探宝",
+        "smMsgId": 34038,
+        "cmMethod": "CityMsg.TreasureAuctionBeginExploreOneKeyReq",
+        "smMethod": "CityMsg.TreasureAuctionBeginExploreOneKeyRsp"
+    },
+    {
+        "comment": "拍卖上架",
+        "smMsgId": 34039,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionSellReq",
+        "smMethod": "CityMsg.TreasureAuctionAuctionSellRsp"
+    },
+    {
+        "comment": "竞拍出价",
+        "smMsgId": 34040,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionBidReq",
+        "smMethod": "CityMsg.TreasureAuctionAuctionBidRsp"
+    },
+    {
+        "comment": "拍卖下架",
+        "smMsgId": 34041,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionSellDownReq",
+        "smMethod": "CityMsg.TreasureAuctionAuctionSellDownRsp"
+    },
+    {
+        "comment": "寻宝 通过商品id获取拍卖商品",
+        "smMsgId": 34042,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionGetGoodsReq",
+        "smMethod": "CityMsg.TreasureAuctionAuctionGetGoodsRsp"
+    },
+    {
+        "comment": "推送-出价同步",
+        "smMsgId": 34043,
+        "smMethod": "CityMsg.TreasureAuctionAuctionSyncBid"
+    },
+    {
+        "comment": "推送-被超越通知",
+        "smMsgId": 34044,
+        "smMethod": "CityMsg.TreasureAuctionAuctionOutbidNotify"
+    },
+    {
+        "comment": "推送-结算通知",
+        "smMsgId": 34045,
+        "smMethod": "CityMsg.TreasureAuctionAuctionSettleNotify"
+    },
+    {
+        "comment": "寻宝 拍卖界面心跳（无回包）",
+        "smMsgId": 34046,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionHeartbeatReq"
+    },
+    {
+        "comment": "寻宝 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+        "smMsgId": 34047,
+        "cmMethod": "CityMsg.TreasureAuctionAuctionNotifyReadReq",
+        "smMethod": "CityMsg.TreasureAuctionAuctionNotifyReadRsp"
+    },
     null,
     null,
     null,
@@ -249407,7 +249606,11 @@
         "smMsgId": 35560,
         "smMethod": "CityMsg.ElixirElvesCountSync"
     },
-    null,
+    {
+        "comment": "同步抽奖赛季时间",
+        "smMsgId": 35561,
+        "smMethod": "CityMsg.ElixirElvesDrawSeasonSync"
+    },
     null,
     null,
     null,
@@ -249468,7 +249671,12 @@
     null,
     null,
     null,
-    null,
+    {
+        "comment": "仙友订单药材快速种植",
+        "smMsgId": 35582,
+        "cmMethod": "CityMsg.ElixirDestinyOrderQuickPlantReq",
+        "smMethod": "CityMsg.ElixirDestinyOrderQuickPlantResp"
+    },
     null,
     null,
     null,
@@ -251224,15 +251432,56 @@
     },
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "comment": "混沌法则 拍卖上架",
+        "smMsgId": 36740,
+        "cmMethod": "CityMsg.ChaosLawAuctionSellReq",
+        "smMethod": "CityMsg.ChaosLawAuctionSellRsp"
+    },
+    {
+        "comment": "混沌法则 竞拍出价",
+        "smMsgId": 36741,
+        "cmMethod": "CityMsg.ChaosLawAuctionBidReq",
+        "smMethod": "CityMsg.ChaosLawAuctionBidRsp"
+    },
+    {
+        "comment": "混沌法则 拍卖下架",
+        "smMsgId": 36742,
+        "cmMethod": "CityMsg.ChaosLawAuctionSellDownReq",
+        "smMethod": "CityMsg.ChaosLawAuctionSellDownRsp"
+    },
+    {
+        "comment": "混沌法则 通过商品id获取拍卖商品",
+        "smMsgId": 36743,
+        "cmMethod": "CityMsg.ChaosLawAuctionGetGoodsReq",
+        "smMethod": "CityMsg.ChaosLawAuctionGetGoodsRsp"
+    },
+    {
+        "comment": "混沌法则 推送-出价同步（无上行体）",
+        "smMsgId": 36744,
+        "smMethod": "CityMsg.ChaosLawAuctionSyncBid"
+    },
+    {
+        "comment": "混沌法则 推送-被超越通知（无上行体）",
+        "smMsgId": 36745,
+        "smMethod": "CityMsg.ChaosLawAuctionOutbidNotify"
+    },
+    {
+        "comment": "混沌法则 推送-结算通知（无上行体）",
+        "smMsgId": 36746,
+        "smMethod": "CityMsg.ChaosLawAuctionSettleNotify"
+    },
+    {
+        "comment": "混沌法则 拍卖界面心跳（无回包）",
+        "smMsgId": 36747,
+        "cmMethod": "CityMsg.ChaosLawAuctionHeartbeatReq"
+    },
+    {
+        "comment": "混沌法则 拍卖弹窗已读确认（客户端真正展示弹窗后回传时间戳，服务端清除对应缓存）",
+        "smMsgId": 36748,
+        "cmMethod": "CityMsg.ChaosLawAuctionNotifyReadReq",
+        "smMethod": "CityMsg.ChaosLawAuctionNotifyReadRsp"
+    },
     null,
     null,
     null,
@@ -251712,6 +251961,243 @@
     null,
     null,
     null,
+    {
+        "comment": "灵兽乱斗 进入活动",
+        "smMsgId": 37200,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightEnterResp"
+    },
+    {
+        "comment": "灵兽乱斗 灵兽抽取",
+        "smMsgId": 37201,
+        "cmMethod": "CityMsg.PetsFightDrawReq",
+        "smMethod": "CityMsg.PetsFightDrawResp"
+    },
+    {
+        "comment": "灵兽乱斗 源生之岭升级",
+        "smMsgId": 37202,
+        "cmMethod": "CityMsg.PetsFightHillUpgradeReq",
+        "smMethod": "CityMsg.PetsFightHillUpgradeResp"
+    },
+    {
+        "comment": "灵兽乱斗 灵兽炼妖",
+        "smMsgId": 37203,
+        "cmMethod": "CityMsg.PetsFightFusionReq",
+        "smMethod": "CityMsg.PetsFightFusionResp"
+    },
+    {
+        "comment": "灵兽乱斗 灵兽列表全量",
+        "smMsgId": 37204,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightPetListResp"
+    },
+    {
+        "comment": "灵兽乱斗 灵兽增量推送",
+        "smMsgId": 37205,
+        "smMethod": "CityMsg.PetsFightPetSyncMsg"
+    },
+    {
+        "comment": "灵兽乱斗 发起妖盟协同炼妖",
+        "smMsgId": 37206,
+        "cmMethod": "CityMsg.PetsFightUnionFusionApplyReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionApplyResp"
+    },
+    {
+        "comment": "灵兽乱斗 撤销妖盟协同炼妖",
+        "smMsgId": 37207,
+        "cmMethod": "CityMsg.PetsFightUnionFusionCancelReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionCancelResp"
+    },
+    {
+        "comment": "灵兽乱斗 响应妖盟协同炼妖",
+        "smMsgId": 37208,
+        "cmMethod": "CityMsg.PetsFightUnionFusionAcceptReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionAcceptResp"
+    },
+    {
+        "comment": "灵兽乱斗 执行妖盟协同炼妖",
+        "smMsgId": 37209,
+        "cmMethod": "CityMsg.PetsFightUnionFusionBreedReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionBreedResp"
+    },
+    {
+        "comment": "灵兽乱斗 PVE关卡战斗",
+        "smMsgId": 37210,
+        "cmMethod": "CityMsg.PetsFightStageBattleReq",
+        "smMethod": "CityMsg.PetsFightStageBattleResp"
+    },
+    {
+        "comment": "灵兽乱斗 妖盟关卡Boss挑战",
+        "smMsgId": 37211,
+        "cmMethod": "CityMsg.PetsFightUnionBossBattleReq",
+        "smMethod": "CityMsg.PetsFightUnionBossBattleResp"
+    },
+    {
+        "comment": "灵兽乱斗 领取妖盟关卡通关奖励",
+        "smMsgId": 37212,
+        "cmMethod": "CityMsg.PetsFightUnionBossRewardReq",
+        "smMethod": "CityMsg.PetsFightUnionBossRewardResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询当前生效的协同炼妖列表",
+        "smMsgId": 37213,
+        "cmMethod": "CityMsg.PetsFightUnionFusionListReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionListResp"
+    },
+    {
+        "comment": "灵兽乱斗 选择或拒绝协同炼妖申请人",
+        "smMsgId": 37214,
+        "cmMethod": "CityMsg.PetsFightUnionFusionSelectReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionSelectResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询申请我的协同炼妖列表",
+        "smMsgId": 37215,
+        "cmMethod": "CityMsg.PetsFightUnionFusionApplicantListReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionApplicantListResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询已响应但未炼妖的协同炼妖列表",
+        "smMsgId": 37216,
+        "cmMethod": "CityMsg.PetsFightUnionFusionBreedListReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionBreedListResp"
+    },
+    {
+        "comment": "灵兽乱斗 分享协同邀请或炼妖结果",
+        "smMsgId": 37217,
+        "cmMethod": "CityMsg.PetsFightUnionFusionShareReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionShareResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询妖盟关卡Boss信息",
+        "smMsgId": 37218,
+        "cmMethod": "CityMsg.PetsFightUnionBossInfoReq",
+        "smMethod": "CityMsg.PetsFightUnionBossInfoResp"
+    },
+    {
+        "comment": "灵兽乱斗 斗宠道台布阵",
+        "smMsgId": 37219,
+        "cmMethod": "CityMsg.PetsFightArenaFormationReq",
+        "smMethod": "CityMsg.PetsFightArenaFormationResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询斗宠道台信息和匹配对手",
+        "smMsgId": 37220,
+        "cmMethod": "CityMsg.PetsFightArenaInfoReq",
+        "smMethod": "CityMsg.PetsFightArenaInfoResp"
+    },
+    {
+        "comment": "灵兽乱斗 刷新斗宠道台对手",
+        "smMsgId": 37221,
+        "cmMethod": "CityMsg.PetsFightArenaRefreshReq",
+        "smMethod": "CityMsg.PetsFightArenaRefreshResp"
+    },
+    {
+        "comment": "灵兽乱斗 斗宠道台挑战",
+        "smMsgId": 37222,
+        "cmMethod": "CityMsg.PetsFightArenaBattleReq",
+        "smMethod": "CityMsg.PetsFightArenaBattleResp"
+    },
+    {
+        "comment": "灵兽乱斗 购买斗宠道台挑战券",
+        "smMsgId": 37223,
+        "cmMethod": "CityMsg.PetsFightArenaBuyTicketReq",
+        "smMethod": "CityMsg.PetsFightArenaBuyTicketResp"
+    },
+    {
+        "comment": "灵兽乱斗 膜拜",
+        "smMsgId": 37224,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightWorshipResp"
+    },
+    {
+        "comment": "灵兽乱斗 领取斗宠道台每日榜奖励",
+        "smMsgId": 37225,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightArenaDailyRewardResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询斗宠道台挑战日志",
+        "smMsgId": 37226,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightArenaLogResp"
+    },
+    {
+        "comment": "灵兽乱斗 斗宠道台扫荡",
+        "smMsgId": 37227,
+        "cmMethod": "CityMsg.PetsFightArenaSweepReq",
+        "smMethod": "CityMsg.PetsFightArenaSweepResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询妖盟Boss关卡挑战记录",
+        "smMsgId": 37228,
+        "cmMethod": "CityMsg.PetsFightUnionBossRecordReq",
+        "smMethod": "CityMsg.PetsFightUnionBossRecordResp"
+    },
+    {
+        "comment": "灵兽乱斗 查询妖盟Boss关卡累计伤害最高玩家",
+        "smMsgId": 37229,
+        "cmMethod": "CityMsg.PetsFightUnionBossTopDamageReq",
+        "smMethod": "CityMsg.PetsFightUnionBossTopDamageResp"
+    },
+    {
+        "comment": "灵兽乱斗 抽取次数同步(服务端推送)",
+        "smMsgId": 37230,
+        "smMethod": "CityMsg.PetsFightDrawTicketSyncMsg"
+    },
+    {
+        "comment": "灵兽乱斗 查询红点详情",
+        "smMsgId": 37231,
+        "cmMethod": "CityMsg.PetsFightCommonReq",
+        "smMethod": "CityMsg.PetsFightRedPointResp"
+    },
+    {
+        "comment": "灵兽乱斗 战斗模拟同步(服务端推送)",
+        "smMsgId": 37232,
+        "smMethod": "CityMsg.PetsFightBattleDebugSync"
+    },
+    {
+        "comment": "灵兽乱斗 一键炼妖",
+        "smMsgId": 37233,
+        "cmMethod": "CityMsg.PetsFightOneKeyBreedReq",
+        "smMethod": "CityMsg.PetsFightOneKeyBreedResp"
+    },
+    {
+        "comment": "灵兽乱斗 一键炼妖上锁",
+        "smMsgId": 37234,
+        "cmMethod": "CityMsg.PetsFightOneKeyLockReq",
+        "smMethod": "CityMsg.PetsFightOneKeyLockResp"
+    },
+    {
+        "comment": "灵兽乱斗 选择特殊品质炼妖结果",
+        "smMsgId": 37235,
+        "cmMethod": "CityMsg.PetsFightFusionSelectReq",
+        "smMethod": "CityMsg.PetsFightFusionSelectResp"
+    },
+    {
+        "comment": "灵兽乱斗 抽灵兽道具转抽取次数",
+        "smMsgId": 37236,
+        "cmMethod": "CityMsg.PetsFightUseDrawItemReq",
+        "smMethod": "CityMsg.PetsFightUseDrawItemResp"
+    },
+    {
+        "comment": "灵兽乱斗 遗忘灵兽被动技能",
+        "smMsgId": 37237,
+        "cmMethod": "CityMsg.PetsFightDeletePassiveSkillReq",
+        "smMethod": "CityMsg.PetsFightDeletePassiveSkillResp"
+    },
+    {
+        "comment": "灵兽乱斗 妖盟协同繁育的记录",
+        "smMsgId": 37238,
+        "cmMethod": "CityMsg.PetsFightUnionFusionRecordReq",
+        "smMethod": "CityMsg.PetsFightUnionFusionRecordResp"
+    },
+    {
+        "comment": "灵兽乱斗 灵兽面板交换",
+        "smMsgId": 37239,
+        "cmMethod": "CityMsg.PetsFightPetExchangeReq",
+        "smMethod": "CityMsg.PetsFightPetExchangeResp"
+    },
     null,
     null,
     null,
@@ -251720,6 +252206,256 @@
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+        "comment": "进入 237301",
+        "smMsgId": 37301,
+        "cmMethod": "CityMsg.WorldBidEnterReq",
+        "smMethod": "CityMsg.WorldBidEnterRsp"
+    },
+    {
+        "comment": "进入匹配 237302",
+        "smMsgId": 37302,
+        "cmMethod": "CityMsg.WorldBidMatchReq",
+        "smMethod": "CityMsg.WorldBidMatchRsp"
+    },
+    {
+        "comment": "匹配成功推送 237303",
+        "smMsgId": 37303,
+        "smMethod": "CityMsg.WorldBidMatchSuccessSync"
+    },
+    {
+        "comment": "获取房间信息 237304",
+        "smMsgId": 37304,
+        "cmMethod": "CityMsg.WorldBidGetRoomInfoReq",
+        "smMethod": "CityMsg.WorldBidGetRoomInfoRsp"
+    },
+    {
+        "comment": "房间信息同步 237305",
+        "smMsgId": 37305,
+        "smMethod": "CityMsg.WorldBidRoomInfoSync"
+    },
+    {
+        "comment": "出价 237306",
+        "smMsgId": 37306,
+        "cmMethod": "CityMsg.WorldBidBidReq",
+        "smMethod": "CityMsg.WorldBidBidRsp"
+    },
+    {
+        "comment": "使用道具 237307",
+        "smMsgId": 37307,
+        "cmMethod": "CityMsg.WorldBidUseItemReq",
+        "smMethod": "CityMsg.WorldBidUseItemRsp"
+    },
+    {
+        "comment": "结算同步 237308",
+        "smMsgId": 37308,
+        "smMethod": "CityMsg.WorldBidSettleSync"
+    },
+    {
+        "comment": "离开房间 237309",
+        "smMsgId": 37309,
+        "cmMethod": "CityMsg.WorldBidLeaveReq",
+        "smMethod": "CityMsg.WorldBidLeaveRsp"
+    },
+    {
+        "comment": "离开房间同步 237310",
+        "smMsgId": 37310,
+        "smMethod": "CityMsg.WorldBidLeaveSync"
+    },
+    {
+        "comment": "房间关闭同步 237311",
+        "smMsgId": 37311,
+        "smMethod": "CityMsg.WorldBidRoomCloseSync"
+    },
+    {
+        "comment": "购买角色/道具 237312",
+        "smMsgId": 37312,
+        "cmMethod": "CityMsg.WorldBidBuyPropReq",
+        "smMethod": "CityMsg.WorldBidBuyPropRsp"
+    },
+    {
+        "comment": "保存设置 237313",
+        "smMsgId": 37313,
+        "cmMethod": "CityMsg.WorldBidSaveSetReq",
+        "smMethod": "CityMsg.WorldBidSaveSetRsp"
+    },
+    {
+        "comment": "创建房间 237314",
+        "smMsgId": 37314,
+        "cmMethod": "CityMsg.WorldBidCreateRoomReq",
+        "smMethod": "CityMsg.WorldBidCreateRoomRsp"
+    },
+    {
+        "comment": "加入房间 237315",
+        "smMsgId": 37315,
+        "cmMethod": "CityMsg.WorldBidJoinRoomReq",
+        "smMethod": "CityMsg.WorldBidJoinRoomRsp"
+    },
+    {
+        "comment": "加入房间同步 237316",
+        "smMsgId": 37316,
+        "smMethod": "CityMsg.WorldBidJoinRoomSync"
+    },
+    {
+        "comment": "开始游戏 237317",
+        "smMsgId": 37317,
+        "cmMethod": "CityMsg.WorldBidStartRoomReq",
+        "smMethod": "CityMsg.WorldBidStartRoomRsp"
+    },
+    {
+        "comment": "踢人 237318",
+        "smMsgId": 37318,
+        "cmMethod": "CityMsg.WorldBidKickPlayerReq",
+        "smMethod": "CityMsg.WorldBidKickPlayerRsp"
+    },
+    {
+        "comment": "踢人同步 237319",
+        "smMsgId": 37319,
+        "smMethod": "CityMsg.WorldBidKickPlayerSync"
+    },
+    {
+        "comment": "获取玩家数据 237320",
+        "smMsgId": 37320,
+        "cmMethod": "CityMsg.WorldBidPlayerBaseReq",
+        "smMethod": "CityMsg.WorldBidPlayerBaseRsp"
+    },
+    {
+        "comment": "发表情 237321",
+        "smMsgId": 37321,
+        "cmMethod": "CityMsg.WorldBidEmotionReq",
+        "smMethod": "CityMsg.WorldBidEmotionRsp"
+    },
+    {
+        "comment": "发表情同步 237322",
+        "smMsgId": 37322,
+        "smMethod": "CityMsg.WorldBidEmotionSync"
+    },
+    {
+        "comment": "取消匹配 237323",
+        "smMsgId": 37323,
+        "cmMethod": "CityMsg.WorldBidCancelMatchReq",
+        "smMethod": "CityMsg.WorldBidCancelMatchRsp"
+    },
+    {
+        "comment": "自建房准备 237324",
+        "smMsgId": 37324,
+        "cmMethod": "CityMsg.WorldBidRoomReadyReq",
+        "smMethod": "CityMsg.WorldBidRoomReadyRsp"
+    },
+    {
+        "comment": "准备同步 237325",
+        "smMsgId": 37325,
+        "smMethod": "CityMsg.WorldBidRoomReadySync"
+    },
+    {
+        "comment": "房间开始同步 237326",
+        "smMsgId": 37326,
+        "smMethod": "CityMsg.WorldBidRoomStartSync"
+    },
+    {
+        "comment": "房间小局结算完成 237327",
+        "smMsgId": 37327,
+        "cmMethod": "CityMsg.WorldBidRoomSettleReq",
+        "smMethod": "CityMsg.WorldBidRoomSettleRsp"
+    },
+    {
+        "comment": "出价完成同步 237328",
+        "smMsgId": 37328,
+        "smMethod": "CityMsg.WorldBidPriceFinishSync"
+    },
+    {
+        "comment": "放弃 237329",
+        "smMsgId": 37329,
+        "cmMethod": "CityMsg.WorldBidGiveUpReq",
+        "smMethod": "CityMsg.WorldBidGiveUpRsp"
+    },
+    {
+        "comment": "放弃同步 237330",
+        "smMsgId": 37330,
+        "smMethod": "CityMsg.WorldBidGiveUpSync"
+    },
+    {
+        "comment": "领取每日奖励 237331",
+        "smMsgId": 37331,
+        "cmMethod": "CityMsg.WorldBidDayRewardReq",
+        "smMethod": "CityMsg.WorldBidDayRewardRsp"
+    },
+    {
+        "comment": "获取图鉴信息 237332",
+        "smMsgId": 37332,
+        "cmMethod": "CityMsg.WorldBidCollectInfoReq",
+        "smMethod": "CityMsg.WorldBidCollectInfoRsp"
+    },
+    {
+        "comment": "升级图鉴 237333",
+        "smMsgId": 37333,
+        "cmMethod": "CityMsg.WorldBidCollectUpReq",
+        "smMethod": "CityMsg.WorldBidCollectUpRsp"
+    },
+    {
+        "comment": "获取对战记录 237334",
+        "smMsgId": 37334,
+        "cmMethod": "CityMsg.WorldBidGetHistoryReq",
+        "smMethod": "CityMsg.WorldBidGetHistoryRsp"
+    },
+    {
+        "comment": "红点同步 237335",
+        "smMsgId": 37335,
+        "smMethod": "CityMsg.WorldBidRedPointSync"
+    },
     null,
     null,
     null,
@@ -251885,6 +252621,160 @@
     null,
     null,
     null,
+    {
+        "comment": "进入",
+        "smMsgId": 37501,
+        "cmMethod": "CityMsg.NewCardCollectEnterReq",
+        "smMethod": "CityMsg.NewCardCollectEnterResp"
+    },
+    {
+        "comment": "新集卡登录同步",
+        "smMsgId": 37502,
+        "smMethod": "CityMsg.NewCardCollectLoginSyncResp"
+    },
+    {
+        "comment": "开卡包",
+        "smMsgId": 37503,
+        "cmMethod": "CityMsg.NewCardCollectOpenBagReq",
+        "smMethod": "CityMsg.NewCardCollectOpenBagResp"
+    },
+    {
+        "comment": "卡牌领奖",
+        "smMsgId": 37504,
+        "cmMethod": "CityMsg.NewCardCollectActivateReq",
+        "smMethod": "CityMsg.NewCardCollectActivateResp"
+    },
+    {
+        "comment": "篇章集齐节点",
+        "smMsgId": 37505,
+        "cmMethod": "CityMsg.NewCardCollectClaimChapterStageReq",
+        "smMethod": "CityMsg.NewCardCollectClaimChapterStageResp"
+    },
+    {
+        "comment": "玄尘战令签到",
+        "smMsgId": 37506,
+        "cmMethod": "CityMsg.NewCardCollectSignInReq",
+        "smMethod": "CityMsg.NewCardCollectSignInResp"
+    },
+    {
+        "comment": "发布交换",
+        "smMsgId": 37507,
+        "cmMethod": "CityMsg.NewCardCollectReleaseReq",
+        "smMethod": "CityMsg.NewCardCollectReleaseResp"
+    },
+    {
+        "comment": "成交交换",
+        "smMsgId": 37508,
+        "cmMethod": "CityMsg.NewCardCollectChangeReq",
+        "smMethod": "CityMsg.NewCardCollectChangeResp"
+    },
+    {
+        "comment": "交换列表",
+        "smMsgId": 37509,
+        "cmMethod": "CityMsg.NewCardCollectChangeListReq",
+        "smMethod": "CityMsg.NewCardCollectChangeListResp"
+    },
+    {
+        "comment": "指定交换搜人",
+        "smMsgId": 37510,
+        "cmMethod": "CityMsg.NewCardCollectSearchPlayerReq",
+        "smMethod": "CityMsg.NewCardCollectSearchPlayerResp"
+    },
+    {
+        "comment": "开随机宝箱",
+        "smMsgId": 37511,
+        "cmMethod": "CityMsg.NewCardCollectOpenRandomBoxReq",
+        "smMethod": "CityMsg.NewCardCollectOpenRandomBoxResp"
+    },
+    {
+        "comment": "卡牌分解",
+        "smMsgId": 37512,
+        "cmMethod": "CityMsg.NewCardCollectCardRecycleReq",
+        "smMethod": "CityMsg.NewCardCollectCardRecycleResp"
+    },
+    {
+        "comment": "局内红点",
+        "smMsgId": 37513,
+        "cmMethod": "CityMsg.NewCardCollectInnerRedPointReq",
+        "smMethod": "CityMsg.NewCardCollectInnerRedPointResp"
+    },
+    {
+        "comment": "忆梦图鉴",
+        "smMsgId": 37514,
+        "cmMethod": "CityMsg.NewCardCollectHistoryViewReq",
+        "smMethod": "CityMsg.NewCardCollectHistoryViewResp"
+    },
+    {
+        "comment": "赛季全收集奖",
+        "smMsgId": 37515,
+        "cmMethod": "CityMsg.NewCardCollectClaimSeasonAwardReq",
+        "smMethod": "CityMsg.NewCardCollectClaimSeasonAwardResp"
+    },
+    {
+        "comment": "离开卡册界面",
+        "smMsgId": 37516,
+        "cmMethod": "CityMsg.NewCardCollectLeaveReq",
+        "smMethod": "CityMsg.NewCardCollectLeaveResp"
+    },
+    {
+        "comment": "玩家可用卡册列表",
+        "smMsgId": 37517,
+        "cmMethod": "CityMsg.NewCardCollectUseAbleCardListReq",
+        "smMethod": "CityMsg.NewCardCollectUseAbleCardListResp"
+    },
+    {
+        "comment": "玩家历史卡册列表",
+        "smMsgId": 37518,
+        "cmMethod": "CityMsg.NewCardCollectPlayerCollectRecordListReq",
+        "smMethod": "CityMsg.NewCardCollectPlayerCollectRecordListResp"
+    },
+    {
+        "comment": "玩家赛季列表",
+        "smMsgId": 37519,
+        "cmMethod": "CityMsg.NewCardCollectPlayerSeasonListReq",
+        "smMethod": "CityMsg.NewCardCollectPlayerSeasonListResp"
+    },
+    {
+        "comment": "失效交换弹窗",
+        "smMsgId": 37520,
+        "smMethod": "CityMsg.NewCardCollectLoseChange"
+    },
+    {
+        "comment": "玩家全部卡牌列表",
+        "smMsgId": 37521,
+        "cmMethod": "CityMsg.NewCardCollectAllCardListReq",
+        "smMethod": "CityMsg.NewCardCollectAllCardListResp"
+    },
+    {
+        "comment": "玩家全部赛季各星级卡牌总数量",
+        "smMsgId": 37522,
+        "cmMethod": "CityMsg.NewCardCollectAllCardCountReq",
+        "smMethod": "CityMsg.NewCardCollectAllCardCountResp"
+    },
+    {
+        "comment": "查询战令额外钥匙可领数量",
+        "smMsgId": 37523,
+        "cmMethod": "CityMsg.NewCardCollectGetKeyInfoReq",
+        "smMethod": "CityMsg.NewCardCollectGetKeyInfoResp"
+    },
+    {
+        "comment": "领取战令额外钥匙",
+        "smMsgId": 37524,
+        "cmMethod": "CityMsg.NewCardCollectReceiveBattlePassKeyReq",
+        "smMethod": "CityMsg.NewCardCollectReceiveBattlePassKeyResp"
+    },
+    {
+        "comment": "五星闪卡按数量锁定",
+        "smMsgId": 37525,
+        "cmMethod": "CityMsg.NewCardCollectCardLockReq",
+        "smMethod": "CityMsg.NewCardCollectCardLockResp"
+    },
+    {
+        "comment": "选择本期参与番外",
+        "smMsgId": 37526,
+        "cmMethod": "CityMsg.NewCardCollectSelectSeasonReq",
+        "smMethod": "CityMsg.NewCardCollectSelectSeasonResp"
+    },
     null,
     null,
     null,
@@ -251948,6 +252838,11 @@
     null,
     null,
     null,
+    {
+        "comment": "增量推送",
+        "smMsgId": 37590,
+        "smMethod": "CityMsg.NewCardCollectSyncData"
+    },
     null,
     null,
     null,
@@ -251958,6 +252853,54 @@
     null,
     null,
     null,
+    {
+        "comment": "灵果寻仙 进入活动",
+        "smMsgId": 37601,
+        "cmMethod": "CityMsg.BubbleDragonEnterActivityReq",
+        "smMethod": "CityMsg.BubbleDragonEnterActivityResp"
+    },
+    {
+        "comment": "灵果寻仙 进入倍率场",
+        "smMsgId": 37602,
+        "cmMethod": "CityMsg.BubbleDragonEnterGameReq",
+        "smMethod": "CityMsg.BubbleDragonEnterGameResp"
+    },
+    {
+        "comment": "灵果寻仙 发射泡泡",
+        "smMsgId": 37603,
+        "cmMethod": "CityMsg.BubbleDragonShootReq",
+        "smMethod": "CityMsg.BubbleDragonShootResp"
+    },
+    {
+        "comment": "灵果寻仙 使用体力道具",
+        "smMsgId": 37604,
+        "cmMethod": "CityMsg.BubbleDragonUseStaminaItemReq",
+        "smMethod": "CityMsg.BubbleDragonUseStaminaItemResp"
+    },
+    {
+        "comment": "灵果寻仙 定风珠消除前N行",
+        "smMsgId": 37605,
+        "cmMethod": "CityMsg.BubbleDragonUseChargeItemReq",
+        "smMethod": "CityMsg.BubbleDragonUseChargeItemResp"
+    },
+    {
+        "comment": "灵果寻仙 神山宝库抽奖",
+        "smMsgId": 37606,
+        "cmMethod": "CityMsg.BubbleDragonDrawReq",
+        "smMethod": "CityMsg.BubbleDragonDrawResp"
+    },
+    {
+        "comment": "灵果寻仙 自选大奖",
+        "smMsgId": 37607,
+        "cmMethod": "CityMsg.BubbleDragonSelectRareReq",
+        "smMethod": "CityMsg.BubbleDragonSelectRareResp"
+    },
+    {
+        "comment": "灵果寻仙 战令特权刷新当前灵果",
+        "smMsgId": 37608,
+        "cmMethod": "CityMsg.BubbleDragonRefreshBubbleReq",
+        "smMethod": "CityMsg.BubbleDragonRefreshBubbleResp"
+    },
     null,
     null,
     null,
@@ -252050,6 +252993,29 @@
     null,
     null,
     null,
+    {
+        "comment": "找回列表同步",
+        "smMsgId": 37701,
+        "smMethod": "CityMsg.RewardReclaimInfoPush"
+    },
+    {
+        "comment": "一键找回",
+        "smMsgId": 37702,
+        "cmMethod": "CityMsg.RewardReclaimBatchClaimReq",
+        "smMethod": "CityMsg.RewardReclaimBatchClaimRsp"
+    },
+    {
+        "comment": "一键购买",
+        "smMsgId": 37703,
+        "cmMethod": "CityMsg.RewardReclaimBatchBuyReq",
+        "smMethod": "CityMsg.RewardReclaimBatchBuyRsp"
+    },
+    {
+        "comment": "全部放弃付费找回",
+        "smMsgId": 37704,
+        "cmMethod": "CityMsg.RewardReclaimAbandonPayReq",
+        "smMethod": "CityMsg.RewardReclaimAbandonPayRsp"
+    },
     null,
     null,
     null,
@@ -252346,7 +253312,109 @@
     null,
     null,
     null,
+    {
+        "comment": "进入主界面",
+        "smMsgId": 38001,
+        "cmMethod": "CityMsg.FishingEnterReq",
+        "smMethod": "CityMsg.FishingEnterRsp"
+    },
+    {
+        "comment": "钓鱼",
+        "smMsgId": 38002,
+        "cmMethod": "CityMsg.FishingCastReq",
+        "smMethod": "CityMsg.FishingCastRsp"
+    },
+    {
+        "comment": "上报 QTE",
+        "smMsgId": 38003,
+        "cmMethod": "CityMsg.FishingReportQteReq",
+        "smMethod": "CityMsg.FishingReportQteRsp"
+    },
+    {
+        "comment": "切换鱼池",
+        "smMsgId": 38004,
+        "cmMethod": "CityMsg.FishingSwitchPoolReq",
+        "smMethod": "CityMsg.FishingSwitchPoolRsp"
+    },
+    {
+        "comment": "鱼灵篓列表",
+        "smMsgId": 38005,
+        "cmMethod": "CityMsg.FishingGetFishListReq",
+        "smMethod": "CityMsg.FishingGetFishListRsp"
+    },
+    {
+        "comment": "扩容鱼篓",
+        "smMsgId": 38006,
+        "cmMethod": "CityMsg.FishingExpandBagReq",
+        "smMethod": "CityMsg.FishingExpandBagRsp"
+    },
+    {
+        "comment": "分解",
+        "smMsgId": 38007,
+        "cmMethod": "CityMsg.FishingDecomposeReq",
+        "smMethod": "CityMsg.FishingDecomposeRsp"
+    },
+    {
+        "comment": "锁定鱼",
+        "smMsgId": 38008,
+        "cmMethod": "CityMsg.FishingLockReq",
+        "smMethod": "CityMsg.FishingLockRsp"
+    },
+    {
+        "comment": "属性继承",
+        "smMsgId": 38009,
+        "cmMethod": "CityMsg.FishingInheritReq",
+        "smMethod": "CityMsg.FishingInheritRsp"
+    },
+    {
+        "comment": "待确认保存/取消",
+        "smMsgId": 38010,
+        "cmMethod": "CityMsg.FishingConfirmPendingReq",
+        "smMethod": "CityMsg.FishingConfirmPendingRsp"
+    },
+    {
+        "comment": "玄诀洗练",
+        "smMsgId": 38011,
+        "cmMethod": "CityMsg.FishingSkillBookReq",
+        "smMethod": "CityMsg.FishingSkillBookRsp"
+    },
+    {
+        "comment": "上阵",
+        "smMsgId": 38012,
+        "cmMethod": "CityMsg.FishingDeployReq",
+        "smMethod": "CityMsg.FishingDeployRsp"
+    },
+    {
+        "comment": "图鉴领奖",
+        "smMsgId": 38013,
+        "cmMethod": "CityMsg.FishingClaimAtlasRewardReq",
+        "smMethod": "CityMsg.FishingClaimAtlasRewardRsp"
+    },
+    {
+        "comment": "升级",
+        "smMsgId": 38014,
+        "cmMethod": "CityMsg.FishingLevelUpReq",
+        "smMethod": "CityMsg.FishingLevelUpRsp"
+    },
     null,
+    {
+        "comment": "鱼实例升级",
+        "smMsgId": 38016,
+        "cmMethod": "CityMsg.FishingFishLevelUpReq",
+        "smMethod": "CityMsg.FishingFishLevelUpRsp"
+    },
+    {
+        "comment": "鱼实例升星",
+        "smMsgId": 38017,
+        "cmMethod": "CityMsg.FishingFishStarUpReq",
+        "smMethod": "CityMsg.FishingFishStarUpRsp"
+    },
+    {
+        "comment": "鱼实例等级重置",
+        "smMsgId": 38018,
+        "cmMethod": "CityMsg.FishingFishLevelResetReq",
+        "smMethod": "CityMsg.FishingFishLevelResetRsp"
+    },
     null,
     null,
     null,
@@ -252427,7 +253495,155 @@
     null,
     null,
     null,
+    {
+        "comment": "灵兽/灵鱼锁数据同步",
+        "smMsgId": 38099,
+        "smMethod": "CityMsg.PetLockSync"
+    },
     null,
+    {
+        "comment": "进入万盟争锋",
+        "smMsgId": 38101,
+        "cmMethod": "CityMsg.PeakDuelEnterReq",
+        "smMethod": "CityMsg.PeakDuelEnterResp"
+    },
+    {
+        "comment": "万盟争锋登录/重连同步",
+        "smMsgId": 38102,
+        "smMethod": "CityMsg.PeakDuelLoginSyncMsg"
+    },
+    {
+        "comment": "大组完整区服列表",
+        "smMsgId": 38103,
+        "cmMethod": "CityMsg.PeakDuelServerListReq",
+        "smMethod": "CityMsg.PeakDuelServerListResp"
+    },
+    {
+        "comment": "赛程详情",
+        "smMsgId": 38104,
+        "cmMethod": "CityMsg.PeakDuelScheduleReq",
+        "smMethod": "CityMsg.PeakDuelScheduleResp"
+    },
+    {
+        "comment": "组内妖盟排行",
+        "smMsgId": 38105,
+        "cmMethod": "CityMsg.PeakDuelGroupRankReq",
+        "smMethod": "CityMsg.PeakDuelGroupRankResp"
+    },
+    {
+        "comment": "对决战况",
+        "smMsgId": 38106,
+        "cmMethod": "CityMsg.PeakDuelBattleInfoReq",
+        "smMethod": "CityMsg.PeakDuelBattleInfoResp"
+    },
+    {
+        "comment": "对决积分全榜",
+        "smMsgId": 38107,
+        "cmMethod": "CityMsg.PeakDuelBattleRankReq",
+        "smMethod": "CityMsg.PeakDuelBattleRankResp"
+    },
+    {
+        "comment": "对决详情-对抗列表",
+        "smMsgId": 38108,
+        "cmMethod": "CityMsg.PeakDuelBattleReportReq",
+        "smMethod": "CityMsg.PeakDuelBattleReportResp"
+    },
+    {
+        "comment": "对决详情-历史对战",
+        "smMsgId": 38109,
+        "cmMethod": "CityMsg.PeakDuelBattleHistoryReq",
+        "smMethod": "CityMsg.PeakDuelBattleHistoryResp"
+    },
+    {
+        "comment": "贡献详情",
+        "smMsgId": 38110,
+        "cmMethod": "CityMsg.PeakDuelContributionReq",
+        "smMethod": "CityMsg.PeakDuelContributionResp"
+    },
+    {
+        "comment": "点赞",
+        "smMsgId": 38111,
+        "cmMethod": "CityMsg.PeakDuelLikeReq",
+        "smMethod": "CityMsg.PeakDuelLikeResp"
+    },
+    {
+        "comment": "获取万盟争锋当前双方战斗信息",
+        "smMsgId": 38112,
+        "cmMethod": "CityMsg.PeakDuelGetFightInfoReq",
+        "smMethod": "CityMsg.PeakDuelGetFightInfoResp"
+    },
+    {
+        "comment": "任务类型66充值循环档批量领取",
+        "smMsgId": 38113,
+        "cmMethod": "CityMsg.PeakDuelClaimRechargeBatchReq",
+        "smMethod": "CityMsg.PeakDuelClaimRechargeBatchResp"
+    },
+    {
+        "comment": "竞猜页信息",
+        "smMsgId": 38114,
+        "cmMethod": "CityMsg.PeakDuelGuessInfoReq",
+        "smMethod": "CityMsg.PeakDuelGuessInfoResp"
+    },
+    {
+        "comment": "领取竞猜币",
+        "smMsgId": 38115,
+        "cmMethod": "CityMsg.PeakDuelReceiveGuessCoinReq",
+        "smMethod": "CityMsg.PeakDuelReceiveGuessCoinResp"
+    },
+    {
+        "comment": "押注妖盟",
+        "smMsgId": 38116,
+        "cmMethod": "CityMsg.PeakDuelGuessReq",
+        "smMethod": "CityMsg.PeakDuelGuessResp"
+    },
+    {
+        "comment": "热度榜",
+        "smMsgId": 38117,
+        "cmMethod": "CityMsg.PeakDuelHeatRankReq",
+        "smMethod": "CityMsg.PeakDuelHeatRankResp"
+    },
+    {
+        "comment": "竞猜榜",
+        "smMsgId": 38118,
+        "cmMethod": "CityMsg.PeakDuelGuessRankReq",
+        "smMethod": "CityMsg.PeakDuelGuessRankResp"
+    },
+    {
+        "comment": "往届冠军",
+        "smMsgId": 38119,
+        "cmMethod": "CityMsg.PeakDuelHistoryReq",
+        "smMethod": "CityMsg.PeakDuelHistoryResp"
+    },
+    {
+        "comment": "庆典信息",
+        "smMsgId": 38120,
+        "cmMethod": "CityMsg.PeakDuelCelebrationReq",
+        "smMethod": "CityMsg.PeakDuelCelebrationResp"
+    },
+    {
+        "comment": "膜拜领奖",
+        "smMsgId": 38121,
+        "cmMethod": "CityMsg.PeakDuelWorshipReq",
+        "smMethod": "CityMsg.PeakDuelWorshipResp"
+    },
+    {
+        "comment": "妖盟各场次排行积分",
+        "smMsgId": 38122,
+        "cmMethod": "CityMsg.PeakDuelUnionMatchScoreReq",
+        "smMethod": "CityMsg.PeakDuelUnionMatchScoreResp"
+    },
+    {
+        "comment": "获取最新个人任务积分",
+        "smMsgId": 38123,
+        "cmMethod": "CityMsg.PeakDuelPlayerScoreReq",
+        "smMethod": "CityMsg.PeakDuelPlayerScoreResp"
+    },
+    {
+        "comment": "红点详情",
+        "smMsgId": 38124,
+        "cmMethod": "CityMsg.PeakDuelRedPointReq",
+        "smMethod": "CityMsg.PeakDuelRedPointResp"
+    },
     null,
     null,
     null,
@@ -252504,7 +253720,36 @@
     null,
     null,
     null,
+    {
+        "comment": "玄机觅宝 进入活动",
+        "smMsgId": 38201,
+        "cmMethod": "CityMsg.SwitchDrawEnterReq",
+        "smMethod": "CityMsg.SwitchDrawEnterRsp"
+    },
+    {
+        "comment": "玄机觅宝 觅宝抽取",
+        "smMsgId": 38202,
+        "cmMethod": "CityMsg.SwitchDrawDrawReq",
+        "smMethod": "CityMsg.SwitchDrawDrawRsp"
+    },
+    {
+        "comment": "玄机觅宝 自选/更换大奖",
+        "smMsgId": 38203,
+        "cmMethod": "CityMsg.SwitchDrawSelectBigRewardReq",
+        "smMethod": "CityMsg.SwitchDrawSelectBigRewardRsp"
+    },
     null,
+    {
+        "comment": "玄机觅宝 数据同步",
+        "smMsgId": 38205,
+        "smMethod": "CityMsg.SwitchDrawSync"
+    },
+    {
+        "comment": "玄机觅宝 一键觅宝",
+        "smMsgId": 38206,
+        "cmMethod": "CityMsg.SwitchDrawDrawAllReq",
+        "smMethod": "CityMsg.SwitchDrawDrawAllRsp"
+    },
     null,
     null,
     null,
@@ -252599,7 +253844,89 @@
     null,
     null,
     null,
+    {
+        "comment": "异宝宝石进入系统",
+        "smMsgId": 38301,
+        "cmMethod": "CityMsg.TreasureStoneEnterReq",
+        "smMethod": "CityMsg.TreasureStoneEnterRsp"
+    },
+    {
+        "comment": "异宝宝石镶嵌",
+        "smMsgId": 38302,
+        "cmMethod": "CityMsg.TreasureStoneEquipReq",
+        "smMethod": "CityMsg.TreasureStoneEquipRsp"
+    },
+    {
+        "comment": "异宝宝石拆卸",
+        "smMsgId": 38303,
+        "cmMethod": "CityMsg.TreasureStoneUnequipReq",
+        "smMethod": "CityMsg.TreasureStoneUnequipRsp"
+    },
+    {
+        "comment": "异宝宝石锁定/解锁",
+        "smMsgId": 38304,
+        "cmMethod": "CityMsg.TreasureStoneLockReq",
+        "smMethod": "CityMsg.TreasureStoneLockRsp"
+    },
+    {
+        "comment": "异宝宝石同步",
+        "smMsgId": 38305,
+        "smMethod": "CityMsg.TreasureStoneSync"
+    },
+    {
+        "comment": "异宝宝石批量融合升阶",
+        "smMsgId": 38306,
+        "cmMethod": "CityMsg.TreasureStoneComposeBatchReq",
+        "smMethod": "CityMsg.TreasureStoneComposeBatchRsp"
+    },
+    {
+        "comment": "异宝宝石合成日志",
+        "smMsgId": 38307,
+        "cmMethod": "CityMsg.TreasureStoneComposeLogReq",
+        "smMethod": "CityMsg.TreasureStoneComposeLogRsp"
+    },
+    {
+        "comment": "异宝宝石红点同步",
+        "smMsgId": 38308,
+        "smMethod": "CityMsg.TreasureStoneSyncRedPoint"
+    },
     null,
+    {
+        "comment": "异宝宝石上架",
+        "smMsgId": 38310,
+        "cmMethod": "CityMsg.TreasureStoneDealSellReq",
+        "smMethod": "CityMsg.TreasureStoneDealSellRsp"
+    },
+    {
+        "comment": "异宝宝石下架",
+        "smMsgId": 38311,
+        "cmMethod": "CityMsg.TreasureStoneDealSellDownReq",
+        "smMethod": "CityMsg.TreasureStoneDealSellDownRsp"
+    },
+    {
+        "comment": "异宝宝石购买",
+        "smMsgId": 38312,
+        "cmMethod": "CityMsg.TreasureStoneDealBuyReq",
+        "smMethod": "CityMsg.TreasureStoneDealBuyRsp"
+    },
+    {
+        "comment": "异宝宝石获取交易记录",
+        "smMsgId": 38313,
+        "cmMethod": "CityMsg.TreasureStoneDealGetRecordReq",
+        "smMethod": "CityMsg.TreasureStoneDealGetRecordRsp"
+    },
+    {
+        "comment": "异宝宝石收藏/取消收藏",
+        "smMsgId": 38314,
+        "cmMethod": "CityMsg.TreasureStoneDealCollectReq",
+        "smMethod": "CityMsg.TreasureStoneDealCollectRsp"
+    },
+    {
+        "comment": "异宝宝石改价",
+        "smMsgId": 38315,
+        "cmMethod": "CityMsg.TreasureStoneDealPriceAdjustReq",
+        "smMethod": "CityMsg.TreasureStoneDealPriceAdjustRsp"
+    },
     null,
     null,
     null,
@@ -252685,7 +254012,89 @@
     null,
     null,
     null,
+    {
+        "comment": "法则宝石进入系统",
+        "smMsgId": 38401,
+        "cmMethod": "CityMsg.LawStoneEnterReq",
+        "smMethod": "CityMsg.LawStoneEnterRsp"
+    },
+    {
+        "comment": "法则宝石镶嵌",
+        "smMsgId": 38402,
+        "cmMethod": "CityMsg.LawStoneEquipReq",
+        "smMethod": "CityMsg.LawStoneEquipRsp"
+    },
+    {
+        "comment": "法则宝石拆卸",
+        "smMsgId": 38403,
+        "cmMethod": "CityMsg.LawStoneUnequipReq",
+        "smMethod": "CityMsg.LawStoneUnequipRsp"
+    },
+    {
+        "comment": "法则宝石锁定/解锁",
+        "smMsgId": 38404,
+        "cmMethod": "CityMsg.LawStoneLockReq",
+        "smMethod": "CityMsg.LawStoneLockRsp"
+    },
+    {
+        "comment": "法则宝石同步",
+        "smMsgId": 38405,
+        "smMethod": "CityMsg.LawStoneSync"
+    },
+    {
+        "comment": "法则宝石批量融合升阶",
+        "smMsgId": 38406,
+        "cmMethod": "CityMsg.LawStoneComposeBatchReq",
+        "smMethod": "CityMsg.LawStoneComposeBatchRsp"
+    },
+    {
+        "comment": "法则宝石合成日志",
+        "smMsgId": 38407,
+        "cmMethod": "CityMsg.LawStoneComposeLogReq",
+        "smMethod": "CityMsg.LawStoneComposeLogRsp"
+    },
+    {
+        "comment": "法则宝石红点同步",
+        "smMsgId": 38408,
+        "smMethod": "CityMsg.LawStoneSyncRedPoint"
+    },
     null,
+    {
+        "comment": "法则宝石上架",
+        "smMsgId": 38410,
+        "cmMethod": "CityMsg.LawStoneDealSellReq",
+        "smMethod": "CityMsg.LawStoneDealSellRsp"
+    },
+    {
+        "comment": "法则宝石下架",
+        "smMsgId": 38411,
+        "cmMethod": "CityMsg.LawStoneDealSellDownReq",
+        "smMethod": "CityMsg.LawStoneDealSellDownRsp"
+    },
+    {
+        "comment": "法则宝石购买",
+        "smMsgId": 38412,
+        "cmMethod": "CityMsg.LawStoneDealBuyReq",
+        "smMethod": "CityMsg.LawStoneDealBuyRsp"
+    },
+    {
+        "comment": "法则宝石获取交易记录",
+        "smMsgId": 38413,
+        "cmMethod": "CityMsg.LawStoneDealGetRecordReq",
+        "smMethod": "CityMsg.LawStoneDealGetRecordRsp"
+    },
+    {
+        "comment": "法则宝石收藏/取消收藏",
+        "smMsgId": 38414,
+        "cmMethod": "CityMsg.LawStoneDealCollectReq",
+        "smMethod": "CityMsg.LawStoneDealCollectRsp"
+    },
+    {
+        "comment": "法则宝石改价",
+        "smMsgId": 38415,
+        "cmMethod": "CityMsg.LawStoneDealPriceAdjustReq",
+        "smMethod": "CityMsg.LawStoneDealPriceAdjustRsp"
+    },
     null,
     null,
     null,
@@ -252871,6 +254280,30 @@
     null,
     null,
     null,
+    {
+        "comment": "文字塔防联动-进入活动",
+        "smMsgId": 38601,
+        "cmMethod": "CityMsg.TextTowerEnterReq",
+        "smMethod": "CityMsg.TextTowerEnterResp"
+    },
+    {
+        "comment": "文字塔防联动-过关领奖",
+        "smMsgId": 38602,
+        "cmMethod": "CityMsg.TextTowerReceiveRewardReq",
+        "smMethod": "CityMsg.TextTowerReceiveRewardResp"
+    },
+    {
+        "comment": "文字塔防联动-按关请求录像",
+        "smMsgId": 38603,
+        "cmMethod": "CityMsg.TextTowerGetVideoReq",
+        "smMethod": "CityMsg.TextTowerGetVideoResp"
+    },
+    {
+        "comment": "文字塔防联动-挑战数据上报",
+        "smMsgId": 38604,
+        "cmMethod": "CityMsg.TextTowerReportReq",
+        "smMethod": "CityMsg.TextTowerReportResp"
+    },
     null,
     null,
     null,
@@ -252966,283 +254399,151 @@
     null,
     null,
     null,
+    {
+        "comment": "问鼎道台入口状态同步",
+        "smMsgId": 38700,
+        "smMethod": "CityMsg.TopFeastTimeEntrySyncMsg"
+    },
+    {
+        "comment": "进入问鼎道台",
+        "smMsgId": 38701,
+        "cmMethod": "CityMsg.TopFeastTimeEnterReq",
+        "smMethod": "CityMsg.TopFeastTimeEnterResp"
+    },
+    {
+        "comment": "申请入座",
+        "smMsgId": 38702,
+        "cmMethod": "CityMsg.TopFeastTimeApplyReq",
+        "smMethod": "CityMsg.TopFeastTimeApplyResp"
+    },
+    {
+        "comment": "取消申请",
+        "smMsgId": 38703,
+        "cmMethod": "CityMsg.TopFeastTimeCancelApplyReq",
+        "smMethod": "CityMsg.TopFeastTimeCancelApplyResp"
+    },
+    {
+        "comment": "领取累计产出",
+        "smMsgId": 38704,
+        "cmMethod": "CityMsg.TopFeastTimeClaimOutputReq",
+        "smMethod": "CityMsg.TopFeastTimeClaimOutputResp"
+    },
+    {
+        "comment": "道台主踢出入座玩家",
+        "smMsgId": 38705,
+        "cmMethod": "CityMsg.TopFeastTimeKickReq",
+        "smMethod": "CityMsg.TopFeastTimeKickResp"
+    },
+    {
+        "comment": "道台场景数据变化",
+        "smMsgId": 38706,
+        "smMethod": "CityMsg.TopFeastTimeSceneSyncMsg"
+    },
+    {
+        "comment": "玩家被踢出道台",
+        "smMsgId": 38707,
+        "smMethod": "CityMsg.TopFeastTimeKickedSyncMsg"
+    },
+    {
+        "comment": "道台主邀请玩家入座",
+        "smMsgId": 38708,
+        "cmMethod": "CityMsg.TopFeastTimeInviteReq",
+        "smMethod": "CityMsg.TopFeastTimeInviteResp"
+    },
+    {
+        "comment": "道台主同意入座申请",
+        "smMsgId": 38709,
+        "cmMethod": "CityMsg.TopFeastTimeAgreeApplyReq",
+        "smMethod": "CityMsg.TopFeastTimeAgreeApplyResp"
+    },
+    {
+        "comment": "道台主一键拒绝入座申请",
+        "smMsgId": 38710,
+        "cmMethod": "CityMsg.TopFeastTimeRefuseAllApplyReq",
+        "smMethod": "CityMsg.TopFeastTimeRefuseAllApplyResp"
+    },
+    {
+        "comment": "进入问鼎宝箱",
+        "smMsgId": 38711,
+        "cmMethod": "CityMsg.TopFeastTimeLotteryEnterReq",
+        "smMethod": "CityMsg.TopFeastTimeLotteryEnterResp"
+    },
     null,
+    {
+        "comment": "开启问鼎宝箱",
+        "smMsgId": 38713,
+        "cmMethod": "CityMsg.TopFeastTimeLotteryDrawReq",
+        "smMethod": "CityMsg.TopFeastTimeLotteryDrawResp"
+    },
+    {
+        "comment": "道台场景心跳（无回包）",
+        "smMsgId": 38714,
+        "cmMethod": "CityMsg.TopFeastTimeHeartbeatReq"
+    },
+    {
+        "comment": "红点详情",
+        "smMsgId": 38715,
+        "cmMethod": "CityMsg.TopFeastTimeRedPointReq",
+        "smMethod": "CityMsg.TopFeastTimeRedPointResp"
+    },
+    {
+        "comment": "查看我申请其他人道台的记录",
+        "smMsgId": 38716,
+        "cmMethod": "CityMsg.TopFeastTimeMyApplyListReq",
+        "smMethod": "CityMsg.TopFeastTimeMyApplyListResp"
+    },
+    {
+        "comment": "查看谁向我申请入座道台",
+        "smMsgId": 38717,
+        "cmMethod": "CityMsg.TopFeastTimeApplyListReq",
+        "smMethod": "CityMsg.TopFeastTimeApplyListResp"
+    },
+    {
+        "comment": "谁邀请我入座的",
+        "smMsgId": 38718,
+        "cmMethod": "CityMsg.TopFeastTimeInviteListReq",
+        "smMethod": "CityMsg.TopFeastTimeInviteListResp"
+    },
+    {
+        "comment": "是否接受邀请入座",
+        "smMsgId": 38719,
+        "cmMethod": "CityMsg.TopFeastTimeAgreeInviteListReq",
+        "smMethod": "CityMsg.TopFeastTimeAgreeInviteListResp"
+    },
+    {
+        "comment": "查看完整的位面列表",
+        "smMsgId": 38720,
+        "cmMethod": "CityMsg.TopFeastTimeListReq",
+        "smMethod": "CityMsg.TopFeastTimeListResp"
+    },
+    {
+        "comment": "申请被同意后收到的同步",
+        "smMsgId": 38721,
+        "smMethod": "CityMsg.TopFeastTimeAgreeJoinSyncMsg"
+    },
+    {
+        "comment": "道台的座位详情",
+        "smMsgId": 38722,
+        "cmMethod": "CityMsg.TopFeastTimeSeatDetailReq",
+        "smMethod": "CityMsg.TopFeastTimeSeatDetailResp"
+    },
+    {
+        "comment": "被邀请人一键拒绝入座邀请",
+        "smMsgId": 38723,
+        "cmMethod": "CityMsg.TopFeastTimeRefuseAllInviteReq",
+        "smMethod": "CityMsg.TopFeastTimeRefuseAllInviteResp"
+    },
     null,
     null,
     null,
     null,
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "comment": "道台的广播",
+        "smMsgId": 38730,
+        "smMethod": "CityMsg.TopFeastTimeBroadcast"
+    },
     null,
     null,
     null,

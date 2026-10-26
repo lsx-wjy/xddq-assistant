@@ -1,0 +1,106 @@
+package com.yq.msg.CityMsg;
+enum TextTowerPb {
+  S_TEXTTOWER_ENTER = 238601;
+  S_TEXTTOWER_RECEIVE_REWARD = 238602;
+  S_TEXTTOWER_GET_VIDEO = 238603;
+  S_TEXTTOWER_REPORT = 238604;
+}
+message TextTowerCharactConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional int32 type = 3;
+  optional int32 text = 4;
+  optional int32 color = 5;
+  optional int32 weight = 6;
+  optional string weightAdd = 7;
+  optional string combine = 8;
+  optional int32 atkType = 9;
+  optional string atk = 10;
+  optional string atkSpeed = 11;
+  optional string atkRange = 12;
+  optional int32 skillType = 13;
+  optional string skillParam = 14;
+  optional string heroName = 15;
+  optional string name = 16;
+  optional string desc = 17;
+}
+message TextTowerWaveConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string monsterList = 3;
+}
+message TextTowerStageConfig {
+  optional int32 activityId = 1;
+  optional int32 id = 2;
+  optional string video = 3;
+  optional string reward = 4;
+  optional int32 days = 5;
+}
+message TextTowerParamMsg {
+  repeated int32 recruitCost = 1;
+  optional int32 recruitInit = 2;
+  repeated int32 recruitGet = 3;
+  repeated int32 recruitWeightShovel = 4;
+  optional int32 protectHp = 5;
+  repeated int32 marchInterval = 6;
+  optional string expUpgrade = 7;
+  repeated int32 expGet = 8;
+  repeated int32 expGetHelp = 9;
+  repeated int32 recruitProtectShovel = 10;
+}
+message TextTowerUniqueConfigMsg {
+  repeated TextTowerCharactConfig charactConfig = 1;
+  repeated TextTowerWaveConfig waveConfig = 2;
+  repeated TextTowerStageConfig stageConfig = 3;
+  optional TextTowerParamMsg param = 4;
+}
+message TextTowerVideoMsg {
+  optional int32 id = 1;
+  optional string param = 2;
+}
+message TextTowerRewardItem {
+  optional int32 goodsId = 1;
+  optional int32 num = 2;
+}
+message TextTowerBuffMsg {
+  optional int32 id = 1;
+  optional int32 type = 2;
+  optional int32 num = 3;
+  optional int32 value = 4;
+}
+message TextTowerEnterReq {
+  required int32 activityId = 1;
+}
+message TextTowerEnterResp {
+  required int32 ret = 1;
+  repeated int32 receivedRewardStageIds = 2;
+  optional int32 openDay = 3;
+}
+message TextTowerReceiveRewardReq {
+  required int32 activityId = 1;
+  required int32 stageId = 2;
+}
+message TextTowerReceiveRewardResp {
+  required int32 ret = 1;
+  repeated TextTowerRewardItem rewards = 2;
+  repeated int32 receivedRewardStageIds = 3;
+}
+message TextTowerGetVideoReq {
+  required int32 activityId = 1;
+  required int32 stageId = 2;
+}
+message TextTowerGetVideoResp {
+  required int32 ret = 1;
+  repeated TextTowerVideoMsg videoList = 2;
+}
+message TextTowerReportReq {
+  required int32 activityId = 1;
+  required int32 stageId = 2;
+  optional int32 wave = 3;
+  optional int32 reportType = 4;
+  optional int32 gameTime = 5;
+  repeated TextTowerBuffMsg goldSnackBuff = 6;
+}
+message TextTowerReportResp {
+  required int32 ret = 1;
+}

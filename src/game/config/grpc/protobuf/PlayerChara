@@ -14,6 +14,7 @@ message PlayerCharaDataMsg {
     optional int32 equipArtifactId = 12;
     optional int32 realTitleId = 13;
     optional int32 equipCardSkin = 14;
+    optional int32 equipBackOrnament = 15;
 }
 enum CharaType {
     CharaType_Appearance = 1;
@@ -26,6 +27,7 @@ enum CharaType {
     CharaType_Frog = 11;
     CharaType_Artifact = 12;
     CharaType_Card_Skin = 14;
+    CharaType_Back_Ornament = 16;
 }
 message GetPlayerCharaListResp {
     required int32 ret = 1;
@@ -51,6 +53,7 @@ message ChangePlayerCharaResp {
     optional int32 equipFrog = 8;
     optional int32 equipArtifactId = 9;
     optional int32 equipCardId = 10;
+    optional int32 equipBackOrnament = 11;
 }
 message UseTitleReq{
     required int32 titleId = 1;

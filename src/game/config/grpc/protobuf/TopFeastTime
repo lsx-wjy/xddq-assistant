@@ -1,0 +1,284 @@
+package com.yq.msg.CityMsg;
+import "Common";
+import "WatchPlayer";
+import "Union";
+enum TopFeastTimePb {
+  TopFeastTime_Entry_Sync = 238700;
+  TopFeastTime_Enter = 238701;
+  TopFeastTime_Apply = 238702;
+  TopFeastTime_Cancel_Apply = 238703;
+  TopFeastTime_Claim_Output = 238704;
+  TopFeastTime_Kick = 238705;
+  TopFeastTime_Scene_Sync = 238706;
+  TopFeastTime_Kicked_Sync = 238707;
+  TopFeastTime_Invite = 238708;
+  TopFeastTime_Agree_Apply = 238709;
+  TopFeastTime_Refuse_All_Apply = 238710;
+  TopFeastTime_Lottery_Enter = 238711;
+  TopFeastTime_Lottery_Draw = 238713;
+  TopFeastTime_Heartbeat = 238714;
+  TopFeastTime_RedPoint = 238715;
+  TopFeastTime_MyApplyList = 238716;
+  TopFeastTime_ApplyToMeList = 238717;
+  TopFeastTime_MyInviteInfo = 238718;
+  TopFeastTime_AgreeInvite = 238719;
+  TopFeastTime_FullServerList = 238720;
+  TopFeastTime_AgreedSync = 238721;
+  TopFeastTime_SeatDetail = 238722;
+  TopFeastTime_Refuse_All_Invite = 238723;
+  TopFeastTime_Broadcast = 238730;
+}
+enum TopFeastTimeRedPointEnum {
+  TopFeastTimeRedPoint_None = 0;
+  TopFeastTimeRedPoint_PendingApplicant = 1;
+}
+message TopFeastTimeEntryMsg {
+  optional string feastId = 1;
+  optional int32 fromSystemId = 2;
+  optional int64 openBeginTime = 3;
+  optional int64 openEndTime = 4;
+  optional TopFeastTimeSeatedInfoMsg seatedInfo = 5;
+  optional TopFeastTimeUnionMsg championUnion = 6;
+}
+message TopFeastTimeEntrySyncMsg {
+  repeated TopFeastTimeEntryMsg entryList = 1;
+}
+message TopFeastTimeUnionMsg {
+  optional int64 unionId = 1;
+  optional string name = 2;
+  optional int32 flag = 3;
+  optional int64 serverId = 4;
+}
+message TopFeastTimeSeatedPlayerMsg {
+  optional TopFeastTimeSeatedPlayer player = 1;
+  optional int64 seatedAt = 2;
+  optional int64 lastReceiveTime = 3;
+}
+message TopFeastTimeSeatedPlayer {
+  optional PlayerAppearanceAndHeadDataMsg appearance = 1;
+  optional string unionName = 2;
+}
+message TopFeastTimePlatformApplyMsg {
+  optional PlayerBaseDataMsg player = 1;
+  optional int64 appliedAt = 2;
+}
+message TopFeastTimePlatformSimpleMsg {
+  optional PlayerBaseDataMsg owner = 1;
+  optional UnionPositionEnum positionType = 2;
+  optional int32 seatedPlayerCount = 3;
+}
+message TopFeastTimePlatformChangeMsg {
+  optional string feastId = 1;
+  optional int64 ownerId = 2;
+  optional int32 seatedPlayerCount = 3;
+}
+message TopFeastTimePlatformDetailMsg {
+  optional int64 platformId = 1;
+  optional PlayerBaseDataMsg owner = 2;
+  optional UnionPositionEnum positionType = 3;
+  repeated TopFeastTimeSeatedPlayerMsg seatedPlayerList = 4;
+}
+message TopFeastTimeKickedInfoMsg {
+  optional string ownerName = 1;
+  optional int64 output = 2;
+}
+message TopFeastTimeSceneMsg {
+  optional TopFeastTimeUnionMsg championUnion = 1;
+  repeated TopFeastTimePlatformSimpleMsg platformList = 2;
+  optional int64 openBeginTime = 3;
+  optional int64 openEndTime = 4;
+  optional int64 seatedPlatformId = 5;
+  optional int64 seatedAt = 6;
+  optional int64 lastReceiveTime = 7;
+  optional TopFeastTimeKickedInfoMsg pendingKickedInfo = 8;
+  repeated int64 applyRecordList = 9;
+  repeated int64 inviteServerIds = 10;
+  repeated TopFeastTimeInviteMsg inviteMsg = 11;
+}
+message TopFeastTimeEnterReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeEnterResp {
+  optional int32 ret = 1;
+  optional TopFeastTimeSceneMsg scene = 2;
+}
+message TopFeastTimeSeatDetailReq {
+  optional string feastId = 1;
+  optional int64 ownerId = 2;
+}
+message TopFeastTimeSeatDetailResp {
+  optional int32 ret = 1;
+  repeated TopFeastTimePlatformDetailMsg detailMsg = 2;
+}
+message TopFeastTimeApplyReq {
+  optional string feastId = 1;
+  optional int64 ownerId = 2;
+}
+message TopFeastTimeApplyResp {
+  optional int32 ret = 1;
+  optional int32 index = 2;
+}
+message TopFeastTimeCancelApplyReq {
+  optional string feastId = 1;
+  optional int64 ownerId = 2;
+}
+message TopFeastTimeCancelApplyResp {
+  optional int32 ret = 1;
+}
+message TopFeastTimeClaimOutputReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeClaimOutputResp {
+  optional int32 ret = 1;
+  optional string reward = 2;
+  optional int64 lastReceiveTime = 3;
+}
+message TopFeastTimeKickReq {
+  optional string feastId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message TopFeastTimeKickResp {
+  optional int32 ret = 1;
+  optional TopFeastTimePlatformDetailMsg simpleMsg = 2;
+}
+message TopFeastTimeInviteReq {
+  optional string feastId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message TopFeastTimeInviteResp {
+  optional int32 ret = 1;
+}
+message TopFeastTimeAgreeApplyReq {
+  optional string feastId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message TopFeastTimeAgreeApplyResp {
+  optional int32 ret = 1;
+  optional TopFeastTimePlatformDetailMsg changMsg = 2;
+}
+message TopFeastTimeRefuseAllApplyReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeRefuseAllApplyResp {
+  optional int32 ret = 1;
+}
+message TopFeastTimeLotteryEnterReq {
+}
+message TopFeastTimeLotteryEnterResp {
+  optional int32 ret = 1;
+  repeated TopFeastTimeLotteryNoticeMsg noticeList = 2;
+}
+message TopFeastTimeLotteryDrawReq {
+  optional int32 openNum = 1;
+}
+message TopFeastTimeLotteryDrawResp {
+  optional int32 ret = 1;
+  optional string boxResults = 2;
+  optional string reward = 3;
+  repeated TopFeastTimeLotteryNoticeMsg noticeList = 4;
+}
+message TopFeastTimeLotteryNoticeMsg {
+  optional string nickName = 1;
+  optional int64 gainTime = 2;
+  optional string reward = 3;
+}
+message TopFeastTimeSceneSyncMsg {
+  repeated TopFeastTimePlatformChangeMsg changeList = 1;
+}
+message TopFeastTimeKickedSyncMsg {
+  optional TopFeastTimeKickedInfoMsg kickedInfo = 1;
+}
+message TopFeastTimeHeartbeatReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeRedPointReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeRedPointResp {
+  required int32 ret = 1;
+  optional string data = 2;
+}
+message TopFeastTimeMyApplyListReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeMyApplyListResp {
+  optional int32 ret = 1;
+  repeated TopFeastTimePlatformApplyInfoMsg applyInfoList = 2;
+}
+message TopFeastTimeApplyListReq{
+  optional string feastId = 1;
+}
+message TopFeastTimeApplyListResp{
+  optional int32 ret = 1;
+  repeated TopFeastTimePlatformApplierMsg applierList = 2;
+}
+message TopFeastTimeInviteListReq{
+  optional string feastId = 1;
+}
+message TopFeastTimeInviteListResp{
+  optional int32 ret = 1;
+  repeated TopFeastTimePlatformInviteInfoMsg inviteInfoListMsg = 2;
+}
+message TopFeastTimeAgreeInviteListReq{
+  optional string feastId = 1;
+  optional int64 targetPlayerId = 2;
+}
+message TopFeastTimeAgreeInviteListResp{
+  optional int32 ret = 1;
+  optional TopFeastTimePlatformDetailMsg changMsg = 2;
+}
+message TopFeastTimeRefuseAllInviteReq{
+  optional string feastId = 1;
+}
+message TopFeastTimeRefuseAllInviteResp{
+  optional int32 ret = 1;
+}
+message TopFeastTimeListReq {
+  optional string feastId = 1;
+}
+message TopFeastTimeListResp {
+  required int32 ret = 1;
+  repeated int64 serverIdList = 2;
+}
+message TopFeastTimeAgreeJoinSyncMsg {
+  repeated TopFeastTimePlatformDetailMsg changeList = 1;
+}
+message TopFeastTimeSeatedInfoMsg {
+  optional int64 platformId = 1;
+  optional int64 seatedAt = 2;
+  optional int64 lastReceiveTime = 3;
+  optional int64 ownerId = 4;
+  optional bool applyRed = 5;
+  repeated int64 inviteId = 6;
+}
+message TopFeastTimeBroadcast {
+  optional int32 type = 1;
+  optional TopFeastTimeApplyRed applyRed = 2;
+  optional TopFeastTimeInviteMsg inviteMsg = 3;
+}
+message TopFeastTimeApplyRed {
+  optional string feastId = 1;
+  optional bool applyRed = 2;
+}
+message TopFeastTimeInviteMsg {
+  optional string feastId = 1;
+  optional string ownerName = 2;
+}
+message TopFeastTimePlatformApplierMsg {
+  optional PlayerHeadAndFightMsg owner = 1;
+  optional string unionName = 2;
+  optional int64 time = 3;
+}
+message TopFeastTimePlatformApplyInfoMsg {
+  optional PlayerHeadAndFightMsg owner = 1;
+  optional UnionPositionEnum positionType = 2;
+  optional int32 seatedPlayerCount = 3;
+  optional int64 time = 4;
+}
+message TopFeastTimePlatformInviteInfoMsg {
+  optional PlayerHeadAndFightMsg owner = 1;
+  optional UnionPositionEnum positionType = 2;
+  optional int32 seatedPlayerCount = 3;
+  optional int64 time = 4;
+  optional string unionName = 5;
+}

@@ -2244,7 +2244,9 @@
     null,
     null,
     null,
-    null,
+    {
+        "smMethod": "CityMsg.UnionActiveValueQueryResp"
+    },
     {
         "smMethod": "CityMsg.UnionPlayerGradeRankRespMsg"
     },
@@ -7449,8 +7451,12 @@
     {
         "smMethod": "CityMsg.MagicTreasureSwitchLinkageSkinResp"
     },
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.MagicTreasureOneKeyRefinePreviewResp"
+    },
+    {
+        "smMethod": "CityMsg.MagicTreasureOneKeyRefineResp"
+    },
     null,
     null,
     null,
@@ -13782,25 +13788,61 @@
     {
         "smMethod": "CityMsg.PupilExactSearchResp"
     },
+    {
+        "smMethod": "CityMsg.PupilSkyRankListResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankShieldResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankAskResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankSetConditionResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankCommentListResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankCommentLikeResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankCommentSendResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankCommentDeleteResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankPrivateChatRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldMessageListMsg"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankChatDeleteRsp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRankSyncChatList"
+    },
+    {
+        "smMethod": "CityMsg.WorldMessageListMsg"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankAskListResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankAskAgreeResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilSkyRankAskRefuseResp"
+    },
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.PupilSkyRankAskCancelResp"
+    },
+    {
+        "smMethod": "CityMsg.PupilRedPointSync"
+    },
     null,
     null,
     null,
@@ -34270,8 +34312,12 @@
     {
         "smMethod": "CityMsg.DailyFollowRemindResp"
     },
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.AssistantPalaceAutoInfoSync"
+    },
+    {
+        "smMethod": "CityMsg.AssistantPalaceAutoRewardResp"
+    },
     null,
     null,
     null,
@@ -39102,19 +39148,43 @@
     {
         "smMethod": "CityMsg.TreasureAuctionChatDeleteRsp"
     },
+    {
+        "smMethod": "CityMsg.TreasureAuctionSelectEventOneKeyRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionVerifyPasswordRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionOneKeyIdentifyRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionBeginExploreOneKeyRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionSellRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionBidRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionSellDownRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionGetGoodsRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionSyncBid"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionOutbidNotify"
+    },
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionSettleNotify"
+    },
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.TreasureAuctionAuctionNotifyReadRsp"
+    },
     null,
     null,
     null,
@@ -41008,7 +41078,9 @@
     {
         "smMethod": "CityMsg.ElixirElvesCountSync"
     },
-    null,
+    {
+        "smMethod": "CityMsg.ElixirElvesDrawSeasonSync"
+    },
     null,
     null,
     null,
@@ -41045,7 +41117,9 @@
     null,
     null,
     null,
-    null,
+    {
+        "smMethod": "CityMsg.ElixirDestinyOrderQuickPlantResp"
+    },
     null,
     null,
     null,
@@ -42449,15 +42523,31 @@
     },
     null,
     null,
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionSellRsp"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionBidRsp"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionSellDownRsp"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionGetGoodsRsp"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionSyncBid"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionOutbidNotify"
+    },
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionSettleNotify"
+    },
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.ChaosLawAuctionNotifyReadRsp"
+    },
     null,
     null,
     null,
@@ -42921,6 +43011,126 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.PetsFightEnterResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightDrawResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightHillUpgradeResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightFusionResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightPetListResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightPetSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionApplyResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionCancelResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionAcceptResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionBreedResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightStageBattleResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionBossBattleResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionBossRewardResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionListResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionSelectResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionApplicantListResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionBreedListResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionShareResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionBossInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaFormationResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaRefreshResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaBattleResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaBuyTicketResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightWorshipResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaDailyRewardResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaLogResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightArenaSweepResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionBossRecordResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionBossTopDamageResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightDrawTicketSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightRedPointResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightBattleDebugSync"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightOneKeyBreedResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightOneKeyLockResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightFusionSelectResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUseDrawItemResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightDeletePassiveSkillResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightUnionFusionRecordResp"
+    },
+    {
+        "smMethod": "CityMsg.PetsFightPetExchangeResp"
+    },
     null,
     null,
     null,
@@ -42982,6 +43192,111 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.WorldBidEnterRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidMatchRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidMatchSuccessSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidGetRoomInfoRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomInfoSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidBidRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidUseItemRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidSettleSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidLeaveRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidLeaveSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomCloseSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidBuyPropRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidSaveSetRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidCreateRoomRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidJoinRoomRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidJoinRoomSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidStartRoomRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidKickPlayerRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidKickPlayerSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidPlayerBaseRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidEmotionRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidEmotionSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidCancelMatchRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomReadyRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomReadySync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomStartSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRoomSettleRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidPriceFinishSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidGiveUpRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidGiveUpSync"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidDayRewardRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidCollectInfoRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidCollectUpRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidGetHistoryRsp"
+    },
+    {
+        "smMethod": "CityMsg.WorldBidRedPointSync"
+    },
     null,
     null,
     null,
@@ -43147,6 +43462,84 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.NewCardCollectEnterResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectLoginSyncResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectOpenBagResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectActivateResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectClaimChapterStageResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectSignInResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectReleaseResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectChangeResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectChangeListResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectSearchPlayerResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectOpenRandomBoxResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectCardRecycleResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectInnerRedPointResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectHistoryViewResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectClaimSeasonAwardResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectLeaveResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectUseAbleCardListResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectPlayerCollectRecordListResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectPlayerSeasonListResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectLoseChange"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectAllCardListResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectAllCardCountResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectGetKeyInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectReceiveBattlePassKeyResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectCardLockResp"
+    },
+    {
+        "smMethod": "CityMsg.NewCardCollectSelectSeasonResp"
+    },
     null,
     null,
     null,
@@ -43210,6 +43603,9 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.NewCardCollectSyncData"
+    },
     null,
     null,
     null,
@@ -43220,6 +43616,30 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.BubbleDragonEnterActivityResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonEnterGameResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonShootResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonUseStaminaItemResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonUseChargeItemResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonDrawResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonSelectRareResp"
+    },
+    {
+        "smMethod": "CityMsg.BubbleDragonRefreshBubbleResp"
+    },
     null,
     null,
     null,
@@ -43312,6 +43732,18 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.RewardReclaimInfoPush"
+    },
+    {
+        "smMethod": "CityMsg.RewardReclaimBatchClaimRsp"
+    },
+    {
+        "smMethod": "CityMsg.RewardReclaimBatchBuyRsp"
+    },
+    {
+        "smMethod": "CityMsg.RewardReclaimAbandonPayRsp"
+    },
     null,
     null,
     null,
@@ -43608,7 +44040,58 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.FishingEnterRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingCastRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingReportQteRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingSwitchPoolRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingGetFishListRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingExpandBagRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingDecomposeRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingLockRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingInheritRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingConfirmPendingRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingSkillBookRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingDeployRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingClaimAtlasRewardRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingLevelUpRsp"
+    },
     null,
+    {
+        "smMethod": "CityMsg.FishingFishLevelUpRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingFishStarUpRsp"
+    },
+    {
+        "smMethod": "CityMsg.FishingFishLevelResetRsp"
+    },
     null,
     null,
     null,
@@ -43689,7 +44172,82 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.PetLockSync"
+    },
     null,
+    {
+        "smMethod": "CityMsg.PeakDuelEnterResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelLoginSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelServerListResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelScheduleResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelGroupRankResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelBattleInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelBattleRankResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelBattleReportResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelBattleHistoryResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelContributionResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelLikeResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelGetFightInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelClaimRechargeBatchResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelGuessInfoResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelReceiveGuessCoinResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelGuessResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelHeatRankResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelGuessRankResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelHistoryResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelCelebrationResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelWorshipResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelUnionMatchScoreResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelPlayerScoreResp"
+    },
+    {
+        "smMethod": "CityMsg.PeakDuelRedPointResp"
+    },
     null,
     null,
     null,
@@ -43766,7 +44324,22 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.SwitchDrawEnterRsp"
+    },
+    {
+        "smMethod": "CityMsg.SwitchDrawDrawRsp"
+    },
+    {
+        "smMethod": "CityMsg.SwitchDrawSelectBigRewardRsp"
+    },
     null,
+    {
+        "smMethod": "CityMsg.SwitchDrawSync"
+    },
+    {
+        "smMethod": "CityMsg.SwitchDrawDrawAllRsp"
+    },
     null,
     null,
     null,
@@ -43861,7 +44434,49 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.TreasureStoneEnterRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneEquipRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneUnequipRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneLockRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneSync"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneComposeBatchRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneComposeLogRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneSyncRedPoint"
+    },
     null,
+    {
+        "smMethod": "CityMsg.TreasureStoneDealSellRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneDealSellDownRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneDealBuyRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneDealGetRecordRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneDealCollectRsp"
+    },
+    {
+        "smMethod": "CityMsg.TreasureStoneDealPriceAdjustRsp"
+    },
     null,
     null,
     null,
@@ -43947,7 +44562,49 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.LawStoneEnterRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneEquipRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneUnequipRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneLockRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneSync"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneComposeBatchRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneComposeLogRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneSyncRedPoint"
+    },
     null,
+    {
+        "smMethod": "CityMsg.LawStoneDealSellRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneDealSellDownRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneDealBuyRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneDealGetRecordRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneDealCollectRsp"
+    },
+    {
+        "smMethod": "CityMsg.LawStoneDealPriceAdjustRsp"
+    },
     null,
     null,
     null,
@@ -44133,6 +44790,18 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.TextTowerEnterResp"
+    },
+    {
+        "smMethod": "CityMsg.TextTowerReceiveRewardResp"
+    },
+    {
+        "smMethod": "CityMsg.TextTowerGetVideoResp"
+    },
+    {
+        "smMethod": "CityMsg.TextTowerReportResp"
+    },
     null,
     null,
     null,
@@ -44228,230 +44897,83 @@
     null,
     null,
     null,
+    {
+        "smMethod": "CityMsg.TopFeastTimeEntrySyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeEnterResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeApplyResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeCancelApplyResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeClaimOutputResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeKickResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeSceneSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeKickedSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeInviteResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeAgreeApplyResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeRefuseAllApplyResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeLotteryEnterResp"
+    },
     null,
+    {
+        "smMethod": "CityMsg.TopFeastTimeLotteryDrawResp"
+    },
     null,
+    {
+        "smMethod": "CityMsg.TopFeastTimeRedPointResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeMyApplyListResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeApplyListResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeInviteListResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeAgreeInviteListResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeListResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeAgreeJoinSyncMsg"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeSeatDetailResp"
+    },
+    {
+        "smMethod": "CityMsg.TopFeastTimeRefuseAllInviteResp"
+    },
     null,
     null,
     null,
     null,
     null,
     null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    {
+        "smMethod": "CityMsg.TopFeastTimeBroadcast"
+    },
     null,
     null,
     null,

@@ -22,7 +22,7 @@ export default class PalaceMgr {
         for (let i = 0; i < t.data.length; i++) {
             const id = t.data[i].id;
             logger.info(`[仙宫管理] 收获礼物 ${id}`);
-            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {id: id, getReward: true, type: "SendGiftType_Palace"}, null);
+            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {id: id, getReward: true, type: 1}, null);
             await new Promise((resolve) => setTimeout(resolve, 1000));
         }
     }
@@ -38,7 +38,7 @@ export default class PalaceMgr {
         if (!isAutomationTaskEnabled('cave.palace')) return;
         logger.debug(`[仙宫管理] 检查崇拜`);
         if (t.worship && t.worshipRandom) {
-            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {titleId: 0, isRandom: 1}, null);
+            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_WORSHIP, {titleId: 0, isRandom: 1}, null);
         }
     }
 
@@ -48,7 +48,7 @@ export default class PalaceMgr {
             PalaceMgr.isMiracle = true;
         } else if (isAutomationTaskEnabled('cave.palace')) {
             PalaceMgr.isMiracle = false;
-            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_SEND_GIFT_GET_REWARD, {titleId: 0, isRandom: 1}, null);
+            GameNetMgr.inst.sendPbMsg(Protocol.S_PALACE_WORSHIP, {titleId: 0, isRandom: 1}, null);
         } else {
             PalaceMgr.isMiracle = false;
         }

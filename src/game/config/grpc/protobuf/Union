@@ -665,3 +665,25 @@ message UnionPeakTitleDataSync {
     repeated UnionPeakTitleData peakTitleData = 2;
     repeated UnionPeakTitleAchieveListData achieveData = 3;
 }
+message UnionActiveValueQueryResp {
+    optional int32 ret = 1;
+    optional UnionActiveValueMsg valueInfo = 2;
+}
+message UnionActiveValueMsg {
+    optional int32 value7d = 1;
+    optional int32 value14d = 2;
+}
+message PeakDuelGetFightInfoReq {
+}
+message PeakDuelGetFightInfoResp {
+  required int32 ret = 1;
+  optional UnionPeakDuelUnionInfo myUnion = 2;
+  optional UnionPeakDuelUnionInfo opponentUnion = 3;
+}
+message UnionPeakDuelUnionInfo {
+  optional int64 unionId = 1;
+  optional string name = 2;
+  optional int32 flag = 3;
+  optional int64 serverId = 4;
+  optional int64 score = 5;
+}

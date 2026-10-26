@@ -323,6 +323,7 @@ message SeaWarEvent_ChallengePlayerData{
     optional int64 assistId = 8;
     optional bool isHadAtk = 9;
     optional int64 unionId = 10;
+    optional int32 backOrnamentId = 11;
 }
 message SeaWarEvent_ChallengeMonster{
     optional int32 monsterId = 1;
@@ -355,6 +356,7 @@ message SeaWarUnionHelpPlayerEntity{
     optional int32 appearanceId = 2;
     optional string unionName = 3;
     optional PlayerHeadDataMsg headInfo = 4;
+    optional int32 backOrnamentId = 5;
 }
 message SeaWarGameLogReq {
     required int32 activityId = 1;
@@ -482,6 +484,7 @@ message SeaWarDeclarationInfoSync {
     optional int64 beUnionServer = 11;
     optional int64 unionId = 12;
     optional int64 beUnionId = 13;
+    optional int32 backOrnamentId = 14;
 }
 message SeaWarDeclarationRecordResp {
     required int32 ret = 1;

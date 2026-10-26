@@ -62,6 +62,7 @@ message LawLooksRefreshSkillMsg {
 message LawLookPassiveSkillInfo{
     optional LawLooksRefreshSkillMsg refreshSkillMsg = 1;
     optional LawLooksRefreshSkillMsg alternateSkillMsg =2;
+    optional bool lock = 3;
 }
 message LawLooksCombineSkillMsg {
     required int32 combineId = 1;

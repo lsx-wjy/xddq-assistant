@@ -1,0 +1,276 @@
+package com.yq.msg.CityMsg;
+import "Common";
+/**
+ * 灵池垂钓 Fishing（V4.1.0 常驻系统协议）
+ *
+ * 【系统类型】洞府入口常驻养成；非限时活动壳，无 activityId、无 uniqueConfig / 配置下发协议。
+ * 【配置】鱼池/图鉴/等级/境界/继承/玄诀等静态表由客户端 GameConfig / 策划 DB 读取。
+ * 【参照】ChaosLaw.proto / Elixir.proto（Enter 拉玩家态；变更走各操作回包）
+ *
+ * systemOpenId = 380；协议号段 238001-238015（须与服务端对齐）
+ *
+ * 【定版】QTE 仅为表现，不参与掉落随机；Cast 回包即最终鱼。
+ *       完美 QTE 通过 ReportQte 按鱼池写入 poolPerfectOnce；各池独立解锁十连，跳过动画客户端自判。
+ * 【Enter】当日首次进入时服务端自动发每日鱼饵，回包 `dailyBaitReward` 弹恭喜获得；鱼饵持有量走背包同步，playerData 不含 bait 字段。
+ * 【配表】鱼种 FishingFishTypeDB：fishTypeId 全局唯一，每条绑定固定 poolId；
+ *       名称/图标/五行/图鉴稀有度读表；协议传 fishTypeId + 实例随机字段（孔数/品质/变异/属性）。
+ * 【Cast】num=1 单钓 / num=10 十连（十连须当前鱼池已在 poolPerfectOnce）；跳过 QTE 动画纯客户端表现，不上报。
+ * 【待确认】继承/洗练结果服务端持久化；未 Confirm 时 Enter 经 playerData 下发，切 Tab 须弹窗。
+ * 【图鉴】鱼种列表/剪影/奖励档读配表；激活与领奖态经 playerData.atlasEntries / 各操作回包增量同步。
+ */
+enum FishingPb {
+    Fishing_Enter = 238001;
+    Fishing_Cast = 238002;
+    Fishing_ReportQte = 238003;
+    Fishing_SwitchPool = 238004;
+    Fishing_GetFishList = 238005;
+    Fishing_ExpandBag = 238006;
+    Fishing_Decompose = 238007;
+    Fishing_Lock = 238008;
+    Fishing_Inherit = 238009;
+    Fishing_ConfirmPending = 238010;
+    Fishing_SkillBook = 238011;
+    Fishing_Deploy = 238012;
+    Fishing_ClaimAtlasReward = 238013;
+    Fishing_LevelUp = 238014;
+    Fishing_RedUpdate = 238015;
+    Fishing_FishLevelUp = 238016;
+    Fishing_FishStarUp = 238017;
+    Fishing_FishLevelReset = 238018;
+}
+/** QTE 表现档位：不参与掉落随机；完美档记入 poolPerfectOnce（解锁该池十连；跳过动画客户端自判） */
+enum FishingQteGrade {
+    Fishing_Qte_Normal = 1;
+    Fishing_Qte_Good = 2;
+    Fishing_Qte_Perfect = 3;
+}
+/** 待确认操作类型（FishingPendingResultMsg.opType） */
+enum FishingPendingOpType {
+    Fishing_Pending_Inherit = 1;
+    Fishing_Pending_SkillBook = 2;
+}
+/** 继承/洗练结果确认类型 */
+enum FishingConfirmType {
+    Fishing_Confirm_Save = 1;
+    Fishing_Confirm_Cancel = 2;
+}
+/** 五行类型（上阵槽位；鱼自带五行读 fishTypeId 配表） */
+enum FishingElement {
+    Fishing_Element_Metal = 1;
+    Fishing_Element_Wood = 2;
+    Fishing_Element_Water = 3;
+    Fishing_Element_Fire = 4;
+    Fishing_Element_Earth = 5;
+}
+/** 单条鱼属性（战斗/展示用） */
+message FishingFishAttrMsg {
+    required int32 attrId = 1;
+    required int32 quality = 2;
+    required string value = 3;
+    optional int32 sourceType = 4;
+    optional bool lock = 5;
+}
+/** 鱼实例（服务端权威；鱼篓/上阵/图鉴详情共用） */
+message FishingFishMsg {
+    required int64 fishId = 1;
+    required int32 fishTypeId = 2;
+    required int32 slots = 3;
+    required int32 quality = 4;
+    required bool mutant = 5;
+    repeated FishingFishAttrMsg attrs = 6;
+    repeated int32 deployedGodBody = 7;
+    required bool locked = 8;
+    optional int64 score = 9;
+    optional int32 level = 10;
+    optional int32 star = 11;
+}
+/** 图鉴玩家进度（静态信息读 fishTypeId 配表；未激活鱼种不在此列表，UI 显示剪影） */
+message FishingAtlasEntryMsg {
+    required int32 fishTypeId = 1;
+    required bool activated = 2;
+    required bool rewardClaimed = 3;
+}
+/** 单个五行上阵槽（空槽不传 fish） */
+message FishingDeploySlotMsg {
+    required int32 element = 1;
+    optional FishingFishMsg fish = 2;
+}
+/**
+ * 上阵页展示数据（五行槽 + 等级区 + 加成汇总）
+ *
+ * 【复用规划 · 暂不修改 WatchPlayer.proto】
+ * 后续 PlayerDetailDataMsg 可增加 optional 字段，例如：
+ *   optional FishingDeployPanelMsg fishingDeploy = 35;
+ * 系统是否开放走通用 SystemOpen；未开放或对方无数据时 **optional 留空即可**，本结构不承载解锁态。
+ */
+message FishingDeployPanelMsg {
+    repeated FishingDeploySlotMsg slotList = 1;
+}
+message FishingCountMsg {
+    optional int32 quality = 1;
+    optional int32 count = 2;
+}
+/** 玩家钓鱼养成总数据（Enter / 各操作回包刷新；不含鱼饵数量） */
+message FishingPlayerDataMsg {
+    required int32 currentPoolId = 1;
+    required int32 totalCastCount = 2;
+    required int32 bagCapacity = 3;
+    required int32 bagCount = 4;
+    optional bool poolPerfectOnce = 5;
+    optional FishingDeployPanelMsg deployData = 6;
+    optional FishingPendingResultMsg inheritPending = 7;
+    optional FishingPendingResultMsg skillBookPending = 8;
+    repeated FishingAtlasEntryMsg atlasEntries = 9;
+    repeated FishingCountMsg fishingCount = 10;
+    optional int32 dayInheritCount = 11;
+    optional int32 dayFreeCount = 12;
+    optional int32 dayAdCount = 13;
+}
+/**
+ * 待确认的继承/洗练会话（服务端持久化，Confirm 前跨重登保留）
+ *
+ * Inherit/SkillBook 成功写入；Enter/playerData 下发；
+ * ConfirmPending 成功后服务端清除对应 inheritPending / skillBookPending。
+ */
+message FishingPendingResultMsg {
+    required int32 pendingId = 1;
+    required int32 opType = 2;
+    required int64 targetFishId = 3;
+    repeated FishingFishAttrMsg previewAttrs = 4;
+    optional int32 replacedAttrIndex = 5;
+    optional int64 score = 6;
+    optional bool success = 7;
+}
+message FishingEnterReq {
+}
+message FishingEnterRsp {
+    required int32 ret = 1;
+    optional FishingPlayerDataMsg playerData = 2;
+    optional string dailyBaitReward = 3;
+    optional string red = 4;
+}
+message FishingCastReq {
+    optional int32 num = 1;
+    optional int32 type = 2;
+    optional bool isUseADTime = 3;
+}
+message FishingCastRsp {
+    required int32 ret = 1;
+    repeated FishingFishMsg fishList = 2;
+    optional FishingPlayerDataMsg playerData = 3;
+    repeated FishingAtlasEntryMsg newAtlas = 4;
+}
+message FishingReportQteReq {
+    required int32 qteGrade = 1;
+}
+message FishingReportQteRsp {
+    required int32 ret = 1;
+    optional bool poolPerfectOnce = 2;
+}
+message FishingGetFishListReq {
+}
+message FishingGetFishListRsp {
+    required int32 ret = 1;
+    repeated FishingFishMsg fishList = 2;
+}
+message FishingExpandBagReq {
+}
+message FishingExpandBagRsp {
+    required int32 ret = 1;
+    optional int32 bagCapacity = 2;
+}
+message FishingDecomposeReq {
+    repeated int64 fishIds = 1;
+}
+message FishingDecomposeRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional FishingPlayerDataMsg playerData = 3;
+}
+message FishingLockReq {
+    required int64 fishId = 1;
+    required int32 stat = 2;
+    optional string passwd = 3;
+    optional string oldPasswd = 4;
+}
+message FishingLockRsp {
+    required int32 ret = 1;
+    optional FishingFishMsg fish = 2;
+    optional int64 forceUnlockTime = 3;
+    optional int64 nextEnterTime = 4;
+}
+message FishingInheritReq {
+    required int64 mainFishId = 1;
+    required int64 materialFishId = 2;
+    required int32 type = 3;
+}
+message FishingInheritRsp {
+    required int32 ret = 1;
+    optional FishingPendingResultMsg pending = 2;
+    optional int32 dayInheritCount = 3;
+    repeated FishingFishMsg fish = 4;
+}
+message FishingConfirmPendingReq {
+    required int32 pendingId = 1;
+    required int32 confirmType = 2;
+}
+message FishingConfirmPendingRsp {
+    required int32 ret = 1;
+    optional FishingFishMsg fish = 2;
+    optional FishingPlayerDataMsg playerData = 3;
+    optional string reward = 4;
+}
+message FishingSkillBookReq {
+    required int64 fishId = 1;
+    required int32 skillBookItemId = 2;
+    optional int32 type = 3;
+}
+message FishingSkillBookRsp {
+    required int32 ret = 1;
+    optional FishingPendingResultMsg pending = 2;
+}
+message FishingDeployReq {
+    required int64 fishId = 1;
+    required int32 element = 2;
+}
+message FishingDeployRsp {
+    required int32 ret = 1;
+    optional FishingDeployPanelMsg deployData = 2;
+    repeated FishingFishMsg updatedFish = 3;
+}
+message FishingClaimAtlasRewardReq {
+    required int32 fishTypeId = 1;
+}
+message FishingClaimAtlasRewardRsp {
+    required int32 ret = 1;
+    optional string reward = 2;
+    optional FishingAtlasEntryMsg entry = 3;
+}
+message FishingRedUpdateSync {
+    optional string red = 1;
+}
+message FishingFishLevelUpReq {
+    optional int64 fishId = 1;
+    optional bool oneKey = 2;
+}
+message FishingFishLevelUpRsp {
+    required int32 ret = 1;
+    optional FishingFishMsg fishMsg = 2;
+}
+message FishingFishStarUpReq {
+    optional int64 fishId = 1;
+    repeated int64 fishList = 2;
+}
+message FishingFishStarUpRsp {
+    required int32 ret = 1;
+    repeated FishingFishMsg fishList = 2;
+    optional string returnItem = 3;
+}
+message FishingFishLevelResetReq {
+    optional int64 fishId = 1;
+}
+message FishingFishLevelResetRsp {
+    required int32 ret = 1;
+    optional int32 itemCount = 2;
+    optional FishingFishMsg fishMsg = 3;
+}

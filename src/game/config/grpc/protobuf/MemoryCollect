@@ -18,15 +18,18 @@ enum MemoryCollectPb{
   memoryCollectCardGroupFull = 217415;
   memoryCollectSyncLoseData = 217416;
 }
+message MemoryCollectCardGroupFull{
+  repeated int32 deck = 1;
+}
 message MemoryCollectCardInfo{
   required int32 id = 1;
   required int64 num = 2;
 }
 message MemoryCollectAlertCardInfo{
-    required int32 id = 1;
-    optional string name = 2;
-    optional int64 num = 3;
-    optional bool isNew = 4;
+  required int32 id = 1;
+  optional string name = 2;
+  optional int64 num = 3;
+  optional bool isNew = 4;
 }
 message MemoryCollectCardBagInfo{
   required int32 id = 1;
@@ -60,22 +63,13 @@ message MemoryCollectSyncData{
   optional bool playerChangerListRedPoint = 6;
   optional bool changerRecordListRedPoint = 7;
 }
-message MemoryCollectLoseChangeInfo{
-  optional int32 cardList = 1;
-  optional PlayerBaseDataMsg playerData = 2;
-}
-message MemoryCollectLoseChange {
-    repeated MemoryCollectLoseChangeInfo loseChangeInfo = 1;
-}
-message MemoryCollectCardGroupFull{
-  repeated int32 deck = 1;
-}
 message MemoryCollectSeasonData{
   required int32 season = 1;
   optional MemoryCollectSeasonDetail seasonData = 2;
   optional MemoryCollectSeasonDetail historySeasonData = 3;
   optional bool isCurSeason = 4;
   optional bool isFull = 5;
+  optional bool awardRed = 6;
 }
 message MemoryCollectSeasonDetail{
   optional int32 value = 1;
@@ -88,6 +82,8 @@ message MemoryCollectLoginSyncData{
   optional int32 openType = 4;
   optional int32 season = 5;
   repeated int32 collectSeasonId = 6;
+  optional int32 serverSeason = 7;
+  optional string extra = 8;
 }
 message MemoryCollectServerInfo{
   required int64 serverId = 1;
@@ -95,6 +91,8 @@ message MemoryCollectServerInfo{
   required int64 startTime = 3;
   required int64 endTime = 4;
   required int64 endShowTime = 5;
+  optional int32 season = 6;
+  optional bool reopen = 7;
 }
 message MemoryCollectEnterReq{
   required int32 activityId = 1;
@@ -109,6 +107,7 @@ message MemoryCollectEnterResp{
   repeated int32 deck = 7;
   repeated MemoryCollectServerInfo serverInfoList = 8;
   optional MemoryCollectLoseChange loseData = 9;
+  optional string extra = 10;
 }
 message MemoryCollectReleaseReq {
   required int32 activityId = 1;
@@ -208,6 +207,13 @@ message MemoryCollectLeaveReq{
 }
 message MemoryCollectLeaveResp{
   required int32 ret = 1;
+}
+message MemoryCollectLoseChange {
+  repeated MemoryCollectLoseChangeInfo loseChangeInfo = 1;
+}
+message MemoryCollectLoseChangeInfo{
+  optional int32 cardList = 1;
+  optional PlayerBaseDataMsg playerData = 2;
 }
 message MemoryCollectPlayerCollectRecordListReq{
   required int32 season = 1;

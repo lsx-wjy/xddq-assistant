@@ -157,6 +157,7 @@ message SpChampRosterShowMsg{
   repeated int32 petSoulShapeList = 14;
   repeated int32 petLinkageId = 15;
   repeated int32 spiritLinkageId = 16;
+  optional int32 equipBackOrnament = 17;
 }
 message SpChampPlayerGuessInfoMsg{
   optional SpChampToSkyPlayerInfo playerInfo = 1;

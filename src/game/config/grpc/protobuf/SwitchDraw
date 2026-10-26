@@ -1,0 +1,94 @@
+package com.yq.msg.CityMsg;
+import "Common";
+enum SwitchDrawPb {
+  SwitchDraw_Enter = 238201;
+  SwitchDraw_Draw = 238202;
+  SwitchDraw_SelectBigReward = 238203;
+  SwitchDraw_Sync = 238205;
+  SwitchDraw_DrawAll = 238206;
+}
+message SwitchDrawEnterReq {
+  required int32 activityId = 1;
+}
+message SwitchDrawEnterRsp {
+  required int32 ret = 1;
+  optional SwitchDrawSync data = 2;
+}
+message SwitchDrawDrawReq {
+  required int32 activityId = 1;
+}
+message SwitchDrawDrawRsp {
+  required int32 ret = 1;
+  optional int32 column = 2;
+  optional int32 pushNum = 3;
+  repeated int32 hitGridIndexList = 4;
+  optional bool hitBigReward = 5;
+  optional string rewards = 6;
+  optional bool autoNextRound = 7;
+  optional SwitchDrawSync data = 8;
+}
+message SwitchDrawSelectBigRewardReq {
+  required int32 activityId = 1;
+  required int32 index = 2;
+  optional int32 selectIndex = 3;
+}
+message SwitchDrawSelectBigRewardRsp {
+  required int32 ret = 1;
+  optional SwitchDrawSync data = 2;
+}
+message SwitchDrawDrawAllReq {
+  required int32 activityId = 1;
+}
+message SwitchDrawDrawAllRsp {
+  required int32 ret = 1;
+  repeated SwitchDrawDrawOnceResult drawList = 2;
+  optional int32 totalCost = 3;
+  optional string totalRewards = 4;
+  optional SwitchDrawSync data = 6;
+}
+message SwitchDrawDrawOnceResult {
+  optional int32 column = 1;
+  optional int32 pushNum = 2;
+  repeated int32 hitGridIndexList = 3;
+  optional bool hitBigReward = 4;
+  optional string rewards = 5;
+  optional int32 costNum = 6;
+}
+message SwitchDrawSync {
+  optional int32 round = 1;
+  optional int32 drawCountInRound = 2;
+  optional int32 costNum = 3;
+  optional bool hasBigReward = 4;
+  optional int32 selectedBigRewardIndex = 6;
+  repeated SwitchDrawGrid gridList = 9;
+  repeated SwitchDrawBigRewardEntry bigRewardList = 10;
+}
+message SwitchDrawGrid {
+  required int32 pos = 1;
+  required int32 configIndex = 2;
+  optional int32 itemId = 3;
+  optional int32 num = 4;
+  optional int32 gridType = 5;
+  optional int32 bigRewardIndex = 6;
+}
+message SwitchDrawBigRewardEntry {
+  required int32 index = 1;
+  optional int32 hitCount = 2;
+  optional int32 selectIndex = 3;
+}
+message SwitchDrawConfigSync {
+  repeated SwitchDrawBoardConfigMsg boardConfigList = 1;
+  repeated SwitchDrawPoolConfigMsg poolConfigList = 2;
+}
+message SwitchDrawPoolConfigMsg {
+  optional int32 id = 1;
+  optional string award = 2;
+  optional int32 time = 3;
+  optional int32 unlock = 4;
+  optional int32 sign = 5;
+}
+message SwitchDrawBoardConfigMsg {
+  optional string floor = 1;
+  optional string reward = 2;
+  optional string cost = 3;
+}

@@ -11,6 +11,7 @@ import "Common";
         optional int64 endTime = 7;
         repeated int64 serverId = 8;
         optional int32 groupType = 9;
+        repeated ServerIdRange serverListRange = 10;
     }
     message ActivityConditionConfig {
         optional int32 activityId = 1;

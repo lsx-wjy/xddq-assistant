@@ -182,6 +182,7 @@ message UnionAreaWarShowMsg{
   optional bool isNpc = 16;
   repeated int32 petLinkageId = 17;
   repeated int32 spiritLinkageId = 18;
+  optional int32 equipBackOrnament = 19;
 }
 message UnionAreaWarPlayerInfo {
   optional int32 energy = 1;

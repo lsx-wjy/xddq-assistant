@@ -49,6 +49,7 @@ enum PackagesBaseProtocols{
     ELIXIR_ELVES_DRAW_CONFIG = 235558;
     ELIXIR_ELVES_COUNT_SYNC = 235560;
     ELIXIR_LOGIN_SYNC_DATA = 235500;
+    PET_LOCK_SYNC = 238099;
 }
 message MonsterGoSeasonSync {
     required string seasonConfig = 1;
@@ -720,6 +721,7 @@ message SealMonsterLoginSync {
     optional int32 costItemNums = 1;
     optional int64 lastRecoveryTime = 2;
     optional string recoverTime = 3;
+    optional string showTime = 4;
 }
 message ElixirElvesDrawConfigSync {
   repeated ElixirElvesDrawConfig drawConfigs = 1;
@@ -752,4 +754,15 @@ message ElixirLoginSyncData {
     repeated int32 danFanIds = 2;
     optional int32 pharmacistLv = 3;
     optional int32 todaySendNum = 4;
+    repeated ElixirLoginSyncGrassSeedInfo grassSeedInfos = 5;
+}
+message ElixirLoginSyncGrassSeedInfo {
+    required int32 grassSeedId = 1;
+    required int32 state = 2;
+    optional int64 startTime = 3;
+    optional int32 lookAdNum = 4;
+}
+message PetLockSync {
+    optional bool hasLock = 1;
+    optional int64 forceUnlockTime = 2;
 }

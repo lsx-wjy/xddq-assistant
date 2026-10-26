@@ -648,6 +648,7 @@ message WarSeasonWorshipPlayerMsg {
   optional int32 titleId = 11;
   repeated int32 petLinkageId = 12;
   repeated int32 spiritLinkageId = 13;
+  optional int32 equipBackOrnament = 14;
 }
 message WarSeasonModifyNoticeReq {
   optional int64 groupId = 1;
@@ -825,6 +826,7 @@ message WarSeasonCommonPlayerGodBodyMsg {
   optional int32 status = 10;
   optional int64 lastFailTime = 11;
   optional bool isOpenAutoRevive = 12;
+  optional int32 equipBackOrnament = 13;
 }
 message WarSeasonMoveCapitalReq {
   optional int64 groupId = 1;

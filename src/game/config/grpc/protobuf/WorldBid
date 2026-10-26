@@ -1,0 +1,326 @@
+package com.yq.msg.CityMsg;
+import "WatchPlayer";
+enum WorldBidPb {
+  WorldBid_Enter = 237301;
+  WorldBid_Match = 237302;
+  WorldBid_MatchSuccessSync = 237303;
+  WorldBid_RoomInfo = 237304;
+  WorldBid_RoomSync = 237305;
+  WorldBid_Bid = 237306;
+  WorldBid_UseItem = 237307;
+  WorldBid_SettleSync = 237308;
+  WorldBid_Leave = 237309;
+  WorldBid_LeaveSync = 237310;
+  WorldBid_RoomCloseSync = 237311;
+  WorldBid_BuyProp = 237312;
+  WorldBid_SaveSet = 237313;
+  WorldBid_CreateRoom = 237314;
+  WorldBid_JoinRoom = 237315;
+  WorldBid_JoinRoomSync = 237316;
+  WorldBid_StartRoom = 237317;
+  WorldBid_KickPlayer = 237318;
+  WorldBid_KickPlayerSync = 237319;
+  WorldBid_PlayerBaseReq = 237320;
+  WorldBid_Emotion = 237321;
+  WorldBid_EmotionSync = 237322;
+  WorldBid_CancelMatch = 237323;
+  WorldBid_RoomReady = 237324;
+  WorldBid_RoomReadySync = 237325;
+  WorldBid_RoomStartSync = 237326;
+  WorldBid_RoomSettle = 237327;
+  WorldBid_PriceFinishSync = 237328;
+  WorldBid_PlayerGiveUp = 237329;
+  WorldBid_PlayerGiveUpSync = 237330;
+  WorldBid_DayReward = 237331;
+  WorldBid_CollectInfo = 237332;
+  WorldBid_CollectUp = 237333;
+  WorldBid_GetHistory = 237334;
+  WorldBid_RedPointSync = 237335;
+}
+enum WorldBidRed {
+  WorldBidRedPoint_Collection = 1;
+  WorldBidRedPoint_Achieve = 2;
+  WorldBidRedPoint_BattlePass = 3;
+  WorldBidRedPoint_Gift = 4;
+  WorldBidRedPoint_Task = 5;
+}
+message WorldBidRecordMsg {
+  optional int32 roleId = 1;
+  optional int64 time = 2;
+  optional int64 price = 3;
+  optional bool win = 4;
+  repeated int32 items = 5;
+  optional int64 myPrice = 6;
+  optional int64 addCoin = 7;
+}
+message WorldBidCollectMsg {
+  optional int32 itemId = 1;
+  optional int32 star = 2;
+  optional int32 count = 3;
+}
+message WorldBidSetMsg {
+  optional int32 roleId = 1;
+  repeated int32 itemId = 2;
+}
+message WorldBidBoardMsg {
+  repeated WorldBidGridMsg grids = 1;
+  optional int64 price = 2;
+}
+message WorldBidQualityMsg {
+  optional int32 quality = 1;
+  optional int32 value = 2;
+}
+message WorldBidGridMsg {
+  optional int32 x = 1;
+  optional int32 y = 2;
+  optional int32 width = 3;
+  optional int32 height = 4;
+  optional int32 quality = 5;
+  optional int32 itemId = 6;
+  optional bool outline = 7;
+}
+message WorldBidRoundMsg {
+  optional int32 round = 1;
+  optional int32 itemId = 2;
+  optional int64 price = 3;
+  optional string itemEffect = 4;
+  optional string roleEffect = 5;
+  optional string mapEffect = 6;
+  optional int32 mapItemId = 7;
+}
+message WorldBidMatchPlayerMsg {
+  optional int64 playerId = 1;
+  optional int64 exp = 2;
+  optional PlayerBaseDataMsg msg = 3;
+}
+message WorldBidPlayerMsg {
+  optional int64 playerId = 1;
+  optional int32 roleId = 2;
+  repeated WorldBidRoundMsg rounds = 3;
+  optional bool giveUp = 4;
+  optional PlayerBaseDataMsg baseData = 5;
+  optional int64 exp = 6;
+  optional bool ready = 7;
+  optional int64 coinCount = 8;
+  optional bool canPrice = 9;
+}
+message WorldBidRoomMsg {
+  optional int32 roomId = 1;
+  optional int64 beginTime = 2;
+  optional int32 mapId = 3;
+  optional int64 roomOwner = 4;
+  optional int32 round = 5;
+  optional int32 bidRound = 6;
+  optional int64 bidStartTime = 7;
+  repeated WorldBidPlayerMsg players = 8;
+  optional WorldBidBoardMsg board = 9;
+  optional int32 areaId = 10;
+  optional string code = 11;
+  optional bool guide = 12;
+  optional int32 gameCount = 13;
+  optional int32 curCount = 14;
+}
+message WorldBidEnterReq {
+}
+message WorldBidEnterRsp {
+  required int32 ret = 1;
+  optional int32 state = 2;
+  optional int32 level = 3;
+  optional int64 exp = 4;
+  optional string systemOpenValue = 5;
+  repeated int32 roleId = 6;
+  optional WorldBidSetMsg setData = 7;
+  optional int32 dayRewardCount = 8;
+  optional int32 roomId = 9;
+  optional string redPoint = 10;
+}
+message WorldBidMatchReq {
+  optional int32 areaId = 1;
+}
+message WorldBidMatchRsp {
+  required int32 ret = 1;
+  optional int64 joinTime = 2;
+}
+message WorldBidMatchSuccessSync {
+  repeated WorldBidMatchPlayerMsg players = 1;
+  optional int32 roomId = 2;
+  optional int64 successTime = 3;
+  optional int32 mapId = 4;
+}
+message WorldBidGetRoomInfoReq {
+  optional int32 roomId = 1;
+}
+message WorldBidGetRoomInfoRsp {
+  required int32 ret = 1;
+  optional WorldBidRoomMsg roomInfo = 2;
+}
+message WorldBidRoomInfoSync {
+  optional WorldBidRoomMsg roomInfo = 1;
+}
+message WorldBidBidReq {
+  optional int64 price = 1;
+  optional bool createRoom = 2;
+}
+message WorldBidBidRsp {
+  required int32 ret = 1;
+  optional int64 price = 2;
+}
+message WorldBidUseItemReq {
+  optional int32 itemId = 1;
+  optional bool createRoom = 2;
+}
+message WorldBidUseItemRsp {
+  required int32 ret = 1;
+  optional WorldBidBoardMsg board = 2;
+  optional WorldBidRoundMsg round = 3;
+}
+message WorldBidSettleSync {
+  optional WorldBidRoomMsg roomMsg = 1;
+  optional int64 winner = 2;
+}
+message WorldBidLeaveReq {
+}
+message WorldBidLeaveRsp {
+  required int32 ret = 1;
+}
+message WorldBidRoomCloseSync {
+  optional int32 roomId = 1;
+}
+message WorldBidLeaveSync {
+  optional int64 playerId = 1;
+}
+message WorldBidBuyPropReq {
+  optional int32 propId = 1;
+  optional int32 count = 2;
+}
+message WorldBidBuyPropRsp {
+  required int32 ret = 1;
+  repeated int32 roles = 2;
+}
+message WorldBidSaveSetReq {
+  optional WorldBidSetMsg setData = 1;
+}
+message WorldBidSaveSetRsp {
+  required int32 ret = 1;
+  optional WorldBidSetMsg setData = 2;
+}
+message WorldBidCreateRoomReq {
+  optional int32 areaId = 1;
+  optional int32 count = 2;
+}
+message WorldBidCreateRoomRsp {
+  required int32 ret = 1;
+  optional int32 roomId = 2;
+}
+message WorldBidJoinRoomReq {
+  optional string roomCode = 1;
+}
+message WorldBidJoinRoomRsp {
+  required int32 ret = 1;
+  optional WorldBidRoomMsg roomMsg = 2;
+}
+message WorldBidJoinRoomSync {
+  optional WorldBidMatchPlayerMsg players = 1;
+}
+message WorldBidStartRoomReq {
+  optional int32 roleId = 1;
+  repeated int32 itemId = 2;
+}
+message WorldBidStartRoomRsp {
+  required int32 ret = 1;
+  optional int64 prepareStartTime = 2;
+}
+message WorldBidKickPlayerReq {
+  optional int64 targetPlayerId = 1;
+}
+message WorldBidKickPlayerRsp {
+  required int32 ret = 1;
+}
+message WorldBidKickPlayerSync {
+  optional int64 targetPlayerId = 1;
+}
+message WorldBidPlayerBaseReq {
+  repeated int64 players = 1;
+  optional int32 roomId = 2;
+}
+message WorldBidPlayerBaseRsp {
+  required int32 ret = 1;
+  repeated PlayerBaseDataMsg players = 2;
+}
+message WorldBidEmotionReq {
+  optional int32 emotionId = 1;
+}
+message WorldBidEmotionRsp {
+  optional int32 ret = 1;
+}
+message WorldBidEmotionSync {
+  optional int64 playerId = 1;
+  optional int32 emotionId = 2;
+}
+message WorldBidCancelMatchReq {
+}
+message WorldBidCancelMatchRsp {
+  required int32 ret = 1;
+}
+message WorldBidRoomReadyReq {
+  optional int32 roleId = 1;
+  repeated int32 itemId = 2;
+  optional bool ready = 3;
+}
+message WorldBidRoomReadyRsp {
+  required int32 ret = 1;
+  repeated int64 playerId = 2;
+}
+message WorldBidRoomReadySync {
+  repeated int64 playerId = 1;
+}
+message WorldBidRoomStartSync {
+  optional int64 prepareStartTime = 1;
+}
+message WorldBidRoomSettleReq {
+}
+message WorldBidRoomSettleRsp {
+  required int32 ret = 1;
+}
+message WorldBidPriceFinishSync {
+  optional int64 playerId = 1;
+}
+message WorldBidGiveUpReq {
+}
+message WorldBidGiveUpRsp {
+  required int32 ret = 1;
+}
+message WorldBidGiveUpSync {
+  repeated int64 players = 1;
+}
+message WorldBidDayRewardReq {
+}
+message WorldBidDayRewardRsp {
+  required int32 ret = 1;
+  optional int32 dayRewardCount = 2;
+  optional string reward = 3;
+}
+message WorldBidCollectInfoReq {
+}
+message WorldBidCollectInfoRsp {
+  required int32 ret = 1;
+  repeated WorldBidCollectMsg collects = 2;
+}
+message WorldBidCollectUpReq {
+  optional int32 itemId = 1;
+}
+message WorldBidCollectUpRsp {
+  required int32 ret = 1;
+  repeated WorldBidCollectMsg collect = 2;
+  optional string reward = 3;
+}
+message WorldBidGetHistoryReq {
+}
+message WorldBidGetHistoryRsp {
+  required int32 ret = 1;
+  repeated WorldBidRecordMsg records = 2;
+  optional int64 winCoin = 3;
+}
+message WorldBidRedPointSync {
+  required string redPoint = 1;
+}

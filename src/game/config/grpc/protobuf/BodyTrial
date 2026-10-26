@@ -93,6 +93,7 @@ message BodyTrialTeamMemberInfo {
   optional string wxHeadUrl = 10;
   optional int32 headFrameId = 11;
   repeated BodyTrialBuffObj buffVec = 12;
+  optional bool inSystem = 13;
 }
 message BodyTrialBuffObj{
   optional int32 buffId = 1;
@@ -282,6 +283,8 @@ message BodyTrialEnterResp {
   optional int32 inviteOpenOff = 14;
   optional int64 lastLeaveTeam = 15;
   repeated int64 applyJoinTeamIdList = 16;
+  optional int32 rewardTempId = 17;
+  optional int32 levelLimit = 18;
 }
 message BodyTrialTeamMemberNotice {
   required int32 type = 1;
@@ -355,6 +358,7 @@ message BodyTrialWorshipShowMsg{
   repeated int32 petSoulShapeList = 14;
   optional int32 titleId = 15;
   repeated int32 petLinkageId = 16;
+  optional int32 backOrnamentId = 17;
 }
 message BodyTrialSuppressedReq {
   optional int32 trialType = 1;

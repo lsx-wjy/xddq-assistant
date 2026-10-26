@@ -51,6 +51,7 @@ message UnionHonorHallWorshipShowMsg{
     optional int32 titleId = 15;
     repeated int32 petLinkageId = 16;
     repeated int32 spiritLinkageId = 17;
+    optional int32 backOrnamentId = 18;
 }
 message UnionHonorHallHonorRankData {
     optional OtherUnionData unionData = 1;

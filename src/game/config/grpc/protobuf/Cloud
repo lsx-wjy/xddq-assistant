@@ -25,6 +25,7 @@ package com.yq.msg.CityMsg;
     }
     message CloudLvUpReq {
         required bool quick = 1;
+        optional int32 targetLevel = 2;
     }
     message CloudLvUpResp {
         required int32 ret = 1;

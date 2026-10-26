@@ -2,6 +2,54 @@ package com.yq.msg.CityMsg;
 import "Common";
 import "PackagesBase";
 import "WorldMessage";
+enum TreasureAuctionPb {
+  TreasureAuction_Enter = 234001;
+  TreasureAuction_SelectEvent = 234002;
+  TreasureAuction_BeginExplore = 234004;
+  TreasureAuction_Reward = 234005;
+  TreasureAuction_SyncPlayerData = 234006;
+  TreasureAuction_HelpTreasure = 234007;
+  TreasureAuction_EquipTreasure = 234008;
+  TreasureAuction_IdentifyTreasure = 234009;
+  TreasureAuction_ExtendWareHouseLimit = 234010;
+  TreasureAuction_DisassembleTreasure = 234011;
+  TreasureAuction_GetHelpList = 234012;
+  TreasureAuction_Sell = 234013;
+  TreasureAuction_GetGoodsList = 234014;
+  TreasureAuction_Buy = 234015;
+  TreasureAuction_Collect = 234016;
+  TreasureAuction_SyncTreasureItems = 234017;
+  TreasureAuction_Lock = 234018;
+  TreasureAuction_GetRecord = 234019;
+  TreasureAuction_SellDown = 234020;
+  TreasureAuction_SetPassword = 234021;
+  TreasureAuction_ClearPassword = 234022;
+  TreasureAuction_PrivateChat = 234023;
+  TreasureAuction_GetMsgList = 234024;
+  TreasureAuction_SyncChatList = 234025;
+  TreasureAuction_ChatMessageSync = 234026;
+  TreasureAuction_SyncRedPoint = 234027;
+  TreasureAuction_GetCommentList = 234028;
+  TreasureAuction_LikeComment = 234029;
+  TreasureAuction_Comment = 234030;
+  TreasureAuction_DeleteComment = 234031;
+  TreasureAuction_PriceAdjust = 234032;
+  TreasureAuction_UpgradeMap = 234033;
+  TreasureAuction_ChatDelete = 234034;
+  TreasureAuction_SelectEventOneKey = 234035;
+  TreasureAuction_VerifyPassword = 234036;
+  TreasureAuction_OneKeyIdentify = 234037;
+  TreasureAuction_BeginExploreOneKey = 234038;
+  TreasureAuction_AuctionSell = 234039;
+  TreasureAuction_AuctionBid = 234040;
+  TreasureAuction_AuctionSellDown = 234041;
+  TreasureAuction_AuctionGetGoods = 234042;
+  TreasureAuction_AuctionSyncBid = 234043;
+  TreasureAuction_AuctionOutbidNotify = 234044;
+  TreasureAuction_AuctionSettleNotify = 234045;
+  TreasureAuction_AuctionHeartbeat = 234046;
+  TreasureAuction_AuctionNotifyRead = 234047;
+}
 message TreasureAuctionEnterReq {
 }
 message TreasureAuctionEnterRsp {
@@ -10,6 +58,8 @@ message TreasureAuctionEnterRsp {
   repeated TreasureAuctionItemData items = 3;
   optional string redPoint = 4;
   optional int32 groupId = 5;
+  repeated TreasureAuctionAuctionSettleNotify settleNotifyList = 6;
+  repeated TreasureAuctionAuctionOutbidNotify outbidNotifyList = 7;
 }
 message TreasureAuctionPlayerData {
   required int32 treasureCount = 1;
@@ -26,6 +76,11 @@ message TreasureAuctionPlayerData {
   required int64 lastCreateEventTime = 12;
   required int32 likeCommentNum = 13;
   required int32 commentNum = 14;
+  optional int32 identifyTotalCount = 15;
+  optional int32 auctionSellCount = 16;
+  optional int32 remainDailyBuyTimes = 17;
+  optional int32 remainUnidentifiedDailyBuyTimes = 18;
+  optional int32 remainDailyAuctionTimes = 19;
 }
 message TreasureAuctionSeparationEquipMsg {
   required int64 index = 1;
@@ -139,7 +194,7 @@ message TreasureAuctionHelpDataMsg {
 message TreasureAuctionSellReq {
   repeated int32 ids = 1;
   required string password = 2;
-  required int32 price = 3;
+  required int64 price = 3;
   required bool anonymous = 4;
 }
 message TreasureAuctionSellRsp {
@@ -151,7 +206,7 @@ message TreasureAuctionGetGoodsListReq {
   required int64 stamp = 1;
   optional int32 treasureId = 2;
   optional string seller = 3;
-  required int32 treasureType = 4;
+  repeated int32 treasureType = 4;
   repeated int32 attrType = 5;
   repeated int32 qualityList = 6;
   required int32 collect = 7;
@@ -160,6 +215,12 @@ message TreasureAuctionGetGoodsListReq {
   required int32 pageNum = 10;
   optional bool unIdentify = 11;
   optional int32 specialSkillFilter = 12;
+  optional int32 listType = 13;
+  optional int64 lastViewTime = 14;
+  optional int32 participateStatus = 15;
+  optional int32 gemLevel = 16;
+  repeated int32 gemAttrTypes = 17;
+  optional int32 hasSpecial = 18;
 }
 message TreasureAuctionGetGoodsListRsp {
   required int32 ret = 1;
@@ -167,6 +228,7 @@ message TreasureAuctionGetGoodsListRsp {
   optional int64 stamp = 3;
   optional int32 maxSize = 4;
   optional int32 collectSize = 5;
+  repeated TreasureAuctionGoodsAuctionData auctionGoodsList = 6;
 }
 message TreasureAuctionGoodsData {
   required string goodsId = 1;
@@ -176,7 +238,7 @@ message TreasureAuctionGoodsData {
   required string score = 5;
   required int64 beginSellTime = 6;
   optional TreasureAuctionPlayerAppearanceDataMsg sellerInfo = 7;
-  required int32 price = 8;
+  required int64 price = 8;
   required bool anonymous = 9;
   required bool collect = 10;
   required string createNickName = 11;
@@ -185,6 +247,9 @@ message TreasureAuctionGoodsData {
   optional TreasureAuctionCommentData comment = 14;
   repeated int32 skillList = 15;
   optional int32 num = 16;
+  optional int32 goodsType = 17;
+  optional int32 gemLevel = 18;
+  optional int32 gemConfigId = 19;
 }
 message TreasureAuctionPlayerAppearanceDataMsg {
   optional int64 playerId = 1;
@@ -200,7 +265,7 @@ message TreasureAuctionPlayerAppearanceDataMsg {
 message TreasureAuctionBuyReq {
   required string goodsId = 1;
   required string password = 2;
-  required int32 price = 3;
+  required int64 price = 3;
   optional int32 num = 4;
 }
 message TreasureAuctionBuyRsp {
@@ -237,7 +302,7 @@ message TreasureAuctionRecordMsg {
   required int32 type = 1;
   required int64 targetPlayerId = 2;
   required int64 targetServerId = 3;
-  required int32 price = 4;
+  required int64 price = 4;
   required int32 quality = 5;
   repeated TreasureAuctionAttributeData attributeList = 6;
   required string score = 7;
@@ -246,6 +311,7 @@ message TreasureAuctionRecordMsg {
   required string targetPlayerName = 10;
   optional int32 num = 11;
   repeated int32 skillList = 12;
+  optional bool auction = 13;
 }
 message TreasureAuctionSellDownReq {
   required int32 id = 1;
@@ -333,7 +399,7 @@ message TreasureAuctionDeleteCommentRsp {
 message TreasureAuctionPriceAdjustReq {
   required int32 id = 1;
   required string password = 2;
-  required int32 price = 3;
+  required int64 price = 3;
 }
 message TreasureAuctionPriceAdjustRsp {
   required int32 ret = 1;
@@ -354,4 +420,128 @@ message TreasureAuctionChatDeleteReq {
 message TreasureAuctionChatDeleteRsp {
   required int32 ret = 1;
   repeated TreasureAuctionFriendInfo friendInfos = 2;
+}
+message TreasureAuctionBidRecordMsg {
+  required int64 playerId = 1;
+  required int64 serverId = 2;
+  required int64 price = 3;
+  required int64 bidTime = 4;
+  required string nickName = 5;
+  required bool anonymous = 6;
+}
+message TreasureAuctionGoodsAuctionData {
+    required TreasureAuctionGoodsData base = 1;
+    required int64 currentPrice = 2;
+    required int64 auctionEndTime = 5;
+    required int64 showEndTime = 6;
+    required int32 bidCount = 8;
+    optional TreasureAuctionPlayerAppearanceDataMsg currentBidder = 9;
+    repeated TreasureAuctionBidRecordMsg recentBids = 10;
+  }
+message TreasureAuctionAuctionSellReq {
+  required int32 itemId = 1;
+  required int64 startPrice = 2;
+  required bool anonymous = 3;
+  required string password = 5;
+}
+message TreasureAuctionAuctionSellRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionGoodsAuctionData goods = 2;
+  optional int32 remainSellCount = 3;
+}
+message TreasureAuctionAuctionBidReq {
+    required string goodsId = 1;
+    required int64 bidPrice = 2;
+    required string password = 3;
+}
+message TreasureAuctionAuctionBidRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionGoodsAuctionData goods = 2;
+}
+message TreasureAuctionAuctionSellDownReq {
+  required int32 itemId = 1;
+}
+message TreasureAuctionAuctionSellDownRsp {
+  required int32 ret = 1;
+  optional string goodsId = 2;
+  optional TreasureAuctionItemData item = 3;
+}
+message TreasureAuctionAuctionGetGoodsReq {
+  required string goodsId = 1;
+}
+message TreasureAuctionAuctionGetGoodsRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionGoodsAuctionData goods = 2;
+}
+message TreasureAuctionAuctionSyncBid {
+  required TreasureAuctionGoodsAuctionData goods = 1;
+}
+message TreasureAuctionAuctionOutbidNotify {
+    required string goodsId = 1;
+    required int32 treasureId = 2;
+    required int64 refundPrice = 3;
+    required int64 nowBidPrice = 4;
+    optional int64 auctionEndTime = 5;
+    optional int64 timestamp = 6;
+}
+message TreasureAuctionAuctionSettleNotify {
+  required string goodsId = 1;
+  required int32 treasureId = 2;
+  required int32 role = 3;
+  required int64 finalPrice = 4;
+  required int64 sellerIncome = 5;
+  optional TreasureAuctionGoodsData goods = 6;
+  optional int64 timestamp = 7;
+}
+message TreasureAuctionAuctionHeartbeatReq {
+}
+message TreasureAuctionSelectEventOneKeyReq {
+}
+message TreasureAuctionSelectEventOneKeyRsp {
+  required int32 ret = 1;
+  optional TreasureAuctionPlayerData playerData = 2;
+  optional string reward = 3;
+}
+message TreasureAuctionVerifyPasswordReq {
+  required string password = 1;
+}
+message TreasureAuctionVerifyPasswordRsp {
+  required int32 ret = 1;
+}
+message TreasureAuctionOneKeyIdentifyReq {
+  optional int32 identifyQualityMax = 1;
+  optional bool autoDisassemble = 2;
+  optional int32 disassembleQualityMax = 3;
+  repeated int32 reserveAttrTypes = 4;
+}
+message TreasureAuctionOneKeyIdentifyResultMsg {
+  required int32 ret = 1;
+  optional int32 itemId = 2;
+  optional TreasureAuctionItemData itemData = 3;
+  optional int32 finalAction = 4;
+  optional bool hitReserveAttr = 5;
+}
+message TreasureAuctionOneKeyIdentifyRsp {
+  required int32 ret = 1;
+  optional int32 stopType = 2;
+  repeated TreasureAuctionOneKeyIdentifyResultMsg results = 3;
+  optional string reward = 4;
+  optional TreasureAuctionPlayerData playerData = 5;
+  optional int32 identifyCount = 6;
+  optional int32 reserveCount = 7;
+  optional int32 disassembleCount = 8;
+}
+message TreasureAuctionBeginExploreOneKeyReq {
+}
+message TreasureAuctionBeginExploreOneKeyRsp {
+  required int32 ret = 1;
+  repeated TreasureAuctionPlaceData places = 2;
+  optional TreasureAuctionPlayerData playerData = 3;
+}
+message TreasureAuctionAuctionNotifyReadReq {
+  repeated int64 settleTimestamps = 1;
+  repeated int64 outbidTimestamps = 2;
+}
+message TreasureAuctionAuctionNotifyReadRsp {
+  required int32 ret = 1;
 }

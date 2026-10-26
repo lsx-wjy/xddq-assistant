@@ -172,6 +172,7 @@ message RebornTrialLevelConfig {
     optional string wxHeadUrl = 2;
     optional int32  appearanceId = 3;
     optional int32 equipCloudId = 4;
+    optional int32 backOrnamentId = 5;
   }
   message RebornTrialUnionChallengeSimpleMsg {
     optional int64 unionId = 1;
@@ -190,6 +191,7 @@ message RebornTrialLevelConfig {
     optional int32 cloudId = 2;
     optional int64 exp = 3;
     optional string nickName = 4;
+    optional int32 backOrnamentId = 5;
   }
   message RebornTrialReportMsg {
     optional PlayerHeadDataMsg headData = 1;

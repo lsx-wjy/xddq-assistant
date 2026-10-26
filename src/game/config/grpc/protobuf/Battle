@@ -37,6 +37,7 @@ message BattleModelMsg {
     optional FateTreasureObj fateTreasureObj = 18;
     optional ArtifactObj artifactObj = 19;
     optional int32 originalRuleQuality = 20;
+    optional int32 backOrnamentId = 21;
 }
 message ArtifactObj {
     optional int32 id = 1;

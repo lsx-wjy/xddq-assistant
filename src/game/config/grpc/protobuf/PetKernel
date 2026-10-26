@@ -71,6 +71,7 @@ message PetKerneActiveResp {
 }
 message PetKernelDrawReq {
   required bool isTen = 1;
+  optional int32 times = 2;
 }
 message PetKernelDrawResp {
   required int32 ret = 1;
