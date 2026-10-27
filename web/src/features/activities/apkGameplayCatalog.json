@@ -1,0 +1,2104 @@
+{
+  "version": "4.1.10.10538",
+  "source": "APK GlobalEnumConfig.systemOpenId + SystemInfoDB + LanguageWordDB; categories are project-defined",
+  "entries": {
+    "AceMahjong": {
+      "displayName": "通天妖牌",
+      "category": "minigame",
+      "aliases": [
+        "通天幺牌"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 348,
+      "systemKey": "ACE_MAHJONG",
+      "languageKey": "SystemName-348"
+    },
+    "ActivityBase": {
+      "displayName": "活动基础功能",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "ActivitysShield": {
+      "displayName": "活动开放配置",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "ADGiftActivity": {
+      "displayName": "广告礼包",
+      "category": "commerce",
+      "aliases": [
+        "支付宝广告礼包"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 152,
+      "systemKey": "AD_GIFT",
+      "languageKey": "SystemName-152"
+    },
+    "AdReward": {
+      "displayName": "广告奖励",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "ADTimeActivity": {
+      "displayName": "缩时香礼包",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Artifact": {
+      "displayName": "造化至宝",
+      "category": "growth",
+      "aliases": [
+        "至宝"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 334,
+      "systemKey": "ARTIFACT",
+      "languageKey": "SystemName-334"
+    },
+    "AskDing": {
+      "displayName": "问鼎八荒",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 59,
+      "systemKey": "ASK_DING",
+      "languageKey": "SystemName-59"
+    },
+    "AskWay": {
+      "displayName": "问道盛会",
+      "category": "competition",
+      "aliases": [
+        "斗法"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 61,
+      "systemKey": "ASK_WAY",
+      "languageKey": "SystemName-61"
+    },
+    "Assistant": {
+      "displayName": "管家",
+      "category": "daily",
+      "aliases": [
+        "仙居助理"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 302,
+      "systemKey": "ASSISTANT",
+      "languageKey": "SystemName-302"
+    },
+    "Attribute": {
+      "displayName": "角色属性",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "AuspiciousBless": {
+      "displayName": "瑞兽赐福",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 105,
+      "systemKey": "AUSPICIOUS_BLESS",
+      "languageKey": "SystemName-105"
+    },
+    "Bag": {
+      "displayName": "背包",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "BallGVG": {
+      "displayName": "遗迹争霸",
+      "category": "union",
+      "aliases": [
+        "妖盟阵营战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 14,
+      "systemKey": "BALLGVG",
+      "languageKey": "SystemName-14"
+    },
+    "Battle": {
+      "displayName": "战斗基础",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "BigChess": {
+      "displayName": "仙弈破阵",
+      "category": "minigame",
+      "aliases": [
+        "仙界象棋"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 341,
+      "systemKey": "BIG_CHESS",
+      "languageKey": "SystemName-341"
+    },
+    "BlessFrog": {
+      "displayName": "福呱宝缘",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 308,
+      "systemKey": "BLESS_FROG",
+      "languageKey": "SystemName-308"
+    },
+    "BloodForbidden": {
+      "displayName": "血色禁地",
+      "category": "challenge",
+      "aliases": [
+        "血脉禁地"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 139,
+      "systemKey": "BLOOD_FORBIDDEN",
+      "languageKey": "SystemName-139"
+    },
+    "BodyTrial": {
+      "displayName": "神躯试炼",
+      "category": "challenge",
+      "aliases": [
+        "神体试炼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 309,
+      "systemKey": "BODY_TRIAL",
+      "languageKey": "SystemName-309"
+    },
+    "Bounce": {
+      "displayName": "弹指飞剑",
+      "category": "minigame",
+      "aliases": [
+        "仙趣弹跳"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 326,
+      "systemKey": "BOUNCE",
+      "languageKey": "SystemName-326"
+    },
+    "BubbleDragon": {
+      "displayName": "大闹仙木林",
+      "category": "minigame",
+      "aliases": [
+        "Bubble Dragon",
+        "灵果寻仙",
+        "泡泡龙"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 376,
+      "systemKey": "BubbleDragon",
+      "languageKey": "SystemName-376"
+    },
+    "CardCollect": {
+      "displayName": "玄尘忆梦",
+      "category": "seasonal",
+      "aliases": [
+        "Card Collect"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 375,
+      "systemKey": "CARD_COLLECT",
+      "languageKey": "SystemName-375"
+    },
+    "CastSwordActivity": {
+      "displayName": "炼器大会",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 119,
+      "systemKey": "CASTSWORD",
+      "languageKey": "SystemName-119"
+    },
+    "CaveTrial": {
+      "displayName": "元辰试炼",
+      "category": "challenge",
+      "aliases": [
+        "洞天试炼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 328,
+      "systemKey": "CAVE_TRIAL",
+      "languageKey": "SystemName-328"
+    },
+    "ChaosLaw": {
+      "displayName": "太初法则",
+      "category": "challenge",
+      "aliases": [
+        "混沌法则"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 367,
+      "systemKey": "CHAOS_LAW",
+      "languageKey": "SystemName-367"
+    },
+    "ChatRedPacket": {
+      "displayName": "聊天红包",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Cloud": {
+      "displayName": "座驾",
+      "category": "growth",
+      "aliases": [
+        "筋斗云"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 10,
+      "systemKey": "CLOUD",
+      "languageKey": "SystemName-10"
+    },
+    "CloudDraw": {
+      "displayName": "座驾申购",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "CloudRefine": {
+      "displayName": "座驾注灵",
+      "category": "growth",
+      "aliases": [
+        "筋斗云注灵"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 129,
+      "systemKey": "CLOUD_REFINE",
+      "languageKey": "SystemName-129"
+    },
+    "CloudSoul": {
+      "displayName": "座驾器灵",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 306,
+      "systemKey": "CLOUD_SOUL",
+      "languageKey": "SystemName-306"
+    },
+    "Common": {
+      "displayName": "公共功能",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "ComposeBall": {
+      "displayName": "召唤神龙",
+      "category": "minigame",
+      "aliases": [
+        "灵珠合成"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 130,
+      "systemKey": "COMPOSE_BALL",
+      "languageKey": "SystemName-130"
+    },
+    "Config": {
+      "displayName": "赛季与礼包配置",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "ConfigShield": {
+      "displayName": "配置开放控制",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "CutPrice": {
+      "displayName": "砍价活动",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "DemonTower": {
+      "displayName": "妖灵宝塔",
+      "category": "seasonal",
+      "aliases": [
+        "妖塔寻宝"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 116,
+      "systemKey": "DEMONTOWER",
+      "languageKey": "SystemName-116"
+    },
+    "Destiny": {
+      "displayName": "仙友",
+      "category": "daily",
+      "aliases": [
+        "仙缘游历"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 17,
+      "systemKey": "FRIENDS",
+      "languageKey": "SystemName-17"
+    },
+    "DestinyFight": {
+      "displayName": "瑶池仙踪",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 307,
+      "systemKey": "DESTINY_FIGHT",
+      "languageKey": "SystemName-307"
+    },
+    "DiscountGift": {
+      "displayName": "雅妃赠礼",
+      "category": "commerce",
+      "aliases": [
+        "折扣战令"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 195,
+      "systemKey": "DISCOUNT_GIFT",
+      "languageKey": "SystemName-195"
+    },
+    "DivineInsight": {
+      "displayName": "神躯",
+      "category": "growth",
+      "aliases": [
+        "神躯内视"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 310,
+      "systemKey": "DIVINE_INSIGHT",
+      "languageKey": "SystemName-310"
+    },
+    "DoubleDemonsActivity": {
+      "displayName": "双妖成行",
+      "category": "seasonal",
+      "aliases": [
+        "双妖同游"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 111,
+      "systemKey": "DOUBLE_DEMONS",
+      "languageKey": "SystemName-111"
+    },
+    "DouroActivity": {
+      "displayName": "斗罗试炼",
+      "category": "seasonal",
+      "aliases": [
+        "斗罗大陆联动"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 94,
+      "systemKey": "DOURO",
+      "languageKey": "SystemName-94"
+    },
+    "DragonHome": {
+      "displayName": "龙窟秘境",
+      "category": "challenge",
+      "aliases": [
+        "龙窟探险"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 108,
+      "systemKey": "DRAGON_HOME",
+      "languageKey": "SystemName-108"
+    },
+    "ElementalBonds": {
+      "displayName": "寻道夺魁",
+      "category": "competition",
+      "aliases": [
+        "五行羁绊"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 182,
+      "systemKey": "ELEMENTAL_BONDS",
+      "languageKey": "SystemName-182"
+    },
+    "Elixir": {
+      "displayName": "丹界",
+      "category": "growth",
+      "aliases": [
+        "炼丹"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 355,
+      "systemKey": "ELIXIR",
+      "languageKey": "SystemName-355"
+    },
+    "ElixirCompetition": {
+      "displayName": "妖盟竞赛",
+      "category": "seasonal",
+      "aliases": [
+        "炼丹大会"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 358,
+      "systemKey": "ELIXIR_COMPETITION",
+      "languageKey": "SystemName-358"
+    },
+    "EquipmentAdvance": {
+      "displayName": "装备精炼",
+      "category": "growth",
+      "aliases": [
+        "装备进阶"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 55,
+      "systemKey": "EQUIPMENT_ADVANCE",
+      "languageKey": "SystemName-55"
+    },
+    "ExchangeBox": {
+      "displayName": "神魔秘宝",
+      "category": "social",
+      "aliases": [
+        "赠礼宝箱"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 337,
+      "systemKey": "EXCHANGE_BOX",
+      "languageKey": "SystemName-337"
+    },
+    "FairyLand": {
+      "displayName": "飞升仙界",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 142,
+      "systemKey": "FAIRY_LAND",
+      "languageKey": "SystemName-142"
+    },
+    "FairyParty": {
+      "displayName": "天道盛宴",
+      "category": "social",
+      "aliases": [
+        "仙宴"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 335,
+      "systemKey": "FAIRY_PARTY",
+      "languageKey": "SystemName-335"
+    },
+    "FairyRabbitActivity": {
+      "displayName": "仙兔开宝",
+      "category": "seasonal",
+      "aliases": [
+        "玉兔赐福",
+        "北冥寻宝",
+        "秘境探宝",
+        "上元灯夜"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 71,
+      "systemKey": "FAIRY_RABBIT",
+      "languageKey": "SystemName-71"
+    },
+    "FanrenActivity": {
+      "displayName": "炼化法宝",
+      "category": "seasonal",
+      "aliases": [
+        "凡人修仙联动",
+        "重塑法身",
+        "涂山续缘",
+        "种植仙树",
+        "三年之约",
+        "赤狱邪蟒",
+        "七色神峰",
+        "血癫问道",
+        "玄境修行",
+        "星辰炼体"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 134,
+      "systemKey": "FAN_REN",
+      "languageKey": "SystemName-134"
+    },
+    "FateTreasure": {
+      "displayName": "本命物",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 318,
+      "systemKey": "FATE_TREASURE",
+      "languageKey": "SystemName-318"
+    },
+    "FestivalCelebrations": {
+      "displayName": "新春庆典",
+      "category": "seasonal",
+      "aliases": [
+        "节日庆典",
+        "周年庆典",
+        "斗破新年"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 110,
+      "systemKey": "FESTIVAL_CELEBRATIONS",
+      "languageKey": "SystemName-110"
+    },
+    "FirstRechargeActivity": {
+      "displayName": "首充",
+      "category": "commerce",
+      "aliases": [
+        "首充奖励"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 8,
+      "systemKey": "FIRSTCHARGE",
+      "languageKey": "SystemName-8"
+    },
+    "Fishing": {
+      "displayName": "仙泽垂钓",
+      "category": "growth",
+      "aliases": [
+        "Fishing",
+        "灵池垂钓"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 380,
+      "systemKey": "FISHING",
+      "languageKey": "SystemName-380"
+    },
+    "FlyToGod": {
+      "displayName": "登阶神境",
+      "category": "challenge",
+      "aliases": [
+        "飞升神界"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 322,
+      "systemKey": "FLY_TO_GOD",
+      "languageKey": "SystemName-322"
+    },
+    "ForbiddenTrials": {
+      "displayName": "禁地试炼",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Friend": {
+      "displayName": "世交好友",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "FundsActivity": {
+      "displayName": "基金",
+      "category": "commerce",
+      "aliases": [
+        "成长基金"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 18,
+      "systemKey": "FUND",
+      "languageKey": "SystemName-18"
+    },
+    "GatherEnergy": {
+      "displayName": "聚灵阵",
+      "category": "daily",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 70,
+      "systemKey": "GATHERENERGY",
+      "languageKey": "SystemName-70"
+    },
+    "Gift": {
+      "displayName": "赠礼",
+      "category": "social",
+      "aliases": [
+        "仙友赠礼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 338,
+      "systemKey": "SEND_GIFT",
+      "languageKey": "SystemName-338"
+    },
+    "GodDemonBattle": {
+      "displayName": "仙魔对决",
+      "category": "competition",
+      "aliases": [
+        "神魔大战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 145,
+      "systemKey": "GOD_DEMON_BATTLE",
+      "languageKey": "SystemName-145"
+    },
+    "GodIsland": {
+      "displayName": "蓬莱仙岛",
+      "category": "competition",
+      "aliases": [
+        "神岛争霸"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 68,
+      "systemKey": "IMMORTAL_ISLAND",
+      "languageKey": "SystemName-68"
+    },
+    "GodPetBorn": {
+      "displayName": "灵兽现世",
+      "category": "seasonal",
+      "aliases": [
+        "神宠降世",
+        "洪荒降临",
+        "神兽降世"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 183,
+      "systemKey": "GOD_PET_BORN",
+      "languageKey": "SystemName-183"
+    },
+    "GodPreach": {
+      "displayName": "诸仙证道",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 329,
+      "systemKey": "GOD_PREACH",
+      "languageKey": "SystemName-329"
+    },
+    "GoldPeach": {
+      "displayName": "体感界面",
+      "category": "seasonal",
+      "aliases": [
+        "金桃奇缘"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 165,
+      "systemKey": "GoldPeach",
+      "languageKey": "SystemName-165"
+    },
+    "GoldSnake": {
+      "displayName": "金蛇狂舞",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "GoodFortuneActivity": {
+      "displayName": "福泽",
+      "category": "welfare",
+      "aliases": [
+        "鸿运签到"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 107,
+      "systemKey": "GOOD_FORTUNE",
+      "languageKey": "SystemName-107"
+    },
+    "GoodsShield": {
+      "displayName": "道具开放配置",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "GreatLuckyActivity": {
+      "displayName": "送7777抽",
+      "category": "seasonal",
+      "aliases": [
+        "昊天鸿运"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 137,
+      "systemKey": "HAO_LUCKYDRAW_ACTIVITY",
+      "languageKey": "SystemName-137"
+    },
+    "GroupInfo": {
+      "displayName": "玩法分组信息",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "GuardFairyTree": {
+      "displayName": "守卫仙树",
+      "category": "minigame",
+      "aliases": [
+        "仙树保卫战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 173,
+      "systemKey": "GUARD_FAIRY_TREE",
+      "languageKey": "SystemName-173"
+    },
+    "Guess": {
+      "displayName": "赛事竞猜",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "HeavenBattle": {
+      "displayName": "大闹天宫",
+      "category": "competition",
+      "aliases": [
+        "天界之战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 305,
+      "systemKey": "HEAVEN_BATTLE",
+      "languageKey": "SystemName-305"
+    },
+    "HeroRank": {
+      "displayName": "群英榜",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 37,
+      "systemKey": "HERORANK",
+      "languageKey": "SystemName-37"
+    },
+    "HolidayPresent": {
+      "displayName": "节日推送自选礼包",
+      "category": "seasonal",
+      "aliases": [
+        "节庆赠礼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 81,
+      "systemKey": "HOLIDAY_PRESENT",
+      "languageKey": "SystemName-81"
+    },
+    "HolyLand": {
+      "displayName": "九幽争霸",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 95,
+      "systemKey": "HOLY_LAND",
+      "languageKey": "SystemName-95"
+    },
+    "Homeland": {
+      "displayName": "福地",
+      "category": "daily",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 15,
+      "systemKey": "HOMELAND",
+      "languageKey": "SystemName-15"
+    },
+    "Invade": {
+      "displayName": "异兽入侵",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 19,
+      "systemKey": "INVADE",
+      "languageKey": "SystemName-19"
+    },
+    "InviteFriends": {
+      "displayName": "邀请好友",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 24,
+      "systemKey": "SHARE_FRIEND",
+      "languageKey": "SystemName-24"
+    },
+    "KiddingSea": {
+      "displayName": "哪吒降妖",
+      "category": "minigame",
+      "aliases": [
+        "仙海救援"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 155,
+      "systemKey": "KIDDING_SEA",
+      "languageKey": "SystemName-155"
+    },
+    "KuaiShou": {
+      "displayName": "侧边栏礼包",
+      "category": "welfare",
+      "aliases": [
+        "快手每日福利"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 197,
+      "systemKey": "KUAI_SHOU_DAILY",
+      "languageKey": "SystemName-197"
+    },
+    "KunlunWar": {
+      "displayName": "昆仑争霸",
+      "category": "competition",
+      "aliases": [
+        "昆仑之战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 199,
+      "systemKey": "KUN_LUN_WAR",
+      "languageKey": "SystemName-199"
+    },
+    "LawLooks": {
+      "displayName": "法象",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 187,
+      "systemKey": "LAW_LOOKS",
+      "languageKey": "SystemName-187"
+    },
+    "LawStone": {
+      "displayName": "混沌石",
+      "category": "growth",
+      "aliases": [
+        "Law Stone"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 384,
+      "systemKey": "LAW_STONE",
+      "languageKey": "SystemName-384"
+    },
+    "LimitTimeGroupBuy": {
+      "displayName": "仙途共聚",
+      "category": "commerce",
+      "aliases": [
+        "限时团购",
+        "九霄同游"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 120,
+      "systemKey": "LIMIT_TIME_GROUP_BUY",
+      "languageKey": "SystemName-120"
+    },
+    "LiveShowActivity": {
+      "displayName": "修仙直播",
+      "category": "welfare",
+      "aliases": [
+        "直播奖励"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 177,
+      "systemKey": "LIVE_SHOW",
+      "languageKey": "SystemName-177"
+    },
+    "Login": {
+      "displayName": "登录与心跳",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Lottery": {
+      "displayName": "福星高照",
+      "category": "seasonal",
+      "aliases": [
+        "仙缘福彩"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 336,
+      "systemKey": "LOTTERY",
+      "languageKey": "SystemName-336"
+    },
+    "LuckyDrawActivity": {
+      "displayName": "运势",
+      "category": "seasonal",
+      "aliases": [
+        "运势抽奖"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 25,
+      "systemKey": "LUCKYDRAW_ACTIVITY",
+      "languageKey": "SystemName-25"
+    },
+    "LuckyRogue": {
+      "displayName": "须弥魔塔",
+      "category": "challenge",
+      "aliases": [
+        "幸运肉鸽"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 344,
+      "systemKey": "LUCK_ROGUE",
+      "languageKey": "SystemName-344"
+    },
+    "LuckyWheel": {
+      "displayName": "鸿运福轮",
+      "category": "seasonal",
+      "aliases": [
+        "幸运转盘"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 303,
+      "systemKey": "LuckyWheel",
+      "languageKey": "SystemName-303"
+    },
+    "Magic": {
+      "displayName": "神通",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 44,
+      "systemKey": "MAGIC",
+      "languageKey": "SystemName-44"
+    },
+    "MagicShop": {
+      "displayName": "宝华堂",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 154,
+      "systemKey": "MAGIC_SHOP",
+      "languageKey": "SystemName-154"
+    },
+    "MagicTreasure": {
+      "displayName": "法宝",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 63,
+      "systemKey": "MAGIC_TREASURE",
+      "languageKey": "SystemName-63"
+    },
+    "Mail": {
+      "displayName": "邮件",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Mall": {
+      "displayName": "坊市",
+      "category": "commerce",
+      "aliases": [
+        "商城"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 3,
+      "systemKey": "SHOP",
+      "languageKey": "SystemName-3"
+    },
+    "MallShield": {
+      "displayName": "商城开放配置",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "MarbleRebate": {
+      "displayName": "璇珠宝境",
+      "category": "commerce",
+      "aliases": [
+        "星环返利"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 343,
+      "systemKey": "MARBLE_REBATE",
+      "languageKey": "SystemName-343"
+    },
+    "Mark": {
+      "displayName": "游戏评分",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Marriage": {
+      "displayName": "结义",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Match3": {
+      "displayName": "秘境封妖",
+      "category": "minigame",
+      "aliases": [
+        "仙界消除"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 169,
+      "systemKey": "MATCH_3",
+      "languageKey": "SystemName-169"
+    },
+    "MeiTuanDaily": {
+      "displayName": "登录好礼",
+      "category": "welfare",
+      "aliases": [
+        "美团每日福利"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 168,
+      "systemKey": "MEITUAN_DAILY",
+      "languageKey": "SystemName-168"
+    },
+    "MeiTuanSubscribe": {
+      "displayName": "订阅奖励",
+      "category": "welfare",
+      "aliases": [
+        "美团订阅福利"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 167,
+      "systemKey": "MEITUAN_SUBSCRIBE",
+      "languageKey": "SystemName-167"
+    },
+    "MemoryCollect": {
+      "displayName": "玄尘忆梦",
+      "category": "seasonal",
+      "aliases": [
+        "图鉴收集"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 174,
+      "systemKey": "MEMORY_COLLECT",
+      "languageKey": "SystemName-174"
+    },
+    "MessageSubscribe": {
+      "displayName": "消息订阅",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "MiniGames": {
+      "displayName": "玩法合集",
+      "category": "minigame",
+      "aliases": [
+        "休闲小游戏"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 77,
+      "systemKey": "MINI_GAME",
+      "languageKey": "SystemName-77"
+    },
+    "Monopoly": {
+      "displayName": "四圣宝域",
+      "category": "minigame",
+      "aliases": [
+        "仙界大富翁"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 131,
+      "systemKey": "MONOPOLY",
+      "languageKey": "SystemName-131"
+    },
+    "MonsterGo": {
+      "displayName": "小妖快跑",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 327,
+      "systemKey": "MONSTER_GO",
+      "languageKey": "SystemName-327"
+    },
+    "MountainSea": {
+      "displayName": "山海万象",
+      "category": "growth",
+      "aliases": [
+        "山海异兽"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 97,
+      "systemKey": "MOUNTAIN_SEA",
+      "languageKey": "SystemName-97"
+    },
+    "MultipleRecharges": {
+      "displayName": "累计充值",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "NewRechargeTotalValue": {
+      "displayName": "累充奖励",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "NewYearRedBag": {
+      "displayName": "新春红包",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "OptionalGiftActivity": {
+      "displayName": "自选礼包",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 26,
+      "systemKey": "OPTIONAL_ACTIVITY",
+      "languageKey": "SystemName-26"
+    },
+    "PackagesBase": {
+      "displayName": "综合活动组件",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PaintingFairyland": {
+      "displayName": "画中仙境",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 146,
+      "systemKey": "PAINTING_FAIRYLAND",
+      "languageKey": "SystemName-146"
+    },
+    "Palace": {
+      "displayName": "仙宫",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 54,
+      "systemKey": "PALACE",
+      "languageKey": "SystemName-54"
+    },
+    "PDDGift": {
+      "displayName": "仙团聚惠",
+      "category": "commerce",
+      "aliases": [
+        "拼团礼包"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 196,
+      "systemKey": "PDD_GIFT",
+      "languageKey": "SystemName-196"
+    },
+    "PeachBanquet": {
+      "displayName": "仙桃乐宴",
+      "category": "social",
+      "aliases": [
+        "仙桃宴"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 135,
+      "systemKey": "PEACH_BANQUET",
+      "languageKey": "SystemName-135"
+    },
+    "PeakDuel": {
+      "displayName": "万盟争锋",
+      "category": "competition",
+      "aliases": [
+        "Peak Duel"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 381,
+      "systemKey": "PEAK_DUEL",
+      "languageKey": "SystemName-381"
+    },
+    "Pet": {
+      "displayName": "灵兽",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 7,
+      "systemKey": "PET",
+      "languageKey": "SystemName-7"
+    },
+    "PetDreamLandActivityProto": {
+      "displayName": "灵兽幻境",
+      "category": "growth",
+      "aliases": [
+        "灵兽梦境"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 41,
+      "systemKey": "PETDREAMLAND",
+      "languageKey": "SystemName-41"
+    },
+    "PetKernel": {
+      "displayName": "灵兽内丹",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 117,
+      "systemKey": "PET_KERNEL",
+      "languageKey": "SystemName-117"
+    },
+    "PetKernelWake": {
+      "displayName": "内丹破境",
+      "category": "growth",
+      "aliases": [
+        "内丹觉醒"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 342,
+      "systemKey": "PET_GOD_KERNEL",
+      "languageKey": "SystemName-342"
+    },
+    "PetsFight": {
+      "displayName": "灵兽乱斗",
+      "category": "competition",
+      "aliases": [
+        "Pets Fight"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 372,
+      "systemKey": "PETS_FIGHT",
+      "languageKey": "SystemName-372"
+    },
+    "Pharmacy": {
+      "displayName": "炼丹大会",
+      "category": "growth",
+      "aliases": [
+        "药园"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 190,
+      "systemKey": "PHARMACY",
+      "languageKey": "SystemName-190"
+    },
+    "PigEscape": {
+      "displayName": "熊口逃生",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PlanesTrial": {
+      "displayName": "三界征途",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 160,
+      "systemKey": "PLANES_TRIAL",
+      "languageKey": "SystemName-160"
+    },
+    "PlayerBattleMainPb": {
+      "displayName": "战斗基础数据",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PlayerChara": {
+      "displayName": "幻境阁",
+      "category": "growth",
+      "aliases": [
+        "角色形象"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 48,
+      "systemKey": "CHARA",
+      "languageKey": "SystemName-48"
+    },
+    "PlayerData": {
+      "displayName": "角色资料",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PlayerSystem": {
+      "displayName": "系统解锁",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PoolTreasure": {
+      "displayName": "灵池探宝",
+      "category": "seasonal",
+      "aliases": [
+        "奖池寻宝"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 320,
+      "systemKey": "POOL_TREASURE",
+      "languageKey": "SystemName-320"
+    },
+    "PrivilegeCard": {
+      "displayName": "特权卡",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 34,
+      "systemKey": "PRIVILEGE_CARD",
+      "languageKey": "SystemName-34"
+    },
+    "Profession": {
+      "displayName": "道途",
+      "category": "growth",
+      "aliases": [
+        "职业修行"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 180,
+      "systemKey": "PROFESSION",
+      "languageKey": "SystemName-180"
+    },
+    "Pupil": {
+      "displayName": "宗门",
+      "category": "growth",
+      "aliases": [
+        "门徒"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 118,
+      "systemKey": "PUPIL",
+      "languageKey": "SystemName-118"
+    },
+    "PupilExplore": {
+      "displayName": "门徒探索",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "PupilRankActivity": {
+      "displayName": "宗门大比",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 138,
+      "systemKey": "PUPIL_RANK",
+      "languageKey": "SystemName-138"
+    },
+    "PupilRogueBattle": {
+      "displayName": "弟子试炼",
+      "category": "challenge",
+      "aliases": [
+        "门徒历练"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 304,
+      "systemKey": "PUPIL_ROGUE",
+      "languageKey": "SystemName-304"
+    },
+    "PuppetWarfare": {
+      "displayName": "御傀争锋",
+      "category": "minigame",
+      "aliases": [
+        "傀儡战场"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 321,
+      "systemKey": "PUPPET_WARFARE",
+      "languageKey": "SystemName-321"
+    },
+    "Rank": {
+      "displayName": "排行榜",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "RankBattle": {
+      "displayName": "斗法",
+      "category": "competition",
+      "aliases": [
+        "妖榜挑战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 5,
+      "systemKey": "SCORERANK",
+      "languageKey": "SystemName-5"
+    },
+    "RebornTrial": {
+      "displayName": "轮回秘境",
+      "category": "challenge",
+      "aliases": [
+        "重生试炼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 172,
+      "systemKey": "REBORN_TRIAL",
+      "languageKey": "SystemName-172"
+    },
+    "RecallActivity": {
+      "displayName": "再续仙缘",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Recharge": {
+      "displayName": "充值",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "RedPoint": {
+      "displayName": "功能提醒",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "RegressionActivity": {
+      "displayName": "仙友召回",
+      "category": "welfare",
+      "aliases": [
+        "仙友回归"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 100,
+      "systemKey": "REGRESSION",
+      "languageKey": "SystemName-100"
+    },
+    "RemoteZombie": {
+      "displayName": "轮回之地",
+      "category": "challenge",
+      "aliases": [
+        "尸潮挑战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 361,
+      "systemKey": "ZOMBIE",
+      "languageKey": "SystemName-361"
+    },
+    "RenewActivity": {
+      "displayName": "转世重修",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "RoadDefend": {
+      "displayName": "小妖卫道",
+      "category": "minigame",
+      "aliases": [
+        "仙树守卫"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 301,
+      "systemKey": "ROAD_DEFEND",
+      "languageKey": "SystemName-301"
+    },
+    "RuleTrial": {
+      "displayName": "法则试炼",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 91,
+      "systemKey": "RULE_TRIAL",
+      "languageKey": "SystemName-91"
+    },
+    "SdkReward": {
+      "displayName": "平台奖励",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "SealMonster": {
+      "displayName": "灵傀降魔",
+      "category": "challenge",
+      "aliases": [
+        "轩辕镇魔"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 366,
+      "systemKey": "SEAL_MONSTER",
+      "languageKey": "SystemName-366"
+    },
+    "SeasonEvent": {
+      "displayName": "天墓奇遇",
+      "category": "seasonal",
+      "aliases": [
+        "赛季庆典",
+        "大闹五庄观",
+        "东海寻珍"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 357,
+      "systemKey": "SEASON_EVENT",
+      "languageKey": "SystemName-357"
+    },
+    "SeaWar": {
+      "displayName": "沧溟妖域",
+      "category": "competition",
+      "aliases": [
+        "罗天幻海"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 349,
+      "systemKey": "CELESTIAL_SEA_WAR",
+      "languageKey": "SystemName-349"
+    },
+    "SecretShop": {
+      "displayName": "神秘商店",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "SecretTower": {
+      "displayName": "六道秘境",
+      "category": "challenge",
+      "aliases": [
+        "镇妖塔"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 56,
+      "systemKey": "SECRETTOWER",
+      "languageKey": "SystemName-56"
+    },
+    "SeekTreasure": {
+      "displayName": "妖市觅宝",
+      "category": "seasonal",
+      "aliases": [
+        "九皇觅宝",
+        "仙树祈愿",
+        "福春觅宝",
+        "龙宫寻宝",
+        "神山寻宝",
+        "普天同庆"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 64,
+      "systemKey": "SEEK_TREASURE",
+      "languageKey": "SystemName-64"
+    },
+    "SevenDaysSignInActivity": {
+      "displayName": "七日签到",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 13,
+      "systemKey": "SIGNIN",
+      "languageKey": "SystemName-13"
+    },
+    "ShuangHui": {
+      "displayName": "粽仙赐福",
+      "category": "seasonal",
+      "aliases": [
+        "双汇联动"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 370,
+      "systemKey": "SHUANG_HUI",
+      "languageKey": "SystemName-370"
+    },
+    "ShuraBattle": {
+      "displayName": "修罗战场",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 159,
+      "systemKey": "SHURA_BATTLE",
+      "languageKey": "SystemName-159"
+    },
+    "SignInFundActivity": {
+      "displayName": "七日之约",
+      "category": "welfare",
+      "aliases": [
+        "签到基金",
+        "新年邀约"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 96,
+      "systemKey": "SIGN_FUND",
+      "languageKey": "SystemName-96"
+    },
+    "SkinInheritActivity": {
+      "displayName": "皮肤传承",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "SkyTrade": {
+      "displayName": "仙域商途",
+      "category": "competition",
+      "aliases": [
+        "天界商路"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 150,
+      "systemKey": "SKY_TRADE",
+      "languageKey": "SystemName-150"
+    },
+    "SkyWar": {
+      "displayName": "征战诸天",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 84,
+      "systemKey": "SKY_WAR",
+      "languageKey": "SystemName-84"
+    },
+    "SoulLiQuid": {
+      "displayName": "琼浆灵液",
+      "category": "growth",
+      "aliases": [
+        "灵液"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 98,
+      "systemKey": "SOULLIQUID",
+      "languageKey": "SystemName-98"
+    },
+    "Spchamp": {
+      "displayName": "万界道会",
+      "category": "competition",
+      "aliases": [
+        "巅峰斗法"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 192,
+      "systemKey": "SP_CHAMP",
+      "languageKey": "SystemName-192"
+    },
+    "Spirit": {
+      "displayName": "精怪",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 11,
+      "systemKey": "SPIRIT",
+      "languageKey": "SystemName-11"
+    },
+    "SpiritFoot": {
+      "displayName": "精怪主题抽奖",
+      "category": "seasonal",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "SpiritTrialActivity": {
+      "displayName": "精怪历练",
+      "category": "challenge",
+      "aliases": [
+        "精怪试炼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 42,
+      "systemKey": "SPIRIT_TRIAL",
+      "languageKey": "SystemName-42"
+    },
+    "Stage": {
+      "displayName": "冒险",
+      "category": "daily",
+      "aliases": [
+        "冒险关卡"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 23,
+      "systemKey": "CHAPTER",
+      "languageKey": "SystemName-23"
+    },
+    "StarTrial": {
+      "displayName": "星宿试炼",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 69,
+      "systemKey": "STARTRIAL",
+      "languageKey": "SystemName-69"
+    },
+    "StoneCommon": {
+      "displayName": "宝石公共数据",
+      "category": "system",
+      "aliases": [
+        "Stone Common"
+      ],
+      "nameSource": "project-description"
+    },
+    "SuppressDemon": {
+      "displayName": "镇魔",
+      "category": "competition",
+      "aliases": [
+        "群妖镇压"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 132,
+      "systemKey": "SUPPRESS_DEMON",
+      "languageKey": "SystemName-132"
+    },
+    "SuppressEvil": {
+      "displayName": "冥域镇邪",
+      "category": "challenge",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 364,
+      "systemKey": "SUPPRESS_EVIL",
+      "languageKey": "SystemName-364"
+    },
+    "SwitchDraw": {
+      "displayName": "天机觅宝",
+      "category": "seasonal",
+      "aliases": [
+        "Switch Draw"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 382,
+      "systemKey": "SWITCH_DRAW",
+      "languageKey": "SystemName-382"
+    },
+    "SystemShield": {
+      "displayName": "系统开放配置",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Talent": {
+      "displayName": "先天灵脉",
+      "category": "growth",
+      "aliases": [
+        "修炼天赋"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 12,
+      "systemKey": "TALENT",
+      "languageKey": "SystemName-12"
+    },
+    "Task": {
+      "displayName": "每日任务",
+      "category": "daily",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "TextTower": {
+      "displayName": "师父别慌",
+      "category": "minigame",
+      "aliases": [
+        "Text Tower",
+        "文字塔防",
+        "文字塔防联动"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 379,
+      "systemKey": "TEXT_DEFENSE",
+      "languageKey": "SystemName-379"
+    },
+    "TopFeastTime": {
+      "displayName": "万盟道台",
+      "category": "social",
+      "aliases": [
+        "Top Feast Time",
+        "问鼎道台"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 387,
+      "systemKey": "TOP_FEAST_TIME",
+      "languageKey": "SystemName-387"
+    },
+    "Tower": {
+      "displayName": "镇妖塔",
+      "category": "daily",
+      "aliases": [
+        "日常挑战塔"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 9,
+      "systemKey": "TOWER",
+      "languageKey": "SystemName-9"
+    },
+    "TreasureAuction": {
+      "displayName": "仙途寻宝",
+      "category": "commerce",
+      "aliases": [
+        "珍宝拍卖"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 340,
+      "systemKey": "TREASURE_AUCTION",
+      "languageKey": "SystemName-340"
+    },
+    "TreasureBowl": {
+      "displayName": "疯狂聚宝盆",
+      "category": "welfare",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 99,
+      "systemKey": "TREASURE_BOWL",
+      "languageKey": "SystemName-99"
+    },
+    "TreasureStone": {
+      "displayName": "道玉",
+      "category": "growth",
+      "aliases": [
+        "Treasure Stone"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 383,
+      "systemKey": "TREASURE_STONE",
+      "languageKey": "SystemName-383"
+    },
+    "Tyloo": {
+      "displayName": "神墟禁地",
+      "category": "union",
+      "aliases": [
+        "妖盟秘境探索"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 345,
+      "systemKey": "TYLOO",
+      "languageKey": "SystemName-345"
+    },
+    "Union": {
+      "displayName": "妖盟",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 16,
+      "systemKey": "UNION",
+      "languageKey": "SystemName-16"
+    },
+    "UnionAreaWar": {
+      "displayName": "妖盟攻城战",
+      "category": "union",
+      "aliases": [
+        "妖盟据点战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 60,
+      "systemKey": "UNION_AREA_WAR",
+      "languageKey": "SystemName-60"
+    },
+    "UnionAssemble": {
+      "displayName": "妖盟集结",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 121,
+      "systemKey": "UNION_ASSEMBLE",
+      "languageKey": "SystemName-121"
+    },
+    "UnionBattle": {
+      "displayName": "妖盟乱斗",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 53,
+      "systemKey": "UNION_BATTLE",
+      "languageKey": "SystemName-53"
+    },
+    "UnionBlessing": {
+      "displayName": "妖盟赐福",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "UnionBoss": {
+      "displayName": "妖邪挑战",
+      "category": "union",
+      "aliases": [
+        "妖邪讨伐"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 58,
+      "systemKey": "UNION_BOSS",
+      "languageKey": "SystemName-58"
+    },
+    "UnionBounty": {
+      "displayName": "妖盟悬赏",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 136,
+      "systemKey": "UNION_BOUNTY",
+      "languageKey": "SystemName-136"
+    },
+    "UnionCeremony": {
+      "displayName": "飞升大典",
+      "category": "union",
+      "aliases": [
+        "封授大典"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 179,
+      "systemKey": "UNION_CEREMONY",
+      "languageKey": "SystemName-179"
+    },
+    "UnionDuel": {
+      "displayName": "妖盟对决",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 85,
+      "systemKey": "UNION_DUEL",
+      "languageKey": "SystemName-85"
+    },
+    "UnionFight": {
+      "displayName": "妖盟夺位战",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 67,
+      "systemKey": "UNION_FIGHT",
+      "languageKey": "SystemName-67"
+    },
+    "UnionHonorHall": {
+      "displayName": "妖盟荣誉堂",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 178,
+      "systemKey": "UNION_HONOR_HALL",
+      "languageKey": "SystemName-178"
+    },
+    "UnionPeakFight": {
+      "displayName": "巅峰妖盟战",
+      "category": "union",
+      "aliases": [
+        "妖盟巅峰战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 300,
+      "systemKey": "UNION_PEAK_FIGHT",
+      "languageKey": "SystemName-300"
+    },
+    "UnionTreasure": {
+      "displayName": "妖盟寻宝",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 162,
+      "systemKey": "UNION_TREASURE",
+      "languageKey": "SystemName-162"
+    },
+    "UnionVote": {
+      "displayName": "妖盟投票",
+      "category": "union",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "Universe": {
+      "displayName": "小世界",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 143,
+      "systemKey": "UNIVERSE",
+      "languageKey": "SystemName-143"
+    },
+    "UniversePuzzle": {
+      "displayName": "世界本源",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 351,
+      "systemKey": "UNIVERSE_PUZZLE",
+      "languageKey": "SystemName-351"
+    },
+    "ValentinesDay": {
+      "displayName": "鹊桥仙遇",
+      "category": "seasonal",
+      "aliases": [
+        "七夕送礼"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 161,
+      "systemKey": "VALENTINES_DAY",
+      "languageKey": "SystemName-161"
+    },
+    "WarSeason": {
+      "displayName": "上古战场",
+      "category": "competition",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 175,
+      "systemKey": "WAR_SEASON",
+      "languageKey": "SystemName-175"
+    },
+    "WatchPlayer": {
+      "displayName": "玩家信息查看",
+      "category": "system",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "WeekCardActivity": {
+      "displayName": "仙缘周卡",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "WelfareGiftActivity": {
+      "displayName": "福利礼包",
+      "category": "commerce",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "WestTravel": {
+      "displayName": "西天救援",
+      "category": "challenge",
+      "aliases": [
+        "西游闯关"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 109,
+      "systemKey": "WEST_TRAVEL",
+      "languageKey": "SystemName-109"
+    },
+    "WeYound": {
+      "displayName": "未央仙境",
+      "category": "union",
+      "aliases": [
+        "妖盟协作探索"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 186,
+      "systemKey": "WE_YOUND",
+      "languageKey": "SystemName-186"
+    },
+    "WildBoss": {
+      "displayName": "挑战妖王",
+      "category": "daily",
+      "aliases": [
+        "宝地挑战"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 6,
+      "systemKey": "WILDBOSS",
+      "languageKey": "SystemName-6"
+    },
+    "WildZoneActivityProto": {
+      "displayName": "蛮荒妖域",
+      "category": "competition",
+      "aliases": [
+        "蛮荒历练"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 50,
+      "systemKey": "MAN_HUANG",
+      "languageKey": "SystemName-50"
+    },
+    "WishPool": {
+      "displayName": "许愿灵池",
+      "category": "seasonal",
+      "aliases": [
+        "如意随心"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 149,
+      "systemKey": "WISH_POOL",
+      "languageKey": "SystemName-149"
+    },
+    "WorldBid": {
+      "displayName": "万界竞拍",
+      "category": "commerce",
+      "aliases": [
+        "World Bid"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 373,
+      "systemKey": "WORLD_BID",
+      "languageKey": "SystemName-373"
+    },
+    "WorldMessage": {
+      "displayName": "世界与妖盟消息",
+      "category": "social",
+      "aliases": [],
+      "nameSource": "project-description"
+    },
+    "WorldRule": {
+      "displayName": "天地法则",
+      "category": "growth",
+      "aliases": [],
+      "nameSource": "apk-system-name",
+      "systemId": 90,
+      "systemKey": "WORLD_RULE",
+      "languageKey": "SystemName-90"
+    },
+    "XiYou": {
+      "displayName": "西游伏魔",
+      "category": "challenge",
+      "aliases": [
+        "西游除妖"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 311,
+      "systemKey": "XIYOU",
+      "languageKey": "SystemName-311"
+    },
+    "Yard": {
+      "displayName": "仙居",
+      "category": "growth",
+      "aliases": [
+        "家园"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 158,
+      "systemKey": "YARD",
+      "languageKey": "SystemName-158"
+    },
+    "YellowMountain": {
+      "displayName": "黄山仙径",
+      "category": "seasonal",
+      "aliases": [
+        "黄山主题闯关",
+        "武当玄途"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 163,
+      "systemKey": "YELLOW_MOUNTAIN",
+      "languageKey": "SystemName-163"
+    },
+    "YueBao": {
+      "displayName": "呱仙阁",
+      "category": "commerce",
+      "aliases": [
+        "仙玉宝府"
+      ],
+      "nameSource": "apk-system-name",
+      "systemId": 170,
+      "systemKey": "YUE_BAO",
+      "languageKey": "SystemName-170"
+    }
+  }
+}

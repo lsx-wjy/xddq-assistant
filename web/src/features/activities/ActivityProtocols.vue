@@ -11,6 +11,7 @@ import ActivityFilters from './ActivityFilters.vue'
 import ActivityTable from './ActivityTable.vue'
 import { useActivities } from './useActivities'
 import { useProtocolRunner } from './useProtocolRunner'
+import { searchAliasesFor } from './activityTaxonomy'
 import type {
   ActivityItem,
   ActivityProtocol,
@@ -85,6 +86,7 @@ const filteredActivities = computed(() => {
     const matchesQuery = !normalizedQuery
       || activity.displayName.toLocaleLowerCase().includes(normalizedQuery)
       || activity.name.toLocaleLowerCase().includes(normalizedQuery)
+      || searchAliasesFor(activity.name).some(alias => alias.toLocaleLowerCase().includes(normalizedQuery))
       || activity.protocols.some(protocol =>
         protocol.key.toLocaleLowerCase().includes(normalizedQuery)
         || protocol.comment.toLocaleLowerCase().includes(normalizedQuery),

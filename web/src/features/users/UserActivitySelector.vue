@@ -2,6 +2,7 @@
 import { computed, shallowRef } from 'vue'
 import { CheckCheck, Eraser, Search, ShieldAlert } from '@lucide/vue'
 import { useActivities } from '@/features/activities/useActivities'
+import { searchAliasesFor } from '@/features/activities/activityTaxonomy'
 
 const selectedActivities = defineModel<string[]>({ required: true })
 
@@ -17,6 +18,7 @@ const visibleActivities = computed(() => {
     const matchesQuery = !normalizedQuery
       || activity.displayName.toLocaleLowerCase().includes(normalizedQuery)
       || activity.name.toLocaleLowerCase().includes(normalizedQuery)
+      || searchAliasesFor(activity.name).some(alias => alias.toLocaleLowerCase().includes(normalizedQuery))
       || activity.categoryLabel.toLocaleLowerCase().includes(normalizedQuery)
     return matchesCategory && matchesQuery
   })

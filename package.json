@@ -30,13 +30,15 @@
         "vue-tsc": "^2.2.0"
     },
     "scripts": {
-        "build": "npm run verify:protocols && npm run dashboard:build",
+        "build": "npm run verify:protocols && npm run verify:gameplay-catalog && npm run dashboard:build",
         "start": "node app.js",
         "dashboard": "vite --config vite.config.ts",
         "dashboard:build": "vue-tsc --noEmit -p web/tsconfig.json && vite build --config vite.config.ts",
         "dashboard:preview": "vite preview --config vite.config.ts",
         "dashboard:serve": "node scripts/dashboard-server.mjs",
         "protocol:sync": "node scripts/sync-apk-protocols.mjs",
-        "verify:protocols": "node scripts/verify-protocols.mjs"
+        "verify:protocols": "node scripts/verify-protocols.mjs",
+        "gameplay:sync": "node scripts/sync-gameplay-catalog.mjs",
+        "verify:gameplay-catalog": "node scripts/verify-gameplay-catalog.mjs"
     }
 }
