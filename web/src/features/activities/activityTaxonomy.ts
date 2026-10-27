@@ -1,4 +1,11 @@
 import type { GameplayCategory, GameplayCategoryOption } from './types'
+import apkGameplayCatalog from './apkGameplayCatalog.json'
+
+const catalogEntries = apkGameplayCatalog.entries as Record<string, {
+  displayName: string
+  category: GameplayCategory
+  aliases: readonly string[]
+}>
 
 export const gameplayCategories: readonly GameplayCategoryOption[] = [
   { id: 'daily', label: '每日任务', description: '日常领取、资源收集与重复玩法' },
@@ -15,7 +22,7 @@ export const gameplayCategories: readonly GameplayCategoryOption[] = [
   { id: 'other', label: '其他玩法', description: '暂未归入固定类别的新功能' },
 ]
 
-export const displayNames: Readonly<Record<string, string>> = {
+const fallbackDisplayNames: Readonly<Record<string, string>> = {
   AceMahjong: '通天幺牌',
   ActivityBase: '活动基础功能',
   ActivitysShield: '活动开放配置',
@@ -226,6 +233,11 @@ export const displayNames: Readonly<Record<string, string>> = {
   YueBao: '仙玉宝府',
 }
 
+export const displayNames: Readonly<Record<string, string>> = {
+  ...fallbackDisplayNames,
+  ...Object.fromEntries(Object.entries(catalogEntries).map(([name, entry]) => [name, entry.displayName])),
+}
+
 const namesByCategory: Readonly<Record<GameplayCategory, readonly string[]>> = {
   daily: ['Assistant', 'Destiny', 'GatherEnergy', 'Homeland', 'Stage', 'Task', 'Tower', 'WildBoss'],
   growth: [
@@ -293,6 +305,7 @@ for (const [category, names] of Object.entries(namesByCategory) as [GameplayCate
 const categoryLabelById = new Map(gameplayCategories.map(category => [category.id, category.label]))
 
 export function categoryFor(name: string): GameplayCategory {
+  if (catalogEntries[name]) return catalogEntries[name].category
   if (name.startsWith('Union')) return 'union'
   return categoryByName.get(name) ?? 'other'
 }
@@ -303,4 +316,8 @@ export function categoryLabelFor(category: GameplayCategory) {
 
 export function displayNameFor(name: string) {
   return displayNames[name] ?? name.replace(/([a-z])([A-Z])/g, '$1 $2')
+}
+
+export function searchAliasesFor(name: string): readonly string[] {
+  return catalogEntries[name]?.aliases ?? []
 }

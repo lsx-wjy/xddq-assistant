@@ -136,6 +136,17 @@ npm start                  # 启动原始单账号命令行脚本
 
 ## 协议升级验证
 
+玩法中心的默认名称来自同版本 APK 的 `SystemInfoDB`、`LanguageWordDB` 和客户端 `systemOpenId`；分类由本项目维护，旧名称和活动主题别名保留用于搜索。公共协议结构等没有独立系统入口的分组使用项目说明名，不能把分组数量直接理解为独立活动数量。
+
+升级协议后，可使用解压后的 APK 和已还原的客户端脚本同步名称与分类：
+
+```powershell
+npm run gameplay:sync -- --apk-root "G:/迅雷下载/744012834" --client-script "backups/client-4.1.10.10538.js"
+npm run verify:gameplay-catalog
+```
+
+按实际位置替换路径；APK 与协议版本必须一致。同步生成 `web/src/features/activities/apkGameplayCatalog.json`，并在本地 `backups/` 输出差异报告；通过 `--report` 可指定报告目录。运行期活动换皮名称与开放状态仍以服务器数据为准。构建会检查全部协议分组是否都有名称、分类及一致的版本。
+
 ```powershell
 node scripts/verify-gameplay-compatibility.mjs
 node scripts/audit-protocol-upgrade.mjs --baseline "../old-checkout/src/game/config/grpc"
