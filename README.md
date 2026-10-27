@@ -122,6 +122,7 @@ npm run dashboard          # 启动本地开发管理界面
 npm run dashboard:build    # 只构建管理界面
 npm run dashboard:serve    # 运行已构建的生产管理服务
 npm run verify:protocols   # 校验协议映射与编解码
+npm run verify:protobuf-loader # 离线检查共享协议加载、全部映射消息编解码与初始化重试
 npm run protocol:sync      # 从 APK/CDN 同步协议资料
 npm start                  # 启动原始单账号命令行脚本
 ```
@@ -133,6 +134,18 @@ npm start                  # 启动原始单账号命令行脚本
 - 生产管理服务支持 HTTP Basic Auth，并限制允许访问 API 的网页来源。
 - `account.js`、SQLite 数据库、运行日志、构建依赖和本地临时文件不会包含在默认上传包中。
 - 不要尝试通过高频登录或伪造请求规避服务器限制。出现 `505` 时应等待限制时间结束，并检查客户端版本、登录频率和连接状态。
+
+## 内存与协议加载
+
+每个角色使用独立 Node.js 进程；同一角色的所有 protobuf 文件共用一个 `Root`，避免重复保留公共定义。并发初始化只执行一次，加载失败后可以重试。已有角色进程需要断开后重新连接才能加载修改后的代码。
+
+`npm run verify:protobuf-loader` 不连接游戏，会检查全部映射消息的合成数据编解码、响应候选选择及初始化行为。保留旧版 `ProtobufMgr.js` 后，还可对比优化前后的定义、收发映射、编码字节和内存：
+
+```powershell
+node scripts/verify-protobuf-loader.mjs --baseline "backups/memory-optimization-2026-10-27/ProtobufMgr.before.js" --output "backups/memory-optimization-2026-10-27/verification"
+```
+
+按实际备份位置替换路径。对比在两个顺序启动的独立进程中运行；内存统计包括协议初始化，以及另一次遍历全部消息执行编解码后的 RSS，不包含在线角色状态、管理后台和浏览器，不能直接当作在线单角色的内存预算。
 
 ## 协议升级验证
 
