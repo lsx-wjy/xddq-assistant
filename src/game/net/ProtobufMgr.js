@@ -15,6 +15,7 @@ class ProtobufMgr {
         this.missingByteDecoders = [];
         this.missingMessageTypes = [];
         this.initialized = false;
+        this.initializationPromise = null;
         this.basePath = resolvePath('../config/grpc/json');
         this.protoPath = resolvePath('../config/grpc/protobuf');
     }
@@ -27,9 +28,16 @@ class ProtobufMgr {
     }
 
     async initialize() {
-        if (this.initialized) {
-            return; // Exit if already initialized
+        if (this.initialized) return;
+        if (!this.initializationPromise) {
+            this.initializationPromise = this.loadProtocols().finally(() => {
+                this.initializationPromise = null;
+            });
         }
+        return this.initializationPromise;
+    }
+
+    async loadProtocols() {
         // 读取Json文件
         const [cityMsgInfoRes, cmdListRes, resvCmdListRes, activityRegistryRes] = await Promise.all([
             fs.readFile(path.join(this.basePath, 'CityMsgInfo'), 'utf-8'),
@@ -43,15 +51,21 @@ class ProtobufMgr {
         this.resvCmdList = JSON.parse(resvCmdListRes);
         this.activityRegistry = JSON.parse(activityRegistryRes);
 
-        // 依次读取多个 proto 文件并加载到 messages 中
+        // 所有协议共用一个 Root，让 Common、Battle 等公共依赖只解析一次。
+        // 每个文件单独 protobuf.load 会保留多份公共定义，显著放大角色进程内存。
         const protoFiles = await fs.readdir(this.protoPath);
+        const root = new protobuf.Root();
+        await root.load(protoFiles.map(protoName => path.join(this.protoPath, protoName)));
+        root.resolveAll();
 
-        await Promise.all(protoFiles.map(protoName => this.loadParseAllCmdMsg(protoName)));
+        this.messages = {};
+        this.missingByteDecoders = [];
+        this.missingMessageTypes = [];
+        for (const protoName of protoFiles) this.registerMessages(protoName, root);
         this.initialized = true;
     }
 
-    async loadParseAllCmdMsg(protoName) {
-        const root = await protobuf.load(path.join(this.protoPath, protoName));
+    registerMessages(protoName, root) {
         const msgInfo = this.msgInfoDict[protoName] || [];
 
         for (const msg of msgInfo) {
