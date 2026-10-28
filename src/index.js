@@ -55,6 +55,7 @@ async function applyAutomationConfig(config) {
         ['cave.ad-gather-energy', '#game/mgr/GatherEnergyMgr.js'],
         ['union.demon-hunt', '#game/mgr/UnionMgr.js'],
         ['schedule.daily-restart', '#game/mgr/DailyScheduleMgr.js'],
+        ['basic.assistant-palace-jade', '#game/mgr/AssistantPalaceRewardMgr.js'],
     ];
     for (const [taskId, modulePath] of passiveManagers) {
         if (!isAutomationTaskEnabled(taskId)) continue;

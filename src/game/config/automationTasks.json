@@ -65,6 +65,7 @@
   {"id":"basic.mail-rewards","category":"basic","name":"自动领取邮件奖励","description":"收到邮件列表后执行一键领取邮件附件。","status":"ready","manager":"MsgRecvMgr","requires":[],"fields":[]},
   {"id":"basic.use-talent-reishi","category":"basic","name":"自动使用万年灵芝","description":"背包中存在万年灵芝时，按原脚本一次性用于灵脉参悟。","status":"ready","manager":"BagMgr","requires":[],"fields":[]},
   {"id":"basic.free-activity-gifts","category":"benefit","name":"自动领取全部免费礼包","description":"统一领取当前活动内标价为零的免费项，覆盖升宝堂、免费自选、超值礼包、仙缘福泽签到与仙缘免费礼包；绝不购买付费项。","status":"ready","manager":"ActivityMgr","requires":[],"fields":[]},
+  {"id":"basic.assistant-palace-jade","category":"benefit","name":"22:00 自动领取仙官赐福仙玉","description":"北京时间每天 22:00 后，根据仙官赐福状态同步领取聚宝盆仙玉；断线后当晚重新连接会自动补领，并限制重试次数避免重复请求。","status":"ready","manager":"AssistantPalaceRewardMgr","requires":[],"fields":[]},
   {"id":"basic.fortune-share","category":"benefit","name":"[运势] 灵兽运势免费奖励","description":"领取灵兽运势免费券、分享奖励与游戏圈奖励；只执行免费领取请求。","status":"ready","manager":"CustomMgr","requires":[],"fields":[]},
   {"id":"basic.claim-all-ads","category":"advertising","name":"一键领取全部广告奖励","description":"一次开启青蛙、精怪、神通、法宝、宗门、聚灵阵和妖盟的可领广告奖励；不包括仙树减时、福地刷新等非领奖广告。","status":"ready","manager":"广告奖励集合","requires":[],"fields":[]},
   {"id":"basic.ad-frog","category":"advertising","name":"自动收获青蛙","description":"按每日上限与冷却领取青蛙广告激励。","status":"ready","manager":"FrogMgr","requires":[],"fields":[]},

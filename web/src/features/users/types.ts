@@ -28,6 +28,47 @@ export interface AutomationRunState {
   logs: readonly AutomationRunLog[]
 }
 
+export interface UserProfileSnapshot {
+  identity?: {
+    nickname?: string
+    playerId?: string
+    roleId?: string
+    serverId?: number
+  }
+  progress?: {
+    realmsId?: number
+    fightValue?: number
+  }
+  tree?: {
+    level?: number
+    peaches?: number
+    freeSpeedUpRemaining?: number
+  }
+  resources?: {
+    fairyJade?: number
+    dailyClaimedJade?: number
+    dailyClaimedJadeDate?: string
+  }
+  union?: {
+    id?: string
+    name?: string
+    memberCount?: number
+    position?: number
+  }
+  homeland?: {
+    energy?: number
+    freeWorkers?: number
+    totalWorkers?: number
+  }
+  benefits?: {
+    monthCardActive?: boolean
+    yearCardActive?: boolean
+    palaceWorshipAvailable?: boolean
+    palaceMiracle?: boolean
+  }
+  syncedAt?: string
+}
+
 export interface UserRecord {
   id: string
   note: string
@@ -58,6 +99,7 @@ export interface UserRecord {
   allowPurchase: boolean
   activityObservations: Record<string, ActivityObservation>
   automationRun: AutomationRunState
+  profile: UserProfileSnapshot
   updatedAt: string
 }
 
@@ -72,6 +114,12 @@ export interface UserDraft {
   persistSnapshots: boolean
   allowCombat: boolean
   allowPurchase: boolean
+}
+
+export interface UserLoginDraft {
+  account: string
+  password: string
+  serverId: number
 }
 
 export interface ServerOption {

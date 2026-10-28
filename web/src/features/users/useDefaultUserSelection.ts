@@ -1,5 +1,7 @@
 import { computed, shallowRef, watch, type Ref } from 'vue'
+import { useSession } from '@/features/auth/useSession'
 import type { UserRecord } from './types'
+import { chooseSelectedUserId } from './selectionPolicy'
 
 type UsersRef = Readonly<Ref<readonly UserRecord[]>>
 
@@ -11,16 +13,21 @@ function isConnected(user: UserRecord) {
 }
 
 export function useDefaultUserSelection(users: UsersRef) {
-  const selectedUserId = shallowRef('')
+  const { session } = useSession()
 
   const selectedUser = computed(() =>
-    users.value.find(user => user.id === selectedUserId.value) ?? null,
+    users.value.find(user => user.id === sharedSelectedUserId.value) ?? null,
   )
 
-  watch(users, availableUsers => {
-    if (selectedUser.value) return
-    selectedUserId.value = availableUsers.find(isConnected)?.id ?? ''
+  watch([users, () => session.value.userId], ([availableUsers, authenticatedUserId]) => {
+    sharedSelectedUserId.value = chooseSelectedUserId(
+      availableUsers.map(user => ({ id: user.id, connected: isConnected(user) })),
+      sharedSelectedUserId.value,
+      authenticatedUserId ?? '',
+    )
   }, { immediate: true })
 
-  return { selectedUserId, selectedUser }
+  return { selectedUserId: sharedSelectedUserId, selectedUser }
 }
+
+const sharedSelectedUserId = shallowRef('')

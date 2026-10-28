@@ -21,7 +21,9 @@ import HeroRankMgr from "#game/mgr/HeroRankMgr.js";
 import ActivityMgr from "#game/mgr/ActivityMgr.js";
 import UnionMgr from "#game/mgr/UnionMgr.js";
 import HomelandMgr from "#game/mgr/HomelandMgr.js";
+import AssistantPalaceRewardMgr from '#game/mgr/AssistantPalaceRewardMgr.js';
 import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
+import { reportProfile } from '#game/common/ProfileReporter.js';
 
 class MsgRecvMgr {
     constructor() {
@@ -50,24 +52,44 @@ class MsgRecvMgr {
         UserMgr.playerId = t.playerId;
         UserMgr.roleId = t.roleId;
         UserMgr.serverId = Number(t.serverId);
+        reportProfile({
+            identity: {
+                nickname: String(t.nickName || ''),
+                playerId: String(t.playerId || ''),
+                roleId: String(t.roleId || ''),
+                serverId: Number(t.serverId) || 0,
+            },
+        });
     }
 
     // 104 同步特权卡数据
     static PrivilegeCardDataMsg(t) {
         logger.debug("[MsgRecvMgr] 同步特权卡数据");
         PlayerAttributeMgr.inst.SyncVip(t);
+        reportProfile({ benefits: {
+            monthCardActive: PlayerAttributeMgr.isMonthCardVip,
+            yearCardActive: PlayerAttributeMgr.isYearCardVip,
+        } });
     }
 
     // 201 玩家属性信息同步
     static PlayerAttributeDataMsg(t) {
         logger.debug("[MsgRecvMgr] 玩家属性信息同步");
         PlayerAttributeMgr.inst.SyncAttribute(t);
+        reportProfile({ progress: {
+            realmsId: Number(PlayerAttributeMgr.realmsId) || 0,
+            fightValue: Number(PlayerAttributeMgr.fightValue) || 0,
+        } });
     }
 
     // 207 树状态
     static DreamDataMsg(t) {
         logger.debug("[MsgRecvMgr] 树状态同步");
         PlayerAttributeMgr.inst.SyncTree(t);
+        reportProfile({ tree: {
+            level: Number(PlayerAttributeMgr.inst.treeLevel) || 0,
+            freeSpeedUpRemaining: Math.max(0, PlayerAttributeMgr.inst.AD_REWARD_DAILY_MAX_NUM - PlayerAttributeMgr.inst.getAdRewardTimes),
+        } });
         // 初始化完成后 自定义管理器初始化
         CustomMgr.inst.init();
     }
@@ -94,6 +116,10 @@ class MsgRecvMgr {
     static SyncBagMsg(t) {
         logger.debug("[MsgRecvMgr] 背包数据同步");
         BagMgr.inst.SyncBagMsg(t);
+        reportProfile({
+            tree: { peaches: Number(BagMgr.inst.findItemById(100004)?.num) || 0 },
+            resources: { fairyJade: Number(BagMgr.inst.findItemById(100000)?.num) || 0 },
+        });
     }
 
     // 651 游历数据同步
@@ -113,6 +139,17 @@ class MsgRecvMgr {
     static MyUnionData(t) {
         logger.debug("[MsgRecvMgr] 妖盟数据同步");
         UnionMgr.pushMyUnionDataBroadcast(t);
+        const unionData = t?.myUnionData || t || {};
+        const baseData = unionData.baseData || unionData;
+        const ownMember = Array.isArray(unionData.memberList)
+            ? unionData.memberList.find(member => String(member?.playerData?.playerId || '') === String(UserMgr.playerId || ''))
+            : null;
+        reportProfile({ union: {
+            id: String(baseData.unionId || ''),
+            name: String(baseData.name || ''),
+            memberCount: Number(baseData.memberNum) || 0,
+            position: Number.isInteger(Number(ownMember?.position)) ? Number(ownMember.position) : -1,
+        } });
     }
 
     // 2165 妖盟砍价数据同步
@@ -136,12 +173,14 @@ class MsgRecvMgr {
     static PalaceWorshipRsp(t) {
         logger.debug("[MsgRecvMgr] 仙宫点赞同步");
         PalaceMgr.inst.PalaceWorshipRsp(t);
+        reportProfile({ benefits: { palaceWorshipAvailable: false } });
     }
 
     // 4803 仙宫外部数据请求
     static EnterPalaceRsp(t) {
         logger.debug("[MsgRecvMgr] 仙宫外部数据请求");
         PalaceMgr.inst.checkWorship(t);
+        reportProfile({ benefits: { palaceWorshipAvailable: Boolean(t?.worship || t?.worshipRandom) } });
     }
 
     // 4808 仙宫送福数据同步
@@ -154,6 +193,19 @@ class MsgRecvMgr {
     static PalaceMiracleDataMsg(t) {
         logger.debug("[MsgRecvMgr] 仙宫神迹同步");
         PalaceMgr.inst.checkMiracle(t);
+        reportProfile({ benefits: { palaceMiracle: PalaceMgr.isMiracle } });
+    }
+
+    // 30213 仙官赐福自动领取信息同步
+    static AssistantPalaceAutoInfoSync(t) {
+        logger.debug('[MsgRecvMgr] 仙官赐福自动领取信息同步');
+        AssistantPalaceRewardMgr.inst.receiveSync(t);
+    }
+
+    // 30214 仙官赐福聚宝盆领取响应；通常由请求回调处理，此处用于服务端主动下发兜底。
+    static AssistantPalaceAutoRewardResp(t) {
+        logger.debug('[MsgRecvMgr] 仙官赐福聚宝盆领取响应');
+        AssistantPalaceRewardMgr.inst.receiveRewardResponse(t);
     }
 
     // 11801 进入宗门系统
@@ -291,6 +343,11 @@ class MsgRecvMgr {
     static SyncHomelandMsg(t) {
         logger.debug("[MsgRecvMgr] 同步福地鼠宝数据");
         HomelandMgr.inst.doInit(t);
+        reportProfile({ homeland: {
+            energy: Number(HomelandMgr.inst.worker.energy) || 0,
+            freeWorkers: Number(HomelandMgr.inst.worker.free) || 0,
+            totalWorkers: Number(HomelandMgr.inst.worker.total) || 0,
+        } });
     }
 
     // 1052 进入福地

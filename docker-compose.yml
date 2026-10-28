@@ -9,6 +9,7 @@ services:
       DASHBOARD_HOST: 0.0.0.0
       DASHBOARD_PORT: 4173
       DASHBOARD_ALLOWED_ORIGINS: https://${DASHBOARD_DOMAIN}
+      TZ: Asia/Shanghai
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs

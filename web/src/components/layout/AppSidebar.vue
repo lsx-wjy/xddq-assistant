@@ -2,28 +2,36 @@
 import {
   Activity,
   Bot,
+  CircleUserRound,
   House,
+  LogOut,
   ScrollText,
   Settings,
   Users,
 } from '@lucide/vue'
 import companionImage from '@/assets/cultivator-companion.png'
 
-type PageKey = 'overview' | 'users' | 'automation' | 'activities' | 'logs' | 'settings'
+type PageKey = 'overview' | 'profile' | 'users' | 'automation' | 'activities' | 'logs' | 'settings'
 
 const currentPage = defineModel<PageKey>({ required: true })
+const props = defineProps<{
+  isAdmin: boolean
+  displayName: string
+}>()
+const emit = defineEmits<{ logout: [] }>()
 
 const navigation = [
-  { key: 'overview', label: '总览', icon: House, enabled: true },
-  { key: 'users', label: '用户管理', icon: Users, enabled: true },
-  { key: 'automation', label: '自动任务', icon: Bot, enabled: true },
-  { key: 'activities', label: '玩法中心', icon: Activity, enabled: true },
-  { key: 'logs', label: '运行日志', icon: ScrollText, enabled: true },
-  { key: 'settings', label: '系统设置', icon: Settings, enabled: true },
+  { key: 'overview', label: '总览', icon: House, adminOnly: true, userOnly: false },
+  { key: 'profile', label: '我的角色', icon: CircleUserRound, adminOnly: false, userOnly: true },
+  { key: 'users', label: '用户管理', icon: Users, adminOnly: true, userOnly: false },
+  { key: 'automation', label: '自动任务', icon: Bot, adminOnly: false, userOnly: false },
+  { key: 'activities', label: '玩法中心', icon: Activity, adminOnly: true, userOnly: false },
+  { key: 'logs', label: '运行日志', icon: ScrollText, adminOnly: false, userOnly: false },
+  { key: 'settings', label: '系统设置', icon: Settings, adminOnly: false, userOnly: false },
 ] as const
 
-function selectItem(key: string, enabled: boolean) {
-  if (enabled && (key === 'overview' || key === 'users' || key === 'automation' || key === 'activities' || key === 'logs' || key === 'settings')) {
+function selectItem(key: string) {
+  if (key === 'overview' || key === 'profile' || key === 'users' || key === 'automation' || key === 'activities' || key === 'logs' || key === 'settings') {
     currentPage.value = key as PageKey
   }
 }
@@ -45,17 +53,16 @@ function selectItem(key: string, enabled: boolean) {
 
     <nav class="navigation" aria-label="主导航">
       <button
-        v-for="item in navigation"
+        v-for="item in navigation.filter(entry => props.isAdmin ? !entry.userOnly : !entry.adminOnly)"
         :key="item.key"
         class="nav-item"
         :class="{
           'nav-item--active': currentPage === item.key,
-          'nav-item--disabled': !item.enabled,
         }"
         :aria-current="currentPage === item.key ? 'page' : undefined"
-        :title="item.enabled ? item.label : `${item.label}即将开放`"
+        :title="item.label"
         type="button"
-        @click="selectItem(item.key, item.enabled)"
+        @click="selectItem(item.key)"
       >
         <component :is="item.icon" :size="22" :stroke-width="1.8" />
         <span>{{ item.label }}</span>
@@ -66,9 +73,15 @@ function selectItem(key: string, enabled: boolean) {
       <img :src="companionImage" alt="" />
     </div>
 
-    <div class="service-status">
+    <div class="session-card">
       <span class="status-orb" aria-hidden="true"></span>
-      <span>本地服务运行中</span>
+      <span class="session-card__identity">
+        <strong>{{ displayName }}</strong>
+        <small>{{ isAdmin ? '超级管理员' : '当前角色' }}</small>
+      </span>
+      <button type="button" title="退出登录" aria-label="退出登录" @click="emit('logout')">
+        <LogOut :size="18" />
+      </button>
     </div>
   </aside>
 </template>
@@ -222,13 +235,12 @@ function selectItem(key: string, enabled: boolean) {
   filter: drop-shadow(0 9px 10px rgb(0 0 0 / 35%));
 }
 
-.service-status {
+.session-card {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
   min-height: 58px;
-  padding: 0 12px;
+  padding: 9px 10px 9px 12px;
   color: #7cf1c7;
   font-size: 15px;
   font-weight: 700;
@@ -237,6 +249,43 @@ function selectItem(key: string, enabled: boolean) {
   border: 1px solid #b69958;
   border-radius: 9px;
   box-shadow: inset 0 0 0 2px rgb(218 189 120 / 18%);
+}
+
+.session-card__identity {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.session-card__identity strong {
+  color: #dcf6e8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-card__identity small {
+  color: #75bca2;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.session-card button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  color: #e7d493;
+  background: rgb(212 181 101 / 8%);
+  border: 1px solid rgb(212 181 101 / 42%);
+  border-radius: 7px;
+  cursor: pointer;
+  place-items: center;
+}
+
+.session-card button:hover {
+  color: #fff1b8;
+  background: rgb(174 80 55 / 28%);
 }
 
 .status-orb {
@@ -295,7 +344,7 @@ function selectItem(key: string, enabled: boolean) {
     display: none;
   }
 
-  .service-status {
+  .session-card {
     min-height: 44px;
   }
 }
@@ -306,7 +355,7 @@ function selectItem(key: string, enabled: boolean) {
   }
 
   .brand-name,
-  .service-status {
+  .session-card {
     display: none;
   }
 

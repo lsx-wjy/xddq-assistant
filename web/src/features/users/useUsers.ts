@@ -1,5 +1,5 @@
 import { computed, onMounted, onUnmounted, readonly, shallowRef } from 'vue'
-import type { UserDraft, UserRecord } from './types'
+import type { UserDraft, UserLoginDraft, UserRecord } from './types'
 
 interface UsersResponse {
   users: UserRecord[]
@@ -55,8 +55,8 @@ export function useUsers() {
     }
   }
 
-  async function createUser(draft: UserDraft) {
-    const response = await fetch('/api/users', {
+  async function loginUser(draft: UserLoginDraft) {
+    const response = await fetch('/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(draft),
@@ -103,7 +103,7 @@ export function useUsers() {
     error: readonly(error),
     serverOptions,
     refreshUsers,
-    createUser,
+    loginUser,
     updateUser,
     setConnection,
   }

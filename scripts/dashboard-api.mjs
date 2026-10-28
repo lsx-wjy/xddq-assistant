@@ -7,10 +7,26 @@ import AuthService from '../src/services/authService.js'
 import Protocol from '../src/game/net/Protocol.js'
 import activityRegistry from '../src/game/config/grpc/json/activityRegistry.json' with { type: 'json' }
 import automationTasks from '../src/game/config/automationTasks.json' with { type: 'json' }
+import {
+  canUseProtocolRunner,
+  createSessionRegistry,
+  scopeUsersForPrincipal,
+  userIsAccessible,
+  verifyAdminPassword,
+} from './dashboard-auth.mjs'
+import { mergeProfileSnapshot } from './dashboard-profile.mjs'
 import { createDashboardUserStore } from './dashboard-user-store.mjs'
 
 const SERVER_OPTIONS_PATH = '/api/server-options'
+const SESSION_PATH = '/api/session'
+const SESSION_LOGIN_PATH = '/api/session/login'
+const SESSION_LOGOUT_PATH = '/api/session/logout'
+const MANAGED_USER_LOGIN_PATH = '/api/users/login'
 const USERS_PATH = '/api/users'
+const SESSION_COOKIE_NAME = 'xddq_session'
+const ADMIN_ACCOUNT = 'admin'
+const ADMIN_PASSWORD_HASH = process.env.DASHBOARD_ADMIN_PASSWORD_HASH
+  || 'scrypt$4e765f5620f12d4fe1dcb4db05ac5896$9c7ea5964af8a7f3701cf10a798568ae7fbd3f36a3c12c6cf78c76c5ff3627817c9645a5d0d7dbc2e15494f88fdabe128abd99b981fb62fe610746fa5b69faf7'
 const MAX_BODY_BYTES = 256 * 1024
 const DEFAULT_505_COOLDOWN_MS = 30 * 60 * 1000
 const RECONNECT_DELAYS_MS = [30_000, 120_000, 300_000, 900_000, 1_800_000]
@@ -29,6 +45,7 @@ for (const group of activityRegistry) {
   if (group.protocols.some(protocol => protocol.requestMethod)) automationTaskIds.add(`activity.${group.name}`)
 }
 const processStates = new Map()
+const dashboardSessions = createSessionRegistry()
 let userStore
 
 class HttpError extends Error {
@@ -43,6 +60,50 @@ function sendJson(response, statusCode, payload) {
   response.setHeader('Content-Type', 'application/json; charset=utf-8')
   response.setHeader('Cache-Control', 'no-store')
   response.end(JSON.stringify(payload))
+}
+
+function readCookie(request, name) {
+  const cookieHeader = String(request.headers.cookie || '')
+  for (const cookie of cookieHeader.split(';')) {
+    const separator = cookie.indexOf('=')
+    if (separator < 0 || cookie.slice(0, separator).trim() !== name) continue
+    try {
+      return decodeURIComponent(cookie.slice(separator + 1).trim())
+    } catch {
+      return ''
+    }
+  }
+  return ''
+}
+
+function setSessionCookie(response, token, expiresAt) {
+  const maxAge = Math.max(0, Math.floor((expiresAt - Date.now()) / 1_000))
+  response.setHeader(
+    'Set-Cookie',
+    `${SESSION_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${maxAge}`,
+  )
+}
+
+function clearSessionCookie(response) {
+  response.setHeader('Set-Cookie', `${SESSION_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0`)
+}
+
+function principalFor(request) {
+  return dashboardSessions.resolve(readCookie(request, SESSION_COOKIE_NAME))
+}
+
+function requirePrincipal(request) {
+  const principal = principalFor(request)
+  if (!principal) throw new HttpError(401, '请先登录')
+  return principal
+}
+
+function requireAdmin(principal) {
+  if (principal?.role !== 'admin') throw new HttpError(403, '仅管理员可以执行此操作')
+}
+
+function requireUserAccess(principal, userId) {
+  if (!userIsAccessible(principal, userId)) throw new HttpError(403, '无权访问其他用户')
 }
 
 function isAllowedDashboardOrigin(origin) {
@@ -217,6 +278,7 @@ function defaultProcessState() {
     forbiddenEndTime: null,
     retryBlockedUntil: null,
     activityObservations: {},
+    profile: {},
     pendingProtocolRequest: null,
     automationRun: {
       status: 'idle', startedAt: null, finishedAt: null, completed: 0, skipped: 0, failed: 0, logs: [],
@@ -262,6 +324,7 @@ function safeUser(user) {
     allowCombat: user.allowCombat,
     allowPurchase: user.allowPurchase,
     activityObservations: state.activityObservations,
+    profile: state.profile,
     automationRun: {
       ...state.automationRun,
       logs: state.automationRun.logs.slice(-120),
@@ -291,7 +354,7 @@ function selectedManagedAutomationTasks(user) {
     ))
 }
 
-function buildInternalRequestIds(automation, user) {
+export function buildInternalRequestIds(automation, user) {
   const enabled = taskId => automation.tasks[taskId]?.enabled === true
   const ids = new Set()
   const add = (taskId, names, allowed = true) => {
@@ -331,6 +394,7 @@ function buildInternalRequestIds(automation, user) {
     'S_GATHER_ENERGY_ENTER_NEW', 'S_GATHER_ENERGY_GET_AD_AWARD',
   ])
   add('cave.palace', ['S_PALACE_ENTER_OUTER', 'S_PALACE_WORSHIP', 'S_PALACE_SEND_GIFT_GET_REWARD'])
+  add('basic.assistant-palace-jade', ['S_ASSISTANT_PALACE_AUTO_REWARD'])
   addForAny(['cave.pupil-training', 'cave.pupil-management'], [
     'S_PUPIL_ENTER', 'S_PUPIL_TRAIN', 'S_PUPIL_RECRUIT', 'S_PUPIL_GRADUATE',
   ])
@@ -435,7 +499,7 @@ async function runAutomationQueue(user) {
   }
 }
 
-function buildRuntimeAccount(user) {
+export function buildRuntimeAccount(user) {
   const selectedActivities = selectedActivitiesFrom(user.selectedActivities)
   const storedAutomation = normalizeAutomationSettings(user.automationSettings)
   const automation = {
@@ -496,6 +560,7 @@ function buildRuntimeAccount(user) {
     ...(task('challenge.wild-boss').enabled && user.allowCombat ? ['WildBoss'] : []),
     ...(task('challenge.duel').enabled && user.allowCombat ? ['RankBattle'] : []),
     ...(task('cave.palace').enabled ? ['Palace'] : []),
+    ...(task('basic.assistant-palace-jade').enabled ? ['Assistant'] : []),
     ...(hasTask('cave.pupil-training', 'cave.pupil-management') ? ['Pupil'] : []),
     ...(hasTask('union.demon-hunt', 'union.bargain', 'union.daily-task-reward', 'shop.union-purchases') ? ['Union'] : []),
     ...(task('union.demon-hunt').enabled && user.allowCombat ? ['UnionBoss'] : []),
@@ -795,6 +860,7 @@ function startUserProcess(user) {
   child.on('message', message => {
     if (message?.type === 'runtime-error') handleRuntimeError(user, state, message)
     else if (message?.type === 'activity-observation') captureActivityObservation(state, message)
+    else if (message?.type === 'profile-update') state.profile = mergeProfileSnapshot(state.profile, message.profile)
     else if (message?.type === 'protocol-request-result') settlePendingProtocol(state, message)
     else if (message?.type === 'scheduled-restart') {
       appendAutomationLog(state, 'info', '定时任务：正在按已选设置重启游戏连接。')
@@ -918,8 +984,142 @@ function stopAllUserProcesses() {
 
 export function shutdownDashboard() {
   stopAllUserProcesses()
+  dashboardSessions.clear()
   userStore?.close()
   userStore = undefined
+}
+
+async function listPlatformServers(accountValue, passwordValue) {
+  const account = cleanText(accountValue, 128)
+  const password = typeof passwordValue === 'string' ? passwordValue : ''
+  if (!account || !password) {
+    throw new HttpError(400, '请先填写平台账号和登录密码')
+  }
+
+  try {
+    const { servers } = await new AuthService().List(account, password)
+    return servers
+      .map(server => ({
+        serverId: Number(server.serverId),
+        serverName: String(server.serverName || `区服 ${server.serverId}`),
+      }))
+      .filter(server => Number.isInteger(server.serverId) && server.serverId > 0)
+  } catch (error) {
+    throw new HttpError(401, error instanceof Error ? error.message : '账号或密码验证失败')
+  }
+}
+
+async function loginPlatformUser(body) {
+  const account = cleanText(body.account, 128)
+  const password = typeof body.password === 'string' ? body.password.slice(0, 256) : ''
+  const serverId = Number(body.serverId)
+  if (!account || !password || !Number.isInteger(serverId) || serverId <= 0) {
+    throw new HttpError(400, '请填写账号、密码并选择角色区服')
+  }
+  if (account.toLocaleLowerCase() === ADMIN_ACCOUNT) {
+    throw new HttpError(400, '该账号名称为管理入口保留')
+  }
+
+  const servers = await listPlatformServers(account, password)
+  const selectedServer = servers.find(server => server.serverId === serverId)
+  if (!selectedServer) throw new HttpError(400, '所选角色区服不属于当前账号')
+
+  const users = loadUsers()
+  const index = users.findIndex(user => user.account === account && user.serverId === serverId)
+  const existing = index >= 0 ? users[index] : null
+  const now = new Date().toISOString()
+  const user = existing
+    ? { ...existing, password, serverName: selectedServer.serverName, updatedAt: now }
+    : normalizeUser({
+        note: selectedServer.serverName,
+        account,
+        password,
+        serverName: selectedServer.serverName,
+        serverId,
+        autoReconnect: false,
+        selectedActivities: [],
+        persistSnapshots: false,
+        allowCombat: false,
+        allowPurchase: false,
+      }, null, users.find(item => item.account === account))
+
+  const nextUsers = [...users]
+  if (index >= 0) nextUsers[index] = user
+  else nextUsers.push(user)
+  saveUsers(nextUsers)
+  return user
+}
+
+function sessionPayload(principal) {
+  if (!principal) return { authenticated: false, role: null, userId: null, displayName: '' }
+  if (principal.role === 'admin') {
+    return { authenticated: true, role: 'admin', userId: null, displayName: '超级管理员' }
+  }
+  const user = loadUsers().find(item => item.id === principal.userId)
+  if (!user) return { authenticated: false, role: null, userId: null, displayName: '' }
+  return {
+    authenticated: true,
+    role: 'user',
+    userId: user.id,
+    displayName: user.note,
+    user: safeUser(user),
+  }
+}
+
+async function handleSession(request, response) {
+  if (request.method !== 'GET') {
+    response.setHeader('Allow', 'GET')
+    sendJson(response, 405, { error: '仅支持 GET 请求' })
+    return
+  }
+  sendJson(response, 200, sessionPayload(principalFor(request)))
+}
+
+async function handleSessionLogin(request, response) {
+  if (request.method !== 'POST') {
+    response.setHeader('Allow', 'POST')
+    sendJson(response, 405, { error: '仅支持 POST 请求' })
+    return
+  }
+  const body = await readJsonBody(request)
+  const account = cleanText(body.account, 128)
+  const password = typeof body.password === 'string' ? body.password : ''
+  let principal
+  let user = null
+
+  if (account.toLocaleLowerCase() === ADMIN_ACCOUNT) {
+    if (!verifyAdminPassword(password, ADMIN_PASSWORD_HASH)) throw new HttpError(401, '管理员账号或密码错误')
+    principal = { role: 'admin', userId: null }
+  } else {
+    user = await loginPlatformUser(body)
+    principal = { role: 'user', userId: user.id }
+  }
+
+  const session = dashboardSessions.create(principal)
+  setSessionCookie(response, session.token, session.expiresAt)
+  sendJson(response, 200, { ...sessionPayload(principal), user: user ? safeUser(user) : undefined })
+}
+
+async function handleSessionLogout(request, response) {
+  if (request.method !== 'POST') {
+    response.setHeader('Allow', 'POST')
+    sendJson(response, 405, { error: '仅支持 POST 请求' })
+    return
+  }
+  dashboardSessions.revoke(readCookie(request, SESSION_COOKIE_NAME))
+  clearSessionCookie(response)
+  sendJson(response, 200, { authenticated: false })
+}
+
+async function handleManagedUserLogin(request, response, principal) {
+  requireAdmin(principal)
+  if (request.method !== 'POST') {
+    response.setHeader('Allow', 'POST')
+    sendJson(response, 405, { error: '仅支持 POST 请求' })
+    return
+  }
+  const user = await loginPlatformUser(await readJsonBody(request))
+  sendJson(response, 200, { user: safeUser(user) })
 }
 
 async function handleServerOptions(request, response) {
@@ -928,54 +1128,22 @@ async function handleServerOptions(request, response) {
     sendJson(response, 405, { error: '仅支持 POST 请求' })
     return
   }
-
   const body = await readJsonBody(request)
-  const account = cleanText(body.account, 128)
-  const password = typeof body.password === 'string' ? body.password : ''
-  if (!account || !password) {
-    sendJson(response, 400, { error: '请先填写平台账号和登录密码' })
-    return
-  }
-
-  try {
-    const { servers } = await new AuthService().List(account, password)
-    const safeServers = servers
-      .map(server => ({
-        serverId: Number(server.serverId),
-        serverName: String(server.serverName || `区服 ${server.serverId}`),
-      }))
-      .filter(server => Number.isInteger(server.serverId) && server.serverId > 0)
-    sendJson(response, 200, { servers: safeServers })
-  } catch (error) {
-    sendJson(response, 502, { error: error instanceof Error ? error.message : '区服读取失败' })
-  }
+  sendJson(response, 200, { servers: await listPlatformServers(body.account, body.password) })
 }
 
-async function handleUsersCollection(request, response) {
+async function handleUsersCollection(request, response, principal) {
   const users = await loadUsers()
   if (request.method === 'GET') {
-    sendJson(response, 200, { users: users.map(safeUser) })
+    sendJson(response, 200, { users: scopeUsersForPrincipal(users, principal).map(safeUser) })
     return
   }
-  if (request.method !== 'POST') {
-    response.setHeader('Allow', 'GET, POST')
-    sendJson(response, 405, { error: '不支持此请求方法' })
-    return
-  }
-
-  const body = await readJsonBody(request)
-  const account = cleanText(body.account, 128)
-  const sharedIdentity = users.find(item => item.account === account)
-  const user = normalizeUser(body, null, sharedIdentity)
-  if (users.some(item => item.account === user.account && item.serverId === user.serverId)) {
-    sendJson(response, 409, { error: '该账号和区服已经添加' })
-    return
-  }
-  await saveUsers([...users, user])
-  sendJson(response, 201, { user: safeUser(user) })
+  response.setHeader('Allow', 'GET')
+  sendJson(response, 405, { error: '用户只能通过登录验证加入' })
 }
 
-async function handleUserItem(request, response, userId, action) {
+async function handleUserItem(request, response, userId, action, principal) {
+  requireUserAccess(principal, userId)
   const users = await loadUsers()
   const index = users.findIndex(user => user.id === userId)
   if (index < 0) {
@@ -1013,6 +1181,7 @@ async function handleUserItem(request, response, userId, action) {
   const roleChanged = user.account !== updatedUser.account || user.serverId !== updatedUser.serverId
   stopUserProcess(user.id)
   if (roleChanged) stateFor(user.id).activityObservations = {}
+  if (roleChanged) stateFor(user.id).profile = {}
   const nextUsers = [...users]
   nextUsers[index] = updatedUser
   await saveUsers(nextUsers)
@@ -1085,33 +1254,57 @@ export async function handleDashboardApi(request, response, pathname) {
     sendJson(response, 403, { error: '页面访问来源不在允许名单中' })
     return
   }
+  if (pathname === SESSION_PATH) {
+    await handleSession(request, response)
+    return
+  }
+  if (pathname === SESSION_LOGIN_PATH) {
+    await handleSessionLogin(request, response)
+    return
+  }
+  if (pathname === SESSION_LOGOUT_PATH) {
+    await handleSessionLogout(request, response)
+    return
+  }
   if (pathname === SERVER_OPTIONS_PATH) {
     await handleServerOptions(request, response)
     return
   }
+  const principal = requirePrincipal(request)
+  if (pathname === MANAGED_USER_LOGIN_PATH) {
+    await handleManagedUserLogin(request, response, principal)
+    return
+  }
   if (pathname === USERS_PATH) {
-    await handleUsersCollection(request, response)
+    await handleUsersCollection(request, response, principal)
     return
   }
 
   const automationSettingsMatch = pathname.match(/^\/api\/users\/([^/]+)\/automation-settings$/)
   if (automationSettingsMatch) {
-    await handleAutomationSettings(request, response, decodeURIComponent(automationSettingsMatch[1]))
+    const userId = decodeURIComponent(automationSettingsMatch[1])
+    requireUserAccess(principal, userId)
+    await handleAutomationSettings(request, response, userId)
     return
   }
 
   const automationRunMatch = pathname.match(/^\/api\/users\/([^/]+)\/automation\/run$/)
   if (automationRunMatch) {
-    await handleAutomationRun(request, response, decodeURIComponent(automationRunMatch[1]))
+    const userId = decodeURIComponent(automationRunMatch[1])
+    requireUserAccess(principal, userId)
+    await handleAutomationRun(request, response, userId)
     return
   }
 
   const protocolMatch = pathname.match(/^\/api\/users\/([^/]+)\/protocols\/([^/]+)\/run$/)
   if (protocolMatch) {
+    if (!canUseProtocolRunner(principal)) throw new HttpError(403, '玩法中心仅向管理员开放')
+    const userId = decodeURIComponent(protocolMatch[1])
+    requireUserAccess(principal, userId)
     await handleProtocolRequest(
       request,
       response,
-      decodeURIComponent(protocolMatch[1]),
+      userId,
       decodeURIComponent(protocolMatch[2]),
     )
     return
@@ -1119,7 +1312,7 @@ export async function handleDashboardApi(request, response, pathname) {
 
   const userMatch = pathname.match(/^\/api\/users\/([^/]+)(?:\/(connect|disconnect))?$/)
   if (userMatch) {
-    await handleUserItem(request, response, decodeURIComponent(userMatch[1]), userMatch[2])
+    await handleUserItem(request, response, decodeURIComponent(userMatch[1]), userMatch[2], principal)
     return
   }
   sendJson(response, 404, { error: '接口不存在' })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onUnmounted, shallowRef } from 'vue'
-import { AlertCircle, CheckCircle2, LoaderCircle, Plus, RefreshCw } from '@lucide/vue'
+import { AlertCircle, CheckCircle2, LoaderCircle, LogIn, RefreshCw } from '@lucide/vue'
 import { displayNameFor } from '@/features/activities/activityTaxonomy'
 import UserDetailsDrawer from './UserDetailsDrawer.vue'
 import UserDrawer from './UserDrawer.vue'
@@ -15,7 +15,7 @@ const {
   error,
   serverOptions,
   refreshUsers,
-  createUser,
+  loginUser,
   updateUser,
   setConnection,
 } = useUsers()
@@ -103,10 +103,10 @@ async function handleSave(draft: UserDraft) {
       showToast(`已保存“${updated.note}”的修改，连接保持关闭`)
       return
     }
-    const created = await createUser(draft)
+    const created = await loginUser({ account: draft.account, password: draft.password, serverId: draft.serverId })
     drawerOpen.value = false
     detailUserId.value = created.id
-    showToast(`已添加“${created.note}”，请按需选择连接`)
+    showToast(`“${created.note}”登录验证成功，已加入用户列表`)
   } catch (requestError) {
     saveError.value = requestError instanceof Error ? requestError.message : '用户保存失败'
   } finally {
@@ -148,9 +148,9 @@ onUnmounted(() => {
           <h1 class="page-title">用户管理</h1>
           <p class="page-subtitle">账号、区服、连接与运行玩法均由你逐项管理</p>
         </div>
-        <button class="jade-button" type="button" aria-label="添加用户" @click="openCreateDrawer">
-          <Plus :size="20" />
-          <span>添加用户</span>
+        <button class="jade-button" type="button" aria-label="登录用户" @click="openCreateDrawer">
+          <LogIn :size="20" />
+          <span>登录用户</span>
         </button>
       </header>
 

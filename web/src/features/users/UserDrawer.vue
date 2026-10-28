@@ -48,7 +48,7 @@ const serverPlaceholder = computed(() => {
   return '请选择角色所在区服'
 })
 const isValid = computed(() =>
-  form.note.trim().length > 0
+  (isEditing.value ? form.note.trim().length > 0 : true)
   && form.account.trim().length > 0
   && (isEditing.value || form.password.length > 0)
   && Number.isInteger(Number(form.serverId))
@@ -135,7 +135,7 @@ function saveUser() {
   submitted.value = true
   if (!isValid.value || props.saving) return
   emit('save', {
-    note: form.note.trim(),
+    note: form.note.trim() || form.serverName || form.account.trim(),
     account: form.account.trim(),
     password: form.password,
     serverId: Number(form.serverId),
@@ -153,13 +153,13 @@ function saveUser() {
   <AppDrawer :open="open" labelled-by="user-form-title" @close="closeDrawer">
     <form class="user-form" @submit.prevent="saveUser">
       <header class="drawer-heading">
-        <h2 id="user-form-title">{{ isEditing ? '修改用户' : '添加用户' }}</h2>
-        <p>{{ isEditing ? '修改账号、区服与运行玩法' : '配置账号信息，保存后由你手动连接' }}</p>
+        <h2 id="user-form-title">{{ isEditing ? '修改用户' : '登录用户' }}</h2>
+        <p>{{ isEditing ? '修改账号、区服与运行玩法' : '验证平台账号，并选择要加入管理台的角色' }}</p>
       </header>
 
       <div class="ornament-line">账号信息</div>
       <div class="form-fields">
-        <label class="field-label">
+        <label v-if="isEditing" class="field-label">
           <span>用户备注</span>
           <input v-model.trim="form.note" class="field-control" type="text" placeholder="例如：青云客" />
         </label>
@@ -232,18 +232,19 @@ function saveUser() {
 
       <p class="privacy-note">
         <ShieldCheck :size="15" />
-        密码仅保存在本机 SQLite 数据库中，不会返回浏览器页面
+        {{ isEditing ? '密码仅保存在本机 SQLite 数据库中，不会返回浏览器页面' : '登录时会再次验证账号与所选区服，成功后才加入用户列表' }}
       </p>
       <p v-if="submitted && !isValid" class="form-error">
-        请完整填写备注、账号{{ isEditing ? '' : '、密码' }}并选择有效区服。
+        请完整填写{{ isEditing ? '备注、' : '' }}账号{{ isEditing ? '' : '、密码' }}并选择有效区服。
       </p>
       <p v-if="error" class="form-error">{{ error }}</p>
 
-      <div class="ornament-line">运行玩法</div>
-      <UserActivitySelector v-model="form.selectedActivities" />
+      <template v-if="isEditing">
+        <div class="ornament-line">运行玩法</div>
+        <UserActivitySelector v-model="form.selectedActivities" />
 
-      <div class="ornament-line">连接与安全</div>
-      <div class="settings-list">
+        <div class="ornament-line">连接与安全</div>
+        <div class="settings-list">
         <div class="settings-row">
           <div class="settings-copy">
             <strong>断线自动重连</strong>
@@ -272,12 +273,13 @@ function saveUser() {
           </div>
           <ToggleSwitch v-model="form.allowPurchase" label="允许购买与交易" />
         </div>
-      </div>
+        </div>
+      </template>
 
       <div class="drawer-actions">
         <button class="paper-button" type="button" :disabled="saving" @click="closeDrawer">取消</button>
         <button class="jade-button" type="submit" :disabled="saving">
-          {{ saving ? '正在保存…' : isEditing ? '保存修改' : '保存用户' }}
+          {{ saving ? (isEditing ? '正在保存…' : '正在登录…') : isEditing ? '保存修改' : '登录用户' }}
         </button>
       </div>
     </form>
