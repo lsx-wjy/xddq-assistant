@@ -2,7 +2,7 @@ const schema = {
   identity: { nickname: 'text', playerId: 'id', roleId: 'id', serverId: 'number' },
   progress: { realmsId: 'number', fightValue: 'number' },
   tree: { level: 'number', peaches: 'number', freeSpeedUpRemaining: 'number' },
-  resources: { fairyJade: 'number', dailyClaimedJade: 'number', dailyClaimedJadeDate: 'text' },
+  resources: { fairyJade: 'number', dailyClaimedJade: 'number', dailyClaimedJadeDate: 'text', dailyClaimedJadeSource: 'text' },
   union: { id: 'id', name: 'text', memberCount: 'number', position: 'number' },
   homeland: { energy: 'number', freeWorkers: 'number', totalWorkers: 'number' },
   benefits: {

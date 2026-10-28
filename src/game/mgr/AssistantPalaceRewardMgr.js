@@ -1,10 +1,10 @@
 import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
-import { reportProfile } from '#game/common/ProfileReporter.js';
 import GameNetMgr from '#game/net/GameNetMgr.js';
 import Protocol from '#game/net/Protocol.js';
 import logger from '#utils/logger.js';
 
 const TASK_ID = 'basic.assistant-palace-jade';
+export { rewardItemAmount } from '#game/common/RewardItems.js';
 
 const CHINA_TIME_FORMATTER = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Shanghai',
@@ -31,17 +31,6 @@ export function chinaDateParts(date = new Date()) {
     };
 }
 
-export function rewardItemAmount(reward, itemId) {
-    if (typeof reward !== 'string' || !Number.isInteger(Number(itemId))) return 0;
-    const pattern = new RegExp(`(?:^|[^0-9])${Number(itemId)}\\s*=\\s*(\\d+)`, 'g');
-    let total = 0;
-    for (const match of reward.matchAll(pattern)) {
-        const amount = Number(match[1]);
-        if (Number.isSafeInteger(amount) && amount > 0) total += amount;
-    }
-    return total;
-}
-
 function recordIsEligible(record, nowMs) {
     if (!record || record.reward === true) return false;
     const rawTime = Number(record.time);
@@ -56,14 +45,12 @@ export default class AssistantPalaceRewardMgr {
         enabled = () => false,
         ready = () => false,
         sendReward = () => false,
-        reportDailyJade = () => {},
         log = () => {},
     } = {}) {
         this.now = now;
         this.enabled = enabled;
         this.ready = ready;
         this.sendReward = sendReward;
-        this.reportDailyJade = reportDailyJade;
         this.log = log;
         this.records = null;
         this.recordsDate = '';
@@ -74,8 +61,6 @@ export default class AssistantPalaceRewardMgr {
         this.attemptDate = '';
         this.attempts = 0;
         this.completedDate = '';
-        this.dailyClaimDate = '';
-        this.dailyClaimedJade = 0;
         this.maxDailyAttempts = 6;
     }
 
@@ -89,10 +74,6 @@ export default class AssistantPalaceRewardMgr {
                     {},
                     callback,
                 ),
-                reportDailyJade: ({ date, amount }) => reportProfile({ resources: {
-                    dailyClaimedJade: amount,
-                    dailyClaimedJadeDate: date,
-                } }),
                 log: (level, message) => {
                     const writer = typeof logger[level] === 'function' ? logger[level] : logger.info;
                     writer.call(logger, `[仙官赐福] ${message}`);
@@ -160,7 +141,6 @@ export default class AssistantPalaceRewardMgr {
     }
 
     receiveRewardResponse(data) {
-        const wasInFlight = this.inFlight;
         this.inFlight = false;
         const now = this.now();
         const nowMs = now.getTime();
@@ -170,15 +150,6 @@ export default class AssistantPalaceRewardMgr {
         const ret = Number(data?.ret);
 
         if (ret === 0) {
-            const claimedJade = wasInFlight ? rewardItemAmount(data?.reward, 100000) : 0;
-            if (claimedJade > 0) {
-                if (this.dailyClaimDate !== claimDate) {
-                    this.dailyClaimDate = claimDate;
-                    this.dailyClaimedJade = 0;
-                }
-                this.dailyClaimedJade += claimedJade;
-                this.reportDailyJade({ date: claimDate, amount: this.dailyClaimedJade });
-            }
             if (Array.isArray(data?.records) && data.records.length > 0) {
                 this.records = data.records.map(record => ({ ...record }));
                 this.recordsDate = claimDate;

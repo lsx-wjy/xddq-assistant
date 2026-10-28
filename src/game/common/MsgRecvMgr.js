@@ -26,6 +26,12 @@ import { isAutomationTaskEnabled } from '#game/common/AutomationTaskMgr.js';
 import { reportProfile } from '#game/common/ProfileReporter.js';
 
 class MsgRecvMgr {
+    // Observe successful rewards independently of one-shot request callbacks.
+    static observePalaceReward(method, data) {
+        if (method === 'PalaceWorshipRsp') PalaceMgr.inst.recordReward(data, '仙宫朝拜');
+        else if (method === 'GetSendGiftRewardRsp') PalaceMgr.inst.recordReward(data, '仙宫送福');
+    }
+
     constructor() {
         this.loginMsgIdList = [
             Protocol.S_PLAYER_DATA_SYNC_MSG,     // 101 用户信息同步
@@ -189,6 +195,11 @@ class MsgRecvMgr {
         PalaceMgr.inst.checkReward(t);
     }
 
+    // 4807 仙宫送福领奖响应：只统计服务器确认成功后实际获得的仙玉。
+    static GetSendGiftRewardRsp(t) {
+        PalaceMgr.inst.recordReward(t, '仙宫送福');
+    }
+
     // 4809 仙宫神迹同步
     static PalaceMiracleDataMsg(t) {
         logger.debug("[MsgRecvMgr] 仙宫神迹同步");
@@ -324,7 +335,8 @@ class MsgRecvMgr {
     // 2102 进入妖盟后的当前妖盟数据。
     static RspUnionEnter(t) {
         logger.debug('[MsgRecvMgr] 进入妖盟');
-        UnionMgr.inst.receiveUnionEnter(t);
+        if (Number(t?.ret) === 0 && t?.myUnionData) MsgRecvMgr.MyUnionData(t.myUnionData);
+        else UnionMgr.inst.receiveUnionEnter(t);
     }
 
     // 2117 妖盟每日任务进度，用于确认任务完成后再领奖。

@@ -5,6 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . ./
+COPY account.js.sample ./account.js
 RUN npm run build
 
 FROM node:24-bookworm-slim AS runtime
@@ -19,6 +20,7 @@ RUN npm ci --omit=dev && npm cache clean --force
 COPY --from=build /app/dist-dashboard ./dist-dashboard
 COPY --from=build /app/scripts ./scripts
 COPY --from=build /app/src ./src
+COPY --from=build /app/config ./config
 COPY --from=build /app/account.js.sample ./account.js
 
 RUN mkdir -p /app/data /app/logs

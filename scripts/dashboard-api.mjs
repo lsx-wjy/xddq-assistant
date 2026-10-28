@@ -16,6 +16,9 @@ import {
 } from './dashboard-auth.mjs'
 import { mergeProfileSnapshot } from './dashboard-profile.mjs'
 import { createDashboardUserStore } from './dashboard-user-store.mjs'
+import { readDashboardAccess, isPlatformAccountAllowed, isDashboardUserAllowed } from '../src/config/dashboardAccess.js'
+import { createConnectionSlots, ConnectionLimitError } from './dashboard-connection-slots.mjs'
+import { chinaDateKey } from '../src/game/common/chinaDateKey.js'
 
 const SERVER_OPTIONS_PATH = '/api/server-options'
 const SESSION_PATH = '/api/session'
@@ -46,6 +49,8 @@ for (const group of activityRegistry) {
 }
 const processStates = new Map()
 const dashboardSessions = createSessionRegistry()
+const connectionSlots = createConnectionSlots(() => readDashboardAccess().maxGameConnections)
+const verificationProcesses = new Set()
 let userStore
 
 class HttpError extends Error {
@@ -291,6 +296,17 @@ function stateFor(userId) {
   return processStates.get(userId)
 }
 
+function palaceResourcesFor(user) {
+  const date = chinaDateKey()
+  const stored = getUserStore().loadPalaceDailyJade(user.account, user.serverId, date)
+  const live = processStates.get(user.id)?.profile?.resources
+  if (live?.dailyClaimedJadeSource === 'palace' && live.dailyClaimedJadeDate === date
+    && Number.isSafeInteger(live.dailyClaimedJade) && live.dailyClaimedJade > stored.dailyClaimedJade) {
+    stored.dailyClaimedJade = live.dailyClaimedJade
+  }
+  return stored
+}
+
 function safeUser(user) {
   const state = stateFor(user.id)
   const selectedActivities = selectedActivitiesFrom(user.selectedActivities)
@@ -324,7 +340,10 @@ function safeUser(user) {
     allowCombat: user.allowCombat,
     allowPurchase: user.allowPurchase,
     activityObservations: state.activityObservations,
-    profile: state.profile,
+    profile: {
+      ...state.profile,
+      resources: { ...state.profile.resources, ...palaceResourcesFor(user) },
+    },
     automationRun: {
       ...state.automationRun,
       logs: state.automationRun.logs.slice(-120),
@@ -570,6 +589,8 @@ export function buildRuntimeAccount(user) {
   const runtimeGroups = [...new Set([...selectedActivities, ...automationGroups])]
 
   return {
+    dashboardAccessRequired: true,
+    palaceDailyJade: user.id ? palaceResourcesFor(user) : undefined,
     username: user.account,
     password: user.password,
     serverId: user.serverId,
@@ -672,6 +693,11 @@ function clearLoginFailure(user, state) {
 
 function inspectProcessLine(user, state, line) {
   const cleanLine = stripAnsi(line)
+  // Reward records must be visible even if no task queue has been started in this session.
+  if (cleanLine.includes('[仙宫领玉]')) {
+    appendAutomationLog(state, 'success', cleanLine)
+    return
+  }
   if (cleanLine.includes('[WebSocket] 角色数据同步完成')) {
     state.connectionState = 'running'
     state.everConnected = true
@@ -805,8 +831,19 @@ function scheduleReconnect(user, state) {
   state.connectionState = 'reconnecting'
   state.restartTimer = setTimeout(() => {
     state.restartTimer = null
-    if (state.desiredConnected) startUserProcess(user)
+    if (state.desiredConnected) restartUserProcess(user)
   }, delay)
+}
+
+function restartUserProcess(user) {
+  try {
+    startUserProcess(user)
+  } catch (error) {
+    const state = stateFor(user.id)
+    state.lastError = error.message
+    state.connectionState = 'error'
+    state.desiredConnected = false
+  }
 }
 
 function startUserProcess(user) {
@@ -841,13 +878,21 @@ function startUserProcess(user) {
   state.forbiddenEndTime = null
   state.retryBlockedUntil = null
 
-  const encodedConfig = Buffer.from(JSON.stringify(buildRuntimeAccount(user)), 'utf8').toString('base64')
-  const child = spawn(process.execPath, ['src/index.js'], {
-    cwd: projectRoot,
-    env: { ...process.env, XDDQ_RUNTIME_ACCOUNT: encodedConfig },
-    stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
-    windowsHide: true,
-  })
+  const releaseSlot = connectionSlots.acquire()
+  let child
+  try {
+    const encodedConfig = Buffer.from(JSON.stringify(buildRuntimeAccount(user)), 'utf8').toString('base64')
+    child = spawn(process.execPath, ['src/index.js'], {
+      cwd: projectRoot,
+      env: { ...process.env, XDDQ_RUNTIME_ACCOUNT: encodedConfig },
+      stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
+      windowsHide: true,
+    })
+  } catch (error) {
+    releaseSlot()
+    throw error
+  }
+  child.once('close', releaseSlot)
 
   state.child = child
   state.stopping = false
@@ -860,7 +905,16 @@ function startUserProcess(user) {
   child.on('message', message => {
     if (message?.type === 'runtime-error') handleRuntimeError(user, state, message)
     else if (message?.type === 'activity-observation') captureActivityObservation(state, message)
-    else if (message?.type === 'profile-update') state.profile = mergeProfileSnapshot(state.profile, message.profile)
+    else if (message?.type === 'profile-update') {
+      state.profile = mergeProfileSnapshot(state.profile, message.profile)
+      try {
+        userStore?.savePalaceDailyJade(user.account, user.serverId, message.profile?.resources)
+      } catch (error) {
+        const warning = `仙宫领玉统计保存失败：${error.message}`
+        appendAutomationLog(state, 'error', warning)
+        console.error(`[管理服务] ${warning}`)
+      }
+    }
     else if (message?.type === 'protocol-request-result') settlePendingProtocol(state, message)
     else if (message?.type === 'scheduled-restart') {
       appendAutomationLog(state, 'info', '定时任务：正在按已选设置重启游戏连接。')
@@ -873,8 +927,11 @@ function startUserProcess(user) {
   child.on('error', error => {
     state.lastError = error.message
     state.connectionState = 'error'
+    state.desiredConnected = false
+    if (state.child === child) state.child = null
   })
   child.on('exit', () => {
+    releaseSlot()
     if (state.child !== child) return
     state.child = null
     rejectPendingProtocol(state, new HttpError(409, '游戏连接已断开，未收到该功能的响应'))
@@ -882,7 +939,7 @@ function startUserProcess(user) {
     if (state.pendingStartUser && state.desiredConnected) {
       const pendingUser = state.pendingStartUser
       state.pendingStartUser = null
-      startUserProcess(pendingUser)
+      restartUserProcess(pendingUser)
       return
     }
     if (!state.desiredConnected && state.loginErrorCode) {
@@ -984,6 +1041,7 @@ function stopAllUserProcesses() {
 
 export function shutdownDashboard() {
   stopAllUserProcesses()
+  for (const child of verificationProcesses) child.kill()
   dashboardSessions.clear()
   userStore?.close()
   userStore = undefined
@@ -1024,6 +1082,26 @@ async function loginPlatformUser(body) {
   const selectedServer = servers.find(server => server.serverId === serverId)
   if (!selectedServer) throw new HttpError(400, '所选角色区服不属于当前账号')
 
+  const accessConfig = readDashboardAccess()
+  if (!isPlatformAccountAllowed(accessConfig, account)) {
+    if (!accessConfig.allowedUnionIds.length) throw new HttpError(403, '登录未获授权：平台账号不在白名单中')
+    const existingUser = loadUsers().find(user => user.account === account && user.serverId === serverId)
+    if (existingUser && stateFor(existingUser.id).child) {
+      // Avoid a second login taking over a role that is already connected.
+      const state = stateFor(existingUser.id)
+      if (state.connectionState !== 'running') throw new HttpError(409, '角色正在连接或断开，请稍后再登录')
+      const unionId = state.profile?.union?.id
+      if (!isDashboardUserAllowed(accessConfig, account, unionId)) {
+        throw new HttpError(403, '登录未获授权：平台账号和角色妖盟均不在白名单中')
+      }
+    } else {
+      const unionId = await verifyPlatformUnion({ ...existingUser, account, password, serverId })
+      if (!isDashboardUserAllowed(readDashboardAccess(), account, unionId)) {
+        throw new HttpError(403, '登录未获授权：平台账号和角色妖盟均不在白名单中')
+      }
+    }
+  }
+
   const users = loadUsers()
   const index = users.findIndex(user => user.account === account && user.serverId === serverId)
   const existing = index >= 0 ? users[index] : null
@@ -1048,6 +1126,51 @@ async function loginPlatformUser(body) {
   else nextUsers.push(user)
   saveUsers(nextUsers)
   return user
+}
+
+async function verifyPlatformUnion(user) {
+  const blockedUntil = Number(user.retryBlockedUntil)
+  if (blockedUntil > Date.now()) throw new HttpError(423, '角色登录限制尚未解除，请稍后再试')
+  const releaseSlot = connectionSlots.acquire()
+  try {
+    return await new Promise((resolve, reject) => {
+      const runtime = buildRuntimeAccount({ ...user, selectedActivities: [], automationSettings: {}, autoReconnect: false })
+      runtime.dashboardAccessRequired = false
+      runtime.activities.internalRequestIds = [Protocol.S_UNION_ENTER]
+      const child = spawn(process.execPath, ['scripts/dashboard-union-probe.mjs'], {
+        cwd: projectRoot,
+        env: { ...process.env, XDDQ_RUNTIME_ACCOUNT: Buffer.from(JSON.stringify(runtime)).toString('base64') },
+        stdio: ['ignore', 'ignore', 'ignore', 'ipc'],
+        windowsHide: true,
+      })
+      verificationProcesses.add(child)
+      let result
+      let processError
+      const timer = setTimeout(() => {
+        processError = new HttpError(504, '妖盟资格验证超时，请稍后重试')
+        child.kill()
+      }, 60_000)
+      child.on('message', message => {
+        if (message?.type === 'union-verification') result = message
+        else if (message?.type === 'runtime-error') {
+          processError = new HttpError(403, message.message)
+          if (user.id) handleRuntimeError(user, stateFor(user.id), message)
+        }
+      })
+      child.on('error', error => { processError = error })
+      child.on('close', () => {
+        clearTimeout(timer)
+        verificationProcesses.delete(child)
+        if (processError) reject(processError)
+        else if (!result || result.error) {
+          if (result?.code === 505 && user.id) handleRuntimeError(user, stateFor(user.id), { ...result, message: result.error, retryable: false })
+          reject(new HttpError(403, result?.error || '无法取得角色妖盟信息，登录未获授权'))
+        } else resolve(result.unionId)
+      })
+    })
+  } finally {
+    releaseSlot()
+  }
 }
 
 function sessionPayload(principal) {
@@ -1329,7 +1452,7 @@ function registerDashboardApi(server) {
     void handleDashboardApi(request, response, pathname).catch(error => {
       if (!response.writableEnded) {
         const message = error instanceof SyntaxError ? '请求内容不是有效 JSON' : error.message
-        const statusCode = error instanceof SyntaxError ? 400 : error instanceof HttpError ? error.statusCode : 500
+        const statusCode = error instanceof SyntaxError ? 400 : error instanceof HttpError || error instanceof ConnectionLimitError ? error.statusCode : 500
         sendJson(response, statusCode, { error: message || '本机服务处理失败' })
       }
     })

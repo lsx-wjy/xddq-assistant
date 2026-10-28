@@ -10,6 +10,7 @@ import LoopMgr from '#game/common/LoopMgr.js';
 import ActivityCompatMgr from '#game/mgr/ActivityCompatMgr.js';
 import ProtocolPayloadMgr from '#game/mgr/ProtocolPayloadMgr.js';
 import account from '#config/runtimeAccount.js';
+import { readDashboardAccess, isPlatformAccountAllowed, isDashboardUserAllowed } from '#config/dashboardAccess.js';
 
 class GameNetMgr {
     constructor() {
@@ -37,6 +38,8 @@ class GameNetMgr {
         this.expectedResponses = new Map();
         this.blockedRequests = new Set();
         this.lastSendError = '';
+        this.accessConfig = account.dashboardAccessRequired ? readDashboardAccess() : null;
+        this.resetAccessCheck();
     }
 
     static get inst() {
@@ -78,6 +81,14 @@ class GameNetMgr {
         if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
         this.reconnectTimer = null;
         this._closed = false;
+        if (account.dashboardAccessRequired) {
+            try {
+                this.accessConfig = readDashboardAccess();
+            } catch (error) {
+                this.reportRuntimeError({ message: error.message, retryable: false });
+                return;
+            }
+        }
         this.resetLoginLifecycle();
         this.login();
         logger.info("[WebSocket] 连接成功");
@@ -161,6 +172,20 @@ class GameNetMgr {
         }
         if (this.loginReady) return;
 
+        if (this.accessPending) {
+            this.accessWaiting = true;
+            if (this.accessUnionId !== null) this.finishAccessCheck();
+            else {
+                if (!this.accessTimer) {
+                    this.accessTimer = setTimeout(() => this.reportRuntimeError({
+                        message: '妖盟资格验证超时，请稍后重试', retryable: false,
+                    }), 15_000);
+                    this.sendPbMsg(Protocol.S_UNION_ENTER, {}, null);
+                }
+            }
+            return;
+        }
+
         this.loginReady = true;
         this.reConnectTimes = 0;
         this.isReconnectNum = 0;
@@ -182,6 +207,31 @@ class GameNetMgr {
         this.blockedRequests.clear();
         LoopMgr.inst.end();
         this.net.heartbeatStop();
+        this.resetAccessCheck();
+    }
+
+    resetAccessCheck() {
+        if (this.accessTimer) clearTimeout(this.accessTimer);
+        this.accessTimer = null;
+        this.accessPending = Boolean(this.accessConfig && !isPlatformAccountAllowed(this.accessConfig, account.username));
+        this.accessWaiting = false;
+        this.accessUnionId = null;
+        this.accessMessages = [];
+    }
+
+    finishAccessCheck() {
+        if (!this.accessWaiting || !this.accessPending) return;
+        if (!isDashboardUserAllowed(this.accessConfig, account.username, this.accessUnionId)) {
+            this.reportRuntimeError({ message: '登录未获授权：平台账号和角色妖盟均不在白名单中', retryable: false });
+            return;
+        }
+        clearTimeout(this.accessTimer);
+        this.accessTimer = null;
+        this.accessPending = false;
+        const buffered = this.accessMessages;
+        this.accessMessages = [];
+        for (const args of buffered) this.resvHandler(...args);
+        this.handleLoginOver();
     }
 
     reportRuntimeError({ code = null, message, retryable = false }) {
@@ -219,13 +269,17 @@ class GameNetMgr {
 
         const isLogin = msgId === Protocol.S_PLAYER_LOGIN;
         const isPing = msgId === Protocol.S_PLAYER_PING;
-        if (!isLogin && !isPing && !this.loginReady) {
+        const isAccessQuery = this.accessPending && this.accessWaiting && msgId === Protocol.S_UNION_ENTER;
+        if (this.accessPending && !isLogin && !isPing && !isAccessQuery) {
+            return this.rejectSend(msgId, '正在验证妖盟登录资格');
+        }
+        if (!isLogin && !isPing && !isAccessQuery && !this.loginReady) {
             return this.rejectSend(msgId, '登录数据同步尚未完成');
         }
         if (isPing && !this.loginAccepted) {
             return this.rejectSend(msgId, '登录验证尚未成功');
         }
-        if (!isLogin && !isPing) {
+        if (!isLogin && !isPing && !isAccessQuery) {
             const requestPolicy = options.manual
                 ? ActivityCompatMgr.inst.checkManualRequest(msgId, options.protocolKey)
                 : ActivityCompatMgr.inst.checkRequest(msgId);
@@ -397,7 +451,20 @@ class GameNetMgr {
         if (msgData) {
             const responseConfig = ProtobufMgr.inst.resvCmdList[msgId];
             const methodPath = decodedMethod || responseConfig?.smMethod;
+            const method = methodPath?.split('.').at(-1);
+            if (this.accessPending && !['RspLoginMsg', 'LoginOverMsg'].includes(method)) {
+                if (method === 'MyUnionData') {
+                    this.accessUnionId = String(msgData?.baseData?.unionId || '');
+                } else if (method === 'RspUnionEnter') {
+                    this.accessUnionId = Number(msgData?.ret) === 0
+                        ? String(msgData?.myUnionData?.baseData?.unionId || '') : '';
+                }
+                this.accessMessages.push([msgId, msgData, decodedMethod]);
+                if (this.accessUnionId !== null) this.finishAccessCheck();
+                return;
+            }
             ActivityCompatMgr.inst.capture(msgId, methodPath, msgData);
+            MsgRecvMgr.observePalaceReward(method, msgData);
 
             if (msgId && this.handlers[msgId]) {
                 const handler = this.handlers[msgId];

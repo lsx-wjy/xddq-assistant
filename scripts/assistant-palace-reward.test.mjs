@@ -178,44 +178,32 @@ test('未知错误码停止当天请求且不会抛出异常', () => {
   assert.equal(requests.length, 1)
 })
 
-test('成功领取后累计并上报当日仙玉，重复响应不重复累计', () => {
-  let now = new Date('2026-10-28T14:00:00.000Z')
+test('聚宝盆成功领奖不再上报仙宫的当日领玉统计', () => {
   const requests = []
-  const reports = []
   const manager = new rewardModule.default({
-    now: () => now,
+    now: () => new Date('2026-10-28T14:00:00.000Z'),
     enabled: () => true,
     ready: () => true,
     sendReward: callback => {
       requests.push(callback)
       return true
     },
-    reportDailyJade: report => reports.push(report),
   })
 
   manager.loopUpdate()
-  requests[0]({
-    ret: 0,
-    reward: '100000=120|100004=5',
-    records: [{ count: 1, type: 1, time: 0, reward: false }],
-  })
-  manager.loopUpdate()
-  requests[1]({
-    ret: 0,
-    reward: '100000=30',
-    records: [{ count: 1, type: 1, time: 0, reward: true }],
-  })
-  requests[1]({ ret: 0, reward: '100000=30' })
-
-  assert.deepEqual(reports, [
-    { date: '2026-10-28', amount: 120 },
-    { date: '2026-10-28', amount: 150 },
-  ])
-
-  now = new Date('2026-10-29T14:00:00.000Z')
-  manager.completedDate = ''
-  manager.records = null
-  manager.loopUpdate()
-  requests[2]({ ret: 0, reward: '100000=40' })
-  assert.deepEqual(reports.at(-1), { date: '2026-10-29', amount: 40 })
+  const sent = []
+  const priorSend = Object.getOwnPropertyDescriptor(process, 'send')
+  const priorConnected = Object.getOwnPropertyDescriptor(process, 'connected')
+  try {
+    Object.defineProperty(process, 'send', { value: message => sent.push(message), configurable: true })
+    Object.defineProperty(process, 'connected', { value: true, configurable: true })
+    requests[0]({ ret: 0, reward: '100000=120|100004=5' })
+    assert.equal(manager.completedDate, '2026-10-28')
+    assert.deepEqual(sent.filter(message => message.type === 'profile-update'), [])
+  } finally {
+    if (priorSend) Object.defineProperty(process, 'send', priorSend)
+    else delete process.send
+    if (priorConnected) Object.defineProperty(process, 'connected', priorConnected)
+    else delete process.connected
+  }
 })

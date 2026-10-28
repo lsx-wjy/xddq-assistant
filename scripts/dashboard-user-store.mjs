@@ -129,6 +129,16 @@ export function createDashboardUserStore({ databaseFile, legacyJsonFile }) {
   database.exec('PRAGMA synchronous = NORMAL')
   database.exec('PRAGMA busy_timeout = 5000')
   database.exec(CREATE_USERS_TABLE)
+  // Keep role/day counters separate: saveUsers replaces the user table in a transaction.
+  database.exec(`
+    CREATE TABLE IF NOT EXISTS palace_daily_jade (
+      account TEXT NOT NULL,
+      server_id INTEGER NOT NULL,
+      date_key TEXT NOT NULL,
+      amount INTEGER NOT NULL CHECK (amount >= 0),
+      PRIMARY KEY (account, server_id, date_key)
+    )
+  `)
 
   const existingColumns = new Set(
     database.prepare('PRAGMA table_info(dashboard_users)').all().map(column => column.name),
@@ -141,6 +151,13 @@ export function createDashboardUserStore({ databaseFile, legacyJsonFile }) {
 
   const selectUsers = database.prepare('SELECT * FROM dashboard_users ORDER BY created_at ASC')
   const insertUser = database.prepare(INSERT_USER)
+  const selectPalaceJade = database.prepare(`
+    SELECT amount FROM palace_daily_jade WHERE account = ? AND server_id = ? AND date_key = ?
+  `)
+  const savePalaceJade = database.prepare(`
+    INSERT INTO palace_daily_jade (account, server_id, date_key, amount) VALUES (?, ?, ?, ?)
+    ON CONFLICT (account, server_id, date_key) DO UPDATE SET amount = MAX(amount, excluded.amount)
+  `)
   const updateLoginStateStatement = database.prepare(`
     UPDATE dashboard_users SET
       login_error_code = ?,
@@ -200,6 +217,21 @@ export function createDashboardUserStore({ databaseFile, legacyJsonFile }) {
     loadUsers,
     saveUsers,
     updateLoginState,
+    loadPalaceDailyJade(account, serverId, date) {
+      const row = selectPalaceJade.get(String(account).trim().toLowerCase(), serverId, date)
+      return {
+        dailyClaimedJade: row?.amount ?? 0,
+        dailyClaimedJadeDate: date,
+        dailyClaimedJadeSource: 'palace',
+      }
+    },
+    savePalaceDailyJade(account, serverId, resources) {
+      if (resources?.dailyClaimedJadeSource !== 'palace'
+        || !/^\d{4}-\d{2}-\d{2}$/.test(resources.dailyClaimedJadeDate)
+        || !Number.isSafeInteger(resources.dailyClaimedJade) || resources.dailyClaimedJade < 0) return
+      savePalaceJade.run(String(account).trim().toLowerCase(), serverId,
+        resources.dailyClaimedJadeDate, resources.dailyClaimedJade)
+    },
     close() {
       database.close()
     },

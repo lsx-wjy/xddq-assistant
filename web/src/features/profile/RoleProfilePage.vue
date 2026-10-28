@@ -37,7 +37,7 @@ const tree = computed(() => profile.value.tree ?? {})
 const resources = computed(() => profile.value.resources ?? {})
 const dailyClaimedJade = computed(() => {
   const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date())
-  return resources.value.dailyClaimedJadeDate === today
+  return resources.value.dailyClaimedJadeSource === 'palace' && resources.value.dailyClaimedJadeDate === today
     ? (resources.value.dailyClaimedJade ?? 0)
     : 0
 })
@@ -153,7 +153,7 @@ onUnmounted(() => { if (toastTimer) window.clearTimeout(toastTimer) })
               <div><small>仙树等级</small><strong>Lv.{{ numberCopy(tree.level) }}</strong></div>
               <div><small>剩余桃子</small><strong>{{ numberCopy(tree.peaches) }}</strong></div>
               <div class="metric-jade"><small>仙玉余额</small><strong>{{ numberCopy(resources.fairyJade) }}</strong></div>
-              <div class="metric-jade-daily"><small>当日领玉</small><strong>+{{ numberCopy(dailyClaimedJade) }}</strong></div>
+              <div class="metric-jade-daily" title="当日自动仙宫朝拜与收礼实际获得的仙玉"><small>当日领玉</small><strong>+{{ numberCopy(dailyClaimedJade) }}</strong></div>
             </div>
           </section>
 

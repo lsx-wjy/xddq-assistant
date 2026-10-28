@@ -48,6 +48,7 @@ export interface UserProfileSnapshot {
     fairyJade?: number
     dailyClaimedJade?: number
     dailyClaimedJadeDate?: string
+    dailyClaimedJadeSource?: string
   }
   union?: {
     id?: string

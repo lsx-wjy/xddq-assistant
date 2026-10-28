@@ -11,7 +11,7 @@ test('profile updates merge nested sections without erasing earlier data', () =>
   const merged = mergeProfileSnapshot(initial, {
     homeland: { energy: 88, freeWorkers: 2, totalWorkers: 5 },
     progress: { fightValue: 1_234_567 },
-    resources: { fairyJade: 8_888, dailyClaimedJade: 240, dailyClaimedJadeDate: '2026-10-28' },
+    resources: { fairyJade: 8_888, dailyClaimedJade: 240, dailyClaimedJadeDate: '2026-10-28', dailyClaimedJadeSource: 'palace' },
   }, 2_000)
 
   assert.deepEqual(merged.identity, { nickname: '青云客', roleId: '123' })
@@ -21,6 +21,7 @@ test('profile updates merge nested sections without erasing earlier data', () =>
     fairyJade: 8_888,
     dailyClaimedJade: 240,
     dailyClaimedJadeDate: '2026-10-28',
+    dailyClaimedJadeSource: 'palace',
   })
   assert.equal(merged.syncedAt, new Date(2_000).toISOString())
 })
