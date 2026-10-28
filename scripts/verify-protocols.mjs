@@ -37,17 +37,21 @@ function createRequiredSample(type, depth = 0) {
 
 await ProtobufMgr.inst.initialize();
 
+if (Array.isArray(ProtobufMgr.inst.cmdList) || Array.isArray(ProtobufMgr.inst.resvCmdList)) {
+    throw new Error('协议索引必须使用紧凑对象，不能使用稀疏数组');
+}
+
 const missingRequests = [];
-for (let id = 0; id < ProtobufMgr.inst.cmdList.length; id += 1) {
-    const command = ProtobufMgr.inst.cmdList[id];
+for (const [rawId, command] of Object.entries(ProtobufMgr.inst.cmdList)) {
+    const id = Number(rawId);
     if (command?.cmMethod && ProtobufMgr.inst.getMsgCandidates(id, true).length === 0) {
         missingRequests.push(`${id}:${command.cmMethod}`);
     }
 }
 
 const missingResponses = [];
-for (let id = 0; id < ProtobufMgr.inst.resvCmdList.length; id += 1) {
-    const command = ProtobufMgr.inst.resvCmdList[id];
+for (const [rawId, command] of Object.entries(ProtobufMgr.inst.resvCmdList)) {
+    const id = Number(rawId);
     if (command?.smMethod && ProtobufMgr.inst.getMsgCandidates(id, false).length === 0) {
         missingResponses.push(`${id}:${command.smMethod}`);
     }

@@ -30,7 +30,9 @@
         "vue-tsc": "^2.2.0"
     },
     "scripts": {
-        "build": "npm run verify:protocols && npm run verify:protobuf-loader && npm run verify:gameplay-catalog && npm run dashboard:build",
+        "test": "node --test",
+        "test:protocol-audit": "node --test scripts/protocol-audit.integration.mjs",
+        "build": "npm test && npm run verify:protocols && npm run verify:protobuf-loader && npm run verify:gameplay-catalog && npm run dashboard:build",
         "start": "node app.js",
         "dashboard": "vite --config vite.config.ts",
         "dashboard:build": "vue-tsc --noEmit -p web/tsconfig.json && vite build --config vite.config.ts",

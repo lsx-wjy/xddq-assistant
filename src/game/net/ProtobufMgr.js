@@ -7,8 +7,8 @@ const resolvePath = createPath(import.meta.url);
 
 class ProtobufMgr {
     constructor() {
-        this.cmdList = [];
-        this.resvCmdList = [];
+        this.cmdList = {};
+        this.resvCmdList = {};
         this.messages = {};
         this.msgInfoDict = {};
         this.activityRegistry = [];

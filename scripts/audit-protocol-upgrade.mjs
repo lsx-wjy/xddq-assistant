@@ -4,6 +4,7 @@ import protobuf from 'protobufjs';
 import ts from 'typescript';
 import { ProtobufMgr } from '../src/game/net/ProtobufMgr.js';
 import Protocol from '../src/game/net/Protocol.js';
+import { iterateProtocolIndex } from './lib/protocol-index.mjs';
 
 const options = {};
 for (let i = 2; i < process.argv.length; i += 2) {
@@ -115,10 +116,10 @@ for (const [key, type] of current.messages) {
 await ProtobufMgr.inst.initialize();
 const pm = ProtobufMgr.inst;
 const missingRequests = [], missingResponses = [];
-for (const [id, cmd] of pm.cmdList.entries()) if (cmd?.cmMethod && !pm.getMsg(Number(id), true)) missingRequests.push({ id, method: cmd.cmMethod });
-for (const [id, cmd] of pm.resvCmdList.entries()) if (cmd?.smMethod && !pm.getMsg(Number(id), false)) missingResponses.push({ id, method: cmd.smMethod });
+for (const [id, cmd] of iterateProtocolIndex(pm.cmdList)) if (cmd.cmMethod && !pm.getMsg(Number(id), true)) missingRequests.push({ id, method: cmd.cmMethod });
+for (const [id, cmd] of iterateProtocolIndex(pm.resvCmdList)) if (cmd.smMethod && !pm.getMsg(Number(id), false)) missingResponses.push({ id, method: cmd.smMethod });
 const allMappingChanges = [];
-for (const [id, before] of oldCommands.entries()) {
+for (const [id, before] of iterateProtocolIndex(oldCommands)) {
     if (!before?.cmMethod) continue;
     const after = pm.cmdList[id];
     if (!after || ['cmMethod', 'smMethod', 'smMsgId'].some(k => before[k] !== after[k])) allMappingChanges.push({ id, before, after });
